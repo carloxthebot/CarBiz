@@ -28,7 +28,8 @@ h1 { margin:0 0 8px; font-size:38px; letter-spacing:-.02em; }
 .stat b { display:block; font-size:28px; letter-spacing:-.01em; }
 .stat span { color:var(--dim); font-size:15px; }
 nav { position:sticky; top:0; z-index:5; background:var(--bg); padding:14px 0;
-  border-bottom:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  border-bottom:1px solid var(--line); display:flex; gap:10px; align-items:center; }
+.chips { display:flex; gap:8px; flex-wrap:wrap; }
 nav a { color:var(--ink); text-decoration:none; font-size:16px; padding:7px 14px;
   border:1px solid var(--line); border-radius:999px; background:var(--card); white-space:nowrap; }
 nav a:hover { border-color:var(--accent); color:var(--accent); }
@@ -110,7 +111,21 @@ tr.line th { text-align:left; padding:14px 16px 8px; font-size:15px; color:var(-
 footer { margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:15.5px; line-height:1.75; }
 footer a { color:var(--accent); }
 tr.hide { display:none; }
-@media (max-width:640px) { h1 { font-size:30px; } .page { padding:0 14px 60px; } }
+/* On a phone the chip rows wrapped to four or five lines and pushed the table
+   off the screen. One swipeable line each instead -- the row is the affordance,
+   so it keeps a visible edge rather than fading out. */
+@media (max-width:780px) {
+  nav { flex-direction:column; align-items:stretch; gap:10px; }
+  #q { width:100%; min-width:0; }
+  .chips, .tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+    margin:0 -14px; padding:0 14px 2px; }
+  .chips::-webkit-scrollbar, .tabs::-webkit-scrollbar { display:none; }
+  .chips a, .tabs button { scroll-snap-align:start; flex:0 0 auto; }
+  .panels { border-radius:12px; padding:20px 18px; }
+}
+@media (max-width:640px) { h1 { font-size:30px; } .page { padding:0 14px 60px; }
+  .panels { margin:0 -14px; border-radius:0; border-left:none; border-right:none; } }
 </style>
 </head>
 <body>
@@ -127,7 +142,8 @@ tr.hide { display:none; }
     <div class="stat"><b>￥2,200–440,000</b><span>日本定價區間</span></div>
   </div>
 </header>
-<nav><input id="q" type="search" placeholder="搜尋品項、Code、備註…" autocomplete="off"><a href="#channels">各地通路與稅費</a><a href="#suspension">懸吊・底盤</a><a href="#brake">煞車</a><a href="#intake">進氣</a><a href="#exhaust">排氣</a><a href="#cooling">冷卻・油溫</a><a href="#ecu">電子・ECU・儀表</a><a href="#interior">內裝・配件</a><a href="#nolocal">只有試算</a></nav>
+<nav><input id="q" type="search" placeholder="搜尋品項、Code、備註…" autocomplete="off">
+<div class="chips"><a href="#channels">各地通路與稅費</a><a href="#suspension">懸吊・底盤</a><a href="#brake">煞車</a><a href="#intake">進氣</a><a href="#exhaust">排氣</a><a href="#cooling">冷卻・油溫</a><a href="#ecu">電子・ECU・儀表</a><a href="#interior">內裝・配件</a><a href="#nolocal">只有試算</a></div></nav>
 <section id="channels">
   <h2>各地通路與稅費</h2>
   <p class="blurb">先讀這一節：各地由誰在賣、價差從哪裡來、哪些品項查不到公開標價，以及當地法規擋掉了什麼。下面的價格表要對照這裡才看得懂。</p>
