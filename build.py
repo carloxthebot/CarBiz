@@ -1,0 +1,277 @@
+#!/usr/bin/env python3
+"""build.py — render data/blitz-gr86-zn8.json into a single self-contained
+index.html (no build step, no CDN, opens straight off the filesystem).
+
+Two inputs:
+  data/blitz-gr86-zn8.json   BLITZ's Japanese listing (written by scrape.py)
+  data/prices-local.json     researched TH / HK / MY street prices (optional)
+
+The second one is optional on purpose: the Japanese page has to render whether or
+not the local-price research is finished, and each country arrives separately.
+"""
+import json, os, re, datetime
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(HERE, "data", "blitz-gr86-zn8.json")
+LOCAL = os.path.join(HERE, "data", "prices-local.json")
+OUT = os.path.join(HERE, "index.html")
+
+SOURCE_URL = ("https://partsnavi.blitz.co.jp/products/search/search_car/list.php"
+              "?maker_id=1&car_name_first=1&car_name=GR86&car_model=ZN8&model_year=2024")
+
+# BLITZ ships 41 product lines for this chassis; grouping them by what the part
+# actually does is the only way the page is readable. Order matters -- it is the
+# order a person actually modifies a car in.
+CATEGORIES = [
+    ("suspension", "懸吊・底盤", "車高調、拉桿、懸吊臂",
+     ["DAMPER ZZ-R", "MIRACLE ADJUSTER Series", "SUSPENSION ARM", "B-MCB",
+      "STABILINK ADJUSTER", "STRUT TOWER BAR", "TRUSS BAR"]),
+    ("brake", "煞車", "大四／六活塞卡鉗套件",
+     ["BIG CALIPER KIT II"]),
+    ("intake", "進氣", "香菇頭、進氣管、集氣箱",
+     ["CORE TYPE AIR CLEANER", "SUS POWER AIR FILTER Series", "CARBON INTAKE SYSTEM",
+      "SUCTION KIT", "DRY CARBON SUCTION KIT", "HYBRID AIRCON FILTER"]),
+    ("exhaust", "排氣", "NUR-SPEC 全段與尾飾管",
+     ["NUR-SPEC Exhaust System"]),
+    ("cooling", "冷卻・油溫", "水箱、油冷、感知器座",
+     ["RACING RADIATOR TypeZS", "RACING RADIATOR CAP", "RACING OIL COOLER KIT BR",
+      "RACING RADIATOR HOSE KIT", "RACING OIL FILTER", "OIL SENSOR ATTACHMENT",
+      "WATER TEMP SENSOR ATTACHMENT"]),
+    ("ecu", "電子・ECU・儀表", "油門控制、ECU、多功能顯示",
+     ["OBDIIアダプター(LASERオプション品)", "OBDIIアダプター86/BRZ専用項目(LASERオプション品)",
+      "Touch-B.R.A.I.N. PLUS 86/BRZ専用項目", "Touch-B.R.A.I.N. PLUS", "FLD METER",
+      "Power Thro NA", "Sma Thro X", "Thro Con / Sma Thro", "Power Con X", "Power Con NA",
+      "Speed Jumper", "BLITZ TUNING ECU", "TV-NAVI Jumper / TV Jumper", "RACING METER PANEL"]),
+    ("aero", "外觀空力", "AERO SPEED 前中後定風翼",
+     ["AERO SPEED"]),
+    ("interior", "內裝・配件", "排檔頭、手煞車、油蓋、引擎蓋撐桿",
+     ["OIL FILLER CAP", "SHIFT KNOB", "HAND BRAKE LEVER", "SMART PHONE HOLDER",
+      "ENGINE HOOD DAMPER"]),
+]
+
+
+def yen(s):
+    """'￥205,700 | (￥187,000)' -> (205700, 187000). Either half may be absent."""
+    nums = [int(n.replace(",", "")) for n in re.findall(r"￥([\d,]+)", s or "")]
+    incl = nums[0] if nums else None
+    excl = nums[1] if len(nums) > 1 else None
+    return incl, excl
+
+
+def esc(s):
+    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+def notes(it):
+    parts = [p for p in (it.get("note2"), it.get("note1")) if p]
+    return " ／ ".join(parts).replace(" | ", " ")
+
+
+def main():
+    groups = json.load(open(DATA))
+    by_line = {g["line"]: g["items"] for g in groups}
+    local = json.load(open(LOCAL)) if os.path.exists(LOCAL) else {}
+
+    placed, cats = set(), []
+    for slug, title, blurb, lines in CATEGORIES:
+        items = []
+        for ln in lines:
+            for it in by_line.get(ln, []):
+                items.append(dict(it, line=ln))
+                placed.add(ln)
+        if items:
+            cats.append((slug, title, blurb, items))
+    leftover = [dict(it, line=ln) for ln, its in by_line.items() if ln not in placed for it in its]
+    if leftover:
+        cats.append(("other", "其他", "尚未歸類", leftover))
+
+    total = sum(len(c[3]) for c in cats)
+    prices = [yen(i["price"])[0] for c in cats for i in c[3]]
+    prices = [p for p in prices if p]
+    stamp = datetime.date.today().isoformat()
+
+    # ---- category sections -------------------------------------------------
+    sections = []
+    for slug, title, blurb, items in cats:
+        rows = []
+        cur = None
+        for it in sorted(items, key=lambda x: (x["line"], -(yen(x["price"])[0] or 0))):
+            if it["line"] != cur:
+                cur = it["line"]
+                rows.append(f'<tr class="line"><th colspan="4">{esc(cur)}</th></tr>')
+            incl, excl = yen(it["price"])
+            name = esc(it["name"].replace(" | ", " "))
+            n = notes(it)
+            rows.append(
+                f'<tr data-s="{esc((cur + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
+                f'<td class="nm">{name}{f"<span class=nt>{esc(n)}</span>" if n else ""}</td>'
+                f'<td class="cd">{esc(it["code"])}</td>'
+                f'<td class="pr">{"￥{:,}".format(incl) if incl else "—"}</td>'
+                f'<td class="pe">{"￥{:,}".format(excl) if excl else "—"}</td></tr>')
+        sections.append(f'''<section id="{slug}">
+  <h2>{esc(title)} <span class="cnt">{len(items)}</span></h2>
+  <p class="blurb">{esc(blurb)}</p>
+  <div class="wrap"><table>
+    <thead><tr><th>品項</th><th>Code</th><th>稅入價</th><th>稅拔價</th></tr></thead>
+    <tbody>{"".join(rows)}</tbody>
+  </table></div>
+</section>''')
+
+    # ---- local prices ------------------------------------------------------
+    local_html = ""
+    for cc in ("TH", "HK", "MY"):
+        d = local.get(cc)
+        if not d:
+            continue
+        rows = "".join(
+            f'<tr><td class="nm">{esc(r.get("part",""))}</td>'
+            f'<td class="pr">{esc(r.get("jp",""))}</td>'
+            f'<td class="pr">{esc(r.get("localPrice",""))}</td>'
+            f'<td class="pr">{esc(r.get("jpEquiv",""))}</td>'
+            f'<td class="mx">{esc(r.get("multiple",""))}</td>'
+            f'<td class="src">{f"""<a href="{esc(r.get("url",""))}" rel="noopener">來源</a>""" if r.get("url") else "—"}</td></tr>'
+            for r in d.get("rows", []))
+        missing = d.get("notFound") or []
+        local_html += f'''<section id="loc-{cc.lower()}" class="local">
+  <h2>{esc(d.get("title", cc))} <span class="cnt">{len(d.get("rows", []))}</span></h2>
+  <p class="blurb">{esc(d.get("summary", ""))}</p>
+  {f'<div class="wrap"><table><thead><tr><th>品項</th><th>日本定價</th><th>當地售價</th><th>折日圓</th><th>倍數</th><th></th></tr></thead><tbody>{rows}</tbody></table></div>' if rows else '<p class="none">沒有查到公開標價。</p>'}
+  {f'<p class="miss"><b>查不到公開標價：</b>{esc("、".join(missing))}</p>' if missing else ""}
+  {f'<p class="blurb">{esc(d.get("note",""))}</p>' if d.get("note") else ""}
+</section>'''
+    if not local_html:
+        local_html = ('<section class="local pending"><h2>泰國・香港・馬來西亞售價</h2>'
+                      '<p class="blurb">當地售價調查進行中，完成後會補進這一節。</p></section>')
+
+    nav = "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats)
+    nav += "".join(f'<a href="#loc-{c.lower()}">{esc(local[c].get("navTitle", c))}</a>'
+                   for c in ("TH", "HK", "MY") if c in local)
+
+    html = f'''<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLITZ × GR86 (ZN8) 產品與售價總覽</title>
+<style>
+:root {{
+  --bg:#f7f8fa; --card:#fff; --ink:#14161a; --dim:#616a76; --line:#e3e6eb;
+  --accent:#0b64c8; --accentbg:#eaf2fd; --head:#f0f2f5;
+}}
+@media (prefers-color-scheme: dark) {{
+  :root {{ --bg:#0e1013; --card:#15181d; --ink:#e8eaed; --dim:#98a1ad; --line:#252a31;
+           --accent:#5aa9f8; --accentbg:#132436; --head:#1b1f26; }}
+}}
+* {{ box-sizing:border-box; }}
+body {{ margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans TC",
+  "PingFang TC","Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }}
+.page {{ max-width:1080px; margin:0 auto; padding:0 20px 80px; }}
+header {{ padding:48px 0 28px; border-bottom:1px solid var(--line); }}
+h1 {{ margin:0 0 6px; font-size:30px; letter-spacing:-.02em; }}
+.sub {{ color:var(--dim); margin:0 0 22px; }}
+.stats {{ display:flex; flex-wrap:wrap; gap:10px; }}
+.stat {{ background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:10px 16px; }}
+.stat b {{ display:block; font-size:22px; letter-spacing:-.01em; }}
+.stat span {{ color:var(--dim); font-size:12px; }}
+nav {{ position:sticky; top:0; z-index:5; background:var(--bg); padding:14px 0;
+  border-bottom:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap;
+  align-items:center; }}
+nav a {{ color:var(--ink); text-decoration:none; font-size:13px; padding:5px 11px;
+  border:1px solid var(--line); border-radius:999px; background:var(--card);
+  white-space:nowrap; }}
+nav a:hover {{ border-color:var(--accent); color:var(--accent); }}
+#q {{ flex:1; min-width:180px; padding:7px 12px; border:1px solid var(--line);
+  border-radius:999px; background:var(--card); color:var(--ink); font-size:13px; }}
+#q:focus {{ outline:none; border-color:var(--accent); }}
+section {{ margin:40px 0 0; }}
+h2 {{ font-size:20px; margin:0 0 4px; letter-spacing:-.01em; }}
+.cnt {{ font-size:12px; color:var(--dim); font-weight:400; background:var(--head);
+  border-radius:999px; padding:2px 9px; vertical-align:3px; }}
+.blurb {{ color:var(--dim); margin:0 0 14px; font-size:13px; }}
+.wrap {{ overflow-x:auto; background:var(--card); border:1px solid var(--line);
+  border-radius:12px; }}
+table {{ width:100%; border-collapse:collapse; font-size:14px; min-width:560px; }}
+thead th {{ text-align:left; font-size:11px; letter-spacing:.06em; color:var(--dim);
+  text-transform:uppercase; padding:11px 14px; border-bottom:1px solid var(--line);
+  background:var(--head); font-weight:600; }}
+tbody td {{ padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; }}
+tbody tr:last-child td {{ border-bottom:none; }}
+tr.line th {{ text-align:left; padding:12px 14px 6px; font-size:12px; color:var(--accent);
+  background:var(--accentbg); border-bottom:1px solid var(--line); font-weight:600;
+  letter-spacing:.02em; }}
+.nm {{ font-weight:500; }}
+.nt {{ display:block; color:var(--dim); font-size:11.5px; font-weight:400;
+  margin-top:3px; line-height:1.45; }}
+.cd {{ color:var(--dim); font-variant-numeric:tabular-nums; white-space:nowrap; }}
+.pr {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
+  font-weight:600; }}
+.pe {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
+  color:var(--dim); }}
+.mx {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }}
+.src a {{ color:var(--accent); text-decoration:none; font-size:12px; }}
+.local h2 {{ color:var(--ink); }}
+.miss {{ font-size:12.5px; color:var(--dim); margin:12px 0 0; }}
+.none {{ color:var(--dim); font-size:13px; }}
+.pending {{ opacity:.7; }}
+footer {{ margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
+  color:var(--dim); font-size:12.5px; }}
+footer a {{ color:var(--accent); }}
+tr.hide {{ display:none; }}
+@media (max-width:640px) {{ h1 {{ font-size:24px; }} .page {{ padding:0 14px 60px; }} }}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>BLITZ × GR86 <span style="color:var(--dim);font-weight:400">ZN8</span></h1>
+  <p class="sub">FA24／2021.10– ・ 依 BLITZ 官方商品検索システム 2024 年式查詢結果整理，日本含稅定價</p>
+  <div class="stats">
+    <div class="stat"><b>{total}</b><span>品項</span></div>
+    <div class="stat"><b>{len(by_line)}</b><span>產品線</span></div>
+    <div class="stat"><b>{len(cats)}</b><span>分類</span></div>
+    <div class="stat"><b>￥{min(prices):,}</b><span>最低價</span></div>
+    <div class="stat"><b>￥{max(prices):,}</b><span>最高價</span></div>
+  </div>
+</header>
+<nav><input id="q" type="search" placeholder="搜尋品項、Code、備註…" autocomplete="off">{nav}</nav>
+{"".join(sections)}
+{local_html}
+<footer>
+  資料來源：<a href="{SOURCE_URL}" rel="noopener">BLITZ 商品検索システム</a>（GR86 / ZN8 / 2024 年式，全類別）・
+  擷取日 {stamp}。價格為日本國內含稅定價，括號欄為稅拔價，不含運費、關稅與當地稅。<br>
+  以 <code>./scrape.py &amp;&amp; ./build.py</code> 重新產生。
+</footer>
+</div>
+<script>
+const q = document.getElementById('q');
+q.addEventListener('input', () => {{
+  const v = q.value.trim().toLowerCase();
+  document.querySelectorAll('tbody tr[data-s]').forEach(tr => {{
+    tr.classList.toggle('hide', v && !tr.dataset.s.includes(v));
+  }});
+  // A product-line header with nothing left under it is noise, so hide it too.
+  document.querySelectorAll('tr.line').forEach(h => {{
+    let n = h.nextElementSibling, any = false;
+    while (n && !n.classList.contains('line')) {{
+      if (n.dataset.s && !n.classList.contains('hide')) {{ any = true; break; }}
+      n = n.nextElementSibling;
+    }}
+    h.classList.toggle('hide', !any);
+  }});
+  document.querySelectorAll('section').forEach(s => {{
+    const rows = s.querySelectorAll('tbody tr[data-s]');
+    if (!rows.length) return;
+    s.style.display = [...rows].some(r => !r.classList.contains('hide')) ? '' : 'none';
+  }});
+}});
+</script>
+</body>
+</html>'''
+    open(OUT, "w").write(html)
+    print(f"{total} 品項 / {len(cats)} 分類 → {OUT}")
+
+
+if __name__ == "__main__":
+    main()
