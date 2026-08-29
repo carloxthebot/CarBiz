@@ -20,7 +20,9 @@ import json, os, re, datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data", "blitz-gr86-zn8.json")
 LOCAL = os.path.join(HERE, "data", "prices-local.json")
-OUT = os.path.join(HERE, "index.html")
+# The report lives on its own path, not at the site root: CarBiz is meant to
+# hold more than one pricing study, and the root is the index of them.
+OUT = os.path.join(HERE, "blitz-gr86", "index.html")
 
 SOURCE_URL = ("https://partsnavi.blitz.co.jp/products/search/search_car/list.php"
               "?maker_id=1&car_name_first=1&car_name=GR86&car_model=ZN8&model_year=2024")
@@ -380,7 +382,7 @@ tr.hide {{ display:none; }}
   日本價來源：<a href="{SOURCE_URL}" rel="noopener">BLITZ 商品検索システム</a>（GR86 / ZN8 / 2024 年式，全類別），擷取日 {stamp}，為日本國內含稅定價，不含運費、關稅與當地稅。<br>
   當地售價逐筆附來源連結（點價格即可開啟），為查訪當日的公開標價；括號內折算日圓僅供比較，匯率{f"：{rate_line}" if rate_line else "待補"}。查不到公開標價的品項一律留白，不做估算。<br>
   「水貨到岸試算」是從日本出口通路買進、加運費與當地關稅與稅金後的<strong>計算值</strong>，不是任何業者的報價，一律標示為試算；計算依據寫在各地卡片裡。<br>
-  以 <code>./scrape.py &amp;&amp; ./build.py</code> 重新產生。
+  以 <code>./scrape.py &amp;&amp; ./greycalc.py &amp;&amp; ./build.py</code> 重新產生。
 </footer>
 </div>
 <script>

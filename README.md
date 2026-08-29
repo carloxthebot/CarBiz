@@ -4,10 +4,11 @@
 
 ## 這是什麼
 
-`index.html` 是一頁式靜態網頁，把 BLITZ 官方商品検索システム 對 GR86 / ZN8 / 2024 年式的查詢結果
+`blitz-gr86/index.html` 是一頁式靜態網頁，把 BLITZ 官方商品検索システム 對 GR86 / ZN8 / 2024 年式的查詢結果
 （41 條產品線、110 個品項）整理成八個分類，列出日本含稅與稅拔定價，並附上各地當地售價的調查結果。
 
-沒有框架、沒有 CDN、沒有 build step——直接用瀏覽器打開 `index.html` 就是成品。
+沒有框架、沒有 CDN、沒有 build step——直接用瀏覽器打開 `blitz-gr86/index.html` 就是成品。根目錄的 `index.html` 是站台首頁，
+手寫的一頁清單，之後多一個題目就多一張卡片。
 
 ## 分類
 
@@ -21,7 +22,7 @@
 ```bash
 ./scrape.py     # 重抓 BLITZ 官網 → data/blitz-gr86-zn8.json
 ./greycalc.py   # 水貨到岸試算 → 寫回 data/prices-local.json 的 grey 區塊
-./build.py      # JSON (+ data/prices-local.json) → index.html
+./build.py      # JSON (+ data/prices-local.json) → blitz-gr86/index.html
 ```
 
 `greycalc.py` 裡面是**算式，不是抄來的數字**：日本出口通路實價＋實際運費報價＝CIF，再套各地關稅與稅金。
