@@ -72,10 +72,14 @@ def notes(it):
     return " ／ ".join(p for p in (it.get("note2"), it.get("note1")) if p).replace(" | ", " ")
 
 
-def cell(entry, sym, rate, jp):
-    """One local-price cell: local amount, then what it means against Japan."""
+def cell(entry, sym, rate, jp, researched):
+    """One local-price cell: local amount, then what it means against Japan.
+
+    「—」 and 調查中 are different claims: the first says we looked and there is no
+    public price, the second says nobody has looked yet. Collapsing them would
+    quietly turn an unfinished column into a finding."""
     if not entry or entry.get("amount") in (None, ""):
-        return '<td class="lp none">—</td>'
+        return f'<td class="lp none">{"—" if researched else "調查中"}</td>'
     amt = entry["amount"]
     head = f'{sym}{amt:,.0f}' if isinstance(amt, (int, float)) else esc(amt)
     sub = ""
@@ -129,7 +133,7 @@ def main():
             incl, _ = yen(it["price"])
             n = notes(it)
             p = prices.get(it["code"], {})
-            cells = "".join(cell(p.get(cc), sym, rates.get(cur3), incl)
+            cells = "".join(cell(p.get(cc), sym, rates.get(cur3), incl, cc in have)
                             for cc, _, cur3, sym in COUNTRIES)
             rows.append(
                 f'<tr data-s="{esc((cur_line + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
@@ -165,8 +169,7 @@ def main():
   {f"<ul>{chan}</ul>" if chan else ""}
   {f'<p class="miss"><b>查不到公開標價：</b>{esc("、".join(miss))}</p>' if miss else ""}
   {f'<p class="miss">{esc(d["caveat"])}</p>' if d.get("caveat") else ""}
-  {f'<p class="miss">{esc(d["taxNote"])}</p>' if d.get("taxNote") else ""}
-  {f'<p class="miss">{esc(d["landedNote"])}</p>' if d.get("landedNote") else ""}
+  {"".join(f'<p class="miss">{esc(x)}</p>' for x in d.get("extra", []))}
 </div>'''
 
     nav = "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats) + '<a href="#channels">通路與稅費</a>'
