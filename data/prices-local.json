@@ -176,6 +176,45 @@
         "從日本自己買的到岸基準（RHDJapan 實際購物車報價，收貨地設吉隆坡 50450，查詢日 2026-08-29，以真實 BLITZ 料號對應，未含馬國關稅與銷售稅）：DAMPER ZZ-R 92467 到岸約 RM3,396（0.65× 日本定價）、NUR-SPEC 63199 約 RM4,242（1.09×，運費就吃掉 ￥36,579——排氣貴在長度不是重量）、BIG CALIPER KIT II 86104 約 RM9,644（0.89×）、SUCTION KIT 約 RM514、拉桿約 RM459。這是自日本進口的到岸價，不是馬來西亞店頭價，所以沒有放進價格欄。若以私人收件照 MFN 30% 加 SST 10% 計，ZZ-R 那組會從 RM3,396 變成約 RM4,860；能出 Form AJ 的進口商則是約 RM3,736。另可對照：全馬唯一那筆 LM 進氣 RM1,280，是同一顆件在 RHDJapan 品項價（￥28,369）的約 1.8 倍，屬正常的平行輸入零售加成，不是代理價。",
         "風險在安裝端，不在海關。《Road Transport Act 1987》s.6(5) 把非法改裝的責任延伸到**賣方與施工者**，不只車主；法人另有 s.119A，每一位董事、秘書、經理推定有罪，除非能證明已盡注意義務。排氣噪音有明確法源：P.U.(A) 244/87 第二附表 Standard C，九人座以下客車 80 dB(A) 上限，採 7.5 公尺 drive-by 測法；Rule 3(b) 明文豁免指定賽道競技用途，所以「競技專用」在馬來西亞對應到真的法律豁免，不只是免責聲明。**懸吊與車身高度查不到任何法源**——jpj.gov.my 拒絕連線，1959 年構造規則在需簽章的端點後面，而 ZZ-R 與 Spec-C 正是主力產品，這是這一節最大的空洞。另有一則屬新聞而非法條：JPJ 在 2026 年 8 月的一次查扣中，將更換 ECU 視為 s.59(2) 的非法改裝。"
       ]
+    },
+    "SG": {
+      "summary": "四地之中資料最完整的一個，而且價格最低——**新加坡的售價普遍低於日本定價**：避震 0.68–0.76×、卡鉗 0.90×、進氣 0.82–0.93×。原因是兩個管道都從日本免稅出口，日本 10% 消費稅先被拿掉，賣家再自己打折。但 BLITZ 官方掛名的新加坡經銷 Garage R **一個 BLITZ 品項都沒賣**——它 Wix 商店的 44 個商品全是 Cusco、Dixcel、Billion、CAG，品牌牆上的 Blitz 連結直接指回原廠網站。真正在賣的是 RZCrew Trading Pte Ltd（新加坡註冊公司，Shopify 站上有 2,608 個 BLITZ 品項，標價含進口稅、從日本倉庫 DHL 直送）與 Amazon.sg 的 Amazon Japan 跨境館。",
+      "channels": [
+        {
+          "name": "Garage R",
+          "url": "https://www.hks-garager.com.sg",
+          "kind": "官方經銷",
+          "note": "BLITZ 官網掛名的新馬經銷商，但商店 44 個商品裡零個 BLITZ，也不標任何 BLITZ 價格"
+        },
+        {
+          "name": "RZCrew Garage（RZCrew Trading Pte Ltd）",
+          "url": "https://rzcrewgarage.com/collections/blitz",
+          "kind": "網店",
+          "note": "新加坡註冊公司，2,608 個 BLITZ 品項；頁面明載「新馬售價已含所有進口稅」、日本倉 DHL 3–7 天"
+        },
+        {
+          "name": "Amazon.sg（Amazon Japan 跨境館）",
+          "url": "https://www.amazon.sg",
+          "kind": "跨境",
+          "note": "標價只是商品本身，進口稅費與運費在結帳時另加，因此不是到岸價"
+        }
+      ],
+      "notFound": [
+        "92599 ZZ-R GR86/BRZ CUP",
+        "63199／63801／63199V NUR-SPEC（63199C 除外）",
+        "10479 OIL COOLER KIT BR",
+        "19185／19192 RACING METER PANEL",
+        "13850 排檔頭／13851 手煞車拉桿／13852 油蓋（新加坡用的是 14001–14007 另一組料號）",
+        "96800 TRUSS BAR（只有 95800 藍色版）",
+        "18709 機油濾芯（只有 18100）",
+        "二手市場——完全沒有資料"
+      ],
+      "caveat": "兩件事讓這一欄要小心讀。第一，RZCrew 的四款避震頁面**標題都寫初代 ZN6/ZC6**，但料號 92467／98467／92208／93136 與 BLITZ 官方 ZN8 應用表相同，RHDJapan 的同料號頁面也明列 ZN8/ZD8——研判是賣場標題沒更新，不是不適用，這幾筆已標示「頁面標初代」。前塔頂拉桿那頁 SKU 寫 96133、內文卻寫 96100，同樣標示出來。第二，Amazon.sg 的價格**只是商品本身**，進口稅費與運費結帳時另加，所以那幾筆不是到岸價，跟 RZCrew 的含稅價不能直接並列比較，格子裡都標了。另外 RZCrew 有一頁把 86104 標成 S$2,084.40（其他頁都是 S$3,080.60），研判是它站上的資料錯誤，未採用。",
+      "extra": [
+        "覆蓋率缺口要說在前面：Carousell、Shopee、Lazada、Facebook、sgCarMart 全部擋抓取（403／反爬蟲），所以**新加坡的二手市場與個人賣家完全沒有資料**——那是查不到，不是沒有。",
+        "法規把 BLITZ 的產品線切成兩半，這是新加坡最重要的一條。依 LTA One Motoring 的改裝規定：**避震、拉桿、進氣、儀表都不需要事前核准**（懸吊項下明文列出 aftermarket springs、shock absorbers、strut bars，只要求不影響操控、車身最低點不觸地、不為了裝懸吊而改車體結構，**沒有數字化的最低離地高**）；但**排氣需要 LTA 核准**，而且要件是「原廠出具該車型適用證明」加上「LTA 或 NEA 認可實驗室的測試報告」——BLITZ 不為新加坡出具這些文件，所以 BLITZ 的中尾段實務上**無法合法上路**，除非買家自己去做測試報告。大卡鉗則是灰色地帶：LTA 兩份清單都沒提到汽車煞車，既不在免核准清單、也不在需核准清單。違規改裝的罰則是個人最高 S$20,000 或兩年徒刑（累犯加倍），車廠最高 S$40,000／S$80,000。",
+        "排氣噪音的數字比想像中複雜：現行法規的在用車標準是**距排氣口 0.5 公尺的靜態測量**，2023-04-01 之後在新加坡登記的車（GR86 屬此類）限值是**該車型自己的型式認證靜態值 +5 dB(A)**，不是一個固定數字；更早期或外國登記車則取 103 dB(A) 與參考值 +5 的較高者。另外一條對 BLITZ 有利卻用不上的規定：改裝排氣若構成重大改裝，可接受的標準包含 UN/ECE R59、EU 540/2014，**或日本的《自動車型式認証実施要領》附則 112 第 II 節（售後消音器技術基準）**——也就是說一支帶有日本附則 112 認證的 JDM 排氣，在法規層面本來就符合新加坡標準，卡住的是程序：LTA 仍要求原廠的車型適用證明與認可實驗室報告。"
+      ]
     }
   },
   "prices": {
@@ -185,6 +224,12 @@
         "url": "https://www.priceza.com/s/ราคา/blitz-gr86",
         "seen": "2026-08-29",
         "kind": "跨境代購"
+      },
+      "SG": {
+        "amount": 134.19,
+        "url": "https://www.amazon.sg/dp/B0D5LK92CC",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
       }
     },
     "96101": {
@@ -199,6 +244,12 @@
         "url": "https://loongwahshop.com/products/BLITZ-GR86-Strut-Tower-Bar-Rear",
         "seen": "2026-08-29",
         "kind": "新品"
+      },
+      "SG": {
+        "amount": 145.6,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
       }
     },
     "56275": {
@@ -207,6 +258,12 @@
         "url": "https://www.mudah.my/gr86-brz-blitz-lm-intake-kit-108939467.htm",
         "seen": "2026-08-29",
         "kind": "新品·未標料號"
+      },
+      "SG": {
+        "amount": 281.5,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
       }
     },
     "92467": {
@@ -215,6 +272,12 @@
         "url": "https://loongwahshop.com/products/BLITZ-ZZ-R-86-GR-SPORT-BRZ-ZN6%2CZD8-FA20",
         "seen": "2026-08-29",
         "kind": "新品"
+      },
+      "SG": {
+        "amount": 1249.6,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品·頁面標初代"
       }
     },
     "96133": {
@@ -223,6 +286,12 @@
         "url": "https://loongwahshop.com/products/BLITZ-GR86-Strut-Tower-Bar-Front",
         "seen": "2026-08-29",
         "kind": "新品"
+      },
+      "SG": {
+        "amount": 160.2,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品·頁面料號不一致"
       }
     },
     "13851": {
@@ -271,6 +340,172 @@
         "url": "https://www.hkcah.com/index.php?route=product/product&product_id=3836",
         "seen": "2026-08-29",
         "kind": "新品"
+      },
+      "SG": {
+        "amount": 50.91,
+        "url": "https://www.amazon.sg/dp/B01MTCRRTE",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
+      }
+    },
+    "98467": {
+      "SG": {
+        "amount": 1711.71,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品·頁面標初代"
+      }
+    },
+    "92208": {
+      "SG": {
+        "amount": 1452.45,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品·頁面標初代"
+      }
+    },
+    "93136": {
+      "SG": {
+        "amount": 1835.4,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品·頁面標初代"
+      }
+    },
+    "86104": {
+      "SG": {
+        "amount": 3080.6,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "86113": {
+      "SG": {
+        "amount": 2132.8,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "86105": {
+      "SG": {
+        "amount": 2211.7,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "86114": {
+      "SG": {
+        "amount": 2132.8,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "59275": {
+      "SG": {
+        "amount": 281.5,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "26275": {
+      "SG": {
+        "amount": 365.2,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "35275": {
+      "SG": {
+        "amount": 505.2,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "42275": {
+      "SG": {
+        "amount": 423.7,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "27031": {
+      "SG": {
+        "amount": 1787.4,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "18875": {
+      "SG": {
+        "amount": 459.0,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "63199C": {
+      "SG": {
+        "amount": 1580.0,
+        "url": "https://rzcrewgarage.com/collections/blitz",
+        "seen": "2026-08-29",
+        "kind": "新品"
+      }
+    },
+    "55101": {
+      "SG": {
+        "amount": 135.13,
+        "url": "https://www.amazon.sg/dp/B0D5L77VF4",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
+      }
+    },
+    "55102": {
+      "SG": {
+        "amount": 443.16,
+        "url": "https://www.amazon.sg/dp/B0BSGYVRX4",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
+      }
+    },
+    "55302": {
+      "SG": {
+        "amount": 443.79,
+        "url": "https://www.amazon.sg/dp/B0BT7W39GF",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
+      }
+    },
+    "95800": {
+      "SG": {
+        "amount": 130.75,
+        "url": "https://www.amazon.sg/dp/B0FN3L7H54",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
+      }
+    },
+    "97101": {
+      "SG": {
+        "amount": 115.96,
+        "url": "https://www.amazon.sg/dp/B0FL6GM1TW",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
+      }
+    },
+    "18100": {
+      "SG": {
+        "amount": 29.58,
+        "url": "https://www.amazon.sg/dp/B0DW41N26C",
+        "seen": "2026-08-29",
+        "kind": "新品·未含進口稅費"
       }
     }
   },
