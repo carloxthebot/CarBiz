@@ -27,7 +27,8 @@ SOURCE_URL = ("https://partsnavi.blitz.co.jp/products/search/search_car/list.php
 
 # Column order is deliberate: Japan is the reference price, the other three are
 # read against it left to right.
-COUNTRIES = [("TH", "泰國", "THB", "฿"), ("HK", "香港", "HKD", "HK$"), ("MY", "馬來西亞", "MYR", "RM")]
+COUNTRIES = [("TH", "泰國", "THB", "฿"), ("MY", "馬來西亞", "MYR", "RM"),
+             ("SG", "新加坡", "SGD", "S$"), ("HK", "香港", "HKD", "HK$")]
 
 CATEGORIES = [
     ("suspension", "懸吊・底盤", "車高調、拉桿、懸吊臂",
@@ -72,14 +73,8 @@ def notes(it):
     return " ／ ".join(p for p in (it.get("note2"), it.get("note1")) if p).replace(" | ", " ")
 
 
-def cell(entry, sym, rate, jp, researched):
-    """One local-price cell: local amount, then what it means against Japan.
-
-    「—」 and 調查中 are different claims: the first says we looked and there is no
-    public price, the second says nobody has looked yet. Collapsing them would
-    quietly turn an unfinished column into a finding."""
-    if not entry or entry.get("amount") in (None, ""):
-        return f'<td class="lp none">{"—" if researched else "調查中"}</td>'
+def money(entry, sym, rate, jp, estimate=False):
+    """Inner markup of one price: the local figure, then what it means vs Japan."""
     amt = entry["amount"]
     head = f'{sym}{amt:,.0f}' if isinstance(amt, (int, float)) else esc(amt)
     sub = ""
@@ -87,11 +82,27 @@ def cell(entry, sym, rate, jp, researched):
         equiv = amt * rate
         mult = f" ×{equiv / jp:.2f}" if jp else ""
         sub = f'<span class="eq">≈￥{equiv:,.0f}{mult}</span>'
-    tag = f'<span class="tag">{esc(entry["kind"])}</span>' if entry.get("kind") else ""
+    tag = "試算" if estimate else entry.get("kind")
+    tag = f'<span class="tag{" est" if estimate else ""}">{esc(tag)}</span>' if tag else ""
     body = f'{head}{tag}{sub}'
     if entry.get("url"):
         body = f'<a href="{esc(entry["url"])}" rel="noopener" title="{esc(entry.get("seen",""))}">{body}</a>'
-    return f'<td class="lp">{body}</td>'
+    return body
+
+
+def cell(retail, grey, sym, rate, jp, researched):
+    """One country cell, carrying both readings; the toggle shows one at a time.
+
+    「—」 and 調查中 are different claims: the first says we looked and there is no
+    public price, the second says nobody has looked yet. Collapsing them would
+    quietly turn an unfinished column into a finding. A parallel-import figure is
+    a third thing again -- a calculation, never a quote -- so it is always tagged
+    試算 and never silently mixed into the retail reading."""
+    empty = f'<span class="none">{"—" if researched else "調查中"}</span>'
+    r = money(retail, sym, rate, jp) if retail and retail.get("amount") not in (None, "") else empty
+    g = (f'<span class="est">{money(grey, sym, rate, jp, True)}</span>'
+         if grey and grey.get("amount") not in (None, "") else f'<span class="none">—</span>')
+    return f'<td class="lp"><span class="v-retail">{r}</span><span class="v-grey">{g}</span></td>'
 
 
 def main():
@@ -100,6 +111,7 @@ def main():
     local = json.load(open(LOCAL)) if os.path.exists(LOCAL) else {}
     rates = (local.get("meta") or {}).get("rates") or {}       # JPY per 1 local unit
     prices = local.get("prices") or {}
+    grey = local.get("grey") or {}          # 水貨到岸試算, keyed the same way
     have = {cc for cc in (c[0] for c in COUNTRIES) if (local.get("countries") or {}).get(cc)}
 
     placed, cats = set(), []
@@ -133,7 +145,8 @@ def main():
             incl, _ = yen(it["price"])
             n = notes(it)
             p = prices.get(it["code"], {})
-            cells = "".join(cell(p.get(cc), sym, rates.get(cur3), incl, cc in have)
+            gp = grey.get(it["code"], {})
+            cells = "".join(cell(p.get(cc), gp.get(cc), sym, rates.get(cur3), incl, cc in have)
                             for cc, _, cur3, sym in COUNTRIES)
             rows.append(
                 f'<tr data-s="{esc((cur_line + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
@@ -172,7 +185,9 @@ def main():
   {"".join(f'<p class="miss">{esc(x)}</p>' for x in d.get("extra", []))}
 </div>'''
 
-    nav = "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats) + '<a href="#channels">通路與稅費</a>'
+    nav = ('<a href="#channels">各地通路與稅費</a>'
+           + "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats)
+           + '<button id="mode" type="button">切換：水貨到岸試算</button>')
     rate_line = "・".join(f"1 {c} ≈ ￥{rates[c]:.2f}" for _, _, c, _ in COUNTRIES if rates.get(c))
 
     html = f'''<!DOCTYPE html>
@@ -235,7 +250,16 @@ tr.line th {{ text-align:left; padding:12px 14px 6px; font-size:12px; color:var(
 .lp {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }}
 .lp a {{ color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); }}
 .lp a:hover {{ color:var(--accent); }}
-.lp.none {{ color:var(--line); }}
+.lp .none {{ color:var(--line); }}
+.v-grey {{ display:none; }}
+body.grey .v-retail {{ display:none; }}
+body.grey .v-grey {{ display:inline; }}
+.est {{ color:var(--dim); }}
+.tag.est {{ border-style:dashed; border-color:var(--accent); color:var(--accent); }}
+#mode {{ font:inherit; font-size:13px; padding:5px 11px; border:1px solid var(--accent);
+  border-radius:999px; background:var(--card); color:var(--accent); cursor:pointer;
+  white-space:nowrap; margin-left:auto; }}
+body.grey #mode {{ background:var(--accent); color:#fff; }}
 .eq {{ display:block; font-size:11px; color:var(--dim); font-weight:400; font-variant-numeric:tabular-nums; }}
 .tag {{ font-size:10px; color:var(--dim); border:1px solid var(--line); border-radius:4px;
   padding:0 4px; margin-left:5px; vertical-align:1px; }}
@@ -266,19 +290,25 @@ tr.hide {{ display:none; }}
   </div>
 </header>
 <nav><input id="q" type="search" placeholder="搜尋品項、Code、備註…" autocomplete="off">{nav}</nav>
-{"".join(sections)}
 <section id="channels">
-  <h2>通路與稅費</h2>
-  <p class="blurb">各地由誰在賣、價差從哪裡來，以及查不到公開標價的品項。</p>
+  <h2>各地通路與稅費</h2>
+  <p class="blurb">先讀這一節：各地由誰在賣、價差從哪裡來、哪些品項查不到公開標價，以及當地法規擋掉了什麼。下面的價格表要對照這裡才看得懂。</p>
   <div class="notes">{notes_html}</div>
 </section>
+{"".join(sections)}
 <footer>
   日本價來源：<a href="{SOURCE_URL}" rel="noopener">BLITZ 商品検索システム</a>（GR86 / ZN8 / 2024 年式，全類別），擷取日 {stamp}，為日本國內含稅定價，不含運費、關稅與當地稅。<br>
   當地售價逐筆附來源連結（點價格即可開啟），為查訪當日的公開標價；括號內折算日圓僅供比較，匯率{f"：{rate_line}" if rate_line else "待補"}。查不到公開標價的品項一律留白，不做估算。<br>
+  「水貨到岸試算」是從日本出口通路買進、加運費與當地關稅與稅金後的<strong>計算值</strong>，不是任何業者的報價，一律標示為試算；計算依據寫在各地卡片裡。<br>
   以 <code>./scrape.py &amp;&amp; ./build.py</code> 重新產生。
 </footer>
 </div>
 <script>
+const mode = document.getElementById('mode');
+mode.addEventListener('click', () => {{
+  const grey = document.body.classList.toggle('grey');
+  mode.textContent = grey ? '切換：當地零售價' : '切換：水貨到岸試算';
+}});
 const q = document.getElementById('q');
 q.addEventListener('input', () => {{
   const v = q.value.trim().toLowerCase();
