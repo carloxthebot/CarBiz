@@ -164,6 +164,9 @@ def main():
   <p class="blurb">{esc(d.get("summary",""))}</p>
   {f"<ul>{chan}</ul>" if chan else ""}
   {f'<p class="miss"><b>查不到公開標價：</b>{esc("、".join(miss))}</p>' if miss else ""}
+  {f'<p class="miss">{esc(d["caveat"])}</p>' if d.get("caveat") else ""}
+  {f'<p class="miss">{esc(d["taxNote"])}</p>' if d.get("taxNote") else ""}
+  {f'<p class="miss">{esc(d["landedNote"])}</p>' if d.get("landedNote") else ""}
 </div>'''
 
     nav = "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats) + '<a href="#channels">通路與稅費</a>'
