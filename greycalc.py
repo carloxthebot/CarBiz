@@ -13,6 +13,10 @@ Item price and freight must come from the SAME exporter -- Black Hawk Japan is
 cheaper on 13 of these SKUs, but its freight was never quoted, and pairing one
 shop's price with another's shipping would be a number that exists nowhere.
 
+Singapore freight for the coilover band is a measured RHDJapan cart quote to a
+Singapore address on a comparable coilover box, not the same SKU -- roughly 50%
+above the Kuala Lumpur figure, so reusing KL there would have understated it.
+
 Freight to Hong Kong: Japan Post Zone 2 covers HK/SG/TH/MY at identical rates,
 but these parcels exceed postal limits and go by courier, where HK is a slightly
 cheaper zone. Where a UPS published-rate ratio was measured for the weight band,
@@ -34,15 +38,19 @@ import json, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 LOCAL = os.path.join(HERE, "data", "prices-local.json")
 
-# code: (RHDJapan item ¥, freight to KL ¥, freight to HK ¥ or None to reuse KL)
+# code: (RHDJapan item ¥, freight to KL ¥, freight to HK ¥ or None, freight to SG ¥ or None)
+# None means "reuse the Kuala Lumpur quote", which is the honest fallback: Japan
+# Post Zone 2 covers all four at one rate, and the couriers differ by a few
+# percent between these zones.
 SKUS = {
-    "92467": (124_289, 10_423, 10_165),   # DAMPER ZZ-R, ~25kg; HK via UPS ratio 0.975
-    "98208": (218_559, 14_800, None),     # ZZ-R BB DSC Plus, ~30kg
-    "86104": (363_579, 18_954, None),     # BIG CALIPER KIT II front, 15kg
-    "63199": (131_679, 36_579, 33_525),   # NUR-SPEC, 150cm long box; HK via UPS ratio 0.916
-    "55301": (17_559, 2_830, None),       # SUCTION KIT, ~2kg
-    "96133": (14_839, 3_353, None),       # STRUT TOWER BAR front
-    "96101": (14_839, 3_353, None),       # STRUT TOWER BAR rear, same price and box
+    "92467": (124_289, 10_423, 10_165, 15_512),  # DAMPER ZZ-R ~25kg; HK via UPS ratio 0.975,
+                                                 # SG measured on a comparable coilover box
+    "98208": (218_559, 14_800, None, 15_512),    # ZZ-R BB DSC Plus ~30kg; same SG coilover band
+    "86104": (363_579, 18_954, None, None),      # BIG CALIPER KIT II front, 15kg
+    "63199": (131_679, 36_579, 33_525, None),    # NUR-SPEC, 150cm long box; HK via UPS ratio 0.916
+    "55301": (17_559, 2_830, None, None),        # SUCTION KIT, ~2kg
+    "96133": (14_839, 3_353, None, None),        # STRUT TOWER BAR front
+    "96101": (14_839, 3_353, None, None),        # STRUT TOWER BAR rear, same price and box
 }
 
 
@@ -50,17 +58,21 @@ def landed(item, freight, rates):
     """CIF -> landed cost in JPY for each destination."""
     out = {}
     for cc in ("HK", "SG", "TH", "MY"):
-        cif = item + (freight[cc])
+        cif = item + freight[cc]
         if cc == "HK":
             out[cc] = cif                                  # no duty, no GST
         elif cc == "SG":
-            if cif <= 400 * rates["SGD"]:
+            # The low-value test is the ITEM's sales value with shipping excluded
+            # -- Singapore Customs' own example: an S$395 item with S$25 shipping
+            # is an S$395 sale. Above it, GST is charged on the full CIF.
+            if item <= 400 * rates["SGD"]:
                 out[cc] = cif                              # air/post relief
             else:
                 out[cc] = cif * 1.09 + 3.19 * rates["SGD"]  # GST + TradeNet permit
         elif cc == "TH":
             out[cc] = cif * 1.30 * 1.07                    # 30% duty, then 7% VAT
         elif cc == "MY":
+            # Malaysia's de minimis is on CIF, unlike Singapore's.
             out[cc] = cif if cif <= 500 * rates["MYR"] else cif * 1.30 * 1.10
     return out
 
@@ -70,8 +82,8 @@ def main():
     rates = d["meta"]["rates"]          # JPY per 1 unit of local currency
     cur = {"HK": "HKD", "SG": "SGD", "TH": "THB", "MY": "MYR"}
     grey = {}
-    for code, (item, kl, hk) in SKUS.items():
-        freight = {"KL": kl, "MY": kl, "SG": kl, "TH": kl, "HK": hk or kl}
+    for code, (item, kl, hk, sg) in SKUS.items():
+        freight = {"MY": kl, "TH": kl, "HK": hk or kl, "SG": sg or kl}
         for cc, jpy in landed(item, freight, rates).items():
             note = (f"日本出口通路 RHDJapan 品項 ￥{item:,} ＋ 運費 ￥{freight[cc]:,}"
                     f" ＝ CIF ￥{item + freight[cc]:,}，加當地關稅與稅金後 ￥{jpy:,.0f}。"
