@@ -243,10 +243,20 @@ def main():
     pi = local.get("greyNote")
     if pi:
         tabs.append(f'<button type="button" data-t="PI">{FLAGS["PI"]} 水貨試算</button>')
+        rt = pi.get("ratioTable")
+        rt_html = ""
+        if rt:
+            rt_html = ('<h4>定價比率是怎麼推得的</h4><div class="wrap"><table class="ratio">'
+                       + "<thead><tr>" + "".join(f"<th>{esc(h)}</th>" for h in rt["head"])
+                       + "</tr></thead><tbody>"
+                       + "".join("<tr>" + "".join(
+                           f'<td class="{"pr" if i == 1 else ""}">{esc(c)}</td>'
+                           for i, c in enumerate(r)) + "</tr>" for r in rt["rows"])
+                       + "</tbody></table></div>")
         panels.append('<div class="panel" id="p-PI">'
                       + '<p class="lead">' + esc(pi.get("summary", "")) + '</p>'
                       + "".join('<p class="miss">' + esc(x) + '</p>' for x in pi.get("extra", []))
-                      + '</div>')
+                      + rt_html + '</div>')
     notes_html = (f'<div class="tabs">{"".join(tabs)}</div>'
                   f'<div class="panels">{"".join(panels)}</div>')
 
@@ -357,6 +367,9 @@ tr.line th {{ text-align:left; padding:14px 16px 8px; font-size:15px; color:var(
 .panel ul {{ margin:0; padding-left:20px; font-size:16px; }}
 .panel li {{ margin-bottom:9px; }}
 .panel a {{ color:var(--accent); }}
+table.ratio {{ min-width:0; font-size:15px; }}
+table.ratio td {{ white-space:normal; }}
+table.ratio td.pr {{ font-weight:600; }}
 .lead {{ font-size:18px; line-height:1.8; margin:0 0 4px; }}
 .rate {{ color:var(--dim); font-size:14px; margin:0 0 12px; font-variant-numeric:tabular-nums; }}
 .note {{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }}

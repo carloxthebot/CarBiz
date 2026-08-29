@@ -56,24 +56,29 @@ MEASURED = {
     "96101": (14_839, 3_353, None, None),
 }
 
-# ---- tier 2: Black Hawk Japan's ratio against the EX-TAX MSRP, per product
-# line. Each figure is measured on a real BHJ listing, not assumed; the lines
-# with no BHJ listing fall back to 0.85, its most common tier, and are flagged
-# in the note so the page can say which is which.
-RATIO = {
-    "DAMPER ZZ-R": 0.67,                  # 92467 .668 / 92208 .653 / 93136 .656
-    "BIG CALIPER KIT II": 0.91,           # 86104 .911
-    "NUR-SPEC Exhaust System": 0.85,      # 63199 .850
-    "SUCTION KIT": 0.85, "DRY CARBON SUCTION KIT": 0.85, "CARBON INTAKE SYSTEM": 0.85,
-    "CORE TYPE AIR CLEANER": 0.69,        # 56275 .691
-    "SUS POWER AIR FILTER Series": 0.73,  # 59624 .729
-    "RACING OIL FILTER": 0.67,            # 18709 .668
-    "HYBRID AIRCON FILTER": 0.70,
-    "STRUT TOWER BAR": 0.81, "TRUSS BAR": 0.81,   # 96133 .814
-    "RACING OIL COOLER KIT BR": 0.81,     # 10479 .814
-    "RACING METER PANEL": 0.91,           # 19185 .911
-    "SHIFT KNOB": 0.85, "HAND BRAKE LEVER": 0.85, "OIL FILLER CAP": 0.85,  # 13850/13851 .850
+# ---- tier 2: Black Hawk Japan's ratio against the EX-TAX MSRP ----------
+# The ratio is not a judgement call and it is not hard-coded: it is DERIVED here
+# from Black Hawk Japan's actual listed prices, captured 2026-08-29, divided by
+# the ex-consumption-tax MSRP that scrape.py already holds for the same part
+# number. BHJ prices its BLITZ range off a clean multiple per product family --
+# that is what made this possible -- so the observations below pin a ratio for
+# each family, and a family with no observation says so on the page.
+OBSERVED = {                 # BLITZ code -> Black Hawk Japan listed price, JPY
+    "92467": 124_901, "92208": 146_942, "93136": 185_682, "98467": 206_934,
+    "98208": 233_165, "92599": 180_338,          # DAMPER ZZ-R
+    "96133": 14_238, "96101": 14_238, "96800": 15_052,   # bars
+    "63199": 119_011, "63199V": 127_511,          # NUR-SPEC
+    "86104": 355_212, "86105": 255_023,           # BIG CALIPER KIT II
+    "55301": 17_002,                              # SUCTION KIT
+    "56275": 26_959,                              # CORE TYPE AIR CLEANER
+    "59624": 4_736,                               # SUS POWER AIR FILTER
+    "18709": 2_204,                               # RACING OIL FILTER
+    "10479": 89_501,                              # OIL COOLER KIT BR
+    "13851": 11_901, "13850": 5_950, "13852": 6_375,     # interior
+    "19185": 27_323,                              # RACING METER PANEL
 }
+# Families BHJ does not list are given the modal observed ratio rather than an
+# invented one, and every such cell says on the page that it was borrowed.
 DEFAULT_RATIO = 0.85
 
 # ---- freight bands. Published Japan Post Zone 2 rates (identical for all four
@@ -104,6 +109,19 @@ def ex_tax(price):
     return n[1] if len(n) > 1 else (round(n[0] / 1.1) if n else None)
 
 
+def ratios(groups):
+    """Per-product-line ratio, averaged over whatever BHJ actually lists there.
+    Returns {line: (ratio, [evidence strings])}."""
+    seen = {}
+    for g in groups:
+        for it in g["items"]:
+            bhj = OBSERVED.get(it["code"])
+            xt = ex_tax(it["price"])
+            if bhj and xt:
+                seen.setdefault(g["line"], []).append((it["code"], bhj, xt, bhj / xt))
+    return {line: (sum(r for *_, r in obs) / len(obs), obs) for line, obs in seen.items()}
+
+
 def landed(item, freight, rates):
     out = {}
     for cc in ("HK", "SG", "TH", "MY"):
@@ -124,11 +142,13 @@ def main():
     rates = d["meta"]["rates"]
     cur = {"HK": "HKD", "SG": "SGD", "TH": "THB", "MY": "MYR"}
     grey, tiers = {}, {"實報": 0, "公式": 0}
+    groups = json.load(open(DATA))
+    derived = ratios(groups)
 
-    for group in json.load(open(DATA)):
+    for group in groups:
         line = group["line"]
         band_key, per_country = BAND.get(line, ("small", None))
-        ratio = RATIO.get(line)
+        ratio = derived.get(line, (None, None))[0]
         for it in group["items"]:
             code, xt = it["code"], ex_tax(it["price"])
             if not xt:
@@ -144,9 +164,16 @@ def main():
                                     else BAND["NUR-SPEC Exhaust System"][1])
                 freight = {c: f[c] for c in cur}
                 tier = "公式"
-                basis = (f"Black Hawk Japan 對此產品線的定價比率 未稅定價 ￥{xt:,} × "
-                         f"{ratio or DEFAULT_RATIO:.2f}{'' if ratio else '（此產品線無 BHJ 實價，採其最常見比率）'}"
-                         f" ＝ ￥{item:,}")
+                if ratio:
+                    ev = derived[line][1]
+                    src = "、".join(f"{c} 上架價 ￥{b:,} ÷ 未稅定價 ￥{x:,} ＝ {r:.3f}"
+                                   for c, b, x, r in ev[:2])
+                    how = (f"比率 {ratio:.2f} 由本產品線 {len(ev)} 筆 Black Hawk Japan 實際上架價推得"
+                           f"（{src}{'…' if len(ev) > 2 else ''}）")
+                else:
+                    how = (f"此產品線 Black Hawk Japan 沒有上架，無實價可推，"
+                           f"借用觀測到最常見的比率 {DEFAULT_RATIO:.2f}")
+                basis = f"{how}；未稅定價 ￥{xt:,} × {ratio or DEFAULT_RATIO:.2f} ＝ ￥{item:,}"
             for cc, jpy in landed(item, freight, rates).items():
                 grey.setdefault(code, {})[cc] = {
                     "amount": round(jpy / rates[cur[cc]]),
@@ -157,9 +184,22 @@ def main():
             tiers[tier] += 1
 
     d["grey"] = grey
+    # Publish the derivation alongside the numbers. Written from here rather than
+    # kept as prose in the JSON so the page can never quote a ratio the maths no
+    # longer uses.
+    d.setdefault("greyNote", {})["ratioTable"] = {
+        "head": ["產品線", "比率", "怎麼推得的"],
+        "rows": [[line, f"×{r:.3f}",
+                  "、".join(f"{c} ￥{b:,} ÷ ￥{x:,}" for c, b, x, _ in obs)]
+                 for line, (r, obs) in sorted(derived.items(), key=lambda kv: -kv[1][0])]
+        + [["（其餘產品線）", f"×{DEFAULT_RATIO:.2f}", "BHJ 未上架，借用觀測到最常見的比率"]],
+    }
     json.dump(d, open(LOCAL, "w"), ensure_ascii=False, indent=2)
     print(f"{len(grey)} 個料號 × 4 地 = {sum(tiers.values()) * 4} 格試算"
           f"（實報 {tiers['實報']} 料號 / 公式 {tiers['公式']} 料號）")
+    print("由 BHJ 實價推得的產品線比率：")
+    for line, (r, obs) in sorted(derived.items(), key=lambda kv: -kv[1][0]):
+        print(f"  ×{r:.3f}  {line:30} （{len(obs)} 筆）")
 
 
 if __name__ == "__main__":
