@@ -29,6 +29,7 @@ SOURCE_URL = ("https://partsnavi.blitz.co.jp/products/search/search_car/list.php
 # read against it left to right.
 COUNTRIES = [("TH", "泰國", "THB", "฿"), ("MY", "馬來西亞", "MYR", "RM"),
              ("SG", "新加坡", "SGD", "S$"), ("HK", "香港", "HKD", "HK$")]
+FLAGS = {"TH": "🇹🇭", "MY": "🇲🇾", "SG": "🇸🇬", "HK": "🇭🇰", "PI": "📦"}
 
 CATEGORIES = [
     ("suspension", "懸吊・底盤", "車高調、拉桿、懸吊臂",
@@ -102,12 +103,13 @@ def cell(retail, grey, sym, rate, jp, researched):
     public price, the second says nobody has looked. An estimate is a third thing
     again -- arithmetic, never a quote -- so it always carries its 試算 tag and its
     own muted style, and is never allowed to look like a found price."""
+    real = bool(retail and retail.get("amount") not in (None, ""))
     empty = f'<span class="none">{"—" if researched else "調查中"}</span>'
-    r = money(retail, sym, rate, jp) if retail and retail.get("amount") not in (None, "") else empty
+    r = money(retail, sym, rate, jp) if real else empty
     out = f'<span class="v-retail">{r}</span>'
     if grey and grey.get("amount") not in (None, ""):
         out += f'<span class="v-grey" title="{esc(grey.get("note",""))}">{money(grey, sym, rate, jp, True)}</span>'
-    return f'<td class="lp">{out}</td>'
+    return f'<td class="lp{" real" if real else ""}">{out}</td>'
 
 
 def main():
@@ -208,33 +210,40 @@ def main():
 </section>''' if unpriced else ""
 
     # ---- appendix: who sells it, what the markup is made of -----------------
-    notes_html = ""
+    tabs, panels = [], []
     for cc, name, cur3, _ in COUNTRIES:
-        d = (local.get("countries") or {}).get(cc)
-        if not d:
-            notes_html += (f'<div class="note"><h3>{esc(name)}</h3>'
-                           f'<p class="blurb">當地售價調查進行中。</p></div>')
+        d0 = (local.get("countries") or {}).get(cc)
+        n_found = sum(1 for c in prices.values() if c.get(cc, {}).get("amount") not in (None, ""))
+        tabs.append(f'<button type="button" data-t="{cc}">{FLAGS[cc]} {esc(name)}'
+                    f'<span class="cnt">{n_found}</span></button>')
+        if not d0:
+            panels.append(f'<div class="panel" id="p-{cc}"><p class="blurb">當地售價調查進行中。</p></div>')
             continue
-        miss = d.get("notFound") or []
-        chan = "".join(f'<li>{esc(c.get("name",""))}'
-                       + (f' — <a href="{esc(c["url"])}" rel="noopener">{esc(c.get("kind","連結"))}</a>' if c.get("url") else "")
-                       + (f' <span class="eq">{esc(c["note"])}</span>' if c.get("note") else "")
-                       + '</li>' for c in d.get("channels", []))
-        notes_html += f'''<div class="note"><h3>{esc(name)}
-  <span class="cur">1 {esc(cur3)} ≈ ￥{rates.get(cur3, 0):.2f}</span></h3>
-  <p class="blurb">{esc(d.get("summary",""))}</p>
-  {f"<ul>{chan}</ul>" if chan else ""}
+        miss = d0.get("notFound") or []
+        chan = "".join(
+            f'<li><b>{esc(c.get("name",""))}</b>'
+            + (f' — <a href="{esc(c["url"])}" rel="noopener">{esc(c.get("kind","連結"))}</a>' if c.get("url")
+               else (f' <span class="eq">{esc(c.get("kind",""))}</span>' if c.get("kind") else ""))
+            + (f'<br><span class="eq">{esc(c["note"])}</span>' if c.get("note") else "")
+            + '</li>' for c in d0.get("channels", []))
+        panels.append(f'''<div class="panel" id="p-{cc}">
+  <p class="rate">1 {esc(cur3)} ≈ ￥{rates.get(cur3, 0):.2f}　·　查到零售標價 {n_found} 筆</p>
+  <p class="lead">{esc(d0.get("summary",""))}</p>
+  {f"<h4>通路</h4><ul>{chan}</ul>" if chan else ""}
   {f'<p class="miss"><b>查不到公開標價：</b>{esc("、".join(miss))}</p>' if miss else ""}
-  {f'<p class="miss">{esc(d["caveat"])}</p>' if d.get("caveat") else ""}
-  {"".join(f'<p class="miss">{esc(x)}</p>' for x in d.get("extra", []))}
-</div>'''
+  {f'<p class="miss">{esc(d0["caveat"])}</p>' if d0.get("caveat") else ""}
+  {"".join(f'<p class="miss">{esc(x)}</p>' for x in d0.get("extra", []))}
+</div>''')
 
     pi = local.get("greyNote")
     if pi:
-        notes_html += ('<div class="note pi"><h3>' + esc(pi.get("title", "水貨到岸試算")) + '</h3>'
-                       + '<p class="blurb">' + esc(pi.get("summary", "")) + '</p>'
-                       + "".join('<p class="miss">' + esc(x) + '</p>' for x in pi.get("extra", []))
-                       + '</div>')
+        tabs.append(f'<button type="button" data-t="PI">{FLAGS["PI"]} 水貨試算</button>')
+        panels.append('<div class="panel" id="p-PI">'
+                      + '<p class="lead">' + esc(pi.get("summary", "")) + '</p>'
+                      + "".join('<p class="miss">' + esc(x) + '</p>' for x in pi.get("extra", []))
+                      + '</div>')
+    notes_html = (f'<div class="tabs">{"".join(tabs)}</div>'
+                  f'<div class="panels">{"".join(panels)}</div>')
 
     shown = {sec.split('"')[1] for sec in sections}
     nav = ('<a href="#channels">各地通路與稅費</a>'
@@ -252,76 +261,97 @@ def main():
 :root {{
   --bg:#f7f8fa; --card:#fff; --ink:#14161a; --dim:#616a76; --line:#e3e6eb;
   --accent:#0b64c8; --accentbg:#eaf2fd; --head:#f0f2f5; --jpbg:#fbfcfe;
+  --real:#0d6b52; --realbg:#eaf6f1; --line-2:#c8cdd6;
 }}
 @media (prefers-color-scheme: dark) {{
   :root {{ --bg:#0e1013; --card:#15181d; --ink:#e8eaed; --dim:#98a1ad; --line:#252a31;
-           --accent:#5aa9f8; --accentbg:#132436; --head:#1b1f26; --jpbg:#171b21; }}
+           --accent:#5aa9f8; --accentbg:#132436; --head:#1b1f26; --jpbg:#171b21;
+           --real:#5fc9a4; --realbg:#12291f; --line-2:#3a424d; }}
 }}
 * {{ box-sizing:border-box; }}
 body {{ margin:0; background:var(--bg); color:var(--ink);
-  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans TC",
+  font:18px/1.65 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans TC",
   "PingFang TC","Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }}
-.page {{ max-width:1180px; margin:0 auto; padding:0 20px 80px; }}
+.page {{ max-width:1340px; margin:0 auto; padding:0 20px 80px; }}
 header {{ padding:48px 0 28px; border-bottom:1px solid var(--line); }}
-h1 {{ margin:0 0 6px; font-size:30px; letter-spacing:-.02em; }}
+h1 {{ margin:0 0 8px; font-size:38px; letter-spacing:-.02em; }}
 .sub {{ color:var(--dim); margin:0 0 22px; }}
 .stats {{ display:flex; flex-wrap:wrap; gap:10px; }}
 .stat {{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 16px; }}
-.stat b {{ display:block; font-size:22px; letter-spacing:-.01em; }}
-.stat span {{ color:var(--dim); font-size:12px; }}
+.stat b {{ display:block; font-size:28px; letter-spacing:-.01em; }}
+.stat span {{ color:var(--dim); font-size:15px; }}
 nav {{ position:sticky; top:0; z-index:5; background:var(--bg); padding:14px 0;
   border-bottom:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }}
-nav a {{ color:var(--ink); text-decoration:none; font-size:13px; padding:5px 11px;
+nav a {{ color:var(--ink); text-decoration:none; font-size:16px; padding:7px 14px;
   border:1px solid var(--line); border-radius:999px; background:var(--card); white-space:nowrap; }}
 nav a:hover {{ border-color:var(--accent); color:var(--accent); }}
 #q {{ flex:1; min-width:180px; padding:7px 12px; border:1px solid var(--line);
-  border-radius:999px; background:var(--card); color:var(--ink); font-size:13px; }}
+  border-radius:999px; background:var(--card); color:var(--ink); font-size:16px; }}
 #q:focus {{ outline:none; border-color:var(--accent); }}
 section {{ margin:40px 0 0; }}
-h2 {{ font-size:20px; margin:0 0 4px; letter-spacing:-.01em; }}
-.cnt {{ font-size:12px; color:var(--dim); font-weight:400; background:var(--head);
+h2 {{ font-size:26px; margin:0 0 6px; letter-spacing:-.01em; }}
+.cnt {{ font-size:15px; color:var(--dim); font-weight:400; background:var(--head);
   border-radius:999px; padding:2px 9px; vertical-align:3px; }}
-.blurb {{ color:var(--dim); margin:0 0 14px; font-size:13px; }}
+.blurb {{ color:var(--dim); margin:0 0 16px; font-size:16px; line-height:1.7; }}
 .wrap {{ overflow-x:auto; background:var(--card); border:1px solid var(--line); border-radius:12px; }}
-table {{ width:100%; border-collapse:collapse; font-size:14px; min-width:860px; }}
-thead th {{ text-align:left; font-size:11px; letter-spacing:.06em; color:var(--dim);
-  text-transform:uppercase; padding:10px 14px; border-bottom:1px solid var(--line);
+table {{ width:100%; border-collapse:collapse; font-size:17px; min-width:1040px; }}
+thead th {{ text-align:left; font-size:13px; letter-spacing:.06em; color:var(--dim);
+  text-transform:uppercase; padding:12px 16px; border-bottom:1px solid var(--line);
   background:var(--head); font-weight:600; }}
 thead th.jp, thead th.lp {{ text-align:right; }}
-.cur {{ display:block; font-size:10px; letter-spacing:.04em; color:var(--dim);
+.cur {{ display:block; font-size:12.5px; letter-spacing:.04em; color:var(--dim);
   font-weight:400; text-transform:none; margin-top:1px; }}
-tbody td {{ padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; }}
+tbody td {{ padding:13px 16px; border-bottom:1px solid var(--line); vertical-align:top; }}
 tbody tr:last-child td {{ border-bottom:none; }}
-tr.line th {{ text-align:left; padding:12px 14px 6px; font-size:12px; color:var(--accent);
+tr.line th {{ text-align:left; padding:14px 16px 8px; font-size:15px; color:var(--accent);
   background:var(--accentbg); border-bottom:1px solid var(--line); font-weight:600; }}
 .nm {{ font-weight:500; min-width:220px; }}
-.nt {{ display:block; color:var(--dim); font-size:11.5px; font-weight:400; margin-top:3px; line-height:1.45; }}
+.nt {{ display:block; color:var(--dim); font-size:14px; font-weight:400; margin-top:3px; line-height:1.45; }}
 .cd {{ color:var(--dim); font-variant-numeric:tabular-nums; white-space:nowrap; }}
 .jp {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
   font-weight:600; background:var(--jpbg); }}
 .lp {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }}
+.lp.real {{ background:var(--realbg); box-shadow:inset 3px 0 0 var(--real); }}
+.lp.real .v-retail {{ font-weight:600; }}
 .lp a {{ color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); }}
 .lp a:hover {{ color:var(--accent); }}
 .lp .none {{ color:var(--line); }}
 .v-retail {{ display:block; }}
 .v-grey {{ display:block; margin-top:6px; padding-top:6px; border-top:1px dotted var(--line);
   color:var(--dim); }}
-.tag.est {{ border-style:dashed; border-color:var(--accent); color:var(--accent); }}
-.eq {{ display:block; font-size:11px; color:var(--dim); font-weight:400; font-variant-numeric:tabular-nums; }}
-.tag {{ font-size:10px; color:var(--dim); border:1px solid var(--line); border-radius:4px;
-  padding:0 4px; margin-left:5px; vertical-align:1px; }}
-.notes {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }}
+.eq {{ display:block; font-size:13.5px; color:var(--dim); font-weight:400; font-variant-numeric:tabular-nums; }}
+.tag {{ font-size:12.5px; border-radius:4px; padding:1px 6px; margin-left:6px; vertical-align:1px;
+  border:1px solid var(--real); color:var(--real); background:var(--realbg); }}
+.tag.est {{ border-style:dashed; border-color:var(--line-2); color:var(--dim); background:transparent; }}
+.tabs {{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:-1px; }}
+.tabs button {{ font:inherit; font-size:17px; padding:11px 18px; cursor:pointer;
+  background:var(--bg); color:var(--dim); border:1px solid var(--line);
+  border-bottom-color:transparent; border-radius:12px 12px 0 0; white-space:nowrap; }}
+.tabs button:hover {{ color:var(--ink); }}
+.tabs button.on {{ background:var(--card); color:var(--ink); font-weight:600; border-bottom-color:var(--card); }}
+.tabs .cnt {{ margin-left:8px; font-size:13px; }}
+.panels {{ background:var(--card); border:1px solid var(--line); border-radius:0 12px 12px 12px;
+  padding:24px 26px; }}
+.panel {{ display:none; }}
+.panel.on {{ display:block; }}
+.panel h4 {{ margin:22px 0 6px; font-size:15px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--dim); }}
+.panel ul {{ margin:0; padding-left:20px; font-size:16px; }}
+.panel li {{ margin-bottom:9px; }}
+.panel a {{ color:var(--accent); }}
+.lead {{ font-size:18px; line-height:1.8; margin:0 0 4px; }}
+.rate {{ color:var(--dim); font-size:14px; margin:0 0 12px; font-variant-numeric:tabular-nums; }}
 .note {{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }}
-.note h3 {{ margin:0 0 6px; font-size:15px; }}
+.note h3 {{ margin:0 0 8px; font-size:19px; }}
 .note.pi {{ border-color:var(--accent); background:var(--accentbg); grid-column:1/-1; }}
-.note ul {{ margin:8px 0 0; padding-left:18px; font-size:13px; }}
+.note ul {{ margin:10px 0 0; padding-left:20px; font-size:16px; }}
 .note li {{ margin-bottom:5px; }}
 .note a {{ color:var(--accent); }}
-.miss {{ font-size:12.5px; color:var(--dim); margin:12px 0 0; }}
-footer {{ margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; }}
+.miss {{ font-size:15.5px; line-height:1.75; color:var(--dim); margin:12px 0 0; }}
+footer {{ margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:15.5px; line-height:1.75; }}
 footer a {{ color:var(--accent); }}
 tr.hide {{ display:none; }}
-@media (max-width:640px) {{ h1 {{ font-size:24px; }} .page {{ padding:0 14px 60px; }} }}
+@media (max-width:640px) {{ h1 {{ font-size:30px; }} .page {{ padding:0 14px 60px; }} }}
 </style>
 </head>
 <body>
@@ -354,6 +384,15 @@ tr.hide {{ display:none; }}
 </footer>
 </div>
 <script>
+// Country intel is five long reads; showing them all at once buried the tables.
+const tabs = [...document.querySelectorAll('.tabs button')];
+const show = k => {{
+  tabs.forEach(b => b.classList.toggle('on', b.dataset.t === k));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'p-' + k));
+}};
+tabs.forEach(b => b.addEventListener('click', () => show(b.dataset.t)));
+if (tabs.length) show(tabs[0].dataset.t);
+
 const q = document.getElementById('q');
 q.addEventListener('input', () => {{
   const v = q.value.trim().toLowerCase();
