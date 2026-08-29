@@ -110,7 +110,10 @@ def cell(retail, grey, sym, rate, jp, researched):
     r = money(retail, sym, rate, jp) if real else empty
     out = f'<span class="v-retail">{r}</span>'
     if grey and grey.get("amount") not in (None, ""):
-        out += f'<span class="v-grey" title="{esc(grey.get("note",""))}">{money(grey, sym, rate, jp, True)}</span>'
+        # A title attribute is a desktop-only affordance -- a phone has no hover,
+        # so the arithmetic behind every estimate was simply unreachable there.
+        out += (f'<button type="button" class="v-grey" data-calc="{esc(grey.get("note",""))}">'
+                f'{money(grey, sym, rate, jp, True)}</button>')
     return f'<td class="lp{" real" if real else ""}">{out}</td>'
 
 
@@ -319,8 +322,20 @@ tr.line th {{ text-align:left; padding:14px 16px 8px; font-size:15px; color:var(
 .lp a:hover {{ color:var(--accent); }}
 .lp .none {{ color:var(--line); }}
 .v-retail {{ display:block; }}
-.v-grey {{ display:block; margin-top:6px; padding-top:6px; border-top:1px dotted var(--line);
-  color:var(--dim); }}
+.v-grey {{ display:block; width:100%; margin-top:6px; padding:6px 0 0;
+  border:none; border-top:1px dotted var(--line); background:none; color:var(--dim);
+  font:inherit; text-align:right; cursor:pointer; }}
+.v-grey:hover .tag.est {{ border-color:var(--accent); color:var(--accent); }}
+#calc {{ position:fixed; left:0; right:0; bottom:0; z-index:20; background:var(--card);
+  border-top:2px solid var(--accent); padding:20px 24px 24px; font-size:16px;
+  line-height:1.75; max-height:52vh; overflow-y:auto;
+  box-shadow:0 -8px 32px rgba(0,0,0,.16); }}
+#calc b {{ display:block; font-size:14px; letter-spacing:.05em; color:var(--dim);
+  text-transform:uppercase; margin-bottom:6px; }}
+#calc p {{ margin:0; max-width:900px; }}
+#calcx {{ position:absolute; top:12px; right:16px; font:inherit; font-size:26px; line-height:1;
+  background:none; border:none; color:var(--dim); cursor:pointer; padding:4px 8px; }}
+#calcx:hover {{ color:var(--ink); }}
 .eq {{ display:block; font-size:13.5px; color:var(--dim); font-weight:400; font-variant-numeric:tabular-nums; }}
 .tag {{ font-size:12.5px; border-radius:4px; padding:1px 6px; margin-left:6px; vertical-align:1px;
   border:1px solid var(--real); color:var(--real); background:var(--realbg); }}
@@ -378,6 +393,8 @@ tr.hide {{ display:none; }}
 </section>
 {"".join(sections)}
 {nolocal}
+<div id="calc" hidden><button type="button" id="calcx" aria-label="關閉">×</button>
+  <b>這一格是怎麼算出來的</b><p id="calct"></p></div>
 <footer>
   日本價來源：<a href="{SOURCE_URL}" rel="noopener">BLITZ 商品検索システム</a>（GR86 / ZN8 / 2024 年式，全類別），擷取日 {stamp}，為日本國內含稅定價，不含運費、關稅與當地稅。<br>
   當地售價逐筆附來源連結（點價格即可開啟），為查訪當日的公開標價；括號內折算日圓僅供比較，匯率{f"：{rate_line}" if rate_line else "待補"}。查不到公開標價的品項一律留白，不做估算。<br>
@@ -386,6 +403,19 @@ tr.hide {{ display:none; }}
 </footer>
 </div>
 <script>
+// Every estimate has its own arithmetic -- the exporter ratio differs by product
+// line, the freight by size band, the duty and tax by destination -- so each one
+// carries its own working, shown in one shared panel rather than 440 hidden rows.
+const calc = document.getElementById('calc'), calct = document.getElementById('calct');
+document.addEventListener('click', e => {{
+  const b = e.target.closest('.v-grey');
+  if (!b) return;
+  calct.textContent = b.dataset.calc;
+  calc.hidden = false;
+}});
+document.getElementById('calcx').addEventListener('click', () => {{ calc.hidden = true; }});
+document.addEventListener('keydown', e => {{ if (e.key === 'Escape') calc.hidden = true; }});
+
 // Country intel is five long reads; showing them all at once buried the tables.
 const tabs = [...document.querySelectorAll('.tabs button')];
 const show = k => {{
@@ -398,6 +428,7 @@ if (tabs.length) show(tabs[0].dataset.t);
 const q = document.getElementById('q');
 q.addEventListener('input', () => {{
   const v = q.value.trim().toLowerCase();
+  calc.hidden = true;
   document.querySelectorAll('tbody tr[data-s]').forEach(tr => {{
     tr.classList.toggle('hide', v && !tr.dataset.s.includes(v));
   }});
