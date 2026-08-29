@@ -185,6 +185,13 @@ def main():
   {"".join(f'<p class="miss">{esc(x)}</p>' for x in d.get("extra", []))}
 </div>'''
 
+    pi = local.get("greyNote")
+    if pi:
+        notes_html += ('<div class="note pi"><h3>' + esc(pi.get("title", "水貨到岸試算")) + '</h3>'
+                       + '<p class="blurb">' + esc(pi.get("summary", "")) + '</p>'
+                       + "".join('<p class="miss">' + esc(x) + '</p>' for x in pi.get("extra", []))
+                       + '</div>')
+
     nav = ('<a href="#channels">各地通路與稅費</a>'
            + "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats)
            + '<button id="mode" type="button">切換：水貨到岸試算</button>')
@@ -266,6 +273,7 @@ body.grey #mode {{ background:var(--accent); color:#fff; }}
 .notes {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }}
 .note {{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }}
 .note h3 {{ margin:0 0 6px; font-size:15px; }}
+.note.pi {{ border-color:var(--accent); background:var(--accentbg); grid-column:1/-1; }}
 .note ul {{ margin:8px 0 0; padding-left:18px; font-size:13px; }}
 .note li {{ margin-bottom:5px; }}
 .note a {{ color:var(--accent); }}

@@ -20,8 +20,13 @@
 
 ```bash
 ./scrape.py     # 重抓 BLITZ 官網 → data/blitz-gr86-zn8.json
+./greycalc.py   # 水貨到岸試算 → 寫回 data/prices-local.json 的 grey 區塊
 ./build.py      # JSON (+ data/prices-local.json) → index.html
 ```
+
+`greycalc.py` 裡面是**算式，不是抄來的數字**：日本出口通路實價＋實際運費報價＝CIF，再套各地關稅與稅金。
+輸入來源與每一條稅制規則都寫在檔頭。之所以獨立成一支腳本，是為了讓頁面上的試算值可以被重新推導與稽核，
+而不是手打進 JSON。
 
 `scrape.py` 在解析出的品項數掉到 80 以下時會直接失敗退出。BLITZ 的表格不是每一列包一個
 `.row`——一條產品線只開一個 `.row`，後面每一列都是平鋪的 `.td` 兄弟節點，所以用 `.row` 切會
