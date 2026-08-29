@@ -129,39 +129,83 @@ def main():
 
     total = sum(len(c[3]) for c in cats)
     jp_all = [p for p in (yen(i["price"])[0] for c in cats for i in c[3]) if p]
-    covered = sum(1 for c in cats for i in c[3] if prices.get(i["code"]))
     stamp = datetime.date.today().isoformat()
+
+    def has_any(code):
+        """Any figure at all for this SKU -- a found retail price or a landed
+        estimate. This is what decides which half of the page an item lives in."""
+        for m in (prices, grey):
+            if any(v.get("amount") not in (None, "") for v in m.get(code, {}).values()):
+                return True
+        return False
+
+    covered = sum(1 for c in cats for i in c[3] if has_any(i["code"]))
 
     head_cols = "".join(f'<th class="lp">{esc(name)}<span class="cur">{esc(cur)}</span></th>'
                         for _, name, cur, _ in COUNTRIES)
 
-    sections = []
-    for slug, title, blurb, items in cats:
-        rows, cur_line = [], None
-        for it in sorted(items, key=lambda x: (x["line"], -(yen(x["price"])[0] or 0))):
-            if it["line"] != cur_line:
-                cur_line = it["line"]
-                rows.append(f'<tr class="line"><th colspan="{3 + len(COUNTRIES)}">{esc(cur_line)}</th></tr>')
-            incl, _ = yen(it["price"])
-            n = notes(it)
-            p = prices.get(it["code"], {})
-            gp = grey.get(it["code"], {})
-            cells = "".join(cell(p.get(cc), gp.get(cc), sym, rates.get(cur3), incl, cc in have)
-                            for cc, _, cur3, sym in COUNTRIES)
-            rows.append(
-                f'<tr data-s="{esc((cur_line + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
+    def row(it, cur_line):
+        incl, _ = yen(it["price"])
+        n = notes(it)
+        p, gp = prices.get(it["code"], {}), grey.get(it["code"], {})
+        cells = "".join(cell(p.get(cc), gp.get(cc), sym, rates.get(cur3), incl, cc in have)
+                        for cc, _, cur3, sym in COUNTRIES)
+        return (f'<tr data-s="{esc((cur_line + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
                 f'<td class="nm">{esc(it["name"].replace(" | ", " "))}'
                 f'{f"<span class=nt>{esc(n)}</span>" if n else ""}</td>'
                 f'<td class="cd">{esc(it["code"])}</td>'
                 f'<td class="jp">{"￥{:,}".format(incl) if incl else "—"}</td>{cells}</tr>')
+
+    # The page leads with what can actually be compared. An item nobody in the
+    # four markets prices has one number on it, and 77 such rows in front of the
+    # 33 that carry a comparison buries the whole point of the table.
+    sections, unpriced = [], []
+    for slug, title, blurb, items in cats:
+        rows, cur_line = [], None
+        for it in sorted(items, key=lambda x: (x["line"], -(yen(x["price"])[0] or 0))):
+            if not has_any(it["code"]):
+                unpriced.append((title, it))
+                continue
+            if it["line"] != cur_line:
+                cur_line = it["line"]
+                rows.append(f'<tr class="line"><th colspan="{3 + len(COUNTRIES)}">{esc(cur_line)}</th></tr>')
+            rows.append(row(it, cur_line))
+        if not rows:
+            continue
+        n_here = sum(1 for i in items if has_any(i["code"]))
         sections.append(f'''<section id="{slug}">
-  <h2>{esc(title)} <span class="cnt">{len(items)}</span></h2>
+  <h2>{esc(title)} <span class="cnt">{n_here} / {len(items)}</span></h2>
   <p class="blurb">{esc(blurb)}</p>
   <div class="wrap"><table>
     <thead><tr><th>品項</th><th>Code</th><th class="jp">日本<span class="cur">JPY 稅入</span></th>{head_cols}</tr></thead>
     <tbody>{"".join(rows)}</tbody>
   </table></div>
 </section>''')
+
+    # ---- the other half: priced in Japan, nowhere else ---------------------
+    nl_rows, cur_cat = [], None
+    for cat_title, it in unpriced:
+        if cat_title != cur_cat:
+            cur_cat = cat_title
+            nl_rows.append(f'<tr class="line"><th colspan="4">{esc(cat_title)}</th></tr>')
+        incl, _ = yen(it["price"])
+        n = notes(it)
+        nl_rows.append(
+            f'<tr data-s="{esc((it["line"] + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
+            f'<td class="nm">{esc(it["line"])} <span class="eq">{esc(it["name"].replace(" | ", " "))}</span></td>'
+            f'<td class="cd">{esc(it["code"])}</td>'
+            f'<td class="jp">{"￥{:,}".format(incl) if incl else "—"}</td></tr>')
+    nolocal = f'''<section id="nolocal">
+  <h2>四地都查不到價格 <span class="cnt">{len(unpriced)} / {total}</span></h2>
+  <p class="blurb">這些品項在泰、馬、新、港都沒有公開標價，也沒有足以試算到岸價的日本出口報價，所以只有日本定價。
+  成因有兩種，讀的時候要分開：一種是品項本身在海外沒有流通（電子類幾乎全數如此）；
+  另一種是被 BLITZ 自己的料號細分稀釋——NUR-SPEC 排氣與 AERO SPEED 光是尾飾管材質、有無 LED 就拆成十幾個料號，
+  而海外賣場只會進其中一兩個規格。</p>
+  <div class="wrap"><table>
+    <thead><tr><th>產品線／品項</th><th>Code</th><th class="jp">日本<span class="cur">JPY 稅入</span></th></tr></thead>
+    <tbody>{"".join(nl_rows)}</tbody>
+  </table></div>
+</section>''' if unpriced else ""
 
     # ---- appendix: who sells it, what the markup is made of -----------------
     notes_html = ""
@@ -192,8 +236,10 @@ def main():
                        + "".join('<p class="miss">' + esc(x) + '</p>' for x in pi.get("extra", []))
                        + '</div>')
 
+    shown = {sec.split('"')[1] for sec in sections}
     nav = ('<a href="#channels">各地通路與稅費</a>'
-           + "".join(f'<a href="#{s}">{esc(t)}</a>' for s, t, _, _ in cats)
+           + "".join(f'<a href="#{sl}">{esc(t)}</a>' for sl, t, _, _ in cats if sl in shown)
+           + ('<a href="#nolocal">查不到價格</a>' if unpriced else "")
            + '<button id="mode" type="button">切換：水貨到岸試算</button>')
     rate_line = "・".join(f"1 {c} ≈ ￥{rates[c]:.2f}" for _, _, c, _ in COUNTRIES if rates.get(c))
 
@@ -293,7 +339,7 @@ tr.hide {{ display:none; }}
     <div class="stat"><b>{total}</b><span>品項</span></div>
     <div class="stat"><b>{len(by_line)}</b><span>產品線</span></div>
     <div class="stat"><b>{len(cats)}</b><span>分類</span></div>
-    <div class="stat"><b>{covered}</b><span>查到當地售價</span></div>
+    <div class="stat"><b>{covered} <span style="font-size:14px;color:var(--dim)">/ {total}</span></b><span>查到價格（{covered / total * 100:.0f}%）</span></div>
     <div class="stat"><b>￥{min(jp_all):,}–{max(jp_all):,}</b><span>日本定價區間</span></div>
   </div>
 </header>
@@ -304,6 +350,7 @@ tr.hide {{ display:none; }}
   <div class="notes">{notes_html}</div>
 </section>
 {"".join(sections)}
+{nolocal}
 <footer>
   日本價來源：<a href="{SOURCE_URL}" rel="noopener">BLITZ 商品検索システム</a>（GR86 / ZN8 / 2024 年式，全類別），擷取日 {stamp}，為日本國內含稅定價，不含運費、關稅與當地稅。<br>
   當地售價逐筆附來源連結（點價格即可開啟），為查訪當日的公開標價；括號內折算日圓僅供比較，匯率{f"：{rate_line}" if rate_line else "待補"}。查不到公開標價的品項一律留白，不做估算。<br>
@@ -342,7 +389,7 @@ q.addEventListener('input', () => {{
 </body>
 </html>'''
     open(OUT, "w").write(html)
-    print(f"{total} 品項 / {len(cats)} 分類 / {covered} 筆有當地售價 → {OUT}")
+    print(f"{total} 品項 / {len(cats)} 分類 / {covered} 筆有價格（含試算） → {OUT}")
 
 
 if __name__ == "__main__":
