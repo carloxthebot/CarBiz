@@ -82,7 +82,7 @@ def money(entry, sym, rate, jp, estimate=False):
         equiv = amt * rate
         mult = f" ×{equiv / jp:.2f}" if jp else ""
         sub = f'<span class="eq">≈￥{equiv:,.0f}{mult}</span>'
-    tag = "試算" if estimate else entry.get("kind")
+    tag = entry.get("kind")
     tag = f'<span class="tag{" est" if estimate else ""}">{esc(tag)}</span>' if tag else ""
     body = f'{head}{tag}{sub}'
     if entry.get("url"):
@@ -91,18 +91,23 @@ def money(entry, sym, rate, jp, estimate=False):
 
 
 def cell(retail, grey, sym, rate, jp, researched):
-    """One country cell, carrying both readings; the toggle shows one at a time.
+    """One country cell: the retail price found, and under it the landed estimate.
 
-    「—」 and 調查中 are different claims: the first says we looked and there is no
-    public price, the second says nobody has looked yet. Collapsing them would
-    quietly turn an unfinished column into a finding. A parallel-import figure is
-    a third thing again -- a calculation, never a quote -- so it is always tagged
-    試算 and never silently mixed into the retail reading."""
+    Both readings sit in the same cell because they answer the same question from
+    two directions -- what a shop there charges, and what it costs to bring one in
+    yourself. Keeping them side by side is the comparison; hiding one behind a
+    toggle made you hold a number in your head while you flipped.
+
+    「—」 and 調查中 stay different claims: the first says we looked and there is no
+    public price, the second says nobody has looked. An estimate is a third thing
+    again -- arithmetic, never a quote -- so it always carries its 試算 tag and its
+    own muted style, and is never allowed to look like a found price."""
     empty = f'<span class="none">{"—" if researched else "調查中"}</span>'
     r = money(retail, sym, rate, jp) if retail and retail.get("amount") not in (None, "") else empty
-    g = (f'<span class="est">{money(grey, sym, rate, jp, True)}</span>'
-         if grey and grey.get("amount") not in (None, "") else f'<span class="none">—</span>')
-    return f'<td class="lp"><span class="v-retail">{r}</span><span class="v-grey">{g}</span></td>'
+    out = f'<span class="v-retail">{r}</span>'
+    if grey and grey.get("amount") not in (None, ""):
+        out += f'<span class="v-grey" title="{esc(grey.get("note",""))}">{money(grey, sym, rate, jp, True)}</span>'
+    return f'<td class="lp">{out}</td>'
 
 
 def main():
@@ -132,12 +137,12 @@ def main():
     stamp = datetime.date.today().isoformat()
 
     def has_any(code):
-        """Any figure at all for this SKU -- a found retail price or a landed
-        estimate. This is what decides which half of the page an item lives in."""
-        for m in (prices, grey):
-            if any(v.get("amount") not in (None, "") for v in m.get(code, {}).values()):
-                return True
-        return False
+        """A price someone actually charges, found in a listing. Every SKU now
+        carries a landed estimate, so an estimate can no longer sort the page --
+        what still separates the two halves is whether anyone in the four markets
+        was observed selling the thing."""
+        return any(v.get("amount") not in (None, "")
+                   for v in prices.get(code, {}).values())
 
     covered = sum(1 for c in cats for i in c[3] if has_any(i["code"]))
 
@@ -182,27 +187,22 @@ def main():
   </table></div>
 </section>''')
 
-    # ---- the other half: priced in Japan, nowhere else ---------------------
+    # ---- the other half: nobody there sells it, so only the estimate ------
     nl_rows, cur_cat = [], None
     for cat_title, it in unpriced:
         if cat_title != cur_cat:
             cur_cat = cat_title
-            nl_rows.append(f'<tr class="line"><th colspan="4">{esc(cat_title)}</th></tr>')
-        incl, _ = yen(it["price"])
-        n = notes(it)
-        nl_rows.append(
-            f'<tr data-s="{esc((it["line"] + " " + it["name"] + " " + it["code"] + " " + n).lower())}">'
-            f'<td class="nm">{esc(it["line"])} <span class="eq">{esc(it["name"].replace(" | ", " "))}</span></td>'
-            f'<td class="cd">{esc(it["code"])}</td>'
-            f'<td class="jp">{"￥{:,}".format(incl) if incl else "—"}</td></tr>')
+            nl_rows.append(f'<tr class="line"><th colspan="{3 + len(COUNTRIES)}">{esc(cat_title)}'
+                           f' <span class="eq">{esc(it["line"])}</span></th></tr>')
+        nl_rows.append(row(it, cat_title + " " + it["line"]))
     nolocal = f'''<section id="nolocal">
-  <h2>四地都查不到價格 <span class="cnt">{len(unpriced)} / {total}</span></h2>
-  <p class="blurb">這些品項在泰、馬、新、港都沒有公開標價，也沒有足以試算到岸價的日本出口報價，所以只有日本定價。
-  成因有兩種，讀的時候要分開：一種是品項本身在海外沒有流通（電子類幾乎全數如此）；
+  <h2>四地都沒有查到零售標價 <span class="cnt">{len(unpriced)} / {total}</span></h2>
+  <p class="blurb">這些品項在泰、馬、新、港都沒有人公開標價，所以只有日本定價與到岸試算——每一格的數字都是計算值，
+  沒有任何一筆是有人真的在賣的價格。查不到的成因有兩種，讀的時候要分開：一種是品項本身在海外沒有流通（電子類幾乎全數如此）；
   另一種是被 BLITZ 自己的料號細分稀釋——NUR-SPEC 排氣與 AERO SPEED 光是尾飾管材質、有無 LED 就拆成十幾個料號，
-  而海外賣場只會進其中一兩個規格。</p>
+  海外賣場只會進其中一兩個規格。</p>
   <div class="wrap"><table>
-    <thead><tr><th>產品線／品項</th><th>Code</th><th class="jp">日本<span class="cur">JPY 稅入</span></th></tr></thead>
+    <thead><tr><th>品項</th><th>Code</th><th class="jp">日本<span class="cur">JPY 稅入</span></th>{head_cols}</tr></thead>
     <tbody>{"".join(nl_rows)}</tbody>
   </table></div>
 </section>''' if unpriced else ""
@@ -239,8 +239,7 @@ def main():
     shown = {sec.split('"')[1] for sec in sections}
     nav = ('<a href="#channels">各地通路與稅費</a>'
            + "".join(f'<a href="#{sl}">{esc(t)}</a>' for sl, t, _, _ in cats if sl in shown)
-           + ('<a href="#nolocal">查不到價格</a>' if unpriced else "")
-           + '<button id="mode" type="button">切換：水貨到岸試算</button>')
+           + ('<a href="#nolocal">只有試算</a>' if unpriced else ""))
     rate_line = "・".join(f"1 {c} ≈ ￥{rates[c]:.2f}" for _, _, c, _ in COUNTRIES if rates.get(c))
 
     html = f'''<!DOCTYPE html>
@@ -304,15 +303,10 @@ tr.line th {{ text-align:left; padding:12px 14px 6px; font-size:12px; color:var(
 .lp a {{ color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); }}
 .lp a:hover {{ color:var(--accent); }}
 .lp .none {{ color:var(--line); }}
-.v-grey {{ display:none; }}
-body.grey .v-retail {{ display:none; }}
-body.grey .v-grey {{ display:inline; }}
-.est {{ color:var(--dim); }}
+.v-retail {{ display:block; }}
+.v-grey {{ display:block; margin-top:6px; padding-top:6px; border-top:1px dotted var(--line);
+  color:var(--dim); }}
 .tag.est {{ border-style:dashed; border-color:var(--accent); color:var(--accent); }}
-#mode {{ font:inherit; font-size:13px; padding:5px 11px; border:1px solid var(--accent);
-  border-radius:999px; background:var(--card); color:var(--accent); cursor:pointer;
-  white-space:nowrap; margin-left:auto; }}
-body.grey #mode {{ background:var(--accent); color:#fff; }}
 .eq {{ display:block; font-size:11px; color:var(--dim); font-weight:400; font-variant-numeric:tabular-nums; }}
 .tag {{ font-size:10px; color:var(--dim); border:1px solid var(--line); border-radius:4px;
   padding:0 4px; margin-left:5px; vertical-align:1px; }}
@@ -339,7 +333,8 @@ tr.hide {{ display:none; }}
     <div class="stat"><b>{total}</b><span>品項</span></div>
     <div class="stat"><b>{len(by_line)}</b><span>產品線</span></div>
     <div class="stat"><b>{len(cats)}</b><span>分類</span></div>
-    <div class="stat"><b>{covered} <span style="font-size:14px;color:var(--dim)">/ {total}</span></b><span>查到價格（{covered / total * 100:.0f}%）</span></div>
+    <div class="stat"><b>{covered} <span style="font-size:14px;color:var(--dim)">/ {total}</span></b><span>查到零售標價（{covered / total * 100:.0f}%）</span></div>
+    <div class="stat"><b>{total}</b><span>有到岸試算</span></div>
     <div class="stat"><b>￥{min(jp_all):,}–{max(jp_all):,}</b><span>日本定價區間</span></div>
   </div>
 </header>
@@ -359,11 +354,6 @@ tr.hide {{ display:none; }}
 </footer>
 </div>
 <script>
-const mode = document.getElementById('mode');
-mode.addEventListener('click', () => {{
-  const grey = document.body.classList.toggle('grey');
-  mode.textContent = grey ? '切換：當地零售價' : '切換：水貨到岸試算';
-}});
 const q = document.getElementById('q');
 q.addEventListener('input', () => {{
   const v = q.value.trim().toLowerCase();
