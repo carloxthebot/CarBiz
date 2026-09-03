@@ -1,6 +1,15 @@
 # CarBiz
 
-改裝零件的價格研究。目前一個題目：**BLITZ 為 Toyota GR86（ZN8）出的全產品線，日本定價 vs. 東南亞／香港當地售價。**
+這個 repo 有兩個獨立的子專案，共用同一個名字但沒有互相依賴：
+
+- **`blitz-gr86/`（本頁下方）**：改裝零件的價格研究站，一頁式靜態網頁。
+- **`bot/` + `worker/`**：LINE 訂單管理機器人 + 本機 Claude Code worker。setup 見 [`docs/setup.md`](docs/setup.md)。
+
+---
+
+## 改裝零件的價格研究
+
+目前一個題目：**BLITZ 為 Toyota GR86（ZN8）出的全產品線，日本定價 vs. 東南亞／香港當地售價。**
 
 ## 這是什麼
 

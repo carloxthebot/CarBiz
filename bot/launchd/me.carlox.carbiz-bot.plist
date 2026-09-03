@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- CarBiz bot launchd unit.
+
+     Install:
+       cp bot/launchd/me.carlox.carbiz-bot.plist ~/Library/LaunchAgents/
+       launchctl load ~/Library/LaunchAgents/me.carlox.carbiz-bot.plist
+
+     Uninstall:
+       launchctl unload ~/Library/LaunchAgents/me.carlox.carbiz-bot.plist
+       rm ~/Library/LaunchAgents/me.carlox.carbiz-bot.plist
+
+     Logs:
+       tail -f ~/Library/Logs/carbiz-bot.log
+
+     Env: bot 自己會讀 bot/.env,launchd 只給 PATH 讓 node / claude / python3
+          解析得到。cloudflared 是另一個 launchd unit(見 docs/setup.md)。
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>me.carlox.carbiz-bot</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/npm</string>
+        <string>--prefix</string>
+        <string>/Users/carlox/Personal/CarBiz/bot</string>
+        <string>start</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/carlox/Personal/CarBiz/bot</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Users/carlox/Library/Logs/carbiz-bot.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/carlox/Library/Logs/carbiz-bot.log</string>
+</dict>
+</plist>

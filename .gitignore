@@ -1,1 +1,14 @@
 .DS_Store
+
+# --- 訂單管理 bot / worker（見 docs/setup.md）---
+# 本機機密：service account 金鑰、bot 環境變數
+worker/.env
+worker/state/sheets-map.json
+*.service-account.json
+
+# CF bot 本地 dev 用的機密
+bot/.dev.vars
+bot/node_modules
+bot/.wrangler
+
+__pycache__/
