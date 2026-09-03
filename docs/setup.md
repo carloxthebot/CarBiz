@@ -3,9 +3,9 @@
 架構、決策與檔案結構寫在 `~/.claude-personal/plans/abstract-jingling-dragon.md`；
 這份是「照這個順序做」的操作手冊。
 
-**架構回顧**：LINE → cloudflared tunnel → 本機 Node HTTP server (bot/)
+**架構回顧**：LINE → Tailscale Funnel (`*.ts.net`) → 本機 Node HTTP server (bot/)
 → spawn `claude -p` → sheets.py 讀寫 Google Sheets → LINE push 回覆。
-完全沒有雲端邏輯，Cloudflare 只是隧道服務。
+完全沒有雲端邏輯，隧道只是把本機 port 對外開放。
 
 ## 一、Google Sheets service account（GCP）
 
@@ -27,35 +27,46 @@
 5. Messaging API → 關掉「Auto-reply messages」與「Greeting messages」。
 6. 加 bot 為好友，等 setup 完能傳訊測試。
 
-## 三、Cloudflared tunnel
+## 三、HTTPS 隧道
 
-Cloudflared 免費、穩定、不需要自己有網域也能跑（快速隧道）。生產用建議
-用具名隧道 + 自己的網域，本機開發用快速隧道就夠。
+首選 **Tailscale Funnel** —— 這台 Mac 已經在 Tailscale 網絡裡（`carloxthebot`
+tailnet），Funnel 直接把本機 port 對外開放，URL 永久固定、不用帳號設定、
+不用自己網域、免費。
+
+```bash
+# 一次性：到 admin console 打開 Funnel 這個 tailnet feature
+# （只需要開一次；連結會由 tailscale 首次 `funnel` 呼叫時印出）
+tailscale funnel --bg 8787
+
+# 印出的 URL 拿去貼 LINE webhook：
+#   https://carloxmac-mini.tail184478.ts.net/api/line/webhook
+
+# 檢查目前 funnel 狀態
+tailscale funnel status
+
+# 停用
+tailscale funnel --https=443 off
+```
+
+`--bg` 模式代表 tailscaled 記住這個 config，Mac 重開會自動恢復，不需要
+launchd 額外管一個 tunnel process。
+
+### 備案：cloudflared
+
+如果 Tailscale 不可用（例如要複製到不在你 tailnet 的機器），有兩種 cloudflared
+路徑：
 
 ```bash
 brew install cloudflared
 
-# --- 快速隧道（開發用，URL 每次重啟會換）---
+# 快速隧道（免帳號、URL 每次重啟會換）
 cloudflared tunnel --url http://localhost:8787
-# 印出的 https://xxxxx.trycloudflare.com 拿去貼 LINE webhook
 
-# --- 具名隧道（正式用，URL 固定）---
-cloudflared tunnel login              # 瀏覽器選一個 CF 上的 zone
-cloudflared tunnel create carbiz      # 產生 ~/.cloudflared/<uuid>.json
+# 具名隧道（URL 固定，但需要 CF 帳號 + 自己的網域 zone）
+cloudflared tunnel login
+cloudflared tunnel create carbiz
 cloudflared tunnel route dns carbiz carbiz.你的網域
-cat > ~/.cloudflared/config.yml <<YAML
-tunnel: carbiz
-credentials-file: /Users/carlox/.cloudflared/<uuid>.json
-ingress:
-  - hostname: carbiz.你的網域
-    service: http://localhost:8787
-  - service: http_status:404
-YAML
-cloudflared tunnel run carbiz
-# LINE webhook 填 https://carbiz.你的網域/api/line/webhook
 ```
-
-沒有自己網域可以擋一下：先用快速隧道，等頻繁 URL 變化受不了再申請具名。
 
 ## 四、本機 bot
 
@@ -99,7 +110,7 @@ SHEETS_FOLDER_ID=<你的 folder id> \
 
 ## 六、端到端驗證
 
-1. bot + tunnel 都啟動中
+1. bot 已啟動、`tailscale funnel status` 顯示 Funnel on
 2. LINE 打「hi」→ 1:1 應該看到「打字中…」動畫；群組會回「收到,處理中…」
 3. `tail -f ~/Library/Logs/carbiz-bot.log` 應該看到 `[task xxxxxxxx] start:`
 4. 幾秒後 LINE 收到 bot 的回覆
@@ -115,7 +126,10 @@ cd worker && source .venv/bin/activate && python3 tools/sheets_map.py
 
 ## 常見問題
 
-- **tunnel 快速隧道 URL 每次換**：正式用具名隧道，快速隧道只適合驗證期。
+- **URL 突然打不通**：`tailscale status` 看 Mac 是不是有 online；重開 Mac
+  後 `tailscale funnel status` 應該還會顯示 Funnel on（`--bg` 會恢復）。
+- **cloudflared 快速隧道 URL 每次換**：正式用 Tailscale Funnel 或 cloudflared
+  具名隧道。
 - **`claude` 找不到**：`.env` 的 `CLAUDE_BIN` 填絕對路徑，例如 `/usr/local/bin/claude`。
 - **權限錯誤（Sheets）**：確認 folder share 對象是 SA email，不是你自己的 email。
 - **loading 動畫沒出現**：只有 1:1 私聊有；群組退回文字「收到」。
