@@ -7,10 +7,20 @@ export type LineSource = {
   roomId?: string
 }
 
+export type LineMentionee = {
+  index?: number
+  length?: number
+  type?: 'user' | 'all'
+  userId?: string
+}
+
 export type LineMessage = {
   id: string
   type: 'text' | 'image' | 'sticker' | string
   text?: string
+  mention?: {
+    mentionees?: LineMentionee[]
+  }
 }
 
 export type LineEvent = {

@@ -8,6 +8,7 @@ export function createTask(input: {
   lineUserId: string
   channelId: string
   rawMessage: string
+  imagePaths?: string[]
 }): TaskRow | null {
   const id = randomUUID()
   const now = Date.now()
@@ -15,10 +16,13 @@ export function createTask(input: {
     db
       .prepare(
         `INSERT INTO tasks
-           (id, event_id, line_user_id, channel_id, raw_message, status, created_at)
-         VALUES (?, ?, ?, ?, ?, 'pending', ?)`,
+           (id, event_id, line_user_id, channel_id, raw_message, image_paths, status, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, 'pending', ?)`,
       )
-      .run(id, input.eventId, input.lineUserId, input.channelId, input.rawMessage, now)
+      .run(
+        id, input.eventId, input.lineUserId, input.channelId, input.rawMessage,
+        input.imagePaths?.length ? JSON.stringify(input.imagePaths) : null, now,
+      )
     return db.prepare(`SELECT * FROM tasks WHERE id = ?`).get(id) as TaskRow | null
   } catch (err) {
     // event_id 撞 UNIQUE = LINE 重送了同一則 webhook,靜靜跳過

@@ -14,3 +14,5 @@ bot/.wrangler
 bot/carbiz.sqlite*
 
 __pycache__/
+worker/state/*
+!worker/state/.gitkeep

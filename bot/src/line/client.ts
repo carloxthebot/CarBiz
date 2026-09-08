@@ -18,6 +18,15 @@ export async function push(to: string, text: string): Promise<void> {
   await send(`${API}/message/push`, { to, messages: [textMsg(text)] })
 }
 
+// 抓圖片/檔案內容。注意是 api-data.line.me,不是 api.line.me。
+export async function fetchContent(messageId: string): Promise<Buffer> {
+  const res = await fetch(`https://api-data.line.me/v2/bot/message/${messageId}/content`, {
+    headers: { authorization: `Bearer ${env.LINE_CHANNEL_ACCESS_TOKEN}` },
+  })
+  if (!res.ok) throw new Error(`content fetch ${messageId} failed: ${res.status} ${await res.text()}`)
+  return Buffer.from(await res.arrayBuffer())
+}
+
 async function send(url: string, payload: unknown): Promise<void> {
   const res = await fetch(url, {
     method: 'POST',

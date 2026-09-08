@@ -14,6 +14,7 @@ export type TaskRow = {
   line_user_id: string
   channel_id: string
   raw_message: string
+  image_paths: string | null // JSON array of absolute paths under worker/state/inbox
   status: 'pending' | 'running' | 'done' | 'failed'
   result_text: string | null
   error_text: string | null
@@ -39,13 +40,37 @@ db.exec(`
     finished_at   INTEGER
   );
   CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks(status, created_at);
+
+  -- 每個 LINE channel(1:1 = userId、group = groupId、room = roomId)
+  -- 對應一個 Claude Code session。resume 讓連續問答有前文記憶。
+  -- context_tokens 是上一輪結束後的 session 累積大小,超過 80% 上限
+  -- 就在下一輪先跑 /compact。
+  CREATE TABLE IF NOT EXISTS sessions (
+    channel_id      TEXT PRIMARY KEY,
+    session_id      TEXT NOT NULL,
+    context_tokens  INTEGER NOT NULL DEFAULT 0,
+    context_window  INTEGER NOT NULL DEFAULT 200000,
+    needs_compact   INTEGER NOT NULL DEFAULT 0,
+    updated_at      INTEGER NOT NULL
+  );
 `)
+
+// migration 0002:圖片路徑(JSON array)。sqlite 沒有 ADD COLUMN IF NOT EXISTS,先查。
+{
+  const cols = (db.prepare(`PRAGMA table_info(tasks)`).all() as { name: string }[]).map((c) => c.name)
+  if (!cols.includes('image_paths')) db.exec(`ALTER TABLE tasks ADD COLUMN image_paths TEXT`)
+}
 
 // 上一次跑到一半就掛掉的任務,啟動時全部標成 failed —— 不重跑,因為使用者
 // 可能已經看到 loading 動畫消失、自己重打了。寧可漏一則也不要意外重複寫入。
+// 拿到的 channel_id 交給 server.ts 開機時 push 一句道歉,不然使用者無感失蹤。
+const orphans = db.prepare(
+  `SELECT id, channel_id, raw_message FROM tasks WHERE status IN ('pending','running')`,
+).all() as { id: string; channel_id: string; raw_message: string }[]
 db.prepare(
   `UPDATE tasks SET status = 'failed', error_text = 'server restarted mid-run', finished_at = ?
     WHERE status IN ('pending','running')`,
 ).run(Date.now())
+export const orphanedOnBoot = orphans
 
 export { db }
