@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16181a">
+<title>Jimny JB74 改裝配置</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto+Mono:wght@500&display=swap">
+<style>
+:root{
+  --stage:#e8eae7; --panel:#16181a; --panel-2:#1e2124; --panel-3:#282c30;
+  --ink:#f0f1ee; --ink-2:#9ea49c; --ink-3:#6b7069;
+  --rule:#2c3034; --rule-2:#3d4348;
+  --key:#d8cf3a; --key-dim:#3a3814; --key-ink:#16181a;
+  --warn:#e0913c; --err:#d2593f;
+  --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Oswald","Helvetica Neue",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+  --body:-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--panel);color:var(--ink);font:15px/1.55 var(--body);
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.app{display:grid;grid-template-columns:1fr 360px;height:100%}
+@media(max-width:860px){.app{grid-template-columns:1fr;grid-template-rows:44vh 1fr}}
+
+.stage{position:relative;background:var(--stage);overflow:hidden;touch-action:none}
+#cv{display:block;width:100%;height:100%}
+.badge{position:absolute;top:14px;left:16px;pointer-events:none}
+.badge .mk{font:500 9.5px/1 var(--mono);letter-spacing:.26em;color:#8b908a}
+.badge .md{font:600 21px/1.05 var(--disp);letter-spacing:.04em;color:#22262a;margin-top:4px}
+.views{position:absolute;top:12px;right:14px;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:62%}
+.views button{font:500 11.5px/1 var(--body);padding:6px 9px;border:1px solid #cfd2ce;border-radius:2px;
+  background:#fbfbfaee;color:#3b3f43;cursor:pointer}
+.views button[aria-pressed=true]{background:var(--key);border-color:var(--key);color:var(--key-ink);font-weight:600}
+.hud{position:absolute;left:16px;bottom:12px;font:500 10.5px/1.65 var(--mono);color:#6e736d;pointer-events:none}
+.hud b{color:#22262a}
+#boot{position:absolute;inset:0;display:grid;place-items:center;background:var(--stage);z-index:4;
+  font:500 13px var(--mono);color:#5d625c;text-align:center;padding:20px}
+#boot .bar{width:190px;height:3px;background:#d3d6d1;border-radius:2px;margin:12px auto 0;overflow:hidden}
+#boot .bar i{display:block;height:100%;width:0;background:var(--key);transition:width .2s}
+.credit{position:absolute;right:14px;bottom:10px;font:500 9.5px/1.5 var(--mono);color:#8d928c;
+  text-align:right;max-width:52%}
+.credit a{color:#6e736d}
+
+.panel{background:var(--panel);border-left:1px solid var(--rule);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.head{padding:18px 20px 16px;border-bottom:1px solid var(--rule)}
+.head .kicker{font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
+.head h1{font:600 20px/1.15 var(--disp);letter-spacing:.03em;margin:8px 0 0}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;margin-top:14px;overflow:hidden}
+.readout div{background:var(--panel-2);padding:9px 10px}
+.readout span{display:block;font:500 9px/1 var(--mono);letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase}
+.readout b{display:block;font:600 16px/1.2 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums}
+.readout small{font-size:10px;font-weight:400;color:var(--ink-3)}
+
+section{border-bottom:1px solid var(--rule)}
+.sec-h{display:flex;align-items:center;gap:11px;width:100%;padding:14px 20px;background:none;border:0;
+  color:var(--ink);cursor:pointer;text-align:left;font:inherit}
+.sec-h .ix{font:600 12px/1 var(--mono);color:var(--key);width:12px;flex:none}
+.sec-h .tt{flex:1;min-width:0}
+.sec-h .tt b{display:block;font:600 14px/1.2 var(--disp);letter-spacing:.03em}
+.sec-h .tt i{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sec-h .ar{color:var(--ink-3);font-size:10px;transition:transform .18s}
+.sec-h[aria-expanded=true] .ar{transform:rotate(180deg)}
+.sec-b{padding:0 20px 18px;display:none}
+.sec-h[aria-expanded=true]+.sec-b{display:block}
+.lbl{font:500 9.5px/1 var(--mono);letter-spacing:.13em;color:var(--ink-3);text-transform:uppercase;margin:16px 0 8px;display:block}
+.swatches{display:flex;gap:7px;flex-wrap:wrap}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid transparent;outline:1px solid var(--rule-2);
+  cursor:pointer;padding:0;position:relative}
+.sw[aria-pressed=true]{border-color:var(--key);outline-color:var(--key)}
+select{width:100%;background:var(--panel-2);color:var(--ink);border:1px solid var(--rule-2);border-radius:2px;
+  padding:10px 11px;font:14px var(--body);appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);
+  background-position:right 14px top 18px,right 9px top 18px;background-size:5px 5px;background-repeat:no-repeat}
+select:focus{outline:2px solid var(--key);outline-offset:-1px}
+.hint{font-size:11px;color:var(--ink-3);line-height:1.5;margin:6px 0 0}
+.toggles{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:9px;background:var(--panel-2);border:0;
+  padding:12px;color:var(--ink);cursor:pointer;font:inherit;text-align:left;width:100%}
+.tg[aria-pressed=true]{background:var(--key-dim)}
+.tg .nm{font-size:13px;min-width:0}
+.tg .nm i{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tg[aria-pressed=true] .nm{color:var(--key)}
+.tg .st{font:500 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink-3);flex:none}
+.tg[aria-pressed=true] .st{color:var(--key)}
+.flags{padding:0 20px 16px;display:grid;gap:6px}
+.flag{padding:9px 11px;border-radius:2px;font-size:12px;line-height:1.5;border-left:2px solid}
+.flag.error{background:#2a1714;border-color:var(--err);color:#f0c4ba}
+.flag.warn{background:#2a2113;border-color:var(--warn);color:#f0d8b8}
+.flag.info{background:var(--panel-2);border-color:var(--rule-2);color:var(--ink-2)}
+.flag b{font:600 9.5px/1.6 var(--mono);letter-spacing:.08em;display:block}
+.acts{padding:16px 20px 30px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts button{padding:12px;border-radius:2px;font:600 13px var(--body);cursor:pointer;border:1px solid}
+.ghost{background:none;border-color:var(--rule-2);color:var(--ink-2)}
+.solid{background:var(--key);border-color:var(--key);color:var(--key-ink)}
+#out{margin:0 20px 22px;background:var(--panel-2);border:1px solid var(--rule);border-radius:3px;padding:12px;
+  font:11.5px/1.65 var(--mono);color:var(--ink-2);white-space:pre-wrap;display:none}
+#out.on{display:block}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage">
+    <canvas id="cv"></canvas>
+    <div id="boot">載入 3D 模型…<div class="bar"><i id="bootbar"></i></div></div>
+    <div class="badge"><div class="mk">SUZUKI · JB74W</div><div class="md">JIMNY SIERRA</div></div>
+    <div class="views" id="views"></div>
+    <div class="hud" id="hud"></div>
+    <div class="credit">3D 模型 “2023 Suzuki Jimny Sierra” by tonielpro520,<br>
+      <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></div>
+  </div>
+
+  <div class="panel">
+    <div class="head">
+      <div class="kicker">改裝配置器</div>
+      <h1>Jimny JB74</h1>
+      <div class="readout">
+        <div><span>總舉升</span><b id="rLift">0<small> mm</small></b></div>
+        <div><span>胎外徑</span><b id="rTyre">693<small> mm</small></b></div>
+        <div><span>估離地</span><b id="rClear">210<small> mm</small></b></div>
+      </div>
+    </div>
+    <section><button class="sec-h" aria-expanded="true"><span class="ix">L</span>
+      <span class="tt"><b>懸吊與舉升</b><i id="sumL">原廠</i></span><span class="ar">▾</span></button>
+      <div class="sec-b">
+        <label class="lbl">懸吊舉升</label><select id="selLift"></select><p class="hint" id="hLift"></p>
+        <label class="lbl">車身舉升</label><select id="selBody"></select><p class="hint" id="hBody"></p>
+      </div></section>
+    <section><button class="sec-h" aria-expanded="false"><span class="ix">W</span>
+      <span class="tt"><b>輪框與輪胎</b><i id="sumW">原廠</i></span><span class="ar">▾</span></button>
+      <div class="sec-b">
+        <label class="lbl">輪框</label><select id="selWheel"></select><p class="hint" id="hWheel"></p>
+        <label class="lbl">輪胎尺寸</label><select id="selTyre"></select><p class="hint" id="hTyre"></p>
+      </div></section>
+    <section><button class="sec-h" aria-expanded="false"><span class="ix">E</span>
+      <span class="tt"><b>外觀與配件</b><i id="sumE">原廠</i></span><span class="ar">▾</span></button>
+      <div class="sec-b">
+        <label class="lbl">車身配色</label><div class="swatches" id="colSw"></div>
+        <select id="selColor" style="margin-top:10px"></select>
+        <button class="tg" id="tgTwo" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
+          <span class="nm">雙色車頂<i>ZJ3 Bluish Black Pearl</i></span><span class="st">關閉</span></button>
+        <label class="lbl">加裝配件</label><div class="toggles" id="toggles"></div>
+      </div></section>
+    <div class="flags" id="flags"></div>
+    <div class="acts"><button class="ghost" id="btnReset">全部還原</button>
+      <button class="solid" id="btnExport">匯出這台配置</button></div>
+    <pre id="out"></pre>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{
+ "three":"https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js",
+ "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { rigJimny, applyConfig } from './rig.js';
+import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js';
+import { buildAccessory } from './accessories.js';
+
+const cv = document.getElementById('cv');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe8eae7);
+const cam = new THREE.PerspectiveCamera(30, 1, 0.05, 200);
+const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0xc4c8bf, 2.0));
+const kl = new THREE.DirectionalLight(0xffffff, 2.2); kl.position.set(4, 6.5, 4.5);
+kl.castShadow = true; kl.shadow.mapSize.set(2048, 2048);
+Object.assign(kl.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .1, far: 26 });
+kl.shadow.bias = -0.0005; scene.add(kl);
+const fl2 = new THREE.DirectionalLight(0xffffff, 0.5); fl2.position.set(-5, 3, -4); scene.add(fl2);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.ShadowMaterial({ opacity: .18 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+const orbit = { az: .8, el: .18, dist: 9, ty: .85 };
+function applyCam() {
+  orbit.el = Math.max(-.15, Math.min(1.1, orbit.el));
+  orbit.dist = Math.max(4.5, Math.min(22, orbit.dist));
+  cam.position.set(Math.cos(orbit.el) * Math.sin(orbit.az) * orbit.dist,
+    orbit.ty + Math.sin(orbit.el) * orbit.dist, Math.cos(orbit.el) * Math.cos(orbit.az) * orbit.dist);
+  cam.lookAt(0, orbit.ty, 0);
+}
+let drag = null, pinch = 0;
+cv.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if (!drag) return;
+  orbit.az -= (e.clientX - drag.x) * .008; orbit.el += (e.clientY - drag.y) * .006;
+  drag = { x: e.clientX, y: e.clientY }; applyCam(); });
+addEventListener('pointerup', () => drag = null);
+cv.addEventListener('wheel', e => { e.preventDefault(); orbit.dist *= 1 + Math.sign(e.deltaY) * .09; applyCam(); }, { passive: false });
+cv.addEventListener('touchmove', e => { if (e.touches.length !== 2) return; e.preventDefault();
+  const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+  if (pinch) { orbit.dist *= pinch / d; applyCam(); } pinch = d; }, { passive: false });
+cv.addEventListener('touchend', () => pinch = 0);
+function resize() { const w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
+  renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+addEventListener('resize', resize);
+const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後側', 2.4, .18, 9],
+  ['正前', 0, .1, 8], ['俯視', .6, 1.0, 10]];
+
+const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', wheel: 'oem', tyre: 't195',
+  snorkel: false, roofRack: 'none', awning: 'none', windowGuards: false, ladder: false,
+  rockSliders: false, lightBar: false, spareBag: false };
+let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
+const find = (l, id) => l.find(x => x.id === id) || l[0];
+
+const loader = new GLTFLoader();
+const draco = new DRACOLoader();
+draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/libs/draco/');
+loader.setDRACOLoader(draco);
+loader.load('model/jimny-hq.glb', (g) => {
+  rig = rigJimny(THREE, g.scene);
+  rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  scene.add(rig); rig.add(accGroup);
+  document.getElementById('boot').style.display = 'none';
+  buildUI(); update();
+}, (p) => { if (p.total) document.getElementById('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
+(e) => { document.getElementById('boot').textContent = '模型載入失敗：' + (e?.message || e); });
+
+function update() {
+  const lift = find(LIFTS, S.lift), bl = find(BODY_LIFTS, S.bodyLift);
+  const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
+  const col = COLORS.find(c => c.code === S.color) || COLORS[3];
+  const total = lift.lift + bl.body;
+  applyConfig(THREE, rig, { bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK,
+    lift: total, tyreDia: ty.dia, spareMatches: true });
+
+  accGroup.clear();
+  const D = rig.userData.dims;
+  const A = { bodyW: 1480, frontZ: 1640, rearZ: -1906, sillY: 455, beltline: 825,
+    roofY: 1730, glassY: 1450, glassH: 400, grilleY: 945, bumperY: 605, lift: total };
+  for (const [k, on] of Object.entries({ snorkel: S.snorkel, rockSliders: S.rockSliders, ladder: S.ladder,
+      windowGuards: S.windowGuards, lightBar: S.lightBar, spareBag: S.spareBag }))
+    if (on) { const n = buildAccessory(THREE, k, A); if (n) accGroup.add(n); }
+  if (S.roofRack !== 'none') { const n = buildAccessory(THREE, 'roofRack', A, S.roofRack); if (n) accGroup.add(n); }
+  if (S.awning !== 'none') { const n = buildAccessory(THREE, 'awning', A, S.awning); if (n) accGroup.add(n); }
+  accGroup.position.y = total * 0.001 + (ty.dia - 693) * 0.0005;
+  accGroup.traverse(o => { if (o.isMesh) o.castShadow = true; });
+
+  const set = (id, v) => document.getElementById(id).innerHTML = v;
+  set('rLift', total + '<small> mm</small>');
+  set('rTyre', ty.dia + '<small> mm</small>');
+  set('rClear', (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>');
+  document.getElementById('sumL').textContent = total ? lift.label + (bl.body ? ' + ' + bl.label : '') : '原廠';
+  document.getElementById('sumW').textContent = wh.label.replace('原廠 ', '') + ' · ' + ty.label.replace('（原廠）', '');
+  const n = ['snorkel','windowGuards','ladder','rockSliders','lightBar','spareBag'].filter(k => S[k]).length
+    + (S.roofRack !== 'none') + (S.awning !== 'none');
+  document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
+  document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b>`;
+  const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
+  document.getElementById('flags').innerHTML = fl.map(f =>
+    `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${f.msg}</div>`).join('');
+}
+
+function buildUI() {
+  const money = (p, c) => p == null ? '' : (c === 'JPY' ? '¥' : c === 'AUD' ? 'A$' : c === 'GBP' ? '£' : '$') + p.toLocaleString();
+  const opt = (l, v, f) => document.getElementById(l).innerHTML =
+    v.map(o => `<option value="${o.id}"${o.id === f ? ' selected' : ''}>${o.__l(o)}</option>`).join('');
+  LIFTS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
+  BODY_LIFTS.forEach(o => o.__l = x => x.label);
+  WHEELS.forEach(o => o.__l = x => `${x.label} (${x.rim}×${x.width}J ET${x.offset > 0 ? '+' : ''}${x.offset})`);
+  TYRES.forEach(o => o.__l = x => `${x.label} — Ø${x.dia}mm`);
+  opt('selLift', LIFTS, S.lift); opt('selBody', BODY_LIFTS, S.bodyLift);
+  opt('selWheel', WHEELS, S.wheel); opt('selTyre', TYRES, S.tyre);
+  document.getElementById('selColor').innerHTML = COLORS.map(c =>
+    `<option value="${c.code}"${c.code === S.color ? ' selected' : ''}>${c.code} ${c.name}</option>`).join('');
+  document.getElementById('colSw').innerHTML = COLORS.map(c =>
+    `<button class="sw" data-c="${c.code}" title="${c.name}" aria-pressed="${c.code === S.color}"
+      style="background:#${c.hex.toString(16).padStart(6,'0')}"></button>`).join('');
+  const TG = [['snorkel','呼吸管'],['rockSliders','側踏'],['ladder','後爬梯'],
+    ['windowGuards','鐵窗'],['lightBar','車頂燈條'],['spareBag','備胎書包']];
+  document.getElementById('toggles').innerHTML =
+    `<button class="tg" data-rack aria-pressed="false"><span class="nm">車頂架</span><span class="st">無</span></button>
+     <button class="tg" data-awn aria-pressed="false"><span class="nm">側邊帳</span><span class="st">無</span></button>` +
+    TG.map(([k, l]) => `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
+  document.getElementById('views').innerHTML = VIEWS.map((v, i) =>
+    `<button data-v="${i}" aria-pressed="${i === 0}">${v[0]}</button>`).join('');
+  hints();
+
+  const on = (id, f) => document.getElementById(id).onchange = e => { f(e.target.value); hints(); update(); };
+  on('selLift', v => S.lift = v); on('selBody', v => S.bodyLift = v); on('selTyre', v => S.tyre = v);
+  document.getElementById('selWheel').onchange = e => {
+    const w = find(WHEELS, e.target.value), t = find(TYRES, S.tyre);
+    S.wheel = e.target.value;
+    if (t.rim !== w.rim) { const nt = TYRES.find(x => x.rim === w.rim); if (nt) { S.tyre = nt.id; document.getElementById('selTyre').value = nt.id; } }
+    hints(); update();
+  };
+  document.getElementById('selColor').onchange = e => { S.color = e.target.value;
+    document.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.color)); update(); };
+  document.getElementById('colSw').onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return;
+    S.color = b.dataset.c; document.getElementById('selColor').value = S.color;
+    document.querySelectorAll('[data-c]').forEach(x => x.setAttribute('aria-pressed', x === b)); update(); };
+  document.getElementById('tgTwo').onclick = e => { S.twoTone = !S.twoTone;
+    e.currentTarget.setAttribute('aria-pressed', S.twoTone);
+    e.currentTarget.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉'; update(); };
+  document.getElementById('toggles').onclick = e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.hasAttribute('data-rack')) { S.roofRack = { none:'platform', platform:'basket', basket:'none' }[S.roofRack];
+      b.setAttribute('aria-pressed', S.roofRack !== 'none');
+      b.querySelector('.st').textContent = { none:'無', platform:'平台', basket:'籃式' }[S.roofRack]; }
+    else if (b.hasAttribute('data-awn')) { S.awning = { none:'left', left:'right', right:'none' }[S.awning];
+      b.setAttribute('aria-pressed', S.awning !== 'none');
+      b.querySelector('.st').textContent = { none:'無', left:'左側', right:'右側' }[S.awning]; }
+    else { const k = b.dataset.k; if (!k) return; S[k] = !S[k];
+      b.setAttribute('aria-pressed', S[k]); b.querySelector('.st').textContent = S[k] ? '已裝' : '未裝'; }
+    update();
+  };
+  document.querySelectorAll('.sec-h').forEach(h => h.onclick = () => {
+    const o = h.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.sec-h').forEach(x => x.setAttribute('aria-expanded', 'false'));
+    h.setAttribute('aria-expanded', String(!o));
+  });
+  document.getElementById('views').onclick = e => { const b = e.target.closest('[data-v]'); if (!b) return;
+    document.querySelectorAll('[data-v]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    const [, az, el, d] = VIEWS[+b.dataset.v]; orbit.az = az; orbit.el = el; orbit.dist = d; applyCam(); };
+  document.getElementById('btnReset').onclick = () => location.reload();
+  document.getElementById('btnExport').onclick = () => {
+    const lift = find(LIFTS, S.lift), bl = find(BODY_LIFTS, S.bodyLift);
+    const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
+    const col = COLORS.find(c => c.code === S.color);
+    const acc = [S.roofRack !== 'none' && '車頂架', S.awning !== 'none' && '側邊帳', S.snorkel && '呼吸管',
+      S.rockSliders && '側踏', S.ladder && '後爬梯', S.windowGuards && '鐵窗',
+      S.lightBar && '車頂燈條', S.spareBag && '備胎書包'].filter(Boolean);
+    const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
+    const o = document.getElementById('out');
+    o.textContent = ['JIMNY JB74 改裝配置', '─'.repeat(28),
+      `車色    ${col.code} ${col.name}${S.twoTone ? '（雙色黑頂）' : ''}`,
+      `懸吊    ${lift.label}`, bl.body ? `車身舉升 ${bl.label}` : null,
+      `輪框    ${wh.label}`, `輪胎    ${ty.label} Ø${ty.dia}mm`, '',
+      `總舉升  ${lift.lift + bl.body}mm`,
+      `估離地  ${210 + lift.lift + bl.body + Math.round((ty.dia - 693) / 2)}mm`, '',
+      acc.length ? '配件\n' + acc.map(a => '  · ' + a).join('\n') : '配件    無',
+      fl.length ? '\n注意\n' + fl.map(f => '  ! ' + f.msg).join('\n') : '',
+      '', '※ 價格為概略值，實際以代理商報價為準。'].filter(x => x !== null).join('\n');
+    o.classList.add('on'); o.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+}
+function hints() {
+  const n = o => [o.brand && o.brand !== '—' ? o.brand : '', o.note || '', o.uncertain ? '（未完全查證）' : ''].filter(Boolean).join(' · ');
+  document.getElementById('hLift').textContent = n(find(LIFTS, S.lift));
+  document.getElementById('hBody').textContent = n(find(BODY_LIFTS, S.bodyLift));
+  document.getElementById('hWheel').textContent = n(find(WHEELS, S.wheel));
+  document.getElementById('hTyre').textContent = n(find(TYRES, S.tyre));
+}
+
+resize(); applyCam();
+(function loop() { renderer.render(scene, cam); requestAnimationFrame(loop); })();
+new ResizeObserver(resize).observe(cv.parentElement);
+</script>
+</body>
+</html>
