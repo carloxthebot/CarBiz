@@ -223,7 +223,7 @@ loader.setDRACOLoader(draco);
 loader.load('model/jimny-hq.glb', (g) => {
   rig = rigJimny(THREE, g.scene);
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
-  scene.add(rig); rig.add(accGroup);
+  scene.add(rig); rig.userData.BODY.add(accGroup);
   document.getElementById('boot').style.display = 'none';
   buildUI(); update();
 }, (p) => { if (p.total) document.getElementById('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
@@ -237,16 +237,15 @@ function update() {
   applyConfig(THREE, rig, { bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK,
     lift: total, tyreDia: ty.dia, spareMatches: true });
 
+  // Accessories live under BODY so the lift carries them automatically, and
+  // they position themselves from anchors measured off this mesh.
   accGroup.clear();
-  const D = rig.userData.dims;
-  const A = { bodyW: 1480, frontZ: 1640, rearZ: -1906, sillY: 455, beltline: 825,
-    roofY: 1730, glassY: 1450, glassH: 400, grilleY: 945, bumperY: 605, lift: total };
-  for (const [k, on] of Object.entries({ snorkel: S.snorkel, rockSliders: S.rockSliders, ladder: S.ladder,
-      windowGuards: S.windowGuards, lightBar: S.lightBar, spareBag: S.spareBag }))
+  const A = { ...rig.userData.anchors, lift: total };
+  for (const [k, on] of Object.entries({ snorkel: S.snorkel, rockSliders: S.rockSliders,
+      ladder: S.ladder, windowGuards: S.windowGuards, lightBar: S.lightBar, spareBag: S.spareBag }))
     if (on) { const n = buildAccessory(THREE, k, A); if (n) accGroup.add(n); }
   if (S.roofRack !== 'none') { const n = buildAccessory(THREE, 'roofRack', A, S.roofRack); if (n) accGroup.add(n); }
   if (S.awning !== 'none') { const n = buildAccessory(THREE, 'awning', A, S.awning); if (n) accGroup.add(n); }
-  accGroup.position.y = total * 0.001 + (ty.dia - 693) * 0.0005;
   accGroup.traverse(o => { if (o.isMesh) o.castShadow = true; });
 
   const set = (id, v) => document.getElementById(id).innerHTML = v;

@@ -83,22 +83,14 @@ export function rigJimny(THREE, gltfScene) {
     wheelGroups.push(g);
   }
 
-  const spareGroup = new THREE.Group(); spareGroup.name = 'spare';
+  // The model already carries a tailgate-mounted spare. Earlier this code
+  // reparented it to scale with the road tyres, and the transform maths threw
+  // it off the car. It is left exactly where the artist put it; only its
+  // measured position is exported, so a spare-wheel bag can be placed on it.
+  let spareBox = null;
   if (spare.length) {
-    const box = new THREE.Box3();
-    for (const m of spare) box.expandByObject(m);
-    const centre = box.getCenter(new THREE.Vector3());
-    spareGroup.position.copy(centre);
-    for (const m of spare) {
-      m.updateMatrixWorld(true);
-      const keep = m.matrixWorld.clone();
-      spareGroup.add(m);
-      m.matrix.copy(spareGroup.matrixWorld.clone().invert().multiply(keep));
-      m.matrix.decompose(m.position, m.quaternion, m.scale);
-    }
-    BODY.add(spareGroup);                          // the spare rides with the body
-    const sz = box.getSize(new THREE.Vector3());
-    spareGroup.userData.baseDia = Math.max(sz.y, sz.z);
+    spareBox = new THREE.Box3();
+    for (const m of spare) spareBox.expandByObject(m);
   }
 
   // ---- paint: clone so the swatch cannot bleed into other materials -----
@@ -129,15 +121,79 @@ export function rigJimny(THREE, gltfScene) {
     roofMat.name = 'RoofPaint';
   }
 
+  // ---- anchors, MEASURED ------------------------------------------------
+  // Accessories were previously positioned from hand-guessed constants copied
+  // off an earlier hand-built model. On this mesh those numbers put the roof
+  // rack in mid-air and drove the snorkel through the floor. Everything below
+  // is measured off the actual geometry instead, in millimetres.
+  const M = 1000;                                  // metres -> mm
+  const paintedBox = new THREE.Box3();
+  for (const m of painted) paintedBox.expandByObject(m);
+
+  // roof: the top of the painted shell, ignoring the aerial
+  let roofY = -Infinity, roofXHalf = 0, roofZMin = Infinity, roofZMax = -Infinity;
+  for (const m of painted) {
+    const b = new THREE.Box3().setFromObject(m);
+    if (b.max.y > paintedBox.min.y + (paintedBox.max.y - paintedBox.min.y) * 0.80) {
+      const w = Math.max(Math.abs(b.min.x), Math.abs(b.max.x));
+      if (b.max.x - b.min.x > 0.4) {              // a real roof panel, not a trim strip
+        roofY = Math.max(roofY, b.max.y);
+        roofXHalf = Math.max(roofXHalf, w);
+        roofZMin = Math.min(roofZMin, b.min.z);
+        roofZMax = Math.max(roofZMax, b.max.z);
+      }
+    }
+  }
+  if (!isFinite(roofY)) { roofY = paintedBox.max.y; roofXHalf = paintedBox.max.x; }
+
+  // body sides at door height (half-way up the painted shell)
+  const midY = (paintedBox.min.y + paintedBox.max.y) / 2;
+  let sideXHalf = 0;
+  for (const m of painted) {
+    const b = new THREE.Box3().setFromObject(m);
+    if (b.min.y < midY && b.max.y > midY)
+      sideXHalf = Math.max(sideXHalf, Math.abs(b.min.x), Math.abs(b.max.x));
+  }
+  if (!sideXHalf) sideXHalf = paintedBox.max.x;
+
+  const wheelZ = wheelGroups.map((g) => g.position.z);
+  const frontAxleZ = Math.max(...wheelZ), rearAxleZ = Math.min(...wheelZ);
+
+  const anchors = {
+    bodyW: sideXHalf * 2 * M,
+    halfW: sideXHalf * M,
+    roofY: roofY * M,
+    roofZFront: roofZMax * M,
+    roofZRear: roofZMin * M,
+    roofHalfW: roofXHalf * M,
+    noseZ: paintedBox.max.z * M,
+    tailZ: paintedBox.min.z * M,
+    sillY: paintedBox.min.y * M,
+    beltY: (paintedBox.min.y + (paintedBox.max.y - paintedBox.min.y) * 0.56) * M,
+    frontAxleZ: frontAxleZ * M,
+    rearAxleZ: rearAxleZ * M,
+    spare: spareBox ? {
+      x: (spareBox.min.x + spareBox.max.x) / 2 * M,
+      y: (spareBox.min.y + spareBox.max.y) / 2 * M,
+      z: (spareBox.min.z + spareBox.max.z) / 2 * M,
+      dia: Math.max(spareBox.max.y - spareBox.min.y, spareBox.max.x - spareBox.min.x) * M,
+    } : null,
+  };
+  anchors.glassY = anchors.beltY + (anchors.roofY - anchors.beltY) * 0.45;
+  anchors.glassH = (anchors.roofY - anchors.beltY) * 0.62;
+  anchors.grilleY = anchors.beltY - (anchors.beltY - anchors.sillY) * 0.30;
+  anchors.bumperY = anchors.sillY + (anchors.beltY - anchors.sillY) * 0.22;
+  anchors.beltline = anchors.beltY;          // accessories use this name
+
   const dims = {
     mmPerUnit,
-    lengthM: (full.max.z - full.min.z),
-    widthM: (full.max.x - full.min.x),
-    heightM: (full.max.y - full.min.y),
+    lengthMM: (full.max.z - full.min.z) * M,
+    widthMM: (full.max.x - full.min.x) * M,
+    heightMM: (full.max.y - full.min.y) * M,
   };
 
   root.userData = {
-    BODY, WHEELS, wheelGroups, spareGroup,
+    BODY, WHEELS, wheelGroups, spareBox, anchors,
     paintMat, roofMat, roofMeshes, painted, dims,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
@@ -165,10 +221,6 @@ export function applyConfig(THREE, rig, cfg) {
     g.position.y = targetDia / 2;
     // lift raises the body, which reads the same as dropping the wheels
     g.position.y -= (cfg.lift ?? 0) * mm;
-  }
-  if (U.spareGroup && U.spareGroup.userData.baseDia) {
-    const sk = cfg.spareMatches === false ? 1 : k;
-    U.spareGroup.scale.setScalar(sk);
   }
 
   // body sits at lift height above its rigged rest position
