@@ -168,13 +168,13 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609150428';
-import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js?v=202609150428';
-import { buildAccessory } from './accessories.js?v=202609150428';
-import { buildWheel } from './wheels.js?v=202609150428';
+import { rigJimny, applyConfig } from './rig.js?v=202609150510';
+import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js?v=202609150510';
+import { buildAccessory, loadParts } from './accessories.js?v=202609150510';
+import { buildWheel } from './wheels.js?v=202609150510';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609150428';
+const BUILD = '202609150510';
 
 const cv = document.getElementById('cv');
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe8eae7);
@@ -224,7 +224,7 @@ const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後�
 const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', wheel: 'oem', tyre: 't195',
   tread: 'at', rimColor: 0xc8ccd0,
   snorkel: false, roofRack: 'none', awning: 'none', windowGuards: false, ladder: false,
-  rockSliders: false, lightBar: false, spareBag: false };
+  rockSliders: false, lightBar: false, spareBag: false, spareCover: false };
 let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
 const RIMS = [0xc8ccd0, 0x2b2f36, 0x8a6a3c, 0xd8d9d6, 0xb8410f];
 const find = (l, id) => l.find(x => x.id === id) || l[0];
@@ -233,12 +233,14 @@ const loader = new GLTFLoader();
 const draco = new DRACOLoader();
 draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/libs/draco/');
 loader.setDRACOLoader(draco);
-loader.load('model/jimny-hq.glb', (g) => {
+const partsReady = loadParts(loader, `model/parts.glb?v=${BUILD}`);
+loader.load('model/jimny-hq.glb', async (g) => {
+  await partsReady;
   rig = rigJimny(THREE, g.scene);
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   scene.add(rig); rig.userData.BODY.add(accGroup);
   // inspection hook for headless verification scripts; harmless in the page
-  window.__jimny = { THREE, rig, scene, update: () => update() };
+  window.__jimny = { THREE, rig, scene, update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); } };
   document.getElementById('boot').style.display = 'none';
   buildUI(); update();
 }, (p) => { if (p.total) document.getElementById('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
@@ -257,16 +259,14 @@ function update() {
     buildWheel: (o) => buildWheel(THREE, o),
   });
 
-  // Accessories live under BODY so the lift carries them automatically, and
-  // they position themselves from anchors measured off this mesh.
+  // Accessories live under BODY so the lift carries them automatically; each
+  // is a modelled part already positioned for this car (see accessories.js).
   accGroup.clear();
-  const A = { ...rig.userData.anchors, lift: total };
-  for (const [k, on] of Object.entries({ snorkel: S.snorkel, rockSliders: S.rockSliders,
-      ladder: S.ladder, windowGuards: S.windowGuards, lightBar: S.lightBar, spareBag: S.spareBag }))
-    if (on) { const n = buildAccessory(THREE, k, A); if (n) accGroup.add(n); }
-  if (S.roofRack !== 'none') { const n = buildAccessory(THREE, 'roofRack', A, S.roofRack); if (n) accGroup.add(n); }
-  if (S.awning !== 'none') { const n = buildAccessory(THREE, 'awning', A, S.awning); if (n) accGroup.add(n); }
-  accGroup.traverse(o => { if (o.isMesh) o.castShadow = true; });
+  const add = (n) => n && accGroup.add(n);
+  for (const k of ['snorkel', 'rockSliders', 'ladder', 'windowGuards', 'lightBar', 'spareBag', 'spareCover'])
+    if (S[k]) add(buildAccessory(k));
+  if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack));
+  if (S.awning !== 'none') add(buildAccessory('awning', S.awning));
 
   const set = (id, v) => document.getElementById(id).innerHTML = v;
   set('rLift', total + '<small> mm</small>');
@@ -274,7 +274,7 @@ function update() {
   set('rClear', (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>');
   document.getElementById('sumL').textContent = total ? lift.label + (bl.body ? ' + ' + bl.label : '') : '原廠';
   document.getElementById('sumW').textContent = wh.label.replace('原廠 ', '') + ' · ' + ty.label.replace('（原廠）', '');
-  const n = ['snorkel','windowGuards','ladder','rockSliders','lightBar','spareBag'].filter(k => S[k]).length
+  const n = ['snorkel','windowGuards','ladder','rockSliders','lightBar','spareBag','spareCover'].filter(k => S[k]).length
     + (S.roofRack !== 'none') + (S.awning !== 'none');
   document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
   document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b><br>版本 ${BUILD}`;
@@ -299,7 +299,7 @@ function buildUI() {
     `<button class="sw" data-c="${c.code}" title="${c.name}" aria-pressed="${c.code === S.color}"
       style="background:#${c.hex.toString(16).padStart(6,'0')}"></button>`).join('');
   const TG = [['snorkel','呼吸管'],['rockSliders','側踏'],['ladder','後爬梯'],
-    ['windowGuards','鐵窗'],['lightBar','車頂燈條'],['spareBag','備胎書包']];
+    ['windowGuards','鐵窗'],['lightBar','車頂燈條'],['spareBag','備胎書包'],['spareCover','備胎硬殼蓋']];
   document.getElementById('toggles').innerHTML =
     `<button class="tg" data-rack aria-pressed="false"><span class="nm">車頂架</span><span class="st">無</span></button>
      <button class="tg" data-awn aria-pressed="false"><span class="nm">側邊帳</span><span class="st">無</span></button>` +
@@ -344,6 +344,11 @@ function buildUI() {
       b.setAttribute('aria-pressed', S.awning !== 'none');
       b.querySelector('.st').textContent = { none:'無', left:'左側', right:'右側' }[S.awning]; }
     else { const k = b.dataset.k; if (!k) return; S[k] = !S[k];
+      // a bag and a hard cover cannot both sit on the spare
+      const other = { spareBag: 'spareCover', spareCover: 'spareBag' }[k];
+      if (other && S[k] && S[other]) { S[other] = false;
+        const ob = document.querySelector(`[data-k="${other}"]`);
+        ob.setAttribute('aria-pressed', false); ob.querySelector('.st').textContent = '未裝'; }
       b.setAttribute('aria-pressed', S[k]); b.querySelector('.st').textContent = S[k] ? '已裝' : '未裝'; }
     update();
   };
@@ -362,7 +367,7 @@ function buildUI() {
     const col = COLORS.find(c => c.code === S.color);
     const acc = [S.roofRack !== 'none' && '車頂架', S.awning !== 'none' && '側邊帳', S.snorkel && '呼吸管',
       S.rockSliders && '側踏', S.ladder && '後爬梯', S.windowGuards && '鐵窗',
-      S.lightBar && '車頂燈條', S.spareBag && '備胎書包'].filter(Boolean);
+      S.lightBar && '車頂燈條', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋'].filter(Boolean);
     const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
     const o = document.getElementById('out');
     o.textContent = ['JIMNY JB74 改裝配置', '─'.repeat(28),
