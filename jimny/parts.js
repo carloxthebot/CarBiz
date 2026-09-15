@@ -74,6 +74,8 @@ export const LIFTS = [
   // ---- 4 吋 (100mm)
   { id: 'br100', label: 'Black Raptor 4" 全套', inch: '4"', lift: 100, body: 0, price: 1586, cur: 'GBP',
     brand: 'JimnyBits', note: '彈簧、避震、4 支 Caster 修正臂、2 支可調 Panhard、編織油管、橫樑下降；左右駕彈簧不同' },
+  { id: 'sg50bl', label: 'SHOWA GARAGE 50 + 25mm 車身舉升', inch: '3"', lift: 50, body: 25, price: null, cur: 'JPY',
+    brand: 'SHOWA GARAGE / JimnyBits', uncertain: true, note: '2 吋懸吊加車身墊高，31 吋胎的常見組合' },
   { id: 'combo100', label: '2" 懸吊 + 2" 車身舉升', inch: '4"', lift: 50, body: 50, price: null, cur: 'AUD',
     brand: 'Black Raptor / ZOOK', uncertain: true, note: '用車身舉升取代 Caster 修正臂與 Panhard 的組合路線' },
 ];
@@ -175,8 +177,8 @@ export const FRONT_BUMPERS = [
     note: '全不鏽鋼雙管，象牙白／黑／拋光；含霧燈架（無霧燈架 ¥93,500）。顯示為車身同色' },
   { id: 'outclass_t2', label: 'OUTCLASS TYPE2 絞盤鐵保桿', price: 140800, cur: 'JPY', brand: 'OUTCLASS',
     note: '鐵製、含絞盤床與 4 顆 LED 方燈；出廠未烤漆（可選 Raptor 塗層）' },
-  { id: 'stubby_led', label: '短版平面鐵保桿＋LED 方燈', price: null, cur: 'TWD', brand: '多家', uncertain: true,
-    note: '兩輪之間的短鐵桿，車牌與兩顆 4 燈 LED 鎖在正面，護罩下方鏤空（車主實車配置）' },
+  { id: 'tube_heritage', label: '圓管前保桿＋Heritage 護板', price: null, cur: 'TWD', brand: 'Heritage', uncertain: true,
+    note: 'Ø60 圓管橫貫、車牌鎖在管上、下掛黑色護板與兩顆 4 燈 LED（車主實車配置）' },
 ];
 
 export const REAR_BUMPERS = [
@@ -197,6 +199,29 @@ export const GRILLES = [
     note: 'SJ10 復古七直孔，含鋁網與反光片；ABS 烤漆版（素材 ¥60,500）。顯示為車身同色' },
 ];
 
+
+// Snorkel kits sold for the JB74; all mount on the right (1.5L airbox side).
+export const SNORKELS = [
+  { id: 'none', label: '無', price: 0 },
+  { id: 'safari', label: 'Safari / Ironman 圓管進氣頭', price: 451, cur: 'AUD', brand: 'Ironman 4x4', part: 'ISNORKEL070',
+    note: 'Ø89 LLDPE 圓管、前向進氣頭；需切葉子板' },
+  { id: 'bravo', label: 'Bravo Snorkel SSJN', price: 399, cur: 'EUR', brand: 'Bravo Snorkel',
+    note: '西班牙製、方形管身貼 A 柱、彎頭側向網狀進氣；免鑽孔（換掉葉子板角飾板）' },
+  { id: 'urnieta', label: 'URNIETA Salado', price: 839, cur: 'AUD', brand: 'URNIETA', part: '0702021',
+    note: 'ABS 方管、矩形百葉進氣頭、側面開槽；免鑽孔，另附旋風前濾頭' },
+  { id: 'precleaner', label: 'Safari 管身＋旋風前濾頭', price: null, cur: 'GBP', brand: 'Safari + PC35', uncertain: true,
+    note: 'Ø180 透明旋風碗，先甩掉粉塵' },
+  { id: 'sleek', label: 'Mega Jimny Supa-Sleek', price: 649, cur: 'AUD', brand: 'Mega Jimny',
+    note: '2 吋不鏽鋼細管貼 A 柱、後向小進氣口；免鑽孔、幾乎看不見' },
+];
+
+export const MIRRORS = [
+  { id: 'stock', label: '原廠電動折疊鏡', price: 0, brand: 'SUZUKI' },
+  { id: 'urnieta', label: 'URNIETA Salado 環管後照鏡', price: 949, cur: 'AUD', brand: 'URNIETA', part: '0702022',
+    note: '方形鏡頭＋圓管環臂，沿用原廠門上三角座；手動調整，附相機孔' },
+  { id: 'damd', label: 'DAMD Truck Mirror', price: 88000, cur: 'JPY', brand: 'DAMD',
+    note: '直式卡車鏡＋U 型管臂，消光黑或鍍鉻；含加熱，失去電動折疊' },
+];
 
 export const SIMPLE = {
   snorkel:      { label: '呼吸管', brands: 'Safari / Ironman 4x4 / ARB / Rival / APIO',

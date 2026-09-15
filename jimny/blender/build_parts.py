@@ -140,7 +140,7 @@ def roof_rack(variant):
 # an air ram whose top sits ~80 mm above the roof line, mouth facing forward.
 # Body ~95 x 75 mm rounded rectangle, ram ~180 L x 130 W x 150 H (estimates).
 def snorkel(side=1):
-    root = group('snorkel')
+    root = group('snorkel_safari')
     off = 40                                    # centreline outboard of the pillar skin
     wing_y = top_y(side * 700, 660)
     path = [
@@ -531,16 +531,15 @@ def grille_owner():
     ow, oh = 580, 215
     grille_panel('panel', root, TEXBLACK, (ow, oh, 858))
     lamp_bezels(root, TEXBLACK, 'square')
-    for k in range(7):
-        y = 858 - oh / 2 + 14 + k * 31
-        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 20, 22), TEXBLACK, root, bevel=3)
+    for k in range(5):
+        y = 858 - oh / 2 + 22 + k * 43
+        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 30, 22), TEXBLACK, root, bevel=4)
     wire_mesh(root, BLACK, 0, 858, face_z(0) - 20, ow - 10, oh - 10, pitch=9)
     box('backing', (0, 858, face_z(0) - 32), (ow, oh, 3), RUBBER, root, bevel=0)
-    text('suzuki', 'SUZUKI', (0, 866, face_z(0) + 16), 56, 5, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
+    text('suzuki', 'SUZUKI', (0, 862, face_z(0) + 16), 56, 5, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     for k, (x, y) in enumerate(SIGNAL):
-        for (cx, cy, sx, sy) in ((0, 46, 100, 8), (0, -46, 100, 8), (-46, 0, 8, 100), (46, 0, 8, 100)):
-            box(f'sigFrame{k}{cx}{cy}', (x + cx, y + cy, face_z(x) + 12), (sx, sy, 10), TEXBLACK, root, bevel=2)
+        annulus(f'sigBezel{k}', (x, y, face_z(x) + 14), 39, 50, 10, TEXBLACK, root)
     return root
 
 
@@ -766,30 +765,35 @@ def roof_lights():
     return root
 
 
-def bumper_stubby_led():
-    """Owner's front bumper: a short plate bumper between the wheels, ~190 mm
-    tall with chamfered ends, sitting just under the grille; number plate
-    and two 4-LED pods on its face, bay open above the crossmember."""
-    root = group('frontBumper_stubby_led')
-    y, zf = 560, 1700
-    H, D = 190, 90
-    path = [(-560, y, zf - D / 2 - 90), (-470, y, zf - D / 2), (470, y, zf - D / 2), (560, y, zf - D / 2 - 90)]
-    sweep('bar', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 8, 3), TEXBLACK, root)
-    box('topLip', (0, y + H / 2 + 2, zf - D / 2 - 10), (940, 6, D - 20), TEXBLACK, root, bevel=1)
+def bumper_tube_heritage():
+    """Owner's front bumper (daylight photos): one round tube across the full
+    width with plain cut ends, the number plate on the tube's centre, a black
+    plate panel hanging below with a script "Heritage" mark, two 4-LED pods
+    on that panel, bay open above the crossmember."""
+    root = group('frontBumper_tube_heritage')
+    y, zt = 660, 1700
+    tube('bar', [(-705, y, zt - 60), (-640, y, zt), (640, y, zt), (705, y, zt - 60)], 62, TEXBLACK, root, bend=140)
     for s in (-1, 1):
-        px, py, pz = s * 375, y, zf
-        box(f'pod{s}', (px, py, pz + 22), (86, 86, 48), BLACK, root, bevel=4)
-        box(f'podRim{s}', (px, py, pz + 48), (80, 80, 6), TEXBLACK, root, bevel=2)
+        box(f'cap{s}', (s * 708, y, zt - 62), (6, 60, 60), TEXBLACK, root, bevel=2)
+        box(f'leg{s}', (s * 330, y - 60, zt - 130), (60, 150, 160), TEXBLACK, root, bevel=3)
+        box(f'hook{s}', (s * 300, y - 140, zt - 60), (60, 22, 90), RED, root, bevel=4)
+    # plate panel: trapezoid hanging under the tube, raked back at the bottom
+    panel = prism('panel', [(y - 20, zt - 40), (y - 250, zt - 95), (y - 250, zt - 101), (y - 20, zt - 46)], -380, 380, TEXBLACK, root)
+    for s in (-1, 1):
+        prism(f'panelWing{s}', [(y - 20, zt - 40), (y - 170, zt - 78), (y - 170, zt - 84), (y - 20, zt - 46)], s * 380, s * 440, TEXBLACK, root)
+    text('heritage', 'Heritage', (0, y - 185, zt - 86), 70, 3, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
+         font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
+    for s in (-1, 1):
+        px, py, pz = s * 330, y - 95, zt - 46
+        box(f'pod{s}', (px, py, pz + 24), (86, 86, 48), BLACK, root, bevel=4)
+        box(f'podRim{s}', (px, py, pz + 50), (80, 80, 6), TEXBLACK, root, bevel=2)
         for (dx, dy) in ((-18, -18), (18, -18), (-18, 18), (18, 18)):
-            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 52), (0, 0, 1), 28, 4, CHROME, root, n=20)
-            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 55), (0, 0, 1), 26, 2, LENS, root, n=20)
-        box(f'podFoot{s}', (px, py - 55, pz + 6), (30, 26, 20), TEXBLACK, root, bevel=2)
-        box(f'leg{s}', (s * 330, y - 40, zf - D - 60), (60, 110, 140), TEXBLACK, root, bevel=3)
-        box(f'hook{s}', (s * 300, y - H / 2 - 22, zf - 30), (60, 20, 80), RED, root, bevel=4)
-    box('plateFrame', (0, y, zf + 4), (346, 181, 4), BLACK, root, bevel=1)
-    box('plate', (0, y, zf + 8), (330, 165, 3), PLATE, root, bevel=1)
+            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 54), (0, 0, 1), 28, 4, CHROME, root, n=20)
+            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 57), (0, 0, 1), 26, 2, LENS, root, n=20)
+    box('plateBracket', (0, y - 40, zt + 10), (300, 80, 6), BLACK, root, bevel=1)
+    box('plate', (0, y - 40, zt + 34), (330, 165, 3), PLATE, root, bevel=1)
     tube('crossmember', [(-540, 470, 1480), (540, 470, 1480)], 55, TEXBLACK, root)
-    box('bay', (0, 520, 1380), (1050, 300, 20), RUBBER, root, bevel=4)
+    box('bay', (0, 540, 1380), (1050, 320, 20), RUBBER, root, bevel=4)
     return root
 
 
@@ -913,6 +917,153 @@ def flares():
     return root
 
 
+# ============================================================ SNORKEL VARIANTS
+# All on the vehicle's RIGHT (the 1.5L airbox side). The "no-drill" kits
+# (Bravo, Urnieta, Supa-Sleek) replace the black fender-corner garnish at the
+# A-pillar base instead of cutting the wing, so their bodies start there.
+PILLAR = [(660 + 40, 1160, 630), (640 + 40, 1400, 500), (612 + 40, 1580, 410)]   # x, y, z along the pillar (right side = -x)
+
+
+def _pillar_path(side, off, top_y=1600):
+    return [(side * 700, 990, 640), (side * (700 + off - 40), 1080, 640),
+            (side * (660 + off), 1160, 630), (side * (640 + off), 1400, 500), (side * (612 + off), top_y, 405)]
+
+
+def snorkel_bravo(side=RIGHT):
+    """Bravo Snorkel SSJN: squared textured body hugging the pillar from a base
+    plate on the fender corner; 3.5in elbow head turned outward with a mesh
+    intake on its side face."""
+    root = group('snorkel_bravo')
+    off = 44
+    pts = fillet(_pillar_path(side, off, 1590), 90, steps=8)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(96, 80, 18, 4), TEXBLACK, root)
+    box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
+    hx, hz = side * (612 + off), 405
+    tube('neck', [(hx, 1585, hz), (hx, 1640, hz)], 89, TEXBLACK, root)
+    # elbow head: turns outward, flat cap, grille on the outer face
+    head = tube('elbow', [(hx, 1630, hz), (hx, 1690, hz), (hx + side * 60, 1700, hz)], 89, TEXBLACK, root, bend=45)
+    box('cap', (hx + side * 62, 1700, hz), (30, 100, 100), TEXBLACK, root, bevel=8)
+    for k in range(5):
+        box(f'grille{k}', (hx + side * 80, 1668 + k * 16, hz), (4, 6, 76), RUBBER, root, bevel=0)
+    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+        box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
+    return root
+
+
+def snorkel_urnieta(side=RIGHT):
+    """URNIETA Salado: rectangular ABS body from the fender corner, round
+    collar, then a rectangular head with forward louvres and slotted sides."""
+    root = group('snorkel_urnieta')
+    off = 42
+    pts = fillet(_pillar_path(side, off, 1570), 80, steps=8)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(90, 70, 10, 3), TEXBLACK, root)
+    box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
+    hx, hz = side * (612 + off), 405
+    lib.cylinder('collar', (hx, 1590, hz), (0, 1, 0), 96, 40, TEXBLACK, root)
+    box('head', (hx, 1670, hz), (140, 110, 120), TEXBLACK, root, bevel=10)
+    for k in range(5):
+        box(f'louvre{k}', (hx, 1632 + k * 19, hz + 62), (118, 6, 6), RUBBER, root, bevel=0)
+    for k in range(6):
+        box(f'slot{k}', (hx + side * 72, 1670, hz - 45 + k * 18), (4, 80, 6), RUBBER, root, bevel=0)
+    box('lid', (hx, 1728, hz), (146, 8, 126), TEXBLACK, root, bevel=3)
+    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+        box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
+    return root
+
+
+def snorkel_precleaner(side=RIGHT):
+    """Safari-type body with a cyclonic pre-cleaner bowl instead of the ram."""
+    root = group('snorkel_precleaner')
+    off = 40
+    wing_y = top_y(side * 700, 660)
+    path = [(side * 705, wing_y - 60, 660), (side * 705, wing_y + 80, 660), (side * (660 + off), 1160, 630),
+            (side * (640 + off), 1400, 500), (side * (612 + off), 1560, 410), (side * (612 + off), 1600, 405)]
+    pts = fillet(path, 110, steps=10)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(95, 75, 30, 5), TEXBLACK, root)
+    box('wingSeal', (side * 705, wing_y + 6, 660), (140, 10, 140), RUBBER, root, bevel=4)
+    hx, hz = side * (612 + off), 405
+    lib.cylinder('stem', (hx, 1625, hz), (0, 1, 0), 89, 50, TEXBLACK, root)
+    lib.cylinder('bowl', (hx, 1690, hz), (0, 1, 0), 180, 80, material('ClearBowl', 0xd9dde2, rough=0.1, metal=0.0), root, n=32)
+    lib.cylinder('bowlBase', (hx, 1652, hz), (0, 1, 0), 150, 12, TEXBLACK, root, n=32)
+    lib.cylinder('bowlTop', (hx, 1734, hz), (0, 1, 0), 184, 10, TEXBLACK, root, n=32)
+    lib.cylinder('lid', (hx, 1760, hz), (0, 1, 0), 150, 42, TEXBLACK, root, n=32)
+    sphere('knob', (hx, 1786, hz), 40, TEXBLACK, root)
+    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+        box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
+    return root
+
+
+def snorkel_sleek(side=RIGHT):
+    """Mega Jimny Supa-Sleek: 2in tube tight to the pillar from a flat
+    fender-corner cover, small rear-facing scoop at the top."""
+    root = group('snorkel_sleek')
+    off = 30
+    pts = fillet(_pillar_path(side, off, 1585), 70, steps=8)
+    tube('body', [tuple(p) for p in pts], 51, TEXBLACK, root, bend=70)
+    box('cover', (side * 712, 1000, 620), (50, 34, 180), TEXBLACK, root, bevel=8)
+    hx, hz = side * (612 + off), 405
+    box('scoop', (hx, 1605, hz - 30), (70, 60, 110), TEXBLACK, root, bevel=8,
+        rot=Matrix.Rotation(math.radians(-35 * side), 3, 'X'))
+    box('scoopMouth', (hx, 1620, hz - 85), (54, 40, 4), RUBBER, root, bevel=2)
+    for (y, z, x) in ((1300, 555, 650),):
+        box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 16, 30), STEEL, root, bevel=2)
+    return root
+
+
+# ==================================================================== MIRRORS
+# Both replace the stock door mirrors (hidden by the page). Mounted on the
+# door's mirror triangle like the stock unit (front top corner of the door).
+MIR_X, MIR_Y, MIR_Z = 705, 1165, 445        # door skin at the mirror triangle
+
+
+def mirrors_urnieta():
+    """URNIETA Salado: squarish 200 x 150 head inside a round-tube loop arm
+    (~411 tall x 237 out) fixed top and bottom to the door."""
+    root = group('mirrors_urnieta')
+    for s in (-1, 1):
+        x0 = s * MIR_X
+        loop = [(x0, 1330, 480), (s * (MIR_X + 170), 1330, 445), (s * (MIR_X + 170), 1000, 445), (x0, 1000, 480)]
+        tube(f'arm{s}', loop, 20, BLACK, root, bend=60)
+        for y in (1330, 1000):
+            box(f'base{s}{y}', (s * (MIR_X + 4), y, 482), (10, 50, 70), BLACK, root, bevel=3)
+        head = box(f'head{s}', (s * (MIR_X + 120), MIR_Y, 440), (34, 150, 200), BLACK, root, bevel=16)
+        head.modifiers['bevel'].segments = 4
+        box(f'glass{s}', (s * (MIR_X + 120), MIR_Y, 421), (2, 136, 186), CHROME, root, bevel=0)
+        box(f'stem{s}', (s * (MIR_X + 145), MIR_Y, 440), (30, 24, 24), BLACK, root, bevel=3)
+    return root
+
+
+def mirrors_damd():
+    """DAMD Truck Mirror: tall 150 x 250 head on a U-shaped round-pipe arm."""
+    root = group('mirrors_damd')
+    for s in (-1, 1):
+        x0 = s * MIR_X
+        loop = [(x0, 1320, 480), (s * (MIR_X + 185), 1320, 440), (s * (MIR_X + 185), 990, 440), (x0, 990, 480)]
+        tube(f'arm{s}', loop, 19, BLACK, root, bend=50)
+        for y in (1320, 990):
+            box(f'base{s}{y}', (s * (MIR_X + 4), y, 482), (10, 44, 60), BLACK, root, bevel=3)
+        head = box(f'head{s}', (s * (MIR_X + 130), MIR_Y - 10, 438), (30, 250, 150), BLACK, root, bevel=14)
+        head.modifiers['bevel'].segments = 4
+        box(f'glass{s}', (s * (MIR_X + 130), MIR_Y - 10, 421), (2, 234, 136), CHROME, root, bevel=0)
+        box(f'stem{s}', (s * (MIR_X + 160), MIR_Y - 10, 438), (40, 20, 20), BLACK, root, bevel=3)
+    return root
+
+
+def pillar_pods():
+    """3in round amber pod lights on L-brackets at the A-pillar base."""
+    root = group('pillarPods')
+    amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
+    for s in (-1, 1):
+        x, y, z = s * 690, 1185, 580
+        box(f'bracket{s}', (s * 672, y - 60, z - 40), (6, 120, 70), BLACK, root, bevel=1)
+        box(f'foot{s}', (s * 690, y - 118, z - 40), (40, 6, 70), BLACK, root, bevel=1)
+        lib.cylinder(f'hsg{s}', (x, y, z - 30), (0, 0, 1), 76, 60, BLACK, root, n=28)
+        annulus(f'bezel{s}', (x, y, z + 2), 30, 38, 8, BLACK, root, n=28)
+        lib.cylinder(f'lens{s}', (x, y, z + 1), (0, 0, 1), 60, 3, amber, root, n=28)
+        box(f'ear{s}', (x, y - 45, z - 30), (26, 20, 30), BLACK, root, bevel=2)
+    return root
+
+
 def build():
     for v in ('platform', 'basket'):
         roof_rack(v)
@@ -936,12 +1087,19 @@ def build():
         rim(st)
     roof_rack_arb()
     roof_lights()
-    bumper_stubby_led()
+    bumper_tube_heritage()
     rear_bumper_tube()
     ladder_tube()
     guard_can()
     flares()
     decals()
+    snorkel_bravo()
+    snorkel_urnieta()
+    snorkel_precleaner()
+    snorkel_sleek()
+    mirrors_urnieta()
+    mirrors_damd()
+    pillar_pods()
     lib.export(os.path.abspath(OUT))
 
 

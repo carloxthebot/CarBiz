@@ -130,7 +130,6 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
       <span class="tt"><b>懸吊與舉升</b><i id="sumL">原廠</i></span><span class="ar">▾</span></button>
       <div class="sec-b">
         <label class="lbl">懸吊舉升</label><select id="selLift"></select><p class="hint" id="hLift"></p>
-        <label class="lbl">車身舉升</label><select id="selBody"></select><p class="hint" id="hBody"></p>
       </div></section>
     <section><button class="sec-h" aria-expanded="false"><span class="ix">W</span>
       <span class="tt"><b>輪框與輪胎</b><i id="sumW">原廠</i></span><span class="ar">▾</span></button>
@@ -152,6 +151,8 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
         <label class="lbl">前保桿</label><select id="selBumper"></select><p class="hint" id="hBumper"></p>
         <label class="lbl">水箱護罩</label><select id="selGrille"></select><p class="hint" id="hGrille"></p>
         <label class="lbl">後保桿</label><select id="selRear"></select><p class="hint" id="hRear"></p>
+        <label class="lbl">呼吸管</label><select id="selSnorkel"></select><p class="hint" id="hSnorkel"></p>
+        <label class="lbl">後照鏡</label><select id="selMirror"></select><p class="hint" id="hMirror"></p>
         <label class="lbl">加裝配件</label><div class="toggles" id="toggles"></div>
       </div></section>
     <div class="flags" id="flags"></div>
@@ -178,13 +179,13 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609152254';
-import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SIMPLE, validate } from './parts.js?v=202609152254';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609152254';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609152254';
+import { rigJimny, applyConfig } from './rig.js?v=202609152320';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, SIMPLE, validate } from './parts.js?v=202609152320';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609152320';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609152320';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609152254';
+const BUILD = '202609152320';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -276,7 +277,7 @@ const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後�
 const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', wheel: 'oem', tyre: 't195',
   tread: 'toyo_at3', owl: false, rimColor: 0xc8ccd0,
   frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
-  snorkel: false, roofRack: 'none', awning: 'none', windowGuards: false, ladder: 'none',
+  snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', windowGuards: false, ladder: 'none',
   rockSliders: false, lightBar: false, spareBag: false, spareCover: false,
   roofLights: false, guardCan: false, flares: false, decals: false };
 let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
@@ -284,8 +285,9 @@ const RIMS = [0xc8ccd0, 0x2b2f36, 0x8a6a3c, 0xd8d9d6, 0xb8410f];
 // the owner's own car (from their photos): black JB74 on a 3" lift, 31"
 // Open Country M/T white letters on matte-black MAXX wheels
 const DEMO = { color: 'ZJ3', lift: 'sg75', wheel: 'maxx', tyre: 't31', tread: 'toyo_mt', owl: true, rimColor: 0x2b2f36,
-  grille: 'hbar_suzuki', frontBumper: 'stubby_led', rearBumper: 'tube', roofRack: 'arb', roofLights: true, awning: 'left',
-  windowGuards: true, guardCan: true, ladder: 'tube', rockSliders: true, flares: true, decals: true };
+  grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'tube', roofRack: 'arb', roofLights: true, awning: 'left',
+  windowGuards: true, guardCan: true, ladder: 'tube', rockSliders: true, flares: true, decals: true,
+  mirrors: 'urnieta', pillarPods: true, snorkel: 'none' };
 // toggle buttons read their state from S, so presets and cycling share one path
 function syncToggles() {
   const t = document.getElementById('toggles'); if (!t) return;
@@ -319,7 +321,7 @@ loader.load('model/jimny-hq.glb', async (g) => {
 (e) => { document.getElementById('boot').textContent = '模型載入失敗：' + (e?.message || e); });
 
 function update() {
-  const lift = find(LIFTS, S.lift), bl = find(BODY_LIFTS, S.bodyLift);
+  const lift = find(LIFTS, S.lift), bl = { body: lift.body ?? 0, label: '' };
   const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
   const col = COLORS.find(c => c.code === S.color) || COLORS[3];
   const total = lift.lift + bl.body;
@@ -329,6 +331,7 @@ function update() {
     tread: { ...find(TYRE_MODELS, S.tread), owl: S.owl }, rimColor: S.rimColor,
     spacer: Math.max(0, -wh.offset) * 0.7,
     hideBumper: S.frontBumper !== 'stock', hideGrille: S.grille !== 'stock', hideRear: S.rearBumper !== 'stock',
+    hideMirrors: S.mirrors !== 'stock',
     buildWheel: (o) => buildWheel(THREE, { ...o, rimNode: getPart('rim_' + o.style) }),
   });
 
@@ -337,11 +340,13 @@ function update() {
   accGroup.clear();
   const paint = rig.userData.paintMat;
   const add = (n) => n && accGroup.add(n);
-  for (const k of ['snorkel', 'rockSliders', 'windowGuards', 'lightBar', 'spareBag', 'spareCover', 'roofLights', 'flares', 'decals'])
+  for (const k of ['rockSliders', 'windowGuards', 'lightBar', 'spareBag', 'spareCover', 'roofLights', 'flares', 'decals', 'pillarPods'])
     if (S[k]) add(buildAccessory(k, undefined, paint));
   if (S.guardCan && S.windowGuards) add(buildAccessory('guardCan', undefined, paint));
   if (S.ladder !== 'none') add(buildAccessory('ladder', S.ladder, paint));
   if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint));
+  if (S.snorkel !== 'none') add(buildAccessory('snorkel', S.snorkel, paint));
+  if (S.mirrors !== 'stock') add(buildAccessory('mirrors', S.mirrors, paint));
   if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint));
   if (S.awning !== 'none') add(buildAccessory('awning', S.awning, paint));
   if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint));
@@ -351,10 +356,11 @@ function update() {
   set('rLift', total + '<small> mm</small>');
   set('rTyre', ty.dia + '<small> mm</small>');
   set('rClear', (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>');
-  document.getElementById('sumL').textContent = total ? lift.label + (bl.body ? ' + ' + bl.label : '') : '原廠';
+  document.getElementById('sumL').textContent = total ? lift.label : '原廠';
   document.getElementById('sumW').textContent = wh.label.replace('原廠 ', '') + ' · ' + ty.label.replace('（原廠）', '');
-  const n = ['snorkel','windowGuards','rockSliders','lightBar','spareBag','spareCover','roofLights','guardCan','flares','decals'].filter(k => S[k]).length
-    + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock');
+  const n = ['windowGuards','rockSliders','lightBar','spareBag','spareCover','roofLights','guardCan','flares','decals','pillarPods'].filter(k => S[k]).length
+    + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
+    + (S.snorkel !== 'none') + (S.mirrors !== 'stock');
   document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
   document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b><br>版本 ${BUILD}`;
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
@@ -367,18 +373,19 @@ function buildUI() {
   const opt = (l, v, f) => document.getElementById(l).innerHTML =
     v.map(o => `<option value="${o.id}"${o.id === f ? ' selected' : ''}>${o.__l(o)}</option>`).join('');
   LIFTS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  BODY_LIFTS.forEach(o => o.__l = x => x.label);
   WHEELS.forEach(o => o.__l = x => `${x.label} (${x.rim}×${x.width}J ET${x.offset > 0 ? '+' : ''}${x.offset})`);
   TYRES.forEach(o => o.__l = x => `${x.label} — Ø${x.dia}mm`);
   // lifts grouped by inch class
   document.getElementById('selLift').innerHTML = [...new Set(LIFTS.map(l => l.inch))].map(cls =>
     `<optgroup label="${cls === '原廠' ? '原廠' : cls + ' 舉升'}">` + LIFTS.filter(l => l.inch === cls).map(o =>
       `<option value="${o.id}"${o.id === S.lift ? ' selected' : ''}>${o.__l(o)}</option>`).join('') + '</optgroup>').join('');
-  opt('selBody', BODY_LIFTS, S.bodyLift);
   FRONT_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   GRILLES.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   REAR_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   opt('selBumper', FRONT_BUMPERS, S.frontBumper); opt('selGrille', GRILLES, S.grille); opt('selRear', REAR_BUMPERS, S.rearBumper);
+  SNORKELS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
+  MIRRORS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
+  opt('selSnorkel', SNORKELS, S.snorkel); opt('selMirror', MIRRORS, S.mirrors);
   opt('selWheel', WHEELS, S.wheel); opt('selTyre', TYRES, S.tyre);
   document.getElementById('selTread').innerHTML = ['at', 'rt', 'mt'].map(p =>
     `<optgroup label="${{ at: 'A/T 全地形', rt: 'R/T 混合地形', mt: 'M/T 泥地' }[p]}">` +
@@ -389,7 +396,7 @@ function buildUI() {
   document.getElementById('colSw').innerHTML = COLORS.map(c =>
     `<button class="sw" data-c="${c.code}" title="${c.name}" aria-pressed="${c.code === S.color}"
       style="background:#${c.hex.toString(16).padStart(6,'0')}"></button>`).join('');
-  const TG = [['snorkel','呼吸管'],['rockSliders','側踏'],['windowGuards','鐵窗（WLM）'],['guardCan','鐵窗掛油桶＋斧頭'],
+  const TG = [['pillarPods','A 柱琥珀圓燈'],['rockSliders','側踏'],['windowGuards','鐵窗（WLM）'],['guardCan','鐵窗掛油桶＋斧頭'],
     ['flares','鉚釘寬體輪弧'],['decals','車門貼字'],['lightBar','車頂燈條'],['roofLights','車頂圓燈'],['spareBag','備胎書包'],['spareCover','備胎硬殼蓋']];
   document.getElementById('toggles').innerHTML =
     `<button class="tg" data-rack aria-pressed="false"><span class="nm">車頂架</span><span class="st">無</span></button>
@@ -415,8 +422,9 @@ function buildUI() {
   };
 
   const on = (id, f) => document.getElementById(id).onchange = e => { f(e.target.value); hints(); update(); };
-  on('selLift', v => S.lift = v); on('selBody', v => S.bodyLift = v); on('selTyre', v => S.tyre = v);
+  on('selLift', v => S.lift = v); on('selTyre', v => S.tyre = v);
   on('selBumper', v => S.frontBumper = v); on('selGrille', v => S.grille = v); on('selRear', v => S.rearBumper = v);
+  on('selSnorkel', v => S.snorkel = v); on('selMirror', v => S.mirrors = v);
   document.getElementById('btnDemo').onclick = () => { S = { ...DEF, ...DEMO }; buildUI(); hints(); update(); };
   syncToggles();
   document.getElementById('selWheel').onchange = e => {
@@ -456,13 +464,14 @@ function buildUI() {
     const [, az, el, d] = VIEWS[+b.dataset.v]; orbit.az = az; orbit.el = el; orbit.dist = d; applyCam(); };
   document.getElementById('btnReset').onclick = () => location.reload();
   document.getElementById('btnExport').onclick = () => {
-    const lift = find(LIFTS, S.lift), bl = find(BODY_LIFTS, S.bodyLift);
+    const lift = find(LIFTS, S.lift), bl = { body: lift.body ?? 0, label: '' };
     const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
     const col = COLORS.find(c => c.code === S.color);
     const acc = [S.frontBumper !== 'stock' && '前保桿 ' + find(FRONT_BUMPERS, S.frontBumper).label,
       S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
-      S.roofRack !== 'none' && '車頂架', S.awning !== 'none' && '側邊帳', S.snorkel && '呼吸管',
-      S.rockSliders && '側踏', S.ladder !== 'none' && '後爬梯', S.windowGuards && '鐵窗', S.guardCan && '鐵窗油桶斧頭',
+      S.roofRack !== 'none' && '車頂架', S.awning !== 'none' && '側邊帳',
+      S.snorkel !== 'none' && '呼吸管 ' + find(SNORKELS, S.snorkel).label, S.mirrors !== 'stock' && '後照鏡 ' + find(MIRRORS, S.mirrors).label,
+      S.pillarPods && 'A 柱琥珀圓燈', S.rockSliders && '側踏', S.ladder !== 'none' && '後爬梯', S.windowGuards && '鐵窗', S.guardCan && '鐵窗油桶斧頭',
       S.flares && '鉚釘輪弧', S.decals && '車門貼字', S.lightBar && '車頂燈條', S.roofLights && '車頂圓燈', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
       S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label].filter(Boolean);
     const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
@@ -482,12 +491,13 @@ function buildUI() {
 function hints() {
   const n = o => [o.brand && o.brand !== '—' ? o.brand : '', o.note || '', o.uncertain ? '（未完全查證）' : ''].filter(Boolean).join(' · ');
   document.getElementById('hLift').textContent = n(find(LIFTS, S.lift));
-  document.getElementById('hBody').textContent = n(find(BODY_LIFTS, S.bodyLift));
   document.getElementById('hWheel').textContent = n(find(WHEELS, S.wheel));
   document.getElementById('hTyre').textContent = n(find(TYRES, S.tyre));
   document.getElementById('hBumper').textContent = n(find(FRONT_BUMPERS, S.frontBumper));
   document.getElementById('hGrille').textContent = n(find(GRILLES, S.grille));
   document.getElementById('hRear').textContent = n(find(REAR_BUMPERS, S.rearBumper));
+  document.getElementById('hSnorkel').textContent = n(find(SNORKELS, S.snorkel));
+  document.getElementById('hMirror').textContent = n(find(MIRRORS, S.mirrors));
   const tm = find(TYRE_MODELS, S.tread);
   document.getElementById('hTread').textContent = tm.note || '';
   document.getElementById('owlNote').textContent = tm.owl ? '此型號有白字版本' : '此型號原廠無白字版本（僅示意）';
