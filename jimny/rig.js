@@ -52,15 +52,20 @@ export function rigJimny(THREE, gltfScene) {
   const spare = [];
   raw.traverse((o) => {
     if (!o.isMesh) return;
+    // GLTFLoader sanitises node names (whitespace -> '_'), so the file's
+    // "roda_1_2 roda1" arrives as "roda_1_2_roda1". A \b after the digit never
+    // matches before '_' — that silently found zero wheels, left them inside
+    // the body, and made every lift and tyre change float the whole car.
     const n = o.name || '';
-    if (/roda_1_1/.test(n)) { spare.push(o); return; }
-    const m = n.match(/roda([1-4])\b/);
+    if (/roda_1_1(?!\d)/.test(n)) { spare.push(o); return; }
+    const m = n.match(/roda([1-4])(?!\d)/);
     if (m) corners['roda' + m[1]].push(o);
   });
 
-  // Pull each corner into its own group, pivoted on the wheel centre so that
-  // scaling changes the tyre's diameter about the hub instead of sliding it.
+  // Pull each corner into its own group, pivoted on the wheel centre, so the
+  // wheel can be placed on the ground independently of the body.
   const wheelGroups = [];
+  root.updateMatrixWorld(true);
   for (const key of Object.keys(corners)) {
     const meshes = corners[key];
     if (!meshes.length) continue;
@@ -69,14 +74,10 @@ export function rigJimny(THREE, gltfScene) {
     for (const m of meshes) box.expandByObject(m);
     const centre = box.getCenter(new THREE.Vector3());
     g.position.copy(centre);
-    for (const m of meshes) {
-      m.updateMatrixWorld(true);
-      const keep = m.matrixWorld.clone();
-      g.add(m);
-      m.matrix.copy(g.matrixWorld.clone().invert().multiply(keep));
-      m.matrix.decompose(m.position, m.quaternion, m.scale);
-    }
     WHEELS.add(g);
+    g.updateMatrixWorld(true);
+    // attach() keeps each mesh's world transform while reparenting
+    for (const m of meshes) g.attach(m);
     const sz = box.getSize(new THREE.Vector3());
     g.userData.baseDia = Math.max(sz.y, sz.z);     // metres
     g.userData.baseCentre = centre.clone();
@@ -234,6 +235,7 @@ export function applyConfig(THREE, rig, cfg) {
         tread: cfg.tread ?? 'at', rimColor: cfg.rimColor ?? 0xc8ccd0,
       });
       const side = Math.sign(g.position.x) || 1;
+      w.scale.x = side;                        // rim face points outward on both sides
       w.position.set(g.position.x + side * (cfg.spacer ?? 0) * mm, targetDia / 2, g.position.z);
       w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       U.WHEELS.add(w);

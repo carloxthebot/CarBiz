@@ -17,7 +17,7 @@
 const MM = 0.001;
 
 const mat = (THREE, color, opts = {}) => new THREE.MeshStandardMaterial({
-  color, roughness: opts.rough ?? 0.62, metalness: opts.metal ?? 0.05, ...opts,
+  color, roughness: opts.rough ?? 0.62, metalness: opts.metal ?? 0.05,
 });
 
 function box(THREE, w, h, d, material, x = 0, y = 0, z = 0) {

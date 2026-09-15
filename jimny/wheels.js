@@ -19,7 +19,8 @@
 const MM = 0.001;
 
 const mat = (THREE, color, o = {}) => new THREE.MeshStandardMaterial({
-  color, roughness: o.rough ?? 0.6, metalness: o.metal ?? 0.05, ...o,
+  color, roughness: o.rough ?? 0.6, metalness: o.metal ?? 0.05,
+  side: o.side ?? THREE.FrontSide,
 });
 
 export function buildWheel(THREE, {
@@ -34,8 +35,8 @@ export function buildWheel(THREE, {
   const sidewall = Math.max(tR - rR, 40);  // what actually changes with tyre size
   const W = width * 0.92;
 
-  const rubber = mat(THREE, 0x15171a, { rough: 0.96 });
-  const rubberLit = mat(THREE, 0x1d2024, { rough: 0.94 });
+  const rubber = mat(THREE, 0x1c1e21, { rough: 0.95 });
+  const rubberSide = mat(THREE, 0x26292d, { rough: 0.9, side: THREE.DoubleSide });
   const rim = mat(THREE, rimColor, { rough: 0.38, metal: 0.72 });
   const hubMat = mat(THREE, 0x202328, { rough: 0.7, metal: 0.3 });
 
@@ -45,13 +46,31 @@ export function buildWheel(THREE, {
     c.castShadow = c.receiveShadow = true; return c;
   };
 
-  // --- tyre: carcass, shoulders, sidewall bulge -------------------------
-  g.add(cyl(tR, tR, W, 44, rubber));
-  // shoulders taper in, which is what stops it reading as a barrel
-  g.add(cyl(tR - sidewall * 0.10, tR, W * 0.22, 44, rubber, W * 0.40));
-  g.add(cyl(tR, tR - sidewall * 0.10, W * 0.22, 44, rubber, -W * 0.40));
-  // sidewall face, slightly proud so the tyre has a lip over the rim
-  g.add(cyl(rR + sidewall * 0.62, rR + sidewall * 0.62, W * 1.01, 40, rubberLit));
+  // --- tyre: a hollow ring revolved from its cross-section ---------------
+  // It used to be a solid cylinder, which hid the rim completely and rendered
+  // every wheel as a black disc. The lathe profile runs bead -> sidewall bulge
+  // -> rounded shoulder -> tread -> back, leaving the centre open so the rim
+  // shows, and the sidewall height is exactly tyre radius minus rim radius.
+  const sh = Math.min(sidewall * 0.28, W * 0.22);       // shoulder radius
+  const bulge = W * 0.06;
+  const prof = [];
+  const half = W / 2;
+  prof.push(new THREE.Vector2(rR * MM, -half * 0.86 * MM));                       // inner bead
+  prof.push(new THREE.Vector2((rR + sidewall * 0.45) * MM, (-half - bulge) * MM)); // sidewall bulge
+  for (let i = 0; i <= 6; i++) {                                                   // shoulder
+    const a = Math.PI / 2 * (i / 6);
+    prof.push(new THREE.Vector2((tR - sh + Math.sin(a) * sh) * MM, (-half + sh - Math.cos(a) * sh) * MM));
+  }
+  for (let i = 0; i <= 6; i++) {
+    const a = Math.PI / 2 * (i / 6);
+    prof.push(new THREE.Vector2((tR - sh + Math.cos(a) * sh) * MM, (half - sh + Math.sin(a) * sh) * MM));
+  }
+  prof.push(new THREE.Vector2((rR + sidewall * 0.45) * MM, (half + bulge) * MM));
+  prof.push(new THREE.Vector2(rR * MM, half * 0.86 * MM));                         // outer bead
+  const tyre = new THREE.Mesh(new THREE.LatheGeometry(prof, 56), rubberSide);
+  tyre.rotation.z = Math.PI / 2;
+  tyre.castShadow = tyre.receiveShadow = true;
+  g.add(tyre);
 
   // --- tread ------------------------------------------------------------
   const mt = tread === 'mt';
@@ -64,8 +83,8 @@ export function buildWheel(THREE, {
     for (const s of [-1, 1]) {
       const b = new THREE.Mesh(
         new THREE.BoxGeometry(W * lugW * MM, lugH * MM, (tyreDia * (mt ? 0.075 : 0.055)) * MM), rubber);
-      b.position.set(s * W * 0.30 * MM, Math.sin(a + stagger * 0.1) * (tR - lugH * 0.4) * MM,
-        Math.cos(a + stagger * 0.1) * (tR - lugH * 0.4) * MM);
+      b.position.set(s * W * 0.30 * MM, Math.sin(a + stagger * 0.1) * (tR - lugH * 0.72) * MM,
+        Math.cos(a + stagger * 0.1) * (tR - lugH * 0.72) * MM);
       b.rotation.x = -a;
       b.castShadow = true;
       g.add(b);
@@ -73,15 +92,19 @@ export function buildWheel(THREE, {
     // centre blocks
     const c = new THREE.Mesh(
       new THREE.BoxGeometry(W * 0.26 * MM, lugH * MM, (tyreDia * 0.05) * MM), rubber);
-    c.position.set(stagger * W * 0.5 * MM, Math.sin(a) * (tR - lugH * 0.4) * MM, Math.cos(a) * (tR - lugH * 0.4) * MM);
+    c.position.set(stagger * W * 0.5 * MM, Math.sin(a) * (tR - lugH * 0.72) * MM, Math.cos(a) * (tR - lugH * 0.72) * MM);
     c.rotation.x = -a; c.castShadow = true; g.add(c);
   }
 
   // --- rim --------------------------------------------------------------
-  g.add(cyl(rR, rR, W * 0.80, 36, rim));                    // barrel
-  g.add(cyl(rR + 8, rR + 8, W * 0.07, 36, rim, W * 0.38));  // outer lip
-  const face = cyl(rR * 0.97, rR * 0.97, W * 0.10, 36, rim, W * 0.30);
-  g.add(face);
+  // open-ended barrel: a capped one sat in front of the spokes and hid them
+  const barrel = new THREE.Mesh(new THREE.CylinderGeometry(rR * MM, rR * MM, W * 0.80 * MM, 36, 1, true),
+    mat(THREE, rimColor, { rough: 0.4, metal: 0.7, side: THREE.DoubleSide }));
+  barrel.rotation.z = Math.PI / 2; g.add(barrel);
+  const lip = new THREE.Mesh(new THREE.TorusGeometry((rR + 4) * MM, 9 * MM, 8, 40), rim);
+  lip.rotation.y = Math.PI / 2; lip.position.x = W * 0.40 * MM; g.add(lip);
+  // dark backing dish, set inboard so spokes read against it
+  g.add(cyl(rR * 0.96, rR * 0.96, W * 0.04, 36, mat(THREE, 0x121417, { rough: 0.8 }), W * 0.12));
 
   const spokes = { stock: 5, spoke: 8, beadlock: 8, steel: 0 }[style] ?? 5;
   if (style === 'steel') {
