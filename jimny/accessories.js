@@ -11,25 +11,29 @@
 // To change a part: edit build_parts.py, run it with Blender, then run
 // `npx gltf-transform draco model/parts.glb model/parts.glb`.
 
-import { noiseBump } from './rig.js';
+import { loadFinishes } from './rig.js';
 
 let PARTS = null;
 
 export function loadParts(loader, url, THREE) {
   return new Promise((resolve) => loader.load(url, (g) => {
     PARTS = {};
-    // powder coat and textured plastic are not smooth; the exporter's flat
-    // colours get a tileable grain (parts carry box-projected UVs for it)
-    const grain = THREE && noiseBump(THREE, 5, 12);
+    // Real surface finishes (Poly Haven, CC0): normal + roughness maps for
+    // powder coat / textured plastic (leather grain reads right at this
+    // scale), rubber, canvas and PVC. Parts carry box-projected UVs at one
+    // repeat per 100 mm; `mm` is the texture's real size so grain stays true.
+    const finish = THREE && loadFinishes(THREE);
     const seen = new Set();
     g.scene.traverse((o) => {
       const m = o.material;
       if (!m || seen.has(m)) return;
       seen.add(m);
-      if (grain && /TextureBlack|PowderBlack|Canvas|AwningPVC|Rubber|Webbing/.test(m.name)) {
-        m.bumpMap = grain; m.bumpScale = /Canvas|Webbing/.test(m.name) ? 1.2 : 0.5; m.needsUpdate = true;
-      }
-      if (m.name === 'BodyPaint') return;                 // swapped per clone
+      if (!finish) return;
+      const f = /TextureBlack|PowderBlack|LugNut|RimBarrel/.test(m.name) ? finish.powder
+        : /Rubber/.test(m.name) ? finish.rubber
+        : /Canvas|Webbing/.test(m.name) ? finish.canvas
+        : /AwningPVC/.test(m.name) ? finish.pvc : null;
+      if (f) { m.normalMap = f.nor; m.roughnessMap = f.rough; m.normalScale.set(f.k, f.k); m.needsUpdate = true; }
     });
     for (const o of g.scene.children) PARTS[o.name] = o;
     resolve(PARTS);

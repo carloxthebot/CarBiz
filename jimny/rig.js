@@ -20,6 +20,25 @@
 
 export const MODEL_SCALE_TARGET = 3550;   // mm, JB74 overall length
 
+/** Real PBR finishes (Poly Haven, CC0) shared by the car's trim and the parts.
+ *  Box-projected part UVs repeat every 100 mm, so repeat = 100 / real size. */
+let FINISHES = null;
+export function loadFinishes(THREE, base = 'model/pbr/') {
+  if (FINISHES) return FINISHES;
+  const ld = new THREE.TextureLoader();
+  const set = (id, mm, k) => {
+    const t = (m) => { const x = ld.load(`${base}${id}_${m}.jpg`); x.wrapS = x.wrapT = THREE.RepeatWrapping; x.repeat.set(100 / mm, 100 / mm); x.anisotropy = 4; return x; };
+    return { nor: t('nor_gl'), rough: t('rough'), k };
+  };
+  FINISHES = {
+    powder: set('leather_white', 300, 0.55),      // fine grain: powder coat, textured plastic
+    rubber: set('rubber_tiles', 2000, 0.6),
+    canvas: set('rough_linen', 270, 0.8),
+    pvc: set('scuba_suede', 285, 0.5),
+  };
+  return FINISHES;
+}
+
 /** Tileable grain for textured plastic and powder coat. `size` is the feature
  *  size in texture pixels; the map repeats every ~10 cm of surface. */
 export function noiseBump(THREE, size = 6, repeat = 10) {
@@ -215,10 +234,10 @@ export function rigJimny(THREE, gltfScene) {
   // and the headlamps as empty black holes. JB74 facts: textured black bumper,
   // grille and arches; chrome badge; chrome reflector bowls behind clear lenses.
   // Runs AFTER the anchors so re-painting the roof panel cannot move the rack.
-  const grain = noiseBump(THREE, 6);
+  const fin = loadFinishes(THREE);
   const TRIM = {
     black: new THREE.MeshStandardMaterial({ name: 'TrimBlack', color: 0x1a1b1d, roughness: 0.78, metalness: 0,
-      bumpMap: grain, bumpScale: 0.6 }),
+      normalMap: fin.powder.nor, normalScale: new THREE.Vector2(0.5, 0.5) }),
     glass: new THREE.MeshPhysicalMaterial({ name: 'Glass', color: 0x0b0f12, roughness: 0.04, metalness: 0,
       transparent: true, opacity: 0.6 }),
     satin: new THREE.MeshStandardMaterial({ name: 'TrimSatin', color: 0x161719, roughness: 0.5, metalness: 0.1 }),
@@ -228,7 +247,7 @@ export function rigJimny(THREE, gltfScene) {
     lens: new THREE.MeshStandardMaterial({ name: 'LampLens', color: 0xffffff, roughness: 0.05, metalness: 0,
       transparent: true, opacity: 0.12, depthWrite: false }),
   };
-  TRIM.blackFlat = TRIM.black.clone(); TRIM.blackFlat.bumpMap = null; TRIM.blackFlat.name = 'TrimBlackFlat';
+  TRIM.blackFlat = TRIM.black.clone(); TRIM.blackFlat.normalMap = null; TRIM.blackFlat.name = 'TrimBlackFlat';
   const byName = {
     Carro_Plastico: TRIM.black,          // flares, mirrors, sills, lower grille mesh
     Carro_Interno_1: TRIM.satin,         // grille surround (+ cabin trim)
