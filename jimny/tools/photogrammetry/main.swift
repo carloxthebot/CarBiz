@@ -17,6 +17,7 @@ guard args.count >= 3 else {
 let input = URL(fileURLWithPath: args[1], isDirectory: true)
 let output = URL(fileURLWithPath: args[2])
 let detailName = args.count > 3 ? args[3] : "medium"
+let noMask = args.contains("nomask")          // whole scenes (a car in a garage) must not be masked
 let detail: PhotogrammetrySession.Request.Detail = {
     switch detailName {
     case "preview": return .preview
@@ -35,7 +36,7 @@ guard PhotogrammetrySession.isSupported else {
 var config = PhotogrammetrySession.Configuration()
 config.featureSensitivity = .high
 config.sampleOrdering = .unordered
-config.isObjectMaskingEnabled = true
+config.isObjectMaskingEnabled = !noMask
 
 let session: PhotogrammetrySession
 do {

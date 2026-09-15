@@ -1034,34 +1034,50 @@ def mirrors_urnieta():
 
 
 def mirrors_damd():
-    """DAMD Truck Mirror: tall 150 x 250 head on a U-shaped round-pipe arm."""
+    """DAMD Truck Mirror, measured off the owner's photos: tall 150 x 250 head
+    with big radii hanging inside a U of 20 mm tube; the top arm leaves a
+    flat plate bracket at the door's top front corner, the vertical run passes
+    behind the head's outer third, the bottom arm returns to a hinge block on
+    a plate at the cowl beside the door hinge."""
     root = group('mirrors_damd')
     for s in (-1, 1):
-        x0 = s * MIR_X
-        loop = [(x0, 1320, 480), (s * (MIR_X + 185), 1320, 440), (s * (MIR_X + 185), 990, 440), (x0, 990, 480)]
-        tube(f'arm{s}', loop, 19, BLACK, root, bend=50)
-        for y in (1320, 990):
-            box(f'base{s}{y}', (s * (MIR_X + 4), y, 482), (10, 44, 60), BLACK, root, bevel=3)
-        head = box(f'head{s}', (s * (MIR_X + 130), MIR_Y - 10, 438), (30, 250, 150), BLACK, root, bevel=14)
-        head.modifiers['bevel'].segments = 4
-        box(f'glass{s}', (s * (MIR_X + 130), MIR_Y - 10, 421), (2, 234, 136), CHROME, root, bevel=0)
-        box(f'stem{s}', (s * (MIR_X + 160), MIR_Y - 10, 438), (40, 20, 20), BLACK, root, bevel=3)
+        xd = s * MIR_X
+        xo = s * (MIR_X + 175)                     # vertical tube
+        loop = [(xd + s * 6, 1315, 505), (xo, 1315, 490), (xo, 1000, 490), (xd + s * 6, 1000, 505)]
+        tube(f'arm{s}', loop, 20, BLACK, root, bend=55)
+        # top bracket: plate against the pillar with a clamp on the tube
+        box(f'topPlate{s}', (s * (MIR_X - 2), 1300, 525), (6, 70, 110), BLACK, root, bevel=1)
+        box(f'topClamp{s}', (s * (MIR_X + 22), 1315, 505), (44, 30, 30), BLACK, root, bevel=4)
+        # bottom: hinge block on a plate at the cowl
+        box(f'botPlate{s}', (s * (MIR_X - 6), 985, 540), (70, 6, 110), BLACK, root, bevel=1)
+        lib.cylinder(f'hinge{s}', (s * (MIR_X + 14), 1005, 505), (0, 1, 0), 34, 60, BLACK, root, n=16)
+        box(f'botClamp{s}', (s * (MIR_X + 30), 1000, 505), (40, 26, 26), BLACK, root, bevel=3)
+        # head: 150 x 250 x 50 shell, corner radius ~30, glass in the rear face
+        head = box(f'head{s}', (s * (MIR_X + 120), 1165, 458), (50, 250, 150), BLACK, root, bevel=28)
+        head.modifiers['bevel'].segments = 6
+        box(f'glass{s}', (s * (MIR_X + 120), 1165, 432), (2, 226, 128), CHROME, root, bevel=0)
+        box(f'glassRim{s}', (s * (MIR_X + 120), 1165, 434), (2, 236, 138), RUBBER, root, bevel=0)
+        # pivot from the vertical tube to the head's back
+        box(f'pivot{s}', (s * (MIR_X + 168), 1165, 486), (22, 40, 24), BLACK, root, bevel=3)
     return root
 
 
 def pillar_pods():
-    """3in round amber pod lights on L-brackets at the A-pillar base."""
+    """Two small round pods stacked on one bracket at the cowl beside the
+    A-pillar base (owner's car): amber above, white below, facing forward."""
     root = group('pillarPods')
     amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
     for s in (-1, 1):
-        x, y, z = s * 690, 1185, 580
-        box(f'bracket{s}', (s * 672, y - 60, z - 40), (6, 120, 70), BLACK, root, bevel=1)
-        box(f'foot{s}', (s * 690, y - 118, z - 40), (40, 6, 70), BLACK, root, bevel=1)
-        lib.cylinder(f'hsg{s}', (x, y, z - 30), (0, 0, 1), 76, 60, BLACK, root, n=28)
-        annulus(f'bezel{s}', (x, y, z + 2), 30, 38, 8, BLACK, root, n=28)
-        lib.cylinder(f'lens{s}', (x, y, z + 1), (0, 0, 1), 60, 3, amber, root, n=28)
-        box(f'ear{s}', (x, y - 45, z - 30), (26, 20, 30), BLACK, root, bevel=2)
+        x, z = s * 688, 600
+        box(f'bracket{s}', (s * 674, 1150, z - 25), (8, 130, 60), BLACK, root, bevel=1)
+        box(f'foot{s}', (s * 690, 1084, z - 25), (40, 6, 60), BLACK, root, bevel=1)
+        for (y, dia, lens) in ((1205, 70, amber), (1140, 58, LENS)):
+            lib.cylinder(f'hsg{s}{y}', (x, y, z - 26), (0, 0, 1), dia, 52, BLACK, root, n=24)
+            annulus(f'bezel{s}{y}', (x, y, z + 1), dia / 2 - 8, dia / 2 + 1, 6, BLACK, root, n=24)
+            lib.cylinder(f'lens{s}{y}', (x, y, z), (0, 0, 1), dia - 16, 3, lens, root, n=24)
+            box(f'ear{s}{y}', (s * 680, y, z - 26), (14, 16, 26), BLACK, root, bevel=2)
     return root
+
 
 
 def build():
