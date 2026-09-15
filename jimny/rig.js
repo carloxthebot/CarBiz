@@ -186,6 +186,51 @@ export function rigJimny(THREE, gltfScene) {
   anchors.bumperY = anchors.sillY + (anchors.beltY - anchors.sillY) * 0.22;
   anchors.beltline = anchors.beltY;          // accessories use this name
 
+  // ---- trim: give the exported greys their real finishes ------------------
+  // The OBJ export flattened every material to a mid grey, so the bumper,
+  // grille surround and flares read as primer, the Suzuki "S" as dull plastic
+  // and the headlamps as empty black holes. JB74 facts: textured black bumper,
+  // grille and arches; chrome badge; chrome reflector bowls behind clear lenses.
+  // Runs AFTER the anchors so re-painting the roof panel cannot move the rack.
+  const TRIM = {
+    black: new THREE.MeshStandardMaterial({ name: 'TrimBlack', color: 0x1a1b1d, roughness: 0.78, metalness: 0 }),
+    satin: new THREE.MeshStandardMaterial({ name: 'TrimSatin', color: 0x161719, roughness: 0.5, metalness: 0.1 }),
+    chrome: new THREE.MeshStandardMaterial({ name: 'Chrome', color: 0xe2e5e8, roughness: 0.14, metalness: 1 }),
+    // lamp lenses were 40% black glass, which hid the chrome bowl and reflector
+    // the model already has behind them; clear glass lets those show
+    lens: new THREE.MeshStandardMaterial({ name: 'LampLens', color: 0xffffff, roughness: 0.05, metalness: 0,
+      transparent: true, opacity: 0.12, depthWrite: false }),
+  };
+  const byName = {
+    Carro_Plastico: TRIM.black,          // flares, mirrors, sills, lower grille mesh
+    Carro_Interno_1: TRIM.satin,         // grille surround (+ cabin trim)
+    Carro_Metal_Preto_1: TRIM.black,     // bumper, grille slats
+    Carro_Metal_Farol: TRIM.chrome,      // badge, lamp rings
+  };
+  const lampZ = frontAxleZ + 0.3;         // lenses ahead of this are head/fog lamps
+  raw.traverse((o) => {
+    if (!o.isMesh || Array.isArray(o.material)) return;
+    const name = o.material.name || '';
+    if (name === 'Carro_Metal_Preto_1') {
+      // the roof skin shares the bumper's material but is body-coloured on a JB74
+      const b = new THREE.Box3().setFromObject(o);
+      if (b.min.y > roofLine && b.max.x - b.min.x > 0.4 && paintMat) {
+        o.material = paintMat; painted.push(o); roofMeshes.push(o); return;
+      }
+    }
+    if (name === 'Carro_Vidros') {
+      const b = new THREE.Box3().setFromObject(o);
+      if (b.min.z > lampZ && b.max.y < roofLine * 0.75) o.material = TRIM.lens;
+      return;
+    }
+    if (byName[name]) o.material = byName[name];
+  });
+  // the roof skin only joins roofMeshes here, so two-tone had no roof to paint
+  if (!roofMat && roofMeshes.length && paintMat) {
+    roofMat = paintMat.clone();
+    roofMat.name = 'RoofPaint';
+  }
+
   const dims = {
     mmPerUnit,
     lengthMM: (full.max.z - full.min.z) * M,

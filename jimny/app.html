@@ -167,13 +167,14 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609150411';
-import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js?v=202609150411';
-import { buildAccessory } from './accessories.js?v=202609150411';
-import { buildWheel } from './wheels.js?v=202609150411';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { rigJimny, applyConfig } from './rig.js?v=202609150428';
+import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js?v=202609150428';
+import { buildAccessory } from './accessories.js?v=202609150428';
+import { buildWheel } from './wheels.js?v=202609150428';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609150411';
+const BUILD = '202609150428';
 
 const cv = document.getElementById('cv');
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe8eae7);
@@ -183,7 +184,10 @@ renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0xc4c8bf, 2.0));
+// Image-based light so chrome and paint have something to reflect; without it
+// metallic surfaces render as flat dark grey.
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.add(new THREE.HemisphereLight(0xffffff, 0xc4c8bf, 1.2));
 const kl = new THREE.DirectionalLight(0xffffff, 2.2); kl.position.set(4, 6.5, 4.5);
 kl.castShadow = true; kl.shadow.mapSize.set(2048, 2048);
 Object.assign(kl.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .1, far: 26 });
@@ -233,6 +237,8 @@ loader.load('model/jimny-hq.glb', (g) => {
   rig = rigJimny(THREE, g.scene);
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   scene.add(rig); rig.userData.BODY.add(accGroup);
+  // inspection hook for headless verification scripts; harmless in the page
+  window.__jimny = { THREE, rig, scene, update: () => update() };
   document.getElementById('boot').style.display = 'none';
   buildUI(); update();
 }, (p) => { if (p.total) document.getElementById('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
