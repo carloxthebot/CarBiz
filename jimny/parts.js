@@ -128,11 +128,14 @@ export const TYRES = [
     note: '+21%，需 4 吋舉升、−30 offset、大幅切割輪拱與保桿、17/87 減速齒輪' },
 ];
 
-// Tread patterns drawn by wheels.js. `pattern` picks the geometry (at / rt /
-// mt); `owl` says whether the maker sells a white-letter sidewall in JB74
+// Tread patterns drawn by wheels.js. `pattern` picks the procedural geometry
+// (at / rt / mt); `mask` names a strip traced from the maker's tread photo
+// (blender/trace_tread.py) that replaces it, `repeatMM` being the strip's
+// length along the circumference; `owl` says whether the maker sells a white-letter sidewall in JB74
 // sizes, so the toggle can be offered honestly.
 export const TYRE_MODELS = [
   { id: 'toyo_at3', pattern: 'at', brand: 'TOYO TIRES', model: 'OPEN COUNTRY A/T III', owl: true,
+    mask: { file: 'toyo_at3.png', repeatMM: 184 },
     label: 'TOYO Open Country A/T III', note: '白字：日規 215/70R16、美規 235/75R15、30×9.5、31×10.5' },
   { id: 'bfg_ko2', pattern: 'at', brand: 'BFGoodrich', model: 'ALL-TERRAIN T/A KO2', owl: true,
     label: 'BFGoodrich All-Terrain T/A KO2', note: '多數尺寸有白字（RWL）' },
@@ -141,6 +144,7 @@ export const TYRE_MODELS = [
   { id: 'fk_at3w', pattern: 'at', brand: 'FALKEN', model: 'WILDPEAK A/T3W', owl: false,
     label: 'Falken WILDPEAK A/T3W', note: '僅黑字' },
   { id: 'toyo_rt', pattern: 'rt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY R/T', owl: true,
+    mask: { file: 'toyo_rt.png', repeatMM: 156 },
     label: 'TOYO Open Country R/T', note: '日規單面白字' },
   { id: 'yk_xat', pattern: 'rt', brand: 'YOKOHAMA', model: 'GEOLANDAR X-AT G016', owl: true,
     label: 'Yokohama GEOLANDAR X-AT', note: '白字：195R16C、215/70R16' },
@@ -149,6 +153,7 @@ export const TYRE_MODELS = [
   { id: 'kd_rt', pattern: 'rt', brand: 'KENDA', model: 'KLEVER R/T', owl: true,
     label: 'Kenda Klever R/T KR601', note: '部分尺寸白字' },
   { id: 'toyo_mt', pattern: 'mt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY M/T', owl: true,
+    mask: { file: 'toyo_mt.png', repeatMM: 246 },
     label: 'TOYO Open Country M/T', note: '日規單面白字；LT 規格' },
   { id: 'bfg_km3', pattern: 'mt', brand: 'BFGoodrich', model: 'MUD-TERRAIN T/A KM3', owl: false,
     label: 'BFGoodrich Mud-Terrain T/A KM3', note: '僅黑字' },

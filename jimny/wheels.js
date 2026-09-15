@@ -233,6 +233,48 @@ const PATTERNS = {
 
 const TEX_CACHE = new Map();
 
+// Traced tread masks: a grayscale strip per tyre model (white = block top,
+// black = groove floor) covering `widthMM` across and `repeatMM` along the
+// circumference, traced from the maker's flat tread drawing. When a model has
+// one, it replaces the hand-written pattern function; the parametric patterns
+// above remain the fallback.
+const MASKS = new Map();
+if (typeof window !== "undefined") window.__treadMasks = MASKS;   // inspection hook
+export function loadTreadMasks(models, base = 'model/tread/') {
+  return Promise.all(models.filter((m) => m.mask).map((m) => new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
+      const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+      const d = ctx.getImageData(0, 0, c.width, c.height).data;
+      const a = new Float32Array(c.width * c.height);
+      for (let i = 0; i < a.length; i++) a[i] = 1 - d[i * 4] / 255;      // 1 = full groove depth
+      MASKS.set(m.id, { a, w: c.width, h: c.height, ...m.mask });
+      resolve();
+    };
+    img.onerror = () => resolve();
+    img.src = base + m.mask.file;
+  })));
+}
+
+function maskPattern(mk, tw, circ, shArc, depth, sideScale) {
+  const n = Math.max(1, Math.round(circ / mk.repeatMM)), P = circ / n;
+  // the traced strip spans the tread plus most of the shoulder, whatever the size
+  const widthMM = mk.widthMM ?? tw + 1.8 * shArc;
+  const sx = mk.w / P, sy = mk.h / widthMM;
+  const at = (x, y) => mk.a[((y % mk.h) + mk.h) % mk.h * mk.w + ((x % mk.w) + mk.w) % mk.w];
+  return {
+    P, depth, sideScale,
+    g(u, v) {
+      const fx = wrap(u, P) * sx, fy = (v + widthMM / 2) * sy;
+      if (fy < 0 || fy >= mk.h - 1) return 0;                 // beyond the traced strip: plain sidewall
+      const x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0;
+      return (at(x0, y0) * (1 - tx) + at(x0 + 1, y0) * tx) * (1 - ty) + (at(x0, y0 + 1) * (1 - tx) + at(x0 + 1, y0 + 1) * tx) * ty;
+    },
+    sipe() { return 0; },
+  };
+}
+
 function tyreProfile(tR, rR, half, sidewall) {
   const sh = Math.min(sidewall * 0.12, 24);              // shoulder radius: LT tyres have a wide, flat crown
   const bulge = half * 0.12;
@@ -244,8 +286,11 @@ function tyreProfile(tR, rR, half, sidewall) {
   for (let i = 1; i <= 4; i++) push(rR + (br - rR) * i / 4, -half * 0.86 - (bx - half * 0.86) * i / 4);
   for (let i = 1; i <= 5; i++) push(br + (tR - sh - br) * i / 5, -bx + (bx - half) * i / 5);
   for (let i = 1; i <= 8; i++) { const a = Math.PI / 2 * i / 8; push(tR - sh + Math.sin(a) * sh, -half + sh - Math.cos(a) * sh); }
-  const tw = 2 * (half - sh), N = Math.max(30, Math.round(tw / 3.5));   // ~3.5 mm across, so 10 mm grooves survive
-  for (let i = 1; i <= N; i++) push(tR, -half + sh + tw * i / N);
+  // tread, shoulder to CENTRE only; the mirror below supplies the other half.
+  // (It used to run the full width and then get mirrored, so the profile
+  // doubled back across the tread and the pattern landed on the shoulders.)
+  const tw = 2 * (half - sh), N = Math.max(15, Math.round(tw / 7));      // ~3.5 mm across, so 10 mm grooves survive
+  for (let i = 1; i <= N; i++) push(tR, -half + sh + (tw / 2) * i / N);
   const m = pts.length;                                   // mirror, skipping the last (centre-symmetric) point
   for (let i = m - 2; i >= 0; i--) push(pts[i].r, -pts[i].x);
   let s = 0;
@@ -332,7 +377,9 @@ export function buildTyre(THREE, { tR, rR, half, sidewall, width, tread }) {
   const brand = spec.brand ?? 'TOYO TIRES', model = spec.model ?? 'OPEN COUNTRY A/T III', owl = !!spec.owl;
   const { pts, L, tw, shArc } = tyreProfile(tR, rR, half, sidewall);
   const circ = 2 * Math.PI * tR;
-  const pat = PATTERNS[pattern](tw, circ, shArc);
+  const mk = spec.id && MASKS.get(spec.id);
+  const fallback = PATTERNS[pattern](tw, circ, shArc);
+  const pat = mk ? maskPattern(mk, tw, circ, shArc, fallback.depth, fallback.sideScale) : fallback;
   const N = Math.max(360, Math.round(circ / 3.5));        // ~3.5 mm around
   const M = pts.length;
   const pos = new Float32Array((N + 1) * M * 3), uv = new Float32Array((N + 1) * M * 2);
@@ -359,7 +406,7 @@ export function buildTyre(THREE, { tR, rR, half, sidewall, width, tread }) {
   geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
   geo.setIndex(idx);
   geo.computeVertexNormals();
-  const key = [pattern, brand, model, owl, Math.round(tR), Math.round(rR), Math.round(width)].join('|');
+  const key = [mk ? spec.id : pattern, brand, model, owl, Math.round(tR), Math.round(rR), Math.round(width)].join('|');
   const { map, nmap, bmap } = tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl });
   const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({
     map, normalMap: nmap, normalScale: new THREE.Vector2(1, 1), bumpMap: bmap, bumpScale: 0.0025, roughness: 0.82, metalness: 0 }));
