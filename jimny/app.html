@@ -167,10 +167,13 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { rigJimny, applyConfig } from './rig.js';
-import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js';
-import { buildAccessory } from './accessories.js';
-import { buildWheel } from './wheels.js';
+import { rigJimny, applyConfig } from './rig.js?v=202609150411';
+import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js?v=202609150411';
+import { buildAccessory } from './accessories.js?v=202609150411';
+import { buildWheel } from './wheels.js?v=202609150411';
+// Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
+// is obvious at a glance.
+const BUILD = '202609150411';
 
 const cv = document.getElementById('cv');
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe8eae7);
@@ -268,7 +271,7 @@ function update() {
   const n = ['snorkel','windowGuards','ladder','rockSliders','lightBar','spareBag'].filter(k => S[k]).length
     + (S.roofRack !== 'none') + (S.awning !== 'none');
   document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
-  document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b>`;
+  document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b><br>版本 ${BUILD}`;
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   document.getElementById('flags').innerHTML = fl.map(f =>
     `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${f.msg}</div>`).join('');
