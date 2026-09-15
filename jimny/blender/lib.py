@@ -53,7 +53,21 @@ def srgb(hexcol):
 
 
 # ------------------------------------------------------------------ objects
+def box_uv(bm, scale=0.1):
+    """Box-projected UVs (one repeat per `scale` metres) so tiling grain maps work."""
+    bm.normal_update()
+    uv = bm.loops.layers.uv.verify()
+    for f in bm.faces:
+        n = f.normal
+        ax = max(range(3), key=lambda i: abs(n[i]))
+        a, b = [i for i in range(3) if i != ax]
+        for l in f.loops:
+            co = l.vert.co
+            l[uv].uv = (co[a] / scale, co[b] / scale)
+
+
 def new_object(name, bm, mat, parent=None, smooth=True, bevel=0.0, segments=2):
+    box_uv(bm)
     me = bpy.data.meshes.new(name)
     bm.to_mesh(me)
     bm.free()
@@ -252,6 +266,36 @@ def cut(ob, cutters):
         me = c.data
         bpy.data.objects.remove(c)
         bpy.data.meshes.remove(me)
+
+
+def lathe(name, profile, mat, parent=None, n=64, smooth=True):
+    """Revolve a closed (r, x) polyline around the car X axis at the origin."""
+    bm = bmesh.new()
+    rings = []
+    for r, x in profile:
+        rings.append([bm.verts.new(P(x, r * math.sin(2 * math.pi * i / n), r * math.cos(2 * math.pi * i / n)))
+                      for i in range(n)])
+    loops = rings + [rings[0]]
+    for a, b in zip(loops, loops[1:]):
+        for i in range(n):
+            bm.faces.new((a[i], a[(i + 1) % n], b[(i + 1) % n], b[i]))
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return new_object(name, bm, mat, parent, smooth=smooth)
+
+
+def prism(name, poly, x0, x1, mat, parent=None, smooth=False):
+    """Polygon given as (y, z) car-frame points, extruded from x0 to x1."""
+    bm = bmesh.new()
+    a = [bm.verts.new(P(x0, y, z)) for (y, z) in poly]
+    b = [bm.verts.new(P(x1, y, z)) for (y, z) in poly]
+    bm.faces.new(a)
+    bm.faces.new(list(reversed(b)))
+    k = len(poly)
+    for i in range(k):
+        bm.faces.new((a[i], b[i], b[(i + 1) % k], a[(i + 1) % k]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return new_object(name, bm, mat, parent, smooth=smooth)
 
 
 def export(path, draco=False):

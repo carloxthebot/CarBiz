@@ -90,16 +90,18 @@ export const WHEELS = [
     price: 0, brand: 'SUZUKI', note: 'ET+5／5×139.7／中心孔 108mm' },
   { id: 'oemsteel', label: '原廠鐵圈（JL）', rim: 15, width: 5.5, offset: 5, style: 'steel',
     price: 0, brand: 'SUZUKI' },
-  { id: 'wildboar', label: 'APIO WILDBOAR X', rim: 15, width: 6.0, offset: -5, style: 'spoke',
+  { id: 'wildboar', label: 'APIO WILDBOAR X', rim: 15, width: 6.0, offset: -5, style: 'eight',
     price: null, cur: 'JPY', brand: 'APIO', uncertain: true, note: '15×6.0J −5' },
-  { id: 'wildboar16', label: 'APIO WILDBOAR SR 16', rim: 16, width: 5.5, offset: 20, style: 'spoke',
+  { id: 'wildboar16', label: 'APIO WILDBOAR SR 16', rim: 16, width: 5.5, offset: 20, style: 'eight',
     price: null, cur: 'JPY', brand: 'APIO', uncertain: true },
-  { id: 'bradley', label: 'Bradley V', rim: 16, width: 5.5, offset: 22, style: 'spoke',
+  { id: 'bradley', label: 'Bradley V', rim: 16, width: 5.5, offset: 22, style: 'six',
     price: 37400, cur: 'JPY', brand: '4x4 Engineering', note: '每顆單價；另有 +0 Jimny spec' },
-  { id: 'xtremej', label: 'MLJ XTREME-J XJ04', rim: 16, width: 5.5, offset: 22, style: 'spoke',
+  { id: 'xtremej', label: 'MLJ XTREME-J XJ04', rim: 16, width: 5.5, offset: 22, style: 'eight',
     price: null, cur: 'JPY', brand: 'MLJ', uncertain: true },
-  { id: 'te37xt', label: 'RAYS TE37XT M-SPEC for J', rim: 16, width: 5.5, offset: 20, style: 'spoke',
+  { id: 'te37xt', label: 'RAYS TE37XT M-SPEC for J', rim: 16, width: 5.5, offset: 20, style: 'six',
     price: null, cur: 'JPY', brand: 'RAYS', note: '鍛造一件式，2025 年起；Bronze／Blast Black' },
+  { id: 'maxx', label: 'MAXX Flowforged 8 輻', rim: 16, width: 7.0, offset: -10, style: 'eight',
+    price: null, brand: 'MAXX', uncertain: true, note: '消光黑，車主實車配置' },
   { id: 'beadlock', label: 'Beadlock 造型輪圈', rim: 16, width: 7.0, offset: -20, style: 'beadlock',
     price: null, brand: '多家', uncertain: true, note: '深 offset，需搭配大幅輪拱修改' },
 ];
@@ -168,6 +170,14 @@ export const FRONT_BUMPERS = [
     note: '全不鏽鋼雙管，象牙白／黑／拋光；含霧燈架（無霧燈架 ¥93,500）。顯示為車身同色' },
   { id: 'outclass_t2', label: 'OUTCLASS TYPE2 絞盤鐵保桿', price: 140800, cur: 'JPY', brand: 'OUTCLASS',
     note: '鐵製、含絞盤床與 4 顆 LED 方燈；出廠未烤漆（可選 Raptor 塗層）' },
+  { id: 'tube_led', label: '管狀前保桿＋LED 方燈', price: null, cur: 'TWD', brand: '多家', uncertain: true,
+    note: 'Ø60 黑管、車牌下吊、兩側 4 燈 LED 方燈（車主實車配置）' },
+];
+
+export const REAR_BUMPERS = [
+  { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
+  { id: 'tube', label: '管狀後保桿（含尾燈座）', price: null, cur: 'TWD', brand: 'OUTCLASS / 多家', uncertain: true,
+    note: 'Ø60 鋼管、保留原廠尾燈、右側排氣尾管' },
 ];
 
 export const GRILLES = [

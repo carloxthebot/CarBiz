@@ -20,6 +20,29 @@
 
 export const MODEL_SCALE_TARGET = 3550;   // mm, JB74 overall length
 
+/** Tileable grain for textured plastic and powder coat. `size` is the feature
+ *  size in texture pixels; the map repeats every ~10 cm of surface. */
+export function noiseBump(THREE, size = 6, repeat = 10) {
+  const N = 256, c = document.createElement('canvas'); c.width = c.height = N;
+  const ctx = c.getContext('2d'), img = ctx.createImageData(N, N), d = img.data;
+  const cells = Math.max(2, Math.round(N / size)), grid = new Float32Array(cells * cells);
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < grid.length; i++) grid[i] = rnd();
+  const at = (x, y) => grid[((y % cells) + cells) % cells * cells + ((x % cells) + cells) % cells];
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    const gx = x / size, gy = y / size, x0 = Math.floor(gx), y0 = Math.floor(gy);
+    const tx = gx - x0, ty = gy - y0, sx = tx * tx * (3 - 2 * tx), sy = ty * ty * (3 - 2 * ty);
+    const v = (at(x0, y0) * (1 - sx) + at(x0 + 1, y0) * sx) * (1 - sy) + (at(x0, y0 + 1) * (1 - sx) + at(x0 + 1, y0 + 1) * sx) * sy;
+    const g = Math.round(90 + v * 80 + (rnd() - 0.5) * 24);
+    const i = (y * N + x) * 4; d[i] = d[i + 1] = d[i + 2] = g; d[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat, repeat);
+  return t;
+}
+
 export function rigJimny(THREE, gltfScene) {
   const root = new THREE.Group();
   root.name = 'jimny-rig';
@@ -101,10 +124,10 @@ export function rigJimny(THREE, gltfScene) {
   });
   let paintMat = null;
   if (painted.length) {
-    paintMat = painted[0].material.clone();
-    paintMat.name = 'BodyPaint';
-    paintMat.roughness = 0.45;
-    paintMat.metalness = 0.25;
+    // car paint is a colour coat under clear lacquer; the clearcoat layer is
+    // what gives the sharp reflection on top of a soft base
+    paintMat = new THREE.MeshPhysicalMaterial({ name: 'BodyPaint', color: 0x6a6866, roughness: 0.42, metalness: 0.15,
+      clearcoat: 1.0, clearcoatRoughness: 0.06 });
     for (const m of painted) m.material = paintMat;
   }
 
@@ -192,8 +215,12 @@ export function rigJimny(THREE, gltfScene) {
   // and the headlamps as empty black holes. JB74 facts: textured black bumper,
   // grille and arches; chrome badge; chrome reflector bowls behind clear lenses.
   // Runs AFTER the anchors so re-painting the roof panel cannot move the rack.
+  const grain = noiseBump(THREE, 6);
   const TRIM = {
-    black: new THREE.MeshStandardMaterial({ name: 'TrimBlack', color: 0x1a1b1d, roughness: 0.78, metalness: 0 }),
+    black: new THREE.MeshStandardMaterial({ name: 'TrimBlack', color: 0x1a1b1d, roughness: 0.78, metalness: 0,
+      bumpMap: grain, bumpScale: 0.6 }),
+    glass: new THREE.MeshPhysicalMaterial({ name: 'Glass', color: 0x0b0f12, roughness: 0.04, metalness: 0,
+      transparent: true, opacity: 0.6 }),
     satin: new THREE.MeshStandardMaterial({ name: 'TrimSatin', color: 0x161719, roughness: 0.5, metalness: 0.1 }),
     chrome: new THREE.MeshStandardMaterial({ name: 'Chrome', color: 0xe2e5e8, roughness: 0.14, metalness: 1 }),
     // lamp lenses were 40% black glass, which hid the chrome bowl and reflector
@@ -201,6 +228,7 @@ export function rigJimny(THREE, gltfScene) {
     lens: new THREE.MeshStandardMaterial({ name: 'LampLens', color: 0xffffff, roughness: 0.05, metalness: 0,
       transparent: true, opacity: 0.12, depthWrite: false }),
   };
+  TRIM.blackFlat = TRIM.black.clone(); TRIM.blackFlat.bumpMap = null; TRIM.blackFlat.name = 'TrimBlackFlat';
   const byName = {
     Carro_Plastico: TRIM.black,          // flares, mirrors, sills, lower grille mesh
     Carro_Interno_1: TRIM.satin,         // grille surround (+ cabin trim)
@@ -221,9 +249,13 @@ export function rigJimny(THREE, gltfScene) {
     if (name === 'Carro_Vidros') {
       const b = new THREE.Box3().setFromObject(o);
       if (b.min.z > lampZ && b.max.y < roofLine * 0.75) o.material = TRIM.lens;
+      else o.material = TRIM.glass;
       return;
     }
-    if (byName[name]) o.material = byName[name];
+    if (byName[name]) {
+      // bump maps need texture coordinates; the export only has them on some meshes
+      o.material = byName[name] === TRIM.black && !o.geometry.attributes.uv ? TRIM.blackFlat : byName[name];
+    }
   });
   // the roof skin only joins roofMeshes here, so two-tone had no roof to paint
   if (!roofMat && roofMeshes.length && paintMat) {
@@ -235,13 +267,15 @@ export function rigJimny(THREE, gltfScene) {
   // Bumper: everything black ahead of the axle and below the bonnet line,
   // plus the fog lamps set into it. Grille: the satin surround panel, its
   // slats and inserts, the signal bezels and the badge. Headlamp units stay.
-  const stockBumper = [], stockGrille = [];
+  const stockBumper = [], stockGrille = [], stockRear = [];
   raw.traverse((o) => {
     if (!o.isMesh || Array.isArray(o.material)) return;
     const b = new THREE.Box3().setFromObject(o);
     const c = b.getCenter(new THREE.Vector3()).multiplyScalar(1000);
-    if (c.z < 1500) return;
     const n = o.material.name;
+    // rear bumper: the one big satin shell under the tailgate; the tail lamps set into it stay
+    if (c.z < -1400 && c.y < 650 && n === 'TrimSatin' && (b.max.x - b.min.x) > 1.0) { stockRear.push(o); return; }
+    if (c.z < 1500) return;
     if (c.y < 720 && c.z > 1550 && (n === 'TrimBlack' || (c.y < 650 && /Chrome|LampLens|Carro_Ref/.test(n))))
       stockBumper.push(o);
     else if (c.y >= 740 && c.y < 1000 && (n === 'TrimSatin' || (n === 'TrimBlack' && c.z > 1560) ||
@@ -257,7 +291,7 @@ export function rigJimny(THREE, gltfScene) {
   };
 
   root.userData = {
-    BODY, WHEELS, wheelGroups, spareBox, anchors, stockBumper, stockGrille,
+    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear,
     paintMat, roofMat, roofMeshes, painted, dims,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
@@ -272,6 +306,7 @@ export function applyConfig(THREE, rig, cfg) {
   if (U.paintMat && cfg.bodyColor != null) U.paintMat.color.setHex(cfg.bodyColor);
   for (const m of U.stockBumper) m.visible = !cfg.hideBumper;
   for (const m of U.stockGrille) m.visible = !cfg.hideGrille;
+  for (const m of U.stockRear) m.visible = !cfg.hideRear;
   if (U.roofMat) {
     const twoTone = !!cfg.twoTone;
     U.roofMat.color.setHex(twoTone ? (cfg.roofColor ?? 0x1e2326) : (cfg.bodyColor ?? 0x6a6866));
@@ -305,6 +340,23 @@ export function applyConfig(THREE, rig, cfg) {
       w.position.set(g.position.x + side * (cfg.spacer ?? 0) * mm, targetDia / 2, g.position.z);
       w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       U.WHEELS.add(w);
+      U.builtWheels.push(w);
+    }
+    // the tailgate spare matches the road wheels: the model's own is hidden
+    // and a built one hung in its place, face to the rear
+    if (U.spareBox) {
+      for (const m of U.spare) m.visible = false;
+      const w = cfg.buildWheel({
+        rimDia: cfg.rimDia ?? 15, tyreDia: cfg.tyreDia ?? 693,
+        width: cfg.tyreWidth ?? 195, style: cfg.wheelStyle ?? 'stock',
+        tread: cfg.tread ?? 'at', rimColor: cfg.rimColor ?? 0xc8ccd0,
+      });
+      const c = U.spareBox.getCenter(new THREE.Vector3());
+      const spareDia = U.spareBox.max.y - U.spareBox.min.y;
+      w.rotation.y = -Math.PI / 2;               // axle along Z, face towards -Z
+      w.position.set(c.x, c.y + (targetDia - spareDia) * 0.25, c.z + (cfg.tyreWidth ?? 195) * 0.92 * mm / 2 - (U.spareBox.max.z - U.spareBox.min.z) / 2);
+      w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      U.BODY.add(w);
       U.builtWheels.push(w);
     }
   } else {

@@ -18,9 +18,10 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import lib  # noqa: E402
-from lib import P, box, tube, sweep, group, material, rounded_rect, circle, fillet, annulus, sphere, text, cut  # noqa: E402
+from lib import P, box, tube, sweep, group, material, rounded_rect, circle, fillet, annulus, sphere, text, cut, lathe, prism  # noqa: E402
 import bmesh  # noqa: E402
 import bpy  # noqa: E402
+from mathutils import Matrix  # noqa: E402
 from mathutils import Vector  # noqa: E402
 
 CAR = json.load(open(os.path.join(HERE, 'car.json')))
@@ -191,7 +192,7 @@ def rock_sliders():
 # top step, four steps (top hook step + 3 pressed channel rungs, rubber grips
 # top and bottom), about 135 mm stand-off. Width ~220 mm (estimate).
 def ladder():
-    root = group('ladder')
+    root = group('ladder_fr')
     s = RIGHT
     xin, xout = s * 395, s * 615
     zface = TAIL_Z - 110
@@ -518,7 +519,7 @@ def grille_klc():
     lamp_bezels(root, PAINT, 'round')
     wire_mesh(root, STEEL, 0, 850, face_z(0) - 18, 480, 200, pitch=8, bar=1.2)
     box('backing', (0, 850, face_z(0) - 30), (490, 210, 3), RUBBER, root, bevel=0)
-    text('suzuki', 'SUZUKI', (0, 955, face_z(0) + 9), 42, 3, BLACK, root)
+    text('suzuki', 'SUZUKI', (0, 955, face_z(0) + 9), 42, 3, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
     return root
 
 
@@ -615,6 +616,248 @@ def bumper_outclass():
     return root
 
 
+# ======================================================================== RIMS
+# Wheels are modelled once at 16 x 7J with the axle along X and the face at
+# +X; the page scales the diameter and width to the size chosen and tints the
+# face material (RimFace). Five designs: the JB74 alloy (five paired spokes),
+# a JL steel wheel with eight vents, a six-spoke forged look (TE37 XT /
+# Bradley V), an eight-spoke steel-look (WILDBOAR / XTREME-J) and a bolted
+# beadlock ring.
+RIM_R, RIM_W = 203.2, 178.0
+RIM_FACE = material('RimFace', 0xc8ccd0, rough=0.35, metal=0.8)
+RIM_DARK = material('RimBarrel', 0x2a2d31, rough=0.6, metal=0.6)
+NUT = material('LugNut', 0xd8dadd, rough=0.3, metal=1.0)
+
+
+def rim(style):
+    root = group(f'rim_{style}')
+    R, W = RIM_R, RIM_W
+    # barrel with both lips, as one revolved shell
+    prof = [(R, -W / 2), (R + 14, -W / 2), (R + 14, -W / 2 + 8), (R + 2, -W / 2 + 12), (R + 2, W / 2 - 14),
+            (R + 16, W / 2 - 8), (R + 16, W / 2), (R + 4, W / 2), (R - 4, W / 2 - 6), (R - 4, -W / 2 + 6), (R - 8, -W / 2 + 2)]
+    lathe('barrel', prof, RIM_DARK, root)
+    dish = W / 2 - (24 if style == 'steel' else 38)            # face plane, inset from the outer lip
+    face_r = R - 6
+    # the face: a disc with the windows cut out, spokes are what remains
+    face = lathe('face', [(0, dish - 6), (0, dish + 6), (face_r, dish + 10), (face_r, dish - 12)], RIM_FACE, root, n=96)
+    cutters = []
+    hub_r = 0.30 * R
+    if style == 'steel':
+        for k in range(8):
+            a = 2 * math.pi * k / 8
+            cutters.append(lib.cylinder(f'vent{k}', (dish, 0.64 * R * math.sin(a), 0.64 * R * math.cos(a)), (1, 0, 0), 46, 60, RIM_FACE, None, n=24))
+    else:
+        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'eight': (8, 0.22), 'beadlock': (8, 0.26)}[style]
+        for k in range(n):
+            a0 = 2 * math.pi * k / n
+            half = math.pi / n - spoke / 2                      # half the angular width of a window
+            r_in, r_out = hub_r + 8, face_r - 14
+            poly = []
+            for t in range(9):                                  # outer arc
+                a = a0 - half + 2 * half * t / 8
+                poly.append((r_out * math.sin(a), r_out * math.cos(a)))
+            for t in range(9):                                  # inner arc, back
+                a = a0 + half - 2 * half * t / 8
+                poly.append((r_in * math.sin(a), r_in * math.cos(a)))
+            pts = [(0, y, z) for (y, z) in poly]
+            rounded = [(p.y, p.z) for p in fillet(pts + [pts[0]], 14, steps=3)]
+            cutters.append(prism(f'win{k}', rounded, dish - 40, dish + 40, RIM_FACE, None))
+        if style == 'stock':                                     # JB74 alloy: each spoke carries a slot
+            for k in range(n):
+                a = 2 * math.pi * k / n + math.pi / n
+                cutters.append(box(f'slot{k}', (dish, 0.62 * R * math.sin(a), 0.62 * R * math.cos(a)), (60, 22, 56), RIM_FACE, None, bevel=0,
+                                   rot=Matrix.Rotation(-a, 3, 'X')))
+    cutters.append(lib.cylinder('bore', (dish, 0, 0), (1, 0, 0), 60, 60, RIM_FACE, None, n=32))
+    for k in range(5):                                           # 5 x 139.7 lug holes
+        a = 2 * math.pi * k / 5
+        cutters.append(lib.cylinder(f'lug{k}', (dish, 69.85 * math.sin(a), 69.85 * math.cos(a)), (1, 0, 0), 30, 60, RIM_FACE, None, n=16))
+    cut(face, cutters)
+    for k in range(5):
+        a = 2 * math.pi * k / 5
+        nut = lib.cylinder(f'nut{k}', (dish + 6, 69.85 * math.sin(a), 69.85 * math.cos(a)), (1, 0, 0), 21, 20, NUT, root, n=6)
+    lib.cylinder('cap', (dish + 3, 0, 0), (1, 0, 0), 58, 8, RIM_DARK, root, n=32)
+    if style == 'beadlock':
+        annulus_x = W / 2 + 4
+        ring = lathe('ring', [(R - 10, annulus_x - 4), (R + 20, annulus_x - 4), (R + 20, annulus_x + 10), (R - 10, annulus_x + 10)],
+                     material('BeadlockRing', 0xb8410f, rough=0.45, metal=0.3), root)
+        for k in range(24):
+            a = 2 * math.pi * k / 24
+            lib.cylinder(f'bolt{k}', (annulus_x + 12, (R + 5) * math.sin(a), (R + 5) * math.cos(a)), (1, 0, 0), 9, 8, NUT, root, n=6)
+    return root
+
+
+# ============================================================ OWNER'S CAR PARTS
+# Modelled from the owner's photos of their black JB74 (parking-garage set):
+# ARB BASE Rack with two round spots, tube front bumper with LED pods, tube
+# rear bumper keeping the stock tail lamps, hoop-type tube ladder with a
+# fire extinguisher, WLM guard carrying a flat fuel can and an axe, and
+# riveted pocket-style flares.
+ARB_W, ARB_L = 1285, 1545
+RACK_TOP = ROOF_Y_MID + 95
+RACK_ZC = (ROOF_Z_FRONT + ROOF_Z_REAR) / 2 - 20
+WOOD = material('AxeHandle', 0xa07a4a, rough=0.7)
+RED_LABEL = material('LabelRed', 0xb3261e, rough=0.5)
+
+
+def roof_rack_arb():
+    root = group('roofRack_arb')
+    W, L, top = ARB_W, ARB_L, RACK_TOP
+    deck = top - 45
+    z0, z1 = RACK_ZC - L / 2, RACK_ZC + L / 2
+    for s in (-1, 1):                                    # dovetail side rails
+        sweep(f'rail{s}', [(s * (W / 2 - 22), deck + 22, z0), (s * (W / 2 - 22), deck + 22, z1)], rounded_rect(44, 45, 4), BLACK, root)
+        for k in range(int((L - 60) // 38)):
+            box(f'slot{s}{k}', (s * W / 2, deck + 22, z0 + 40 + k * 38), (2, 12, 20), TEXBLACK, root, bevel=0)
+    for zz in (z0, z1):                                  # end rails
+        sweep(f'end{zz}', [(-W / 2 + 44, deck + 22, zz + (22 if zz == z0 else -22)), (W / 2 - 44, deck + 22, zz + (22 if zz == z0 else -22))],
+              rounded_rect(45, 44, 4), BLACK, root)
+    n = 15                                               # planks across the car
+    pitch = (L - 120) / (n - 1)
+    for i in range(n):
+        z = z0 + 60 + i * pitch
+        box(f'plank{i}', (0, top - 8, z), (W - 88, 14, 78), BLACK, root, bevel=2)
+        box(f'gap{i}', (0, top - 2, z + 44), (W - 88, 2, 10), TEXBLACK, root, bevel=0)
+    for s in (-1, 1):                                    # six gutter legs
+        for k in range(3):
+            z = z0 + 170 + k * (L - 340) / 2
+            yg = ROOF_Y_EDGE - 6
+            leg = [(s * (GUTTER_X + 18), yg - 25, z), (s * (GUTTER_X + 18), yg + 40, z), (s * (W / 2 - 22), deck, z)]
+            sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
+            box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
+    box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
+    text('arbLabel', 'BASE RACK', (0, deck + 22, z0 - 24), 22, 1, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
+    return root
+
+
+def roof_lights():
+    root = group('roofLights')
+    z = RACK_ZC + ARB_L / 2 + 10
+    for s in (-1, 1):
+        x, y = s * (ARB_W / 2 - 130), RACK_TOP + 105
+        lib.cylinder(f'hsg{s}', (x, y, z - 40), (0, 0, 1), 180, 90, BLACK, root, n=40)
+        annulus(f'bezel{s}', (x, y, z + 8), 78, 92, 12, BLACK, root, n=40)
+        lib.cylinder(f'bowl{s}', (x, y, z + 2), (0, 0, 1), 156, 6, CHROME, root, n=40)
+        lib.cylinder(f'lens{s}', (x, y, z + 6), (0, 0, 1), 160, 3, LENS, root, n=40)
+        box(f'stem{s}', (x, y - 100, z - 40), (30, 110, 26), BLACK, root, bevel=3)
+        box(f'foot{s}', (x, RACK_TOP - 44, z - 40), (70, 12, 70), BLACK, root, bevel=2)
+        for k in (-1, 1):
+            box(f'ear{s}{k}', (x + k * 96, y - 10, z - 40), (8, 60, 40), BLACK, root, bevel=2)
+    return root
+
+
+def bumper_tube_led():
+    root = group('frontBumper_tube_led')
+    y = 575
+    tube('bar', [(-735, y, 1580), (-620, y, 1735), (620, y, 1735), (735, y, 1580)], 60, TEXBLACK, root, bend=120)
+    for s in (-1, 1):
+        sphere(f'cap{s}', (s * 735, y, 1580), 60, TEXBLACK, root)
+        box(f'hanger{s}', (s * 120, y - 60, 1738), (14, 110, 10), TEXBLACK, root, bevel=1)
+        # 4-LED pod: square housing, four small lamps
+        px, py, pz = s * 330, 490, 1728
+        box(f'pod{s}', (px, py, pz), (92, 92, 60), BLACK, root, bevel=4)
+        box(f'podRim{s}', (px, py, pz + 32), (84, 84, 6), TEXBLACK, root, bevel=2)
+        for (dx, dy) in ((-19, -19), (19, -19), (-19, 19), (19, 19)):
+            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 36), (0, 0, 1), 30, 4, CHROME, root, n=20)
+            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 39), (0, 0, 1), 28, 2, LENS, root, n=20)
+        box(f'podArm{s}', (px, py + 60, pz - 20), (20, 50, 30), TEXBLACK, root, bevel=2)
+    number_plate(root, 500, 1745)
+    box('skid', (0, 400, 1620), (600, 4, 240), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
+    valance(root)
+    return root
+
+
+def rear_bumper_tube():
+    root = group('rearBumper_tube')
+    y = 425
+    tube('bar', [(-735, y, -1470), (-650, y, -1655), (650, y, -1655), (735, y, -1470)], 60, TEXBLACK, root, bend=120)
+    for s in (-1, 1):
+        sphere(f'cap{s}', (s * 735, y, -1470), 60, TEXBLACK, root)
+        box(f'mount{s}', (s * 330, 440, -1540), (70, 90, 200), TEXBLACK, root, bevel=4)
+        # housings behind the stock tail lamps, with a frame around the lens
+        box(f'lampBox{s}', (s * 513, 518, -1548), (370, 160, 70), TEXBLACK, root, bevel=4)
+        for (cx, cy, sx, sy) in ((0, 78, 370, 14), (0, -78, 370, 14), (-180, 0, 14, 160), (180, 0, 14, 160)):
+            box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1600), (sx, sy, 24), TEXBLACK, root, bevel=2)
+    box('valance', (0, 470, -1450), (1300, 230, 24), RUBBER, root, bevel=4)
+    number_plate(root, 560, -1612)
+    # exhaust tip on the vehicle's right, angled out
+    ex = RIGHT * 470
+    lib.cylinder('exhaust', (ex, 330, -1620), (RIGHT * 0.35, -0.08, -1), 64, 170, CHROME, root, n=24)
+    lib.cylinder('exhaustIn', (ex + RIGHT * 28, 322, -1698), (RIGHT * 0.35, -0.08, -1), 52, 8, RUBBER, root, n=24)
+    return root
+
+
+def ladder_tube():
+    root = group('ladder_tube')
+    s = RIGHT
+    zf = TAIL_Z - 95
+    xi, xo = s * 400, s * 630
+    y0, y1 = 560, 1480
+    for x in (xi, xo):
+        rail = [(x, y0, zf), (x, y1, zf), (x, 1560, TAIL_Z + 30), (x, 1575, TAIL_Z + 90)]
+        tube(f'rail{x}', rail, 25, BLACK, root, bend=70)
+    tube('top', [(xi, 1575, TAIL_Z + 90), (xo, 1575, TAIL_Z + 90)], 25, BLACK, root)
+    tube('bottom', [(xi, y0, zf), (xo, y0, zf)], 25, BLACK, root)
+    for k in range(3):
+        y = 760 + k * 240
+        tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 22, BLACK, root)
+    for y in (650, 1320):
+        for x in (xi, xo):
+            box(f'standoff{x}{y}', (x, y, (TAIL_Z + zf) / 2), (34, 34, abs(TAIL_Z - zf)), BLACK, root, bevel=3)
+    # fire extinguisher clamped to the outer rail
+    ex, ey, ez = xo + s * 62, 1010, zf
+    lib.cylinder('extBody', (ex, ey, ez), (0, 1, 0), 88, 380, RUBBER, root, n=28)
+    lib.cylinder('extBand', (ex, ey + 40, ez), (0, 1, 0), 90, 90, RED_LABEL, root, n=28)
+    lib.cylinder('extNeck', (ex, ey + 205, ez), (0, 1, 0), 40, 30, CHROME, root, n=16)
+    box('extLever', (ex, ey + 235, ez + 10), (30, 20, 90), BLACK, root, bevel=3)
+    for y in (ey - 110, ey + 110):
+        box(f'clamp{y}', ((xo + ex) / 2, y, ez), (abs(ex - xo) + 40, 24, 30), BLACK, root, bevel=3)
+    return root
+
+
+def guard_can():
+    """Flat fuel can and an axe on the LEFT window guard (owner's car)."""
+    root = group('guardCan')
+    s = -RIGHT
+    q = QUARTER
+    cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
+    face = s * 716
+    # fuel can: rounded slab with a cap and two straps
+    can = box('can', (face + s * 50, cy - 10, cz - 90), (96, 330, 440), TEXBLACK, root, bevel=28)
+    can.modifiers['bevel'].segments = 4
+    lib.cylinder('cap', (face + s * 50, cy + 120, cz - 250), (1, 0, 0), 72, 110, TEXBLACK, root, n=20)
+    box('capTop', (face + s * 106, cy + 120, cz - 250), (10, 60, 60), STEEL, root, bevel=3)
+    box('ridge', (face + s * 100, cy - 10, cz - 90), (6, 200, 300), TEXBLACK, root, bevel=3)
+    for z in (cz - 260, cz + 80):
+        box(f'strap{z}', (face + s * 55, cy - 10, z), (110, 40, 26), STEEL, root, bevel=3)
+    # axe: wooden handle, steel head, two clamps
+    ax = cz + 235
+    lib.cylinder('handle', (face + s * 34, cy - 30, ax), (0, 1, 0), 32, 620, WOOD, root, n=14)
+    box('head', (face + s * 34, cy + 280, ax - 40), (30, 90, 170), STEEL, root, bevel=4)
+    for y in (cy - 200, cy + 120):
+        box(f'axeClamp{y}', (face + s * 20, y, ax), (48, 24, 50), BLACK, root, bevel=3)
+    return root
+
+
+def flares():
+    """Riveted pocket-style flares over all four arches."""
+    root = group('flares')
+    r_in, r_out = 455, 505
+    for s in (-1, 1):
+        for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
+            poly = []
+            for t in range(25):
+                a = math.radians(6 + 168 * t / 24)
+                poly.append((346 + r_out * math.sin(a), z + r_out * math.cos(a)))
+            for t in range(25):
+                a = math.radians(174 - 168 * t / 24)
+                poly.append((346 + r_in * math.sin(a), z + r_in * math.cos(a)))
+            band = prism(f'flare{s}{z}', poly, s * 786, s * 794, TEXBLACK, root)
+            for t in range(14):
+                a = math.radians(12 + 156 * t / 13)
+                lib.cylinder(f'rivet{s}{z}{t}', (s * 797, 346 + 480 * math.sin(a), z + 480 * math.cos(a)), (1, 0, 0), 14, 6, BLACK, root, n=6)
+    return root
+
+
 def build():
     for v in ('platform', 'basket'):
         roof_rack(v)
@@ -633,6 +876,15 @@ def build():
     bumper_showa()
     bumper_klc()
     bumper_outclass()
+    for st in ('stock', 'steel', 'six', 'eight', 'beadlock'):
+        rim(st)
+    roof_rack_arb()
+    roof_lights()
+    bumper_tube_led()
+    rear_bumper_tube()
+    ladder_tube()
+    guard_can()
+    flares()
     lib.export(os.path.abspath(OUT))
 
 

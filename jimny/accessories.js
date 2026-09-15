@@ -11,11 +11,26 @@
 // To change a part: edit build_parts.py, run it with Blender, then run
 // `npx gltf-transform draco model/parts.glb model/parts.glb`.
 
+import { noiseBump } from './rig.js';
+
 let PARTS = null;
 
-export function loadParts(loader, url) {
+export function loadParts(loader, url, THREE) {
   return new Promise((resolve) => loader.load(url, (g) => {
     PARTS = {};
+    // powder coat and textured plastic are not smooth; the exporter's flat
+    // colours get a tileable grain (parts carry box-projected UVs for it)
+    const grain = THREE && noiseBump(THREE, 5, 12);
+    const seen = new Set();
+    g.scene.traverse((o) => {
+      const m = o.material;
+      if (!m || seen.has(m)) return;
+      seen.add(m);
+      if (grain && /TextureBlack|PowderBlack|Canvas|AwningPVC|Rubber|Webbing/.test(m.name)) {
+        m.bumpMap = grain; m.bumpScale = /Canvas|Webbing/.test(m.name) ? 1.2 : 0.5; m.needsUpdate = true;
+      }
+      if (m.name === 'BodyPaint') return;                 // swapped per clone
+    });
     for (const o of g.scene.children) PARTS[o.name] = o;
     resolve(PARTS);
   }, undefined, () => resolve(null)));
@@ -23,6 +38,8 @@ export function loadParts(loader, url) {
 
 // Parts painted body colour (KLC's ivory bumper and grille) carry a material
 // named BodyPaint; it is swapped for the car's own paint so the swatch applies.
+export const getPart = (name) => PARTS?.[name] ?? null;
+
 export function buildAccessory(kind, variant, paintMat) {
   const node = PARTS?.[variant ? `${kind}_${variant}` : kind];
   if (!node) return null;
