@@ -191,6 +191,8 @@ export const GRILLES = [
     part: 'E00500', note: 'ABS 素材黑（烤漆版 E00502 ¥31,900）；中央蜂巢網開口' },
   { id: 'outclass_g', label: 'OUTCLASS Vintage G Grille', price: 57750, cur: 'JPY', brand: 'OUTCLASS',
     note: 'ASA 樹脂紋理黑；4 道橫柵＋中央直柱，後方細網' },
+  { id: 'hbar_suzuki', label: '橫柵護罩＋SUZUKI 白字', price: null, cur: 'TWD', brand: '多家', uncertain: true,
+    note: '7 道橫柵、方形大燈座、白色 SUZUKI 字樣（車主實車配置）' },
   { id: 'klc_sj', label: 'KLC Face Grille SJ（七孔）', price: 93500, cur: 'JPY', brand: 'KLC',
     note: 'SJ10 復古七直孔，含鋁網與反光片；ABS 烤漆版（素材 ¥60,500）。顯示為車身同色' },
 ];

@@ -523,6 +523,27 @@ def grille_klc():
     return root
 
 
+# Owner's grille (from the photos): flat black panel, seven horizontal slats
+# across the full opening between squared lamp bezels, bold white SUZUKI
+# lettering standing over the slats, square indicator bezels.
+def grille_owner():
+    root = group('grille_hbar_suzuki')
+    ow, oh = 580, 215
+    grille_panel('panel', root, TEXBLACK, (ow, oh, 858))
+    lamp_bezels(root, TEXBLACK, 'square')
+    for k in range(7):
+        y = 858 - oh / 2 + 14 + k * 31
+        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 20, 22), TEXBLACK, root, bevel=3)
+    wire_mesh(root, BLACK, 0, 858, face_z(0) - 20, ow - 10, oh - 10, pitch=9)
+    box('backing', (0, 858, face_z(0) - 32), (ow, oh, 3), RUBBER, root, bevel=0)
+    text('suzuki', 'SUZUKI', (0, 866, face_z(0) + 16), 56, 5, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    for k, (x, y) in enumerate(SIGNAL):
+        for (cx, cy, sx, sy) in ((0, 46, 100, 8), (0, -46, 100, 8), (-46, 0, 8, 100), (46, 0, 8, 100)):
+            box(f'sigFrame{k}{cx}{cy}', (x + cx, y + cy, face_z(x) + 12), (sx, sy, 10), TEXBLACK, root, bevel=2)
+    return root
+
+
 # ============================================================== FRONT BUMPERS
 # All three replace the stock bumper (hidden by the page). The stock one is
 # 1565 wide, y 342-714, front face z ~1770; a black valance behind each new
@@ -746,31 +767,29 @@ def roof_lights():
 
 
 def bumper_stubby_led():
-    """Owner's front bumper: a short flat-faced steel bar between the wheels,
-    number plate and two 4-LED square pods bolted to its face, nothing above
-    it — the area under the grille stays open showing the crossmember."""
+    """Owner's front bumper: a short plate bumper between the wheels, ~190 mm
+    tall with chamfered ends, sitting just under the grille; number plate
+    and two 4-LED pods on its face, bay open above the crossmember."""
     root = group('frontBumper_stubby_led')
-    y, zf = 470, 1700
-    W, H, D = 1080, 125, 95
-    bar = box('bar', (0, y, zf - D / 2), (W, H, D), TEXBLACK, root, bevel=5)
+    y, zf = 560, 1700
+    H, D = 190, 90
+    path = [(-560, y, zf - D / 2 - 90), (-470, y, zf - D / 2), (470, y, zf - D / 2), (560, y, zf - D / 2 - 90)]
+    sweep('bar', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 8, 3), TEXBLACK, root)
+    box('topLip', (0, y + H / 2 + 2, zf - D / 2 - 10), (940, 6, D - 20), TEXBLACK, root, bevel=1)
     for s in (-1, 1):
-        box(f'endPlate{s}', (s * (W / 2 + 4), y + 10, zf - D / 2 - 5), (8, H + 40, D + 30), TEXBLACK, root, bevel=2)
-        box(f'gusset{s}', (s * (W / 2 - 60), y - H / 2 - 30, zf - D / 2), (6, 60, D - 20), TEXBLACK, root, bevel=1)
-        # 4-LED pod on the bar face
-        px, py, pz = s * 380, y, zf
+        px, py, pz = s * 375, y, zf
         box(f'pod{s}', (px, py, pz + 22), (86, 86, 48), BLACK, root, bevel=4)
         box(f'podRim{s}', (px, py, pz + 48), (80, 80, 6), TEXBLACK, root, bevel=2)
         for (dx, dy) in ((-18, -18), (18, -18), (-18, 18), (18, 18)):
             lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 52), (0, 0, 1), 28, 4, CHROME, root, n=20)
             lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 55), (0, 0, 1), 26, 2, LENS, root, n=20)
         box(f'podFoot{s}', (px, py - 55, pz + 6), (30, 26, 20), TEXBLACK, root, bevel=2)
-        # chassis brackets below the bar
-        box(f'leg{s}', (s * 330, y - 20, zf - D - 60), (60, 90, 140), TEXBLACK, root, bevel=3)
-        box(f'hook{s}', (s * 300, y - H / 2 - 25, zf - 30), (60, 20, 80), RED, root, bevel=4)
-    box('plate', (0, y, zf + 6), (330, 165, 4), PLATE, root, bevel=1)
-    # what the missing stock bumper used to hide: crossmember and a dark bay behind
-    tube('crossmember', [(-540, 560, 1480), (540, 560, 1480)], 55, TEXBLACK, root)
-    box('bay', (0, 560, 1380), (1050, 260, 20), RUBBER, root, bevel=4)
+        box(f'leg{s}', (s * 330, y - 40, zf - D - 60), (60, 110, 140), TEXBLACK, root, bevel=3)
+        box(f'hook{s}', (s * 300, y - H / 2 - 22, zf - 30), (60, 20, 80), RED, root, bevel=4)
+    box('plateFrame', (0, y, zf + 4), (346, 181, 4), BLACK, root, bevel=1)
+    box('plate', (0, y, zf + 8), (330, 165, 3), PLATE, root, bevel=1)
+    tube('crossmember', [(-540, 470, 1480), (540, 470, 1480)], 55, TEXBLACK, root)
+    box('bay', (0, 520, 1380), (1050, 300, 20), RUBBER, root, bevel=4)
     return root
 
 
@@ -909,6 +928,7 @@ def build():
     grille_showa()
     grille_outclass()
     grille_klc()
+    grille_owner()
     bumper_showa()
     bumper_klc()
     bumper_outclass()

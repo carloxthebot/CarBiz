@@ -223,10 +223,17 @@ def sphere(name, centre, dia, mat, parent=None):
     return new_object(name, bm, mat, parent, smooth=True)
 
 
-def text(name, body, centre, size, depth, mat, parent=None):
+_FONTS = {}
+
+
+def text(name, body, centre, size, depth, mat, parent=None, font=None):
     """Extruded text standing on the car's front face (reads from +Z)."""
     cu = bpy.data.curves.new(name, type='FONT')
     cu.body = body
+    if font:
+        if font not in _FONTS:
+            _FONTS[font] = bpy.data.fonts.load(font)
+        cu.font = _FONTS[font]
     cu.size = size * MM
     cu.extrude = depth / 2 * MM
     cu.align_x = 'CENTER'
