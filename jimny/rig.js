@@ -212,17 +212,36 @@ export function applyConfig(THREE, rig, cfg) {
     for (const m of U.roofMeshes) m.material = twoTone ? U.roofMat : U.paintMat;
   }
 
-  // tyre diameter: scale each corner about its hub
+  // Wheels. The model's own are hidden and a built wheel takes each place, so
+  // the rim you chose is the rim you see, and fitting a taller tyre grows the
+  // SIDEWALL instead of scaling a 15" rim into a 17" one.
+  //
+  // Heights, ground at y = 0:
+  //   wheel centre = tyre radius                (the tyre is always on the ground)
+  //   body         = rest + lift + half the tyre's growth
+  // An earlier version also pushed the wheels DOWN by the lift while raising
+  // the body, applying it twice and leaving the tyres hanging in mid-air.
   const targetDia = (cfg.tyreDia ?? 693) * mm;
-  const k = U.baseTyreDia ? targetDia / U.baseTyreDia : 1;
-  for (const g of U.wheelGroups) {
-    g.scale.setScalar(k);
-    // keep the tyre touching the floor: hub height = radius
-    g.position.y = targetDia / 2;
-    // lift raises the body, which reads the same as dropping the wheels
-    g.position.y -= (cfg.lift ?? 0) * mm;
+
+  if (cfg.buildWheel) {
+    for (const w of U.builtWheels ?? []) w.parent?.remove(w);
+    U.builtWheels = [];
+    for (const g of U.wheelGroups) {
+      g.visible = false;                       // reference geometry only
+      const w = cfg.buildWheel({
+        rimDia: cfg.rimDia ?? 15, tyreDia: cfg.tyreDia ?? 693,
+        width: cfg.tyreWidth ?? 195, style: cfg.wheelStyle ?? 'stock',
+        tread: cfg.tread ?? 'at', rimColor: cfg.rimColor ?? 0xc8ccd0,
+      });
+      const side = Math.sign(g.position.x) || 1;
+      w.position.set(g.position.x + side * (cfg.spacer ?? 0) * mm, targetDia / 2, g.position.z);
+      w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      U.WHEELS.add(w);
+      U.builtWheels.push(w);
+    }
+  } else {
+    for (const g of U.wheelGroups) { g.visible = true; g.position.y = targetDia / 2; }
   }
 
-  // body sits at lift height above its rigged rest position
   U.BODY.position.y = (cfg.lift ?? 0) * mm + (targetDia - U.baseTyreDia) / 2;
 }

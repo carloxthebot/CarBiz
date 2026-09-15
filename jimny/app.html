@@ -137,6 +137,9 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
       <div class="sec-b">
         <label class="lbl">輪框</label><select id="selWheel"></select><p class="hint" id="hWheel"></p>
         <label class="lbl">輪胎尺寸</label><select id="selTyre"></select><p class="hint" id="hTyre"></p>
+        <label class="lbl">胎紋</label>
+        <select id="selTread"><option value="at">A/T 全地形</option><option value="mt">M/T 泥地</option></select>
+        <label class="lbl">輪框顏色</label><div class="swatches" id="rimSw"></div>
       </div></section>
     <section><button class="sec-h" aria-expanded="false"><span class="ix">E</span>
       <span class="tt"><b>外觀與配件</b><i id="sumE">原廠</i></span><span class="ar">▾</span></button>
@@ -167,6 +170,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { rigJimny, applyConfig } from './rig.js';
 import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js';
 import { buildAccessory } from './accessories.js';
+import { buildWheel } from './wheels.js';
 
 const cv = document.getElementById('cv');
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe8eae7);
@@ -211,9 +215,11 @@ const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後�
   ['正前', 0, .1, 8], ['俯視', .6, 1.0, 10]];
 
 const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', wheel: 'oem', tyre: 't195',
+  tread: 'at', rimColor: 0xc8ccd0,
   snorkel: false, roofRack: 'none', awning: 'none', windowGuards: false, ladder: false,
   rockSliders: false, lightBar: false, spareBag: false };
 let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
+const RIMS = [0xc8ccd0, 0x2b2f36, 0x8a6a3c, 0xd8d9d6, 0xb8410f];
 const find = (l, id) => l.find(x => x.id === id) || l[0];
 
 const loader = new GLTFLoader();
@@ -234,8 +240,13 @@ function update() {
   const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
   const col = COLORS.find(c => c.code === S.color) || COLORS[3];
   const total = lift.lift + bl.body;
-  applyConfig(THREE, rig, { bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK,
-    lift: total, tyreDia: ty.dia, spareMatches: true });
+  applyConfig(THREE, rig, {
+    bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK, lift: total,
+    tyreDia: ty.dia, tyreWidth: ty.width, rimDia: wh.rim, wheelStyle: wh.style,
+    tread: S.tread, rimColor: S.rimColor,
+    spacer: Math.max(0, -wh.offset) * 0.7,
+    buildWheel: (o) => buildWheel(THREE, o),
+  });
 
   // Accessories live under BODY so the lift carries them automatically, and
   // they position themselves from anchors measured off this mesh.
@@ -284,9 +295,20 @@ function buildUI() {
     `<button class="tg" data-rack aria-pressed="false"><span class="nm">車頂架</span><span class="st">無</span></button>
      <button class="tg" data-awn aria-pressed="false"><span class="nm">側邊帳</span><span class="st">無</span></button>` +
     TG.map(([k, l]) => `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
+  document.getElementById('rimSw').innerHTML = RIMS.map(h =>
+    `<button class="sw" data-r="${h}" aria-pressed="${h === S.rimColor}"
+      style="background:#${h.toString(16).padStart(6, '0')}"></button>`).join('');
   document.getElementById('views').innerHTML = VIEWS.map((v, i) =>
     `<button data-v="${i}" aria-pressed="${i === 0}">${v[0]}</button>`).join('');
   hints();
+
+  document.getElementById('selTread').onchange = e => { S.tread = e.target.value; update(); };
+  document.getElementById('rimSw').onclick = e => {
+    const b = e.target.closest('[data-r]'); if (!b) return;
+    S.rimColor = +b.dataset.r;
+    document.querySelectorAll('[data-r]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    update();
+  };
 
   const on = (id, f) => document.getElementById(id).onchange = e => { f(e.target.value); hints(); update(); };
   on('selLift', v => S.lift = v); on('selBody', v => S.bodyLift = v); on('selTyre', v => S.tyre = v);
