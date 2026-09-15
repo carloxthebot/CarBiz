@@ -787,23 +787,28 @@ def rear_bumper_tube():
 
 
 def ladder_tube():
+    """Hoop-type tube ladder on the hinge side; the rails climb the tailgate,
+    bend forward over the roof edge and hook onto the rack's rear rail, as on
+    the owner's car. Fire extinguisher clamped to the outer rail."""
     root = group('ladder_tube')
     s = RIGHT
     zf = TAIL_Z - 95
     xi, xo = s * 400, s * 630
-    y0, y1 = 560, 1480
+    y0 = 560
+    rack_rail_z = RACK_ZC - ARB_L / 2 + 40
+    rack_y = RACK_TOP - 45 + 22
     for x in (xi, xo):
-        rail = [(x, y0, zf), (x, y1, zf), (x, 1560, TAIL_Z + 30), (x, 1575, TAIL_Z + 90)]
-        tube(f'rail{x}', rail, 25, BLACK, root, bend=70)
-    tube('top', [(xi, 1575, TAIL_Z + 90), (xo, 1575, TAIL_Z + 90)], 25, BLACK, root)
+        rail = [(x, y0, zf), (x, 1420, zf), (x, 1580, TAIL_Z - 40), (x, rack_y + 30, rack_rail_z + 60), (x, rack_y, rack_rail_z + 60)]
+        tube(f'rail{x}', rail, 25, BLACK, root, bend=90)
+        box(f'hook{x}', (x, rack_y - 4, rack_rail_z + 30), (40, 20, 70), BLACK, root, bevel=3)
+    tube('top', [(xi, rack_y + 30, rack_rail_z + 60), (xo, rack_y + 30, rack_rail_z + 60)], 25, BLACK, root)
     tube('bottom', [(xi, y0, zf), (xo, y0, zf)], 25, BLACK, root)
     for k in range(3):
-        y = 760 + k * 240
+        y = 760 + k * 230
         tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 22, BLACK, root)
-    for y in (650, 1320):
+    for y in (650, 1300):
         for x in (xi, xo):
             box(f'standoff{x}{y}', (x, y, (TAIL_Z + zf) / 2), (34, 34, abs(TAIL_Z - zf)), BLACK, root, bevel=3)
-    # fire extinguisher clamped to the outer rail
     ex, ey, ez = xo + s * 62, 1010, zf
     lib.cylinder('extBody', (ex, ey, ez), (0, 1, 0), 88, 380, RUBBER, root, n=28)
     lib.cylinder('extBand', (ex, ey + 40, ez), (0, 1, 0), 90, 90, RED_LABEL, root, n=28)
@@ -811,6 +816,19 @@ def ladder_tube():
     box('extLever', (ex, ey + 235, ez + 10), (30, 20, 90), BLACK, root, bevel=3)
     for y in (ey - 110, ey + 110):
         box(f'clamp{y}', ((xo + ex) / 2, y, ez), (abs(ex - xo) + 40, 24, 30), BLACK, root, bevel=3)
+    return root
+
+
+def decals():
+    """Owner's door lettering: MODEL:3BA-JB74W with two lines of small print,
+    and the WLM mark on each guard. Thin white text standing 1 mm proud."""
+    root = group('decals')
+    white = material('LabelWhite', 0xf0f0ec, rough=0.6)
+    for s in (-1, 1):
+        for i, (line, size, dy) in enumerate((('MODEL:3BA-JB74W', 26, 0), ('PART TIME 4-WHEEL DRIVE', 11, -30), ('5-SPEED MANUAL', 11, -46))):
+            ob = text(f'door{s}{i}', line, (s * 707, 1030 + dy, 300), size, 1, white, root)
+            ob.rotation_euler = (0, 0, math.radians(90 * s))
+            ob.location = P(s * 707, 1030 + dy, 300)
     return root
 
 
@@ -885,6 +903,7 @@ def build():
     ladder_tube()
     guard_can()
     flares()
+    decals()
     lib.export(os.path.abspath(OUT))
 
 

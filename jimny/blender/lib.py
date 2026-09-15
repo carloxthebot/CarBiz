@@ -237,10 +237,11 @@ def text(name, body, centre, size, depth, mat, parent=None):
     tmp.location = P(*centre)
     dg = bpy.context.evaluated_depsgraph_get()
     me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg))
-    me.transform(tmp.matrix_world)
+    me.transform(Matrix.Rotation(math.pi / 2, 4, 'X'))   # stand the text up, facing car +Z
     bpy.data.objects.remove(tmp)
     bpy.data.curves.remove(cu)
     ob = bpy.data.objects.new(name, me)
+    ob.location = P(*centre)
     bpy.context.scene.collection.objects.link(ob)
     me.materials.append(mat)
     if parent is not None:

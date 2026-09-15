@@ -188,7 +188,7 @@ const PATTERNS = {
     const n = Math.round(circ / 52), P = circ / n, e = 1.6, half = tw / 2;
     const rowIn = tw * 0.03, rowOut = tw * 0.25, voidC = tw * 0.31;
     return {
-      P, depth: 14, sideScale: 0.55,
+      P, depth: 14, sideScale: 0.7,
       g(u, v) {
         const av = Math.abs(v), sg = v < 0 ? -1 : 1;
         let g = circG(u, v, 0, 10, 5, P, e);
@@ -198,7 +198,7 @@ const PATTERNS = {
         const phase = sg > 0 ? P * 0.25 : P * 0.75;
         g = Math.max(g, Math.min(lateral(u, av, P, phase, P * 0.36, sg * 0.15, half, e), band(av, tw * 0.36, 1e9, e)));
         const sd = av - (half + shArc);
-        if (sd > 0) { const k = Math.floor(wrap(u - phase, 2 * P) / P); g = Math.max(g, smooth((k ? 6 : 16) - sd, 2.5)); }
+        if (sd > 0) { const k = Math.floor(wrap(u - phase, 2 * P) / P); g = Math.max(g, smooth((k ? 10 : 26) - sd, 2.5)); }
         return g;
       },
       sipe(u, v) {
@@ -213,7 +213,7 @@ const PATTERNS = {
     const n = Math.round(circ / 68), P = circ / n, e = 1.8, half = tw / 2;
     const rowIn = tw * 0.03, rowOut = tw * 0.24, voidC = tw * 0.31;
     return {
-      P, depth: 17, sideScale: 0.55,
+      P, depth: 17, sideScale: 0.8,
       g(u, v) {
         const av = Math.abs(v), sg = v < 0 ? -1 : 1;
         let g = circG(u, v, 0, 9, 5, P, e);
@@ -223,7 +223,7 @@ const PATTERNS = {
         const phase = sg > 0 ? P * 0.25 : P * 0.75;
         g = Math.max(g, Math.min(lateral(u, av, P, phase, P * 0.42, sg * 0.15, half, e), band(av, tw * 0.37, 1e9, e)));
         const sd = av - (half + shArc);
-        if (sd > 0) { const k = Math.floor(wrap(u - phase, 2 * P) / P); g = Math.max(g, smooth((k ? 8 : 24) - sd, 3)); }
+        if (sd > 0) { const k = Math.floor(wrap(u - phase, 2 * P) / P); g = Math.max(g, smooth((k ? 14 : 38) - sd, 3)); }
         return g;
       },
       sipe() { return 0; },
@@ -270,7 +270,7 @@ function tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl })
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
   const nrm = document.createElement('canvas'); nrm.width = W; nrm.height = H;
   const c = cv.getContext('2d'), n = nrm.getContext('2d');
-  c.fillStyle = '#1e2023'; c.fillRect(0, 0, W, H);
+  c.fillStyle = '#26282b'; c.fillRect(0, 0, W, H);
   n.fillStyle = '#8080ff'; n.fillRect(0, 0, W, H);
   const y0 = Math.max(0, Math.floor((L / 2 - tw / 2 - shArc - 30) / mmpx)), y1 = Math.min(H, Math.ceil((L / 2 + tw / 2 + shArc + 30) / mmpx));
   const rows = y1 - y0;
@@ -288,7 +288,7 @@ function tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl })
       const i = y * W + x, h = hf[i];
       const g = -h / pat.depth, sp = pat.sipe(x * mmpx, v);
       const kk = 1 - 0.55 * Math.min(1, g) - 0.5 * sp;
-      d[i * 4] = 30 * kk + 4; d[i * 4 + 1] = 32 * kk + 4; d[i * 4 + 2] = 35 * kk + 4;
+      d[i * 4] = 40 * kk + 4; d[i * 4 + 1] = 42 * kk + 4; d[i * 4 + 2] = 45 * kk + 4;
       // central differences, wrapping around the circumference
       const hx = (hf[y * W + (x + 1) % W] - hf[y * W + (x + W - 1) % W]) / (2 * mmpx);
       const hy = (hf[Math.min(y + 1, rows - 1) * W + x] - hf[Math.max(y - 1, 0) * W + x]) / (2 * mmpx);
@@ -301,16 +301,16 @@ function tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl })
   // outer sidewall lettering: outer face is the high-s end
   const sideTop = (L / 2 + tw / 2 + shArc + 6) / mmpx, sideBot = H;
   const bandH = sideBot - sideTop;
-  const yText = sideTop + bandH * 0.62;
+  const yText = sideTop + bandH * 0.5;
   const draw = (ctx, fill) => {
     ctx.fillStyle = fill; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    for (const [t, at, big] of [[brand, 0.0, true], [model, 0.25, false], [brand, 0.5, true], [model, 0.75, false]]) {
-      let fs = Math.round(bandH * (big ? 0.30 : 0.24));
+    for (const [t, at, big] of [[brand, 0.0, true], [model, 0.5, false]]) {
+      let fs = Math.round(bandH * (big ? 0.17 : 0.15));
       const font = (nn) => `${big ? '900' : '700'} ${nn}px "Helvetica Neue", Arial, sans-serif`;
       ctx.font = font(fs);
       const w = ctx.measureText(t).width;
-      if (w > W * 0.20) { fs = Math.floor(fs * W * 0.20 / w); ctx.font = font(fs); }
-      ctx.fillText(t, W * (at + 0.125), yText);
+      if (w > W * 0.30) { fs = Math.floor(fs * W * 0.30 / w); ctx.font = font(fs); }
+      ctx.fillText(t, W * (at + 0.25), yText);
     }
   };
   draw(c, owl ? '#ece9dd' : '#2b2d31');
@@ -362,7 +362,7 @@ export function buildTyre(THREE, { tR, rR, half, sidewall, width, tread }) {
   const key = [pattern, brand, model, owl, Math.round(tR), Math.round(rR), Math.round(width)].join('|');
   const { map, nmap, bmap } = tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl });
   const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({
-    map, normalMap: nmap, normalScale: new THREE.Vector2(1, 1), bumpMap: bmap, bumpScale: 0.0025, roughness: 0.93, metalness: 0 }));
+    map, normalMap: nmap, normalScale: new THREE.Vector2(1, 1), bumpMap: bmap, bumpScale: 0.0025, roughness: 0.82, metalness: 0 }));
   m.castShadow = m.receiveShadow = true;
   m.name = 'tyre';
   return m;
