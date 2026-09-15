@@ -137,8 +137,9 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
       <div class="sec-b">
         <label class="lbl">輪框</label><select id="selWheel"></select><p class="hint" id="hWheel"></p>
         <label class="lbl">輪胎尺寸</label><select id="selTyre"></select><p class="hint" id="hTyre"></p>
-        <label class="lbl">胎紋</label>
-        <select id="selTread"><option value="at">A/T 全地形</option><option value="mt">M/T 泥地</option></select>
+        <label class="lbl">輪胎型號</label><select id="selTread"></select><p class="hint" id="hTread"></p>
+        <button class="tg" id="tgOwl" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
+          <span class="nm">白字胎邊<i id="owlNote">Outlined White Letters</i></span><span class="st">關閉</span></button>
         <label class="lbl">輪框顏色</label><div class="swatches" id="rimSw"></div>
       </div></section>
     <section><button class="sec-h" aria-expanded="false"><span class="ix">E</span>
@@ -148,6 +149,8 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
         <select id="selColor" style="margin-top:10px"></select>
         <button class="tg" id="tgTwo" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
           <span class="nm">雙色車頂<i>ZJ3 Bluish Black Pearl</i></span><span class="st">關閉</span></button>
+        <label class="lbl">前保桿</label><select id="selBumper"></select><p class="hint" id="hBumper"></p>
+        <label class="lbl">水箱護罩</label><select id="selGrille"></select><p class="hint" id="hGrille"></p>
         <label class="lbl">加裝配件</label><div class="toggles" id="toggles"></div>
       </div></section>
     <div class="flags" id="flags"></div>
@@ -168,13 +171,13 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609150510';
-import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, SIMPLE, validate } from './parts.js?v=202609150510';
-import { buildAccessory, loadParts } from './accessories.js?v=202609150510';
-import { buildWheel } from './wheels.js?v=202609150510';
+import { rigJimny, applyConfig } from './rig.js?v=202609150547';
+import { COLORS, ROOF_BLACK, LIFTS, BODY_LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, GRILLES, SIMPLE, validate } from './parts.js?v=202609150547';
+import { buildAccessory, loadParts } from './accessories.js?v=202609150547';
+import { buildWheel } from './wheels.js?v=202609150547';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609150510';
+const BUILD = '202609150547';
 
 const cv = document.getElementById('cv');
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe8eae7);
@@ -222,7 +225,8 @@ const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後�
   ['正前', 0, .1, 8], ['俯視', .6, 1.0, 10]];
 
 const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', wheel: 'oem', tyre: 't195',
-  tread: 'at', rimColor: 0xc8ccd0,
+  tread: 'toyo_at3', owl: false, rimColor: 0xc8ccd0,
+  frontBumper: 'stock', grille: 'stock',
   snorkel: false, roofRack: 'none', awning: 'none', windowGuards: false, ladder: false,
   rockSliders: false, lightBar: false, spareBag: false, spareCover: false };
 let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
@@ -240,7 +244,7 @@ loader.load('model/jimny-hq.glb', async (g) => {
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   scene.add(rig); rig.userData.BODY.add(accGroup);
   // inspection hook for headless verification scripts; harmless in the page
-  window.__jimny = { THREE, rig, scene, update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); } };
+  window.__jimny = { THREE, rig, scene, cam, update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); } };
   document.getElementById('boot').style.display = 'none';
   buildUI(); update();
 }, (p) => { if (p.total) document.getElementById('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
@@ -254,19 +258,23 @@ function update() {
   applyConfig(THREE, rig, {
     bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK, lift: total,
     tyreDia: ty.dia, tyreWidth: ty.width, rimDia: wh.rim, wheelStyle: wh.style,
-    tread: S.tread, rimColor: S.rimColor,
+    tread: { ...find(TYRE_MODELS, S.tread), owl: S.owl }, rimColor: S.rimColor,
     spacer: Math.max(0, -wh.offset) * 0.7,
+    hideBumper: S.frontBumper !== 'stock', hideGrille: S.grille !== 'stock',
     buildWheel: (o) => buildWheel(THREE, o),
   });
 
   // Accessories live under BODY so the lift carries them automatically; each
   // is a modelled part already positioned for this car (see accessories.js).
   accGroup.clear();
+  const paint = rig.userData.paintMat;
   const add = (n) => n && accGroup.add(n);
   for (const k of ['snorkel', 'rockSliders', 'ladder', 'windowGuards', 'lightBar', 'spareBag', 'spareCover'])
-    if (S[k]) add(buildAccessory(k));
-  if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack));
-  if (S.awning !== 'none') add(buildAccessory('awning', S.awning));
+    if (S[k]) add(buildAccessory(k, undefined, paint));
+  if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint));
+  if (S.awning !== 'none') add(buildAccessory('awning', S.awning, paint));
+  if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint));
+  if (S.grille !== 'stock') add(buildAccessory('grille', S.grille, paint));
 
   const set = (id, v) => document.getElementById(id).innerHTML = v;
   set('rLift', total + '<small> mm</small>');
@@ -275,7 +283,7 @@ function update() {
   document.getElementById('sumL').textContent = total ? lift.label + (bl.body ? ' + ' + bl.label : '') : '原廠';
   document.getElementById('sumW').textContent = wh.label.replace('原廠 ', '') + ' · ' + ty.label.replace('（原廠）', '');
   const n = ['snorkel','windowGuards','ladder','rockSliders','lightBar','spareBag','spareCover'].filter(k => S[k]).length
-    + (S.roofRack !== 'none') + (S.awning !== 'none');
+    + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock');
   document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
   document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b><br>版本 ${BUILD}`;
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
@@ -291,8 +299,19 @@ function buildUI() {
   BODY_LIFTS.forEach(o => o.__l = x => x.label);
   WHEELS.forEach(o => o.__l = x => `${x.label} (${x.rim}×${x.width}J ET${x.offset > 0 ? '+' : ''}${x.offset})`);
   TYRES.forEach(o => o.__l = x => `${x.label} — Ø${x.dia}mm`);
-  opt('selLift', LIFTS, S.lift); opt('selBody', BODY_LIFTS, S.bodyLift);
+  // lifts grouped by inch class
+  document.getElementById('selLift').innerHTML = [...new Set(LIFTS.map(l => l.inch))].map(cls =>
+    `<optgroup label="${cls === '原廠' ? '原廠' : cls + ' 舉升'}">` + LIFTS.filter(l => l.inch === cls).map(o =>
+      `<option value="${o.id}"${o.id === S.lift ? ' selected' : ''}>${o.__l(o)}</option>`).join('') + '</optgroup>').join('');
+  opt('selBody', BODY_LIFTS, S.bodyLift);
+  FRONT_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
+  GRILLES.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
+  opt('selBumper', FRONT_BUMPERS, S.frontBumper); opt('selGrille', GRILLES, S.grille);
   opt('selWheel', WHEELS, S.wheel); opt('selTyre', TYRES, S.tyre);
+  document.getElementById('selTread').innerHTML = ['at', 'rt', 'mt'].map(p =>
+    `<optgroup label="${{ at: 'A/T 全地形', rt: 'R/T 混合地形', mt: 'M/T 泥地' }[p]}">` +
+    TYRE_MODELS.filter(t => t.pattern === p).map(t =>
+      `<option value="${t.id}"${t.id === S.tread ? ' selected' : ''}>${t.label}</option>`).join('') + '</optgroup>').join('');
   document.getElementById('selColor').innerHTML = COLORS.map(c =>
     `<option value="${c.code}"${c.code === S.color ? ' selected' : ''}>${c.code} ${c.name}</option>`).join('');
   document.getElementById('colSw').innerHTML = COLORS.map(c =>
@@ -311,7 +330,10 @@ function buildUI() {
     `<button data-v="${i}" aria-pressed="${i === 0}">${v[0]}</button>`).join('');
   hints();
 
-  document.getElementById('selTread').onchange = e => { S.tread = e.target.value; update(); };
+  document.getElementById('selTread').onchange = e => { S.tread = e.target.value; hints(); update(); };
+  document.getElementById('tgOwl').onclick = e => { S.owl = !S.owl;
+    e.currentTarget.setAttribute('aria-pressed', S.owl);
+    e.currentTarget.querySelector('.st').textContent = S.owl ? '開啟' : '關閉'; update(); };
   document.getElementById('rimSw').onclick = e => {
     const b = e.target.closest('[data-r]'); if (!b) return;
     S.rimColor = +b.dataset.r;
@@ -321,6 +343,7 @@ function buildUI() {
 
   const on = (id, f) => document.getElementById(id).onchange = e => { f(e.target.value); hints(); update(); };
   on('selLift', v => S.lift = v); on('selBody', v => S.bodyLift = v); on('selTyre', v => S.tyre = v);
+  on('selBumper', v => S.frontBumper = v); on('selGrille', v => S.grille = v);
   document.getElementById('selWheel').onchange = e => {
     const w = find(WHEELS, e.target.value), t = find(TYRES, S.tyre);
     S.wheel = e.target.value;
@@ -365,7 +388,9 @@ function buildUI() {
     const lift = find(LIFTS, S.lift), bl = find(BODY_LIFTS, S.bodyLift);
     const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
     const col = COLORS.find(c => c.code === S.color);
-    const acc = [S.roofRack !== 'none' && '車頂架', S.awning !== 'none' && '側邊帳', S.snorkel && '呼吸管',
+    const acc = [S.frontBumper !== 'stock' && '前保桿 ' + find(FRONT_BUMPERS, S.frontBumper).label,
+      S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
+      S.roofRack !== 'none' && '車頂架', S.awning !== 'none' && '側邊帳', S.snorkel && '呼吸管',
       S.rockSliders && '側踏', S.ladder && '後爬梯', S.windowGuards && '鐵窗',
       S.lightBar && '車頂燈條', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋'].filter(Boolean);
     const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
@@ -388,6 +413,11 @@ function hints() {
   document.getElementById('hBody').textContent = n(find(BODY_LIFTS, S.bodyLift));
   document.getElementById('hWheel').textContent = n(find(WHEELS, S.wheel));
   document.getElementById('hTyre').textContent = n(find(TYRES, S.tyre));
+  document.getElementById('hBumper').textContent = n(find(FRONT_BUMPERS, S.frontBumper));
+  document.getElementById('hGrille').textContent = n(find(GRILLES, S.grille));
+  const tm = find(TYRE_MODELS, S.tread);
+  document.getElementById('hTread').textContent = tm.note || '';
+  document.getElementById('owlNote').textContent = tm.owl ? '此型號有白字版本' : '此型號原廠無白字版本（僅示意）';
 }
 
 resize(); applyCam();

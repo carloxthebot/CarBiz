@@ -21,10 +21,16 @@ export function loadParts(loader, url) {
   }, undefined, () => resolve(null)));
 }
 
-export function buildAccessory(kind, variant) {
+// Parts painted body colour (KLC's ivory bumper and grille) carry a material
+// named BodyPaint; it is swapped for the car's own paint so the swatch applies.
+export function buildAccessory(kind, variant, paintMat) {
   const node = PARTS?.[variant ? `${kind}_${variant}` : kind];
   if (!node) return null;
   const n = node.clone(true);
-  n.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  n.traverse((o) => {
+    if (!o.isMesh) return;
+    o.castShadow = true; o.receiveShadow = true;
+    if (paintMat && o.material?.name === 'BodyPaint') o.material = paintMat;
+  });
   return n;
 }

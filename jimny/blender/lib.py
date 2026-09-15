@@ -186,6 +186,74 @@ def cylinder(name, centre, axis, dia, length, mat, parent=None, n=24, bevel=1.0)
                  smooth=True)
 
 
+def annulus(name, centre, r_in, r_out, depth, mat, parent=None, n=48):
+    """Flat ring in the car X-Y plane (facing +Z), `depth` mm thick towards -Z."""
+    cx, cy, cz = centre
+    bm = bmesh.new()
+    rings = []
+    for r, z in ((r_in, cz), (r_out, cz), (r_out, cz - depth), (r_in, cz - depth)):
+        rings.append([bm.verts.new(P(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n), z))
+                      for i in range(n)])
+    loops = rings + [rings[0]]
+    for a, b in zip(loops, loops[1:]):
+        for i in range(n):
+            bm.faces.new((a[i], a[(i + 1) % n], b[(i + 1) % n], b[i]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return new_object(name, bm, mat, parent, smooth=True)
+
+
+def sphere(name, centre, dia, mat, parent=None):
+    bm = bmesh.new()
+    bmesh.ops.create_uvsphere(bm, u_segments=20, v_segments=12, radius=dia / 2 * MM)
+    bmesh.ops.translate(bm, vec=P(*centre), verts=bm.verts)
+    return new_object(name, bm, mat, parent, smooth=True)
+
+
+def text(name, body, centre, size, depth, mat, parent=None):
+    """Extruded text standing on the car's front face (reads from +Z)."""
+    cu = bpy.data.curves.new(name, type='FONT')
+    cu.body = body
+    cu.size = size * MM
+    cu.extrude = depth / 2 * MM
+    cu.align_x = 'CENTER'
+    cu.align_y = 'CENTER'
+    tmp = bpy.data.objects.new(name + '_curve', cu)
+    bpy.context.scene.collection.objects.link(tmp)
+    tmp.rotation_euler = (math.pi / 2, 0, 0)
+    tmp.location = P(*centre)
+    dg = bpy.context.evaluated_depsgraph_get()
+    me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg))
+    me.transform(tmp.matrix_world)
+    bpy.data.objects.remove(tmp)
+    bpy.data.curves.remove(cu)
+    ob = bpy.data.objects.new(name, me)
+    bpy.context.scene.collection.objects.link(ob)
+    me.materials.append(mat)
+    if parent is not None:
+        ob.parent = parent
+    return ob
+
+
+def apply_modifiers(ob):
+    with bpy.context.temp_override(object=ob, active_object=ob, selected_objects=[ob]):
+        for m in list(ob.modifiers):
+            bpy.ops.object.modifier_apply(modifier=m.name)
+
+
+def cut(ob, cutters):
+    """Boolean-subtract each cutter object from ob, then delete the cutters."""
+    for c in cutters:
+        mod = ob.modifiers.new('cut', 'BOOLEAN')
+        mod.operation = 'DIFFERENCE'
+        mod.object = c
+        mod.solver = 'EXACT'
+    apply_modifiers(ob)
+    for c in cutters:
+        me = c.data
+        bpy.data.objects.remove(c)
+        bpy.data.meshes.remove(me)
+
+
 def export(path, draco=False):
     bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', export_yup=True, export_apply=True,
                               export_extras=False, export_draco_mesh_compression_enable=draco)

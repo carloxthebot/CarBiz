@@ -231,6 +231,24 @@ export function rigJimny(THREE, gltfScene) {
     roofMat.name = 'RoofPaint';
   }
 
+  // ---- stock front bumper and grille, so aftermarket ones can replace them
+  // Bumper: everything black ahead of the axle and below the bonnet line,
+  // plus the fog lamps set into it. Grille: the satin surround panel, its
+  // slats and inserts, the signal bezels and the badge. Headlamp units stay.
+  const stockBumper = [], stockGrille = [];
+  raw.traverse((o) => {
+    if (!o.isMesh || Array.isArray(o.material)) return;
+    const b = new THREE.Box3().setFromObject(o);
+    const c = b.getCenter(new THREE.Vector3()).multiplyScalar(1000);
+    if (c.z < 1500) return;
+    const n = o.material.name;
+    if (c.y < 720 && c.z > 1550 && (n === 'TrimBlack' || (c.y < 650 && /Chrome|LampLens|Carro_Ref/.test(n))))
+      stockBumper.push(o);
+    else if (c.y >= 740 && c.y < 1000 && (n === 'TrimSatin' || (n === 'TrimBlack' && c.z > 1560) ||
+      (n === 'Chrome' && Math.abs(c.x) < 100)))
+      stockGrille.push(o);
+  });
+
   const dims = {
     mmPerUnit,
     lengthMM: (full.max.z - full.min.z) * M,
@@ -239,7 +257,7 @@ export function rigJimny(THREE, gltfScene) {
   };
 
   root.userData = {
-    BODY, WHEELS, wheelGroups, spareBox, anchors,
+    BODY, WHEELS, wheelGroups, spareBox, anchors, stockBumper, stockGrille,
     paintMat, roofMat, roofMeshes, painted, dims,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
@@ -252,6 +270,8 @@ export function applyConfig(THREE, rig, cfg) {
   const mm = 0.001;
 
   if (U.paintMat && cfg.bodyColor != null) U.paintMat.color.setHex(cfg.bodyColor);
+  for (const m of U.stockBumper) m.visible = !cfg.hideBumper;
+  for (const m of U.stockGrille) m.visible = !cfg.hideGrille;
   if (U.roofMat) {
     const twoTone = !!cfg.twoTone;
     U.roofMat.color.setHex(twoTone ? (cfg.roofColor ?? 0x1e2326) : (cfg.bodyColor ?? 0x6a6866));
@@ -280,7 +300,8 @@ export function applyConfig(THREE, rig, cfg) {
         tread: cfg.tread ?? 'at', rimColor: cfg.rimColor ?? 0xc8ccd0,
       });
       const side = Math.sign(g.position.x) || 1;
-      w.scale.x = side;                        // rim face points outward on both sides
+      // turn, don't mirror: a mirrored wheel reads its sidewall lettering backwards
+      w.rotation.y = side < 0 ? Math.PI : 0;
       w.position.set(g.position.x + side * (cfg.spacer ?? 0) * mm, targetDia / 2, g.position.z);
       w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       U.WHEELS.add(w);
