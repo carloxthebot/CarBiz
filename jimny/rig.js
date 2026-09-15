@@ -276,9 +276,10 @@ export function rigJimny(THREE, gltfScene) {
     // rear bumper: the one big satin shell under the tailgate; the tail lamps set into it stay
     if (c.z < -1400 && c.y < 650 && n === 'TrimSatin' && (b.max.x - b.min.x) > 1.0) { stockRear.push(o); return; }
     if (c.z < 1500) return;
-    if (c.y < 720 && c.z > 1550 && (n === 'TrimBlack' || (c.y < 650 && /Chrome|LampLens|Carro_Ref/.test(n))))
+    // (TrimBlackFlat is the same finish on meshes without UVs)
+    if (c.y < 720 && c.z > 1550 && (/^TrimBlack/.test(n) || (c.y < 650 && /Chrome|LampLens|Carro_Ref/.test(n))))
       stockBumper.push(o);
-    else if (c.y >= 740 && c.y < 1000 && (n === 'TrimSatin' || (n === 'TrimBlack' && c.z > 1560) ||
+    else if (c.y >= 740 && c.y < 1000 && (n === 'TrimSatin' || (/^TrimBlack/.test(n) && c.z > 1560) ||
       (n === 'Chrome' && Math.abs(c.x) < 100)))
       stockGrille.push(o);
   });

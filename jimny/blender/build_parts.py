@@ -745,44 +745,62 @@ def roof_lights():
     return root
 
 
-def bumper_tube_led():
-    root = group('frontBumper_tube_led')
-    y = 575
-    tube('bar', [(-735, y, 1580), (-620, y, 1735), (620, y, 1735), (735, y, 1580)], 60, TEXBLACK, root, bend=120)
+def bumper_stubby_led():
+    """Owner's front bumper: a short flat-faced steel bar between the wheels,
+    number plate and two 4-LED square pods bolted to its face, nothing above
+    it — the area under the grille stays open showing the crossmember."""
+    root = group('frontBumper_stubby_led')
+    y, zf = 470, 1700
+    W, H, D = 1080, 125, 95
+    bar = box('bar', (0, y, zf - D / 2), (W, H, D), TEXBLACK, root, bevel=5)
     for s in (-1, 1):
-        sphere(f'cap{s}', (s * 735, y, 1580), 60, TEXBLACK, root)
-        box(f'hanger{s}', (s * 120, y - 60, 1738), (14, 110, 10), TEXBLACK, root, bevel=1)
-        # 4-LED pod: square housing, four small lamps
-        px, py, pz = s * 330, 490, 1728
-        box(f'pod{s}', (px, py, pz), (92, 92, 60), BLACK, root, bevel=4)
-        box(f'podRim{s}', (px, py, pz + 32), (84, 84, 6), TEXBLACK, root, bevel=2)
-        for (dx, dy) in ((-19, -19), (19, -19), (-19, 19), (19, 19)):
-            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 36), (0, 0, 1), 30, 4, CHROME, root, n=20)
-            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 39), (0, 0, 1), 28, 2, LENS, root, n=20)
-        box(f'podArm{s}', (px, py + 60, pz - 20), (20, 50, 30), TEXBLACK, root, bevel=2)
-    number_plate(root, 500, 1745)
-    box('skid', (0, 400, 1620), (600, 4, 240), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
-    valance(root)
+        box(f'endPlate{s}', (s * (W / 2 + 4), y + 10, zf - D / 2 - 5), (8, H + 40, D + 30), TEXBLACK, root, bevel=2)
+        box(f'gusset{s}', (s * (W / 2 - 60), y - H / 2 - 30, zf - D / 2), (6, 60, D - 20), TEXBLACK, root, bevel=1)
+        # 4-LED pod on the bar face
+        px, py, pz = s * 380, y, zf
+        box(f'pod{s}', (px, py, pz + 22), (86, 86, 48), BLACK, root, bevel=4)
+        box(f'podRim{s}', (px, py, pz + 48), (80, 80, 6), TEXBLACK, root, bevel=2)
+        for (dx, dy) in ((-18, -18), (18, -18), (-18, 18), (18, 18)):
+            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 52), (0, 0, 1), 28, 4, CHROME, root, n=20)
+            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 55), (0, 0, 1), 26, 2, LENS, root, n=20)
+        box(f'podFoot{s}', (px, py - 55, pz + 6), (30, 26, 20), TEXBLACK, root, bevel=2)
+        # chassis brackets below the bar
+        box(f'leg{s}', (s * 330, y - 20, zf - D - 60), (60, 90, 140), TEXBLACK, root, bevel=3)
+        box(f'hook{s}', (s * 300, y - H / 2 - 25, zf - 30), (60, 20, 80), RED, root, bevel=4)
+    box('plate', (0, y, zf + 6), (330, 165, 4), PLATE, root, bevel=1)
+    # what the missing stock bumper used to hide: crossmember and a dark bay behind
+    tube('crossmember', [(-540, 560, 1480), (540, 560, 1480)], 55, TEXBLACK, root)
+    box('bay', (0, 560, 1380), (1050, 260, 20), RUBBER, root, bevel=4)
     return root
 
 
 def rear_bumper_tube():
+    """Owner's rear bumper: one fat straight tube low across the back with
+    squared end caps, plate wings above it carrying the stock tail lamps,
+    exhaust tip out the right, tow hook and shackle underneath, mesh corner
+    covers where the stock bumper used to wrap round."""
     root = group('rearBumper_tube')
-    y = 425
-    tube('bar', [(-735, y, -1470), (-650, y, -1655), (650, y, -1655), (735, y, -1470)], 60, TEXBLACK, root, bend=120)
+    y, z = 430, -1650
+    tube('bar', [(-745, y, z), (745, y, z)], 76, TEXBLACK, root)
     for s in (-1, 1):
-        sphere(f'cap{s}', (s * 735, y, -1470), 60, TEXBLACK, root)
-        box(f'mount{s}', (s * 330, 440, -1540), (70, 90, 200), TEXBLACK, root, bevel=4)
-        # housings behind the stock tail lamps, with a frame around the lens
-        box(f'lampBox{s}', (s * 513, 518, -1548), (370, 160, 70), TEXBLACK, root, bevel=4)
-        for (cx, cy, sx, sy) in ((0, 78, 370, 14), (0, -78, 370, 14), (-180, 0, 14, 160), (180, 0, 14, 160)):
-            box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1600), (sx, sy, 24), TEXBLACK, root, bevel=2)
-    box('valance', (0, 470, -1450), (1300, 230, 24), RUBBER, root, bevel=4)
-    number_plate(root, 560, -1612)
-    # exhaust tip on the vehicle's right, angled out
-    ex = RIGHT * 470
-    lib.cylinder('exhaust', (ex, 330, -1620), (RIGHT * 0.35, -0.08, -1), 64, 170, CHROME, root, n=24)
-    lib.cylinder('exhaustIn', (ex + RIGHT * 28, 322, -1698), (RIGHT * 0.35, -0.08, -1), 52, 8, RUBBER, root, n=24)
+        box(f'endCap{s}', (s * 752, y, z), (14, 96, 96), TEXBLACK, root, bevel=3)
+        box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
+        # wing plate behind the tail lamp, lamp framed on it
+        box(f'wing{s}', (s * 513, 545, -1568), (400, 250, 8), TEXBLACK, root, bevel=3)
+        box(f'wingTop{s}', (s * 513, 665, -1575), (400, 8, 30), TEXBLACK, root, bevel=2)
+        for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
+            box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), TEXBLACK, root, bevel=2)
+        # corner cover with a hex-mesh vent
+        box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), TEXBLACK, root, bevel=6,
+            rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+    box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
+    box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
+    ex = RIGHT * 400
+    lib.cylinder('exhaust', (ex, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
+    lib.cylinder('exhaustIn', (ex + RIGHT * 38, 334, -1738), (RIGHT * 0.4, -0.06, -1), 50, 8, RUBBER, root, n=24)
+    box('towHook', (RIGHT * 300, 365, -1600), (70, 26, 120), RED, root, bevel=5)
+    annulus('shackle', (-RIGHT * 330, 360, -1630), 16, 28, 26, RED, root, n=24)
+    box('shackleTab', (-RIGHT * 330, 385, -1600), (12, 60, 80), TEXBLACK, root, bevel=2)
     return root
 
 
@@ -793,19 +811,19 @@ def ladder_tube():
     root = group('ladder_tube')
     s = RIGHT
     zf = TAIL_Z - 95
-    xi, xo = s * 400, s * 630
-    y0 = 560
+    xi, xo = s * 430, s * 610
+    y0 = 600
     rack_rail_z = RACK_ZC - ARB_L / 2 + 40
     rack_y = RACK_TOP - 45 + 22
     for x in (xi, xo):
         rail = [(x, y0, zf), (x, 1420, zf), (x, 1580, TAIL_Z - 40), (x, rack_y + 30, rack_rail_z + 60), (x, rack_y, rack_rail_z + 60)]
-        tube(f'rail{x}', rail, 25, BLACK, root, bend=90)
+        tube(f'rail{x}', rail, 32, BLACK, root, bend=110)
         box(f'hook{x}', (x, rack_y - 4, rack_rail_z + 30), (40, 20, 70), BLACK, root, bevel=3)
-    tube('top', [(xi, rack_y + 30, rack_rail_z + 60), (xo, rack_y + 30, rack_rail_z + 60)], 25, BLACK, root)
-    tube('bottom', [(xi, y0, zf), (xo, y0, zf)], 25, BLACK, root)
-    for k in range(3):
-        y = 760 + k * 230
-        tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 22, BLACK, root)
+    tube('top', [(xi, rack_y + 30, rack_rail_z + 60), (xo, rack_y + 30, rack_rail_z + 60)], 32, BLACK, root)
+    tube('bottom', [(xi, y0, zf), (xo, y0, zf)], 32, BLACK, root)
+    for k in range(2):
+        y = 850 + k * 300
+        tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 26, BLACK, root)
     for y in (650, 1300):
         for x in (xi, xo):
             box(f'standoff{x}{y}', (x, y, (TAIL_Z + zf) / 2), (34, 34, abs(TAIL_Z - zf)), BLACK, root, bevel=3)
@@ -898,7 +916,7 @@ def build():
         rim(st)
     roof_rack_arb()
     roof_lights()
-    bumper_tube_led()
+    bumper_stubby_led()
     rear_bumper_tube()
     ladder_tube()
     guard_can()

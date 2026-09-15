@@ -175,14 +175,14 @@ export const FRONT_BUMPERS = [
     note: '全不鏽鋼雙管，象牙白／黑／拋光；含霧燈架（無霧燈架 ¥93,500）。顯示為車身同色' },
   { id: 'outclass_t2', label: 'OUTCLASS TYPE2 絞盤鐵保桿', price: 140800, cur: 'JPY', brand: 'OUTCLASS',
     note: '鐵製、含絞盤床與 4 顆 LED 方燈；出廠未烤漆（可選 Raptor 塗層）' },
-  { id: 'tube_led', label: '管狀前保桿＋LED 方燈', price: null, cur: 'TWD', brand: '多家', uncertain: true,
-    note: 'Ø60 黑管、車牌下吊、兩側 4 燈 LED 方燈（車主實車配置）' },
+  { id: 'stubby_led', label: '短版平面鐵保桿＋LED 方燈', price: null, cur: 'TWD', brand: '多家', uncertain: true,
+    note: '兩輪之間的短鐵桿，車牌與兩顆 4 燈 LED 鎖在正面，護罩下方鏤空（車主實車配置）' },
 ];
 
 export const REAR_BUMPERS = [
   { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
   { id: 'tube', label: '管狀後保桿（含尾燈座）', price: null, cur: 'TWD', brand: 'OUTCLASS / 多家', uncertain: true,
-    note: 'Ø60 鋼管、保留原廠尾燈、右側排氣尾管' },
+    note: 'Ø76 直管、方形封板、尾燈座板、右側排氣尾管、拖鉤（車主實車配置）' },
 ];
 
 export const GRILLES = [
