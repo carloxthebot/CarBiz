@@ -170,7 +170,7 @@ def snorkel(side=1):
 # 4 mm folded plate brackets, textured black. Tube ~90 mm outboard of and
 # ~50 mm below the sill (estimate).
 def rock_sliders():
-    root = group('rockSliders')
+    root = group('sideStep_arb')
     y = SILL_Y - 55
     x = BODY_X + 60
     zf, zr = FRONT_ARCH_Z - 40, REAR_ARCH_Z + 40
@@ -297,7 +297,7 @@ def light_bar():
 # black/grey with end caps, two L-brackets into the rack's side T-slot about
 # 1200 apart. On a 1560 rack it overhangs ~285 mm in total.
 def awning(side):
-    root = group(f'awning_{side}')
+    root = group(f'awning_arb_{side}')
     s = -RIGHT if side == 'left' else RIGHT
     L = 2130
     rack_top = ROOF_Y_EDGE + 180
@@ -1080,6 +1080,248 @@ def pillar_pods():
 
 
 
+# ============================================================ MORE VARIANTS
+# Generic builders so each catalogue entry only supplies dimensions.
+def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=6, deflector=True, mesh=False, top=None):
+    """Flat aluminium platform on gutter legs. slat_dir 'across' (Front Runner,
+    ARB) or 'along' (Yakima LockNLoad, Rhino Pioneer)."""
+    root = group(f'roofRack_{pid}')
+    top = top or RACK_TOP
+    deck = top - rail[1]
+    z0, z1 = RACK_ZC - L / 2, RACK_ZC + L / 2
+    for s in (-1, 1):
+        sweep(f'rail{s}', [(s * (W / 2 - rail[0] / 2), deck + rail[1] / 2, z0), (s * (W / 2 - rail[0] / 2), deck + rail[1] / 2, z1)],
+              rounded_rect(rail[0], rail[1], 4), BLACK, root)
+        box(f'railSlot{s}', (s * W / 2, deck + rail[1] / 2, RACK_ZC), (2, 10, L - 20), TEXBLACK, root, bevel=0)
+    for zz, k in ((z0, 1), (z1, -1)):
+        sweep(f'end{zz}', [(-W / 2 + rail[0], deck + rail[1] / 2, zz + k * rail[0] / 2), (W / 2 - rail[0], deck + rail[1] / 2, zz + k * rail[0] / 2)],
+              rounded_rect(rail[1], rail[0], 4), BLACK, root)
+    if slat_dir == 'across':
+        n = slats or int((L - 60) // 110)
+        pitch = (L - 60 - 80) / (n - 1)
+        for i in range(n):
+            z = z0 + 70 + i * pitch
+            box(f'slat{i}', (0, top - 8, z), (W - 2 * rail[0], 15, 62), BLACK, root, bevel=2)
+            box(f'slot{i}', (0, top, z), (W - 2 * rail[0] - 20, 1.5, 9), TEXBLACK, root, bevel=0)
+    else:
+        n = slats or int((W - 2 * rail[0]) // 75)
+        pitch = (W - 2 * rail[0] - 60) / (n - 1)
+        for i in range(n):
+            x = -W / 2 + rail[0] + 30 + i * pitch
+            box(f'slat{i}', (x, top - 8, RACK_ZC), (58, 15, L - 2 * rail[0] - 10), BLACK, root, bevel=2)
+            box(f'slot{i}', (x, top, RACK_ZC), (9, 1.5, L - 2 * rail[0] - 30), TEXBLACK, root, bevel=0)
+    if mesh:                                             # horizontal mesh floor under the slats
+        mw, ml = W - 2 * rail[0], L - 2 * rail[0]
+        for i in range(int(mw // 40) + 1):
+            box(f'mfx{i}', (-mw / 2 + i * 40, top - 20, RACK_ZC), (3, 3, ml), BLACK, root, bevel=0)
+        for j in range(int(ml // 40) + 1):
+            box(f'mfz{j}', (0, top - 20, RACK_ZC - ml / 2 + j * 40), (mw, 3, 3), BLACK, root, bevel=0)
+    per = legs // 2
+    for s in (-1, 1):
+        for k in range(per):
+            z = z0 + 170 + k * (L - 340) / max(1, per - 1)
+            yg = ROOF_Y_EDGE - 6
+            leg = [(s * (GUTTER_X + 18), yg - 25, z), (s * (GUTTER_X + 18), yg + 40, z), (s * (W / 2 - rail[0] / 2), deck, z)]
+            sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
+            box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
+    if deflector:
+        box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
+    return root
+
+
+def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
+    """Roll-out awning on the rack's side rail: soft PVC bag (rounded) or
+    aluminium hard case (crisp). `hinge` adds the 270-degree pivot housing at
+    the rear end (batwing types)."""
+    root = group(f'awning_{pid}_{side}')
+    s = -RIGHT if side == 'left' else RIGHT
+    rack_top = RACK_TOP
+    front = RACK_ZC + ARB_L / 2 + 100                   # bag front never past the roof's leading edge
+    x, y, zc = s * (ARB_W / 2 + 40 + W / 2), rack_top - 40, front - L / 2
+    prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
+    sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
+    for k in (-1, 1):
+        z = zc + k * (L / 2 - 10)
+        sweep(f'cap{k}', [(x, y, z - 18), (x, y, z + 18)], rounded_rect(W + 6, H + 6, 10 if hard else min(W, H) * 0.42, 6), BLACK, root)
+    if not hard:
+        for k in (-1, 1):
+            box(f'strap{k}', (x, y, zc + k * 600), (W + 4, H + 4, 40), WEBBING, root, bevel=10)
+        box('zip', (x + s * W / 2, y - 30, zc), (3, 8, L - 120), WEBBING, root, bevel=0)
+    for k in (-1, 1):
+        z = zc + k * min(600, L * 0.3)
+        box(f'lbracketH{k}', (s * (ARB_W / 2 + 20), y + H / 2 + 15, z), (100, 6, 50), BLACK, root, bevel=2)
+        box(f'lbracketV{k}', (s * (ARB_W / 2 + 5), y + H / 4, z), (6, H / 2 + 30, 50), BLACK, root, bevel=2)
+    if hinge:
+        box('hinge', (x, y - 10, zc - L / 2 - 40), (W + 20, H + 40, 90), BLACK, root, bevel=8)
+        lib.cylinder('pivot', (x, y + H / 2 + 30, zc - L / 2 - 40), (0, 1, 0), 40, 60, BLACK, root)
+    return root
+
+
+def side_step(pid, kind, tube_d=50, length=None, standoff=70, drop=40, pads=(), mat=None, plate_w=180):
+    """kind: 'tube' (round tube, optional step pads), 'slider' (chassis-mounted
+    bar with support tubes), 'plate' (flat step on brackets), 'armour' (sill
+    guard hugging the sill face, no step), 'short' (small step under the door
+    only). pads = [(width, length, z offset from centre), ...]."""
+    root = group(f'sideStep_{pid}')
+    mat = mat or TEXBLACK
+    zf, zr = FRONT_ARCH_Z - 40, REAR_ARCH_Z + 40
+    L = length or (zf - zr - 80)
+    zc = (zf + zr) / 2
+    y = SILL_Y - drop
+    x = BODY_X + standoff
+    for s in (-1, 1):
+        if kind == 'plate':
+            box(f'plate{s}', (s * (x - 10), y, zc), (plate_w, 30, L), mat, root, bevel=6)
+            for i in range(int(L // 90)):
+                box(f'hole{s}{i}', (s * (x - 10), y + 16, zc - L / 2 + 45 + i * 90), (plate_w - 70, 2, 30), RUBBER, root, bevel=0)
+            for k, z in enumerate((zc - L * 0.35, zc, zc + L * 0.35)):
+                box(f'brk{s}{k}', (s * (x - 110), y - 8, z), (200, 30, 60), mat, root, bevel=3)
+        elif kind == 'armour':
+            # plate wrapping the sill: vertical face plus a flat top lip
+            box(f'face{s}', (s * (BODY_X + standoff / 2), SILL_Y + 40, zc), (standoff, 185, L), mat, root, bevel=8)
+            box(f'top{s}', (s * (BODY_X + standoff / 2), SILL_Y + 133, zc), (standoff + 10, 6, L), mat, root, bevel=1)
+            for i in range(int(L // 110)):
+                lib.cylinder(f'bolt{s}{i}', (s * (BODY_X + standoff + 2), SILL_Y + 95, zc - L / 2 + 55 + i * 110), (1, 0, 0), 12, 5, STEEL, root, n=6)
+        elif kind == 'short':
+            # one small step under the door on a tube frame
+            w, l = pads[0][0], pads[0][1]
+            zd = zc + 120                                      # under the door
+            box(f'tread{s}', (s * (x - 10), y, zd), (w, 10, l), ALU_CHEQ, root, bevel=2)
+            for i in range(int(l // 40)):
+                box(f'treadSlot{s}{i}', (s * (x - 10), y + 6, zd - l / 2 + 20 + i * 40), (w - 24, 2, 14), RUBBER, root, bevel=0)
+            tube(f'frame{s}', [(s * (x - 10 - w / 2), y - 8, zd - l / 2), (s * (x - 10 + w / 2), y - 8, zd - l / 2), (s * (x - 10 + w / 2), y - 8, zd + l / 2), (s * (x - 10 - w / 2), y - 8, zd + l / 2)], tube_d, mat, root, bend=40)
+            for k, z in enumerate((zd - l * 0.3, zd + l * 0.3)):
+                box(f'brk{s}{k}', (s * (x - 90), y - 5, z), (160, 30, 50), mat, root, bevel=3)
+        elif kind == 'slider':
+            rail = [(s * (x - 60), y + 10, zf + 10), (s * x, y, zf - 90), (s * x, y, zr + 90), (s * (x - 60), y + 10, zr - 10)]
+            tube(f'main{s}', rail, tube_d, mat, root, bend=110)
+            for k, z in enumerate((zf - 170, zc, zr + 170)):
+                tube(f'support{s}{k}', [(s * (x - 20), y, z), (s * 470, y + 30, z)], tube_d * 0.8, mat, root)
+                box(f'bracket{s}{k}', (s * 455, y + 50, z), (70, 110, 90), mat, root, bevel=4)
+        else:
+            rail = [(s * (x - 40), y, zf + 20), (s * x, y, zf - 60), (s * x, y, zr + 60), (s * (x - 40), y, zr - 20)]
+            tube(f'main{s}', rail, tube_d, mat, root, bend=100)
+            for k, z in enumerate((zc - L * 0.32, zc + L * 0.32)):
+                box(f'brk{s}{k}', (s * (x - 80), y + 10, z), (160, 40, 60), mat, root, bevel=3)
+        if kind in ('tube', 'slider'):
+            for j, (pw, pl, zo) in enumerate(pads):
+                box(f'pad{s}{j}', (s * (x - 10), y + tube_d / 2 + 2, zc + zo), (pw, 6, pl), ALU_CHEQ, root, bevel=1)
+                for i in range(int(pl // 60)):
+                    box(f'padSlot{s}{j}{i}', (s * (x - 10), y + tube_d / 2 + 6, zc + zo - pl / 2 + 30 + i * 60), (pw - 30, 2, 18), RUBBER, root, bevel=0)
+    return root
+
+
+# ===================================================== GENERIC FRONT / REAR / GRILLE
+GUNMETAL = material('Gunmetal', 0x3a3d42, rough=0.45, metal=0.7)
+
+
+def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fogs=False, skid=True, winch=False, mat=None, corners=True):
+    """kind: 'plate' (folded steel bar), 'box' (square tube), 'double' (two
+    tubes), 'short' (short plate between the wheels), 'abs' (OEM-shaped short
+    resin bumper with a mesh opening)."""
+    root = group(f'frontBumper_{pid}')
+    mat = mat or TEXBLACK
+    zf = 1745
+    if kind in ('plate', 'short', 'abs'):
+        path = [(-W / 2, y, zf - D / 2 - 110), (-W / 2 + 120, y, zf - D / 2), (W / 2 - 120, y, zf - D / 2), (W / 2, y, zf - D / 2 - 110)]
+        sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 8 if kind != 'abs' else 30, 4), mat, root)
+        if kind == 'abs':
+            wire_mesh(root, BLACK, 0, y - 10, zf - 6, W * 0.45, H * 0.45, pitch=14)
+            box('meshFrame', (0, y - 10, zf - 12), (W * 0.45 + 20, H * 0.45 + 20, 4), RUBBER, root, bevel=0)
+    elif kind == 'box':
+        sweep('body', [(-W / 2, y, zf - 40), (W / 2, y, zf - 40)], rounded_rect(80, 80, 6, 3), mat, root)
+    elif kind == 'double':
+        for k, yy in enumerate((y + 45, y - 45)):
+            tube(f'bar{k}', [(-W / 2, yy, zf - 130), (-W / 2 + 90, yy, zf - 30), (W / 2 - 90, yy, zf - 30), (W / 2, yy, zf - 130)], tube_d, mat, root, bend=100)
+        for s in (-1, 1):
+            tube(f'link{s}', [(s * 300, y - 45, zf - 30), (s * 300, y + 45, zf - 30)], 30, mat, root)
+    if hoop:
+        tube('hoop', [(-400, y + H / 2 - 20, zf - 60), (-400, y + H / 2 + 140, zf - 60), (400, y + H / 2 + 140, zf - 60), (400, y + H / 2 - 20, zf - 60)], 48, mat, root, bend=110)
+    if fogs:
+        for s in (-1, 1):
+            fog_lamp(root, s * 430, y - 20, zf + 4, mat, dia=90)
+    if winch:
+        box('fairleadFrame', (0, y + 30, zf + 6), (280, 100, 14), RED, root, bevel=3)
+        box('fairleadSlot', (0, y + 30, zf + 14), (220, 56, 4), RUBBER, root, bevel=0)
+    number_plate(root, y - (20 if winch else 0) - (60 if winch else 0), zf + 8)
+    if skid:
+        box('skid', (0, y - H / 2 - 40, zf - 120), (min(700, W - 500), 4, 240), mat, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
+    valance(root, corners=corners and W < 1450)
+    return root
+
+
+def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', steps=False, mat=None):
+    """kind: 'tube' or 'plate'; lamps: 'wings' (plate housings keeping the
+    stock lamps), 'round' (four small round lamps in the bar), 'housing'
+    (recessed boxes), 'none'."""
+    root = group(f'rearBumper_{pid}')
+    mat = mat or TEXBLACK
+    z = -1650
+    if kind == 'tube':
+        tube('bar', [(-W / 2, y, z), (W / 2, y, z)], tube_d, mat, root)
+        for s in (-1, 1):
+            box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
+    else:
+        path = [(-W / 2 - 60, y, z + 150), (-W / 2, y, z), (W / 2, y, z), (W / 2 + 60, y, z + 150)]
+        sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 10, 3), mat, root)
+    for s in (-1, 1):
+        box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), mat, root, bevel=4)
+        if lamps == 'wings':
+            box(f'wing{s}', (s * 513, 545, -1568), (400, 250, 8), mat, root, bevel=3)
+            for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
+                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
+        elif lamps == 'housing':
+            box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
+        elif lamps == 'round':
+            for k, xx in enumerate((s * 470, s * 580)):
+                lib.cylinder(f'lampHsg{s}{k}', (xx, y, z - 8), (0, 0, 1), 78, 40, BLACK, root, n=24)
+                lib.cylinder(f'lampLens{s}{k}', (xx, y, z - 30), (0, 0, 1), 66, 4, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
+        if steps:
+            box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
+    box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
+    box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
+    for s in (-1, 1):
+        box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+    return root
+
+
+def grille_generic(pid, h_slats=0, v_slots=0, hex_cells=False, wire=True, label=None, text_mat=None, bezel='round',
+                   marker=0, mat=None, ow=580, oh=215, slat_h=30, ribs=False, letters_over=True):
+    """Stock-outline panel with a centre opening filled per product."""
+    root = group(f'grille_{pid}')
+    mat = mat or TEXBLACK
+    grille_panel('panel', root, mat, (ow, oh, 858))
+    lamp_bezels(root, mat, bezel)
+    z = face_z(0)
+    if h_slats:
+        pitch = oh / (h_slats + 0.2)
+        for k in range(h_slats):
+            y = 858 - oh / 2 + pitch * 0.6 + k * pitch
+            box(f'slat{k}', (0, y, z + 1), (ow - 10, min(slat_h, pitch * 0.62), 22), mat, root, bevel=4)
+    if v_slots:
+        pitch = ow / (v_slots + 0.5)
+        for k in range(v_slots + 1):
+            x = -ow / 2 + pitch * 0.25 + k * pitch
+            box(f'post{k}', (x, 858, z + 1), (min(24, pitch * 0.35), oh - 8, 22), mat, root, bevel=4)
+    if hex_cells:
+        hex_mesh(root, BLACK, 0, 858, z - 16, ow - 20, oh - 20)
+    elif wire:
+        wire_mesh(root, STEEL if text_mat is None else BLACK, 0, 858, z - 20, ow - 10, oh - 10, pitch=9)
+    box('backing', (0, 858, z - 32), (ow, oh, 3), RUBBER, root, bevel=0)
+    if ribs:
+        for s in (-1, 1):
+            for k in range(3):
+                box(f'rib{s}{k}', (s * 460, 866 + (k - 1) * 45, z + 8), (230, 8, 8), mat, root, bevel=2)
+    for k in range(marker):
+        xx = (-1 if k % 2 == 0 else 1) * (ow / 2 - 60 - (k // 2) * 90)
+        lib.cylinder(f'marker{k}', (xx, 858 + oh / 2 + 24, z + 6), (0, 0, 1), 46, 20, BLACK, root, n=20)
+        lib.cylinder(f'markerLens{k}', (xx, 858 + oh / 2 + 24, z + 17), (0, 0, 1), 38, 3, material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0), root, n=20)
+    if label:
+        text('suzuki', label, (0, 862, z + 16), 56, 5, text_mat or material('LabelWhite', 0xf0f0ec, rough=0.6), root,
+             font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    return root
+
+
 def build():
     for v in ('platform', 'basket'):
         roof_rack(v)
@@ -1116,6 +1358,84 @@ def build():
     mirrors_urnieta()
     mirrors_damd()
     pillar_pods()
+    # catalogue variants (dimensions from parts.js research; see notes there)
+    # roof racks (research 2026-09-16: ARB/Yakima TW, Front Runner, Rhino, JAOS, IPF, APIO, SHOWA, TW generic)
+    rack_platform('yakima', 1370, 1520, slat_dir='across', slats=7, legs=4, deflector=False)
+    rack_platform('fr34', 1345, 1156, slat_dir='across', slats=6, legs=4, deflector=True)
+    rack_platform('pioneer', 1339, 1453, slat_dir='along', slats=5, legs=4, deflector=False)
+    rack_platform('jaos', 1250, 1400, slat_dir='across', slats=6, rail=(32, 32), legs=6, deflector=True)
+    rack_platform('ipf', 1250, 1400, slat_dir='across', slats=7, rail=(40, 39), legs=4, deflector=False)
+    rack_platform('apio', 1270, 1420, slat_dir='across', slats=8, rail=(28, 60), legs=6, deflector=True)
+    rack_platform('showa_foot', 1250, 1500, slat_dir='across', slats=9, rail=(40, 40), legs=6, deflector=False)
+    rack_platform('tw_generic', 1260, 1600, slat_dir='across', slats=9, legs=6, deflector=True)
+    # awnings (closed bag L x W x H; hard = aluminium case; hinge = 270/180 pivot at the rear end)
+    for side in ('left', 'right'):
+        awning_case('arb_touring_2', side, 2200, 130, 130, PVC)
+        awning_case('arb_touring_25', side, 2700, 130, 130, PVC)
+        awning_case('arb_alu', side, 2650, 150, 110, BLACK, hard=True)
+        awning_case('yakima_s', side, 2100, 150, 150, PVC)
+        awning_case('yakima_l', side, 2600, 150, 150, PVC)
+        awning_case('yakima_270', side, 2286, 216, 254, PVC, hinge=True)
+        awning_case('yakima_180', side, 2260, 229, 178, PVC, hinge=True)
+        awning_case('rhino_compact', side, 2000, 180, 160, PVC, hinge=True)
+        awning_case('rhino_270', side, 2500, 180, 160, PVC, hinge=True)
+        awning_case('darche_270', side, 2550, 170, 170, PVC, hinge=True)
+        awning_case('darche_slim', side, 2550, 130, 130, PVC)
+        awning_case('ikamper', side, 2630, 180, 184, BLACK, hard=True, hinge=True)
+        awning_case('allblack_270', side, 2100, 180, 180, PVC, hinge=True)
+    # side steps (research 2026-09-16: TW mrk.com.tw, JP makers)
+    side_step('wlm', 'tube', tube_d=50, pads=[(120, 250, -320), (120, 250, 320)])
+    side_step('jst', 'tube', tube_d=50, pads=[(120, 300, -300), (120, 300, 300)])
+    side_step('tjm', 'slider', tube_d=51, pads=[(110, 200, -350), (110, 200, 0), (110, 200, 350)])
+    side_step('outclass', 'tube', tube_d=45, pads=[(150, 900, 0)], drop=30)
+    side_step('apio_guard', 'armour', standoff=45)
+    side_step('jaos', 'tube', tube_d=76, pads=[(110, 300, 60)])
+    side_step('taniguchi_bar', 'tube', tube_d=42, pads=[(145, 550, 80)])
+    side_step('taniguchi_short', 'short', tube_d=32, pads=[(145, 550, 0)])
+    side_step('showa', 'tube', tube_d=48)
+    side_step('wildgoose_fold', 'short', tube_d=20, pads=[(160, 510, 0)])
+    side_step('wildgoose_guard', 'armour', standoff=55)
+    side_step('customwagon', 'tube', tube_d=48, pads=[(140, 420, 60)])
+    side_step('spieler', 'plate', plate_w=150)
+    side_step('ironman', 'slider', tube_d=51)
+    side_step('hamer', 'slider', tube_d=60, pads=[(120, 260, -300), (120, 260, 300)])
+    # front bumpers (TW/JP research 2026-09-16)
+    front_bar('armando', 'plate', W=1500, H=350, D=180, y=520, hoop=True, fogs=True)
+    front_bar('urnieta_1970', 'short', W=1300, H=160, D=120, y=560)
+    front_bar('beyond_liberte', 'plate', W=1400, H=250, D=150, fogs=True)
+    front_bar('maverick', 'short', W=1200, H=150, D=110, y=540, skid=False)
+    front_bar('jst', 'short', W=1300, H=180, D=130, y=550, hoop=True)
+    front_bar('mrk_abs', 'abs', W=1520, H=250, D=170, y=540, skid=False, corners=False)
+    front_bar('wmd_winch', 'short', W=1100, H=230, D=170, y=560, hoop=True, winch=True)
+    front_bar('jaos_cowl', 'abs', W=1560, H=280, D=180, y=540, skid=False, corners=False)
+    front_bar('taniguchi_square', 'box', W=1400, y=600, skid=False)
+    front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
+    front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
+    # rear bumpers
+    rear_bar('klc_heritage_rear', 'tube', W=1450, tube_d=60, lamps='wings')
+    rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
+    rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
+    rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')
+    rear_bar('wildgoose_crawler_rear', 'tube', W=1330, tube_d=76, lamps='housing')
+    rear_bar('wildgoose_box_rear', 'plate', W=1410, H=100, D=100, y=450, lamps='housing')
+    rear_bar('showa_iron_rear', 'tube', W=1450, tube_d=60, lamps='wings')
+    rear_bar('taniguchi_rear_pipe', 'tube', W=1420, tube_d=60, lamps='none')
+    rear_bar('apio_tactical_rear', 'plate', W=1660, H=280, D=200, y=520, lamps='housing')
+    rear_bar('outclass_rear_abs', 'plate', W=1500, H=220, D=170, y=500, lamps='round')
+    rear_bar('hamer_mx208', 'plate', W=1700, H=300, D=220, y=520, lamps='housing', steps=True)
+    # grilles
+    grille_generic('taishan_retro', v_slots=7, label='SUZUKI')
+    grille_generic('klc_ja', wire=True, marker=4, bezel='round')
+    grille_generic('klc_nanaketsu', v_slots=7, bezel='square')
+    grille_generic('klc_forty', wire=True, ribs=True)
+    grille_generic('urnieta_1970', wire=True, ow=620, oh=230)
+    grille_generic('mrk_angry', h_slats=3, slat_h=42, bezel='square')
+    grille_generic('apio_sj', v_slots=9, mat=GUNMETAL)
+    grille_generic('apio_marker', h_slats=4, marker=4)
+    grille_generic('taniguchi_washer', v_slots=5)
+    grille_generic('kpro_folksy', h_slats=6, mat=material('WhiteGel', 0xeeeee8, rough=0.35), wire=False)
+    grille_generic('prostaff_minig', v_slots=9, bezel='square')
+    grille_generic('sixsense_explosion', h_slats=2, slat_h=50, label='SUZUKI', bezel='square')
     lib.export(os.path.abspath(OUT))
 
 
