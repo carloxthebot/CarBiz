@@ -242,7 +242,7 @@ export function rigJimny(THREE, gltfScene) {
   // Runs AFTER the anchors so re-painting the roof panel cannot move the rack.
   const fin = loadFinishes(THREE);
   const TRIM = {
-    black: new THREE.MeshStandardMaterial({ name: 'TrimBlack', color: 0x1a1b1d, roughness: 0.78, metalness: 0,
+    black: new THREE.MeshStandardMaterial({ name: 'TrimBlack', color: 0x202224, roughness: 0.9, metalness: 0,
       normalMap: fin.powder.nor, normalScale: new THREE.Vector2(0.5, 0.5) }),
     glass: new THREE.MeshPhysicalMaterial({ name: 'Glass', color: 0x0b0f12, roughness: 0.04, metalness: 0,
       transparent: true, opacity: 0.6 }),

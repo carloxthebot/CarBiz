@@ -82,7 +82,7 @@ def roof_rack(variant):
     root = group(f'roofRack_{variant}')
     W, L = (1345, 1560) if variant == 'platform' else (1250, 1300)
     zc = (ROOF_Z_FRONT + ROOF_Z_REAR) / 2 - 20
-    top = ROOF_Y_MID + 95                      # tray just clears the roof crown
+    top = ROOF_Y_MID + 62                      # tray just clears the roof crown
     deck = top - 50                              # underside of the tray
     z0, z1 = zc - L / 2, zc + L / 2
 
@@ -713,7 +713,7 @@ def rim(style):
 # fire extinguisher, WLM guard carrying a flat fuel can and an axe, and
 # riveted pocket-style flares.
 ARB_W, ARB_L = 1285, 1545
-RACK_TOP = ROOF_Y_MID + 95
+RACK_TOP = ROOF_Y_MID + 62
 RACK_ZC = (ROOF_Z_FRONT + ROOF_Z_REAR) / 2 - 20
 WOOD = material('AxeHandle', 0xa07a4a, rough=0.7)
 RED_LABEL = material('LabelRed', 0xb3261e, rough=0.5)
@@ -895,43 +895,55 @@ def guard_can():
         box(f'strap{z}', (face + s * 55, cy - 10, z), (110, 40, 26), STEEL, root, bevel=3)
     # axe: wooden handle, steel head, two clamps
     ax = cz + 235
-    lib.cylinder('handle', (face + s * 34, cy - 30, ax), (0, 1, 0), 32, 620, WOOD, root, n=14)
-    box('head', (face + s * 34, cy + 280, ax - 40), (30, 90, 170), STEEL, root, bevel=4)
-    for y in (cy - 200, cy + 120):
-        box(f'axeClamp{y}', (face + s * 20, y, ax), (48, 24, 50), BLACK, root, bevel=3)
+    lib.cylinder('handle', (face + s * 30, cy - 40, ax), (0, 1, 0), 24, 560, WOOD, root, n=14)
+    for k in range(6):                                       # paracord wrap on the grip
+        lib.cylinder(f'wrap{k}', (face + s * 30, cy - 250 + k * 14, ax), (0, 1, 0), 28, 10, BLACK, root, n=12)
+    # head: bit forward (toward the door), hammer poll behind, eye over the handle
+    box('eye', (face + s * 30, cy + 250, ax), (34, 70, 44), STEEL, root, bevel=5)
+    prism('bit', [(cy + 215, ax + 22), (cy + 285, ax + 22), (cy + 310, ax + 120), (cy + 190, ax + 120)], face + s * 18, face + s * 42, STEEL, root)
+    box('poll', (face + s * 30, cy + 250, ax - 42), (30, 44, 40), STEEL, root, bevel=4)
+    for y in (cy - 180, cy + 130):
+        box(f'axeClamp{y}', (face + s * 18, y, ax), (40, 22, 44), BLACK, root, bevel=3)
     return root
 
 
 def guard_board():
-    """Recovery (traction) board strapped flat on the LEFT window guard."""
+    """Perforated recovery board on the LEFT window guard: about half the
+    guard's height, centred, a grid of square holes, strapped at both ends."""
     root = group('guardBoard')
     s = -RIGHT
     q = QUARTER
     cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
     face = s * 716
-    board = box('board', (face + s * 24, cy, cz), (42, 330, 760), BLACK, root, bevel=14)
+    board = box('board', (face + s * 18, cy - 10, cz), (30, 240, 700), BLACK, root, bevel=10)
     board.modifiers['bevel'].segments = 3
-    for i in range(9):                                       # traction holes
-        for j in range(4):
-            lib.cylinder(f'hole{i}{j}', (face + s * 46, cy - 120 + j * 80, cz - 320 + i * 80), (1, 0, 0), 34, 4, RUBBER, root, n=10)
-    for z in (cz - 260, cz + 260):
-        box(f'strap{z}', (face + s * 26, cy, z), (50, 340, 26), STEEL, root, bevel=3)
+    for i in range(10):
+        for j in range(3):
+            box(f'hole{i}{j}', (face + s * 34, cy - 10 - 70 + j * 70, cz - 315 + i * 70), (4, 36, 36), RUBBER, root, bevel=0)
+    for z in (cz - 250, cz + 250):
+        box(f'strap{z}', (face + s * 20, cy - 10, z), (40, 250, 24), STEEL, root, bevel=3)
     return root
 
 
 def shovel():
-    """Folding shovel along the rack's right rail, blade to the rear."""
+    """Black folding shovel along the rack's right rail, blade to the rear:
+    D-grip, tube shaft with a collar, folding hinge, dished blade."""
     root = group('shovel')
     s = RIGHT
     x = s * (ARB_W / 2 - 40)
-    y = RACK_TOP + 45
+    y = RACK_TOP + 40
     zc = RACK_ZC - 250
-    lib.cylinder('handle', (x, y, zc + 300), (0, 0, 1), 34, 700, WOOD, root, n=14)
-    box('grip', (x, y, zc + 660), (100, 34, 40), BLACK, root, bevel=8)
-    box('blade', (x, y - 10, zc - 180), (220, 40, 300), STEEL, root, bevel=20)
-    box('bladeEdge', (x, y - 10, zc - 340), (180, 30, 30), STEEL, root, bevel=10)
-    for z in (zc + 120, zc + 500):
-        box(f'clamp{z}', (x, y - 30, z), (60, 40, 40), BLACK, root, bevel=4)
+    lib.cylinder('shaft', (x, y, zc + 320), (0, 0, 1), 28, 640, BLACK, root, n=14)
+    tube('dgrip', [(x, y, zc + 640), (x, y + 60, zc + 690), (x, y + 60, zc + 760), (x, y, zc + 800), (x, y, zc + 640)], 22, BLACK, root, bend=30)
+    lib.cylinder('collar', (x, y, zc + 10), (0, 0, 1), 40, 50, STEEL, root, n=14)
+    box('hinge', (x, y, zc - 20), (44, 30, 40), STEEL, root, bevel=4)
+    lib.cylinder('hingePin', (x, y, zc - 20), (1, 0, 0), 14, 56, STEEL, root, n=8)
+    blade = box('blade', (x, y - 6, zc - 190), (200, 22, 320), BLACK, root, bevel=16)
+    blade.modifiers['bevel'].segments = 4
+    box('bladeRib', (x, y + 6, zc - 150), (30, 8, 220), BLACK, root, bevel=2)
+    for z in (zc + 120, zc + 520):
+        box(f'clamp{z}', (x, y - 30, z), (46, 34, 34), BLACK, root, bevel=4)
+        box(f'clampFoot{z}', (x, y - 52, z), (60, 10, 50), BLACK, root, bevel=2)
     return root
 
 
@@ -954,26 +966,15 @@ def revolve_arc(name, profile, centre_y, centre_z, a0, a1, mat, parent, side=1, 
 
 
 def flares():
-    """Pocket-style flares over the stock arches (owner's photos): a wide
-    shell with an inner lip on the body, a flat ledge, an outer face raked
-    ~45 degrees down and out, rivets along the face and three vent slots on
-    the front section. Sits outside the stock flare, which stays as liner."""
+    """Riveted look on the STOCK arches (owner's choice): hex bolt heads along
+    the flare's outer edge; the stock shells stay, rendered matte."""
     root = group('flares')
-    # (r, x) profile: body lip -> ledge -> raked face -> bottom edge -> back inside
-    prof = [(452, 688), (460, 722), (505, 745), (548, 800), (538, 808), (498, 754), (455, 738), (444, 690)]
     for s in (-1, 1):
         for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
-            revolve_arc(f'flare{s}{z}', prof, 346, z, 6, 174, TEXBLACK, root, side=s)
-            for t in range(13):
-                a = math.radians(14 + 152 * t / 12)
-                r, x = 530, 786
-                lib.cylinder(f'rivet{s}{z}{t}', (s * x, 346 + r * math.sin(a), z + r * math.cos(a)), (s * 0.78, math.sin(a) * 0.6, math.cos(a) * 0.6), 15, 7, BLACK, root, n=6)
-            front = z == CAR['anchors']['frontAxleZ']
-            for t in range(3):                                # vent slots on the forward quarter
-                a = math.radians((28 if front else 152) + t * 9)
-                r = 522
-                box(f'vent{s}{z}{t}', (s * 774, 346 + r * math.sin(a), z + r * math.cos(a)), (8, 40, 12), RUBBER, root, bevel=0,
-                    rot=Matrix.Rotation(-a * (1 if s > 0 else 1), 3, 'X'))
+            for t in range(11):
+                a = math.radians(18 + 144 * t / 10)
+                r, x = 478, 786
+                lib.cylinder(f'rivet{s}{z}{t}', (s * x, 346 + r * math.sin(a), z + r * math.cos(a)), (1, 0, 0), 14, 7, BLACK, root, n=6)
     return root
 
 
@@ -1199,9 +1200,9 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     s = -RIGHT if side == 'left' else RIGHT
     rack_top = RACK_TOP
     front = RACK_ZC + ARB_L / 2 + 100                   # bag front never past the roof's leading edge
-    # bag rests on the tray over the rail, overhanging the edge ~100 mm, so its
-    # outer face stays about at the body line (owner's photos)
-    x, y, zc = s * (ARB_W / 2 - W / 2 + 100), rack_top + H / 2 - 6, front - L / 2
+    # bag hangs beside the rail, its top ~40 mm above the tray and its outer
+    # face about at the body line (owner's photos)
+    x, y, zc = s * (ARB_W / 2 + W / 2 - 30), rack_top + 40 - H / 2, front - L / 2
     prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
     sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
     for k in (-1, 1):
@@ -1213,7 +1214,8 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
         box('zip', (x + s * W / 2, y - 30, zc), (3, 8, L - 120), WEBBING, root, bevel=0)
     for k in (-1, 1):
         z = zc + k * min(600, L * 0.3)
-        box(f'bracket{k}', (s * (ARB_W / 2 - W / 2 + 100), y - H / 2 - 4, z), (W - 20, 8, 50), BLACK, root, bevel=2)
+        box(f'bracketH{k}', (s * (ARB_W / 2 + W / 2 - 30), y + H / 2 + 4, z), (W - 10, 8, 50), BLACK, root, bevel=2)
+        box(f'bracketV{k}', (s * (ARB_W / 2 - 4), y + H / 4, z), (8, H / 2 + 20, 50), BLACK, root, bevel=2)
     if hinge:                                            # 270 types: pivot plate at the rear end, flush with the bag
         box('hinge', (x, y - 4, zc - L / 2 - 22), (W + 10, H + 8, 40), BLACK, root, bevel=6)
         lib.cylinder('pivot', (x, y - H / 2 - 30, zc - L / 2 - 22), (0, 1, 0), 36, 50, BLACK, root)
@@ -1334,21 +1336,9 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'klc':
-            # trapezoid lamp housing standing on the tube at each end (KLC photo):
-            # narrower at the tube, wider at the top; nothing below the tube
-            zp = -1585
-            poly = [(s * 340, y + tube_d / 2 - 6), (s * 700, y + tube_d / 2 - 6), (s * 728, 612), (s * 305, 612)]
-            bm = bmesh.new()
-            vs_f = [bm.verts.new(P(px, py, zp + 4)) for (px, py) in poly]
-            vs_b = [bm.verts.new(P(px, py, zp - 4)) for (px, py) in poly]
-            bm.faces.new(vs_f); bm.faces.new(list(reversed(vs_b)))
-            for i in range(4):
-                bm.faces.new((vs_f[i], vs_b[i], vs_b[(i + 1) % 4], vs_f[(i + 1) % 4]))
-            bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
-            lib.new_object(f'wing{s}', bm, mat, root, smooth=False)
-            box(f'wingTop{s}', (s * 516, 614, zp + 30), (420, 8, 70), mat, root, bevel=2)
-            box(f'wingEnd{s}', (s * 730, 530, zp + 30), (8, 170, 70), mat, root, bevel=2)
-            box(f'wingIn{s}', (s * 322, 530, zp + 30), (8, 160, 70), mat, root, bevel=2)
+            # the stock lamps hang above the tube on a small backing plate and a bracket
+            box(f'lampBack{s}', (s * 513, 518, -1556), (380, 150, 8), mat, root, bevel=3)
+            box(f'lampBrk{s}', (s * 513, y + 40, -1600), (60, 70, 40), mat, root, bevel=3)
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'housing':
@@ -1359,7 +1349,11 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
                 lib.cylinder(f'lampLens{s}{k}', (xx, y, z - 30), (0, 0, 1), 66, 4, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
-    box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
+    if lamps == 'klc':                                       # plate hangs under the tube's middle
+        box('plateBrk', (0, y - 40, z), (300, 70, 6), mat, root, bevel=1)
+        box('plate', (0, y - 100, z - tube_d / 2 - 2), (330, 165, 3), PLATE, root, bevel=1)
+    else:
+        box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
         box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
         for s in (-1, 1):
