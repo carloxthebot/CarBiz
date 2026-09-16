@@ -210,8 +210,8 @@ export const REAR_BUMPERS = [
   // ---- 台灣有售
   { id: 'tube', label: '車主實車 管狀後保桿（含尾燈座）', price: null, cur: 'TWD', brand: '多家', uncertain: true,
     note: 'Ø76 直管、方形封板、尾燈座板、右側排氣尾管、拖鉤' },
-  { id: 'klc_heritage_rear', url: 'https://www.mrk.com.tw/product_ii.html?ID=2059', label: 'KLC Heritage 經典復古後保桿（MRK）', price: 26000, cur: 'TWD', brand: 'KLC Heritage',
-    note: 'Ø60 直管、尾燈與車牌開口板；粉體黑／銀／象牙白' },
+  { id: 'klc_heritage_rear', url: 'https://www.mrk.com.tw/product_ii.html?ID=2059', label: 'KLC Heritage 經典復古後保桿（MRK）', price: 26000, cur: 'TWD', brand: 'KLC Heritage', part: 'HTRBBK',
+    note: '粗直管＋兩端梯形尾燈座板、車牌下吊；粉體黑／銀／象牙白（車主實車配置）' },
   { id: 'urnieta_1970_rear', url: 'https://www.mrk.com.tw/product_ii.html?ID=2219', label: 'URNIETA 1970 後保桿', price: 20400, cur: 'TWD', brand: 'URNIETA', part: 'UR015',
     note: '半高、兩端上折、圓形尾燈，8.4kg' },
   { id: 'beyond_rear', url: 'https://www.mrk.com.tw/product_ii.html?ID=2112', label: 'Beyond Japan Liberte 復古後保桿', price: 21000, cur: 'TWD', brand: 'Beyond Japan',

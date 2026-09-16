@@ -645,7 +645,7 @@ def bumper_outclass():
 # beadlock ring.
 RIM_R, RIM_W = 203.2, 178.0
 RIM_FACE = material('RimFace', 0xc8ccd0, rough=0.35, metal=0.8)
-RIM_DARK = material('RimBarrel', 0x2a2d31, rough=0.6, metal=0.6)
+RIM_DARK = material('RimBarrel', 0x0f1113, rough=0.7, metal=0.4)
 NUT = material('LugNut', 0xd8dadd, rough=0.3, metal=1.0)
 
 
@@ -784,14 +784,19 @@ def bumper_tube_heritage():
     text('heritage', 'Heritage', (0, y - 185, zt - 86), 70, 3, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
          font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
     for s in (-1, 1):
-        px, py, pz = s * 330, y - 95, zt - 46
+        px, py, pz = s * 400, y - 95, zt - 40
         box(f'pod{s}', (px, py, pz + 24), (86, 86, 48), BLACK, root, bevel=4)
         box(f'podRim{s}', (px, py, pz + 50), (80, 80, 6), TEXBLACK, root, bevel=2)
         for (dx, dy) in ((-18, -18), (18, -18), (-18, 18), (18, 18)):
             lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 54), (0, 0, 1), 28, 4, CHROME, root, n=20)
             lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 57), (0, 0, 1), 26, 2, LENS, root, n=20)
-    box('plateBracket', (0, y - 40, zt + 10), (300, 80, 6), BLACK, root, bevel=1)
-    box('plate', (0, y - 40, zt + 34), (330, 165, 3), PLATE, root, bevel=1)
+    # KLC Traditional: a second, shorter tube under the main one carries the
+    # lamps at its ends and the number plate in the middle
+    tube('lower', [(-400, y - 95, zt - 20), (400, y - 95, zt - 20)], 50, TEXBLACK, root)
+    for s in (-1, 1):
+        tube(f'link{s}', [(s * 250, y - 95, zt - 20), (s * 250, y, zt)], 30, TEXBLACK, root)
+    box('plateBracket', (0, y - 50, zt + 10), (300, 90, 6), BLACK, root, bevel=1)
+    box('plate', (0, y - 50, zt + 34), (330, 165, 3), PLATE, root, bevel=1)
     tube('crossmember', [(-540, 470, 1480), (540, 470, 1480)], 55, TEXBLACK, root)
     box('bay', (0, 540, 1380), (1050, 320, 20), RUBBER, root, bevel=4)
     return root
@@ -1022,14 +1027,15 @@ def mirrors_urnieta():
     root = group('mirrors_urnieta')
     for s in (-1, 1):
         x0 = s * MIR_X
-        loop = [(x0, 1330, 480), (s * (MIR_X + 170), 1330, 445), (s * (MIR_X + 170), 1000, 445), (x0, 1000, 480)]
+        loop = [(x0, 1330, 485), (s * (MIR_X + 200), 1330, 485), (s * (MIR_X + 200), 1000, 485), (x0, 1000, 485)]
         tube(f'arm{s}', loop, 20, BLACK, root, bend=60)
         for y in (1330, 1000):
             box(f'base{s}{y}', (s * (MIR_X + 4), y, 482), (10, 50, 70), BLACK, root, bevel=3)
-        head = box(f'head{s}', (s * (MIR_X + 120), MIR_Y, 440), (34, 150, 200), BLACK, root, bevel=16)
+        # head faces the rear: wide across the car, thin front-to-back
+        head = box(f'head{s}', (s * (MIR_X + 120), MIR_Y, 452), (200, 150, 34), BLACK, root, bevel=16)
         head.modifiers['bevel'].segments = 4
-        box(f'glass{s}', (s * (MIR_X + 120), MIR_Y, 421), (2, 136, 186), CHROME, root, bevel=0)
-        box(f'stem{s}', (s * (MIR_X + 145), MIR_Y, 440), (30, 24, 24), BLACK, root, bevel=3)
+        box(f'glass{s}', (s * (MIR_X + 120), MIR_Y, 433), (186, 136, 2), CHROME, root, bevel=0)
+        box(f'stem{s}', (s * (MIR_X + 160), MIR_Y, 470), (24, 24, 30), BLACK, root, bevel=3)
     return root
 
 
@@ -1053,21 +1059,22 @@ def mirrors_damd():
         lib.cylinder(f'hinge{s}', (s * (MIR_X + 14), 1005, 505), (0, 1, 0), 34, 60, BLACK, root, n=16)
         box(f'botClamp{s}', (s * (MIR_X + 30), 1000, 505), (40, 26, 26), BLACK, root, bevel=3)
         # head: 150 x 250 x 50 shell, corner radius ~30, glass in the rear face
-        head = box(f'head{s}', (s * (MIR_X + 120), 1165, 458), (50, 250, 150), BLACK, root, bevel=28)
+        # head faces the rear (glass plane across the car); the vertical tube runs just ahead of it
+        head = box(f'head{s}', (s * (MIR_X + 110), 1165, 455), (150, 250, 50), BLACK, root, bevel=28)
         head.modifiers['bevel'].segments = 6
-        box(f'glass{s}', (s * (MIR_X + 120), 1165, 432), (2, 226, 128), CHROME, root, bevel=0)
-        box(f'glassRim{s}', (s * (MIR_X + 120), 1165, 434), (2, 236, 138), RUBBER, root, bevel=0)
-        # pivot from the vertical tube to the head's back
-        box(f'pivot{s}', (s * (MIR_X + 168), 1165, 486), (22, 40, 24), BLACK, root, bevel=3)
+        box(f'glass{s}', (s * (MIR_X + 110), 1165, 429), (128, 226, 2), CHROME, root, bevel=0)
+        box(f'glassRim{s}', (s * (MIR_X + 110), 1165, 431), (138, 236, 2), RUBBER, root, bevel=0)
+        # pivot from the vertical tube to the head's front face
+        box(f'pivot{s}', (s * (MIR_X + 160), 1165, 486), (36, 40, 20), BLACK, root, bevel=3)
     return root
 
 
-def pillar_pods():
+def pillar_pods(sides=(-1, 1), suffix=''):
     """Two small round pods stacked on one bracket at the cowl beside the
     A-pillar base (owner's car): amber above, white below, facing forward."""
-    root = group('pillarPods')
+    root = group('pillarPods' + suffix)
     amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
-    for s in (-1, 1):
+    for s in sides:
         x, z = s * 688, 600
         box(f'bracket{s}', (s * 674, 1150, z - 25), (8, 130, 60), BLACK, root, bevel=1)
         box(f'foot{s}', (s * 690, 1084, z - 25), (40, 6, 60), BLACK, root, bevel=1)
@@ -1270,6 +1277,24 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             box(f'wing{s}', (s * 513, 545, -1568), (400, 250, 8), mat, root, bevel=3)
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
+        elif lamps == 'klc':
+            # trapezoid plate rising from the tube, wider at the top, lamp framed in it
+            # plate sits BEHIND the stock lamps (they stay proud of it): trapezoid in
+            # the X-Y plane, narrower at the tube, wider at the top, 90 mm ahead of the lens
+            zp = -1560
+            poly = [(s * 360, y + 10), (s * 725, y + 10), (s * 725, 640), (s * 320, 640)]
+            bm = bmesh.new()
+            vs_f = [bm.verts.new(P(px, py, zp + 4)) for (px, py) in poly]
+            vs_b = [bm.verts.new(P(px, py, zp - 4)) for (px, py) in poly]
+            bm.faces.new(vs_f); bm.faces.new(list(reversed(vs_b)))
+            for i in range(4):
+                bm.faces.new((vs_f[i], vs_b[i], vs_b[(i + 1) % 4], vs_f[(i + 1) % 4]))
+            bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+            lib.new_object(f'wing{s}', bm, mat, root, smooth=False)
+            box(f'wingTop{s}', (s * 522, 642, zp - 20), (405, 8, 48), mat, root, bevel=2)
+            box(f'wingEnd{s}', (s * 727, 545, zp - 20), (8, 200, 48), mat, root, bevel=2)
+            for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
+                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -1358,6 +1383,7 @@ def build():
     mirrors_urnieta()
     mirrors_damd()
     pillar_pods()
+    pillar_pods(sides=(-RIGHT,), suffix='_left')
     # catalogue variants (dimensions from parts.js research; see notes there)
     # roof racks (research 2026-09-16: ARB/Yakima TW, Front Runner, Rhino, JAOS, IPF, APIO, SHOWA, TW generic)
     rack_platform('yakima', 1370, 1520, slat_dir='across', slats=7, legs=4, deflector=False)
@@ -1412,7 +1438,7 @@ def build():
     front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=1450, tube_d=60, lamps='wings')
+    rear_bar('klc_heritage_rear', 'tube', W=1480, tube_d=70, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')

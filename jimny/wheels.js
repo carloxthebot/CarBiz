@@ -350,11 +350,11 @@ function tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl })
   const draw = (ctx, fill) => {
     ctx.fillStyle = fill; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     for (const [t, at, big] of [[brand, 0.0, true], [model, 0.5, false]]) {
-      let fs = Math.round(bandH * (big ? 0.17 : 0.15));
+      let fs = Math.round(bandH * (big ? 0.27 : 0.25));
       const font = (nn) => `${big ? '900' : '700'} ${nn}px "Helvetica Neue", Arial, sans-serif`;
       ctx.font = font(fs);
       const w = ctx.measureText(t).width;
-      if (w > W * 0.30) { fs = Math.floor(fs * W * 0.30 / w); ctx.font = font(fs); }
+      if (w > W * 0.36) { fs = Math.floor(fs * W * 0.36 / w); ctx.font = font(fs); }
       ctx.fillText(t, W * (at + 0.25), yText);
     }
   };
