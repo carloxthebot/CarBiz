@@ -879,9 +879,9 @@ def decals():
 
 
 def guard_can():
-    """Flat fuel can and an axe on the LEFT window guard (owner's car)."""
+    """Flat fuel can and an axe on the RIGHT window guard (owner's car)."""
     root = group('guardCan')
-    s = -RIGHT
+    s = RIGHT
     q = QUARTER
     cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
     face = s * 716
@@ -902,23 +902,81 @@ def guard_can():
     return root
 
 
+def guard_board():
+    """Recovery (traction) board strapped flat on the LEFT window guard."""
+    root = group('guardBoard')
+    s = -RIGHT
+    q = QUARTER
+    cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
+    face = s * 716
+    board = box('board', (face + s * 34, cy, cz), (60, 330, 760), TEXBLACK, root, bevel=18)
+    board.modifiers['bevel'].segments = 3
+    for i in range(9):                                       # traction slots
+        for j in range(3):
+            box(f'slot{i}{j}', (face + s * 66, cy - 100 + j * 100, cz - 320 + i * 80), (6, 60, 34), RUBBER, root, bevel=0)
+    for z in (cz - 260, cz + 260):
+        box(f'strap{z}', (face + s * 36, cy, z), (70, 340, 26), STEEL, root, bevel=3)
+    return root
+
+
+def shovel():
+    """Folding shovel along the rack's right rail, blade to the rear."""
+    root = group('shovel')
+    s = RIGHT
+    x = s * (ARB_W / 2 - 40)
+    y = RACK_TOP + 45
+    zc = RACK_ZC - 250
+    lib.cylinder('handle', (x, y, zc + 300), (0, 0, 1), 34, 700, WOOD, root, n=14)
+    box('grip', (x, y, zc + 660), (100, 34, 40), BLACK, root, bevel=8)
+    box('blade', (x, y - 10, zc - 180), (220, 40, 300), STEEL, root, bevel=20)
+    box('bladeEdge', (x, y - 10, zc - 340), (180, 30, 30), STEEL, root, bevel=10)
+    for z in (zc + 120, zc + 500):
+        box(f'clamp{z}', (x, y - 30, z), (60, 40, 40), BLACK, root, bevel=4)
+    return root
+
+
 def flares():
-    """Riveted pocket-style flares over all four arches."""
+    """Riveted pocket-style flares replacing the stock arch shells: an outer
+    face standing ~95 mm off the body, a return skirt to the panel, hex bolt
+    heads around the edge, and a lower leg at each end down to the sill."""
     root = group('flares')
-    r_in, r_out = 455, 505
+    r_in, r_out = 448, 545
     for s in (-1, 1):
         for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
+            xo = s * 800                                     # outer face plane
+            # outer face ring
             poly = []
             for t in range(25):
-                a = math.radians(6 + 168 * t / 24)
+                a = math.radians(4 + 172 * t / 24)
                 poly.append((346 + r_out * math.sin(a), z + r_out * math.cos(a)))
             for t in range(25):
-                a = math.radians(174 - 168 * t / 24)
+                a = math.radians(176 - 172 * t / 24)
                 poly.append((346 + r_in * math.sin(a), z + r_in * math.cos(a)))
-            band = prism(f'flare{s}{z}', poly, s * 786, s * 794, TEXBLACK, root)
-            for t in range(14):
-                a = math.radians(12 + 156 * t / 13)
-                lib.cylinder(f'rivet{s}{z}{t}', (s * 797, 346 + 480 * math.sin(a), z + 480 * math.cos(a)), (1, 0, 0), 14, 6, BLACK, root, n=6)
+            prism(f'face{s}{z}', poly, xo - s * 4, xo + s * 4, TEXBLACK, root)
+            # return skirt from the face's outer edge back to the body
+            skirt = []
+            for t in range(25):
+                a = math.radians(4 + 172 * t / 24)
+                skirt.append((346 + (r_out + 6) * math.sin(a), z + (r_out + 6) * math.cos(a)))
+            for t in range(25):
+                a = math.radians(176 - 172 * t / 24)
+                skirt.append((346 + (r_out - 6) * math.sin(a), z + (r_out - 6) * math.cos(a)))
+            prism(f'skirt{s}{z}', skirt, s * 700, xo, TEXBLACK, root)
+            # inner lip hugging the arch opening
+            lip = []
+            for t in range(25):
+                a = math.radians(4 + 172 * t / 24)
+                lip.append((346 + (r_in + 6) * math.sin(a), z + (r_in + 6) * math.cos(a)))
+            for t in range(25):
+                a = math.radians(176 - 172 * t / 24)
+                lip.append((346 + (r_in - 6) * math.sin(a), z + (r_in - 6) * math.cos(a)))
+            prism(f'lip{s}{z}', lip, s * 720, xo, TEXBLACK, root)
+            # legs down to the sill at both ends
+            for k in (-1, 1):
+                box(f'leg{s}{z}{k}', (s * 752, 330, z + k * (r_out - 50)), (96, 90, 96), TEXBLACK, root, bevel=8)
+            for t in range(13):
+                a = math.radians(12 + 156 * t / 12)
+                lib.cylinder(f'rivet{s}{z}{t}', (xo + s * 6, 346 + 505 * math.sin(a), z + 505 * math.cos(a)), (1, 0, 0), 15, 7, BLACK, root, n=6)
     return root
 
 
@@ -1144,7 +1202,7 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     s = -RIGHT if side == 'left' else RIGHT
     rack_top = RACK_TOP
     front = RACK_ZC + ARB_L / 2 + 100                   # bag front never past the roof's leading edge
-    x, y, zc = s * (ARB_W / 2 + 40 + W / 2), rack_top - 40, front - L / 2
+    x, y, zc = s * (ARB_W / 2 + 40 + W / 2), rack_top - 30 - H / 2, front - L / 2   # bag hangs beside the rail, top level with the tray
     prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
     sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
     for k in (-1, 1):
@@ -1374,6 +1432,8 @@ def build():
     rear_bumper_tube()
     ladder_tube()
     guard_can()
+    guard_board()
+    shovel()
     flares()
     decals()
     snorkel_bravo()

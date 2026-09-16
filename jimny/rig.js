@@ -286,7 +286,7 @@ export function rigJimny(THREE, gltfScene) {
   // Bumper: everything black ahead of the axle and below the bonnet line,
   // plus the fog lamps set into it. Grille: the satin surround panel, its
   // slats and inserts, the signal bezels and the badge. Headlamp units stay.
-  const stockBumper = [], stockGrille = [], stockRear = [], stockMirrors = [];
+  const stockBumper = [], stockGrille = [], stockRear = [], stockMirrors = [], stockFlares = [];
   raw.traverse((o) => {
     if (!o.isMesh || Array.isArray(o.material)) return;
     const b = new THREE.Box3().setFromObject(o);
@@ -294,6 +294,8 @@ export function rigJimny(THREE, gltfScene) {
     const n = o.material.name;
     // rear bumper: the one big satin shell under the tailgate; the tail lamps set into it stay
     if (c.z < -1400 && c.y < 650 && n === 'TrimSatin' && (b.max.x - b.min.x) > 1.0) { stockRear.push(o); return; }
+    // wheel-arch flares: the four big black arch shells (replaced by aftermarket flares)
+    if (Math.abs(c.x) > 650 && c.y > 500 && c.y < 750 && (b.max.z - b.min.z) > 0.8 && /^TrimBlack/.test(n)) { stockFlares.push(o); return; }
     // door mirrors: the glass and its two housing shells outboard of the door skin
     if (Math.abs(c.x) > 780 && c.y > 1050 && c.y < 1300 && c.z > 350 && c.z < 550 && /Espelhos|^TrimBlack/.test(n)) { stockMirrors.push(o); return; }
     if (c.z < 1500) return;
@@ -313,7 +315,7 @@ export function rigJimny(THREE, gltfScene) {
   };
 
   root.userData = {
-    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors,
+    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors, stockFlares,
     paintMat, roofMat, roofMeshes, painted, dims,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
@@ -330,6 +332,7 @@ export function applyConfig(THREE, rig, cfg) {
   for (const m of U.stockGrille) m.visible = !cfg.hideGrille;
   for (const m of U.stockRear) m.visible = !cfg.hideRear;
   for (const m of U.stockMirrors) m.visible = !cfg.hideMirrors;
+  for (const m of U.stockFlares) m.visible = !cfg.hideFlares;
   if (U.roofMat) {
     const twoTone = !!cfg.twoTone;
     U.roofMat.color.setHex(twoTone ? (cfg.roofColor ?? 0x1e2326) : (cfg.bodyColor ?? 0x6a6866));
