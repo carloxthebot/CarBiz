@@ -33,7 +33,8 @@ export function loadParts(loader, url, THREE) {
         : /Rubber/.test(m.name) ? finish.rubber
         : /Canvas|Webbing/.test(m.name) ? finish.canvas
         : /AwningPVC/.test(m.name) ? finish.pvc : null;
-      if (f) { m.normalMap = f.nor; m.roughnessMap = f.rough; m.normalScale.set(f.k, f.k); m.needsUpdate = true; }
+      // fabric roughness maps read as gloss under the HDR and turned the bags white; keep those matte
+      if (f) { m.normalMap = f.nor; if (f !== finish.canvas && f !== finish.pvc) m.roughnessMap = f.rough; m.normalScale.set(f.k, f.k); m.needsUpdate = true; }
     });
     for (const o of g.scene.children) PARTS[o.name] = o;
     resolve(PARTS);
