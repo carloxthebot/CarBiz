@@ -745,7 +745,8 @@ def roof_rack_arb():
             sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
             box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
     box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
-    text('arbLabel', 'BASE RACK', (0, deck + 22, z0 - 24), 22, 1, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
+    lbl = text('arbLabel', 'BASE RACK', (0, deck + 22, z0 - 24), 22, 1, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
+    lbl.rotation_euler = (0, 0, math.pi)                    # faces the rear, so it reads from behind
     return root
 
 
@@ -855,13 +856,13 @@ def ladder_tube():
     for y in (650, 1300):
         for x in (xi, xo):
             box(f'standoff{x}{y}', (x, y, (TAIL_Z + zf) / 2), (34, 34, abs(TAIL_Z - zf)), BLACK, root, bevel=3)
-    ex, ey, ez = xo + s * 62, 1010, zf
+    ex, ey, ez = (xi + xo) / 2, 1010, zf - 75                # on the ladder face, between the rails
     lib.cylinder('extBody', (ex, ey, ez), (0, 1, 0), 88, 380, RUBBER, root, n=28)
     lib.cylinder('extBand', (ex, ey + 40, ez), (0, 1, 0), 90, 90, RED_LABEL, root, n=28)
     lib.cylinder('extNeck', (ex, ey + 205, ez), (0, 1, 0), 40, 30, CHROME, root, n=16)
     box('extLever', (ex, ey + 235, ez + 10), (30, 20, 90), BLACK, root, bevel=3)
     for y in (ey - 110, ey + 110):
-        box(f'clamp{y}', ((xo + ex) / 2, y, ez), (abs(ex - xo) + 40, 24, 30), BLACK, root, bevel=3)
+        box(f'clamp{y}', (ex, y, (ez + zf) / 2), (abs(xo - xi) + 30, 24, abs(ez - zf) + 20), BLACK, root, bevel=3)
     return root
 
 
@@ -1001,11 +1002,11 @@ def snorkel_bravo(side=RIGHT):
     box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
     tube('neck', [(hx, 1585, hz), (hx, 1640, hz)], 89, TEXBLACK, root)
-    # elbow head: turns outward, flat cap, grille on the outer face
-    head = tube('elbow', [(hx, 1630, hz), (hx, 1690, hz), (hx + side * 60, 1700, hz)], 89, TEXBLACK, root, bend=45)
-    box('cap', (hx + side * 62, 1700, hz), (30, 100, 100), TEXBLACK, root, bevel=8)
+    # elbow head: turns forward, flat cap, mesh intake facing the nose
+    head = tube('elbow', [(hx, 1630, hz), (hx, 1690, hz), (hx, 1700, hz + 60)], 89, TEXBLACK, root, bend=45)
+    box('cap', (hx, 1700, hz + 62), (100, 100, 30), TEXBLACK, root, bevel=8)
     for k in range(5):
-        box(f'grille{k}', (hx + side * 80, 1668 + k * 16, hz), (4, 6, 76), RUBBER, root, bevel=0)
+        box(f'grille{k}', (hx, 1668 + k * 16, hz + 80), (76, 6, 4), RUBBER, root, bevel=0)
     for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
@@ -1322,6 +1323,8 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
     root = group(f'rearBumper_{pid}')
     mat = mat or TEXBLACK
     z = -1650
+    if lamps == 'klc':
+        z = -1640                                            # just proud of the lamps
     if kind == 'tube':
         tube('bar', [(-W / 2, y, z), (W / 2, y, z)], tube_d, mat, root)
         for s in (-1, 1):
@@ -1336,11 +1339,12 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'klc':
-            # the stock lamps hang above the tube on a small backing plate and a bracket
-            box(f'lampBack{s}', (s * 513, 518, -1556), (380, 150, 8), mat, root, bevel=3)
-            box(f'lampBrk{s}', (s * 513, y + 40, -1600), (60, 70, 40), mat, root, bevel=3)
+            # tube runs along the body's lower edge; the stock lamps sit in
+            # housings hung from the tube, faces set back from the tube
+            box(f'lampHsg{s}', (s * 513, 505, -1568), (390, 170, 60), mat, root, bevel=5)
+            box(f'lampHang{s}', (s * 513, y - tube_d / 2 - 2, -1580), (330, 12, 70), mat, root, bevel=2)
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
-                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
+                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1600), (sx, sy, 16), mat, root, bevel=2)
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -1350,8 +1354,8 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
     if lamps == 'klc':                                       # plate hangs under the tube's middle
-        box('plateBrk', (0, y - 40, z), (300, 70, 6), mat, root, bevel=1)
-        box('plate', (0, y - 100, z - tube_d / 2 - 2), (330, 165, 3), PLATE, root, bevel=1)
+        box('plateBrk', (0, y - 60, z - 10), (300, 90, 6), mat, root, bevel=1)
+        box('plate', (0, y - 130, z - tube_d / 2 + 4), (330, 165, 3), PLATE, root, bevel=1)
     else:
         box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
@@ -1542,7 +1546,7 @@ def build():
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=1480, tube_d=70, lamps='klc')
+    rear_bar('klc_heritage_rear', 'tube', W=1480, tube_d=72, y=606, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')
