@@ -115,7 +115,7 @@ function card(it, key) {
     <div>${tags}</div>
     ${it.note ? `<div class="note">${esc(it.note)}</div>` : ''}
     ${it.part ? `<div class="part">P/N ${esc(it.part)}</div>` : ''}
-    <div class="acts">${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">產品頁 ↗</a>` : ''}${apply}</div>
+    <div class="acts">${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">產品頁 ↗</a>` : ''}${(it.refs ?? []).map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener" title="${esc(u)}">參考 ${i + 1} ↗</a>`).join('')}${apply}</div>
   </div>`;
 }
 function matches(it) {

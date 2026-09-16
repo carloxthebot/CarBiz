@@ -492,14 +492,15 @@ def grille_showa():
 # mesh behind.
 def grille_outclass():
     root = group('grille_outclass_g')
-    ow, oh = 470, 175
+    ow, oh = 520, 200
     grille_panel('panel', root, TEXBLACK, (ow, oh, 858))
     lamp_bezels(root, TEXBLACK, 'square')
-    for k in range(4):
-        y = 858 - oh / 2 + 15 + 15 + k * 45
-        for sx in (-1, 1):
-            box(f'slat{k}{sx}', (sx * (ow / 4 + 6), y, face_z(0) + 2), (ow / 2 - 26, 30, 22), TEXBLACK, root, bevel=4)
-    box('post', (0, 858, face_z(0) + 3), (22, oh, 24), TEXBLACK, root, bevel=3)
+    n = 12                                                   # thin vertical slats across the opening (product photo)
+    for k in range(n):
+        x = -ow / 2 + 22 + k * (ow - 44) / (n - 1)
+        box(f'slat{k}', (x, 858, face_z(0) + 2), (16, oh - 14, 22), TEXBLACK, root, bevel=3)
+    text('script', 'Suzuki', (0, 862, face_z(0) + 16), 60, 3, CHROME, root,
+         font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
     wire_mesh(root, BLACK, 0, 858, face_z(0) - 20, ow - 10, oh - 10, pitch=9)
     box('backing', (0, 858, face_z(0) - 32), (ow, oh, 3), RUBBER, root, bevel=0)
     return root
@@ -1530,7 +1531,7 @@ def build():
         awning_case('ikamper', side, 2630, 180, 184, BLACK, hard=True, hinge=True)
         awning_case('allblack_270', side, 2100, 180, 180, PVC, hinge=True)
     # side steps (research 2026-09-16: TW mrk.com.tw, JP makers)
-    side_step('wlm', 'tube', tube_d=50, pads=[(120, 250, -320), (120, 250, 320)])
+    side_step('wlm', 'tube', tube_d=50, pads=[(130, 900, 0)], drop=30)
     side_step('jst', 'tube', tube_d=50, pads=[(120, 300, -300), (120, 300, 300)])
     side_step('tjm', 'slider', tube_d=51, pads=[(110, 200, -350), (110, 200, 0), (110, 200, 350)])
     side_step('outclass', 'tube', tube_d=45, pads=[(150, 900, 0)], drop=30)
@@ -1573,12 +1574,12 @@ def build():
     rear_bar('outclass_rear_abs', 'plate', W=1500, H=220, D=170, y=500, lamps='round')
     rear_bar('hamer_mx208', 'plate', W=1700, H=300, D=220, y=520, lamps='housing', steps=True)
     # grilles
-    grille_generic('taishan_retro', v_slots=7, label='SUZUKI')
-    grille_generic('klc_ja', wire=True, marker=4, bezel='round')
+    grille_generic('taishan_retro', v_slots=11)
+    grille_generic('klc_ja', wire=True, marker=4, bezel='round', h_slats=1, slat_h=18)
     grille_generic('klc_nanaketsu', v_slots=7, bezel='square')
-    grille_generic('klc_forty', wire=True, ribs=True)
-    grille_generic('urnieta_1970', wire=True, ow=620, oh=230)
-    grille_generic('mrk_angry', h_slats=3, slat_h=42, bezel='square')
+    grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round')
+    grille_generic('urnieta_1970', wire=True, ow=600, oh=220, bezel='square')
+    grille_generic('mrk_angry', v_slots=7, bezel='square', wire=False)
     grille_generic('apio_sj', v_slots=9, mat=GUNMETAL)
     grille_generic('apio_marker', h_slats=4, marker=4)
     grille_generic('taniguchi_washer', v_slots=5)
