@@ -1608,10 +1608,10 @@ def build():
     grille_generic('mrk_angry', v_slots=7, bezel='square', wire=False)
     grille_generic('apio_sj', v_slots=9, mat=GUNMETAL)
     grille_generic('apio_marker', h_slats=4, marker=4)
-    grille_generic('taniguchi_washer', v_slots=5)
+    grille_generic('taniguchi_washer', wire=True)
     grille_generic('kpro_folksy', h_slats=6, mat=material('WhiteGel', 0xeeeee8, rough=0.35), wire=False)
     grille_generic('prostaff_minig', v_slots=9, bezel='square')
-    grille_generic('sixsense_explosion', h_slats=2, slat_h=50, label='SUZUKI', bezel='square')
+    grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', bezel='square', mat=PAINT)
     lib.export(os.path.abspath(OUT))
 
 
