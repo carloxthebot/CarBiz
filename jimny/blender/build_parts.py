@@ -909,13 +909,13 @@ def guard_board():
     q = QUARTER
     cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
     face = s * 716
-    board = box('board', (face + s * 34, cy, cz), (60, 330, 760), TEXBLACK, root, bevel=18)
+    board = box('board', (face + s * 24, cy, cz), (42, 330, 760), BLACK, root, bevel=14)
     board.modifiers['bevel'].segments = 3
-    for i in range(9):                                       # traction slots
-        for j in range(3):
-            box(f'slot{i}{j}', (face + s * 66, cy - 100 + j * 100, cz - 320 + i * 80), (6, 60, 34), RUBBER, root, bevel=0)
+    for i in range(9):                                       # traction holes
+        for j in range(4):
+            lib.cylinder(f'hole{i}{j}', (face + s * 46, cy - 120 + j * 80, cz - 320 + i * 80), (1, 0, 0), 34, 4, RUBBER, root, n=10)
     for z in (cz - 260, cz + 260):
-        box(f'strap{z}', (face + s * 36, cy, z), (70, 340, 26), STEEL, root, bevel=3)
+        box(f'strap{z}', (face + s * 26, cy, z), (50, 340, 26), STEEL, root, bevel=3)
     return root
 
 
@@ -1214,9 +1214,9 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     for k in (-1, 1):
         z = zc + k * min(600, L * 0.3)
         box(f'bracket{k}', (s * (ARB_W / 2 - W / 2 + 100), y - H / 2 - 4, z), (W - 20, 8, 50), BLACK, root, bevel=2)
-    if hinge:
-        box('hinge', (x, y - 10, zc - L / 2 - 40), (W + 20, H + 40, 90), BLACK, root, bevel=8)
-        lib.cylinder('pivot', (x, y + H / 2 + 30, zc - L / 2 - 40), (0, 1, 0), 40, 60, BLACK, root)
+    if hinge:                                            # 270 types: pivot plate at the rear end, flush with the bag
+        box('hinge', (x, y - 4, zc - L / 2 - 22), (W + 10, H + 8, 40), BLACK, root, bevel=6)
+        lib.cylinder('pivot', (x, y - H / 2 - 30, zc - L / 2 - 22), (0, 1, 0), 36, 50, BLACK, root)
     return root
 
 
