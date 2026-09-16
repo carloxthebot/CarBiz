@@ -797,9 +797,6 @@ def bumper_tube_heritage():
         box(f'podMount{s}', (px - s * 60, py, zl), (50, 30, 30), TEXBLACK, root, bevel=3)
         # chassis legs and tow hooks
         box(f'leg{s}', (s * 330, yu - 70, zu - 150), (60, 170, 180), TEXBLACK, root, bevel=3)
-    # the owner's plate rides portrait on the tube's right end, in front of the wing corner
-    box('plateBrk', (RIGHT * 640, yu + 60, zu - 20), (30, 120, 6), TEXBLACK, root, bevel=1)
-    box('plate', (RIGHT * 640, yu + 205, zu - 14), (330, 165, 3), PLATE, root, bevel=1, rot=Matrix.Rotation(math.pi / 2, 3, 'Z'))
     # Heritage panel: big flat plate hanging below the lower tube, slightly raked
     prism('panel', [(yl - 50, zl - 30), (yl - 280, zl - 70), (yl - 280, zl - 76), (yl - 50, zl - 36)], -460, 460, TEXBLACK, root)
     text('heritage', 'Heritage', (-60, yl - 170, zl - 60), 120, 4, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
@@ -1374,6 +1371,9 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             for (cx, cy, sx, sy) in ((0, 86, 380, 12), (0, -86, 380, 12), (-190, 0, 12, 180), (190, 0, 12, 180)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, y - 20 + cy, -1648), (sx, sy, 10), mat, root, bevel=2)
             box(f'hook{s}', (s * 330, y - 150, -1560), (14, 110, 50), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
+            box(f'lensRed{s}', (s * 513, y - 20, -1650), (372, 164, 6), material('TailRed', 0xc0161a, rough=0.2), root, bevel=3)
+            box(f'lensClear{s}', (s * (513 - 40), y - 20, -1655), (118, 112, 4), LENS, root, bevel=2)
+            box(f'lensSplit{s}', (s * (513 + 30), y - 20, -1655), (6, 150, 2), mat, root, bevel=0.5)
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
