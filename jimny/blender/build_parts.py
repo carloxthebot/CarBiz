@@ -1224,7 +1224,7 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     return root
 
 
-def side_step(pid, kind, tube_d=50, length=None, standoff=70, drop=40, pads=(), mat=None, plate_w=180):
+def side_step(pid, kind, tube_d=50, length=None, standoff=70, drop=40, pads=(), mat=None, plate_w=180, upturn=0):
     """kind: 'tube' (round tube, optional step pads), 'slider' (chassis-mounted
     bar with support tubes), 'plate' (flat step on brackets), 'armour' (sill
     guard hugging the sill face, no step), 'short' (small step under the door
@@ -1266,7 +1266,11 @@ def side_step(pid, kind, tube_d=50, length=None, standoff=70, drop=40, pads=(), 
                 tube(f'support{s}{k}', [(s * (x - 20), y, z), (s * 470, y + 30, z)], tube_d * 0.8, mat, root)
                 box(f'bracket{s}{k}', (s * 455, y + 50, z), (70, 110, 90), mat, root, bevel=4)
         else:
-            rail = [(s * (x - 40), y, zf + 20), (s * x, y, zf - 60), (s * x, y, zr + 60), (s * (x - 40), y, zr - 20)]
+            if upturn:                                   # ends curl up and in towards the sill (JST)
+                rail = [(s * (x - 75), y + upturn, zf + 40), (s * (x - 20), y + upturn * 0.3, zf - 20), (s * x, y, zf - 120),
+                        (s * x, y, zr + 120), (s * (x - 20), y + upturn * 0.3, zr + 20), (s * (x - 75), y + upturn, zr - 40)]
+            else:
+                rail = [(s * (x - 40), y, zf + 20), (s * x, y, zf - 60), (s * x, y, zr + 60), (s * (x - 40), y, zr - 20)]
             tube(f'main{s}', rail, tube_d, mat, root, bend=100)
             for k, z in enumerate((zc - L * 0.32, zc + L * 0.32)):
                 box(f'brk{s}{k}', (s * (x - 80), y + 10, z), (160, 40, 60), mat, root, bevel=3)
@@ -1464,6 +1468,27 @@ def side_skirt():
     return root
 
 
+def ladder_jst():
+    """JST tailgate ladder, standard width: a closed oval hoop of 25 mm tube,
+    270 mm inside, four rungs, two tabs bolting it to the hinge side of the
+    tailgate about 60 mm off the skin."""
+    root = group('ladder_jst')
+    s = RIGHT
+    zf = TAIL_Z - 62
+    xi, xo = s * 330, s * 625
+    y0, y1 = 640, 1560
+    r = abs(xo - xi) / 2
+    loop = [(xi, y0 + r, zf), (xi, y1 - r, zf), ((xi + xo) / 2, y1 + 8, zf), (xo, y1 - r, zf),
+            (xo, y0 + r, zf), ((xi + xo) / 2, y0 - 8, zf), (xi, y0 + r, zf), (xi, y0 + r + 40, zf)]
+    tube('hoop', loop, 25, BLACK, root, bend=r - 4)
+    for k in range(4):
+        y = y0 + 150 + k * 205
+        tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 22, BLACK, root)
+    for y in (y0 + 260, y1 - 260):
+        box(f'tab{y}', (xi + s * 20, y, (TAIL_Z + zf) / 2), (60, 70, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
+    return root
+
+
 def build():
     for v in ('platform', 'basket'):
         roof_rack(v)
@@ -1490,6 +1515,7 @@ def build():
     bumper_tube_heritage()
     rear_bumper_tube()
     ladder_tube()
+    ladder_jst()
     guard_can()
     guard_board()
     shovel()
@@ -1532,7 +1558,7 @@ def build():
         awning_case('allblack_270', side, 2100, 180, 180, PVC, hinge=True)
     # side steps (research 2026-09-16: TW mrk.com.tw, JP makers)
     side_step('wlm', 'tube', tube_d=50, pads=[(130, 900, 0)], drop=30)
-    side_step('jst', 'tube', tube_d=50, pads=[(120, 300, -300), (120, 300, 300)])
+    side_step('jst', 'tube', tube_d=50, standoff=55, drop=20, upturn=110)
     side_step('tjm', 'slider', tube_d=51, pads=[(110, 200, -350), (110, 200, 0), (110, 200, 350)])
     side_step('outclass', 'tube', tube_d=45, pads=[(150, 900, 0)], drop=30)
     side_step('apio_guard', 'armour', standoff=45)
