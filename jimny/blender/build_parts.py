@@ -532,9 +532,11 @@ def grille_owner():
     ow, oh = 580, 215
     grille_panel('panel', root, TEXBLACK, (ow, oh, 858))
     lamp_bezels(root, TEXBLACK, 'square')
-    for k in range(3):                                       # KLC Face Grille Nostalgic: three thick bars over fine mesh
-        y = 858 - oh / 2 + 36 + k * 72
-        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 34, 22), TEXBLACK, root, bevel=5)
+    for k in range(5):                                       # owner's KLC Nostalgic: five bars over fine mesh
+        y = 858 - oh / 2 + 22 + k * 43
+        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 26, 22), TEXBLACK, root, bevel=4)
+    for s in (-1, 1):                                        # two thin vertical dividers splitting the bars
+        box(f'divider{s}', (s * 150, 858, face_z(0) + 4), (8, oh - 24, 16), TEXBLACK, root, bevel=1)
     wire_mesh(root, BLACK, 0, 858, face_z(0) - 20, ow - 10, oh - 10, pitch=9)
     box('backing', (0, 858, face_z(0) - 32), (ow, oh, 3), RUBBER, root, bevel=0)
     text('suzuki', 'SUZUKI', (0, 862, face_z(0) + 16), 56, 5, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
@@ -668,7 +670,7 @@ def rim(style):
             a = 2 * math.pi * k / 8
             cutters.append(lib.cylinder(f'vent{k}', (dish, 0.64 * R * math.sin(a), 0.64 * R * math.cos(a)), (1, 0, 0), 46, 60, RIM_FACE, None, n=24))
     else:
-        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'eight': (8, 0.22), 'beadlock': (8, 0.26)}[style]
+        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'eight': (8, 0.22), 'ten': (10, 0.17), 'beadlock': (8, 0.26)}[style]
         for k in range(n):
             a0 = 2 * math.pi * k / n
             half = math.pi / n - spoke / 2                      # half the angular width of a window
@@ -768,39 +770,43 @@ def roof_lights():
 
 
 def bumper_tube_heritage():
-    """Owner's front bumper (daylight photos): one round tube across the full
-    width with plain cut ends, the number plate on the tube's centre, a black
-    plate panel hanging below with a script "Heritage" mark, two 4-LED pods
-    on that panel, bay open above the crossmember."""
+    """KLC Traditional Bumper 74 with KC FLEX ERA 4 pods, from the owner's
+    close-ups: a straight 76 mm upper tube with flat ends and two plate
+    tabs under its middle; a shorter 76 mm lower tube set back with the
+    square KC pods on its ends; a big flat "Heritage" panel below; the
+    silver crossmember visible between the tubes."""
     root = group('frontBumper_tube_heritage')
-    y, zt = 660, 1700
-    tube('bar', [(-705, y, zt - 60), (-640, y, zt), (640, y, zt), (705, y, zt - 60)], 62, TEXBLACK, root, bend=140)
+    yu, zu = 640, 1712                                       # upper tube
+    yl, zl = 520, 1668                                       # lower tube, set back
+    tube('upper', [(-700, yu, zu), (700, yu, zu)], 76, TEXBLACK, root)
+    tube('lower', [(-450, yl, zl), (450, yl, zl)], 76, TEXBLACK, root)
     for s in (-1, 1):
-        box(f'cap{s}', (s * 708, y, zt - 62), (6, 60, 60), TEXBLACK, root, bevel=2)
-        box(f'leg{s}', (s * 330, y - 60, zt - 130), (60, 150, 160), TEXBLACK, root, bevel=3)
-        box(f'hook{s}', (s * 300, y - 140, zt - 60), (60, 22, 90), RED, root, bevel=4)
-    # plate panel: trapezoid hanging under the tube, raked back at the bottom
-    panel = prism('panel', [(y - 20, zt - 40), (y - 250, zt - 95), (y - 250, zt - 101), (y - 20, zt - 46)], -380, 380, TEXBLACK, root)
-    for s in (-1, 1):
-        prism(f'panelWing{s}', [(y - 20, zt - 40), (y - 170, zt - 78), (y - 170, zt - 84), (y - 20, zt - 46)], s * 380, s * 440, TEXBLACK, root)
-    text('heritage', 'Heritage', (0, y - 185, zt - 86), 70, 3, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
+        box(f'capU{s}', (s * 702, yu, zu), (6, 74, 74), TEXBLACK, root, bevel=3)
+        box(f'capL{s}', (s * 452, yl, zl), (6, 74, 74), TEXBLACK, root, bevel=3)
+        # plate tabs under the upper tube, with their bolt heads on top
+        box(f'tab{s}', (s * 120, yu - 55, zu + 6), (28, 60, 6), TEXBLACK, root, bevel=1)
+        lib.cylinder(f'tabBolt{s}', (s * 120, yu + 40, zu), (0, 1, 0), 14, 8, STEEL, root, n=6)
+        # KC FLEX ERA 4: square pod with a red bezel, two spots over two floods
+        px, py, pz = s * 520, yl, zl + 20
+        box(f'pod{s}', (px, py, pz), (96, 96, 70), BLACK, root, bevel=6)
+        box(f'podBezel{s}', (px, py, pz + 36), (92, 92, 6), material('KCRed', 0xb3261e, rough=0.4), root, bevel=8)
+        box(f'podFace{s}', (px, py, pz + 40), (80, 80, 3), BLACK, root, bevel=4)
+        for (dx, dy, m) in ((-19, 19, material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)), (19, 19, material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)), (-19, -19, LENS), (19, -19, LENS)):
+            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 42), (0, 0, 1), 32, 4, CHROME, root, n=20)
+            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 45), (0, 0, 1), 30, 2, m, root, n=20)
+        box(f'podMount{s}', (px - s * 60, py, zl), (50, 30, 30), TEXBLACK, root, bevel=3)
+        # chassis legs and tow hooks
+        box(f'leg{s}', (s * 330, yu - 70, zu - 150), (60, 170, 180), TEXBLACK, root, bevel=3)
+    # the owner's plate rides portrait on the tube's right end, in front of the wing corner
+    box('plateBrk', (RIGHT * 640, yu + 60, zu - 20), (30, 120, 6), TEXBLACK, root, bevel=1)
+    box('plate', (RIGHT * 640, yu + 205, zu - 14), (330, 165, 3), PLATE, root, bevel=1, rot=Matrix.Rotation(math.pi / 2, 3, 'Z'))
+    # Heritage panel: big flat plate hanging below the lower tube, slightly raked
+    prism('panel', [(yl - 50, zl - 30), (yl - 280, zl - 70), (yl - 280, zl - 76), (yl - 50, zl - 36)], -460, 460, TEXBLACK, root)
+    text('heritage', 'Heritage', (-60, yl - 170, zl - 60), 120, 4, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
          font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
-    for s in (-1, 1):
-        px, py, pz = s * 400, y - 95, zt - 40
-        box(f'pod{s}', (px, py, pz + 24), (86, 86, 48), BLACK, root, bevel=4)
-        box(f'podRim{s}', (px, py, pz + 50), (80, 80, 6), TEXBLACK, root, bevel=2)
-        for (dx, dy) in ((-18, -18), (18, -18), (-18, 18), (18, 18)):
-            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 54), (0, 0, 1), 28, 4, CHROME, root, n=20)
-            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 57), (0, 0, 1), 26, 2, LENS, root, n=20)
-    # KLC Traditional: a second, shorter tube under the main one carries the
-    # lamps at its ends and the number plate in the middle
-    tube('lower', [(-400, y - 95, zt - 20), (400, y - 95, zt - 20)], 50, TEXBLACK, root)
-    for s in (-1, 1):
-        tube(f'link{s}', [(s * 250, y - 95, zt - 20), (s * 250, y, zt)], 30, TEXBLACK, root)
-    box('plateBracket', (0, y - 50, zt + 10), (300, 90, 6), BLACK, root, bevel=1)
-    box('plate', (0, y - 50, zt + 34), (330, 165, 3), PLATE, root, bevel=1)
-    tube('crossmember', [(-540, 470, 1480), (540, 470, 1480)], 55, TEXBLACK, root)
-    box('bay', (0, 540, 1380), (1050, 320, 20), RUBBER, root, bevel=4)
+    # what shows between the tubes: the galvanised crossmember and the bay
+    box('crossmember', (0, 575, 1600), (1100, 70, 40), STEEL, root, bevel=4)
+    box('bay', (0, 540, 1420), (1050, 320, 20), RUBBER, root, bevel=4)
     return root
 
 
@@ -881,31 +887,42 @@ def decals():
 
 
 def guard_can():
-    """Flat fuel can and an axe on the RIGHT window guard (owner's car)."""
+    """Flat 7.5 L can and an axe on the RIGHT window guard (owner's photos):
+    can forward with its cap on the forward top corner, a round centre boss
+    with a latch bar, an octagonal raised rim; axe at the rear end, head up,
+    blade forward under a tan leather sheath, two black band clamps."""
     root = group('guardCan')
     s = RIGHT
     q = QUARTER
     cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
     face = s * 716
-    # fuel can: rounded slab with a cap and two straps
-    can = box('can', (face + s * 50, cy - 10, cz - 90), (96, 330, 440), TEXBLACK, root, bevel=28)
+    czc = cz + 120                                           # can centre (forward half)
+    can = box('can', (face + s * 50, cy - 10, czc), (100, 340, 440), TEXBLACK, root, bevel=26)
     can.modifiers['bevel'].segments = 4
-    lib.cylinder('cap', (face + s * 50, cy + 120, cz - 250), (1, 0, 0), 72, 110, TEXBLACK, root, n=20)
-    box('capTop', (face + s * 106, cy + 120, cz - 250), (10, 60, 60), STEEL, root, bevel=3)
-    box('ridge', (face + s * 100, cy - 10, cz - 90), (6, 200, 300), TEXBLACK, root, bevel=3)
-    for z in (cz - 260, cz + 80):
-        box(f'strap{z}', (face + s * 55, cy - 10, z), (110, 40, 26), STEEL, root, bevel=3)
-    # axe: wooden handle, steel head, two clamps
-    ax = cz + 235
-    lib.cylinder('handle', (face + s * 30, cy - 40, ax), (0, 1, 0), 24, 560, WOOD, root, n=14)
-    for k in range(6):                                       # paracord wrap on the grip
-        lib.cylinder(f'wrap{k}', (face + s * 30, cy - 250 + k * 14, ax), (0, 1, 0), 28, 10, BLACK, root, n=12)
-    # head: bit forward (toward the door), hammer poll behind, eye over the handle
-    box('eye', (face + s * 30, cy + 250, ax), (34, 70, 44), STEEL, root, bevel=5)
-    prism('bit', [(cy + 215, ax + 22), (cy + 285, ax + 22), (cy + 310, ax + 120), (cy + 190, ax + 120)], face + s * 18, face + s * 42, STEEL, root)
-    box('poll', (face + s * 30, cy + 250, ax - 42), (30, 44, 40), STEEL, root, bevel=4)
-    for y in (cy - 180, cy + 130):
-        box(f'axeClamp{y}', (face + s * 18, y, ax), (40, 22, 44), BLACK, root, bevel=3)
+    rim = [(cy + 120, czc - 210), (cy + 160, czc - 120), (cy + 160, czc + 120), (cy + 120, czc + 210),
+           (cy - 150, czc + 210), (cy - 180, czc + 120), (cy - 180, czc - 120), (cy - 150, czc - 210)]
+    prism('canRim', rim, face + s * 96, face + s * 106, TEXBLACK, root)
+    box('canField', (face + s * 100, cy - 15, czc), (4, 250, 330), TEXBLACK, root, bevel=2)
+    lib.cylinder('boss', (face + s * 106, cy - 20, czc), (1, 0, 0), 200, 8, TEXBLACK, root, n=32)
+    box('latch', (face + s * 112, cy - 20, czc + 20), (10, 24, 110), BLACK, root, bevel=3)
+    box('handleSlot', (face + s * 100, cy + 130, czc), (6, 26, 120), RUBBER, root, bevel=1)
+    lib.cylinder('cap', (face + s * 40, cy + 140, czc + 235), (0, 0, 1), 64, 40, TEXBLACK, root, n=20)
+    box('label', (face + s * 101, cy - 130, czc - 40), (2, 40, 110), material('LabelGrey', 0x8a8d90, rough=0.6), root, bevel=0.5)
+    for z in (czc - 180, czc + 160):
+        box(f'strap{z}', (face + s * 55, cy - 10, z), (114, 36, 24), BLACK, root, bevel=3)
+    # axe at the rear end of the guard
+    ax = cz - 250
+    lib.cylinder('handle', (face + s * 30, cy - 10, ax), (0, 1, 0), 26, 480, WOOD, root, n=14)
+    box('eye', (face + s * 30, cy + 240, ax), (34, 70, 44), STEEL, root, bevel=5)
+    prism('bit', [(cy + 205, ax + 22), (cy + 275, ax + 22), (cy + 300, ax + 120), (cy + 180, ax + 120)], face + s * 18, face + s * 42, STEEL, root)
+    box('poll', (face + s * 30, cy + 240, ax - 42), (30, 44, 40), STEEL, root, bevel=4)
+    leather = material('Leather', 0xb98a55, rough=0.75)
+    prism('sheath', [(cy + 170, ax + 30), (cy + 285, ax + 30), (cy + 310, ax + 135), (cy + 150, ax + 135)], face + s * 12, face + s * 48, leather, root)
+    for zz in (ax + 70, ax + 115):
+        lib.cylinder(f'stud{zz}', (face + s * 50, cy + 280, zz), (1, 0, 0), 14, 4, material('Brass', 0xb08d3c, rough=0.4, metal=1.0), root, n=10)
+    for y in (cy - 170, cy + 110):                           # black band clamps with a shackle on the outside
+        box(f'axeClamp{y}', (face + s * 20, y, ax), (44, 20, 60), BLACK, root, bevel=3)
+        box(f'shackle{y}', (face + s * 26, y, ax - 50), (24, 18, 30), BLACK, root, bevel=4)
     return root
 
 
@@ -940,9 +957,10 @@ def shovel():
     lib.cylinder('collar', (x, y, zc + 10), (0, 0, 1), 40, 50, STEEL, root, n=14)
     box('hinge', (x, y, zc - 20), (44, 30, 40), STEEL, root, bevel=4)
     lib.cylinder('hingePin', (x, y, zc - 20), (1, 0, 0), 14, 56, STEEL, root, n=8)
-    blade = box('blade', (x, y - 6, zc - 190), (200, 22, 320), BLACK, root, bevel=16)
-    blade.modifiers['bevel'].segments = 4
-    box('bladeRib', (x, y + 6, zc - 150), (30, 8, 220), BLACK, root, bevel=2)
+    pouch = box('pouch', (x, y - 4, zc - 190), (230, 44, 340), CANVAS, root, bevel=22)
+    pouch.modifiers['bevel'].segments = 4
+    box('pouchFlap', (x, y + 20, zc - 60), (120, 6, 90), WEBBING, root, bevel=2)
+    box('pouchStrap', (x, y - 4, zc - 190), (240, 46, 30), WEBBING, root, bevel=2)
     for z in (zc + 120, zc + 520):
         box(f'clamp{z}', (x, y - 30, z), (46, 34, 34), BLACK, root, bevel=4)
         box(f'clampFoot{z}', (x, y - 52, z), (60, 10, 50), BLACK, root, bevel=2)
@@ -968,15 +986,18 @@ def revolve_arc(name, profile, centre_y, centre_z, a0, a1, mat, parent, side=1, 
 
 
 def flares():
-    """Riveted look on the STOCK arches (owner's choice): hex bolt heads along
-    the flare's outer edge; the stock shells stay, rendered matte."""
+    """Pocket-style riveted look on the STOCK arches (owner's choice): six
+    square black pockets along each arch's outer face, a silver hex bolt
+    head in each; the stock shells stay, rendered matte."""
     root = group('flares')
     for s in (-1, 1):
         for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
-            for t in range(11):
-                a = math.radians(18 + 144 * t / 10)
-                r, x = 478, 786
-                lib.cylinder(f'rivet{s}{z}{t}', (s * x, 346 + r * math.sin(a), z + r * math.cos(a)), (1, 0, 0), 14, 7, BLACK, root, n=6)
+            for t, deg in enumerate((12, 38, 66, 94, 122, 150)):
+                a = math.radians(deg)
+                r, x = 470, 780
+                c = (s * x, 346 + r * math.sin(a), z + r * math.cos(a))
+                box(f'pocket{s}{z}{t}', c, (10, 30, 30), TEXBLACK, root, bevel=3)
+                lib.cylinder(f'rivet{s}{z}{t}', (s * (x + 6), c[1], c[2]), (1, 0, 0), 15, 8, STEEL, root, n=6)
     return root
 
 
@@ -1118,10 +1139,10 @@ def mirrors_damd():
         box(f'botClamp{s}', (s * (MIR_X + 30), 1000, 505), (40, 26, 26), BLACK, root, bevel=3)
         # head: 150 x 250 x 50 shell, corner radius ~30, glass in the rear face
         # head faces the rear (glass plane across the car); the vertical tube runs just ahead of it
-        head = box(f'head{s}', (s * (MIR_X + 110), 1165, 455), (150, 250, 50), BLACK, root, bevel=28)
+        head = box(f'head{s}', (s * (MIR_X + 112), 1160, 452), (190, 258, 58), BLACK, root, bevel=32)
         head.modifiers['bevel'].segments = 6
-        box(f'glass{s}', (s * (MIR_X + 110), 1165, 429), (128, 226, 2), CHROME, root, bevel=0)
-        box(f'glassRim{s}', (s * (MIR_X + 110), 1165, 431), (138, 236, 2), RUBBER, root, bevel=0)
+        box(f'glass{s}', (s * (MIR_X + 112), 1160, 422), (166, 232, 2), CHROME, root, bevel=0)
+        box(f'glassRim{s}', (s * (MIR_X + 112), 1160, 424), (176, 242, 2), RUBBER, root, bevel=0)
         # pivot from the vertical tube to the head's front face
         box(f'pivot{s}', (s * (MIR_X + 160), 1165, 486), (36, 40, 20), BLACK, root, bevel=3)
     return root
@@ -1332,8 +1353,9 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
         z = -1640                                            # just proud of the lamps
     if kind == 'tube':
         tube('bar', [(-W / 2, y, z), (W / 2, y, z)], tube_d, mat, root)
-        for s in (-1, 1):
-            box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
+        if lamps != 'klc':                                   # the KLC tube disappears into its lamp boxes
+            for s in (-1, 1):
+                box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
     else:
         path = [(-W / 2 - 60, y, z + 150), (-W / 2, y, z), (W / 2, y, z), (W / 2 + 60, y, z + 150)]
         sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 10, 3), mat, root)
@@ -1346,10 +1368,12 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
         elif lamps == 'klc':
             # tube runs along the body's lower edge; the stock lamps sit in
             # housings hung from the tube, faces set back from the tube
-            box(f'lampHsg{s}', (s * 513, 505, -1568), (390, 170, 60), mat, root, bevel=5)
-            box(f'lampHang{s}', (s * 513, y - tube_d / 2 - 2, -1580), (330, 12, 70), mat, root, bevel=2)
-            for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
-                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1600), (sx, sy, 16), mat, root, bevel=2)
+            # steel boxes on the tube's ends, tops level with the tube, holding the stock lamps;
+            # a red tow hook drops from each box's inner bottom corner
+            box(f'lampHsg{s}', (s * 513, y - 20, -1590), (400, 190, 110), mat, root, bevel=5)
+            for (cx, cy, sx, sy) in ((0, 86, 380, 12), (0, -86, 380, 12), (-190, 0, 12, 180), (190, 0, 12, 180)):
+                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, y - 20 + cy, -1648), (sx, sy, 10), mat, root, bevel=2)
+            box(f'hook{s}', (s * 330, y - 150, -1560), (14, 110, 50), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -1358,9 +1382,10 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
                 lib.cylinder(f'lampLens{s}{k}', (xx, y, z - 30), (0, 0, 1), 66, 4, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
-    if lamps == 'klc':                                       # plate hangs under the tube's middle
-        box('plateBrk', (0, y - 60, z - 10), (300, 90, 6), mat, root, bevel=1)
-        box('plate', (0, y - 130, z - tube_d / 2 + 4), (330, 165, 3), PLATE, root, bevel=1)
+    if lamps == 'klc':                                       # plate on two tabs right under the tube
+        for s in (-1, 1):
+            box(f'plateTab{s}', (s * 110, y - tube_d / 2 - 10, z - 6), (24, 40, 6), mat, root, bevel=1)
+        box('plate', (0, y - tube_d / 2 - 100, z - tube_d / 2 + 2), (330, 165, 3), PLATE, root, bevel=1)
     else:
         box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
@@ -1478,12 +1503,11 @@ def ladder_jst():
     xi, xo = s * 330, s * 625
     y0, y1 = 640, 1560
     r = abs(xo - xi) / 2
-    loop = [(xi, y0 + r, zf), (xi, y1 - r, zf), ((xi + xo) / 2, y1 + 8, zf), (xo, y1 - r, zf),
-            (xo, y0 + r, zf), ((xi + xo) / 2, y0 - 8, zf), (xi, y0 + r, zf), (xi, y0 + r + 40, zf)]
-    tube('hoop', loop, 25, BLACK, root, bend=r - 4)
+    loop = [(xi, y0 + 60, zf), (xi, y1, zf), (xo, y1, zf), (xo, y0, zf), (xi, y0, zf), (xi, y0 + 120, zf)]
+    tube('hoop', loop, 32, BLACK, root, bend=70)
     for k in range(4):
-        y = y0 + 150 + k * 205
-        tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 22, BLACK, root)
+        y = y0 + 170 + k * 215
+        tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 26, BLACK, root)
     for y in (y0 + 260, y1 - 260):
         box(f'tab{y}', (xi + s * 20, y, (TAIL_Z + zf) / 2), (60, 70, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
     return root
@@ -1508,7 +1532,7 @@ def build():
     bumper_showa()
     bumper_klc()
     bumper_outclass()
-    for st in ('stock', 'steel', 'six', 'eight', 'beadlock'):
+    for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock'):
         rim(st)
     roof_rack_arb()
     roof_lights()
@@ -1588,7 +1612,7 @@ def build():
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=1480, tube_d=72, y=606, lamps='klc')
+    rear_bar('klc_heritage_rear', 'tube', W=1120, tube_d=76, y=596, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')

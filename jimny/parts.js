@@ -102,7 +102,7 @@ export const WHEELS = [
     price: null, cur: 'JPY', brand: 'MLJ', uncertain: true },
   { id: 'te37xt', label: 'RAYS TE37XT M-SPEC for J', rim: 16, width: 5.5, offset: 20, style: 'six',
     price: null, cur: 'JPY', brand: 'RAYS', note: '鍛造一件式，2025 年起；Bronze／Blast Black' },
-  { id: 'maxx', photo: true, label: 'MAXX Flowforged 8 輻', rim: 16, width: 7.0, offset: -10, style: 'eight',
+  { id: 'maxx', photo: true, label: 'MAXX Flowforged 10 輻', rim: 16, width: 7.0, offset: -10, style: 'ten',
     price: null, brand: 'MAXX', uncertain: true, note: '消光黑，車主實車配置' },
   { id: 'beadlock', label: 'Beadlock 造型輪圈', rim: 16, width: 7.0, offset: -20, style: 'beadlock',
     price: null, brand: '多家', uncertain: true, note: '深 offset，需搭配大幅輪拱修改' },
@@ -453,7 +453,7 @@ export const OTHERS = [
     note: '硬質樹脂面＋皮革背；配置器「備胎硬殼蓋」' },
   { id: 'trasharoo', key: 'spareBag', url: 'https://agileoffroad.com/products/trasharoo-spare-tire-trash-bag', label: 'Trasharoo 備胎書包', price: null, cur: 'USD', brand: 'Trasharoo', uncertain: true,
     note: '配置器「備胎書包」' },
-  { id: 'maxx', photo: true, url: null, key: 'wheel', label: 'MAXX Flowforged 8 輻 16×7', price: null, cur: 'TWD', brand: 'MAXX', uncertain: true, note: '消光黑，配 TOYO Open Country M/T 225/75R16（車主實車配置）' },
+  { id: 'maxx', photo: true, url: null, key: 'wheel', label: 'MAXX Flowforged 10 輻 16×7', price: null, cur: 'TWD', brand: 'MAXX', uncertain: true, note: '消光黑，配 TOYO Open Country M/T 225/75R16（車主實車配置）' },
 ];
 
 export const SPARE_COVERS = [
