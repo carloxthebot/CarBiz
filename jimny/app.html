@@ -185,13 +185,13 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609160753';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate } from './parts.js?v=202609160753';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609160753';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609160753';
+import { rigJimny, applyConfig } from './rig.js?v=202609160911';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate } from './parts.js?v=202609160911';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609160911';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609160911';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609160753';
+const BUILD = '202609160911';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -285,14 +285,14 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: false, spareBag: false, spareCover: false,
-  roofLights: false, guardCan: false, guardBoard: false, shovel: false, flares: false, decals: false };
+  roofLights: false, guardCan: false, guardBoard: false, shovel: false, flares: false, decals: false, sideSkirt: false };
 let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
 const RIMS = [0xc8ccd0, 0x373b41, 0x8a6a3c, 0xd8d9d6, 0xb8410f];   // matte black reads as a shade of grey so spokes show
 // the owner's own car (from their photos): black JB74 on a 3" lift, 31"
 // Open Country M/T white letters on matte-black MAXX wheels
 const DEMO = { color: 'ZJ3', lift: 'sg75', wheel: 'maxx', tyre: 't31', tread: 'toyo_mt', owl: true, rimColor: 0x373b41,
   grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', roofLights: false, awning: 'yakima_270s', awningSide: 'left',
-  windowGuards: true, guardCan: true, guardBoard: true, shovel: true, ladder: 'tube', sideStep: 'arb', flares: true, decals: false,
+  windowGuards: true, guardCan: true, guardBoard: true, shovel: true, ladder: 'tube', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
   mirrors: 'damd', pillarPods: true, snorkel: 'bravo' };
 // toggle buttons read their state from S, so presets and cycling share one path
 function syncToggles() {
@@ -348,7 +348,7 @@ function update() {
   accGroup.clear();
   const paint = rig.userData.paintMat;
   const add = (n) => n && accGroup.add(n);
-  for (const k of ['windowGuards', 'lightBar', 'spareBag', 'spareCover', 'roofLights', 'flares', 'decals', 'shovel'])
+  for (const k of ['windowGuards', 'lightBar', 'spareBag', 'spareCover', 'roofLights', 'flares', 'decals', 'shovel', 'sideSkirt'])
     if (S[k]) add(buildAccessory(k, undefined, paint));
   if (S.guardBoard && S.windowGuards) add(buildAccessory('guardBoard', undefined, paint));
   // the snorkel takes the right-hand pillar, so pods go left only when one is fitted
@@ -370,7 +370,7 @@ function update() {
   set('rClear', (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>');
   document.getElementById('sumL').textContent = total ? lift.label : '原廠';
   document.getElementById('sumW').textContent = wh.label.replace('原廠 ', '') + ' · ' + ty.label.replace('（原廠）', '');
-  const n = ['windowGuards','lightBar','spareBag','spareCover','roofLights','guardCan','guardBoard','shovel','flares','decals','pillarPods'].filter(k => S[k]).length
+  const n = ['windowGuards','lightBar','spareBag','spareCover','roofLights','guardCan','guardBoard','shovel','flares','decals','pillarPods','sideSkirt'].filter(k => S[k]).length
     + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.snorkel !== 'none') + (S.mirrors !== 'stock');
   document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
@@ -411,7 +411,7 @@ function buildUI() {
     `<button class="sw" data-c="${c.code}" title="${c.name}" aria-pressed="${c.code === S.color}"
       style="background:#${c.hex.toString(16).padStart(6,'0')}"></button>`).join('');
   const TG = [['pillarPods','A 柱小圓燈'],['windowGuards','鐵窗（WLM）'],['guardCan','右鐵窗：油桶＋斧頭'],['guardBoard','左鐵窗：脫困板'],['shovel','車頂架鏟子'],
-    ['flares','鉚釘寬體輪弧'],['decals','車門貼字'],['lightBar','車頂燈條'],['roofLights','車頂圓燈'],['spareBag','備胎書包'],['spareCover','備胎硬殼蓋']];
+    ['flares','輪弧鉚釘'],['sideSkirt','側裙飾板（SHOWA）'],['decals','車門貼字'],['lightBar','車頂燈條'],['roofLights','車頂圓燈'],['spareBag','備胎書包'],['spareCover','備胎硬殼蓋']];
   document.getElementById('toggles').innerHTML =
     '' +
     TG.map(([k, l]) => `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
@@ -483,7 +483,7 @@ function buildUI() {
       S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
       S.snorkel !== 'none' && '呼吸管 ' + find(SNORKELS, S.snorkel).label, S.mirrors !== 'stock' && '後照鏡 ' + find(MIRRORS, S.mirrors).label,
       S.pillarPods && 'A 柱小圓燈', S.sideStep !== 'none' && '側踏 ' + find(SIDE_STEPS, S.sideStep).label, S.ladder !== 'none' && '後爬梯 ' + find(LADDERS, S.ladder).label, S.windowGuards && '鐵窗', S.guardCan && '右鐵窗油桶斧頭', S.guardBoard && '左鐵窗脫困板', S.shovel && '車頂鏟子',
-      S.flares && '鉚釘輪弧', S.decals && '車門貼字', S.lightBar && '車頂燈條', S.roofLights && '車頂圓燈', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
+      S.flares && '輪弧鉚釘', S.sideSkirt && '側裙飾板', S.decals && '車門貼字', S.lightBar && '車頂燈條', S.roofLights && '車頂圓燈', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
       S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label].filter(Boolean);
     const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
     const o = document.getElementById('out');

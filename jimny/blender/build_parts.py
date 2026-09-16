@@ -531,9 +531,9 @@ def grille_owner():
     ow, oh = 580, 215
     grille_panel('panel', root, TEXBLACK, (ow, oh, 858))
     lamp_bezels(root, TEXBLACK, 'square')
-    for k in range(5):
-        y = 858 - oh / 2 + 22 + k * 43
-        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 30, 22), TEXBLACK, root, bevel=4)
+    for k in range(3):                                       # KLC Face Grille Nostalgic: three thick bars over fine mesh
+        y = 858 - oh / 2 + 36 + k * 72
+        box(f'slat{k}', (0, y, face_z(0) + 1), (ow - 10, 34, 22), TEXBLACK, root, bevel=5)
     wire_mesh(root, BLACK, 0, 858, face_z(0) - 20, ow - 10, oh - 10, pitch=9)
     box('backing', (0, 858, face_z(0) - 32), (ow, oh, 3), RUBBER, root, bevel=0)
     text('suzuki', 'SUZUKI', (0, 862, face_z(0) + 16), 56, 5, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
@@ -1449,6 +1449,20 @@ def rear_bumper_klc_nostalgic():
     return root
 
 
+def side_skirt():
+    """SHOWA GARAGE AES sill cover: matte panel under the doors between the
+    arches, a soft crease along its top, wrapping under the sill."""
+    root = group('sideSkirt')
+    zf, zr = FRONT_ARCH_Z - 60, REAR_ARCH_Z + 60
+    L = zf - zr
+    for s in (-1, 1):
+        panel = box(f'panel{s}', (s * (BODY_X + 8), SILL_Y + 30, (zf + zr) / 2), (26, 150, L), TEXBLACK, root, bevel=10)
+        panel.modifiers['bevel'].segments = 3
+        box(f'crease{s}', (s * (BODY_X + 22), SILL_Y + 95, (zf + zr) / 2), (4, 6, L - 40), BLACK, root, bevel=1)
+        box(f'under{s}', (s * (BODY_X - 30), SILL_Y - 40, (zf + zr) / 2), (90, 12, L), TEXBLACK, root, bevel=3)
+    return root
+
+
 def build():
     for v in ('platform', 'basket'):
         roof_rack(v)
@@ -1480,6 +1494,7 @@ def build():
     shovel()
     flares()
     decals()
+    side_skirt()
     snorkel_bravo()
     snorkel_urnieta()
     snorkel_precleaner()

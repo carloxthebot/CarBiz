@@ -48,6 +48,8 @@ section h2 small{font:500 10px var(--mono);color:var(--ink-3);letter-spacing:.1e
 .tag{font:500 9px var(--mono);letter-spacing:.1em;padding:2px 6px;border-radius:2px;background:var(--panel-2);color:var(--ink-2)}
 .tag.tw{background:#2e3a1c;color:#c7d98a}
 .tag.unc{background:#2a2113;color:#e0b070}
+.tag.ok{background:#3a3814;color:var(--key)}
+.tag.dim{background:none;border:1px solid var(--rule-2);color:var(--ink-3)}
 .empty{color:var(--ink-3);font-size:13px;padding:10px 0}
 footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
 </style>
@@ -63,6 +65,7 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
     <button class="chip" data-f="tw" aria-pressed="false">台灣有售（台幣價）</button>
     <button class="chip" data-f="jp" aria-pressed="false">日本</button>
     <button class="chip" data-f="other" aria-pressed="false">澳洲／歐美</button>
+    <button class="chip" data-f="photo" aria-pressed="false">已依實照校正</button>
     <input id="q" type="search" placeholder="搜尋品牌、型號、關鍵字…">
   </div>
   <nav class="toc" id="toc"></nav>
@@ -88,7 +91,7 @@ const CATS = [
   ['後爬梯', 'ladder', LADDERS, ''],
   ['呼吸管', 'snorkel', SNORKELS, 'JB74 1.5L 進氣在右側'],
   ['後照鏡', 'mirrors', MIRRORS, ''],
-  ['其他配件', null, OTHERS, '目錄用，配置器以開關對應'],
+  ['其他配件', null, OTHERS, '以配置器的開關對應（側裙、鐵窗、燈具、備胎配件）'],
 ];
 const SYM = { TWD: 'NT$', JPY: '¥', AUD: 'A$', USD: 'US$', GBP: '£', EUR: '€', NZD: 'NZ$' };
 const region = (it) => it.cur === 'TWD' ? 'tw' : it.cur === 'JPY' ? 'jp' : (it.cur ? 'other' : 'none');
@@ -100,9 +103,12 @@ function card(it, key) {
   const r = region(it);
   const skip = it.id === 'none' || it.id === 'stock' || (it.price === 0 && !it.note);
   if (skip) return '';
-  const tags = [r === 'tw' ? '<span class="tag tw">台灣有售</span>' : '', it.uncertain ? '<span class="tag unc">價格／規格待查證</span>' : '',
+  const modelled = key !== null || it.key;
+  const tags = [it.photo ? '<span class="tag ok">已依實照校正</span>' : modelled ? '<span class="tag">3D 已建模</span>' : '<span class="tag dim">僅列表</span>',
+    r === 'tw' ? '<span class="tag tw">台灣有售</span>' : '', it.uncertain ? '<span class="tag unc">價格／規格待查證</span>' : '',
     it.owl ? '<span class="tag">有白字版</span>' : '', it.inch ? `<span class="tag">${esc(it.inch)}</span>` : ''].join('');
-  const apply = key ? `<a class="apply" href="app.html?${key}=${encodeURIComponent(it.id)}${key === 'tread' ? '&owl=' + !!it.owl : ''}">套用到配置器</a>` : '';
+  const apply = key ? `<a class="apply" href="app.html?${key}=${encodeURIComponent(it.id)}${key === 'tread' ? '&owl=' + !!it.owl : ''}">套用到配置器</a>`
+    : it.key ? `<a class="apply" href="app.html?${it.key}=${it.key === 'wheel' ? 'maxx' : it.key === 'ladder' ? 'fr' : 'true'}">套用到配置器</a>` : '';
   return `<div class="card ${r === 'tw' ? 'tw' : ''}">
     <div class="top"><div><b>${esc(it.label)}</b><div class="brand">${esc(it.brand ?? '')}</div></div>
       <div class="price ${it.price ? '' : 'na'}">${price(it)}<small>${it.cur ?? ''}${it.price && it.cur === 'JPY' ? ' 含稅' : ''}</small></div></div>
@@ -113,7 +119,8 @@ function card(it, key) {
   </div>`;
 }
 function matches(it) {
-  if (filter !== 'all' && region(it) !== filter) return false;
+  if (filter === 'photo') { if (!it.photo) return false; }
+  else if (filter !== 'all' && region(it) !== filter) return false;
   if (!query) return true;
   const hay = [it.label, it.brand, it.note, it.part, it.model, it.id].join(' ').toLowerCase();
   return query.toLowerCase().split(/\s+/).every((w) => hay.includes(w));

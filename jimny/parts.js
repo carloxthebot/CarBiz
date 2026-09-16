@@ -102,7 +102,7 @@ export const WHEELS = [
     price: null, cur: 'JPY', brand: 'MLJ', uncertain: true },
   { id: 'te37xt', label: 'RAYS TE37XT M-SPEC for J', rim: 16, width: 5.5, offset: 20, style: 'six',
     price: null, cur: 'JPY', brand: 'RAYS', note: '鍛造一件式，2025 年起；Bronze／Blast Black' },
-  { id: 'maxx', label: 'MAXX Flowforged 8 輻', rim: 16, width: 7.0, offset: -10, style: 'eight',
+  { id: 'maxx', photo: true, label: 'MAXX Flowforged 8 輻', rim: 16, width: 7.0, offset: -10, style: 'eight',
     price: null, brand: 'MAXX', uncertain: true, note: '消光黑，車主實車配置' },
   { id: 'beadlock', label: 'Beadlock 造型輪圈', rim: 16, width: 7.0, offset: -20, style: 'beadlock',
     price: null, brand: '多家', uncertain: true, note: '深 offset，需搭配大幅輪拱修改' },
@@ -136,7 +136,7 @@ export const TYRES = [
 // length along the circumference; `owl` says whether the maker sells a white-letter sidewall in JB74
 // sizes, so the toggle can be offered honestly.
 export const TYRE_MODELS = [
-  { id: 'toyo_at3', pattern: 'at', brand: 'TOYO TIRES', model: 'OPEN COUNTRY A/T III', owl: true,
+  { id: 'toyo_at3', photo: true, pattern: 'at', brand: 'TOYO TIRES', model: 'OPEN COUNTRY A/T III', owl: true,
     mask: { file: 'toyo_at3.png', repeatMM: 184 },
     label: 'TOYO Open Country A/T III', note: '白字：日規 215/70R16、美規 235/75R15、30×9.5、31×10.5' },
   { id: 'bfg_ko2', pattern: 'at', brand: 'BFGoodrich', model: 'ALL-TERRAIN T/A KO2', owl: true,
@@ -145,7 +145,7 @@ export const TYRE_MODELS = [
     label: 'Yokohama GEOLANDAR A/T G015', note: '部分尺寸白字' },
   { id: 'fk_at3w', pattern: 'at', brand: 'FALKEN', model: 'WILDPEAK A/T3W', owl: false,
     label: 'Falken WILDPEAK A/T3W', note: '僅黑字' },
-  { id: 'toyo_rt', pattern: 'rt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY R/T', owl: true,
+  { id: 'toyo_rt', photo: true, pattern: 'rt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY R/T', owl: true,
     mask: { file: 'toyo_rt.png', repeatMM: 156 },
     label: 'TOYO Open Country R/T', note: '日規單面白字' },
   { id: 'yk_xat', pattern: 'rt', brand: 'YOKOHAMA', model: 'GEOLANDAR X-AT G016', owl: true,
@@ -154,7 +154,7 @@ export const TYRE_MODELS = [
     label: 'Nitto Ridge Grappler', note: '僅黑字；JB74 常用尺寸較少' },
   { id: 'kd_rt', pattern: 'rt', brand: 'KENDA', model: 'KLEVER R/T', owl: true,
     label: 'Kenda Klever R/T KR601', note: '部分尺寸白字' },
-  { id: 'toyo_mt', pattern: 'mt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY M/T', owl: true,
+  { id: 'toyo_mt', photo: true, pattern: 'mt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY M/T', owl: true,
     mask: { file: 'toyo_mt.png', repeatMM: 246 },
     label: 'TOYO Open Country M/T', note: '日規單面白字；LT 規格' },
   { id: 'bfg_km3', pattern: 'mt', brand: 'BFGoodrich', model: 'MUD-TERRAIN T/A KM3', owl: false,
@@ -172,8 +172,8 @@ export const TYRE_MODELS = [
 export const FRONT_BUMPERS = [
   { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
   // ---- 台灣有售
-  { id: 'tube_heritage', url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_iv/', label: 'KLC Heritage Traditional 圓管保桿（MRK 代理）', price: 104500, cur: 'JPY', brand: 'KLC Heritage',
-    note: '不鏽鋼圓管＋Heritage 護板、車牌鎖管上、LED 方燈（車主實車配置）；台灣 MRK 4X4 代理' },
+  { id: 'tube_heritage', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_bk/', label: 'KLC Heritage Traditional Bumper 74 前保桿（黑）', price: 99000, cur: 'JPY', brand: 'KLC Heritage', photo: true,
+    note: '上下雙圓管、車牌跨兩管、Heritage 護板；含霧燈架 ¥110,000；車主實車配置（霧燈改 KC FLEX ERA 4）' },
   { id: 'armando', url: 'https://www.mrk.com.tw/product_ii.html?ID=1542', label: 'ARMANDO PRIME 前鐵保桿（MRK）', price: 29000, cur: 'TWD', brand: 'ARMANDO',
     part: 'AR-SU-FB-PRM', note: '全寬鋼板保桿、中央燈架、圓霧燈孔、下護板' },
   { id: 'urnieta_1970', url: 'https://www.mrk.com.tw/product_ii.html?ID=2210', label: 'URNIETA 1970 前保桿', price: 20600, cur: 'TWD', brand: 'URNIETA', part: 'UR010',
@@ -182,7 +182,7 @@ export const FRONT_BUMPERS = [
     note: '硬邊鋼製、霧燈架＋下護板；MRK 代理' },
   { id: 'maverick', url: 'https://i-pickup.com.tw/product/df0001/', label: 'Maverick 短版金屬前保桿（i-PICKUP）', price: 29000, cur: 'TWD', brand: 'Maverick',
     part: 'DF0001', note: '鍍鋅鋼 NT$29,000／鋁合金 NT$35,000，塗裝 +9,000' },
-  { id: 'jst', url: 'https://www.mrk.com.tw/product_ii.html?ID=1580', label: 'JST 前保桿（黑四驅）', price: null, cur: 'TWD', brand: 'JST', uncertain: true,
+  { id: 'jst', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1580', label: 'JST 前保桿（黑四驅）', price: null, cur: 'TWD', brand: 'JST', uncertain: true,
     note: '短鋼板＋管狀護弓；報價制（估 NT$25–30k）' },
   { id: 'mrk_abs', url: 'https://www.mrk.com.tw/product_ii.html?ID=1948', label: 'MRK 短版 ABS 前保桿 消光黑', price: 9500, cur: 'TWD', brand: 'MRK', part: 'JMY-FB-L',
     note: '原廠造型縮短版、ABS' },
@@ -191,15 +191,15 @@ export const FRONT_BUMPERS = [
   { id: 'jaos_cowl', url: 'https://www.jaos.co.jp/product/B040518/2866', label: 'JAOS Front Sport Cowl', price: 18700, cur: 'TWD', brand: 'JAOS', part: 'B040518',
     note: 'PU 材質＋鋁網，下緣 −80mm；日本 ¥66,000 起' },
   // ---- 日本
-  { id: 'klc_nostalgic', url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicfrontbumper/', label: 'KLC Heritage Nostalgic 前保桿', price: 74800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
+  { id: 'klc_nostalgic', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicfrontbumper/', photo: true, label: 'KLC Heritage Nostalgic 前保桿', price: 74800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
     note: 'JA11 風壓鋼箱型桿、烤漆（顯示為車身同色），下方黑色飾板含圓霧燈；¥74,800–96,800 依塗裝' },
-  { id: 'klc_short', url: 'https://www.klc-div.com/heritage/product/bumper/frontshortbumper74/', label: 'KLC Heritage Front Short Bumper 74', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
+  { id: 'klc_short', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/frontshortbumper74/', photo: true, label: 'KLC Heritage Front Short Bumper 74', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
     note: 'ABS 原廠高度縮短版、中央網狀開口、保留原廠霧燈；素材 ¥63,800' },
-  { id: 'showa_iron', url: 'https://www.showa-garage.shop/shopdetail/000000000842/', label: 'SHOWA GARAGE Iron Bumper', price: 128700, cur: 'JPY', brand: 'SHOWA GARAGE',
+  { id: 'showa_iron', photo: true, url: 'https://www.showa-garage.shop/shopdetail/000000000842/', photo: true, label: 'SHOWA GARAGE Iron Bumper', price: 128700, cur: 'JPY', brand: 'SHOWA GARAGE',
     part: 'E00900', note: 'Ø60 鋼管、兩端 45° 後彎；含 3mm 鋁下護板與霧燈架（本體單售 ¥90,750）' },
-  { id: 'klc_trad', url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_iv/', label: 'KLC Heritage Traditional（象牙白）', price: 104500, cur: 'JPY', brand: 'KLC Heritage',
+  { id: 'klc_trad', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_iv/', photo: true, label: 'KLC Heritage Traditional（象牙白）', price: 104500, cur: 'JPY', brand: 'KLC Heritage',
     note: '全不鏽鋼雙管，象牙白／黑／拋光；顯示為車身同色' },
-  { id: 'outclass_t2', url: 'https://outclass.ocnk.net/product/1095', label: 'OUTCLASS TYPE2 絞盤鐵保桿', price: 140800, cur: 'JPY', brand: 'OUTCLASS',
+  { id: 'outclass_t2', photo: true, url: 'https://outclass.ocnk.net/product/1095', photo: true, label: 'OUTCLASS TYPE2 絞盤鐵保桿', price: 140800, cur: 'JPY', brand: 'OUTCLASS',
     note: '鐵製、含絞盤床與 4 顆 LED 方燈；出廠未烤漆（可選 Raptor 塗層）' },
   { id: 'taniguchi_square', url: 'https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/', label: 'TANIGUCHI 角形前保桿', price: 58300, cur: 'JPY', brand: 'TANIGUCHI',
     note: '2mm 方管、粉體黑；不鏽鋼版 ¥107,800' },
@@ -212,11 +212,11 @@ export const FRONT_BUMPERS = [
 export const REAR_BUMPERS = [
   { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
   // ---- 台灣有售
-  { id: 'tube', label: '車主實車 管狀後保桿（含尾燈座）', price: null, cur: 'TWD', brand: '多家', uncertain: true,
+  { id: 'tube', photo: true, label: '車主實車 管狀後保桿（含尾燈座）', price: null, cur: 'TWD', brand: '多家', uncertain: true,
     note: 'Ø76 直管、方形封板、尾燈座板、右側排氣尾管、拖鉤' },
-  { id: 'klc_heritage_rear', url: 'https://www.mrk.com.tw/product_ii.html?ID=2059', label: 'KLC Heritage 經典復古後保桿（MRK）', price: 26000, cur: 'TWD', brand: 'KLC Heritage', part: 'HTRBBK',
+  { id: 'klc_heritage_rear', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperrear_2_bk/', label: 'KLC Heritage Traditional Bumper 74 後保桿（黑）', price: 88000, cur: 'JPY', brand: 'KLC Heritage', part: 'HTRBBK', photo: true,
     note: '粗直管＋兩端梯形尾燈座板、車牌下吊；粉體黑／銀／象牙白（車主實車配置）' },
-  { id: 'klc_nostalgic_rear', url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicrearbumper/', ownLamps: true, label: 'KLC Heritage Nostalgic 後保桿', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
+  { id: 'klc_nostalgic_rear', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicrearbumper/', ownLamps: true, photo: true, label: 'KLC Heritage Nostalgic 後保桿', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
     note: '烤漆箱型桿（顯示為車身同色）、上緣橡膠條、兩端內嵌三色矩形尾燈' },
   { id: 'urnieta_1970_rear', url: 'https://www.mrk.com.tw/product_ii.html?ID=2219', ownLamps: true, label: 'URNIETA 1970 後保桿', price: 20400, cur: 'TWD', brand: 'URNIETA', part: 'UR015',
     note: '半高、兩端上折、圓形尾燈，8.4kg' },
@@ -244,15 +244,15 @@ export const REAR_BUMPERS = [
 export const GRILLES = [
   { id: 'stock', label: '原廠五格柵', price: 0, brand: 'SUZUKI', note: '5 道直立柵欄，中央 S 標' },
   // ---- 台灣有售
-  { id: 'hbar_suzuki', url: 'https://shopee.tw/product/47473069/5556354773', label: '南國吉米 JB74 復古水箱罩（5 橫柵＋SUZUKI 白字）', price: 2750, cur: 'TWD', brand: '南國吉米（台灣）',
-    note: 'ABS 消光黑；客製色 NT$4,500、草寫字版 NT$5,000（車主實車配置）' },
+  { id: 'hbar_suzuki', photo: true, url: 'https://www.klc-div.com/heritage/product/grille/facegrillenostalgic/', label: 'KLC Heritage Face Grille Nostalgic（橫柵＋SUZUKI 白字）', price: 93500, cur: 'JPY', brand: 'KLC Heritage', photo: true,
+    note: 'ABS 烤漆 ¥93,500／ABS 素材 ¥60,500／FRP ¥55,000；方形大燈座、三道橫柵＋細網；車主實車配置。南國吉米有仿製品 NT$2,750' },
   { id: 'taishan_retro', url: 'https://www.ruten.com.tw/item/show?22105865989825', label: '泰山美研社 復古水箱罩 黑／銀', price: 17500, cur: 'TWD', brand: '泰山美研社（台灣）',
     note: 'KLC 風格樹脂復古罩' },
   { id: 'urnieta_1970', url: 'https://www.heekis.com/products/urnieta-1970-jimny-jb74-jc74-grille', label: 'URNIETA 1970 水箱護罩', price: 8400, cur: 'TWD', brand: 'URNIETA',
     note: '沖壓金屬網＋極簡框，1.6kg；Heekis 代理' },
   { id: 'mrk_angry', url: 'https://www.mrk.com.tw/product_ii.html?ID=1670', label: 'MRK 憤怒鳥款水箱罩', price: 5500, cur: 'TWD', brand: 'MRK', part: 'JB089',
     note: '3 道粗橫條、外端斜切、卡扣安裝' },
-  { id: 'klc_sj', url: 'https://www.klc-div.com/heritage/product/grille/facegrillesj.html', label: 'KLC Face Grille SJ（七孔＋SUZUKI 字）', price: 16000, cur: 'TWD', brand: 'KLC Heritage',
+  { id: 'klc_sj', photo: true, url: 'https://www.klc-div.com/heritage/product/grille/facegrillesj.html', photo: true, label: 'KLC Face Grille SJ（七孔＋SUZUKI 字）', price: 16000, cur: 'TWD', brand: 'KLC Heritage',
     note: 'FRP 素材 NT$16,000（藤井74）；日本 ABS 烤漆 ¥93,500。顯示為車身同色' },
   // ---- 日本
   { id: 'klc_ja', url: 'https://www.klc-div.com/heritage/product/grille/facegrilleja/', label: 'KLC Face Grille JA（JA22 風）', price: 93500, cur: 'JPY', brand: 'KLC Heritage',
@@ -265,9 +265,9 @@ export const GRILLES = [
     note: 'SJ30 直縫沖壓鋼板、槍灰、黑鋁網' },
   { id: 'apio_marker', url: 'https://apio.jp/parts/3033-59.html', label: 'APIO Marker Vintage Iron Grille', price: 75900, cur: 'JPY', brand: 'APIO', part: '3033-59',
     note: '鋼製橫柵＋4 顆 IPF 標誌燈，半光黑或淺古銅' },
-  { id: 'showa_hex', url: 'https://www.showa-garage.shop/shopdetail/000000000205/', label: 'SHOWA GARAGE ABS 蜂巢護罩', price: 16500, cur: 'JPY', brand: 'SHOWA GARAGE',
+  { id: 'showa_hex', photo: true, url: 'https://www.showa-garage.shop/shopdetail/000000000205/', photo: true, label: 'SHOWA GARAGE ABS 蜂巢護罩', price: 16500, cur: 'JPY', brand: 'SHOWA GARAGE',
     part: 'E00500', note: 'ABS 素材黑（烤漆版 E00502 ¥31,900）；中央蜂巢網開口' },
-  { id: 'outclass_g', url: 'https://outclass.ocnk.net/product/1071', label: 'OUTCLASS Vintage G Grille', price: 57750, cur: 'JPY', brand: 'OUTCLASS',
+  { id: 'outclass_g', photo: true, url: 'https://outclass.ocnk.net/product/1071', photo: true, label: 'OUTCLASS Vintage G Grille', price: 57750, cur: 'JPY', brand: 'OUTCLASS',
     note: 'ASA 樹脂紋理黑；4 道橫柵＋中央直柱，後方細網' },
   { id: 'taniguchi_washer', url: 'https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/', label: 'TANIGUCHI FRP Washer Grille', price: 44000, cur: 'JPY', brand: 'TANIGUCHI',
     note: '原廠造型 FRP、洗燈噴嘴移入大燈' },
@@ -283,23 +283,23 @@ export const GRILLES = [
 // Snorkel kits sold for the JB74; all mount on the right (1.5L airbox side).
 export const SNORKELS = [
   { id: 'none', label: '無', price: 0 },
-  { id: 'safari', url: 'https://www.ironman4x4.com.au/products/4x4-snorkel-for-suzuki-jimny-jb74w', label: 'Safari / Ironman 圓管進氣頭', price: 451, cur: 'AUD', brand: 'Ironman 4x4', part: 'ISNORKEL070',
+  { id: 'safari', photo: true, url: 'https://www.ironman4x4.com.au/products/4x4-snorkel-for-suzuki-jimny-jb74w', photo: true, label: 'Safari / Ironman 圓管進氣頭', price: 451, cur: 'AUD', brand: 'Ironman 4x4', part: 'ISNORKEL070',
     note: 'Ø89 LLDPE 圓管、前向進氣頭；需切葉子板' },
-  { id: 'bravo', url: 'https://bravosnorkel.com/en/suzuki/106-suzuki-jimny-2018-.html', label: 'Bravo Snorkel SSJN', price: 399, cur: 'EUR', brand: 'Bravo Snorkel',
+  { id: 'bravo', photo: true, url: 'https://bravosnorkel.com/en/suzuki/106-suzuki-jimny-2018-.html', photo: true, label: 'Bravo Snorkel SSJN', price: 399, cur: 'EUR', brand: 'Bravo Snorkel',
     note: '西班牙製、方形管身貼 A 柱、彎頭側向網狀進氣；免鑽孔（換掉葉子板角飾板）' },
-  { id: 'urnieta', url: 'https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/', label: 'URNIETA Salado', price: 839, cur: 'AUD', brand: 'URNIETA', part: '0702021',
+  { id: 'urnieta', url: 'https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA Salado', price: 839, cur: 'AUD', brand: 'URNIETA', part: '0702021',
     note: 'ABS 方管、矩形百葉進氣頭、側面開槽；免鑽孔，另附旋風前濾頭' },
-  { id: 'precleaner', url: 'https://www.jimnybits.com/snorkel-air-pre-filter-pre-cleaner-head-for-3-snorkels-1.html', label: 'Safari 管身＋旋風前濾頭', price: null, cur: 'GBP', brand: 'Safari + PC35', uncertain: true,
+  { id: 'precleaner', photo: true, url: 'https://www.jimnybits.com/snorkel-air-pre-filter-pre-cleaner-head-for-3-snorkels-1.html', photo: true, label: 'Safari 管身＋旋風前濾頭', price: null, cur: 'GBP', brand: 'Safari + PC35', uncertain: true,
     note: 'Ø180 透明旋風碗，先甩掉粉塵' },
-  { id: 'sleek', url: 'https://megajimny.com/products/supa-sleek-snorkel-system', label: 'Mega Jimny Supa-Sleek', price: 649, cur: 'AUD', brand: 'Mega Jimny',
+  { id: 'sleek', photo: true, url: 'https://megajimny.com/products/supa-sleek-snorkel-system', photo: true, label: 'Mega Jimny Supa-Sleek', price: 649, cur: 'AUD', brand: 'Mega Jimny',
     note: '2 吋不鏽鋼細管貼 A 柱、後向小進氣口；免鑽孔、幾乎看不見' },
 ];
 
 export const MIRRORS = [
   { id: 'stock', label: '原廠電動折疊鏡', price: 0, brand: 'SUZUKI' },
-  { id: 'urnieta', url: 'https://urnieta.com/product/salado-side-mirror-kit-for-jimny-jb74-jc74/', label: 'URNIETA Salado 環管後照鏡', price: 949, cur: 'AUD', brand: 'URNIETA', part: '0702022',
+  { id: 'urnieta', url: 'https://urnieta.com/product/salado-side-mirror-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA Salado 環管後照鏡', price: 949, cur: 'AUD', brand: 'URNIETA', part: '0702022',
     note: '方形鏡頭＋圓管環臂，沿用原廠門上三角座；手動調整，附相機孔' },
-  { id: 'damd', url: 'https://easycars.jp/product/damd-truck-side-mirror-for-jimny-jb64-jb74/', label: 'DAMD Truck Mirror', price: 88000, cur: 'JPY', brand: 'DAMD',
+  { id: 'damd', photo: true, url: 'https://www.pp-performance.net/products/damd-jimny-sierra-truck-mirror', label: 'DAMD Truck Mirror（PP Performance 代理）', price: 19800, cur: 'TWD', brand: 'DAMD', photo: true,
     note: '直式卡車鏡＋U 型管臂，消光黑或鍍鉻；含加熱，失去電動折疊' },
 ];
 
@@ -308,7 +308,7 @@ export const MIRRORS = [
 export const ROOF_RACKS = [
   { id: 'none', label: '無', price: 0 },
   // ---- 台灣有售
-  { id: 'arb', url: 'https://www.ruten.com.tw/item/show?22438729095708', label: 'ARB BASE Rack 1545×1285', price: 45000, cur: 'TWD', brand: 'ARB', part: '1770020 + 17900020',
+  { id: 'arb', photo: true, url: 'https://www.ruten.com.tw/item/show?22438729095708', photo: true, label: 'ARB BASE Rack 1545×1285', price: 45000, cur: 'TWD', brand: 'ARB', part: '1770020 + 17900020',
     note: '鋁擠型平台、燕尾槽側軌、4 支雨槽腳；平台單品 NT$15,000（MRK）；車主實車配置' },
   { id: 'yakima', url: 'https://www.yakima.com.tw/products/locknload-platform', label: 'Yakima LockNLoad 平台 B 1520×1370', price: 23000, cur: 'TWD', brand: 'Yakima', part: '8005045',
     note: '橫向板條 T 槽、4 支雨槽腳（110／150／210mm）；Yakima 台灣售價' },
@@ -319,7 +319,7 @@ export const ROOF_RACKS = [
   { id: 'tw_generic', url: 'https://tw.bid.yahoo.com/item/100868689053', label: '機油倉庫 鋁合金平頂行李架', price: 13000, cur: 'TWD', brand: '機油倉庫（台灣）',
     note: '1600×1260、6 支雨槽腳、前導流板；安裝 +NT$1,000' },
   // ---- 進口
-  { id: 'platform', url: 'https://www.dometic.com/en-au/product/suzuki-jimny-2018-current-slii', label: 'Front Runner Slimline II 全長', price: 1579, cur: 'AUD', brand: 'Front Runner', part: 'KRSJ003T',
+  { id: 'platform', photo: true, url: 'https://www.dometic.com/en-au/product/suzuki-jimny-2018-current-slii', photo: true, label: 'Front Runner Slimline II 全長', price: 1579, cur: 'AUD', brand: 'Front Runner', part: 'KRSJ003T',
     note: '1560×1345、6 支雨槽腳、前導流板，31kg' },
   { id: 'fr34', url: 'https://www.dometic.com/en-au/product/suzuki-jimny-2018-curr-slii-3-4-roof-rack-kit', label: 'Front Runner Slimline II 3/4', price: 1451, cur: 'AUD', brand: 'Front Runner', part: 'KRSJ006T',
     note: '1156×1345、4 支腳' },
@@ -336,13 +336,13 @@ export const ROOF_RACKS = [
 export const AWNINGS = [
   { id: 'none', label: '無', price: 0 },
   // ---- 台灣有售
-  { id: 'yakima_s', url: 'https://www.yakima.com.tw/products/slimshady-%E8%BB%8A%E9%82%8A%E5%B8%B3-2-2-5m', label: 'Yakima OverNOut S 2×2.5m', price: 8500, cur: 'TWD', brand: 'Yakima', part: 'KT8007508',
+  { id: 'yakima_s', photo: true, url: 'https://www.yakima.com.tw/products/slimshady-%E8%BB%8A%E9%82%8A%E5%B8%B3-2-2-5m', photo: true, label: 'Yakima OverNOut S 2×2.5m', price: 8500, cur: 'TWD', brand: 'Yakima', part: 'KT8007508',
     note: '軟袋 2100 長、12kg；Yakima 台灣售價' },
   { id: 'yakima_l', url: 'https://www.yakima.com.tw/products/overnout_l', label: 'Yakima OverNOut L 2.5×2.5m', price: 11700, cur: 'TWD', brand: 'Yakima', part: 'KTHB0019',
     note: '軟袋 2600 長、18kg' },
   { id: 'yakima_270', url: 'https://www.yakima.com.tw/products/overnout-270', label: 'Yakima OverNOut 270 蝙蝠帳', price: 21600, cur: 'TWD', brand: 'Yakima', part: '8007462/3',
     note: '2286×216×254、後端旋轉、四支臂自撐；左＝駕駛側' },
-  { id: 'yakima_270s', url: 'https://www.yakima.com.tw/products/overnout-270', label: 'Yakima OverNOut 270 1.8M 蝙蝠帳', price: 19800, cur: 'TWD', brand: 'Yakima', part: '8007538/9',
+  { id: 'yakima_270s', photo: true, url: 'https://www.yakima.com.tw/products/overnout-270', photo: true, label: 'Yakima OverNOut 270 1.8M 蝙蝠帳', price: 19800, cur: 'TWD', brand: 'Yakima', part: '8007538/9',
     note: '短版 270°，收納約 1850×216×254；架在車頂架側緣上方（車主實車配置）' },
   { id: 'yakima_180', url: 'https://www.yakima.com.tw/products/overnout-180-%E5%81%B4%E9%82%8A%E5%B8%B3', label: 'Yakima OverNOut 180', price: 21600, cur: 'TWD', brand: 'Yakima', part: '8007516',
     note: '2260×229×178、8.7m²、三支臂' },
@@ -370,11 +370,11 @@ export const AWNINGS = [
 export const SIDE_STEPS = [
   { id: 'none', label: '無', price: 0 },
   // ---- 台灣
-  { id: 'wlm', url: 'https://www.mrk.com.tw/product_ii.html?ID=1905', label: 'WLM 4x4 側踏保桿 WLM001', price: 13800, cur: 'TWD', brand: 'WLM 4x4',
+  { id: 'wlm', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1905', photo: true, label: 'WLM 4x4 側踏保桿 WLM001', price: 13800, cur: 'TWD', brand: 'WLM 4x4',
     note: 'Ø50 圓管貼門檻、兩片踏板、鍍鋅粉體黑；用原廠孔位免鑽孔' },
-  { id: 'jst', url: 'https://www.mrk.com.tw/product_ii.html?ID=1580', label: 'JST 吉米工坊 側踏保桿 JB74001', price: 8500, cur: 'TWD', brand: 'JST 吉米工坊',
-    note: '加強型／特仕版 NT$8,500–11,700；直管＋兩片平踏板' },
-  { id: 'tjm', url: 'https://www.mrk.com.tw/product_ii.html?ID=915', label: 'TJM Rock Slider（MRK 代理）', price: 18000, cur: 'TWD', brand: 'TJM',
+  { id: 'jst', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1580', label: 'JSK（JST）側踏保桿 JB74001（MRK）', price: 9000, cur: 'TWD', brand: 'JST 吉米工坊', photo: true,
+    note: '直管＋兩片平踏板，兩端上翹；加強型／特仕版至 NT$11,700；車主實車配置' },
+  { id: 'tjm', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=915', photo: true, label: 'TJM Rock Slider（MRK 代理）', price: 18000, cur: 'TWD', brand: 'TJM',
     part: '735STRSA57X', note: 'Ø51 大樑固定、焊接踏板；支架另購 NT$3,000' },
   // ---- 日本
   { id: 'outclass', url: 'https://outclass.ocnk.net/product/1124', label: 'OUTCLASS サイドステップ', price: 88000, cur: 'JPY', brand: 'OUTCLASS',
@@ -398,7 +398,7 @@ export const SIDE_STEPS = [
   { id: 'spieler', url: 'https://spieler.jp/products/jb64jb74sidestep7575', label: 'SPIELER サイドステップ 7575', price: 88000, cur: 'JPY', brand: 'SPIELER',
     note: '75×75 方管＋鋁面板，用車廂固定孔免鑽' },
   // ---- 澳洲
-  { id: 'arb', url: 'https://www.arb.com.au/product/4424010-arb-rock-sliders-with-textured-black-finish-suzuki-jimny', label: 'ARB Rock Slider', price: 891, cur: 'AUD', brand: 'ARB', part: '4424010',
+  { id: 'arb', photo: true, url: 'https://www.arb.com.au/product/4424010-arb-rock-sliders-with-textured-black-finish-suzuki-jimny', label: 'ARB Rock Slider', price: 891, cur: 'AUD', brand: 'ARB', part: '4424010',
     note: 'Ø60.3 主管、3 支支撐管接大樑、紋理黑，18kg' },
   { id: 'ironman', url: 'https://doubleblackoffroad.com/products/ironman-suzuki-jimny-rock-sliders-2018', label: 'Ironman 4x4 Rock Slider SS070', price: 699, cur: 'AUD', brand: 'Ironman 4x4',
     note: 'Ø50.8×2.6、1280mm、緞面黑' },
@@ -410,7 +410,7 @@ export const LADDERS = [
   { id: 'none', label: '無', price: 0 },
   { id: 'fr', url: 'https://ozjimny.com/products/front-runner-ladder-jimny-models-2023-current-xl', label: 'Front Runner 尾門梯', price: null, cur: 'AUD', brand: 'Front Runner', part: 'LASJ004', uncertain: true,
     note: '4 階、鉸鏈側、勾尾門上緣' },
-  { id: 'tube', label: '管狀環形爬梯', price: null, cur: 'TWD', brand: '多家', uncertain: true,
+  { id: 'tube', photo: true, label: '管狀環形爬梯', price: null, cur: 'TWD', brand: '多家', uncertain: true,
     note: 'Ø32 管環、勾車頂架後緣、附滅火器座（車主實車配置）' },
 ];
 
@@ -419,7 +419,7 @@ export const SIMPLE = {
                   note: '注意左右側別；部分需切葉子板', uncertain: true },
   roofRack:     { label: '車頂架', options: [
                     { id: 'none', label: '無' },
-                    { id: 'platform', url: 'https://www.dometic.com/en-au/product/suzuki-jimny-2018-current-slii', label: '平台式', brand: 'Rhino-Rack Pioneer / Front Runner Slimline II' },
+                    { id: 'platform', photo: true, url: 'https://www.dometic.com/en-au/product/suzuki-jimny-2018-current-slii', label: '平台式', brand: 'Rhino-Rack Pioneer / Front Runner Slimline II' },
                     { id: 'basket', url: 'https://www.showa-garage.shop/shopdetail/000000000111/I59728/', label: '籃式', brand: 'APIO / JAOS / Ironman 4x4' }] },
   awning:       { label: '側邊帳', options: [
                     { id: 'none', label: '無' },
@@ -433,19 +433,23 @@ export const SIMPLE = {
   spareBag:     { label: '備胎書包（スペアタイヤバッグ）', brands: '多家', uncertain: true },
 };
 
-// Catalogue-only extras (no selectable model variant yet)
+// Extras that map to configurator toggles (`key`) rather than a select list
 export const OTHERS = [
-  { id: 'wlm_guard', url: 'https://www.buerjitw.com/products/wlm-%E7%AA%97%E6%88%B6%E9%98%B2%E8%AD%B7%E7%B6%B2-jimny-jb74', label: 'WLM 4x4 後側窗防護網（鐵窗）', price: 5200, cur: 'TWD', brand: 'WLM 4x4', part: 'JB7408 / JB7409',
+  { id: 'showa_skirt', url: 'https://www.heekis.com/products/showasidecover', label: 'SHOWA GARAGE AES 車門下側裙飾板', price: 14500, cur: 'TWD', brand: 'SHOWA GARAGE', photo: true, key: 'sideSkirt',
+    note: '消光黑 AES 門檻下飾蓋，簡約腰線；Heekis 代理；車主實車配置' },
+  { id: 'kc_flex4', url: 'https://www.mrk.com.tw/product_ii.html?ID=561', label: 'KC HiLiTES FLEX ERA 4 霧燈（一對）', price: 23500, cur: 'TWD', brand: 'KC HiLiTES', part: '0289', photo: true, key: 'frontBumper',
+    note: '4 燈 LED 方燈、160W 混合光；裝在 KLC 前保桿下管兩端（車主實車配置，前保桿模型已含）' },
+  { id: 'wlm_guard', photo: true, key: 'windowGuards', url: 'https://www.buerjitw.com/products/wlm-%E7%AA%97%E6%88%B6%E9%98%B2%E8%AD%B7%E7%B6%B2-jimny-jb74', label: 'WLM 4x4 後側窗防護網（鐵窗）', price: 5200, cur: 'TWD', brand: 'WLM 4x4', part: 'JB7408 / JB7409',
     note: '每片；795×533 雷射切割方孔板、雨槽夾固定，可掀式；配置器「鐵窗（WLM）」' },
-  { id: 'fr_ladder', url: 'https://ozjimny.com/products/front-runner-ladder-jimny-models-2023-current-xl', label: 'Front Runner Jimny 尾門梯', price: null, cur: 'AUD', brand: 'Front Runner', part: 'LASJ004', uncertain: true,
+  { id: 'fr_ladder', key: 'ladder', url: 'https://ozjimny.com/products/front-runner-ladder-jimny-models-2023-current-xl', label: 'Front Runner Jimny 尾門梯', price: null, cur: 'AUD', brand: 'Front Runner', part: 'LASJ004', uncertain: true,
     note: '4 階、鉸鏈側；配置器「後爬梯」' },
-  { id: 'ipf_bar', url: 'https://www.ipf-light.com/catalog/642jm2.php', label: 'IPF 600 S-Series 40" 燈條＋A 柱支架', price: null, cur: 'JPY', brand: 'IPF', part: '642SD + 642JM2', uncertain: true,
+  { id: 'ipf_bar', key: 'lightBar', url: 'https://www.ipf-light.com/catalog/642jm2.php', label: 'IPF 600 S-Series 40" 燈條＋A 柱支架', price: null, cur: 'JPY', brand: 'IPF', part: '642SD + 642JM2', uncertain: true,
     note: '配置器「車頂燈條」' },
-  { id: 'suzuki_cover', url: 'https://jdmyamato.com/products/y08-sz0001-00024', label: 'Suzuki 原廠硬式備胎蓋', price: null, cur: 'JPY', brand: 'SUZUKI', part: '9923B-77R21-003', uncertain: true,
+  { id: 'suzuki_cover', key: 'spareCover', url: 'https://jdmyamato.com/products/y08-sz0001-00024', label: 'Suzuki 原廠硬式備胎蓋', price: null, cur: 'JPY', brand: 'SUZUKI', part: '9923B-77R21-003', uncertain: true,
     note: '硬質樹脂面＋皮革背；配置器「備胎硬殼蓋」' },
-  { id: 'trasharoo', url: 'https://agileoffroad.com/products/trasharoo-spare-tire-trash-bag', label: 'Trasharoo 備胎書包', price: null, cur: 'USD', brand: 'Trasharoo', uncertain: true,
+  { id: 'trasharoo', key: 'spareBag', url: 'https://agileoffroad.com/products/trasharoo-spare-tire-trash-bag', label: 'Trasharoo 備胎書包', price: null, cur: 'USD', brand: 'Trasharoo', uncertain: true,
     note: '配置器「備胎書包」' },
-  { id: 'maxx', url: null, label: 'MAXX Flowforged 8 輻 16×7', price: null, cur: 'TWD', brand: 'MAXX', uncertain: true, note: '消光黑（車主實車配置）' },
+  { id: 'maxx', photo: true, url: null, key: 'wheel', label: 'MAXX Flowforged 8 輻 16×7', price: null, cur: 'TWD', brand: 'MAXX', uncertain: true, note: '消光黑（車主實車配置）' },
 ];
 
 export const SPARE_COVERS = [
