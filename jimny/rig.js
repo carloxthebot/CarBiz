@@ -377,7 +377,9 @@ export function applyConfig(THREE, rig, cfg) {
       const c = U.spareBox.getCenter(new THREE.Vector3());
       const spareDia = U.spareBox.max.y - U.spareBox.min.y;
       w.rotation.y = Math.PI / 2;                // axle along Z, rim face towards -Z (rearward)
-      w.position.set(c.x, c.y + (targetDia - spareDia) * 0.25, c.z + (cfg.tyreWidth ?? 195) * 0.92 * mm / 2 - (U.spareBox.max.z - U.spareBox.min.z) / 2);
+      // a wider tyre grows REARWARD (-Z) so its inner face stays on the carrier and
+      // the carrier plate stays behind the rim face instead of poking through it
+      w.position.set(c.x, c.y + (targetDia - spareDia) * 0.25, c.z - ((cfg.tyreWidth ?? 195) * 0.92 * mm / 2 - (U.spareBox.max.z - U.spareBox.min.z) / 2) - 0.03);
       w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       U.BODY.add(w);
       U.builtWheels.push(w);
