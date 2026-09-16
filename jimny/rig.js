@@ -100,6 +100,12 @@ export function rigJimny(THREE, gltfScene) {
     // the body, and made every lift and tyre change float the whole car.
     const n = o.name || '';
     if (/roda_1_1(?!\d)/.test(n)) { spare.push(o); return; }
+    // the model also carries a painted hard cover over the spare (a 440 mm disc
+    // and ring at the tail); it goes with the spare so a built wheel shows its rim
+    {
+      const bb = new THREE.Box3().setFromObject(o), sz = bb.getSize(new THREE.Vector3()), c = bb.getCenter(new THREE.Vector3());
+      if (Math.abs(c.x) < 0.06 && c.z < -1.55 && sz.x > 0.40 && sz.y > 0.40 && sz.z < 0.2) { spare.push(o); return; }
+    }
     const m = n.match(/roda([1-4])(?!\d)/);
     if (m) corners['roda' + m[1]].push(o);
   });
@@ -286,7 +292,7 @@ export function rigJimny(THREE, gltfScene) {
   // Bumper: everything black ahead of the axle and below the bonnet line,
   // plus the fog lamps set into it. Grille: the satin surround panel, its
   // slats and inserts, the signal bezels and the badge. Headlamp units stay.
-  const stockBumper = [], stockGrille = [], stockRear = [], stockMirrors = [], stockFlares = [];
+  const stockBumper = [], stockGrille = [], stockRear = [], stockMirrors = [], stockFlares = [], stockRearLamps = [];
   raw.traverse((o) => {
     if (!o.isMesh || Array.isArray(o.material)) return;
     const b = new THREE.Box3().setFromObject(o);
@@ -294,6 +300,8 @@ export function rigJimny(THREE, gltfScene) {
     const n = o.material.name;
     // rear bumper: the one big satin shell under the tailgate; the tail lamps set into it stay
     if (c.z < -1400 && c.y < 650 && n === 'TrimSatin' && (b.max.x - b.min.x) > 1.0) { stockRear.push(o); return; }
+    // tail lamp units in the stock bumper: hidden only by bumpers that bring their own lamps
+    if (c.z < -1540 && c.y > 440 && c.y < 600 && Math.abs(c.x) > 330 && Math.abs(c.x) < 700 && /Chrome|Vidro|Reflet|Reflec|Glass|LampLens/.test(n)) { stockRearLamps.push(o); return; }
     // wheel-arch flares: the four big black arch shells (replaced by aftermarket flares)
     if (Math.abs(c.x) > 650 && c.y > 500 && c.y < 750 && (b.max.z - b.min.z) > 0.8 && /^TrimBlack/.test(n)) { stockFlares.push(o); return; }
     // door mirrors: the glass and its two housing shells outboard of the door skin
@@ -315,7 +323,7 @@ export function rigJimny(THREE, gltfScene) {
   };
 
   root.userData = {
-    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors, stockFlares,
+    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors, stockFlares, stockRearLamps,
     paintMat, roofMat, roofMeshes, painted, dims,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
@@ -333,6 +341,7 @@ export function applyConfig(THREE, rig, cfg) {
   for (const m of U.stockRear) m.visible = !cfg.hideRear;
   for (const m of U.stockMirrors) m.visible = !cfg.hideMirrors;
   for (const m of U.stockFlares) m.visible = !cfg.hideFlares;
+  for (const m of U.stockRearLamps) m.visible = !cfg.hideRearLamps;
   if (U.roofMat) {
     const twoTone = !!cfg.twoTone;
     U.roofMat.color.setHex(twoTone ? (cfg.roofColor ?? 0x1e2326) : (cfg.bodyColor ?? 0x6a6866));

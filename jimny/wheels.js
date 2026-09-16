@@ -257,7 +257,7 @@ export function loadTreadMasks(models, base = 'model/tread/') {
   })));
 }
 
-function maskPattern(mk, tw, circ, shArc, depth, sideScale) {
+function maskPattern(mk, tw, circ, shArc, depth, sideScale, fallback) {
   const n = Math.max(1, Math.round(circ / mk.repeatMM)), P = circ / n;
   // the traced strip spans the tread plus most of the shoulder, whatever the size
   const widthMM = mk.widthMM ?? tw + 1.8 * shArc;
@@ -266,8 +266,10 @@ function maskPattern(mk, tw, circ, shArc, depth, sideScale) {
   return {
     P, depth, sideScale,
     g(u, v) {
+      // the traced strip stops at the tread edge; the shoulder and sidewall lugs come from the procedural pattern
+      if (Math.abs(v) > tw / 2 - 4 && fallback) return fallback.g(u, v);
       const fx = wrap(u, P) * sx, fy = (v + widthMM / 2) * sy;
-      if (fy < 0 || fy >= mk.h - 1) return 0;                 // beyond the traced strip: plain sidewall
+      if (fy < 0 || fy >= mk.h - 1) return 0;
       const x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0;
       return (at(x0, y0) * (1 - tx) + at(x0 + 1, y0) * tx) * (1 - ty) + (at(x0, y0 + 1) * (1 - tx) + at(x0 + 1, y0 + 1) * tx) * ty;
     },
@@ -350,11 +352,12 @@ function tyreTexture(THREE, key, { circ, L, tw, shArc, pat, brand, model, owl })
   const draw = (ctx, fill) => {
     ctx.fillStyle = fill; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     for (const [t, at, big] of [[brand, 0.0, true], [model, 0.5, false]]) {
-      let fs = Math.round(bandH * (big ? 0.27 : 0.25));
-      const font = (nn) => `${big ? '900' : '700'} ${nn}px "Helvetica Neue", Arial, sans-serif`;
+      let fs = Math.round(bandH * 0.25);
+      const font = (nn) => `${big ? '900' : '800'} ${nn}px "Helvetica Neue", Arial, sans-serif`;
       ctx.font = font(fs);
       const w = ctx.measureText(t).width;
-      if (w > W * 0.36) { fs = Math.floor(fs * W * 0.36 / w); ctx.font = font(fs); }
+      const cap = W * (big ? 0.34 : 0.46);                   // the model name runs a longer arc, as on the tyre
+      if (w > cap) { fs = Math.floor(fs * cap / w); ctx.font = font(fs); }
       ctx.fillText(t, W * (at + 0.25), yText);
     }
   };
@@ -379,7 +382,7 @@ export function buildTyre(THREE, { tR, rR, half, sidewall, width, tread }) {
   const circ = 2 * Math.PI * tR;
   const mk = spec.id && MASKS.get(spec.id);
   const fallback = PATTERNS[pattern](tw, circ, shArc);
-  const pat = mk ? maskPattern(mk, tw, circ, shArc, fallback.depth, fallback.sideScale) : fallback;
+  const pat = mk ? maskPattern(mk, tw, circ, shArc, fallback.depth, fallback.sideScale, fallback) : fallback;
   const N = Math.max(360, Math.round(circ / 3.5));        // ~3.5 mm around
   const M = pts.length;
   const pos = new Float32Array((N + 1) * M * 3), uv = new Float32Array((N + 1) * M * 2);

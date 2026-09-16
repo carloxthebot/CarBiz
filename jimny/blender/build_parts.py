@@ -935,48 +935,45 @@ def shovel():
     return root
 
 
+def revolve_arc(name, profile, centre_y, centre_z, a0, a1, mat, parent, side=1, steps=28):
+    """Revolve a closed (r, x) profile around the wheel axle between angles
+    a0..a1 (degrees, 0 = forward, 90 = up). Ends are capped."""
+    bm = bmesh.new()
+    rings = []
+    for i in range(steps + 1):
+        a = math.radians(a0 + (a1 - a0) * i / steps)
+        rings.append([bm.verts.new(P(side * x, centre_y + r * math.sin(a), centre_z + r * math.cos(a))) for (r, x) in profile])
+    k = len(profile)
+    for r0, r1 in zip(rings, rings[1:]):
+        for j in range(k):
+            bm.faces.new((r0[j], r0[(j + 1) % k], r1[(j + 1) % k], r1[j]))
+    bm.faces.new(list(reversed(rings[0])))
+    bm.faces.new(rings[-1])
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return lib.new_object(name, bm, mat, parent, smooth=True)
+
+
 def flares():
-    """Riveted pocket-style flares replacing the stock arch shells: an outer
-    face standing ~95 mm off the body, a return skirt to the panel, hex bolt
-    heads around the edge, and a lower leg at each end down to the sill."""
+    """Pocket-style flares over the stock arches (owner's photos): a wide
+    shell with an inner lip on the body, a flat ledge, an outer face raked
+    ~45 degrees down and out, rivets along the face and three vent slots on
+    the front section. Sits outside the stock flare, which stays as liner."""
     root = group('flares')
-    r_in, r_out = 448, 545
+    # (r, x) profile: body lip -> ledge -> raked face -> bottom edge -> back inside
+    prof = [(452, 688), (460, 722), (505, 745), (548, 800), (538, 808), (498, 754), (455, 738), (444, 690)]
     for s in (-1, 1):
         for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
-            xo = s * 800                                     # outer face plane
-            # outer face ring
-            poly = []
-            for t in range(25):
-                a = math.radians(4 + 172 * t / 24)
-                poly.append((346 + r_out * math.sin(a), z + r_out * math.cos(a)))
-            for t in range(25):
-                a = math.radians(176 - 172 * t / 24)
-                poly.append((346 + r_in * math.sin(a), z + r_in * math.cos(a)))
-            prism(f'face{s}{z}', poly, xo - s * 4, xo + s * 4, TEXBLACK, root)
-            # return skirt from the face's outer edge back to the body
-            skirt = []
-            for t in range(25):
-                a = math.radians(4 + 172 * t / 24)
-                skirt.append((346 + (r_out + 6) * math.sin(a), z + (r_out + 6) * math.cos(a)))
-            for t in range(25):
-                a = math.radians(176 - 172 * t / 24)
-                skirt.append((346 + (r_out - 6) * math.sin(a), z + (r_out - 6) * math.cos(a)))
-            prism(f'skirt{s}{z}', skirt, s * 700, xo, TEXBLACK, root)
-            # inner lip hugging the arch opening
-            lip = []
-            for t in range(25):
-                a = math.radians(4 + 172 * t / 24)
-                lip.append((346 + (r_in + 6) * math.sin(a), z + (r_in + 6) * math.cos(a)))
-            for t in range(25):
-                a = math.radians(176 - 172 * t / 24)
-                lip.append((346 + (r_in - 6) * math.sin(a), z + (r_in - 6) * math.cos(a)))
-            prism(f'lip{s}{z}', lip, s * 720, xo, TEXBLACK, root)
-            # legs down to the sill at both ends
-            for k in (-1, 1):
-                box(f'leg{s}{z}{k}', (s * 752, 330, z + k * (r_out - 50)), (96, 90, 96), TEXBLACK, root, bevel=8)
+            revolve_arc(f'flare{s}{z}', prof, 346, z, 6, 174, TEXBLACK, root, side=s)
             for t in range(13):
-                a = math.radians(12 + 156 * t / 12)
-                lib.cylinder(f'rivet{s}{z}{t}', (xo + s * 6, 346 + 505 * math.sin(a), z + 505 * math.cos(a)), (1, 0, 0), 15, 7, BLACK, root, n=6)
+                a = math.radians(14 + 152 * t / 12)
+                r, x = 530, 786
+                lib.cylinder(f'rivet{s}{z}{t}', (s * x, 346 + r * math.sin(a), z + r * math.cos(a)), (s * 0.78, math.sin(a) * 0.6, math.cos(a) * 0.6), 15, 7, BLACK, root, n=6)
+            front = z == CAR['anchors']['frontAxleZ']
+            for t in range(3):                                # vent slots on the forward quarter
+                a = math.radians((28 if front else 152) + t * 9)
+                r = 522
+                box(f'vent{s}{z}{t}', (s * 774, 346 + r * math.sin(a), z + r * math.cos(a)), (8, 40, 12), RUBBER, root, bevel=0,
+                    rot=Matrix.Rotation(-a * (1 if s > 0 else 1), 3, 'X'))
     return root
 
 
@@ -1202,7 +1199,9 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     s = -RIGHT if side == 'left' else RIGHT
     rack_top = RACK_TOP
     front = RACK_ZC + ARB_L / 2 + 100                   # bag front never past the roof's leading edge
-    x, y, zc = s * (ARB_W / 2 + 40 + W / 2), rack_top - 30 - H / 2, front - L / 2   # bag hangs beside the rail, top level with the tray
+    # bag rests on the tray over the rail, overhanging the edge ~100 mm, so its
+    # outer face stays about at the body line (owner's photos)
+    x, y, zc = s * (ARB_W / 2 - W / 2 + 100), rack_top + H / 2 - 6, front - L / 2
     prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
     sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
     for k in (-1, 1):
@@ -1214,8 +1213,7 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
         box('zip', (x + s * W / 2, y - 30, zc), (3, 8, L - 120), WEBBING, root, bevel=0)
     for k in (-1, 1):
         z = zc + k * min(600, L * 0.3)
-        box(f'lbracketH{k}', (s * (ARB_W / 2 + 20), y + H / 2 + 15, z), (100, 6, 50), BLACK, root, bevel=2)
-        box(f'lbracketV{k}', (s * (ARB_W / 2 + 5), y + H / 4, z), (6, H / 2 + 30, 50), BLACK, root, bevel=2)
+        box(f'bracket{k}', (s * (ARB_W / 2 - W / 2 + 100), y - H / 2 - 4, z), (W - 20, 8, 50), BLACK, root, bevel=2)
     if hinge:
         box('hinge', (x, y - 10, zc - L / 2 - 40), (W + 20, H + 40, 90), BLACK, root, bevel=8)
         lib.cylinder('pivot', (x, y + H / 2 + 30, zc - L / 2 - 40), (0, 1, 0), 40, 60, BLACK, root)
@@ -1336,11 +1334,10 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'klc':
-            # trapezoid plate rising from the tube, wider at the top, lamp framed in it
-            # plate sits BEHIND the stock lamps (they stay proud of it): trapezoid in
-            # the X-Y plane, narrower at the tube, wider at the top, 90 mm ahead of the lens
-            zp = -1560
-            poly = [(s * 360, y + 10), (s * 725, y + 10), (s * 725, 640), (s * 320, 640)]
+            # trapezoid lamp housing standing on the tube at each end (KLC photo):
+            # narrower at the tube, wider at the top; nothing below the tube
+            zp = -1585
+            poly = [(s * 340, y + tube_d / 2 - 6), (s * 700, y + tube_d / 2 - 6), (s * 728, 612), (s * 305, 612)]
             bm = bmesh.new()
             vs_f = [bm.verts.new(P(px, py, zp + 4)) for (px, py) in poly]
             vs_b = [bm.verts.new(P(px, py, zp - 4)) for (px, py) in poly]
@@ -1349,8 +1346,9 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
                 bm.faces.new((vs_f[i], vs_b[i], vs_b[(i + 1) % 4], vs_f[(i + 1) % 4]))
             bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
             lib.new_object(f'wing{s}', bm, mat, root, smooth=False)
-            box(f'wingTop{s}', (s * 522, 642, zp - 20), (405, 8, 48), mat, root, bevel=2)
-            box(f'wingEnd{s}', (s * 727, 545, zp - 20), (8, 200, 48), mat, root, bevel=2)
+            box(f'wingTop{s}', (s * 516, 614, zp + 30), (420, 8, 70), mat, root, bevel=2)
+            box(f'wingEnd{s}', (s * 730, 530, zp + 30), (8, 170, 70), mat, root, bevel=2)
+            box(f'wingIn{s}', (s * 322, 530, zp + 30), (8, 160, 70), mat, root, bevel=2)
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'housing':
@@ -1361,10 +1359,13 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
                 lib.cylinder(f'lampLens{s}{k}', (xx, y, z - 30), (0, 0, 1), 66, 4, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
-    box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
     box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
-    for s in (-1, 1):
-        box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+    if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
+        box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
+        for s in (-1, 1):
+            box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+    else:
+        lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
 
@@ -1402,6 +1403,51 @@ def grille_generic(pid, h_slats=0, v_slots=0, hex_cells=False, wire=True, label=
     if label:
         text('suzuki', label, (0, 862, z + 16), 56, 5, text_mat or material('LabelWhite', 0xf0f0ec, rough=0.6), root,
              font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    return root
+
+
+# ============================================================ KLC NOSTALGIC
+def bumper_klc_nostalgic():
+    """KLC Heritage Nostalgic front: smooth pressed-steel box bar wrapped
+    round the corners, painted, over a black lower valance with two round
+    fogs, horizontal slots and the number plate."""
+    root = group('frontBumper_klc_nostalgic')
+    y, zf = 640, 1745
+    W, H, D = 1470, 150, 120
+    path = [(-W / 2, y, zf - D / 2 - 160), (-W / 2 + 140, y, zf - D / 2), (W / 2 - 140, y, zf - D / 2), (W / 2, y, zf - D / 2 - 160)]
+    sweep('bar', [tuple(p) for p in fillet(path, 60, steps=4)], rounded_rect(D, H, 34, 5), PAINT, root)
+    box('valance', (0, 470, zf - 90), (1020, 170, 110), TEXBLACK, root, bevel=14)
+    for k in range(3):
+        box(f'slot{k}', (0, 440 + k * 30, zf - 33), (330, 12, 6), RUBBER, root, bevel=0)
+    for s in (-1, 1):
+        fog_lamp(root, s * 400, 470, zf - 34, TEXBLACK, dia=90)
+    box('plate', (0, 480, zf - 28), (330, 165, 3), PLATE, root, bevel=1)
+    box('bay', (0, 560, 1400), (1050, 300, 20), RUBBER, root, bevel=4)
+    return root
+
+
+def rear_bumper_klc_nostalgic():
+    """KLC Heritage Nostalgic rear: painted box bar with wrapped ends, a black
+    rubber strip along the top, rectangular three-colour lamps set into the
+    ends, the number plate hung under the middle. Stock lamps are hidden by
+    the bumper it replaces, so this one carries its own."""
+    root = group('rearBumper_klc_nostalgic_rear')
+    y, z = 470, -1650
+    W, H, D = 1520, 180, 130
+    path = [(-W / 2, y, z + 200), (-W / 2 + 150, y, z), (W / 2 - 150, y, z), (W / 2, y, z + 200)]
+    sweep('bar', [tuple(p) for p in fillet(path, 60, steps=4)], rounded_rect(D, H, 30, 5), PAINT, root)
+    box('rubber', (0, y + H / 2 - 4, z - 4), (W - 320, 10, D - 20), RUBBER, root, bevel=3)
+    red = material('TailRed', 0xc0161a, rough=0.2)
+    amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
+    for s in (-1, 1):
+        cx = s * 520
+        box(f'lampHsg{s}', (cx, y + 5, z - D / 2 - 2), (270, 110, 8), BLACK, root, bevel=2)
+        for (dx, w, m) in ((-95 * s, 70, amber), (0 * s, 100, red), (95 * s, 70, LENS)):
+            box(f'lamp{s}{dx}', (cx + dx, y + 5, z - D / 2 - 8), (w - 6, 96, 6), m, root, bevel=1)
+        box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
+        box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), TEXBLACK, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+    box('plate', (0, y - 20, z - D / 2 - 8), (330, 165, 3), PLATE, root, bevel=1)
+    box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
     return root
 
 
@@ -1462,6 +1508,7 @@ def build():
         awning_case('yakima_s', side, 2100, 150, 150, PVC)
         awning_case('yakima_l', side, 2600, 150, 150, PVC)
         awning_case('yakima_270', side, 2286, 216, 254, PVC, hinge=True)
+        awning_case('yakima_270s', side, 1850, 200, 200, PVC, hinge=True)
         awning_case('yakima_180', side, 2260, 229, 178, PVC, hinge=True)
         awning_case('rhino_compact', side, 2000, 180, 160, PVC, hinge=True)
         awning_case('rhino_270', side, 2500, 180, 160, PVC, hinge=True)
@@ -1496,6 +1543,9 @@ def build():
     front_bar('jaos_cowl', 'abs', W=1560, H=280, D=180, y=540, skid=False, corners=False)
     front_bar('taniguchi_square', 'box', W=1400, y=600, skid=False)
     front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
+    bumper_klc_nostalgic()
+    rear_bumper_klc_nostalgic()
+    front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1480, tube_d=70, lamps='klc')
