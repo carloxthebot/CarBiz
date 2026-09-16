@@ -797,6 +797,7 @@ def bumper_tube_heritage():
         box(f'podMount{s}', (px - s * 60, py, zl), (50, 30, 30), TEXBLACK, root, bevel=3)
         # chassis legs and tow hooks
         box(f'leg{s}', (s * 330, yu - 70, zu - 150), (60, 170, 180), TEXBLACK, root, bevel=3)
+    box('plate', (0, yu - 125, zu + 32), (330, 165, 3), PLATE, root, bevel=1)   # demo plate on the tabs
     # Heritage panel: big flat plate hanging below the lower tube, slightly raked
     prism('panel', [(yl - 50, zl - 30), (yl - 280, zl - 70), (yl - 280, zl - 76), (yl - 50, zl - 36)], -460, 460, TEXBLACK, root)
     text('heritage', 'Heritage', (-60, yl - 170, zl - 60), 120, 4, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
@@ -1367,13 +1368,13 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             # housings hung from the tube, faces set back from the tube
             # steel boxes on the tube's ends, tops level with the tube, holding the stock lamps;
             # a red tow hook drops from each box's inner bottom corner
-            box(f'lampHsg{s}', (s * 513, y - 20, -1590), (400, 190, 110), mat, root, bevel=5)
-            for (cx, cy, sx, sy) in ((0, 86, 380, 12), (0, -86, 380, 12), (-190, 0, 12, 180), (190, 0, 12, 180)):
-                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, y - 20 + cy, -1648), (sx, sy, 10), mat, root, bevel=2)
+            box(f'lampHsg{s}', (s * 513, y - 10, -1622), (400, 176, 116), mat, root, bevel=5)
+            for (cx, cy, sx, sy) in ((0, 80, 380, 12), (0, -80, 380, 12), (-190, 0, 12, 170), (190, 0, 12, 170)):
+                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, y - 10 + cy, -1682), (sx, sy, 8), mat, root, bevel=2)
             box(f'hook{s}', (s * 330, y - 150, -1560), (14, 110, 50), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
-            box(f'lensRed{s}', (s * 513, y - 20, -1650), (372, 164, 6), material('TailRed', 0xc0161a, rough=0.2), root, bevel=3)
-            box(f'lensClear{s}', (s * (513 - 40), y - 20, -1655), (118, 112, 4), LENS, root, bevel=2)
-            box(f'lensSplit{s}', (s * (513 + 30), y - 20, -1655), (6, 150, 2), mat, root, bevel=0.5)
+            box(f'lensRed{s}', (s * 513, y - 10, -1684), (372, 152, 6), material('TailRed', 0xc0161a, rough=0.2), root, bevel=3)
+            box(f'lensClear{s}', (s * (513 - 40), y - 10, -1689), (118, 104, 4), LENS, root, bevel=2)
+            box(f'lensSplit{s}', (s * (513 + 30), y - 10, -1689), (6, 140, 2), mat, root, bevel=0.5)
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -1612,7 +1613,7 @@ def build():
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=1120, tube_d=76, y=596, lamps='klc')
+    rear_bar('klc_heritage_rear', 'tube', W=720, tube_d=76, y=596, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')
