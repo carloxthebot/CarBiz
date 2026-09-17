@@ -1368,13 +1368,8 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             # housings hung from the tube, faces set back from the tube
             # steel boxes on the tube's ends, tops level with the tube, holding the stock lamps;
             # a red tow hook drops from each box's inner bottom corner
-            box(f'lampHsg{s}', (s * 513, y - 10, -1622), (400, 176, 116), mat, root, bevel=5)
-            for (cx, cy, sx, sy) in ((0, 80, 380, 12), (0, -80, 380, 12), (-190, 0, 12, 170), (190, 0, 12, 170)):
-                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, y - 10 + cy, -1682), (sx, sy, 8), mat, root, bevel=2)
+            # the car's own tail lamps stay; the bar only carries a hook each side
             box(f'hook{s}', (s * 330, y - 150, -1560), (14, 110, 50), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
-            box(f'lensRed{s}', (s * 513, y - 10, -1684), (372, 152, 6), material('TailRed', 0xc0161a, rough=0.2), root, bevel=3)
-            box(f'lensClear{s}', (s * (513 - 40), y - 10, -1689), (118, 104, 4), LENS, root, bevel=2)
-            box(f'lensSplit{s}', (s * (513 + 30), y - 10, -1689), (6, 140, 2), mat, root, bevel=0.5)
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -1613,7 +1608,7 @@ def build():
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=720, tube_d=76, y=596, lamps='klc')
+    rear_bar('klc_heritage_rear', 'tube', W=700, tube_d=76, y=556, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')

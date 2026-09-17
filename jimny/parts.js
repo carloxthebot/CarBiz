@@ -218,7 +218,7 @@ export const REAR_BUMPERS = [
     note: 'Ø76 直管、方形封板、尾燈座板、右側排氣尾管、拖鉤' },
   { id: 'klc_heritage_rear', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperrear_2_bk/', refs: ['https://www.mrk.com.tw/product_ii.html?ID=2059'], label: 'KLC Heritage Traditional Bumper 74 後保桿（黑）', price: 88000, cur: 'JPY', brand: 'KLC Heritage', part: 'HTRBBK', photo: true,
     note: '粗直管＋兩端梯形尾燈座板、車牌下吊；粉體黑／銀／象牙白（車主實車配置）' },
-  { id: 'klc_nostalgic_rear', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicrearbumper/', ownLamps: true, photo: true, label: 'KLC Heritage Nostalgic 後保桿', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
+  { id: 'klc_nostalgic_rear', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicrearbumper/', ownLamps: false, photo: true, label: 'KLC Heritage Nostalgic 後保桿', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
     note: '烤漆箱型桿（顯示為車身同色）、上緣橡膠條、兩端內嵌三色矩形尾燈' },
   { id: 'urnieta_1970_rear', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2219', ownLamps: true, label: 'URNIETA 1970 後保桿', price: 20400, cur: 'TWD', brand: 'URNIETA', part: 'UR015',
     note: '半高、兩端上折、圓形尾燈，8.4kg' },
