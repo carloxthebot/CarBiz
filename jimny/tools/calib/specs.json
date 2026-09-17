@@ -1,0 +1,65 @@
+{
+  "_readme": [
+    "Dimensional limits for the exported parts, checked by blender/spec_gate.py.",
+    "Sizes are [min, max] in mm along the car axes: w = across (X), h = up (Y),",
+    "d = fore-aft (Z). Keys like 'y_min' bound one edge of the bounding box.",
+    "Facts only -- a JB74 is 3550 x 1645 x 1730 mm on a 2250 mm wheelbase, and",
+    "an aftermarket bar or step stays inside the body plus its flares. Entries",
+    "carry the source of the number they encode.",
+    "",
+    "Run: Blender -b --factory-startup -P blender/spec_gate.py"
+  ],
+
+  "rules": {
+    "frontBumper_": {
+      "w": [1300, 1800],
+      "note": "no wider than the body (1645) plus a flare each side"
+    },
+    "rearBumper_": {
+      "w": [1300, 1800],
+      "note": "same envelope as the front"
+    },
+    "sideStep_": {
+      "w": [1400, 1760],
+      "d": [500, 1450],
+      "note": "sits inside the body width; length spans the door aperture"
+    },
+    "grille_": {
+      "w": [1250, 1360],
+      "note": "all grilles reuse the stock aperture"
+    },
+    "roofRack_": {
+      "w": [1200, 1420],
+      "note": "roof is 1290 between the gutters; trays overhang a little"
+    },
+    "snorkel_": {
+      "h": [600, 900],
+      "note": "airbox to roofline on the right A-pillar"
+    },
+    "rim_": {
+      "h": [430, 450],
+      "d": [430, 450],
+      "note": "built at 16 in (406.4 mm bead) plus the tyre bead lip; scaled per size in the page"
+    }
+  },
+
+  "parts": {
+    "ladder_jst": {
+      "w": [300, 360],
+      "note": "standard version, 270 mm inside the hoop (Shopee listing)"
+    },
+    "awning_yakima_270s_left": {
+      "d": [1800, 2000],
+      "note": "1.8 m case"
+    },
+    "frontBumper_tube_heritage": {
+      "w": [1350, 1600],
+      "note": "KLC Traditional 74: straight tube, ends inboard of the flares"
+    },
+    "rearBumper_klc_heritage_rear": {
+      "w": [1350, 1500],
+      "y_min": [280, 340],
+      "note": "tube runs above the tail lamps and out past their outer edge (x 680)"
+    }
+  }
+}
