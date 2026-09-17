@@ -1351,9 +1351,8 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
         z = -1640                                            # just proud of the lamps
     if kind == 'tube':
         tube('bar', [(-W / 2, y, z), (W / 2, y, z)], tube_d, mat, root)
-        if lamps != 'klc':                                   # the KLC tube disappears into its lamp boxes
-            for s in (-1, 1):
-                box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
+        for s in (-1, 1):
+            box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
     else:
         path = [(-W / 2 - 60, y, z + 150), (-W / 2, y, z), (W / 2, y, z), (W / 2 + 60, y, z + 150)]
         sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 10, 3), mat, root)
@@ -1608,7 +1607,7 @@ def build():
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
     front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=700, tube_d=76, y=556, lamps='klc')
+    rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1560, H=230, D=150, y=500, lamps='round')
