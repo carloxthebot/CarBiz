@@ -1704,6 +1704,176 @@ def bumper_damd_roots():
     return root
 
 
+# ===================================================== URNIETA (SALADO / 1970)
+# Chinese brand (STARK, Dongguan; 歐尼塔), JB74/JC74 only. Every dimension
+# below is off the factory drawings on urnieta.com -- the grilles are both
+# 1337 x 241 with a 592 x 126 centre opening, and the bumpers carry their own
+# drawing numbers. Widths are pulled in so the bars stay inside the tyre line.
+UNT_TEXT = material('LabelWhite', 0xf0f0ec, rough=0.6)
+
+
+def _urnieta_grille(pid, kind):
+    """Shared outline for both grilles (UN-JIMNY-FB-004 and -026): the stock
+    panel with a 592 x 126 recessed centre, filled with horizontal louvres
+    for SALADO and fine mesh for 1970, URNIETA lettering across the middle."""
+    root = group(f'grille_{pid}')
+    ow, oh, cy = 592, 126, 852
+    grille_panel('panel', root, TEXBLACK, (ow, oh, cy))
+    lamp_bezels(root, TEXBLACK, 'square')
+    z = face_z(0)
+    box('surround', (0, cy, z + 4), (ow + 34, oh + 34, 18), TEXBLACK, root, bevel=8)
+    if kind == 'louvre':
+        for k in range(7):
+            y = cy - oh / 2 + 12 + k * (oh - 24) / 6
+            box(f'louvre{k}', (0, y, z - 2), (ow - 18, 9, 16), TEXBLACK, root, bevel=2)
+        for k in range(5):                                   # small upright ticks between the bars
+            box(f'tick{k}', (-200 + k * 100, cy, z + 2), (7, oh - 26, 12), TEXBLACK, root, bevel=1)
+        lib.cylinder('badge', (168, cy - 40, z + 16), (0, 0, 1), 46, 5, CHROME, root, n=22)
+    else:
+        wire_mesh(root, BLACK, 0, cy, z - 10, ow - 16, oh - 16, pitch=7, bar=1.4)
+        box('unt', (-224, cy, z + 16), (56, 30, 5), UNT_TEXT, root, bevel=1)
+    box('backing', (0, cy, z - 26), (ow, oh, 3), RUBBER, root, bevel=0)
+    text('urnieta', 'URNIETA', (0, cy - 4, z + 16), 62, 6, UNT_TEXT, root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    return root
+
+
+def grille_urnieta_salado():
+    return _urnieta_grille('urnieta_salado', 'louvre')
+
+
+def grille_urnieta_1970():
+    return _urnieta_grille('urnieta_1970', 'mesh')
+
+
+def bumper_urnieta_salado():
+    """SALADO front bumper (UN-JIMNY-FB-001), drawn 1426 x 670: a deep winch
+    bar with a U-shaped bull bar on two uprights, a recessed light pocket at
+    each end behind a mesh guard, an exposed winch plate with a hawse
+    fairlead, and a bolted skid plate under it. 42.8 kg of steel and alloy."""
+    root = group('frontBumper_urnieta_salado')
+    W, y, zf = 1396, 560, 1768
+    D, H = 200, 210
+    xs = [-W / 2 + W * i / 12 for i in range(13)]
+    sweep('body', [(x, y, min(zf, nose_z(x) + 16) - D / 2) for x in xs], rounded_rect(D, H, 16, 4), TEXBLACK, root)
+    for s in (-1, 1):
+        ez = min(zf, nose_z(W / 2) + 16)
+        box(f'endCap{s}', (s * (W / 2 + 4), y, ez - D / 2), (10, H + 6, D + 6), TEXBLACK, root, bevel=5)
+        # light pocket: a recessed rectangle behind a mesh stone guard
+        px = s * 530
+        pz = min(zf, nose_z(530) + 16)
+        box(f'pocket{s}', (px, y + 8, pz - 14), (300, 104, 26), BLACK, root, bevel=10)
+        box(f'lens{s}', (px, y + 8, pz - 4), (262, 74, 6), LENS, root, bevel=4)
+        wire_mesh(root, TEXBLACK, px, y + 8, pz + 2, 258, 70, pitch=13, bar=3)
+        # upright from the bar up to the hoop
+        box(f'post{s}', (s * 155, y + 150, pz - 40), (46, 190, 56), TEXBLACK, root, bevel=5)
+        box(f'postFoot{s}', (s * 155, y + 62, pz - 40), (76, 26, 76), TEXBLACK, root, bevel=4)
+    # the U hoop: up, across, down -- 670 tall overall from the bar's bottom
+    hy, hz = y + 292, min(zf, nose_z(0) + 16) - 70
+    tube('hoop', [(-560, y + 112, hz), (-560, hy - 70, hz), (-470, hy, hz), (470, hy, hz), (560, hy - 70, hz), (560, y + 112, hz)],
+         58, TEXBLACK, root, bend=86)
+    text('salado', 'Salado', (-430, y - 128, zf + 2), 42, 4, UNT_TEXT, root)
+    text('unt', 'URNIETA', (330, hy - 18, hz + 30), 26, 3, UNT_TEXT, root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    # winch plate, fairlead and skid
+    box('winchPlate', (0, y - 96, zf - 96), (620, 200, 14), STEEL, root, bevel=3)
+    box('fairlead', (0, y - 96, zf - 84), (240, 74, 16), STEEL, root, bevel=14)
+    box('hawse', (0, y - 96, zf - 78), (150, 34, 10), RUBBER, root, bevel=8)
+    for k in range(6):
+        lib.cylinder(f'wbolt{k}', (-250 + k * 100, y + 66, zf - 8), (0, 0, 1), 15, 8, STEEL, root, n=6)
+    box('skid', (0, y - 210, zf - 150), (760, 8, 280), STEEL, root, bevel=3,
+        rot=Matrix.Rotation(math.radians(-26), 3, 'X'))
+    valance(root, corners=False)
+    return root
+
+
+def rear_urnieta_salado():
+    """SALADO rear bumper (UN-JIMNY-FB-002), drawn 216 tall: a half-height bar
+    whose ends wrap back round the corners, a lit window each side (one badged
+    Salado, one URNIETA), a flat plate panel in the middle and a step pad
+    under each side. 16.4 kg."""
+    root = group('rearBumper_urnieta_salado_rear')
+    W, ytop, H, D, z = 1414, 620, 216, 150, -1648
+    y, zf = ytop - H / 2, z - 150 / 2
+    path = [(-W / 2, y, z + 150), (-W / 2 + 150, y, z), (W / 2 - 150, y, z), (W / 2, y, z + 150)]
+    sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 14, 4), TEXBLACK, root)
+    for s in (-1, 1):
+        box(f'window{s}', (s * 520, y + 14, zf + 6), (300, 96, 16), BLACK, root, bevel=8)
+        box(f'lens{s}', (s * 520, y + 14, zf - 4), (268, 66, 6), material('TailRed', 0xc0161a, rough=0.2), root, bevel=4)
+        box(f'badge{s}', (s * 520, y - 54, zf - 2), (190, 26, 5), UNT_TEXT, root, bevel=1)
+        box(f'aux{s}', (s * 300, y + 14, zf + 2), (150, 84, 10), BLACK, root, bevel=6)
+        # step pad slung under the bar on two brackets
+        box(f'step{s}', (s * 470, y - H / 2 - 30, z + 10), (300, 12, 190), ALU_CHEQ, root, bevel=2)
+        for k in (-1, 1):
+            box(f'stepArm{s}{k}', (s * 470 + k * 110, y - H / 2 - 16, z + 10), (16, 40, 150), TEXBLACK, root, bevel=2)
+        box(f'endPlug{s}', (s * (W / 2 - 24), y, z + 118), (14, 40, 26), BLACK, root, bevel=6)
+    box('platePanel', (0, y - 24, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
+    box('plate', (0, y - 24, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
+    lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
+    return root
+
+
+def bumper_urnieta_1970():
+    """1970 front bumper (UN-JIMNY-FB-027), drawn 1547 x 331: a slim beam
+    whose ends sweep back into winged corners with three vent slots each, a
+    louvred centre panel carrying URNIETA and a 1970 SERIES badge with a lamp
+    bracket either side, and a flat lower panel with two tow shackles. 21 kg,
+    plastic body on a full metal skid."""
+    root = group('frontBumper_urnieta_1970')
+    W, y, zf, D, H = 1434, 622, 1762, 130, 118
+    xs = [-W / 2 + W * i / 12 for i in range(13)]
+    sweep('body', [(x, y, min(zf, nose_z(x) + 10) - D / 2) for x in xs], rounded_rect(D, H, 12, 4), TEXBLACK, root)
+    box('centre', (0, y, zf - 6), (860, 104, 22), TEXBLACK, root, bevel=6)
+    for k in range(6):                                       # louvres across the centre panel
+        box(f'louvre{k}', (0, y - 40 + k * 16, zf + 6), (700, 7, 10), TEXBLACK, root, bevel=1)
+    box('badge1970', (0, y, zf + 12), (150, 74, 8), TEXBLACK, root, bevel=6)
+    text('n1970', '1970', (0, y + 8, zf + 17), 40, 4, UNT_TEXT, root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    box('unt', (-268, y, zf + 12), (120, 26, 6), UNT_TEXT, root, bevel=1)
+    for s in (-1, 1):
+        box(f'lampBrk{s}', (s * 290, y, zf + 10), (180, 60, 10), TEXBLACK, root, bevel=4)
+        ez = min(zf, nose_z(W / 2 - 90) + 10)
+        box(f'wing{s}', (s * (W / 2 - 90), y + 16, ez - 60), (180, 120, 150), TEXBLACK, root, bevel=16)
+        for k in range(3):                                   # vent slots in the wing
+            box(f'vent{s}{k}', (s * (W / 2 - 150), y - 8 + k * 26, ez + 4), (80, 12, 10), RUBBER, root, bevel=2)
+        box(f'shackle{s}', (s * 220, y - 128, zf - 22), (54, 92, 46), STEEL, root, bevel=8)
+        lib.cylinder(f'shacklePin{s}', (s * 220, y - 112, zf - 22), (1, 0, 0), 20, 66, STEEL, root, n=12)
+    box('lowerPanel', (0, y - 140, zf - 40), (1020, 210, 14), TEXBLACK, root, bevel=4)
+    box('plate', (0, y - 150, zf - 30), (330, 165, 3), PLATE, root, bevel=1)
+    valance(root, corners=False)
+    return root
+
+
+def rear_urnieta_1970():
+    """1970 rear bumper (UN-JIMNY-FB-028), drawn 1617 x 265: half height,
+    ends wrapped back, and the line's signature -- two round lamps a side
+    (the product page calls them GT-R inspired) beside a rectangular recess,
+    with a lit URNIETA badge panel on the right and the plate in the middle."""
+    root = group('rearBumper_urnieta_1970_rear')
+    red = material('TailRed', 0xc0161a, rough=0.18)
+    W, ytop, H, D, z = 1421, 612, 240, 140, -1648
+    y, zf = ytop - H / 2, z - 140 / 2
+    path = [(-W / 2, y, z + 140), (-W / 2 + 140, y, z), (W / 2 - 140, y, z), (W / 2, y, z + 140)]
+    sweep('body', [tuple(p) for p in fillet(path, 36, steps=3)], rounded_rect(D, H, 14, 4), TEXBLACK, root)
+    box('rail', (0, ytop + 16, z + 40), (1180, 34, 120), TEXBLACK, root, bevel=4)
+    for s in (-1, 1):
+        for k, dx in enumerate((618, 512)):                  # the two round lamps
+            lib.cylinder(f'lampCan{s}{k}', (s * dx, y + 6, zf + 16), (0, 0, 1), 92, 34, TEXBLACK, root, n=24)
+            lib.cylinder(f'lampRim{s}{k}', (s * dx, y + 6, zf - 2), (0, 0, 1), 88, 10, CHROME, root, n=24)
+            lib.cylinder(f'lampLens{s}{k}', (s * dx, y + 6, zf - 10), (0, 0, 1), 76, 10, red, root, n=24)
+            d = lib.sphere(f'lampDome{s}{k}', (s * dx, y + 6, zf - 14), 76, red, root)
+            d.scale.y = 0.34
+        box(f'recess{s}', (s * 372, y + 6, zf + 8), (150, 84, 14), BLACK, root, bevel=6)
+        box(f'step{s}', (s * 470, y - H / 2 - 24, z + 10), (250, 12, 170), ALU_CHEQ, root, bevel=2)
+        box(f'endPlug{s}', (s * (W / 2 - 22), y, z + 112), (14, 36, 24), BLACK, root, bevel=6)
+    box('badgePanel', (RIGHT * 250, y + 6, zf + 4), (200, 60, 10), BLACK, root, bevel=4)
+    box('badgeText', (RIGHT * 250, y + 6, zf - 2), (150, 22, 4), UNT_TEXT, root, bevel=1)
+    box('platePanel', (0, y - 16, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
+    box('plate', (0, y - 16, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
+    lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
+    return root
+
+
 def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', steps=False, mat=None):
     """kind: 'tube' or 'plate'; lamps: 'wings' (plate housings keeping the
     stock lamps), 'round' (four small round lamps in the bar), 'housing'
@@ -1964,7 +2134,6 @@ def build():
     side_step('hamer', 'slider', tube_d=60, pads=[(120, 260, -300), (120, 260, 300)])
     # front bumpers (TW/JP research 2026-09-16)
     front_bar('armando', 'plate', W=1500, H=300, D=170, y=530, hoop=True, fogs=True, hooks=True, skid=False)
-    front_bar('urnieta_1970', 'short', W=1300, H=160, D=120, y=560)
     front_bar('beyond_liberte', 'plate', W=1400, H=230, D=150, fog_stalk=True, bash=True, skid=False)
     front_bar('maverick', 'short', W=1300, H=200, D=140, y=540, fogs=True, skid=False)
     front_bar('mrk_abs', 'abs', W=1520, H=250, D=170, y=540, skid=False, corners=False, hump=True, bash=True, mesh_off=RIGHT * 330, fogs=True)
@@ -1989,7 +2158,6 @@ def build():
     rear_bar('damd_roots_rear', 'plate', W=1230, H=150, D=120, y=520, lamps='round', mat=IVORY)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
-    rear_bar('urnieta_1970_rear', 'plate', W=1370, H=140, D=110, y=470, lamps='round')
     rear_bar('beyond_rear', 'plate', W=1360, H=160, D=120, y=460, lamps='wings')
     rear_bar('jaos_rear_cowl', 'plate', W=1330, H=230, D=150, y=500, lamps='round')
     rear_bar('wildgoose_crawler_rear', 'tube', W=1330, tube_d=76, lamps='housing')
@@ -2004,7 +2172,12 @@ def build():
     grille_generic('klc_ja', wire=True, marker=4, bezel='round', h_slats=1, slat_h=18)
     grille_generic('klc_nanaketsu', v_slots=7, bezel='square')
     grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round')
-    grille_generic('urnieta_1970', wire=True, ow=600, oh=220, bezel='square')
+    grille_urnieta_salado()
+    grille_urnieta_1970()
+    bumper_urnieta_salado()
+    rear_urnieta_salado()
+    bumper_urnieta_1970()
+    rear_urnieta_1970()
     grille_generic('mrk_angry', v_slots=7, bezel='square', wire=False)
     grille_generic('apio_sj', v_slots=9, mat=GUNMETAL)
     grille_generic('apio_marker', h_slats=4, marker=4)

@@ -186,6 +186,9 @@ export const TYRE_MODELS = [
 // `id` is the part name suffix in parts.glb. Choosing one hides the stock
 // bumper (with its fog lamps) or the stock grille panel on the model.
 export const FRONT_BUMPERS = [
+  // ---- URNIETA 全車套件專用前保桿（urnieta.com）
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-front-bumper-for-jimny-jb74-jc74/', label: 'URNIETA SALADO 絞盤前保桿（0702031）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_salado', uncertain: true,
+    note: '工程圖 UN-JIMNY-FB-001：1426×670（含 U 型防撞桿）。42.8kg，內藏 8000lb 絞盤艙與導索器，兩端內嵌燈窩加鋼網護罩，U 桿與防撞桿可互換、下護板可拆。官網不標價' },
   // ---- DAMD 全車套件專用前保桿（damd.co.jp）
   { id: 'damd_little_d', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 前保桿', price: 63800, cur: 'JPY', brand: 'DAMD', kit: 'little_d',
     note: '平直鋼板風橫樑、方形端板假螺絲，內側小圓霧燈，中央黑網＋偏置車牌，下方銀色凹坑護板。ABS，裝車要切輪拱內襯' },
@@ -200,7 +203,7 @@ export const FRONT_BUMPERS = [
   { id: 'armando', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1542', label: 'ARMANDO PRIME 前鐵保桿（MRK）', price: 29000, cur: 'TWD', brand: 'ARMANDO',
     part: 'AR-SU-FB-PRM', note: '全寬鋼板保桿、中央燈架、圓霧燈孔、下護板' },
   { id: 'urnieta_1970', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2210', label: 'URNIETA 1970 前保桿', price: 20600, cur: 'TWD', brand: 'URNIETA', part: 'UR010',
-    note: '短版復古、兩側上折收窄，保留原廠霧燈與洗燈' },
+    note: '工程圖 UN-JIMNY-FB-027：1547×331，兩端上揚翼形角＋三道散熱縫，中央百葉面板配 URNIETA 與 1970 SERIES 銘牌，下方平板配兩顆拖車環。21kg。短版復古、兩側上折收窄，保留原廠霧燈與洗燈' },
   { id: 'beyond_liberte', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2114', label: 'Beyond Japan Liberte 復古前保桿', price: 28000, cur: 'TWD', brand: 'Beyond Japan',
     note: '硬邊鋼製、霧燈架＋下護板；MRK 代理' },
   { id: 'maverick', photo: true, url: 'https://i-pickup.com.tw/product/df0001/', label: 'Maverick 短版金屬前保桿（i-PICKUP）', price: 29000, cur: 'TWD', brand: 'Maverick',
@@ -231,6 +234,10 @@ export const FRONT_BUMPERS = [
 ];
 
 export const REAR_BUMPERS = [
+  // ---- URNIETA 全車套件專用後保桿（urnieta.com）
+  { id: 'urnieta_salado_rear', url: 'https://urnieta.com/product/salado-rear-bumper-for-jimny-jb74-jc74/', label: 'URNIETA SALADO 後保桿（0702032）', price: 27000, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_salado', ownLamps: true,
+    refs: ['https://shopee.tw/product/7996649/54712201643'],
+    note: '工程圖 UN-JIMNY-FB-002：高 216mm、展開全長 1816。半高式、兩端包覆轉角，左右各一組燈窗（一側 Salado、一側 URNIETA 銘牌），下方兩片腳踏板。16.4kg。台灣蝦皮 NT$27,000' },
   // ---- DAMD 全車套件專用後保桿（damd.co.jp）
   { id: 'damd_little_d_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 後保桿', price: 81400, cur: 'JPY', brand: 'DAMD', kit: 'little_d', ownLamps: true,
     note: '雙層結構、全寬 1656mm。原廠尾燈整組拆除，改用套件自帶的凸圓頂圓燈（沿用原廠線束）：每側琥珀方向燈、紅色尾／煞車燈、角板上的透明倒車燈，下橫樑再加一片紅色反光片。DAMD 展示車多半加購 ¥10,780 的車牌移設套件改掛後門；有倒車雷達要鑽孔，原廠車牌需重新封印' },
@@ -247,7 +254,7 @@ export const REAR_BUMPERS = [
   { id: 'klc_nostalgic_rear', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/nostalgicrearbumper/', ownLamps: false, photo: true, label: 'KLC Heritage Nostalgic 後保桿', price: 96800, cur: 'JPY', brand: 'KLC Heritage', uncertain: true,
     note: '烤漆箱型桿（顯示為車身同色）、上緣橡膠條、兩端內嵌三色矩形尾燈' },
   { id: 'urnieta_1970_rear', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2219', ownLamps: true, label: 'URNIETA 1970 後保桿', price: 20400, cur: 'TWD', brand: 'URNIETA', part: 'UR015',
-    note: '半高、兩端上折、圓形尾燈，8.4kg' },
+    note: '工程圖 UN-JIMNY-FB-028：1617×265，每側兩顆圓形尾燈（官方寫致敬 Nissan GT-R）＋方形凹窗，右側 URNIETA 燈條銘牌，車牌置中。8.4kg。半高、兩端上折、圓形尾燈，8.4kg' },
   { id: 'beyond_rear', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2112', label: 'Beyond Japan Liberte 復古後保桿', price: 21000, cur: 'TWD', brand: 'Beyond Japan',
     note: '精簡鋼桿、消光黑' },
   { id: 'jaos_rear_cowl', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1176', ownLamps: true, label: 'JAOS Rear Sport Cowl', price: 26500, cur: 'TWD', brand: 'JAOS', part: 'B042518',
@@ -270,6 +277,9 @@ export const REAR_BUMPERS = [
 ];
 
 export const GRILLES = [
+  // ---- URNIETA 全車套件專用面板（urnieta.com，工程圖有標註尺寸）
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-grille-for-jimny-jb74-jc74/', label: 'URNIETA SALADO 水箱罩（0702010）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_salado', uncertain: true,
+    note: '工程圖 UN-JIMNY-FB-004：1337×241，中央開口 592×126，橫向百葉＋URNIETA 立體字。ABS、1.2kg、45° 下傾進氣。官網不標價' },
   // ---- DAMD 全車套件專用面板（damd.co.jp）
   { id: 'damd_little_d', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 水箱罩（消光黑）', price: 52800, cur: 'JPY', brand: 'DAMD', kit: 'little_d',
     note: '致敬舊款 Land Rover Defender；六道橫肋＋綠色橢圓徽章，頭燈外側加兩顆小圓燈。素地出貨但水箱罩一律附消光黑' },
@@ -284,7 +294,7 @@ export const GRILLES = [
   { id: 'taishan_retro', photo: true, url: 'https://www.ruten.com.tw/item/show?22105865989825', label: '泰山美研社 復古水箱罩 黑／銀', price: 17500, cur: 'TWD', brand: '泰山美研社（台灣）',
     note: 'KLC 風格樹脂復古罩' },
   { id: 'urnieta_1970', photo: true, url: 'https://www.heekis.com/products/urnieta-1970-jimny-jb74-jc74-grille', label: 'URNIETA 1970 水箱護罩', price: 8400, cur: 'TWD', brand: 'URNIETA',
-    note: '沖壓金屬網＋極簡框，1.6kg；Heekis 代理' },
+    note: '工程圖 UN-JIMNY-FB-026：1337×241，中央開口 592×126 細網＋URNIETA 立體字與 UNT 小徽。1.6kg。沖壓金屬網＋極簡框，1.6kg；Heekis 代理' },
   { id: 'mrk_angry', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1670', label: 'MRK 憤怒鳥款水箱罩', price: 5500, cur: 'TWD', brand: 'MRK', part: 'JB089',
     note: '3 道粗橫條、外端斜切、卡扣安裝' },
   { id: 'klc_sj', photo: true, url: 'https://www.klc-div.com/heritage/product/grille/facegrillesj.html', photo: true, label: 'KLC Face Grille SJ（七孔＋SUZUKI 字）', price: 16000, cur: 'TWD', brand: 'KLC Heritage',
@@ -549,6 +559,9 @@ export const KITS = [
   { id: 'little_g_trad', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL（初代 G-Wagen 風）', price: 547800, cur: 'JPY', brand: 'DAMD',
     set: { grille: 'damd_little_g_trad', frontBumper: 'damd_little_g_trad', rearBumper: 'damd_little_g_trad_rear' },
     note: 'JB74 車身件套件未塗裝 ¥547,800，烤漆另加 ¥145,200。含引擎蓋罩與蓋上方向燈（尚未建模）' },
+  { id: 'urnieta_salado', url: 'https://urnieta.com/', label: 'URNIETA SALADO（遠征越野）', price: null, cur: 'TWD', brand: 'URNIETA', uncertain: true,
+    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear' },
+    note: '中國東莞斯塔克工業（歐尼塔）；官網不標價，僅後保桿在台灣蝦皮有 NT$27,000。整套另有鋁引擎蓋、管狀側桿、行李架、後梯、四出排氣、涉水管（部分尚未建模）。只支援 JB74／JC74' },
   { id: 'urnieta_1970', url: 'https://urnieta.com/', label: 'URNIETA 1970（70 年代日本車風）', price: 49400, cur: 'TWD', brand: 'URNIETA',
     set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear' },
     note: '中國東莞斯塔克工業（歐尼塔）品牌，2026/6 上線；官網不標價，此為台灣三件合計。半高式前後保桿＋衝壓金屬網水箱罩，後保桿用圓形尾燈（官方寫致敬 Nissan GT-R）。同系列另有引擎蓋、側裙、備胎蓋、鷗翼窗（尚未建模）。只支援 JB74／JC74' },

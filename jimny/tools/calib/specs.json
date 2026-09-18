@@ -120,6 +120,10 @@
     "rearBumper_damd_little_d_rear": { "w": [1420, 1560], "note": "as above" },
     "rearBumper_damd_little_g_trad_rear": { "w": [1420, 1560], "note": "as above" },
     "rearBumper_damd_roots_rear": { "w": [1300, 1560], "note": "as above" },
+    "frontBumper_urnieta_salado": { "w": [1380, 1540], "note": "drawn 1426 (UN-JIMNY-FB-001)" },
+    "rearBumper_urnieta_salado_rear": { "w": [1380, 1540], "note": "drawn 1816 developed; pulled inside the tyre line" },
+    "frontBumper_urnieta_1970": { "w": [1380, 1540], "note": "drawn 1547 (UN-JIMNY-FB-027)" },
+    "rearBumper_urnieta_1970_rear": { "w": [1380, 1540], "note": "drawn 1617 (UN-JIMNY-FB-028); pulled inside the tyre line" },
     "rearBumper_klc_heritage_rear": {
       "w": [1350, 1500],
       "y_min": [280, 340],
