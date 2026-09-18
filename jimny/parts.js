@@ -184,8 +184,6 @@ export const FRONT_BUMPERS = [
     note: '硬邊鋼製、霧燈架＋下護板；MRK 代理' },
   { id: 'maverick', photo: true, url: 'https://i-pickup.com.tw/product/df0001/', label: 'Maverick 短版金屬前保桿（i-PICKUP）', price: 29000, cur: 'TWD', brand: 'Maverick',
     part: 'DF0001', note: '鍍鋅鋼 NT$29,000／鋁合金 NT$35,000，塗裝 +9,000' },
-  { id: 'jst', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1580', refs: ['https://shopee.tw/search?keyword=JST%20%E9%98%B2%E6%92%9E%E5%81%B4%E8%B8%8F%20JB74'], label: 'JST 防撞側踏（JSK）', price: 8980, cur: 'TWD', brand: 'JST 吉米工坊',
-    note: '純 Ø50 圓管貼門檻、兩端向上內收包進車身，無踏板；South Jimny 蝦皮 NT$8,980、MRK NT$9,000；車主實車配置' },
   { id: 'mrk_abs', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1948', label: 'MRK 短版 ABS 前保桿 消光黑', price: 9500, cur: 'TWD', brand: 'MRK', part: 'JMY-FB-L',
     note: '原廠造型縮短版、ABS' },
   { id: 'wmd_winch', photo: true, url: 'https://www.ruten.com.tw/item/show?22105872751291', label: 'WMD 前絞盤短保桿（機油倉庫）', price: 18000, cur: 'TWD', brand: 'WMD（台灣）',

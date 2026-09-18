@@ -84,7 +84,9 @@ def main():
     missing = [n for n in specs if n not in parts]
     for m in missing:
         bad.append(f'{m} is in specs.json but not in the file')
-    print(f'\n{len(parts)} parts measured, {len(specs)} with a spec')
+    checked = sum(1 for n in parts if n in specs or any(n.startswith(k) for k in rules))
+    print(f'\n{len(parts)} parts measured, {checked} checked '
+          f'({len(rules)} family rules, {len(specs)} named)')
     for b in bad:
         print(f'FAIL  {b}')
     sys.exit(1 if bad else 0)

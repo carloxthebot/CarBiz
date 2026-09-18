@@ -40,6 +40,61 @@
       "h": [430, 450],
       "d": [430, 450],
       "note": "built at 16 in (406.4 mm bead) plus the tyre bead lip; scaled per size in the page"
+    },
+    "ladder_": {
+      "w": [200, 520],
+      "h": [800, 1250],
+      "note": "tailgate ladder: narrower than the tailgate, from the bar up to the roof"
+    },
+    "mirrors_": {
+      "w": [1700, 1900],
+      "note": "body is 1645 wide; mirror heads stand a little proud of the flares"
+    },
+    "awning_": {
+      "h": [100, 340],
+      "d": [1700, 2800],
+      "note": "a cased awning on the rack rail: slim bag, 1.8-2.5 m long"
+    },
+    "windowGuards": {
+      "w": [1400, 1500],
+      "note": "one guard per quarter window, inside the body width"
+    },
+    "spare": {
+      "w": [480, 780],
+      "note": "sits on the tailgate carrier, no wider than the spare wheel"
+    },
+    "sideSkirt": {
+      "w": [1400, 1520],
+      "d": [1000, 1300],
+      "note": "runs along the sill between the arches"
+    },
+    "lightBar": {
+      "w": [1000, 1300],
+      "note": "40 in bar on the windscreen header"
+    },
+    "flares": {
+      "w": [1500, 1700],
+      "note": "rivets follow the stock arches, inside the body width"
+    },
+    "pillarPods": {
+      "w": [50, 1500],
+      "note": "small pods at the cowl; the left-only variant is one side"
+    },
+    "shovel": {
+      "d": [900, 1300],
+      "note": "folding shovel along the rack rail"
+    },
+    "guard": {
+      "d": [500, 800],
+      "note": "kit carried on a quarter-window guard, no longer than the guard"
+    },
+    "decals": {
+      "w": [1300, 1500],
+      "note": "door lettering, inside the body width"
+    },
+    "roofLights": {
+      "w": [1000, 1300],
+      "note": "spots on the rack's front rail"
     }
   },
 

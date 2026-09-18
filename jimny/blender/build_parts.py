@@ -596,7 +596,10 @@ def bumper_showa():
 # with Ø90 fogs, flat black skid plate. Sold in ivory / black / polished —
 # drawn in body colour.
 def bumper_klc():
+    """KLC Heritage Traditional Bumper 74 in ivory (the black one is
+    bumper_tube_heritage): the colour is the product, not the car's paint."""
     root = group('frontBumper_klc_trad')
+    PAINT = material('KlcIvory', 0xe6dfcd, rough=0.5, metal=0.1)
     y1, y2 = 615, 545
     tube('upper', [(-650, y1, 1745), (650, y1, 1745)], 60, PAINT, root)
     tube('lower', [(-330, y2, 1705), (330, y2, 1705)], 50, PAINT, root)
@@ -1305,10 +1308,17 @@ def side_step(pid, kind, tube_d=50, length=None, standoff=70, drop=40, pads=(), 
 GUNMETAL = material('Gunmetal', 0x3a3d42, rough=0.45, metal=0.7)
 
 
-def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fogs=False, skid=True, winch=False, mat=None, corners=True):
+def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fogs=False, skid=True, winch=False, mat=None, corners=True,
+              hooks=False, bash=False, hump=False, badge=None, slot=False, bolts=False, fog_stalk=False, mesh_off=0):
     """kind: 'plate' (folded steel bar), 'box' (square tube), 'double' (two
     tubes), 'short' (short plate between the wheels), 'abs' (OEM-shaped short
-    resin bumper with a mesh opening)."""
+    resin bumper with a mesh opening).
+
+    The flags are what tells one product from another in a photo: red tow
+    hooks (Armando), a bright skid plate under the face (Beyond, JAOS, MRK),
+    a raised centre section (JAOS cowl), an air slot under the plate (KLC),
+    exposed bolt heads (TOC), and fog lamps either recessed in the face or
+    hung on brackets off the ends."""
     root = group(f'frontBumper_{pid}')
     mat = mat or TEXBLACK
     zf = 1745
@@ -1316,8 +1326,9 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
         path = [(-W / 2, y, zf - D / 2 - 110), (-W / 2 + 120, y, zf - D / 2), (W / 2 - 120, y, zf - D / 2), (W / 2, y, zf - D / 2 - 110)]
         sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 8 if kind != 'abs' else 30, 4), mat, root)
         if kind == 'abs':
-            wire_mesh(root, BLACK, 0, y - 10, zf - 6, W * 0.45, H * 0.45, pitch=14)
-            box('meshFrame', (0, y - 10, zf - 12), (W * 0.45 + 20, H * 0.45 + 20, 4), RUBBER, root, bevel=0)
+            mw, mh = W * 0.45, H * 0.45
+            wire_mesh(root, BLACK, mesh_off, y - 10, zf - 6, mw, mh, pitch=14)
+            box('meshFrame', (mesh_off, y - 10, zf - 12), (mw + 20, mh + 20, 4), RUBBER, root, bevel=0)
     elif kind == 'box':
         sweep('body', [(-W / 2, y, zf - 40), (W / 2, y, zf - 40)], rounded_rect(80, 80, 6, 3), mat, root)
     elif kind == 'double':
@@ -1330,6 +1341,25 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
     if fogs:
         for s in (-1, 1):
             fog_lamp(root, s * 430, y - 20, zf + 4, mat, dia=90)
+    if fog_stalk:                                            # fogs on brackets off the bar's ends
+        for s in (-1, 1):
+            box(f'fogArm{s}', (s * (W / 2 - 40), y + H / 2 - 10, zf - 30), (20, 90, 40), mat, root, bevel=2)
+            fog_lamp(root, s * (W / 2 - 40), y + H / 2 + 50, zf - 10, mat, dia=110)
+    if hump:                                                 # raised centre section of a moulded cowl
+        box('hump', (0, y + H / 2 - 40, zf - D / 2 - 10), (W * 0.40, 110, D * 0.85), mat, root, bevel=26)
+    if slot:                                                 # air slot across the face under the plate
+        box('slot', (0, y - H / 2 + 50, zf - 2), (W * 0.46, 30, 12), RUBBER, root, bevel=3)
+    if bolts:                                                # exposed hex heads along the face
+        for k in range(10):
+            lib.cylinder(f'bolt{k}', (-W / 2 + 90 + k * (W - 180) / 9, y + H / 2 - 40, zf + 2), (0, 0, 1), 18, 8, STEEL, root, n=6)
+    if hooks:
+        for s in (-1, 1):
+            box(f'hook{s}', (s * 270, y - H / 2 + 20, zf - 10), (16, 120, 64), RED, root, bevel=5)
+    if bash:                                                 # bright skid plate hung under the face
+        box('bash', (0, y - H / 2 - 34, zf - 100), (min(760, W - 420), 6, 250), ALU, root, bevel=2,
+            rot=Matrix.Rotation(math.radians(-28), 3, 'X'))
+    if badge:
+        text('badge', badge, (0, y - H / 2 + 108, zf + 4), 42, 3, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
     if winch:
         box('fairleadFrame', (0, y + 30, zf + 6), (280, 100, 14), RED, root, bevel=3)
         box('fairleadSlot', (0, y + 30, zf + 14), (220, 56, 4), RUBBER, root, bevel=0)
@@ -1351,8 +1381,9 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
         z = -1640                                            # just proud of the lamps
     if kind == 'tube':
         tube('bar', [(-W / 2, y, z), (W / 2, y, z)], tube_d, mat, root)
-        for s in (-1, 1):
-            box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
+        if lamps != 'klc':                                   # the KLC bar is a bare round tube, no end blocks
+            for s in (-1, 1):
+                box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
     else:
         path = [(-W / 2 - 60, y, z + 150), (-W / 2, y, z), (W / 2, y, z), (W / 2 + 60, y, z + 150)]
         sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 10, 3), mat, root)
@@ -1592,20 +1623,19 @@ def build():
     side_step('ironman', 'slider', tube_d=51)
     side_step('hamer', 'slider', tube_d=60, pads=[(120, 260, -300), (120, 260, 300)])
     # front bumpers (TW/JP research 2026-09-16)
-    front_bar('armando', 'plate', W=1500, H=350, D=180, y=520, hoop=True, fogs=True)
+    front_bar('armando', 'plate', W=1500, H=300, D=170, y=530, hoop=True, fogs=True, hooks=True, skid=False)
     front_bar('urnieta_1970', 'short', W=1300, H=160, D=120, y=560)
-    front_bar('beyond_liberte', 'plate', W=1400, H=250, D=150, fogs=True)
-    front_bar('maverick', 'short', W=1200, H=150, D=110, y=540, skid=False)
-    front_bar('jst', 'short', W=1300, H=180, D=130, y=550, hoop=True)
-    front_bar('mrk_abs', 'abs', W=1520, H=250, D=170, y=540, skid=False, corners=False)
+    front_bar('beyond_liberte', 'plate', W=1400, H=230, D=150, fog_stalk=True, bash=True, skid=False)
+    front_bar('maverick', 'short', W=1300, H=200, D=140, y=540, fogs=True, skid=False)
+    front_bar('mrk_abs', 'abs', W=1520, H=250, D=170, y=540, skid=False, corners=False, hump=True, bash=True, mesh_off=RIGHT * 330, fogs=True)
     front_bar('wmd_winch', 'short', W=1100, H=230, D=170, y=560, hoop=True, winch=True)
-    front_bar('jaos_cowl', 'abs', W=1560, H=280, D=180, y=540, skid=False, corners=False)
+    front_bar('jaos_cowl', 'abs', W=1560, H=280, D=180, y=540, skid=False, corners=False, hump=True, bash=True, badge='JAOS', mesh_off=0)
     front_bar('taniguchi_square', 'box', W=1400, y=600, skid=False)
     front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
     bumper_klc_nostalgic()
     rear_bumper_klc_nostalgic()
-    front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False)
-    front_bar('toc_extreme', 'plate', W=1600, H=300, D=180, y=520, fogs=True, corners=False)
+    front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False, slot=True, badge='KLC')
+    front_bar('toc_extreme', 'plate', W=1600, H=260, D=180, y=530, fogs=True, corners=False, bolts=True, skid=False)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
