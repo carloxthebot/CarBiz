@@ -388,6 +388,14 @@ def face_z(x):
     return 1664 - 1.9e-4 * x * x
 
 
+def nose_z(x):
+    """How far forward the body's own nose reaches at this x, in mm, fitted
+    to the model: flat across the middle, then falling away fast once past
+    the headlights (1775 at the centre, 1675 at 600, 1520 at 800). A bumper
+    that ignores this ends up standing 100 mm in front of the wings."""
+    return 1775 - 0.0013 * max(0.0, abs(x) - 350) ** 2
+
+
 def grille_panel(name, root, mat, opening, thick=14, proud=8):
     """Curved slab with headlamp/indicator holes and a rectangular centre opening (w, h, cy)."""
     nx, ny = 52, 8
@@ -601,14 +609,14 @@ def bumper_klc():
     root = group('frontBumper_klc_trad')
     PAINT = material('KlcIvory', 0xe6dfcd, rough=0.5, metal=0.1)
     y1, y2 = 615, 545
-    tube('upper', [(-650, y1, 1745), (650, y1, 1745)], 60, PAINT, root)
-    tube('lower', [(-330, y2, 1705), (330, y2, 1705)], 50, PAINT, root)
+    tube('upper', [(-650, y1, 1690), (650, y1, 1690)], 60, PAINT, root)
+    tube('lower', [(-330, y2, 1660), (330, y2, 1660)], 50, PAINT, root)
     for s in (-1, 1):
-        tube(f'link{s}', [(s * 250, y2, 1705), (s * 250, y1, 1745)], 30, PAINT, root)
-        box(f'fogBox{s}', (s * 340, y2 - 10, 1690), (100, 100, 90), PAINT, root, bevel=6)
-        fog_lamp(root, s * 340, y2 - 10, 1738, PAINT, dia=80)
-        tube(f'upright{s}', [(s * 330, 420, 1520), (s * 330, y1 - 20, 1735)], 45, PAINT, root)
-    number_plate(root, 520, 1732)
+        tube(f'link{s}', [(s * 250, y2, 1660), (s * 250, y1, 1690)], 30, PAINT, root)
+        box(f'fogBox{s}', (s * 340, y2 - 10, 1640), (100, 100, 90), PAINT, root, bevel=6)
+        fog_lamp(root, s * 340, y2 - 10, 1688, PAINT, dia=80)
+        tube(f'upright{s}', [(s * 330, 420, 1500), (s * 330, y1 - 20, 1682)], 45, PAINT, root)
+    number_plate(root, 520, 1682)
     from mathutils import Matrix
     box('skid', (0, 400, 1610), (520, 4, 260), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
     valance(root)
@@ -662,7 +670,7 @@ def rim(style):
     prof = [(R, -W / 2), (R + 14, -W / 2), (R + 14, -W / 2 + 8), (R + 2, -W / 2 + 12), (R + 2, W / 2 - 14),
             (R + 16, W / 2 - 8), (R + 16, W / 2), (R + 4, W / 2), (R - 4, W / 2 - 6), (R - 4, -W / 2 + 6), (R - 8, -W / 2 + 2)]
     lathe('barrel', prof, RIM_DARK, root)
-    dish = W / 2 - (24 if style == 'steel' else 38)            # face plane, inset from the outer lip
+    dish = W / 2 - (24 if style in ('steel', 'daytona', 'moon', 'slot5') else 38)   # face plane, inset from the outer lip
     face_r = R - 6
     # the face: a disc with the windows cut out, spokes are what remains
     face = lathe('face', [(0, dish - 6), (0, dish + 6), (face_r, dish + 10), (face_r, dish - 12)], RIM_FACE, root, n=96)
@@ -672,8 +680,28 @@ def rim(style):
         for k in range(8):
             a = 2 * math.pi * k / 8
             cutters.append(lib.cylinder(f'vent{k}', (dish, 0.64 * R * math.sin(a), 0.64 * R * math.cos(a)), (1, 0, 0), 46, 60, RIM_FACE, None, n=24))
+    elif style == 'moon':
+        pass                                                   # a moon disc: the face is left solid
+    elif style == 'daytona':
+        # rally steel: ten slots, each a rounded bar lying along the radius
+        for k in range(10):
+            a = 2 * math.pi * k / 10
+            for r in (0.52 * R, 0.76 * R):
+                c = box(f'slot{k}{int(r)}', (dish, r * math.sin(a), r * math.cos(a)), (60, 24, 58), RIM_FACE, None,
+                        bevel=11, rot=Matrix.Rotation(-a, 3, 'X'))
+                c.modifiers['bevel'].segments = 4
+                cutters.append(c)
+    elif style == 'slot5':
+        # five wide slots lying across the face, a rounded bar each
+        for k in range(5):
+            a = 2 * math.pi * k / 5
+            c = box(f'slot{k}', (dish, 0.60 * R * math.sin(a), 0.60 * R * math.cos(a)), (60, 40, 150), RIM_FACE, None,
+                    bevel=19, rot=Matrix.Rotation(-a, 3, 'X'))
+            c.modifiers['bevel'].segments = 5
+            cutters.append(c)
     else:
-        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'eight': (8, 0.22), 'ten': (10, 0.17), 'beadlock': (8, 0.26)}[style]
+        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'eight': (8, 0.22), 'ten': (10, 0.17),
+                    'watanabe': (8, 0.26), 'eightpin': (8, 0.26), 'beadlock': (8, 0.26)}[style]
         for k in range(n):
             a0 = 2 * math.pi * k / n
             half = math.pi / n - spoke / 2                      # half the angular width of a window
@@ -701,7 +729,21 @@ def rim(style):
     for k in range(5):
         a = 2 * math.pi * k / 5
         nut = lib.cylinder(f'nut{k}', (dish + 6, 69.85 * math.sin(a), 69.85 * math.cos(a)), (1, 0, 0), 21, 20, NUT, root, n=6)
-    lib.cylinder('cap', (dish + 3, 0, 0), (1, 0, 0), 58, 8, RIM_DARK, root, n=32)
+    if style == 'moon':                                        # a smooth disc laid over the whole face
+        lib.cylinder('moonDisc', (dish + 24, 0, 0), (1, 0, 0), 1.52 * R, 7, RIM_FACE, root, n=64, bevel=4)
+    elif style == 'slot5':                                     # removable chrome centre plate
+        lib.cylinder('plate', (dish + 9, 0, 0), (1, 0, 0), 168, 7, NUT, root, n=44, bevel=3)
+    elif style in ('watanabe', 'daytona'):
+        pass                                                   # these run with the hub open, no cap
+    else:
+        lib.cylinder('cap', (dish + 3, 0, 0), (1, 0, 0), 58, 8, RIM_DARK, root, n=32)
+    if style == 'eightpin':                                    # pin bolts on the face, rivets round the lip
+        for k in range(8):
+            a = 2 * math.pi * k / 8 + math.pi / 8
+            lib.cylinder(f'pin{k}', (dish + 8, 0.74 * R * math.sin(a), 0.74 * R * math.cos(a)), (1, 0, 0), 15, 10, NUT, root, n=8)
+        for k in range(28):
+            a = 2 * math.pi * k / 28
+            lib.cylinder(f'rivet{k}', (W / 2 - 6, (R + 8) * math.sin(a), (R + 8) * math.cos(a)), (1, 0, 0), 10, 10, NUT, root, n=6)
     if style == 'beadlock':
         annulus_x = W / 2 + 4
         ring = lathe('ring', [(R - 10, annulus_x - 4), (R + 20, annulus_x - 4), (R + 20, annulus_x + 10), (R - 10, annulus_x + 10)],
@@ -779,12 +821,12 @@ def bumper_tube_heritage():
     square KC pods on its ends; a big flat "Heritage" panel below; the
     silver crossmember visible between the tubes."""
     root = group('frontBumper_tube_heritage')
-    yu, zu = 640, 1712                                       # upper tube
-    yl, zl = 520, 1668                                       # lower tube, set back
-    tube('upper', [(-700, yu, zu), (700, yu, zu)], 76, TEXBLACK, root)
+    yu, zu = 640, 1694                                       # upper tube
+    yl, zl = 520, 1652                                       # lower tube, set back
+    tube('upper', [(-676, yu, zu), (676, yu, zu)], 76, TEXBLACK, root)
     tube('lower', [(-450, yl, zl), (450, yl, zl)], 76, TEXBLACK, root)
     for s in (-1, 1):
-        box(f'capU{s}', (s * 702, yu, zu), (6, 74, 74), TEXBLACK, root, bevel=3)
+        box(f'capU{s}', (s * 678, yu, zu), (6, 74, 74), TEXBLACK, root, bevel=3)
         box(f'capL{s}', (s * 452, yl, zl), (6, 74, 74), TEXBLACK, root, bevel=3)
         # plate tabs under the upper tube, with their bolt heads on top
         box(f'tab{s}', (s * 120, yu - 55, zu + 6), (28, 60, 6), TEXBLACK, root, bevel=1)
@@ -1323,17 +1365,23 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
     mat = mat or TEXBLACK
     zf = 1745
     if kind in ('plate', 'short', 'abs'):
-        path = [(-W / 2, y, zf - D / 2 - 110), (-W / 2 + 120, y, zf - D / 2), (W / 2 - 120, y, zf - D / 2), (W / 2, y, zf - D / 2 - 110)]
-        sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 8 if kind != 'abs' else 30, 4), mat, root)
+        # follow the nose: flat across the middle, wrapping back at the ends
+        stand = 12 if kind != 'abs' else 4
+        n = 13
+        xs = [-W / 2 + W * i / (n - 1) for i in range(n)]
+        path = [(x, y, min(zf, nose_z(x) + stand) - D / 2) for x in xs]
+        sweep('body', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 8 if kind != 'abs' else 30, 4), mat, root)
         if kind == 'abs':
             mw, mh = W * 0.45, H * 0.45
             wire_mesh(root, BLACK, mesh_off, y - 10, zf - 6, mw, mh, pitch=14)
             box('meshFrame', (mesh_off, y - 10, zf - 12), (mw + 20, mh + 20, 4), RUBBER, root, bevel=0)
     elif kind == 'box':
-        sweep('body', [(-W / 2, y, zf - 40), (W / 2, y, zf - 40)], rounded_rect(80, 80, 6, 3), mat, root)
+        xs = [-W / 2 + W * i / 8 for i in range(9)]
+        sweep('body', [(x, y, min(zf - 40, nose_z(x) - 28)) for x in xs], rounded_rect(80, 80, 6, 3), mat, root)
     elif kind == 'double':
+        xs = [-W / 2 + W * i / 8 for i in range(9)]
         for k, yy in enumerate((y + 45, y - 45)):
-            tube(f'bar{k}', [(-W / 2, yy, zf - 130), (-W / 2 + 90, yy, zf - 30), (W / 2 - 90, yy, zf - 30), (W / 2, yy, zf - 130)], tube_d, mat, root, bend=100)
+            tube(f'bar{k}', [(x, yy, min(zf - 30, nose_z(x) - 20)) for x in xs], tube_d, mat, root, bend=100)
         for s in (-1, 1):
             tube(f'link{s}', [(s * 300, y - 45, zf - 30), (s * 300, y + 45, zf - 30)], 30, mat, root)
     if hoop:
@@ -1349,9 +1397,10 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
         box('hump', (0, y + H / 2 - 40, zf - D / 2 - 10), (W * 0.40, 110, D * 0.85), mat, root, bevel=26)
     if slot:                                                 # air slot across the face under the plate
         box('slot', (0, y - H / 2 + 50, zf - 2), (W * 0.46, 30, 12), RUBBER, root, bevel=3)
-    if bolts:                                                # exposed hex heads along the face
-        for k in range(10):
-            lib.cylinder(f'bolt{k}', (-W / 2 + 90 + k * (W - 180) / 9, y + H / 2 - 40, zf + 2), (0, 0, 1), 18, 8, STEEL, root, n=6)
+    if bolts:                                                # exposed hex heads across the flat of the face
+        for k in range(9):
+            bx = -440 + k * 110
+            lib.cylinder(f'bolt{k}', (bx, y + H / 2 - 40, min(zf, nose_z(bx) + 12) + 2), (0, 0, 1), 18, 8, STEEL, root, n=6)
     if hooks:
         for s in (-1, 1):
             box(f'hook{s}', (s * 270, y - H / 2 + 20, zf - 10), (16, 120, 64), RED, root, bevel=5)
@@ -1454,10 +1503,11 @@ def bumper_damd_little_d():
     path = [(-W / 2, y, zf - D / 2 - 90), (-W / 2 + 110, y, zf - D / 2), (W / 2 - 110, y, zf - D / 2), (W / 2, y, zf - D / 2 - 90)]
     sweep('body', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 10, 4), TEXBLACK, root)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * (W / 2 + 4), y, zf - D / 2 - 70), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
+        ez = nose_z(W / 2) - D / 2 + 10
+        box(f'endCap{s}', (s * (W / 2 + 4), y, ez), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
         fog_lamp(root, s * 330, y - 10, zf + 2, TEXBLACK, dia=76)
         for k in range(3):                                   # dummy fasteners on the end plates
-            lib.cylinder(f'endBolt{s}{k}', (s * (W / 2 + 10), y - 50 + k * 50, zf - D / 2 - 70), (1, 0, 0), 14, 6, STEEL, root, n=6)
+            lib.cylinder(f'endBolt{s}{k}', (s * (W / 2 + 10), y - 50 + k * 50, ez), (1, 0, 0), 14, 6, STEEL, root, n=6)
     wire_mesh(root, BLACK, 0, y, zf - 4, 420, H - 50, pitch=12)
     box('plate', (RIGHT * 250, y - 10, zf + 10), (330, 165, 3), PLATE, root, bevel=1)
     skid = box('skid', (0, y - H / 2 - 36, zf - 96), (820, 6, 250), ALU, root, bevel=2,
@@ -1474,15 +1524,17 @@ def bumper_damd_little_g_trad():
     standing on the top edge at each end, and the plate hung off centre."""
     root = group('frontBumper_damd_little_g_trad')
     y, zf, W, H, D = 585, 1745, 1520, 170, 140
-    sweep('body', [(-W / 2, y, zf - D / 2), (W / 2, y, zf - D / 2)], rounded_rect(D, H, 8, 4), TEXBLACK, root)
+    xs = [-W / 2 + W * i / 12 for i in range(13)]
+    sweep('body', [(x, y, min(zf, nose_z(x) + 12) - D / 2) for x in xs], rounded_rect(D, H, 8, 4), TEXBLACK, root)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * (W / 2 + 4), y, zf - D / 2), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
+        box(f'endCap{s}', (s * (W / 2 + 4), y, nose_z(W / 2) + 12 - D / 2), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
         # Koito square fog on a chrome base, sitting on top of the beam
         box(f'fogBase{s}', (s * 430, y + H / 2 + 14, zf - 40), (34, 30, 34), CHROME_TRIM, root, bevel=3)
         box(f'fogHsg{s}', (s * 430, y + H / 2 + 52, zf - 34), (104, 64, 56), CHROME_TRIM, root, bevel=6)
         box(f'fogLens{s}', (s * 430, y + H / 2 + 52, zf - 4), (86, 48, 5), AMBER, root, bevel=3)
-    for k in range(26):                                      # washboard ribbing across the face
-        box(f'ribV{k}', (-560 + k * 45, y + 20, zf + 2), (12, H - 70, 10), TEXBLACK, root, bevel=2)
+    for k in range(21):                                      # washboard ribbing across the face
+        bx = -450 + k * 45
+        box(f'ribV{k}', (bx, y + 20, min(zf, nose_z(bx) + 12) + 2), (12, H - 70, 10), TEXBLACK, root, bevel=2)
     wire_mesh(root, BLACK, 0, y - 55, zf - 2, 300, 44, pitch=11)
     box('plate', (RIGHT * 300, y - 6, zf + 10), (330, 165, 3), PLATE, root, bevel=1)
     valance(root, corners=False)
@@ -1495,15 +1547,17 @@ def bumper_damd_roots():
     the plate in the centre and a small chrome round fog each side."""
     root = group('frontBumper_damd_roots')
     y, zf, W, H, D = 640, 1745, 1560, 120, 110
-    sweep('beam', [(-W / 2, y, zf - D / 2), (W / 2, y, zf - D / 2)], rounded_rect(D, H, 8, 3), IVORY, root)
+    xs = [-W / 2 + W * i / 12 for i in range(13)]
+    sweep('beam', [(x, y, min(zf, nose_z(x) + 10) - D / 2) for x in xs], rounded_rect(D, H, 8, 3), IVORY, root)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * (W / 2 + 4), y, zf - D / 2), (10, H + 8, D + 8), IVORY, root, bevel=3)
-    for k in range(18):                                      # pressed slots along the beam
-        box(f'slot{k}', (-595 + k * 70, y, zf + 2), (34, 22, 10), RUBBER, root, bevel=2)
-    box('valanceBox', (0, y - 165, zf - 70), (1420, 210, 130), TEXBLACK, root, bevel=10)
-    box('plate', (0, y - 165, zf - 2), (330, 165, 3), PLATE, root, bevel=1)
+        box(f'endCap{s}', (s * (W / 2 + 4), y, nose_z(W / 2) + 10 - D / 2), (10, H + 8, D + 8), IVORY, root, bevel=3)
+    for k in range(17):                                      # pressed slots along the beam
+        bx = -560 + k * 70
+        box(f'slot{k}', (bx, y, min(zf, nose_z(bx) + 10) + 2), (34, 22, 10), RUBBER, root, bevel=2)
+    box('valanceBox', (0, y - 165, zf - 96), (1380, 210, 130), TEXBLACK, root, bevel=10)
+    box('plate', (0, y - 165, zf - 28), (330, 165, 3), PLATE, root, bevel=1)
     for s in (-1, 1):
-        fog_lamp(root, s * 420, y - 165, zf - 4, CHROME_TRIM, dia=86)
+        fog_lamp(root, s * 420, y - 165, min(zf, nose_z(420)) - 30, CHROME_TRIM, dia=86)
     return root
 
 
@@ -1695,7 +1749,7 @@ def build():
     bumper_showa()
     bumper_klc()
     bumper_outclass()
-    for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock'):
+    for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock', 'moon', 'daytona', 'slot5', 'watanabe', 'eightpin'):
         rim(st)
     roof_rack_arb()
     roof_lights()

@@ -104,6 +104,20 @@ export const WHEELS = [
     price: null, cur: 'JPY', brand: 'RAYS', note: '鍛造一件式，2025 年起；Bronze／Blast Black' },
   { id: 'maxx', photo: true, label: 'MAXX Flowforged 10 輻', rim: 16, width: 7.0, offset: -10, style: 'ten',
     price: null, brand: 'MAXX', uncertain: true, note: '消光黑，車主實車配置' },
+  // ---- 復古框（2026-09 調查）。JB74 中心孔 108.1mm，日規 5×139.7 一律 108.25-108.8 可用；
+  // Cragar S/S（91.44）與 American Racing TT-O（83.06）孔徑太小，無法用轉接環補救，故未收錄
+  { id: 'dean_cross', photo: false, url: 'https://www.dean-wheels.com/', label: 'DEAN Cross Country（中心板可拆）', rim: 16, width: 6.0, offset: -5, style: 'slot5',
+    price: 10200, cur: 'TWD', brand: 'DEAN', note: '水平五槽鋼圈臉，中心鍍鉻板可拆，拆掉即露出 5 幅。台灣總代理希琦企業（高雄）現貨，Marguerite White／Mat Black' },
+  { id: 'showa_eight', photo: false, url: 'https://showa-garage.shop/shopbrand/I1582', label: 'Showa Garage IGNITION EIGHT', rim: 16, width: 6.0, offset: 0, style: 'eightpin',
+    price: 8950, cur: 'TWD', brand: 'SHOWA GARAGE', note: '8 根支柱＋亮面 pin bolt＋側唇一圈鉚釘，霧黑／霧銀。日本定價 ¥37,400，台灣希琦有售' },
+  { id: 'daytona_ss', photo: false, url: 'https://www.mljinc.co.jp/product/daytona_ss/daytona_ss', label: 'MLJ DAYTONA SS（2 件式鋼圈）', rim: 16, width: 6.0, offset: 0, style: 'daytona',
+    price: 29700, cur: 'JPY', brand: 'MLJ', note: '10 孔 rally 鋼圈、全平面零凹陷、螺帽全露；5×139.7 不附中心蓋。街價約 ¥13,360。白色版只有 16×5.5J +20' },
+  { id: 'super_moon', photo: false, url: 'https://shop.beyond-jpn.com/collections/%E3%83%9B%E3%82%A4%E3%83%BC%E3%83%AB', label: 'BeyondJAPAN SUPER MOON（月亮盤）', rim: 16, width: 6.0, offset: -5, style: 'moon',
+    price: 19800, cur: 'JPY', brand: 'Beyond Japan', note: '完全無孔的光滑碟盤，最極端的 moon disc 語彙。黑／白 ¥19,800、鍍鉻 ¥23,100' },
+  { id: 'watanabe_f8', photo: false, url: 'https://www.rs-watanabe.co.jp/jimny/', label: 'RS Watanabe F8（八幅）', rim: 16, width: 5.5, offset: 0, style: 'watanabe',
+    price: 45000, cur: 'JPY', brand: 'RS Watanabe', note: 'Sierra 專用 ±0；正統 8 幅、幅面平薄、中心開放（蓋另購）。黑色標配，銀／金／鎂／紅／藍／白 +¥3,000。台灣無代理' },
+  { id: 'mrk_retro', photo: false, url: 'https://www.mrk.com.tw/', label: 'MRK 復古框（陶瓷白）', rim: 16, width: 5.5, offset: 20, style: 'daytona',
+    price: 5500, cur: 'TWD', brand: 'MRK', note: '台製現貨、中心孔 108.1 正確；陶瓷白／銀／消光黑。15×6.0J −5 為 NT$3,980' },
   { id: 'beadlock', label: 'Beadlock 造型輪圈', rim: 16, width: 7.0, offset: -20, style: 'beadlock',
     price: null, brand: '多家', uncertain: true, note: '深 offset，需搭配大幅輪拱修改' },
 ];
