@@ -849,8 +849,10 @@ def bumper_tube_heritage():
         box(f'leg{s}', (s * 330, yu - 70, zu - 150), (60, 170, 180), TEXBLACK, root, bevel=3)
     box('plate', (0, yu - 125, zu + 32), (330, 165, 3), PLATE, root, bevel=1)   # demo plate on the tabs
     # Heritage panel: big flat plate hanging below the lower tube, slightly raked
-    panel = prism('panel', [(yl - 44, zl - 28), (yl - 214, zl - 60), (yl - 214, zl - 68), (yl - 44, zl - 36)], -380, 380, TEXBLACK, root)
-    script = text('heritage', 'Heritage', (-20, yl - 132, zl - 60), 96, 60, TEXBLACK, None,
+    # the plate spans the whole span between the KC pods and hangs well below
+    # the lower tube, raked back; the script sits low and left of centre
+    panel = prism('panel', [(yl - 58, zl - 30), (yl - 252, zl - 66), (yl - 252, zl - 74), (yl - 58, zl - 38)], -524, 524, TEXBLACK, root)
+    script = text('heritage', 'Heritage', (-120, yl - 176, zl - 60), 168, 70, TEXBLACK, None,
                   font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
     cut(panel, [script])                                     # laser-cut script, open right through
     # what shows between the tubes: the galvanised crossmember and the bay
@@ -1269,10 +1271,9 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     root = group(f'awning_{pid}_{side}')
     s = -RIGHT if side == 'left' else RIGHT
     rack_top = RACK_TOP
-    front = RACK_ZC + ARB_L / 2 + 100                   # bag front never past the roof's leading edge
-    # bag hangs beside the rail, its top ~40 mm above the tray and its outer
-    # face about at the body line (owner's photos)
-    x, y, zc = s * (ARB_W / 2 + W / 2 - 30), rack_top + 40 - H / 2, front - L / 2
+    # every case is centred on the roof, so it overhangs the same amount front
+    # and rear -- never trailing a long tail off the back
+    x, y, zc = s * (ARB_W / 2 + W / 2 - 30), rack_top + 40 - H / 2, RACK_ZC
     prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
     sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
     for k in (-1, 1):
