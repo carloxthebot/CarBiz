@@ -111,6 +111,15 @@
       "w": [1350, 1600],
       "note": "KLC Traditional 74: straight tube, ends inboard of the flares"
     },
+    "frontBumper_damd_little_d": {
+      "w": [1420, 1560],
+      "note": "kit bumpers end inside the stock tyre line (766 half-width), not at the body edge (795)"
+    },
+    "frontBumper_damd_little_g_trad": { "w": [1420, 1560], "note": "as above" },
+    "frontBumper_damd_roots": { "w": [1420, 1560], "note": "as above" },
+    "rearBumper_damd_little_d_rear": { "w": [1420, 1560], "note": "as above" },
+    "rearBumper_damd_little_g_trad_rear": { "w": [1420, 1560], "note": "as above" },
+    "rearBumper_damd_roots_rear": { "w": [1300, 1560], "note": "as above" },
     "rearBumper_klc_heritage_rear": {
       "w": [1350, 1500],
       "y_min": [280, 340],

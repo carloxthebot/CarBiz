@@ -1509,7 +1509,7 @@ def bumper_damd_little_d():
     the central face, gunmetal on the end blocks and the skid plate."""
     root = group('frontBumper_damd_little_d')
     gun = material('DamdGunmetal', 0x4a4d52, rough=0.5, metal=0.6)
-    W, ytop, H = 1570, 720, 134
+    W, ytop, H = 1496, 720, 134
     y, zf = ytop - H / 2, 1772
     inner = W / 2 - 212                                      # where the end blocks start
     # flat central face
@@ -1549,7 +1549,7 @@ def rear_damd_little_d():
     root = group('rearBumper_damd_little_d_rear')
     amber = material('AmberLens', 0xe08a1e, rough=0.15)
     red = material('TailRed', 0xc0161a, rough=0.18)
-    W, ytop, HB = 1572, 640, 133
+    W, ytop, HB = 1462, 640, 133
     zc, D = -1640, 140
     zf = zc - D / 2
     ymid = ytop - HB / 2
@@ -1565,13 +1565,14 @@ def rear_damd_little_d():
         prism(f'gusset{s}', [(507, zf + 6), (507, zf + 120), (398, zf + 120)], s * (W / 2 - 60), s * (W / 2 - 20), TEXBLACK, root)
         # the kit's own lamps: domed lenses, amber over red on a shallow
         # diagonal, clear reverse out on the gusset, flat reflector below
-        for (dx, yy, dia, mat_, dome) in ((703, 573, 64, amber, True), (613, 546, 64, red, True),
-                                          (757, 471, 64, LENS, True), (453, 430, 57, red, False)):
-            lib.cylinder(f'lampCan{s}{dx}', (s * dx, yy, zf + 10), (0, 0, 1), dia + 12, 28, TEXBLACK, root, n=22)
-            lib.cylinder(f'lampRim{s}{dx}', (s * dx, yy, zf - 6), (0, 0, 1), dia + 6, 6, CHROME, root, n=22)
-            lib.cylinder(f'lampLens{s}{dx}', (s * dx, yy, zf - 10), (0, 0, 1), dia, 12 if dome else 4, mat_, root, n=22)
+        k = W / 1656.0                                       # the quoted x's are for DAMD's 1656 bar
+        for (dx, yy, dia, mat_, dome) in ((703 * k, 573, 64, amber, True), (613 * k, 546, 64, red, True),
+                                          (757 * k, 471, 64, LENS, True), (453 * k, 430, 57, red, False)):
+            lib.cylinder(f'lampCan{s}{int(dx)}', (s * dx, yy, zf + 10), (0, 0, 1), dia + 12, 28, TEXBLACK, root, n=22)
+            lib.cylinder(f'lampRim{s}{int(dx)}', (s * dx, yy, zf - 6), (0, 0, 1), dia + 6, 6, CHROME, root, n=22)
+            lib.cylinder(f'lampLens{s}{int(dx)}', (s * dx, yy, zf - 10), (0, 0, 1), dia, 12 if dome else 4, mat_, root, n=22)
             if dome:                                         # the lenses are domed, not flat
-                d = lib.sphere(f'lampDome{s}{dx}', (s * dx, yy, zf - 6), dia, mat_, root)
+                d = lib.sphere(f'lampDome{s}{int(dx)}', (s * dx, yy, zf - 6), dia, mat_, root)
                 d.scale.y = 0.34
         box(f'mount{s}', (s * 330, ymid + 30, zc + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
     box('plateStep', (0, 520, zc - 30), (420, 190, 60), TEXBLACK, root, bevel=5)
@@ -1587,7 +1588,7 @@ def bumper_damd_little_g_trad():
     vertical ribbing across its face, a chrome-framed amber SQUARE fog lamp
     standing on the top edge at each end, and the plate hung off centre."""
     root = group('frontBumper_damd_little_g_trad')
-    y, zf, W, H, D = 585, 1745, 1520, 170, 140
+    y, zf, W, H, D = 585, 1745, 1428, 170, 140
     xs = [-W / 2 + W * i / 12 for i in range(13)]
     sweep('body', [(x, y, min(zf, nose_z(x) + 12) - D / 2) for x in xs], rounded_rect(D, H, 8, 4), TEXBLACK, root)
     for s in (-1, 1):
@@ -1615,7 +1616,7 @@ def rear_damd_little_g_trad():
     slightly proud clear reverse. Plate centred, its top 130 below the bar."""
     root = group('rearBumper_damd_little_g_trad_rear')
     piano = material('PianoBlack', 0x141416, rough=0.12, metal=0.25)
-    W, ytop, H, D, z = 1568, 640, 230, 150, -1650
+    W, ytop, H, D, z = 1492, 640, 230, 150, -1650
     y, zf = ytop - H / 2, z - 150 / 2
     sweep('body', [(-W / 2, y, z), (W / 2, y, z)], rounded_rect(D, H, 10, 4), TEXBLACK, root)
     box('ripple', (0, ytop - 26, zf + 4), (W - 120, 44, 10), piano, root, bevel=3)
@@ -1646,7 +1647,7 @@ def bumper_damd_roots():
     with a row of small slots along it, over a black lower valance carrying
     the plate in the centre and a small chrome round fog each side."""
     root = group('frontBumper_damd_roots')
-    y, zf, W, H, D = 640, 1745, 1560, 120, 110
+    y, zf, W, H, D = 640, 1745, 1444, 120, 110
     xs = [-W / 2 + W * i / 12 for i in range(13)]
     sweep('beam', [(x, y, min(zf, nose_z(x) + 10) - D / 2) for x in xs], rounded_rect(D, H, 8, 3), IVORY, root)
     for s in (-1, 1):
@@ -1708,7 +1709,7 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
         box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
         for s in (-1, 1):
-            box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+            box(f'corner{s}', (s * min(740, W / 2 - 30), 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
     else:
         lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
@@ -1937,7 +1938,7 @@ def build():
     bumper_damd_roots()
     rear_damd_little_d()
     rear_damd_little_g_trad()
-    rear_bar('damd_roots_rear', 'plate', W=1360, H=150, D=120, y=520, lamps='round', mat=IVORY)
+    rear_bar('damd_roots_rear', 'plate', W=1230, H=150, D=120, y=520, lamps='round', mat=IVORY)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1370, H=140, D=110, y=470, lamps='round')
