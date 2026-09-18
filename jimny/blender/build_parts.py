@@ -1752,25 +1752,25 @@ def bumper_urnieta_salado():
     each end behind a mesh guard, an exposed winch plate with a hawse
     fairlead, and a bolted skid plate under it. 42.8 kg of steel and alloy."""
     root = group('frontBumper_urnieta_salado')
-    W, y, zf = 1396, 560, 1768
-    D, H = 200, 210
+    W, y, zf = 1300, 566, 1768
+    D, H = 168, 150
     xs = [-W / 2 + W * i / 12 for i in range(13)]
     sweep('body', [(x, y, min(zf, nose_z(x) + 16) - D / 2) for x in xs], rounded_rect(D, H, 16, 4), TEXBLACK, root)
     for s in (-1, 1):
         ez = min(zf, nose_z(W / 2) + 16)
         box(f'endCap{s}', (s * (W / 2 + 4), y, ez - D / 2), (10, H + 6, D + 6), TEXBLACK, root, bevel=5)
         # light pocket: a recessed rectangle behind a mesh stone guard
-        px = s * 530
-        pz = min(zf, nose_z(530) + 16)
-        box(f'pocket{s}', (px, y + 8, pz - 14), (300, 104, 26), BLACK, root, bevel=10)
-        box(f'lens{s}', (px, y + 8, pz - 4), (262, 74, 6), LENS, root, bevel=4)
-        wire_mesh(root, TEXBLACK, px, y + 8, pz + 2, 258, 70, pitch=13, bar=3)
+        px = s * 480
+        pz = min(zf, nose_z(480) + 16)
+        box(f'pocket{s}', (px, y + 6, pz - 12), (262, 92, 24), BLACK, root, bevel=9)
+        box(f'lens{s}', (px, y + 6, pz - 2), (228, 64, 6), LENS, root, bevel=4)
+        wire_mesh(root, TEXBLACK, px, y + 6, pz + 4, 224, 62, pitch=12, bar=3)
         # upright from the bar up to the hoop
-        box(f'post{s}', (s * 155, y + 150, pz - 40), (46, 190, 56), TEXBLACK, root, bevel=5)
-        box(f'postFoot{s}', (s * 155, y + 62, pz - 40), (76, 26, 76), TEXBLACK, root, bevel=4)
+        box(f'post{s}', (s * 155, y + 176, pz - 34), (44, 272, 52), TEXBLACK, root, bevel=5)
+        box(f'postFoot{s}', (s * 155, y + 48, pz - 34), (72, 24, 72), TEXBLACK, root, bevel=4)
     # the U hoop: up, across, down -- 670 tall overall from the bar's bottom
-    hy, hz = y + 292, min(zf, nose_z(0) + 16) - 70
-    tube('hoop', [(-560, y + 112, hz), (-560, hy - 70, hz), (-470, hy, hz), (470, hy, hz), (560, hy - 70, hz), (560, y + 112, hz)],
+    hy, hz = y + 322, min(zf, nose_z(0) + 16) - 64
+    tube('hoop', [(-520, y + 100, hz), (-520, hy - 70, hz), (-440, hy, hz), (440, hy, hz), (520, hy - 70, hz), (520, y + 100, hz)],
          58, TEXBLACK, root, bend=86)
     text('salado', 'Salado', (-430, y - 128, zf + 2), 42, 4, UNT_TEXT, root)
     text('unt', 'URNIETA', (330, hy - 18, hz + 30), 26, 3, UNT_TEXT, root,
@@ -1820,18 +1820,20 @@ def bumper_urnieta_1970():
     bracket either side, and a flat lower panel with two tow shackles. 21 kg,
     plastic body on a full metal skid."""
     root = group('frontBumper_urnieta_1970')
-    W, y, zf, D, H = 1434, 622, 1762, 130, 118
+    W, y, zf, D, H = 1434, 626, 1762, 118, 102
     xs = [-W / 2 + W * i / 12 for i in range(13)]
     sweep('body', [(x, y, min(zf, nose_z(x) + 10) - D / 2) for x in xs], rounded_rect(D, H, 12, 4), TEXBLACK, root)
-    box('centre', (0, y, zf - 6), (860, 104, 22), TEXBLACK, root, bevel=6)
+    box('centre', (0, y, zf - 6), (840, 86, 20), TEXBLACK, root, bevel=5)
     for k in range(6):                                       # louvres across the centre panel
-        box(f'louvre{k}', (0, y - 40 + k * 16, zf + 6), (700, 7, 10), TEXBLACK, root, bevel=1)
-    box('badge1970', (0, y, zf + 12), (150, 74, 8), TEXBLACK, root, bevel=6)
-    text('n1970', '1970', (0, y + 8, zf + 17), 40, 4, UNT_TEXT, root,
+        box(f'louvre{k}', (0, y - 32 + k * 13, zf + 6), (560, 6, 9), TEXBLACK, root, bevel=1)
+    box('badge1970', (272, y - 4, zf + 10), (168, 74, 8), TEXBLACK, root, bevel=6)
+    text('n1970', '1970', (272, y + 4, zf + 15), 40, 4, UNT_TEXT, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
-    box('unt', (-268, y, zf + 12), (120, 26, 6), UNT_TEXT, root, bevel=1)
+    box('unt', (-232, y + 2, zf + 12), (104, 22, 6), UNT_TEXT, root, bevel=1)
     for s in (-1, 1):
-        box(f'lampBrk{s}', (s * 290, y, zf + 10), (180, 60, 10), TEXBLACK, root, bevel=4)
+        box(f'lampBrk{s}', (s * 470, y + 2, zf + 8), (190, 62, 12), TEXBLACK, root, bevel=4)
+        box(f'piaa{s}', (s * 470, y + 2, zf + 15), (150, 34, 8), BLACK, root, bevel=3)
+        box(f'piaaLens{s}', (s * 470, y + 2, zf + 19), (128, 22, 4), LENS, root, bevel=2)
         ez = min(zf, nose_z(W / 2 - 90) + 10)
         box(f'wing{s}', (s * (W / 2 - 90), y + 16, ez - 60), (180, 120, 150), TEXBLACK, root, bevel=16)
         for k in range(3):                                   # vent slots in the wing
@@ -1851,7 +1853,7 @@ def rear_urnieta_1970():
     with a lit URNIETA badge panel on the right and the plate in the middle."""
     root = group('rearBumper_urnieta_1970_rear')
     red = material('TailRed', 0xc0161a, rough=0.18)
-    W, ytop, H, D, z = 1421, 612, 240, 140, -1648
+    W, ytop, H, D, z = 1421, 606, 205, 128, -1648
     y, zf = ytop - H / 2, z - 140 / 2
     path = [(-W / 2, y, z + 140), (-W / 2 + 140, y, z), (W / 2 - 140, y, z), (W / 2, y, z + 140)]
     sweep('body', [tuple(p) for p in fillet(path, 36, steps=3)], rounded_rect(D, H, 14, 4), TEXBLACK, root)
