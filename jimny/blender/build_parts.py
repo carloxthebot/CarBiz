@@ -1370,6 +1370,143 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
     return root
 
 
+# ======================================================= DAMD FULL BODY KITS
+# Panel sets that restyle the whole front end. All three of these keep the
+# stock round headlights, so only the grille panel and the bumpers change.
+# Measured off DAMD's own product photography (damd.co.jp).
+DAMD_GREEN = material('DamdGreen', 0x1d5b3a, rough=0.45)
+CHROME_TRIM = material('ChromeTrim', 0xd8dce0, rough=0.12, metal=1.0)
+AMBER = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
+IVORY = material('RootsIvory', 0xe8e2d2, rough=0.5, metal=0.1)
+
+
+def grille_damd_little_d():
+    """little D.: a black box frame standing proud of the panel carrying six
+    thick horizontal ribs over mesh, a green oval badge low on one side, and
+    two small round lamps stacked outboard of each headlight -- the Defender
+    signature."""
+    root = group('grille_damd_little_d')
+    mat, ow, oh = TEXBLACK, 560, 200
+    grille_panel('panel', root, mat, (ow, oh, 858))
+    lamp_bezels(root, mat, 'square')
+    z = face_z(0)
+    box('frame', (0, 858, z + 8), (ow + 44, oh + 44, 24), mat, root, bevel=8)
+    wire_mesh(root, BLACK, 0, 858, z - 8, ow - 10, oh - 10, pitch=9)
+    for k in range(6):
+        y = 858 - oh / 2 + 20 + k * (oh - 40) / 5
+        box(f'rib{k}', (0, y, z + 22), (ow - 14, 18, 14), mat, root, bevel=3)
+    box('badge', (RIGHT * 168, 858 - oh / 2 + 30, z + 26), (104, 52, 6), DAMD_GREEN, root, bevel=22)
+    for s in (-1, 1):                                        # stacked auxiliary lamps
+        for k, (yy, m) in enumerate(((914, AMBER), (842, LENS))):
+            lib.cylinder(f'auxHsg{s}{k}', (s * 616, yy, face_z(616) + 6), (0, 0, 1), 74, 40, mat, root, n=22)
+            lib.cylinder(f'auxLens{s}{k}', (s * 616, yy, face_z(616) + 26), (0, 0, 1), 62, 5, m, root, n=22)
+    return root
+
+
+def grille_damd_little_g_trad():
+    """little G. TRADITIONAL: the whole panel is a matte black louvre field
+    of twelve thin horizontal slats, broken in the middle by a round matte
+    badge disc. The headlight bays are thick black carriers."""
+    root = group('grille_damd_little_g_trad')
+    mat, ow, oh = TEXBLACK, 600, 215
+    grille_panel('panel', root, mat, (ow, oh, 858))
+    lamp_bezels(root, mat, 'square')
+    z = face_z(0)
+    for k in range(12):
+        y = 858 - oh / 2 + 12 + k * (oh - 24) / 11
+        box(f'louvre{k}', (0, y, z + 6), (ow - 16, 10, 18), mat, root, bevel=2)
+    box('backing', (0, 858, z - 10), (ow, oh, 3), RUBBER, root, bevel=0)
+    lib.cylinder('badge', (0, 858, z + 14), (0, 0, 1), 118, 6, mat, root, n=36, bevel=0.5)
+    annulus('badgeRing', (0, 858, z + 18), 84, 98, 3, BLACK, root)
+    return root
+
+
+def grille_damd_roots():
+    """JIMNY the ROOTS.: a body-colour panel with one wide opening split
+    into five cells by four upright ribs, chrome SUZUKI lettering above it,
+    and a small round amber marker outboard of each headlight."""
+    root = group('grille_damd_roots')
+    ow, oh = 600, 170
+    grille_panel('panel', root, PAINT, (ow, oh, 848))
+    lamp_bezels(root, PAINT, 'round')
+    z = face_z(0)
+    wire_mesh(root, BLACK, 0, 848, z - 16, ow - 10, oh - 10, pitch=9)
+    box('backing', (0, 848, z - 28), (ow, oh, 3), RUBBER, root, bevel=0)
+    for k in range(4):
+        x = -ow / 2 + (k + 1) * ow / 5
+        box(f'rib{k}', (x, 848, z + 2), (22, oh - 6, 20), PAINT, root, bevel=4)
+    box('frameTop', (0, 848 + oh / 2 + 8, z + 2), (ow + 16, 22, 20), PAINT, root, bevel=4)
+    box('frameBot', (0, 848 - oh / 2 - 8, z + 2), (ow + 16, 22, 20), PAINT, root, bevel=4)
+    text('suzuki', 'SUZUKI', (0, 848 + oh / 2 + 44, z + 12), 54, 6, CHROME_TRIM, root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    for s in (-1, 1):
+        lib.cylinder(f'mk{s}', (s * 612, 906, face_z(612) + 8), (0, 0, 1), 52, 24, PAINT, root, n=20)
+        lib.cylinder(f'mkLens{s}', (s * 612, 906, face_z(612) + 22), (0, 0, 1), 42, 4, AMBER, root, n=20)
+    return root
+
+
+def bumper_damd_little_d():
+    """little D. front: a flat matte-black beam with square folded ends, a
+    small round fog inboard each side, a mesh centre with the plate offset
+    beside it, and a dimpled silver skid plate below."""
+    root = group('frontBumper_damd_little_d')
+    y, zf, W, H, D = 560, 1745, 1540, 190, 150
+    path = [(-W / 2, y, zf - D / 2 - 90), (-W / 2 + 110, y, zf - D / 2), (W / 2 - 110, y, zf - D / 2), (W / 2, y, zf - D / 2 - 90)]
+    sweep('body', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 10, 4), TEXBLACK, root)
+    for s in (-1, 1):
+        box(f'endCap{s}', (s * (W / 2 + 4), y, zf - D / 2 - 70), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
+        fog_lamp(root, s * 330, y - 10, zf + 2, TEXBLACK, dia=76)
+        for k in range(3):                                   # dummy fasteners on the end plates
+            lib.cylinder(f'endBolt{s}{k}', (s * (W / 2 + 10), y - 50 + k * 50, zf - D / 2 - 70), (1, 0, 0), 14, 6, STEEL, root, n=6)
+    wire_mesh(root, BLACK, 0, y, zf - 4, 420, H - 50, pitch=12)
+    box('plate', (RIGHT * 250, y - 10, zf + 10), (330, 165, 3), PLATE, root, bevel=1)
+    skid = box('skid', (0, y - H / 2 - 36, zf - 96), (820, 6, 250), ALU, root, bevel=2,
+               rot=Matrix.Rotation(math.radians(-28), 3, 'X'))
+    for k in range(7):                                       # pressed dimples in the skid plate
+        lib.cylinder(f'dimple{k}', (-330 + k * 110, y - H / 2 - 46, zf - 66), (0, 0.5, 1), 44, 5, ALU, root, n=18)
+    valance(root, corners=False)
+    return root
+
+
+def bumper_damd_little_g_trad():
+    """little G. TRADITIONAL front: a flat steel beam with a band of close
+    vertical ribbing across its face, a chrome-framed amber SQUARE fog lamp
+    standing on the top edge at each end, and the plate hung off centre."""
+    root = group('frontBumper_damd_little_g_trad')
+    y, zf, W, H, D = 585, 1745, 1520, 170, 140
+    sweep('body', [(-W / 2, y, zf - D / 2), (W / 2, y, zf - D / 2)], rounded_rect(D, H, 8, 4), TEXBLACK, root)
+    for s in (-1, 1):
+        box(f'endCap{s}', (s * (W / 2 + 4), y, zf - D / 2), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
+        # Koito square fog on a chrome base, sitting on top of the beam
+        box(f'fogBase{s}', (s * 430, y + H / 2 + 14, zf - 40), (34, 30, 34), CHROME_TRIM, root, bevel=3)
+        box(f'fogHsg{s}', (s * 430, y + H / 2 + 52, zf - 34), (104, 64, 56), CHROME_TRIM, root, bevel=6)
+        box(f'fogLens{s}', (s * 430, y + H / 2 + 52, zf - 4), (86, 48, 5), AMBER, root, bevel=3)
+    for k in range(26):                                      # washboard ribbing across the face
+        box(f'ribV{k}', (-560 + k * 45, y + 20, zf + 2), (12, H - 70, 10), TEXBLACK, root, bevel=2)
+    wire_mesh(root, BLACK, 0, y - 55, zf - 2, 300, 44, pitch=11)
+    box('plate', (RIGHT * 300, y - 6, zf + 10), (330, 165, 3), PLATE, root, bevel=1)
+    valance(root, corners=False)
+    return root
+
+
+def bumper_damd_roots():
+    """JIMNY the ROOTS. front: two layers -- an ivory pressed-steel beam
+    with a row of small slots along it, over a black lower valance carrying
+    the plate in the centre and a small chrome round fog each side."""
+    root = group('frontBumper_damd_roots')
+    y, zf, W, H, D = 640, 1745, 1560, 120, 110
+    sweep('beam', [(-W / 2, y, zf - D / 2), (W / 2, y, zf - D / 2)], rounded_rect(D, H, 8, 3), IVORY, root)
+    for s in (-1, 1):
+        box(f'endCap{s}', (s * (W / 2 + 4), y, zf - D / 2), (10, H + 8, D + 8), IVORY, root, bevel=3)
+    for k in range(18):                                      # pressed slots along the beam
+        box(f'slot{k}', (-595 + k * 70, y, zf + 2), (34, 22, 10), RUBBER, root, bevel=2)
+    box('valanceBox', (0, y - 165, zf - 70), (1420, 210, 130), TEXBLACK, root, bevel=10)
+    box('plate', (0, y - 165, zf - 2), (330, 165, 3), PLATE, root, bevel=1)
+    for s in (-1, 1):
+        fog_lamp(root, s * 420, y - 165, zf - 4, CHROME_TRIM, dia=86)
+    return root
+
+
 def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', steps=False, mat=None):
     """kind: 'tube' or 'plate'; lamps: 'wings' (plate housings keeping the
     stock lamps), 'round' (four small round lamps in the bar), 'housing'
@@ -1636,6 +1773,17 @@ def build():
     rear_bumper_klc_nostalgic()
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False, slot=True, badge='KLC')
     front_bar('toc_extreme', 'plate', W=1600, H=260, D=180, y=530, fogs=True, corners=False, bolts=True, skid=False)
+    # DAMD full body kits (damd.co.jp, 2026-09): panel sets that keep the
+    # stock round headlights, so only the grille and the bumpers change
+    grille_damd_little_d()
+    grille_damd_little_g_trad()
+    grille_damd_roots()
+    bumper_damd_little_d()
+    bumper_damd_little_g_trad()
+    bumper_damd_roots()
+    rear_bar('damd_little_d_rear', 'plate', W=1420, H=170, D=130, y=500, lamps='round')
+    rear_bar('damd_little_g_trad_rear', 'plate', W=1440, H=190, D=140, y=510, lamps='round')
+    rear_bar('damd_roots_rear', 'plate', W=1460, H=150, D=120, y=520, lamps='round', mat=IVORY)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
     rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')

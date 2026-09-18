@@ -74,7 +74,7 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
 </div>
 <script type="module">
 import { LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
-  ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS } from './parts.js';
+  ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS } from './parts.js';
 
 // key = the configurator's state key, so "套用" can deep-link into app.html
 const CATS = [
@@ -82,6 +82,7 @@ const CATS = [
   ['輪框', 'wheel', WHEELS, '5×139.7、中心孔 108'],
   ['輪胎尺寸', 'tyre', TYRES, '外徑決定舉升需求'],
   ['輪胎型號（胎紋）', 'tread', TYRE_MODELS, '白字＝原廠有 OWL／RWL 版本'],
+  ['全車套件', 'kit', KITS.filter(k => k.id !== 'none'), 'DAMD 的整套外觀件：選一款就同時換掉水箱罩與前後保桿。台灣無總代理，授權經銷商為台中 Fujii74、新北 JP Racing、台南 JT Garage'],
   ['前保桿', 'frontBumper', FRONT_BUMPERS, ''],
   ['後保桿', 'rearBumper', REAR_BUMPERS, ''],
   ['水箱護罩', 'grille', GRILLES, ''],

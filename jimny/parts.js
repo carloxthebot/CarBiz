@@ -172,6 +172,13 @@ export const TYRE_MODELS = [
 // `id` is the part name suffix in parts.glb. Choosing one hides the stock
 // bumper (with its fog lamps) or the stock grille panel on the model.
 export const FRONT_BUMPERS = [
+  // ---- DAMD 全車套件專用前保桿（damd.co.jp）
+  { id: 'damd_little_d', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 前保桿', price: 63800, cur: 'JPY', brand: 'DAMD', kit: 'little_d',
+    note: '平直鋼板風橫樑、方形端板假螺絲，內側小圓霧燈，中央黑網＋偏置車牌，下方銀色凹坑護板。ABS，裝車要切輪拱內襯' },
+  { id: 'damd_little_g_trad', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL 前保桿', price: 96800, cur: 'JPY', brand: 'DAMD', kit: 'little_g_trad',
+    note: '鋼板橫樑＋密集縱向壓紋，兩顆鍍鉻框方形琥珀霧燈架在保桿上緣，車牌偏一側' },
+  { id: 'damd_roots', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS. 前保桿', price: 63800, cur: 'JPY', brand: 'DAMD', kit: 'roots',
+    note: '雙層：上層象牙色鋼板橫樑帶一排細縫，下層黑色裙板置中掛牌，兩側小圓鍍鉻霧燈' },
   { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
   // ---- 台灣有售
   { id: 'tube_heritage', photo: true, url: 'https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_bk/', refs: ['https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_iv/', 'https://www.mrk.com.tw/product_ii.html?ID=561'], label: 'KLC Heritage Traditional Bumper 74 前保桿（黑）', price: 99000, cur: 'JPY', brand: 'KLC Heritage', photo: true,
@@ -210,6 +217,13 @@ export const FRONT_BUMPERS = [
 ];
 
 export const REAR_BUMPERS = [
+  // ---- DAMD 全車套件專用後保桿（damd.co.jp）
+  { id: 'damd_little_d_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 後保桿', price: 81400, cur: 'JPY', brand: 'DAMD', kit: 'little_d', ownLamps: true,
+    note: '含圓形尾燈、反光片與牌照座；有倒車雷達要鑽孔，原廠車牌需重新封印' },
+  { id: 'damd_little_g_trad_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL 後保桿', price: 85800, cur: 'JPY', brand: 'DAMD', kit: 'little_g_trad', ownLamps: true,
+    note: '含尾燈；擋泥皮另計' },
+  { id: 'damd_roots_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS. 後保桿＋延伸片', price: 96800, cur: 'JPY', brand: 'DAMD', kit: 'roots', ownLamps: true,
+    note: '象牙色橫樑＋延伸片；烤漆版延伸片一律消光黑' },
   { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
   // ---- 台灣有售
   { id: 'tube', photo: true, label: '車主實車 管狀後保桿（含尾燈座）', price: null, cur: 'TWD', brand: '多家', uncertain: true,
@@ -242,6 +256,13 @@ export const REAR_BUMPERS = [
 ];
 
 export const GRILLES = [
+  // ---- DAMD 全車套件專用面板（damd.co.jp）
+  { id: 'damd_little_d', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 水箱罩（消光黑）', price: 52800, cur: 'JPY', brand: 'DAMD', kit: 'little_d',
+    note: '致敬舊款 Land Rover Defender；六道橫肋＋綠色橢圓徽章，頭燈外側加兩顆小圓燈。素地出貨但水箱罩一律附消光黑' },
+  { id: 'damd_little_g_trad', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL 水箱罩（消光黑）', price: 75900, cur: 'JPY', brand: 'DAMD', kit: 'little_g_trad',
+    note: '致敬初代 G-Wagen W460；12 道水平百葉＋中央圓形 dd 徽章。只有消光黑' },
+  { id: 'damd_roots', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS. 水箱罩', price: 52800, cur: 'JPY', brand: 'DAMD', kit: 'roots',
+    note: '與 APIO 共同開發，致敬初代 LJ10；車身色面板、開口被四根直肋分成五格，上緣 SUZUKI 鍍鉻立體字' },
   { id: 'stock', label: '原廠五格柵', price: 0, brand: 'SUZUKI', note: '5 道直立柵欄，中央 S 標' },
   // ---- 台灣有售
   { id: 'hbar_suzuki', photo: true, url: 'https://www.klc-div.com/heritage/product/grille/facegrillenostalgic/', refs: ['https://shopee.tw/product/47473069/5556354773'], label: 'KLC Heritage Face Grille Nostalgic（橫柵＋SUZUKI 白字）', price: 93500, cur: 'JPY', brand: 'KLC Heritage', photo: true,
@@ -501,3 +522,20 @@ export function priceOf(list, id) {
   const it = list.find((x) => x.id === id);
   return it?.price ?? null;
 }
+
+
+// DAMD 全車套件（damd.co.jp）。選一款就同時換掉水箱罩與前後保桿。
+// 這三款都保留原廠圓形頭燈，所以只換面板；saudade / little 5. / little Δ
+// 會換成方形或四圓頭燈，還沒建模。
+export const KITS = [
+  { id: 'none', label: '不使用全車套件', price: 0 },
+  { id: 'little_d', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D.（舊款 Defender 風）', price: 305800, cur: 'JPY', brand: 'DAMD',
+    set: { grille: 'damd_little_d', frontBumper: 'damd_little_d', rearBumper: 'damd_little_d_rear' },
+    note: 'JB74 車身件套件未塗裝 ¥305,800，烤漆另加 ¥96,800。ABS；水箱罩一律消光黑。台灣無總代理，授權經銷商台中 Fujii74' },
+  { id: 'little_g_trad', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL（初代 G-Wagen 風）', price: 547800, cur: 'JPY', brand: 'DAMD',
+    set: { grille: 'damd_little_g_trad', frontBumper: 'damd_little_g_trad', rearBumper: 'damd_little_g_trad_rear' },
+    note: 'JB74 車身件套件未塗裝 ¥547,800，烤漆另加 ¥145,200。含引擎蓋罩與蓋上方向燈（尚未建模）' },
+  { id: 'roots', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS.（初代 LJ10 風）', price: 213400, cur: 'JPY', brand: 'DAMD',
+    set: { grille: 'damd_roots', frontBumper: 'damd_roots', rearBumper: 'damd_roots_rear' },
+    note: 'JB74 外觀三件組未塗裝 ¥213,400，烤漆另加 ¥99,000。與 APIO 共同開發。露天可見代購 NT$65,000（未烤漆）' },
+];

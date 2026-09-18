@@ -148,6 +148,7 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
         <select id="selColor" style="margin-top:10px"></select>
         <button class="tg" id="tgTwo" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
           <span class="nm">雙色車頂<i>ZJ3 Bluish Black Pearl</i></span><span class="st">關閉</span></button>
+        <label class="lbl">全車套件</label><select id="selKit"></select><p class="hint" id="hKit"></p>
         <label class="lbl">前保桿</label><select id="selBumper"></select><p class="hint" id="hBumper"></p>
         <label class="lbl">水箱護罩</label><select id="selGrille"></select><p class="hint" id="hGrille"></p>
         <label class="lbl">後保桿</label><select id="selRear"></select><p class="hint" id="hRear"></p>
@@ -185,13 +186,13 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609180129';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate } from './parts.js?v=202609180129';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609180129';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609180129';
+import { rigJimny, applyConfig } from './rig.js?v=202609180349';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS } from './parts.js?v=202609180349';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609180349';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609180349';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609180129';
+const BUILD = '202609180349';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -282,7 +283,7 @@ const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後�
 
 const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', wheel: 'oem', tyre: 't195',
   tread: 'toyo_at3', owl: false, rimColor: 0xc8ccd0,
-  frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
+  kit: 'none', frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: false, spareBag: false, spareCover: false,
   roofLights: false, guardCan: false, guardBoard: false, shovel: false, flares: false, decals: false, sideSkirt: false };
@@ -394,7 +395,8 @@ function buildUI() {
   FRONT_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   GRILLES.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   REAR_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  opt('selBumper', FRONT_BUMPERS, S.frontBumper); opt('selGrille', GRILLES, S.grille); opt('selRear', REAR_BUMPERS, S.rearBumper);
+  KITS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
+  opt('selKit', KITS, S.kit); opt('selBumper', FRONT_BUMPERS, S.frontBumper); opt('selGrille', GRILLES, S.grille); opt('selRear', REAR_BUMPERS, S.rearBumper);
   SNORKELS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   MIRRORS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
   opt('selSnorkel', SNORKELS, S.snorkel); opt('selMirror', MIRRORS, S.mirrors);
@@ -435,7 +437,18 @@ function buildUI() {
 
   const on = (id, f) => document.getElementById(id).onchange = e => { f(e.target.value); hints(); update(); };
   on('selLift', v => S.lift = v); on('selTyre', v => S.tyre = v);
-  on('selBumper', v => S.frontBumper = v); on('selGrille', v => S.grille = v); on('selRear', v => S.rearBumper = v);
+  document.getElementById('selKit').onchange = e => {
+    S.kit = e.target.value;
+    const k = find(KITS, S.kit);
+    if (k && k.set) Object.assign(S, k.set);
+    buildUI(); hints(); update();
+  };
+  const panel = (id, key) => document.getElementById(id).onchange = e => {
+    S[key] = e.target.value;
+    if (S.kit !== 'none') { S.kit = 'none'; document.getElementById('selKit').value = 'none'; }
+    hints(); update();
+  };
+  panel('selBumper', 'frontBumper'); panel('selGrille', 'grille'); panel('selRear', 'rearBumper');
   on('selSnorkel', v => S.snorkel = v); on('selMirror', v => S.mirrors = v);
   on('selRack', v => S.roofRack = v); on('selAwning', v => S.awning = v); on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
   document.getElementById('tgAwnSide').onclick = e => { S.awningSide = S.awningSide === 'left' ? 'right' : 'left'; syncToggles(); update(); };
@@ -504,6 +517,7 @@ function hints() {
   document.getElementById('hLift').textContent = n(find(LIFTS, S.lift));
   document.getElementById('hWheel').textContent = n(find(WHEELS, S.wheel));
   document.getElementById('hTyre').textContent = n(find(TYRES, S.tyre));
+  document.getElementById('hKit').textContent = n(find(KITS, S.kit));
   document.getElementById('hBumper').textContent = n(find(FRONT_BUMPERS, S.frontBumper));
   document.getElementById('hGrille').textContent = n(find(GRILLES, S.grille));
   document.getElementById('hRear').textContent = n(find(REAR_BUMPERS, S.rearBumper));
