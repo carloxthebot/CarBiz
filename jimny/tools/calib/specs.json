@@ -12,11 +12,11 @@
 
   "rules": {
     "frontBumper_": {
-      "w": [1300, 1800],
-      "note": "no wider than the body (1645) plus a flare each side"
+      "w": [1300, 1640],
+      "note": "the body is 1590 wide across the arches in this model, so a bumper that measures more than about 1640 is sticking out past the wings"
     },
     "rearBumper_": {
-      "w": [1300, 1800],
+      "w": [1300, 1640],
       "note": "same envelope as the front"
     },
     "sideStep_": {

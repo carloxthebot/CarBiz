@@ -630,7 +630,7 @@ def bumper_outclass():
     root = group('frontBumper_outclass_t2')
     y = 560
     # path runs through the box centre; the 200 mm deep profile puts the face at z 1750
-    path = [(-780, y, 1420), (-640, y, 1650), (640, y, 1650), (780, y, 1420)]
+    path = [(-700, y, 1420), (-600, y, 1650), (600, y, 1650), (700, y, 1420)]
     sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(200, 220, 10, 3), TEXBLACK, root)
     box('fairleadFrame', (0, 640, 1756), (300, 100, 14), RED, root, bevel=3)
     box('fairleadSlot', (0, 640, 1764), (240, 56, 4), RUBBER, root, bevel=0)
@@ -1509,7 +1509,7 @@ def bumper_damd_little_d():
     the central face, gunmetal on the end blocks and the skid plate."""
     root = group('frontBumper_damd_little_d')
     gun = material('DamdGunmetal', 0x4a4d52, rough=0.5, metal=0.6)
-    W, ytop, H = 1653, 720, 134
+    W, ytop, H = 1570, 720, 134
     y, zf = ytop - H / 2, 1772
     inner = W / 2 - 212                                      # where the end blocks start
     # flat central face
@@ -1549,7 +1549,7 @@ def rear_damd_little_d():
     root = group('rearBumper_damd_little_d_rear')
     amber = material('AmberLens', 0xe08a1e, rough=0.15)
     red = material('TailRed', 0xc0161a, rough=0.18)
-    W, ytop, HB = 1656, 640, 133
+    W, ytop, HB = 1572, 640, 133
     zc, D = -1640, 140
     zf = zc - D / 2
     ymid = ytop - HB / 2
@@ -1615,7 +1615,7 @@ def rear_damd_little_g_trad():
     slightly proud clear reverse. Plate centred, its top 130 below the bar."""
     root = group('rearBumper_damd_little_g_trad_rear')
     piano = material('PianoBlack', 0x141416, rough=0.12, metal=0.25)
-    W, ytop, H, D, z = 1650, 640, 230, 150, -1650
+    W, ytop, H, D, z = 1568, 640, 230, 150, -1650
     y, zf = ytop - H / 2, z - 150 / 2
     sweep('body', [(-W / 2, y, z), (W / 2, y, z)], rounded_rect(D, H, 10, 4), TEXBLACK, root)
     box('ripple', (0, ytop - 26, zf + 4), (W - 120, 44, 10), piano, root, bevel=3)
@@ -1920,13 +1920,13 @@ def build():
     front_bar('maverick', 'short', W=1300, H=200, D=140, y=540, fogs=True, skid=False)
     front_bar('mrk_abs', 'abs', W=1520, H=250, D=170, y=540, skid=False, corners=False, hump=True, bash=True, mesh_off=RIGHT * 330, fogs=True)
     front_bar('wmd_winch', 'short', W=1100, H=230, D=170, y=560, hoop=True, winch=True)
-    front_bar('jaos_cowl', 'abs', W=1560, H=280, D=180, y=540, skid=False, corners=False, hump=True, bash=True, badge='JAOS', mesh_off=0)
+    front_bar('jaos_cowl', 'abs', W=1470, H=280, D=180, y=540, skid=False, corners=False, hump=True, bash=True, badge='JAOS', mesh_off=0)
     front_bar('taniguchi_square', 'box', W=1400, y=600, skid=False)
     front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
     bumper_klc_nostalgic()
     rear_bumper_klc_nostalgic()
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False, slot=True, badge='KLC')
-    front_bar('toc_extreme', 'plate', W=1600, H=260, D=180, y=530, fogs=True, corners=False, bolts=True, skid=False)
+    front_bar('toc_extreme', 'plate', W=1470, H=260, D=180, y=530, fogs=True, corners=False, bolts=True, skid=False)
     # DAMD full body kits (damd.co.jp, 2026-09): panel sets that keep the
     # stock round headlights, so only the grille and the bumpers change
     grille_damd_little_d()
@@ -1937,19 +1937,19 @@ def build():
     bumper_damd_roots()
     rear_damd_little_d()
     rear_damd_little_g_trad()
-    rear_bar('damd_roots_rear', 'plate', W=1460, H=150, D=120, y=520, lamps='round', mat=IVORY)
+    rear_bar('damd_roots_rear', 'plate', W=1360, H=150, D=120, y=520, lamps='round', mat=IVORY)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
-    rear_bar('urnieta_1970_rear', 'plate', W=1500, H=140, D=110, y=470, lamps='round')
-    rear_bar('beyond_rear', 'plate', W=1450, H=160, D=120, y=460, lamps='wings')
-    rear_bar('jaos_rear_cowl', 'plate', W=1440, H=230, D=150, y=500, lamps='round')
+    rear_bar('urnieta_1970_rear', 'plate', W=1370, H=140, D=110, y=470, lamps='round')
+    rear_bar('beyond_rear', 'plate', W=1360, H=160, D=120, y=460, lamps='wings')
+    rear_bar('jaos_rear_cowl', 'plate', W=1330, H=230, D=150, y=500, lamps='round')
     rear_bar('wildgoose_crawler_rear', 'tube', W=1330, tube_d=76, lamps='housing')
     rear_bar('wildgoose_box_rear', 'plate', W=1410, H=100, D=100, y=450, lamps='housing')
     rear_bar('showa_iron_rear', 'tube', W=1450, tube_d=60, lamps='wings')
     rear_bar('taniguchi_rear_pipe', 'tube', W=1420, tube_d=60, lamps='none')
-    rear_bar('apio_tactical_rear', 'plate', W=1390, H=280, D=200, y=520, lamps='housing')
-    rear_bar('outclass_rear_abs', 'plate', W=1500, H=220, D=170, y=500, lamps='round')
-    rear_bar('hamer_mx208', 'plate', W=1380, H=300, D=220, y=520, lamps='housing', steps=True)
+    rear_bar('apio_tactical_rear', 'plate', W=1290, H=280, D=200, y=520, lamps='housing')
+    rear_bar('outclass_rear_abs', 'plate', W=1310, H=220, D=170, y=500, lamps='round')
+    rear_bar('hamer_mx208', 'plate', W=1270, H=300, D=220, y=520, lamps='housing', steps=True)
     # grilles
     grille_generic('taishan_retro', v_slots=11)
     grille_generic('klc_ja', wire=True, marker=4, bezel='round', h_slats=1, slat_h=18)
