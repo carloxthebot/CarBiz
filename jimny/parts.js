@@ -233,9 +233,9 @@ export const FRONT_BUMPERS = [
 export const REAR_BUMPERS = [
   // ---- DAMD 全車套件專用後保桿（damd.co.jp）
   { id: 'damd_little_d_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/', label: 'DAMD little D. 後保桿', price: 81400, cur: 'JPY', brand: 'DAMD', kit: 'little_d', ownLamps: true,
-    note: '含圓形尾燈、反光片與牌照座；有倒車雷達要鑽孔，原廠車牌需重新封印' },
+    note: '雙層結構、全寬 1656mm。原廠尾燈整組拆除，改用套件自帶的凸圓頂圓燈（沿用原廠線束）：每側琥珀方向燈、紅色尾／煞車燈、角板上的透明倒車燈，下橫樑再加一片紅色反光片。DAMD 展示車多半加購 ¥10,780 的車牌移設套件改掛後門；有倒車雷達要鑽孔，原廠車牌需重新封印' },
   { id: 'damd_little_g_trad_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL 後保桿', price: 85800, cur: 'JPY', brand: 'DAMD', kit: 'little_g_trad', ownLamps: true,
-    note: '含尾燈；擋泥皮另計' },
+    note: '全寬 1650mm，外露面粗目消光黑、凹陷階面鋼琴黑。每側一顆卡車式方形尾燈（DAMD 料號 E-476，215×68mm，中心距中線 ±540），由外而內為琥珀方向燈、紅色反光片、紅色尾／煞車燈、透明倒車燈；無後霧燈。車牌置中掛在下段橫樑' },
   { id: 'damd_roots_rear', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS. 後保桿＋延伸片', price: 96800, cur: 'JPY', brand: 'DAMD', kit: 'roots', ownLamps: true,
     note: '象牙色橫樑＋延伸片；烤漆版延伸片一律消光黑' },
   { id: 'stock', label: '原廠', price: 0, brand: 'SUZUKI' },
