@@ -322,8 +322,8 @@ export const SNORKELS = [
     note: 'Ø89 LLDPE 圓管、前向進氣頭；需切葉子板' },
   { id: 'bravo', photo: true, url: 'https://bravosnorkel.com/en/suzuki/106-suzuki-jimny-2018-.html', refs: ['https://shopee.tw/JIMNY-JB74%E5%B0%88%E7%94%A8%E5%91%BC%E5%90%B8%E7%AE%A1-i.15564603.6673859917'], photo: true, label: 'Bravo Snorkel SSJN', price: 399, cur: 'EUR', brand: 'Bravo Snorkel',
     note: '西班牙製、方形管身貼 A 柱、彎頭側向網狀進氣；免鑽孔（換掉葉子板角飾板）' },
-  { id: 'urnieta', url: 'https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA Salado', price: 839, cur: 'AUD', brand: 'URNIETA', part: '0702021',
-    note: 'ABS 方管、矩形百葉進氣頭、側面開槽；免鑽孔，另附旋風前濾頭' },
+  { id: 'urnieta', url: 'https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA Salado', price: 14000, cur: 'TWD', brand: 'URNIETA', part: '0702021',
+    refs: ['https://shopee.tw/product/7996649/29595052138'], note: '台灣蝦皮 NT$14,000。附標準頭與預濾頭兩種可換頭；取代原廠引擎蓋飾板，不需切葉子板。ABS 方管、矩形百葉進氣頭、側面開槽；免鑽孔，另附旋風前濾頭' },
   { id: 'precleaner', photo: true, url: 'https://www.jimnybits.com/snorkel-air-pre-filter-pre-cleaner-head-for-3-snorkels-1.html', photo: true, label: 'Safari 管身＋旋風前濾頭', price: null, cur: 'GBP', brand: 'Safari + PC35', uncertain: true,
     note: 'Ø180 透明旋風碗，先甩掉粉塵' },
   { id: 'sleek', photo: true, url: 'https://megajimny.com/products/supa-sleek-snorkel-system', photo: true, label: 'Mega Jimny Supa-Sleek', price: 649, cur: 'AUD', brand: 'Mega Jimny',
@@ -332,8 +332,8 @@ export const SNORKELS = [
 
 export const MIRRORS = [
   { id: 'stock', label: '原廠電動折疊鏡', price: 0, brand: 'SUZUKI' },
-  { id: 'urnieta', url: 'https://urnieta.com/product/salado-side-mirror-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA Salado 環管後照鏡', price: 949, cur: 'AUD', brand: 'URNIETA', part: '0702022',
-    note: '官方工程圖 UN-JIMNY-FB-014：總高 411mm、總寬 237mm。圓角矩形鏡座 187×231，單支圓管由門框上前角的關節繞出、沿鏡座內側往下再回到下關節，鏡座以四螺栓夾塊固定在管上，外緣有 URNIETA 銘牌' },
+  { id: 'urnieta', url: 'https://urnieta.com/product/salado-side-mirror-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA SALADO 後照鏡組（0702022）', price: 17800, cur: 'TWD', brand: 'URNIETA', part: '0702022',
+    refs: ['https://shopee.tw/product/7996649/53462197780'], note: '台灣蝦皮 GOAT Wild explorer NT$17,800。URNIETA 為中國東莞斯塔克工業品牌（中文名歐尼塔），非日系；只支援 JB74／JC74，JB64 官方列為不相容。官方工程圖 UN-JIMNY-FB-014：總高 411mm、總寬 237mm。圓角矩形鏡座 187×231，單支圓管由門框上前角的關節繞出、沿鏡座內側往下再回到下關節，鏡座以四螺栓夾塊固定在管上，外緣有 URNIETA 銘牌' },
   { id: 'damd', photo: true, url: 'https://www.pp-performance.net/products/damd-jimny-sierra-truck-mirror', refs: ['https://easycars.jp/product/damd-truck-side-mirror-for-jimny-jb64-jb74/'], label: 'DAMD Truck Mirror（PP Performance 代理）', price: 19800, cur: 'TWD', brand: 'DAMD', photo: true,
     note: '直式卡車鏡＋U 型管臂，消光黑或鍍鉻；含加熱，失去電動折疊' },
 ];
@@ -549,6 +549,9 @@ export const KITS = [
   { id: 'little_g_trad', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/', label: 'DAMD little G. TRADITIONAL（初代 G-Wagen 風）', price: 547800, cur: 'JPY', brand: 'DAMD',
     set: { grille: 'damd_little_g_trad', frontBumper: 'damd_little_g_trad', rearBumper: 'damd_little_g_trad_rear' },
     note: 'JB74 車身件套件未塗裝 ¥547,800，烤漆另加 ¥145,200。含引擎蓋罩與蓋上方向燈（尚未建模）' },
+  { id: 'urnieta_1970', url: 'https://urnieta.com/', label: 'URNIETA 1970（70 年代日本車風）', price: 49400, cur: 'TWD', brand: 'URNIETA',
+    set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear' },
+    note: '中國東莞斯塔克工業（歐尼塔）品牌，2026/6 上線；官網不標價，此為台灣三件合計。半高式前後保桿＋衝壓金屬網水箱罩，後保桿用圓形尾燈（官方寫致敬 Nissan GT-R）。同系列另有引擎蓋、側裙、備胎蓋、鷗翼窗（尚未建模）。只支援 JB74／JC74' },
   { id: 'roots', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS.（初代 LJ10 風）', price: 213400, cur: 'JPY', brand: 'DAMD',
     set: { grille: 'damd_roots', frontBumper: 'damd_roots', rearBumper: 'damd_roots_rear' },
     note: 'JB74 外觀三件組未塗裝 ¥213,400，烤漆另加 ¥99,000。與 APIO 共同開發。露天可見代購 NT$65,000（未烤漆）' },
