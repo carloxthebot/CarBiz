@@ -1036,17 +1036,39 @@ def revolve_arc(name, profile, centre_y, centre_z, a0, a1, mat, parent, side=1, 
     return lib.new_object(name, bm, mat, parent, smooth=True)
 
 
+# Body half-width along each wheel arch at r = 470 from the axle centre,
+# measured off the model every 7.5 degrees. The arch is not a cylinder: it
+# falls from 795 at the top to about 730 at the ends, so anything placed at
+# one fixed x floats off the body near the ends.
+ARCH_HALF_W = {
+    'front': (728, 751, 764, 774, 780, 788, 792, 794, 794, 795, 795,
+              795, 795, 795, 795, 794, 790, 785, 779, 772, 765),
+    'rear': (759, 765, 770, 778, 784, 788, 791, 792, 792, 791, 787,
+             788, 791, 791, 790, 788, 781, 778, 774, 767, 756),
+}
+
+
+def arch_half_w(kind, deg):
+    """Interpolate the measured arch profile; deg runs 15..165 up the arch."""
+    t = (deg - 15) / 7.5
+    tbl = ARCH_HALF_W[kind]
+    i = max(0, min(len(tbl) - 2, int(t)))
+    return tbl[i] + (tbl[i + 1] - tbl[i]) * (t - i)
+
+
 def flares():
-    """Pocket-style riveted look on the STOCK arches (owner's choice): six
-    square black pockets along each arch's outer face, a silver hex bolt
-    head in each; the stock shells stay, rendered matte."""
+    """Riveted look on the STOCK arches (owner's choice): a row of hex bolt
+    heads following the arch. Each one sits on the measured body surface for
+    its angle, not at a fixed x."""
     root = group('flares')
     for s in (-1, 1):
-        for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
+        for kind, z in (('front', CAR['anchors']['frontAxleZ']), ('rear', CAR['anchors']['rearAxleZ'])):
             for t in range(11):
-                a = math.radians(18 + 144 * t / 10)
-                r, x = 478, 786
-                lib.cylinder(f'rivet{s}{z}{t}', (s * x, 346 + r * math.sin(a), z + r * math.cos(a)), (1, 0, 0), 15, 7, STEEL, root, n=6)
+                deg = 20 + 130 * t / 10
+                a = math.radians(deg)
+                r = 470
+                lib.cylinder(f'rivet{s}{kind}{t}', (s * (arch_half_w(kind, deg) - 3), 346 + r * math.sin(a), z + r * math.cos(a)),
+                             (1, 0, 0), 15, 8, STEEL, root, n=6)
     return root
 
 
@@ -1715,9 +1737,15 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
-            for k, xx in enumerate((s * 470, s * 580)):
-                lib.cylinder(f'lampHsg{s}{k}', (xx, y, z - 8), (0, 0, 1), 78, 40, BLACK, root, n=24)
-                lib.cylinder(f'lampLens{s}{k}', (xx, y, z - 30), (0, 0, 1), 66, 4, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
+            # sit them on the bar's rear FACE, and space them off its end, so
+            # they neither sink into the bar nor drift as the bar changes width
+            zr = z - (D if kind == 'plate' else tube_d) / 2
+            for k, xx in enumerate((s * (W / 2 - 70), s * (W / 2 - 180))):
+                lib.cylinder(f'lampHsg{s}{k}', (xx, y, zr + 18), (0, 0, 1), 78, 44, BLACK, root, n=24)
+                lib.cylinder(f'lampRim{s}{k}', (xx, y, zr - 4), (0, 0, 1), 74, 6, CHROME, root, n=24)
+                lib.cylinder(f'lampLens{s}{k}', (xx, y, zr - 9), (0, 0, 1), 66, 6, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
+                d = lib.sphere(f'lampDome{s}{k}', (xx, y, zr - 8), 66, material('TailRed', 0xc0161a, rough=0.2), root)
+                d.scale.y = 0.3
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
     if lamps == 'klc':                                       # plate on two tabs right under the tube
