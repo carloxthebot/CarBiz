@@ -439,11 +439,11 @@ def lamp_bezels(root, mat, style='round'):
         if style == 'round':
             annulus(f'bezel{k}', (x, y, z + 12), 96, 114, 20, mat, root)
         else:                                            # squared bezel with a round bore
-            b = box(f'bezel{k}', (x, y, z + 6), (232, 232, 12), mat, root, bevel=14)
+            b = box(f'bezel{k}', (x, y, z - 14), (232, 232, 30), mat, root, bevel=14)
             c = lib.cylinder(f'cutB{k}', (x, y, z), (0, 0, 1), 192, 60, mat, None, n=48)
             cut(b, [c])
     for k, (x, y) in enumerate(SIGNAL):
-        annulus(f'sigBezel{k}', (x, y, face_z(x) + 14), 39, 48, 8, mat, root)
+        annulus(f'sigBezel{k}', (x, y, face_z(x) - 9), 39, 48, 16, mat, root)
 
 
 def wire_mesh(root, mat, cx, cy, z, w, h, pitch=10, bar=1.6):
@@ -826,27 +826,33 @@ def bumper_tube_heritage():
     tube('upper', [(-676, yu, zu), (676, yu, zu)], 76, TEXBLACK, root)
     tube('lower', [(-450, yl, zl), (450, yl, zl)], 76, TEXBLACK, root)
     for s in (-1, 1):
-        box(f'capU{s}', (s * 678, yu, zu), (6, 74, 74), TEXBLACK, root, bevel=3)
-        box(f'capL{s}', (s * 452, yl, zl), (6, 74, 74), TEXBLACK, root, bevel=3)
+        lib.cylinder(f'capU{s}', (s * 678, yu, zu), (1, 0, 0), 78, 6, TEXBLACK, root, n=28)
+        lib.cylinder(f'capL{s}', (s * 452, yl, zl), (1, 0, 0), 78, 6, TEXBLACK, root, n=28)
         # plate tabs under the upper tube, with their bolt heads on top
         box(f'tab{s}', (s * 120, yu - 55, zu + 6), (28, 60, 6), TEXBLACK, root, bevel=1)
         lib.cylinder(f'tabBolt{s}', (s * 120, yu + 40, zu), (0, 1, 0), 14, 8, STEEL, root, n=6)
         # KC FLEX ERA 4: square pod with a red bezel, two spots over two floods
         px, py, pz = s * 520, yl, zl + 20
-        box(f'pod{s}', (px, py, pz), (96, 96, 70), BLACK, root, bevel=6)
-        box(f'podBezel{s}', (px, py, pz + 36), (92, 92, 6), material('KCRed', 0xb3261e, rough=0.4), root, bevel=8)
-        box(f'podFace{s}', (px, py, pz + 40), (80, 80, 3), BLACK, root, bevel=4)
-        for (dx, dy, m) in ((-19, 19, material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)), (19, 19, material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)), (-19, -19, LENS), (19, -19, LENS)):
-            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 42), (0, 0, 1), 32, 4, CHROME, root, n=20)
-            lib.cylinder(f'ledLens{s}{dx}{dy}', (px + dx, py + dy, pz + 45), (0, 0, 1), 30, 2, m, root, n=20)
-        box(f'podMount{s}', (px - s * 60, py, zl), (50, 30, 30), TEXBLACK, root, bevel=3)
+        amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
+        kcred = material('KCRed', 0xa8231c, rough=0.45)
+        body = box(f'pod{s}', (px, py, pz), (104, 104, 62), BLACK, root, bevel=22)
+        body.modifiers['bevel'].segments = 5
+        ring = box(f'podBezel{s}', (px, py, pz + 30), (100, 100, 12), kcred, root, bevel=24)
+        ring.modifiers['bevel'].segments = 5
+        face = box(f'podFace{s}', (px, py, pz + 33), (78, 78, 6), BLACK, root, bevel=12)
+        face.modifiers['bevel'].segments = 4
+        for (dx, dy, m) in ((-19, 19, amber), (19, 19, amber), (-19, -19, LENS), (19, -19, LENS)):
+            lib.cylinder(f'cup{s}{dx}{dy}', (px + dx, py + dy, pz + 33), (0, 0, 1), 34, 8, CHROME, root, n=20)
+            lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 37), (0, 0, 1), 28, 3, m, root, n=20)
+        box(f'podMount{s}', (px - s * 58, py, zl), (48, 26, 26), TEXBLACK, root, bevel=3)
         # chassis legs and tow hooks
         box(f'leg{s}', (s * 330, yu - 70, zu - 150), (60, 170, 180), TEXBLACK, root, bevel=3)
     box('plate', (0, yu - 125, zu + 32), (330, 165, 3), PLATE, root, bevel=1)   # demo plate on the tabs
     # Heritage panel: big flat plate hanging below the lower tube, slightly raked
-    prism('panel', [(yl - 50, zl - 30), (yl - 280, zl - 70), (yl - 280, zl - 76), (yl - 50, zl - 36)], -460, 460, TEXBLACK, root)
-    text('heritage', 'Heritage', (-60, yl - 170, zl - 60), 120, 4, material('LabelWhite', 0xf0f0ec, rough=0.6), root,
-         font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
+    panel = prism('panel', [(yl - 44, zl - 28), (yl - 214, zl - 60), (yl - 214, zl - 68), (yl - 44, zl - 36)], -380, 380, TEXBLACK, root)
+    script = text('heritage', 'Heritage', (-20, yl - 132, zl - 60), 96, 60, TEXBLACK, None,
+                  font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
+    cut(panel, [script])                                     # laser-cut script, open right through
     # what shows between the tubes: the galvanised crossmember and the bay
     box('crossmember', (0, 575, 1600), (1100, 70, 40), STEEL, root, bevel=4)
     box('bay', (0, 540, 1420), (1050, 320, 20), RUBBER, root, bevel=4)
@@ -1035,12 +1041,10 @@ def flares():
     root = group('flares')
     for s in (-1, 1):
         for z in (CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']):
-            for t, deg in enumerate((12, 38, 66, 94, 122, 150)):
-                a = math.radians(deg)
-                r, x = 470, 780
-                c = (s * x, 346 + r * math.sin(a), z + r * math.cos(a))
-                box(f'pocket{s}{z}{t}', c, (10, 30, 30), TEXBLACK, root, bevel=3)
-                lib.cylinder(f'rivet{s}{z}{t}', (s * (x + 6), c[1], c[2]), (1, 0, 0), 15, 8, STEEL, root, n=6)
+            for t in range(11):
+                a = math.radians(18 + 144 * t / 10)
+                r, x = 478, 786
+                lib.cylinder(f'rivet{s}{z}{t}', (s * x, 346 + r * math.sin(a), z + r * math.cos(a)), (1, 0, 0), 15, 7, STEEL, root, n=6)
     return root
 
 
