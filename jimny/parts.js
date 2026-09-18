@@ -333,7 +333,7 @@ export const SNORKELS = [
 export const MIRRORS = [
   { id: 'stock', label: '原廠電動折疊鏡', price: 0, brand: 'SUZUKI' },
   { id: 'urnieta', url: 'https://urnieta.com/product/salado-side-mirror-kit-for-jimny-jb74-jc74/', photo: true, label: 'URNIETA Salado 環管後照鏡', price: 949, cur: 'AUD', brand: 'URNIETA', part: '0702022',
-    note: '方形鏡頭＋圓管環臂，沿用原廠門上三角座；手動調整，附相機孔' },
+    note: '官方工程圖 UN-JIMNY-FB-014：總高 411mm、總寬 237mm。圓角矩形鏡座 187×231，單支圓管由門框上前角的關節繞出、沿鏡座內側往下再回到下關節，鏡座以四螺栓夾塊固定在管上，外緣有 URNIETA 銘牌' },
   { id: 'damd', photo: true, url: 'https://www.pp-performance.net/products/damd-jimny-sierra-truck-mirror', refs: ['https://easycars.jp/product/damd-truck-side-mirror-for-jimny-jb64-jb74/'], label: 'DAMD Truck Mirror（PP Performance 代理）', price: 19800, cur: 'TWD', brand: 'DAMD', photo: true,
     note: '直式卡車鏡＋U 型管臂，消光黑或鍍鉻；含加熱，失去電動折疊' },
 ];

@@ -1150,20 +1150,36 @@ MIR_X, MIR_Y, MIR_Z = 705, 1165, 445        # door skin at the mirror triangle
 
 
 def mirrors_urnieta():
-    """URNIETA Salado: squarish 200 x 150 head inside a round-tube loop arm
-    (~411 tall x 237 out) fixed top and bottom to the door."""
+    """URNIETA Salado rearview mirror (UN-JIMNY-FB-014), off the factory
+    drawing: 411 tall x 237 across overall. A rounded-rectangle head 187 deep
+    x 231 tall hangs off a single round tube that leaves a knuckle on the
+    door's upper front corner, runs outboard, turns down past the head's
+    inboard side and returns to a second knuckle at the bottom. The head is
+    clamped to that tube by a square four-bolt block on its back, and carries
+    a small URNIETA badge on its outboard edge."""
     root = group('mirrors_urnieta')
+    ytop, ybot = 1352, 996
     for s in (-1, 1):
-        x0 = s * MIR_X
-        loop = [(x0, 1330, 485), (s * (MIR_X + 200), 1330, 485), (s * (MIR_X + 200), 1000, 485), (x0, 1000, 485)]
-        tube(f'arm{s}', loop, 20, BLACK, root, bend=60)
-        for y in (1330, 1000):
-            box(f'base{s}{y}', (s * (MIR_X + 4), y, 482), (10, 50, 70), BLACK, root, bevel=3)
-        # head faces the rear: wide across the car, thin front-to-back
-        head = box(f'head{s}', (s * (MIR_X + 120), MIR_Y, 452), (200, 150, 34), BLACK, root, bevel=16)
-        head.modifiers['bevel'].segments = 4
-        box(f'glass{s}', (s * (MIR_X + 120), MIR_Y, 433), (186, 136, 2), CHROME, root, bevel=0)
-        box(f'stem{s}', (s * (MIR_X + 160), MIR_Y, 470), (24, 24, 30), BLACK, root, bevel=3)
+        xt = s * (MIR_X + 70)                                # the vertical tube run
+        # mounting plates and their pivot knuckles, top and bottom
+        for (yy, zz) in ((ytop, 516), (ybot, 522)):
+            box(f'plate{s}{yy}', (s * (MIR_X - 2), yy, zz), (7, 96, 66), BLACK, root, bevel=2)
+            lib.cylinder(f'knuckle{s}{yy}', (s * (MIR_X + 42), yy, zz - 12), (1, 0, 0), 38, 44, BLACK, root, n=16)
+            box(f'knucklePin{s}{yy}', (s * (MIR_X + 42), yy, zz - 12), (52, 14, 14), STEEL, root, bevel=2)
+        # one continuous tube: out, down the inboard side of the head, back in
+        tube(f'arm{s}', [(s * (MIR_X + 42), ytop, 504), (xt, ytop, 500), (xt, ybot, 500), (s * (MIR_X + 42), ybot, 510)],
+             22, BLACK, root, bend=58)
+        # the head: rounded rectangle, glass facing rearward
+        # 187 across x 231 tall, thin fore-aft, glass looking back down the car
+        head = box(f'head{s}', (s * (MIR_X + 145), 1174, 470), (187, 231, 58), BLACK, root, bevel=44)
+        head.modifiers['bevel'].segments = 6
+        box(f'glass{s}', (s * (MIR_X + 145), 1174, 441), (161, 205, 3), CHROME, root, bevel=0)
+        box(f'glassRim{s}', (s * (MIR_X + 145), 1174, 443), (173, 217, 3), RUBBER, root, bevel=0)
+        # four-bolt clamp block holding the head to the tube
+        box(f'clamp{s}', (s * (MIR_X + 70), 1174, 508), (92, 92, 44), BLACK, root, bevel=8)
+        for (dx, dy) in ((-28, -28), (-28, 28), (28, -28), (28, 28)):
+            lib.cylinder(f'clampBolt{s}{dx}{dy}', (s * (MIR_X + 70) + dx, 1174 + dy, 528), (0, 0, 1), 13, 8, STEEL, root, n=6)
+        box(f'badge{s}', (s * (MIR_X + 232), 1174, 470), (6, 54, 46), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=2)
     return root
 
 
