@@ -1766,22 +1766,29 @@ def bumper_urnieta_salado():
         box(f'lens{s}', (px, y + 6, pz - 2), (228, 64, 6), LENS, root, bevel=4)
         wire_mesh(root, TEXBLACK, px, y + 6, pz + 4, 224, 62, pitch=12, bar=3)
         # upright from the bar up to the hoop
-        box(f'post{s}', (s * 155, y + 176, pz - 34), (44, 272, 52), TEXBLACK, root, bevel=5)
-        box(f'postFoot{s}', (s * 155, y + 48, pz - 34), (72, 24, 72), TEXBLACK, root, bevel=4)
-    # the U hoop: up, across, down -- 670 tall overall from the bar's bottom
-    hy, hz = y + 322, min(zf, nose_z(0) + 16) - 64
-    tube('hoop', [(-520, y + 100, hz), (-520, hy - 70, hz), (-440, hy, hz), (440, hy, hz), (520, hy - 70, hz), (520, y + 100, hz)],
-         58, TEXBLACK, root, bend=86)
+        box(f'post{s}', (s * 344, y + 190, pz - 26), (40, 300, 48), TEXBLACK, root, bevel=5)
+        box(f'postFoot{s}', (s * 344, y + 46, pz - 26), (66, 24, 66), TEXBLACK, root, bevel=4)
+        box(f'postClamp{s}', (s * 344, y + 330, pz - 20), (54, 40, 58), TEXBLACK, root, bevel=5)
+    # the grille guard: a rounded rectangle the size of the grille panel,
+    # standing in front of it. Its legs run down OUTSIDE the headlights, so
+    # the lamps stay clear; two posts off the bumper hold it.
+    gx, gtop, gbot, hz = 668, 962, y + 76, 1742
+    loop = [(-gx, gbot, hz), (-gx, gtop, hz), (gx, gtop, hz), (gx, gbot, hz)]
+    tube('guard', loop, 50, TEXBLACK, root, bend=92)
+    for s in (-1, 1):
+        box(f'guardFoot{s}', (s * gx, gbot - 16, hz - 10), (62, 40, 60), TEXBLACK, root, bevel=5)
+    hy = gtop
     text('salado', 'Salado', (-430, y - 128, zf + 2), 42, 4, UNT_TEXT, root)
-    text('unt', 'URNIETA', (330, hy - 18, hz + 30), 26, 3, UNT_TEXT, root,
+    text('unt', 'URNIETA', (452, gbot + 26, hz + 28), 24, 3, UNT_TEXT, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     # winch plate, fairlead and skid
-    box('winchPlate', (0, y - 96, zf - 96), (620, 200, 14), STEEL, root, bevel=3)
-    box('fairlead', (0, y - 96, zf - 84), (240, 74, 16), STEEL, root, bevel=14)
-    box('hawse', (0, y - 96, zf - 78), (150, 34, 10), RUBBER, root, bevel=8)
+    box('plate', (0, y - 6, zf + 6), (330, 165, 3), PLATE, root, bevel=1)
+    box('winchPlate', (0, y - 150, zf - 96), (620, 190, 14), STEEL, root, bevel=3)
+    box('fairlead', (0, y - 150, zf - 84), (240, 74, 16), STEEL, root, bevel=14)
+    box('hawse', (0, y - 150, zf - 78), (150, 34, 10), RUBBER, root, bevel=8)
     for k in range(6):
         lib.cylinder(f'wbolt{k}', (-250 + k * 100, y + 66, zf - 8), (0, 0, 1), 15, 8, STEEL, root, n=6)
-    box('skid', (0, y - 210, zf - 150), (760, 8, 280), STEEL, root, bevel=3,
+    box('skid', (0, y - 258, zf - 150), (760, 8, 280), STEEL, root, bevel=3,
         rot=Matrix.Rotation(math.radians(-26), 3, 'X'))
     valance(root, corners=False)
     return root
