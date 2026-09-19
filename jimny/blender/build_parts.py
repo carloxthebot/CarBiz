@@ -1766,26 +1766,35 @@ def bumper_urnieta_salado():
         box(f'lens{s}', (px, y + 6, pz - 2), (228, 64, 6), LENS, root, bevel=4)
         wire_mesh(root, TEXBLACK, px, y + 6, pz + 4, 224, 62, pitch=12, bar=3)
         # upright from the bar up to the hoop
-        box(f'post{s}', (s * 344, y + 190, pz - 26), (40, 300, 48), TEXBLACK, root, bevel=5)
-        box(f'postFoot{s}', (s * 344, y + 46, pz - 26), (66, 24, 66), TEXBLACK, root, bevel=4)
-        box(f'postClamp{s}', (s * 344, y + 330, pz - 20), (54, 40, 58), TEXBLACK, root, bevel=5)
-    # the grille guard: a rounded rectangle the size of the grille panel,
-    # standing in front of it. Its legs run down OUTSIDE the headlights, so
-    # the lamps stay clear; two posts off the bumper hold it.
-    gx, gtop, gbot, hz = 668, 962, y + 76, 1742
-    loop = [(-gx, gbot, hz), (-gx, gtop, hz), (gx, gtop, hz), (gx, gbot, hz)]
-    tube('guard', loop, 50, TEXBLACK, root, bend=92)
+        box(f'postFoot{s}', (s * 152, y + 46, 1736), (62, 24, 62), TEXBLACK, root, bevel=4)
+    # the grille guard: a closed rounded-rectangle loop sitting in front of
+    # the grille only, its legs inboard of the headlights so the lamps stay
+    # clear. The loop does not reach the ground -- only two inner uprights
+    # run past it and down onto the bumper.
+    gx, gtop, gbot, hz = 336, 972, 726, 1738
+    tube('guard', [(-gx, gbot, hz), (-gx, gtop, hz), (gx, gtop, hz), (gx, gbot, hz), (-gx, gbot, hz)],
+         44, TEXBLACK, root, bend=80)
     for s in (-1, 1):
-        box(f'guardFoot{s}', (s * gx, gbot - 16, hz - 10), (62, 40, 60), TEXBLACK, root, bevel=5)
+        px2 = s * 152
+        tube(f'upright{s}', [(px2, y + 58, hz + 16), (px2, gtop + 4, hz + 16)], 42, TEXBLACK, root)
+        for yy in (gtop - 14, gbot + 14):
+            box(f'clamp{s}{yy}', (px2, yy, hz + 8), (54, 40, 44), TEXBLACK, root, bevel=5)
     hy = gtop
     text('salado', 'Salado', (-430, y - 128, zf + 2), 42, 4, UNT_TEXT, root)
-    text('unt', 'URNIETA', (452, gbot + 26, hz + 28), 24, 3, UNT_TEXT, root,
+    text('unt', 'URNIETA', (238, gbot + 22, hz + 24), 22, 3, UNT_TEXT, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     # winch plate, fairlead and skid
     box('plate', (0, y - 6, zf + 6), (330, 165, 3), PLATE, root, bevel=1)
+    box('winchBox', (0, y - 158, zf - 120), (640, 176, 210), TEXBLACK, root, bevel=6)
+    lib.cylinder('winchDrum', (0, y - 150, zf - 40), (1, 0, 0), 120, 420, BLACK, root, n=22)
+    for s in (-1, 1):
+        lib.cylinder(f'winchEnd{s}', (s * 220, y - 150, zf - 40), (1, 0, 0), 150, 70, TEXBLACK, root, n=22)
+        box(f'ledBar{s}', (s * 300, y - H / 2 - 24, zf - 14), (180, 40, 34), BLACK, root, bevel=5)
+        box(f'ledLens{s}', (s * 300, y - H / 2 - 24, zf + 4), (154, 22, 5), LENS, root, bevel=2)
+        box(f'shackle{s}', (s * 250, y - 250, zf - 70), (44, 82, 40), STEEL, root, bevel=8)
     box('winchPlate', (0, y - 150, zf - 96), (620, 190, 14), STEEL, root, bevel=3)
-    box('fairlead', (0, y - 150, zf - 84), (240, 74, 16), STEEL, root, bevel=14)
-    box('hawse', (0, y - 150, zf - 78), (150, 34, 10), RUBBER, root, bevel=8)
+    box('fairlead', (0, y - 246, zf - 30), (240, 70, 16), STEEL, root, bevel=14)
+    box('hawse', (0, y - 246, zf - 24), (150, 32, 10), RUBBER, root, bevel=8)
     for k in range(6):
         lib.cylinder(f'wbolt{k}', (-250 + k * 100, y + 66, zf - 8), (0, 0, 1), 15, 8, STEEL, root, n=6)
     box('skid', (0, y - 258, zf - 150), (760, 8, 280), STEEL, root, bevel=3,
