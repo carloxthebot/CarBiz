@@ -1766,22 +1766,22 @@ def bumper_urnieta_salado():
         box(f'lens{s}', (px, y + 6, pz - 2), (228, 64, 6), LENS, root, bevel=4)
         wire_mesh(root, TEXBLACK, px, y + 6, pz + 4, 224, 62, pitch=12, bar=3)
         # upright from the bar up to the hoop
-        box(f'postFoot{s}', (s * 152, y + 46, 1736), (62, 24, 62), TEXBLACK, root, bevel=4)
+        box(f'postFoot{s}', (s * 340, y + 46, 1732), (62, 24, 62), TEXBLACK, root, bevel=4)
     # the grille guard: a closed rounded-rectangle loop sitting in front of
     # the grille only, its legs inboard of the headlights so the lamps stay
     # clear. The loop does not reach the ground -- only two inner uprights
     # run past it and down onto the bumper.
-    gx, gtop, gbot, hz = 336, 972, 726, 1738
+    gx, gtop, gbot, hz = 640, 976, 716, 1734
     tube('guard', [(-gx, gbot, hz), (-gx, gtop, hz), (gx, gtop, hz), (gx, gbot, hz), (-gx, gbot, hz)],
-         44, TEXBLACK, root, bend=80)
+         46, TEXBLACK, root, bend=92)
     for s in (-1, 1):
-        px2 = s * 152
+        px2 = s * 340
         tube(f'upright{s}', [(px2, y + 58, hz + 16), (px2, gtop + 4, hz + 16)], 42, TEXBLACK, root)
         for yy in (gtop - 14, gbot + 14):
             box(f'clamp{s}{yy}', (px2, yy, hz + 8), (54, 40, 44), TEXBLACK, root, bevel=5)
     hy = gtop
     text('salado', 'Salado', (-430, y - 128, zf + 2), 42, 4, UNT_TEXT, root)
-    text('unt', 'URNIETA', (238, gbot + 22, hz + 24), 22, 3, UNT_TEXT, root,
+    text('unt', 'URNIETA', (452, gbot + 24, hz + 24), 22, 3, UNT_TEXT, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     # winch plate, fairlead and skid
     box('plate', (0, y - 6, zf + 6), (330, 165, 3), PLATE, root, bevel=1)
