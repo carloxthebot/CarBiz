@@ -1940,6 +1940,124 @@ def side_skirt_urnieta_1970():
     return root
 
 
+# The bonnet's own surface, measured off the model every 100 mm of z, so an
+# overlay panel can follow it instead of floating.
+BONNET_Y = ((900, 1131), (1000, 1118), (1100, 1111), (1200, 1100), (1300, 1094),
+            (1400, 1084), (1500, 1072), (1600, 1058))
+
+
+def bonnet_y(z):
+    for (z0, y0), (z1, y1) in zip(BONNET_Y, BONNET_Y[1:]):
+        if z <= z1:
+            t = (z - z0) / (z1 - z0)
+            return y0 + (y1 - y0) * max(0.0, min(1.0, t))
+    return BONNET_Y[-1][1]
+
+
+def _urnieta_hood(pid, scoop_z, scoop_w, fins, corner_vent):
+    """Both URNIETA bonnets are drawn 1408 x 882 (UN-JIMNY-FB-003 and -025).
+    The kit swaps the whole panel for aluminium; on the car what reads is the
+    vent, so the vent is what is modelled, sitting on the bonnet's own
+    measured surface rather than on a slab laid over it."""
+    root = group(f'hood_{pid}')
+    sy = bonnet_y(scoop_z)
+    scoop = box('scoop', (0, sy + 30, scoop_z), (scoop_w, 76, 250), PAINT, root, bevel=30)
+    scoop.modifiers['bevel'].segments = 5
+    box('mouth', (0, sy + 44, scoop_z - 118), (scoop_w - 70, 52, 22), BLACK, root, bevel=8)
+    for k in range(fins):
+        box(f'fin{k}', (0, sy + 26 + k * 15, scoop_z - 108), (scoop_w - 96, 7, 46), TEXBLACK, root, bevel=2)
+    box('rib', (0, sy + 52, scoop_z - 30), (14, 44, 190), PAINT, root, bevel=5)
+    text('unt', 'URNIETA', (scoop_w / 2 - 104, sy + 62, scoop_z + 60), 22, 3, UNT_TEXT, root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    if corner_vent:
+        cz, cx = 1452, RIGHT * 468
+        box('cvent', (cx, bonnet_y(cz) + 6, cz), (206, 22, 108), TEXBLACK, root, bevel=8)
+        for k in range(5):
+            box(f'cfin{k}', (cx, bonnet_y(cz) + 14, cz - 40 + k * 20), (168, 7, 8), BLACK, root, bevel=1)
+    return root
+
+
+def hood_urnieta_salado():
+    return _urnieta_hood('urnieta_salado', 1040, 520, 3, False)
+
+
+def hood_urnieta_1970():
+    return _urnieta_hood('urnieta_1970', 1210, 430, 4, True)
+
+
+def _urnieta_spare_shell(root):
+    """Same dished shell as the stock hard cover, so it sits on the spare
+    exactly the way that one does."""
+    cx, cy = SPARE['x'], SPARE['y']
+    R, D = 360, 230
+    zb = SPARE_FACE_Z + 190
+    prof = [(0.0, zb), (R - 10, zb), (R, zb - 20), (R + 6, zb - D + 50), (R - 20, zb - D + 8),
+            (R - 60, zb - D), (0, zb - D - 6)]
+    bm = bmesh.new()
+    seg = 64
+    rings = [[bm.verts.new(P(cx + r * math.cos(2 * math.pi * i / seg), cy + r * math.sin(2 * math.pi * i / seg), z))
+              for i in range(seg)] for (r, z) in prof]
+    for u, v in zip(rings, rings[1:]):
+        for i in range(seg):
+            bm.faces.new((u[i], u[(i + 1) % seg], v[(i + 1) % seg], v[i]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    lib.new_object('shell', bm, TEXBLACK, root)
+    return cx, cy, R, zb - D - 12
+
+
+def spare_urnieta_salado():
+    """SALADO Extended Spare Tire Cover (0702003), 3.4 kg: the outer face
+    folds down into a work table, held by two catches with a stay each side."""
+    root = group('spareCover_urnieta_salado')
+    cx, cy, R, zf = _urnieta_spare_shell(root)
+    box('table', (cx, cy - 10, zf - 10), (2 * R - 150, 2 * R - 210, 22), TEXBLACK, root, bevel=24)
+    box('tableLip', (cx, cy - R + 130, zf - 20), (2 * R - 190, 24, 30), TEXBLACK, root, bevel=6)
+    for s in (-1, 1):
+        box(f'catch{s}', (cx + s * (R - 150), cy - R + 150, zf - 22), (54, 40, 26), STEEL, root, bevel=5)
+        box(f'stay{s}', (cx + s * (R - 90), cy - 30, zf + 6), (12, 200, 34), TEXBLACK, root, bevel=3)
+    t = text('unt', 'URNIETA', (cx, cy + 120, zf - 24), 44, 5, UNT_TEXT, root,
+             font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    t.rotation_euler[2] = math.pi                            # it faces the rear
+    return root
+
+
+def spare_urnieta_1970():
+    """1970 Spare Tire Cover (0703002), 3.4 kg: the same shell carrying a
+    MOLLE field that also takes the matching pouch."""
+    root = group('spareCover_urnieta_1970')
+    cx, cy, R, zf = _urnieta_spare_shell(root)
+    box('panel', (cx, cy - 10, zf - 6), (2 * R - 260, 2 * R - 300, 16), TEXBLACK, root, bevel=18)
+    for r in range(4):
+        yy = cy + 70 - r * 54
+        box(f'row{r}', (cx, yy, zf - 16), (2 * R - 320, 22, 8), WEBBING, root, bevel=2)
+        for c in range(5):
+            box(f'loop{r}{c}', (cx - 112 + c * 56, yy, zf - 20), (9, 22, 6), WEBBING, root, bevel=1)
+    t = text('unt', 'URNIETA', (cx, cy + 148, zf - 18), 36, 5, UNT_TEXT, root,
+             font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    t.rotation_euler[2] = math.pi
+    return root
+
+
+def gullwing_urnieta_1970():
+    """1970 Gullwing Window Kit (0703009), 6.35 kg: the rear quarter glass is
+    re-hung on a top hinge with two gas struts, in a framed surround. No
+    cutting -- the frame clamps over the existing aperture."""
+    root = group('gullwing')
+    q = QUARTER
+    cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
+    PW, PH = 800, 540
+    for s in (-1, 1):
+        x = s * 712
+        for (dy, dz, sy, sz) in ((PH / 2, 0, 34, PW), (-PH / 2, 0, 34, PW), (0, PW / 2, PH, 34), (0, -PW / 2, PH, 34)):
+            box(f'frame{s}{dy}{dz}', (x, cy + dy, cz + dz), (16, sy, sz), TEXBLACK, root, bevel=4)
+        for k in (-1, 1):                                    # top hinges
+            box(f'hinge{s}{k}', (s * 700, cy + PH / 2 + 16, cz + k * 230), (40, 30, 90), TEXBLACK, root, bevel=4)
+        for k in (-1, 1):                                    # gas struts, slightly open
+            lib.cylinder(f'strut{s}{k}', (s * 690, cy + 60, cz + k * 170), (0, 0.9, 0.44), 20, 250, STEEL, root, n=12)
+            box(f'strutFoot{s}{k}', (s * 690, cy - 60, cz + k * 170), (26, 30, 30), TEXBLACK, root, bevel=3)
+    return root
+
+
 def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', steps=False, mat=None):
     """kind: 'tube' or 'plate'; lamps: 'wings' (plate housings keeping the
     stock lamps), 'round' (four small round lamps in the bar), 'housing'
@@ -2240,6 +2358,11 @@ def build():
     grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round')
     grille_urnieta_salado()
     side_bar_urnieta_salado()
+    hood_urnieta_salado()
+    hood_urnieta_1970()
+    spare_urnieta_salado()
+    spare_urnieta_1970()
+    gullwing_urnieta_1970()
     side_skirt_urnieta_1970()
     grille_urnieta_1970()
     bumper_urnieta_salado()

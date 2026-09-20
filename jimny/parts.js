@@ -504,11 +504,6 @@ export const OTHERS = [
   { id: 'maxx', photo: true, url: null, key: 'wheel', label: 'MAXX Flowforged 10 輻 16×7', price: null, cur: 'TWD', brand: 'MAXX', uncertain: true, note: '消光黑，配 TOYO Open Country M/T 225/75R16（車主實車配置）' },
 ];
 
-export const SPARE_COVERS = [
-  { id: 'soft', label: '軟式備胎套' },
-  { id: 'hard', label: '硬殼備胎蓋' },
-  { id: 'none', label: '裸露備胎' },
-];
 
 /** Which warnings apply to a configuration. Pure function so the UI and any
  *  future export share one source of truth. */
@@ -565,12 +560,32 @@ export const KITS = [
     set: { grille: 'damd_little_g_trad', frontBumper: 'damd_little_g_trad', rearBumper: 'damd_little_g_trad_rear' },
     note: 'JB74 車身件套件未塗裝 ¥547,800，烤漆另加 ¥145,200。含引擎蓋罩與蓋上方向燈（尚未建模）' },
   { id: 'urnieta_salado', url: 'https://urnieta.com/', label: 'URNIETA SALADO（遠征越野）', price: null, cur: 'TWD', brand: 'URNIETA', uncertain: true,
-    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear', sideStep: 'urnieta_salado' },
+    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear', sideStep: 'urnieta_salado', hood: 'urnieta_salado', spareCoverKit: 'urnieta_salado' },
     note: '中國東莞斯塔克工業（歐尼塔）；官網不標價，僅後保桿在台灣蝦皮有 NT$27,000。整套另有鋁引擎蓋、管狀側桿、行李架、後梯、四出排氣、涉水管（部分尚未建模）。只支援 JB74／JC74' },
   { id: 'urnieta_1970', url: 'https://urnieta.com/', label: 'URNIETA 1970（70 年代日本車風）', price: 49400, cur: 'TWD', brand: 'URNIETA',
-    set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear', sideStep: 'urnieta_1970' },
+    set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear', sideStep: 'urnieta_1970', hood: 'urnieta_1970', spareCoverKit: 'urnieta_1970' },
     note: '中國東莞斯塔克工業（歐尼塔）品牌，2026/6 上線；官網不標價，此為台灣三件合計。半高式前後保桿＋衝壓金屬網水箱罩，後保桿用圓形尾燈（官方寫致敬 Nissan GT-R）。同系列另有引擎蓋、側裙、備胎蓋、鷗翼窗（尚未建模）。只支援 JB74／JC74' },
   { id: 'roots', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS.（初代 LJ10 風）', price: 213400, cur: 'JPY', brand: 'DAMD',
     set: { grille: 'damd_roots', frontBumper: 'damd_roots', rearBumper: 'damd_roots_rear' },
     note: 'JB74 外觀三件組未塗裝 ¥213,400，烤漆另加 ¥99,000。與 APIO 共同開發。露天可見代購 NT$65,000（未烤漆）' },
+];
+
+
+// URNIETA 引擎蓋。套件是整片鋁製引擎蓋（減重約 65%），配置器只畫出在車上
+// 看得出來的中央隆起與進氣口，蓋在原廠引擎蓋表面上。
+export const HOODS = [
+  { id: 'stock', label: '原廠引擎蓋', price: 0, brand: 'SUZUKI' },
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-hood-kit-for-jimny-jb74-jc74/', label: 'URNIETA SALADO 鋁引擎蓋（0702009）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_salado', uncertain: true,
+    note: '工程圖 UN-JIMNY-FB-003：1408×882。鋁製減重約 65%，中央隆起後段一個大進氣口（三道鰭片＋中肋），沿用原廠鉸鍊／鎖扣／撐桿。6kg。官網不標價' },
+  { id: 'urnieta_1970', url: 'https://urnieta.com/product/1970-hood-kit-for-jimny-jb74-jc74/', label: 'URNIETA 1970 鋁引擎蓋（0703005）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_1970', uncertain: true,
+    note: '工程圖 UN-JIMNY-FB-025：1408×882。進氣口較小且位置偏中段（四道鰭片），右前角另有一組百葉散熱口，正面線條較接近原廠。6kg。官網不標價' },
+];
+
+// 套件專用備胎蓋（原廠硬殼蓋仍在「配件」開關裡）
+export const SPARE_COVERS = [
+  { id: 'none', label: '不使用套件備胎蓋', price: 0 },
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-extended-spare-tire-cover-for-jimny-jb74-jc74-jb64/', label: 'URNIETA SALADO 延伸備胎蓋（0702003）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_salado', uncertain: true,
+    note: '外蓋可向下翻開變成工作檯，兩顆卡扣＋兩支撐桿。3.4kg，JB64 也能裝。官網不標價' },
+  { id: 'urnieta_1970', url: 'https://urnieta.com/product/1970-spare-tire-cover-kit-for-jimny-jb74-jc74-jb64/', label: 'URNIETA 1970 備胎蓋（0703002）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_1970', uncertain: true,
+    note: 'MOLLE 格帶面板／收納包雙模式。3.4kg，JB64 也能裝。官網不標價' },
 ];
