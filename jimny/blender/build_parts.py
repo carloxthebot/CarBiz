@@ -1892,6 +1892,54 @@ def rear_urnieta_1970():
     return root
 
 
+def side_bar_urnieta_salado():
+    """SALADO Side Bar Kit (UN-JIMNY-FB-009), drawn 1270 x 460 for the three
+    door: an outer round tube running the length of the sill and turning in
+    at both ends, a slotted tread plate bolted inboard of it, two bracket
+    arms per side reaching to the chassis and a diagonal stay at the front,
+    with a clamped step pad at the middle. 27 kg the pair."""
+    root = group('sideStep_urnieta_salado')
+    z0, z1, ty = -565, 705, 336
+    for s in (-1, 1):
+        xo, xi = s * 800, s * 690
+        tube(f'bar{s}', [(s * 620, ty, z0 - 60), (xo, ty, z0 + 40), (xo, ty, z1 - 40), (s * 620, ty, z1 + 60)],
+             60, TEXBLACK, root, bend=120)
+        plate = box(f'tread{s}', (s * 742, ty + 26, (z0 + z1) / 2), (118, 10, z1 - z0 - 140), ALU_CHEQ, root, bevel=2)
+        for k in range(8):                                   # drain slots punched in the tread
+            zz = z0 + 120 + k * (z1 - z0 - 240) / 7
+            box(f'slot{s}{k}', (s * 742, ty + 30, zz), (72, 6, 26), RUBBER, root, bevel=2)
+        for k, zz in enumerate((z0 + 170, z1 - 170)):        # bracket arms into the chassis
+            box(f'arm{s}{k}', (s * 560, ty - 6, zz), (300, 70, 62), TEXBLACK, root, bevel=4)
+            box(f'armPlate{s}{k}', (s * 420, ty - 6, zz), (14, 130, 90), TEXBLACK, root, bevel=3)
+            for (dy, dz) in ((-34, -24), (-34, 24), (34, -24), (34, 24)):
+                lib.cylinder(f'armBolt{s}{k}{dy}{dz}', (s * 412, ty - 6 + dy, zz + dz), (1, 0, 0), 13, 8, STEEL, root, n=6)
+        box(f'stay{s}', (s * 600, ty - 74, z0 + 250), (18, 150, 190), TEXBLACK, root, bevel=3,
+            rot=Matrix.Rotation(math.radians(s * 22), 3, 'Z'))
+        for k in (-1, 1):                                    # the centre step clamp
+            box(f'clamp{s}{k}', (xo, ty + 16, (z0 + z1) / 2 + k * 62), (72, 60, 26), TEXBLACK, root, bevel=4)
+        box(f'pad{s}', (xo, ty + 40, (z0 + z1) / 2), (96, 12, 124), ALU_CHEQ, root, bevel=2)
+    return root
+
+
+def side_skirt_urnieta_1970():
+    """1970 Side Skirt Kit (UN-JIMNY-FB-030), drawn 1433 x 176: a one-piece
+    moulding along the sill with a long raised rib, three bolt heads along
+    its top edge and a kicked-up tail at each end. 4.6 kg the pair."""
+    root = group('sideStep_urnieta_1970')
+    z0, z1, ty = -600, 833, 338
+    for s in (-1, 1):
+        body = box(f'skirt{s}', (s * 762, ty, (z0 + z1) / 2), (46, 176, z1 - z0), TEXBLACK, root, bevel=12)
+        body.modifiers['bevel'].segments = 3
+        box(f'rib{s}', (s * 786, ty - 18, (z0 + z1) / 2), (16, 34, z1 - z0 - 180), TEXBLACK, root, bevel=8)
+        box(f'ribLip{s}', (s * 790, ty - 18, (z0 + z1) / 2), (8, 12, z1 - z0 - 220), BLACK, root, bevel=4)
+        for k, zz in enumerate((z0 + 250, (z0 + z1) / 2, z1 - 250)):
+            lib.cylinder(f'bolt{s}{k}', (s * 784, ty + 62, zz), (1, 0, 0), 22, 10, TEXBLACK, root, n=8)
+        for k, zz in enumerate((z0 + 40, z1 - 40)):          # the ends kick up to meet the arches
+            box(f'tail{s}{k}', (s * 756, ty + 46, zz), (44, 130, 96), TEXBLACK, root, bevel=14)
+        box(f'tab{s}', (s * 736, ty + 70, z1 - 150), (30, 46, 120), TEXBLACK, root, bevel=3)
+    return root
+
+
 def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', steps=False, mat=None):
     """kind: 'tube' or 'plate'; lamps: 'wings' (plate housings keeping the
     stock lamps), 'round' (four small round lamps in the bar), 'housing'
@@ -2191,6 +2239,8 @@ def build():
     grille_generic('klc_nanaketsu', v_slots=7, bezel='square')
     grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round')
     grille_urnieta_salado()
+    side_bar_urnieta_salado()
+    side_skirt_urnieta_1970()
     grille_urnieta_1970()
     bumper_urnieta_salado()
     rear_urnieta_salado()

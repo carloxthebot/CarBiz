@@ -413,6 +413,11 @@ export const AWNINGS = [
 ];
 
 export const SIDE_STEPS = [
+  // ---- URNIETA 全車套件專用（urnieta.com，工程圖有標註尺寸）
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-side-bar-kit-for-jimny-jb74-jc74/', label: 'URNIETA SALADO 管狀側桿（0702025）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_salado', uncertain: true,
+    note: '工程圖 UN-JIMNY-FB-009：三門 1270×460（五門 1687×460）。外側圓管兩端內收，內側鎖一片開槽踏板，每側兩支支架進大樑＋前方一支斜撐，中央一組夾具踏墊。27kg／組。官網不標價' },
+  { id: 'urnieta_1970', url: 'https://urnieta.com/product/1970-side-skirt-kit-for-jimny-jb74-jc74/', label: 'URNIETA 1970 側裙（0703004）', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_1970', uncertain: true,
+    note: '工程圖 UN-JIMNY-FB-030：1433×176。一體成型側裙，沿長度一道凸起飾條、上緣三顆螺栓、兩端向上收尾接輪拱。4.6kg／組。官網不標價' },
   { id: 'none', label: '無', price: 0 },
   // ---- 台灣
   { id: 'wlm', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1905', photo: true, label: 'WLM 4x4 側踏保桿 WLM001', price: 13800, cur: 'TWD', brand: 'WLM 4x4',
@@ -560,10 +565,10 @@ export const KITS = [
     set: { grille: 'damd_little_g_trad', frontBumper: 'damd_little_g_trad', rearBumper: 'damd_little_g_trad_rear' },
     note: 'JB74 車身件套件未塗裝 ¥547,800，烤漆另加 ¥145,200。含引擎蓋罩與蓋上方向燈（尚未建模）' },
   { id: 'urnieta_salado', url: 'https://urnieta.com/', label: 'URNIETA SALADO（遠征越野）', price: null, cur: 'TWD', brand: 'URNIETA', uncertain: true,
-    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear' },
+    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear', sideStep: 'urnieta_salado' },
     note: '中國東莞斯塔克工業（歐尼塔）；官網不標價，僅後保桿在台灣蝦皮有 NT$27,000。整套另有鋁引擎蓋、管狀側桿、行李架、後梯、四出排氣、涉水管（部分尚未建模）。只支援 JB74／JC74' },
   { id: 'urnieta_1970', url: 'https://urnieta.com/', label: 'URNIETA 1970（70 年代日本車風）', price: 49400, cur: 'TWD', brand: 'URNIETA',
-    set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear' },
+    set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear', sideStep: 'urnieta_1970' },
     note: '中國東莞斯塔克工業（歐尼塔）品牌，2026/6 上線；官網不標價，此為台灣三件合計。半高式前後保桿＋衝壓金屬網水箱罩，後保桿用圓形尾燈（官方寫致敬 Nissan GT-R）。同系列另有引擎蓋、側裙、備胎蓋、鷗翼窗（尚未建模）。只支援 JB74／JC74' },
   { id: 'roots', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD JIMNY the ROOTS.（初代 LJ10 風）', price: 213400, cur: 'JPY', brand: 'DAMD',
     set: { grille: 'damd_roots', frontBumper: 'damd_roots', rearBumper: 'damd_roots_rear' },
