@@ -60,8 +60,8 @@
       "note": "one guard per quarter window, inside the body width"
     },
     "spare": {
-      "w": [480, 780],
-      "note": "sits on the tailgate carrier, no wider than the spare wheel"
+      "w": [380, 780],
+      "note": "sits on the tailgate carrier, no wider than the spare wheel; the URNIETA covers only cap the wheel face, about 0.62 of the tyre"
     },
     "sideSkirt": {
       "w": [1400, 1520],

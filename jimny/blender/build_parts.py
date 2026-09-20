@@ -1894,30 +1894,27 @@ def rear_urnieta_1970():
 
 def side_bar_urnieta_salado():
     """SALADO Side Bar Kit (UN-JIMNY-FB-009), drawn 1270 x 460 for the three
-    door: an outer round tube running the length of the sill and turning in
-    at both ends, a slotted tread plate bolted inboard of it, two bracket
-    arms per side reaching to the chassis and a diagonal stay at the front,
-    with a clamped step pad at the middle. 27 kg the pair."""
+    door. From the fitted photos it is a big single tube along the sill whose
+    ends sweep up toward the body, with a long grippy step strip bonded along
+    its top (URNIETA printed on it, a Salado badge near the rear) and tubular
+    arms back to the chassis -- not a chequer-plate step."""
     root = group('sideStep_urnieta_salado')
-    z0, z1, ty = -565, 705, 336
+    z0, z1, ty = -555, 690, 330
     for s in (-1, 1):
-        xo, xi = s * 800, s * 690
-        tube(f'bar{s}', [(s * 620, ty, z0 - 60), (xo, ty, z0 + 40), (xo, ty, z1 - 40), (s * 620, ty, z1 + 60)],
-             60, TEXBLACK, root, bend=120)
-        plate = box(f'tread{s}', (s * 742, ty + 26, (z0 + z1) / 2), (118, 10, z1 - z0 - 140), ALU_CHEQ, root, bevel=2)
-        for k in range(8):                                   # drain slots punched in the tread
-            zz = z0 + 120 + k * (z1 - z0 - 240) / 7
-            box(f'slot{s}{k}', (s * 742, ty + 30, zz), (72, 6, 26), RUBBER, root, bevel=2)
-        for k, zz in enumerate((z0 + 170, z1 - 170)):        # bracket arms into the chassis
-            box(f'arm{s}{k}', (s * 560, ty - 6, zz), (300, 70, 62), TEXBLACK, root, bevel=4)
-            box(f'armPlate{s}{k}', (s * 420, ty - 6, zz), (14, 130, 90), TEXBLACK, root, bevel=3)
-            for (dy, dz) in ((-34, -24), (-34, 24), (34, -24), (34, 24)):
-                lib.cylinder(f'armBolt{s}{k}{dy}{dz}', (s * 412, ty - 6 + dy, zz + dz), (1, 0, 0), 13, 8, STEEL, root, n=6)
-        box(f'stay{s}', (s * 600, ty - 74, z0 + 250), (18, 150, 190), TEXBLACK, root, bevel=3,
-            rot=Matrix.Rotation(math.radians(s * 22), 3, 'Z'))
-        for k in (-1, 1):                                    # the centre step clamp
-            box(f'clamp{s}{k}', (xo, ty + 16, (z0 + z1) / 2 + k * 62), (72, 60, 26), TEXBLACK, root, bevel=4)
-        box(f'pad{s}', (xo, ty + 40, (z0 + z1) / 2), (96, 12, 124), ALU_CHEQ, root, bevel=2)
+        xo = s * 796
+        tube(f'bar{s}', [(s * 700, ty + 84, z0 - 58), (xo, ty, z0 + 50), (xo, ty, z1 - 50), (s * 700, ty + 84, z1 + 58)],
+             94, TEXBLACK, root, bend=140)
+        # the step strip sits on top of the tube, slightly inboard
+        box(f'strip{s}', (xo - s * 4, ty + 50, (z0 + z1) / 2), (76, 14, z1 - z0 - 210), RUBBER, root, bevel=5)
+        for k in range(22):                                  # grip ribs moulded into it
+            zz = z0 + 130 + k * (z1 - z0 - 260) / 21
+            box(f'grip{s}{k}', (xo - s * 4, ty + 56, zz), (68, 6, 16), RUBBER, root, bevel=2)
+        box(f'label{s}', (xo - s * 4, ty + 58, (z0 + z1) / 2 - 190), (60, 6, 130), UNT_TEXT, root, bevel=1)
+        box(f'badge{s}', (xo, ty - 16, z1 - 130), (10, 40, 150), UNT_TEXT, root, bevel=2)
+        for k, zz in enumerate((z0 + 200, z1 - 200)):        # tubular arms into the chassis
+            tube(f'arm{s}{k}', [(xo, ty - 10, zz), (s * 540, ty - 40, zz), (s * 430, ty - 46, zz)], 52, TEXBLACK, root, bend=90)
+            box(f'armPlate{s}{k}', (s * 418, ty - 46, zz), (14, 120, 84), TEXBLACK, root, bevel=3)
+        tube(f'stay{s}', [(xo, ty - 6, z0 + 320), (s * 520, ty - 56, z0 + 150)], 44, TEXBLACK, root, bend=70)
     return root
 
 
@@ -1954,85 +1951,84 @@ def bonnet_y(z):
     return BONNET_Y[-1][1]
 
 
-def _urnieta_hood(pid, scoop_z, scoop_w, fins, corner_vent):
-    """Both URNIETA bonnets are drawn 1408 x 882 (UN-JIMNY-FB-003 and -025).
-    The kit swaps the whole panel for aluminium; on the car what reads is the
-    vent, so the vent is what is modelled, sitting on the bonnet's own
-    measured surface rather than on a slab laid over it."""
+def _urnieta_hood(pid, vent_z, vent_w, slots, corner_vent):
+    """Both URNIETA bonnets are drawn 1408 x 882 (UN-JIMNY-FB-003, -025). On
+    the car the panel reads as stock apart from the intake, which is a WIDE
+    and nearly FLUSH louvre set into the bonnet -- about 43% of the bonnet's
+    width on the SALADO, smaller and further forward on the 1970 -- so that
+    is what is modelled, on the bonnet's own measured surface."""
     root = group(f'hood_{pid}')
-    sy = bonnet_y(scoop_z)
-    scoop = box('scoop', (0, sy + 30, scoop_z), (scoop_w, 76, 250), PAINT, root, bevel=30)
-    scoop.modifiers['bevel'].segments = 5
-    box('mouth', (0, sy + 44, scoop_z - 118), (scoop_w - 70, 52, 22), BLACK, root, bevel=8)
-    for k in range(fins):
-        box(f'fin{k}', (0, sy + 26 + k * 15, scoop_z - 108), (scoop_w - 96, 7, 46), TEXBLACK, root, bevel=2)
-    box('rib', (0, sy + 52, scoop_z - 30), (14, 44, 190), PAINT, root, bevel=5)
-    text('unt', 'URNIETA', (scoop_w / 2 - 104, sy + 62, scoop_z + 60), 22, 3, UNT_TEXT, root,
-         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    vy = bonnet_y(vent_z)
+    box('surround', (0, vy + 12, vent_z), (vent_w, 26, 150), PAINT, root, bevel=12)
+    box('well', (0, vy + 19, vent_z), (vent_w - 44, 14, 118), BLACK, root, bevel=6)
+    for k in range(slots):                                   # long openings, split by a centre rib
+        dx = (k - (slots - 1) / 2) * (vent_w - 70) / max(1, slots)
+        box(f'slot{k}', (dx, vy + 24, vent_z), ((vent_w - 110) / slots, 10, 96), BLACK, root, bevel=4)
+        for j in range(4):                                   # cross fins inside each opening
+            box(f'fin{k}{j}', (dx, vy + 27, vent_z - 36 + j * 24), ((vent_w - 118) / slots, 5, 8), TEXBLACK, root, bevel=1)
+    box('rib', (0, vy + 25, vent_z), (16, 12, 126), PAINT, root, bevel=4)
+    box('lip', (0, vy + 18, vent_z - 74), (vent_w - 20, 22, 18), PAINT, root, bevel=8)
     if corner_vent:
         cz, cx = 1452, RIGHT * 468
-        box('cvent', (cx, bonnet_y(cz) + 6, cz), (206, 22, 108), TEXBLACK, root, bevel=8)
+        box('cvent', (cx, bonnet_y(cz) + 6, cz), (206, 20, 104), TEXBLACK, root, bevel=8)
         for k in range(5):
-            box(f'cfin{k}', (cx, bonnet_y(cz) + 14, cz - 40 + k * 20), (168, 7, 8), BLACK, root, bevel=1)
+            box(f'cfin{k}', (cx, bonnet_y(cz) + 13, cz - 38 + k * 19), (168, 6, 8), BLACK, root, bevel=1)
     return root
 
 
 def hood_urnieta_salado():
-    return _urnieta_hood('urnieta_salado', 1040, 520, 3, False)
+    return _urnieta_hood('urnieta_salado', 986, 610, 2, False)
 
 
 def hood_urnieta_1970():
-    return _urnieta_hood('urnieta_1970', 1210, 430, 4, True)
+    return _urnieta_hood('urnieta_1970', 1180, 430, 3, True)
 
 
-def _urnieta_spare_shell(root):
-    """Same dished shell as the stock hard cover, so it sits on the spare
-    exactly the way that one does."""
+def _urnieta_spare_dish(root, mat=None):
+    """URNIETA's covers sit on the WHEEL FACE inside the tyre -- about 0.62
+    of the tyre's diameter in the fitted photos -- not over the whole wheel
+    the way the stock hard cover does."""
     cx, cy = SPARE['x'], SPARE['y']
-    R, D = 360, 230
-    zb = SPARE_FACE_Z + 190
-    prof = [(0.0, zb), (R - 10, zb), (R, zb - 20), (R + 6, zb - D + 50), (R - 20, zb - D + 8),
-            (R - 60, zb - D), (0, zb - D - 6)]
-    bm = bmesh.new()
-    seg = 64
-    rings = [[bm.verts.new(P(cx + r * math.cos(2 * math.pi * i / seg), cy + r * math.sin(2 * math.pi * i / seg), z))
-              for i in range(seg)] for (r, z) in prof]
-    for u, v in zip(rings, rings[1:]):
-        for i in range(seg):
-            bm.faces.new((u[i], u[(i + 1) % seg], v[(i + 1) % seg], v[i]))
-    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
-    lib.new_object('shell', bm, TEXBLACK, root)
-    return cx, cy, R, zb - D - 12
+    R = 0.31 * SPARE['dia']
+    zf = SPARE_FACE_Z + 36
+    mat = mat or TEXBLACK
+    # built from discs along the car's Z: lathe() revolves about X (it is the
+    # rim builder's helper) and would lay the cover on its side
+    lib.cylinder('back', (cx, cy, zf + 40), (0, 0, 1), 2 * (R - 20), 80, mat, root, n=64)
+    lib.cylinder('rim', (cx, cy, zf + 2), (0, 0, 1), 2 * (R + 6), 22, mat, root, n=64)
+    lib.cylinder('face', (cx, cy, zf - 10), (0, 0, 1), 2 * (R - 18), 16, mat, root, n=64)
+    return cx, cy, R, zf
 
 
 def spare_urnieta_salado():
-    """SALADO Extended Spare Tire Cover (0702003), 3.4 kg: the outer face
-    folds down into a work table, held by two catches with a stay each side."""
+    """SALADO Extended Spare Tire Cover (0702003), 3.4 kg: a round hard cover
+    whose lower half folds down into a work table, with a latch knob at the
+    top and the seam running across below the lettering."""
     root = group('spareCover_urnieta_salado')
-    cx, cy, R, zf = _urnieta_spare_shell(root)
-    box('table', (cx, cy - 10, zf - 10), (2 * R - 150, 2 * R - 210, 22), TEXBLACK, root, bevel=24)
-    box('tableLip', (cx, cy - R + 130, zf - 20), (2 * R - 190, 24, 30), TEXBLACK, root, bevel=6)
+    cx, cy, R, zf = _urnieta_spare_dish(root)
+    box('seam', (cx, cy - 40, zf - 20), (2 * R - 60, 8, 6), BLACK, root, bevel=2)
+    lib.cylinder('knob', (cx, cy + R - 44, zf - 22), (0, 0, 1), 44, 16, TEXBLACK, root, n=20)
+    lib.cylinder('knobFace', (cx, cy + R - 44, zf - 30), (0, 0, 1), 30, 5, STEEL, root, n=20)
     for s in (-1, 1):
-        box(f'catch{s}', (cx + s * (R - 150), cy - R + 150, zf - 22), (54, 40, 26), STEEL, root, bevel=5)
-        box(f'stay{s}', (cx + s * (R - 90), cy - 30, zf + 6), (12, 200, 34), TEXBLACK, root, bevel=3)
-    t = text('unt', 'URNIETA', (cx, cy + 120, zf - 24), 44, 5, UNT_TEXT, root,
+        box(f'hinge{s}', (cx + s * (R - 70), cy - 44, zf - 20), (40, 22, 8), STEEL, root, bevel=2)
+    t = text('unt', 'URNIETA', (cx, cy - 14, zf - 22), 46, 5, UNT_TEXT, root,
              font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     t.rotation_euler[2] = math.pi                            # it faces the rear
     return root
 
 
 def spare_urnieta_1970():
-    """1970 Spare Tire Cover (0703002), 3.4 kg: the same shell carrying a
-    MOLLE field that also takes the matching pouch."""
+    """1970 Spare Tire Cover (0703002), 3.4 kg: the same round cover carrying
+    a MOLLE field that also takes the matching pouch."""
     root = group('spareCover_urnieta_1970')
-    cx, cy, R, zf = _urnieta_spare_shell(root)
-    box('panel', (cx, cy - 10, zf - 6), (2 * R - 260, 2 * R - 300, 16), TEXBLACK, root, bevel=18)
-    for r in range(4):
-        yy = cy + 70 - r * 54
-        box(f'row{r}', (cx, yy, zf - 16), (2 * R - 320, 22, 8), WEBBING, root, bevel=2)
-        for c in range(5):
-            box(f'loop{r}{c}', (cx - 112 + c * 56, yy, zf - 20), (9, 22, 6), WEBBING, root, bevel=1)
-    t = text('unt', 'URNIETA', (cx, cy + 148, zf - 18), 36, 5, UNT_TEXT, root,
+    cx, cy, R, zf = _urnieta_spare_dish(root)
+    box('panel', (cx, cy - 6, zf - 22), (2 * R - 110, 2 * R - 150, 10), TEXBLACK, root, bevel=14)
+    for r in range(3):
+        yy = cy + 46 - r * 50
+        box(f'row{r}', (cx, yy, zf - 28), (2 * R - 170, 20, 7), WEBBING, root, bevel=2)
+        for c in range(4):
+            box(f'loop{r}{c}', (cx - 84 + c * 56, yy, zf - 32), (9, 20, 5), WEBBING, root, bevel=1)
+    t = text('unt', 'URNIETA', (cx, cy + R - 56, zf - 24), 34, 5, UNT_TEXT, root,
              font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     t.rotation_euler[2] = math.pi
     return root
