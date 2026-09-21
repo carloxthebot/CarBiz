@@ -32,3 +32,32 @@ them. Source artifact: <https://claude.ai/artifact/VARATv6R47Xn2ucasL2XSe>
 Prices are maker list unless the entry says otherwise; Japanese street runs
 60–70% of list for cast wheels, and Taiwanese sellers add roughly 40–70% on
 top of Japanese list.
+
+## `jb74-accessory-atlas.json`
+
+241 products across twelve categories — suspension, ladders, spare carriers,
+winches, winch mounts, roof tents, roof racks, lighting, exhausts, snorkels,
+mud flaps, mirrors — each with part number, price (per currency, with a
+`verified` flag), dimensions, weight, finish, where it mounts, and a
+`modelling` paragraph saying what changes on the car's silhouette.
+
+Same shape as the wheel atlas: `rules` for the cross-cutting facts, and
+`corrections` for names that turn out not to exist. The ones that matter
+most:
+
+- JB74 is ladder-frame with live axles and **separate springs and dampers**,
+  so no coilover exists for it. The **rear damper is the only one visible**
+  from outside (outboard, raked 15–20°); the front hides behind the wheel.
+- Roof load is **30 kg dynamic**, which every hard-shell roof tent exceeds,
+  and any roof tent puts the car **over 2.0 m** — out of mechanical parking.
+- Winches split into a **~380 mm Japanese-bumper class** and a **534–616 mm
+  Australian class** with different mount patterns; control-box placement
+  gives three distinct silhouettes.
+- The airbox is on the right, so **every snorkel runs the right A-pillar**.
+- There is **no Japanese swing-out spare carrier** — the tailgate swings, so
+  Japan solves it with relocation brackets instead.
+
+`priceConflicts` keeps the ten cases where two sources disagree rather than
+silently picking one, and `gaps` lists what no maker publishes (Tough Dog
+body colours, IPF light-bar dimensions, most swing-out plate thicknesses) so
+nobody fills them in by guessing.
