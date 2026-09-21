@@ -1138,7 +1138,8 @@ def snorkel_precleaner(side=RIGHT):
     box('wingSeal', (side * 705, wing_y + 6, 660), (140, 10, 140), RUBBER, root, bevel=4)
     hx, hz = side * (612 + off), 405
     lib.cylinder('stem', (hx, 1625, hz), (0, 1, 0), 89, 50, TEXBLACK, root)
-    lib.cylinder('bowl', (hx, 1690, hz), (0, 1, 0), 180, 80, material('ClearBowl', 0x9aa3a9, rough=0.28, metal=0.0)   # smoked polycarbonate, not white, root, n=32)
+    # smoked polycarbonate, not the white it used to be
+    lib.cylinder('bowl', (hx, 1690, hz), (0, 1, 0), 180, 80, material('ClearBowl', 0x9aa3a9, rough=0.28, metal=0.0), root, n=32)
     lib.cylinder('bowlBase', (hx, 1652, hz), (0, 1, 0), 150, 12, TEXBLACK, root, n=32)
     lib.cylinder('bowlTop', (hx, 1734, hz), (0, 1, 0), 184, 10, TEXBLACK, root, n=32)
     lib.cylinder('lid', (hx, 1760, hz), (0, 1, 0), 150, 42, TEXBLACK, root, n=32)
