@@ -241,7 +241,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .views button{padding:7px 9px;font-size:10.5px}
   .credit{max-width:42%;bottom:calc(var(--sheet) + 8px);font-size:9px}
   .hud{max-width:52%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.6}
-  .panel{grid-area:1/1;align-self:end;z-index:3;height:86dvh;border-left:0;
+  .panel{grid-area:1/1;align-self:end;z-index:3;height:92dvh;border-left:0;
     border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
     background:#0c1214f2;backdrop-filter:blur(14px);
     box-shadow:0 -18px 40px #00000066;
@@ -254,6 +254,20 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .grab span{display:block;width:38px;height:4px;border-radius:99px;background:var(--line2);margin:0 auto}
   .head{padding-top:6px}
   .head h1{display:none}
+  /* Once the sheet is open the numbers have done their job; they shrink to a
+     strip so the list you are actually choosing from gets the height. The
+     peek keeps the big readout, because that is all the peek is for. */
+  body.sheet .head{padding:2px 16px 8px}
+  body.sheet .hero{margin-top:8px;padding:7px 11px}
+  body.sheet .hero .h-l span{font-size:8px}
+  body.sheet .hero .h-l b{font-size:21px;margin-top:2px}
+  body.sheet .hero .h-r i{font-size:10px}
+  body.sheet .hero .h-r em{font-size:9.5px}
+  body.sheet .gauge{margin-top:6px}
+  body.sheet .gauge div{padding:5px 9px}
+  body.sheet .gauge span{font-size:8px}
+  body.sheet .gauge b{font-size:14px;margin-top:2px}
+  body.sheet .steps button{padding:8px 6px 7px}
   /* three stacked full-width buttons ate a third of the sheet on a phone;
      one compact row leaves that space to the parts */
   .acts{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;
@@ -417,14 +431,14 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609212323';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609212323';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609212323';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609212323';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609212323';
+import { rigJimny, applyConfig } from './rig.js?v=202609212328';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609212328';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609212328';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609212328';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609212328';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609212323';
+const BUILD = '202609212328';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
