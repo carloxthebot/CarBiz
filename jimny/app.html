@@ -24,7 +24,7 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
-  -webkit-font-smoothing:antialiased;overflow:hidden}
+  -webkit-font-smoothing:antialiased;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .app{display:grid;grid-template-columns:1fr 372px;height:100%}
 
 /* ── stage ────────────────────────────────────────────────────────────── */
@@ -228,6 +228,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .grab{display:none}
 @media(max-width:860px){
   :root{--sheet:198px}
+  /* Safari's toolbar overlays a 100% viewport, which cut the step row off the
+     bottom of the sheet's peek; dvh tracks the bar as it hides and shows */
+  html,body{height:100dvh}
   .app{grid-template-columns:1fr;grid-template-rows:100%}
   .stage{grid-area:1/1;align-items:start}
   /* the sheet covers the bottom of the screen, so the car is framed in what
@@ -238,7 +241,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .views button{padding:7px 9px;font-size:10.5px}
   .credit{max-width:42%;bottom:calc(var(--sheet) + 8px);font-size:9px}
   .hud{max-width:52%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.6}
-  .panel{grid-area:1/1;align-self:end;z-index:3;height:86vh;border-left:0;
+  .panel{grid-area:1/1;align-self:end;z-index:3;height:86dvh;border-left:0;
     border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
     background:#0c1214f2;backdrop-filter:blur(14px);
     box-shadow:0 -18px 40px #00000066;
@@ -246,7 +249,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
        the browser decides a vh is worth this frame */
     transform:translateY(calc(100% - var(--sheet)));transition:transform .3s cubic-bezier(.32,.72,0,1)}
   body.sheet .panel{transform:translateY(0)}
-  .grab{display:block;flex:none;width:100%;border:0;background:none;padding:9px 0 3px;cursor:pointer}
+  .grab{display:block;flex:none;width:100%;border:0;background:none;padding:10px 0 4px;cursor:grab;touch-action:none}
+  .head{touch-action:pan-x}
   .grab span{display:block;width:38px;height:4px;border-radius:99px;background:var(--line2);margin:0 auto}
   .head{padding-top:6px}
   .head h1{display:none}
@@ -405,14 +409,14 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609211719';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609211719';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609211719';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609211719';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609211719';
+import { rigJimny, applyConfig } from './rig.js?v=202609211736';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609211736';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609211736';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609211736';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609211736';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609211719';
+const BUILD = '202609211736';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -686,7 +690,62 @@ function goStep(i) {
 }
 $('steps').onclick = e => { const b = e.target.closest('[data-s]'); if (!b) return;
   goStep(+b.dataset.s); document.body.classList.add('sheet'); };
-$('grab').onclick = () => document.body.classList.toggle('sheet');
+
+/* ═══ phone: the panel is a sheet you drag ═══════════════════════════════
+   Tapping the handle works, but a sheet that only responds to a 38-pixel
+   target is a sheet people fight with. Dragging anywhere on the handle, the
+   header or the step row moves it, and it snaps to whichever end is nearer.
+   The peek height is measured rather than guessed, so the step row always
+   clears the browser's own bottom bar. */
+const sheetEl = document.querySelector('.panel');
+const phone = () => matchMedia('(max-width: 860px)').matches;
+function setPeek() {
+  if (!phone()) { document.documentElement.style.removeProperty('--sheet'); return; }
+  const h = $('grab').offsetHeight + document.querySelector('.head').offsetHeight + $('steps').offsetHeight;
+  const safe = parseFloat(getComputedStyle(document.body).paddingBottom) || 0;
+  document.documentElement.style.setProperty('--sheet', Math.round(h + 14 + safe) + 'px');
+}
+addEventListener('resize', setPeek);
+{
+  let y0 = null, moved = 0, height = 0, peek = 0, wasOpen = false, from = null;
+  const peekPx = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet')) || 200;
+  const stop = () => { y0 = null; sheetEl.style.transition = ''; sheetEl.style.transform = ''; };
+  const down = (e) => {
+    if (!phone() || e.button > 0) return;
+    // inside the scrolling list, only take over when it is already at the top
+    if (e.currentTarget === $('body') && $('body').scrollTop > 0) return;
+    y0 = e.clientY; moved = 0; from = e.currentTarget;
+    height = sheetEl.getBoundingClientRect().height; peek = peekPx();
+    wasOpen = document.body.classList.contains('sheet');
+    sheetEl.style.transition = 'none';
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+  const move = (e) => {
+    if (y0 === null) return;
+    moved = e.clientY - y0;
+    // an open sheet scrolled to the top still has to let the list scroll up
+    if (wasOpen && moved < 0 && from === $('body')) { stop(); return; }
+    const base = wasOpen ? 0 : height - peek;
+    const dy = Math.max(0, Math.min(height - peek, base + moved));
+    if (Math.abs(moved) > 6 && e.cancelable) e.preventDefault();
+    sheetEl.style.transform = `translateY(${dy}px)`;
+  };
+  const up = () => {
+    if (y0 === null) return;
+    const d = moved, tap = from === $('grab');
+    stop();
+    if (Math.abs(d) > 40) document.body.classList.toggle('sheet', d < 0);
+    else if (tap && Math.abs(d) < 8) document.body.classList.toggle('sheet');
+  };
+  for (const el of [$('grab'), document.querySelector('.head'), $('body')]) {
+    el.addEventListener('pointerdown', down);
+    el.addEventListener('pointermove', move, { passive: false });
+    el.addEventListener('pointerup', up);
+    el.addEventListener('pointercancel', up);
+  }
+  // a tap on the handle alone still toggles, and the header's link still works
+  document.querySelector('.head a').addEventListener('pointerdown', (e) => e.stopPropagation());
+}
 
 /* ═══ 1 · lift: pick the height first, then the kit ══════════════════════ */
 const INC = { spring:'彈簧', shock:'避震', hose:'長油管', caster:'Caster 修正', panhard:'橫拉桿', body:'車身墊高' };
@@ -1058,7 +1117,7 @@ $('btnExport').onclick = () => {
   o.classList.add('on'); o.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 };
 
-resize(); applyCam();
+resize(); setPeek(); applyCam();
 (function loop() { if (composer) composer.render(); else renderer.render(scene, cam); requestAnimationFrame(loop); })();
 new ResizeObserver(resize).observe(cv.parentElement);
 </script>

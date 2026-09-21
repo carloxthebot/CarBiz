@@ -2155,13 +2155,17 @@ def rack_wood(size='half'):
     H, L = 160, 1350
     W = 600 if size == 'half' else 1000                      # TB-HR1 / TB-RR1
     xc = 350 if size == 'half' else 0                        # the half sits over to one side
-    z1 = ROOF_Z_FRONT - 20
+    # Fore-aft position measured 2026-09-22 off DAMD's own two fitted side
+    # views (docs/jb74-fitment.json): the wooden nose lands 218-325 mm behind
+    # the windscreen header and the tail 218-317 mm ahead of the rear roof
+    # edge -- essentially centred, over the front door, not up at the screen.
+    z1 = ROOF_Z_FRONT - 270
     z0 = z1 - L
     zc = (z0 + z1) / 2
     deck = RACK_TOP - 30
     top = deck + H
     # two TERZO cross bars with gutter feet
-    for zz in (zc - L / 4, zc + L / 4):
+    for zz in (zc - 395, zc + 395):                          # TERZO bars, 790 apart (measured)
         sweep(f'bar{zz}', [(-660, deck - 34, zz), (660, deck - 34, zz)], rounded_rect(70, 26, 6), BLACK, root)
         for s in (-1, 1):
             box(f'foot{s}{zz}', (s * (GUTTER_X + 10), ROOF_Y_EDGE + 16, zz), (60, 74, 52), BLACK, root, bevel=6)

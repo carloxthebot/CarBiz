@@ -1,6 +1,7 @@
 {
-  "compiled": "2026-09-21",
+  "compiled": "2026-09-22",
   "vehicle": "Suzuki Jimny Sierra JB74W, 2018-, 3-door",
+  "methodUpdate20260922": "Second pass, roof racks only. Question asked: where fore-and-aft does the DAMD trip basket actually sit on a JB74 roof. Method: find dead side-on photographs of real fitted cars, scale them on the published 2250 mm wheelbase, and read the roof edges, the rack ends and the TERZO feet off a pixel grid drawn over the image. Two such photographs exist and both were used; every three-quarter photo was discarded as unmeasurable, because the basket floor sits about 175 mm above the roof and the wide-angle lenses used displace the nose or tail by 100-200 mm. The pass overturned the previous one's roof-length assumption and therefore its placement conclusion, and confirmed its half-vs-full conclusion. WebSearch was again unavailable (600/600 used); research was curl plus r.jina.ai as a read proxy for Yahoo Japan. Shopee, Instagram, Facebook, mercari and croooober all remained unreachable.",
   "method": "Maker-published figures are marked verified:true and cite the page they came from. Where no maker publishes a number, it is derived from a real fitted photo and the reasoning chain is written out in full in `evidence`. No figure in this file was invented. WebSearch was unavailable (session budget exhausted); everything here came from curl/WebFetch against the makers' own sites plus Yahoo Japan, Ruten's JSON API and Rakuten Taiwan. Google, Bing, DuckDuckGo, Mojeek, Yahoo Taiwan and Shopee all block automated access.",
 
   "ladder": {
@@ -115,6 +116,18 @@
     "modelling": "Model the bottle as a plain cylinder with a black plastic handle/valve head: 85 mm diameter x 340 mm tall for the Japanese 1 kg default, or 110 x 276 (5型) / 130 x 460 (10型) for a Taiwanese car. For the seat-rail position lay it on its side, axis fore-aft, low in the passenger footwell — this is the only position with real JB74-specific hardware behind it. For a window guard, stand it vertically flat against a 591 x 365 mm panel. For a tube clamp, stand it vertically beside the tube with two visible band clamps and a red or gold quick-release knob."
   },
 
+  "roofPanel": {
+    "lengthMM": 1890,
+    "lengthRangeMM": [1878, 1906],
+    "lengthTolerance": "+/- 40",
+    "verified": false,
+    "definition": "Fore-aft, from the windscreen header (the front corner of the roof, where the rain gutter starts) to the rear roof edge above the tailgate. The rain gutter runs this whole length on each side.",
+    "widthMM": 1250,
+    "widthNote": "Between the rain gutters, ESTIMATED from APIO's fitted photo and from the 1000 mm full-size trip basket sitting inboard of both gutters. Not measured directly.",
+    "evidence": "THREE independent photogrammetric measurements, all scaled on the published 2250 mm wheelbase, all on dead side-on studio photographs: 1878 mm (DAMD little B. grey/red demo car, damd.co.jp .../images/2.jpg), 1889 mm (DAMD tan demo car, Rakuten sh-store damd-21188_4.jpg) and 1906 mm (stock-bodied DAMD side view, .../images/0L4A3204_1.jpg). The first two agree to 0.6%. In both of the first two the 1350 mm trip basket measures 1343-1347 mm on the same scale, which validates the scale independently of the wheelbase. CORROBORATION: Suzuki publish 室内長 (interior length) 1,795 mm for the JB64/JB74, which a 1300 mm roof could not contain; and the Jimny aftermarket sells 'full-roof' (全面タイプ) racks at 1400 mm (Showa Garage A-x L, W1250 x L1400), 1480 mm (SPIELER, 1260 x 1480) and 1540 mm (GB Roof Basket, 長さ154cm 幅126cm), plus an A-x variant at 1700 mm long — none of which would fit on a 1300 mm roof.",
+    "supersedes": "The figure of 'about 1300 mm' used everywhere in the previous pass of this file. That was wrong by roughly 45%, and every millimetre figure derived from it (foot positions, bar spacing, 'the rack is longer than the roof') was wrong with it."
+  },
+
   "roofRacks": [
     {
       "id": "damd_trip_basket_half",
@@ -126,13 +139,78 @@
       "feet": {
         "perSide": 2,
         "attachesTo": "factory rain gutter (drip moulding) — PIAA TERZO EF3TM rain-moulding feet, four of them, plus two square main bars; DAMD's base carrier kit is JB64/JB74-specific and weighs 5 kg",
-        "positionsFromWindscreenMM": [430, 1050]
+        "positionsFromWindscreenMM": [480, 1290],
+        "positionsFromWindscreenMM_range": {"front": [480, 700], "rear": [1290, 1480], "barSpacingMM": [775, 810]},
+        "positionsNote": "MEASURED ON TWO FITTED SIDE-VIEW PHOTOGRAPHS OF DAMD'S OWN DEMO CARS, not on PIAA's catalogue photo, and they do NOT agree with each other — which is itself the finding: the gutter imposes no fixed station. On the little B. grey/red car the feet sit about 480 mm and 1290 mm behind the windscreen header (bars 808 mm apart); on the tan car in the Rakuten sh-store listing they sit about 700 mm and 1480 mm behind it (bars 774 mm apart). The earlier figures in this file (430 / 1050, bars 620 mm apart) were wrong: they came from PIAA's own fitting photo scaled against a roof assumed to be 1300 mm long, and the roof is about 1890 mm (see roofPanel). ESTIMATED, +/- 60 mm."
       },
-      "placement": "THE HALF SIZE IS HALF THE WIDTH, NOT HALF THE LENGTH. It is 1350 mm fore-and-aft — exactly the same as the full size — and is narrowed from 1000 mm to 600 mm across the car. So the question of whether it sits forward, centred or set back does not arise: it runs essentially the whole roof, and because 1350 mm is slightly longer than the JB74 roof panel, its curved wooden nose sits level with or just proud of the windscreen header and its tail reaches the rear roof edge. The variable that IS free is lateral: the rack is offset to ONE SIDE of the roof, leaving a bare strip of base bar about 600-700 mm wide alongside it. That strip is the entire point of the half size — DAMD's own copy says 余ったスペースで、スキー板やサーフボードの積載が可能に (the space left over lets you carry skis or a surfboard), which only makes sense for a full-length strip beside the basket, never for a 600 mm gap behind it. DAMD's fitted photograph shows it offset to one side with both base bars protruding bare on the other. Fore-aft position has a little adjustment because bracket B clips onto the rack's floor pipes from below and can slide, but the rack is longer than the roof so the range is small.",
-      "materials": "Steel basket, black. The front plate and the two side plates are Accoya (アコヤ) — acetylated NEW ZEALAND radiata pine, a natural timber, honey/amber in colour with a satin finish and the 'trip basket' logo branded into it. The curved front plate is a full-width fairing that wraps down over the leading edge.",
+      "placement": {
+        "frontEdgeFromWindscreenHeaderMM": 270,
+        "frontEdgeRangeMM": [218, 325],
+        "rearEdgeFromWindscreenHeaderMM": 1620,
+        "gapToRearRoofEdgeMM": 270,
+        "gapToRearRoofEdgeRangeMM": [218, 317],
+        "roofLengthUsedMM": 1890,
+        "fractionOfRoof": {"noseAt": 0.14, "tailAt": 0.86},
+        "overhangsRearRoofEdge": false,
+        "overhangsWindscreen": false,
+        "woodNoseSitsOver": "the front door — roughly above the front-seat occupants' heads, about a third of the way back along the front door. NOT over the windscreen, NOT behind the front doors.",
+        "verified": false,
+        "desc": "CENTRED, NOT PUSHED FORWARD AND NOT PUSHED BACK. On DAMD's own fitted cars the 1350 mm rack leaves roughly 220-330 mm of bare roof ahead of its wooden nose and roughly 220-320 mm of bare roof behind its tail, on a roof panel about 1890 mm long. It never reaches the windscreen header and it never overhangs the rear roof edge or the tailgate. The two demo cars differ by about 110 mm (roughly one floor-pipe pitch) in where the rack sits, one biased slightly forward and one slightly back, which is the adjustment range in practice rather than a fixed station.",
+        "adjustability": "FORE-AFT POSITION IS ESSENTIALLY FREE. The JB74's rain gutter is a continuous channel running the whole length of the roof, so the TERZO EF3TM feet can clamp anywhere along it; the only limits are the gutter's straight run and TERZO's usable bar spacing (their basket fitment tables quote 400-800 mm between bars). On top of that the rack's own bracket B clips up onto the floor pipes from below and can be moved a pipe or two, DAMD only 'recommending' the 3rd-to-4th pipe from each end. Nothing about the gutter or the feet pins the rack to one station.",
+        "lateral": "The half size is offset to ONE SIDE of the roof, leaving a bare full-length strip of base bar about 600-700 mm wide alongside it with both TERZO feet on that side exposed. DAMD's fitted photographs (JIMNY_half-size.jpg on damd.co.jp and damd-21188.jpg on Rakuten, both the same tan/yellow car) show the basket on the left-hand side of the RHD car with the bars bare to the right. That strip is the point of the half size — DAMD's copy says 余ったスペースで、スキー板やサーフボードの積載が可能に (the space left over lets you carry skis or a surfboard), which only works for a full-length strip beside the basket."
+      },
+      "materials": "Steel basket, black. The front plate and the two side plates are Accoya (アコヤ) — acetylated NEW ZEALAND radiata pine, a natural timber, honey/amber in colour with a satin finish and the 'trip basket' logo branded into it. See the `wood` object for geometry.",
+      "wood": {
+        "pieceCount": 3,
+        "pieces": "ONE front plate (E-578 on the half size) plus TWO side plates (E-553, the same part as the full size). That is the complete list of timber in the kit — DAMD's own 構成部品表 has no other wood item.",
+        "frontPlate": {
+          "part": "E-578",
+          "continuous": true,
+          "slats": 0,
+          "slatNote": "A SINGLE continuous board, not slats and not several boards. The grain runs lengthwise and is unbroken across the whole panel in DAMD's close-up (damd-0078_2.jpg / TB-RR1_2.jpg at 1920x1280); the parts list draws it as one part with one part number.",
+          "lengthMM": 580,
+          "lengthRangeMM": [550, 600],
+          "lengthNote": "Spans the basket's 600 mm front edge, ending just inboard of the corner radii. The manual's ※均等にする step is only about centring it left-right.",
+          "heightMM": 120,
+          "heightRangeMM": [110, 125],
+          "thicknessMM": 15,
+          "thicknessNote": "WEAK — read off the exposed end grain in the side-plate close-up, no scale reference. Treat as 12-18 mm.",
+          "profile": "FLAT, NOT CURVED. Measured on the side-on photo: the wood's outer edge runs (660,285) → (655,295) → (651,305) → (649,311), which is a straight line to within 1 px over its whole height. The 'curved fairing' impression in three-quarter shots comes from two other things — the basket's own swept front corner tube behind the board, and the board's fully radiused ends (the end radius equals half the board height, so each end is a half-round).",
+          "rakeFromVerticalDeg": 19,
+          "rakeRangeDeg": [15, 23],
+          "rakeDirection": "TOP EDGE REARWARD, BOTTOM EDGE FORWARD — it leans back over the basket like a wind fairing. It is NOT a vertical slab.",
+          "rakeNote": "ADJUSTABLE, which is why the two cars differ. The board hangs from the basket's front rail on three (full size) or two (half size) clamps, and the manual's step 2 is [H]フロントプレートを起こして[H]ノブを本締めします — rotate the plate up to the angle you want, THEN tighten the knobs. Measured 22.5 deg on DAMD's little B. car and 15.1 deg on the tan car. Use 19 deg for a model.",
+          "topEdge": "FLUSH, tucked just UNDER the top rim tube — it does not stand proud. On the side-on photo the board's top end is about 5 px (19 mm) below the top of the rim tube, i.e. level with the tube's centre, and in every close-up the black rail passes in front of the board's top edge.",
+          "bottomEdge": "Reaches down to about the level of the basket floor pipes.",
+          "endShape": "Fully half-round: the end radius equals half the panel height, about 60 mm, so each end is a semicircle. All four edges are eased/chamfered with a visible band about 10-12% of the panel height wide.",
+          "surface": "Fine combed / wire-brushed texture over honey-amber Accoya, with broad soft lengthwise grain figure. Satin, not gloss.",
+          "fixings": "TWO M6x70 carriage bolts (A-165) through the board, each into a clamp (E-254) gripping the front rail, closed by a knurled knob (E-255) and an M6 nut (B-109) on the FRONT face. The two domed knob/bolt heads are visible on the wood at about 70% of the panel height down from the top edge, spaced at roughly 25% and 75% of the panel length. (The full size has three of each instead of two.)"
+        },
+        "sidePlates": {
+          "part": "E-553",
+          "count": 2,
+          "sizeMM": [185, 115],
+          "sizeRangeMM": {"length": [175, 195], "height": [110, 120]},
+          "shape": "Flat rectangular board with generously rounded corners and an eased edge all round — the same board thickness and the same finish as the front plate.",
+          "where": "ONE ON EACH SIDE WALL, on the OUTSIDE of the wall, at mid-length — DAMD: [A]ルーフラック本体の前から6番目と7番目のパイプの図示の位置を目安にして[B]サイドプレート上端を合わせます, i.e. straddling the 6th and 7th U-hoop counted from the front, with the plate's TOP edge level with the hoops' weld line so it tucks just under the top rail. On the measured cars that is about 600-700 mm behind the wooden nose.",
+          "fixings": "Two M5x25 pan screws (A-164) and flange nuts (B-029) through the plate into two 12 mm pipe clamps (E-549) that grip the two hoops. The two screw heads sit on the plate about 120 mm apart horizontally — which is one hoop pitch, and is how the hoop pitch was measured.",
+          "modelNote": "CONFIRMS the model's 'small wood block on each side rail', but CORRECT IT: it is a flat plate about 185 x 115 mm on the outside of the side WALL, not a small block, and not on the rail."
+        },
+        "badge": {
+          "type": "Engraved / branded into the wood, not an applied plate and not an oval — a stadium-shaped (rounded-bar) outline containing 'trip basket' in a stencil face, with a small slotted-screw glyph engraved at each end. The engraving is dark and the wood grain runs through it.",
+          "sizeMM": [115, 25],
+          "sizeRangeMM": {"length": [105, 125], "height": [20, 30]},
+          "onFrontPlate": "ONE badge, near the left-hand end as seen from in front of the car: it starts roughly 70-90 mm in from that end and its centre sits about 24% of the panel height down from the top edge. Not centred on the panel.",
+          "onSidePlates": "ONE badge on each, horizontally centred and sitting slightly above the plate's vertical centre.",
+          "count": 3
+        },
+        "elsewhere": "NO WOOD ANYWHERE ELSE. Nothing on the rear end, nothing on the floor, and no timber cap on the rim tube — the rim is bare black steel all the way round. DAMD's parts list is exhaustive and contains exactly one front plate and two side plates.",
+        "verified": false,
+        "evidence": "PIECE COUNT, PART NUMBERS AND FIXING COUNTS are read directly off DAMD's own 構成部品表 (roofrack-partslist_halfsize.pdf): F フロントプレート x1 E-578, B サイドプレート x2 E-553, C パイプクランプ(12mm) x4 E-549, D 平小ねじ(M5x25) x4, E フランジナット(M5) x4, G クランプ x2 E-254, H ノブ x2 E-255, I 大ナット(M6) x2, J 角根丸頭ボルト(M6x70) x2. The full-size list is identical except F is E-552 and G/H/I/J are x3. RAKE is measured on the two fitted side views used for placement, on brightness-boosted 16x crops: on damd.co.jp .../images/2.jpg the wood's outer edge runs from (661,283) at the top to (649,312) at the bottom, dx=12 dy=29, atan = 22.5 deg from vertical; on tshop.r10s.jp .../damd-21188_4.jpg from (478,66) to (471,92), dx=7 dy=26, atan = 15.1 deg. Both lean the same way, top rearward. HEIGHT from the same two crops: 31.4 px slant x 3.794 mm/px x 1.047 depth correction = 125 mm, and 27.9 px x 3.961 = 110 mm. Cross-checked against DAMD's own front elevation in the manual (図❷, the ※均等にする sub-drawing), where the plate measures 900 x 105 drawing-px inside a frame of 915 px that represents the full size's 1000 mm width: 105 px = 115 mm apparent, and dividing by cos(20 deg) for the rake gives 122 mm true. Also cross-checked against the full-size studio shot damd-0078_1.jpg, where the wood occupies 0.76 of the basket's 160 mm front depth = 122 mm. FLATNESS: the side-view profile is straight to within 1 px, the parts-list drawing shows a flat board, and the installation sequence (hang from three clamps, rotate up, tighten) only makes sense for a flat board whose angle is set by the clamps. SIDE PLATE SIZE from the same two side views: 49 x 29 px = 195 x 115 mm on the grey car, 45 x 30 px = 178 x 119 mm on the tan car. BADGE from a full-resolution crop of damd-0078_2.jpg: the outline measures 730 x 180 px where the panel is 803 px tall, i.e. 0.91 and 0.22 of the panel height = about 109 x 27 mm. WHAT COULD NOT BE ESTABLISHED: the board thickness, which has no scale reference in any photograph."
+      },
       "mount": "The rack does not touch the roof. Four TERZO EF3TM feet clamp the rain gutters, two square bars span the roof, and the rack clamps to those bars at four points: bracket A (E-256) over the bar, bracket C (E-258) under it, bracket B (E-257) clipped up onto the rack's floor pipes, drawn together by an M6x55 cap bolt and a knob star. DAMD recommend placing each bracket between the 3rd and 4th floor pipe from the end. The wooden side plates mount on the 6th and 7th pipe counted from the front.",
       "price": {"JPY": 61600, "JPY_exTax": 56000, "JPY_withCarrier": 81400, "JPY_withCarrier_exTax": 74000, "TWD": 19800, "verified": true},
-      "priceNote": "JPY are DAMD list, tax included where shown. The TWD 19,800 is the user's sighting of a Shopee listing under the seller name 藤井74 and is NOT verified — Shopee blocks automated access (API error 90309999) and its search pages render only via JavaScript. It is however consistent: ¥61,600 is about NT$13,100 at roughly 4.7 JPY/TWD, and NT$19,800 is a 51% markup, inside the 40-70% band Taiwanese sellers add to Japanese list. Do not confuse it with DAMD's ¥19,800 'trip basket ウッドパネル', which is a different product (see corrections).",
+      "priceNote": "JPY are DAMD list, tax included where shown. A Japanese retailer price for the bare half-size rack is now confirmed: Rakuten sh-store (エスエイチカンパニー) list TB-HR1 at ¥55,400 plus ¥6,600 shipping — https://item.rakuten.co.jp/sh-store/damd-21188/ — which is below DAMD's ¥61,600 list. The TWD 19,800 is the user's sighting of a Shopee listing under the seller name 藤井74 and is NOT verified — Shopee blocks automated access (API error 90309999) and its search pages render only via JavaScript. It is however consistent: ¥61,600 is about NT$13,100 at roughly 4.7 JPY/TWD, and NT$19,800 is a 51% markup, inside the 40-70% band Taiwanese sellers add to Japanese list. Do not confuse it with DAMD's ¥19,800 'trip basket ウッドパネル', which is a different product (see corrections).",
       "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
       "manuals": [
         "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/manual/roofrack_halfsize.pdf",
@@ -140,7 +218,7 @@
       ],
       "modelling": "A long, narrow, shallow steel wire basket lying along one side of the roof. 1350 long x 600 wide x 160 tall, floor about 175 mm above the gutter line so the top rail is roughly 335 mm above the roof — enough to take a standard JB74 from 1730 mm to about 2065 mm and out of a 2.0 m height-limited car park. Side walls are vertical U-hoops of round tube welded to a heavier perimeter rail; the floor is longitudinal pipes. The only non-black elements are three pieces of honey-coloured timber: the curved 600 mm front fairing (part E-578) and two small rectangular logo plates on the sides at the 6th/7th pipe. Under it sit two black square bars on four arched black gutter feet with a small 'terzo' logo on each.",
       "verified": true,
-      "evidence": "DIMENSIONS are DAMD's own published figures: フルサイズ : 1350mm×1000mm×160mm / 重量 : 16kg, ハーフサイズ： 1350mm × 600mm × 160mm / 重量：13.5kg. That 1350 is the FORE-AFT length and the 600/1000 the across-car width is established five independent ways. (1) The Australian distributor states it in words for the full size — '135cms long, 100cms wide, 16cms high'. (2) Both installation manuals give the SAME instruction for the wooden side plates — mount them level with the 6th and 7th pipe counted from the front — which is only possible if both versions have identical side rails, hence identical length. (3) The two parts lists differ in exactly the parts that would change if the WIDTH changed and in nothing else: the front plate is E-552 on the full size and E-578 on the half, and the full size needs THREE front-plate clamps, knobs, nuts and carriage bolts against the half's TWO, while the side plates are the same part E-553 on both and all four brackets A/B/C are common. (4) DAMD's marketing rationale — leftover space for skis and surfboards — requires a full-length strip beside the basket. (5) Photo check: in DAMD's studio shots the apparent width-to-depth ratio is 1.33 for the full size and 1.11 for the half; the true ratios under the length-constant reading are 0.74 and 0.44, implying foreshortening factors of 1.8 and 2.5 for the receding axis, which are physically possible, whereas the width-constant reading would require the receding axis to appear LONGER than life, which is impossible. FEET: DAMD state the base carrier kit is JB64/JB74-specific PIAA TERZO feet (4) plus main bars (2) totalling 5 kg; PIAA's foot table gives the rain-moulding foot EF3TM at 3.1 kg for four, leaving about 1.9 kg for two bars, so EF3TM is the foot — and PIAA's own product photograph for EF3TM is of a Jimny with the feet clamped on its rain gutters. FOOT POSITIONS are estimated from that photograph, which is a near side-on view of the roof showing both near-side feet: measuring along the gutter, the roof front corner is at 325 px, the front foot at 495 px, the rear foot at 700 px and the rear corner at 775 px, so the feet sit at 0.38 and 0.83 of the gutter span; correcting modestly for the rear of the roof being further from the camera gives about 0.34 and 0.81, and on a JB74 roof panel taken as about 1300 mm fore-aft that is roughly 430 mm and 1050 mm behind the windscreen header, the bars about 620 mm apart and the rear foot about 250 mm ahead of the rear roof edge. FLOOR HEIGHT is computed, not published: PIAA publish EF3TM's バー下寸法 (height to the underside of the bar) as 142 mm; the rack then sits on top of the bar plus bracket A, and neither the TERZO square bar's section height nor the bracket's thickness is published, so 175 mm carries roughly +/-20 mm."
+      "evidence": "PLACEMENT AND ROOF LENGTH (new, 2026-09-22) are measured off two fitted SIDE-VIEW photographs, which is the only view in which this question is answerable — every three-quarter photo of this rack is misleading because the basket floor sits about 175 mm above the roof and the wide-angle lenses used throw the nose forward or the tail back by 100-200 mm. PHOTO 1: https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/images/2.jpg (1442x961), DAMD's own little B. grey/red demo car, dead side-on. Scale from the wheelbase: front hub centre x=372, rear hub centre x=965, 593 px for 2250 mm = 3.794 mm/px; checked against overall length (front bumper x=218 to spare wheel x=1160, 942 px = 3574 mm vs published 3550, 0.7% out). Roof panel: windscreen header x=586 (read on a brightness-boosted crop; an amber little B. marker lamp sits on the corner), rear roof edge x=1081, so 495 px = 1878 mm. Rack: wooden nose x=647, rear rail x=985, 338 px. The rack's side rails sit about 500 mm inboard of the wheel plane, so rack points were rescaled about the image centre (x=721) by 1.047 before comparing — the factor that makes the rack measure its published 1350 mm; the implied camera distance of about 6 m is consistent with a studio side shot. Corrected: nose x=643.5, tail x=997.4, length 1343 mm. Front gap 218 mm, rear gap 317 mm. PHOTO 2: https://tshop.r10s.jp/sh-store/cabinet/product01/damd-21188_4.jpg (1001x590), the tan DAMD demo car, also dead side-on, from the Rakuten sh-store HALF SIZE listing. Wheelbase: hubs at x=197 and x=765, 568 px = 3.961 mm/px; the rack then measures 340 px = 1347 mm without any depth correction, so this is a longer lens. Roof: header x=388, rear edge x=865, 477 px = 1889 mm. Rack: nose x=470, tail x=810. Front gap 82 px = 325 mm, rear gap 55 px = 218 mm. The two independent roof measurements agree to 0.6% (1878 / 1889). A third measurement on a stock-bodied DAMD side view (https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/images/0L4A3204_1.jpg, hubs x=237/885 = 648 px, gutter x=451 to x=1000 = 549 px) gives 1906 mm. DIMENSIONS are DAMD's own published figures: フルサイズ : 1350mm×1000mm×160mm / 重量 : 16kg, ハーフサイズ： 1350mm × 600mm × 160mm / 重量：13.5kg. That 1350 is the FORE-AFT length and the 600/1000 the across-car width is now settled by the fitted photographs themselves — in both side views the rack measures 1343-1347 mm nose to tail against the 2250 mm wheelbase — and was already established five independent ways. (1) The Australian distributor states it in words for the full size — '135cms long, 100cms wide, 16cms high'. (2) Both installation manuals give the SAME instruction for the wooden side plates — mount them level with the 6th and 7th pipe counted from the front — which is only possible if both versions have identical side rails, hence identical length. (3) The two parts lists differ in exactly the parts that would change if the WIDTH changed and in nothing else: the front plate is E-552 on the full size and E-578 on the half, and the full size needs THREE front-plate clamps, knobs, nuts and carriage bolts against the half's TWO, while the side plates are the same part E-553 on both and all four brackets A/B/C are common. (4) DAMD's marketing rationale — leftover space for skis and surfboards — requires a full-length strip beside the basket. (5) Photo check: in DAMD's studio shots the apparent width-to-depth ratio is 1.33 for the full size and 1.11 for the half; the true ratios under the length-constant reading are 0.74 and 0.44, implying foreshortening factors of 1.8 and 2.5 for the receding axis, which are physically possible, whereas the width-constant reading would require the receding axis to appear LONGER than life, which is impossible. FEET: DAMD state the base carrier kit is JB64/JB74-specific PIAA TERZO feet (4) plus main bars (2) totalling 5 kg; PIAA's foot table gives the rain-moulding foot EF3TM at 3.1 kg for four, leaving about 1.9 kg for two bars, so EF3TM is the foot — and PIAA's own product photograph for EF3TM is of a Jimny with the feet clamped on its rain gutters. FOOT POSITIONS are now measured on the two fitted side views above instead of on PIAA's catalogue photo. On photo 1 the two feet clamp the gutter at x=712 and x=925, i.e. 478 mm and 1286 mm behind the header with the bars 808 mm apart; on photo 2 at x=565 and x=760.5, i.e. 701 mm and 1476 mm behind the header with the bars 774 mm apart. The bar spacing agrees between the two cars to within 5% but the absolute stations differ by more than 200 mm, which is the point: the gutter does not fix them. The superseded 430 / 1050 / 620 mm figures came from PIAA's photo read against a roof assumed to be about 1300 mm long. FLOOR HEIGHT is computed, not published: PIAA publish EF3TM's バー下寸法 (height to the underside of the bar) as 142 mm; the rack then sits on top of the bar plus bracket A, and neither the TERZO square bar's section height nor the bracket's thickness is published, so 175 mm carries roughly +/-20 mm."
     },
     {
       "id": "damd_trip_basket_full",
@@ -149,9 +227,71 @@
       "part": "TB-RR1 (rack alone) / TB-RRKJB (rack + base carrier kit)",
       "dims": {"lengthMM": 1350, "widthMM": 1000, "heightMM": 160, "floorAboveRoofMM": 175},
       "weightKG": 16.0,
-      "feet": {"perSide": 2, "attachesTo": "factory rain gutter (drip moulding), PIAA TERZO EF3TM", "positionsFromWindscreenMM": [430, 1050]},
-      "placement": "Runs 1350 mm fore-and-aft, slightly longer than the JB74 roof panel, so the wooden nose sits level with or just proud of the windscreen header and the tail reaches the rear roof edge. At 1000 mm wide it sits inboard of both rain gutters and is centred across the roof, covering most of the base bars. Same fore-aft footprint as the half size.",
-      "materials": "Same as the half size: black steel basket with an Accoya (acetylated New Zealand radiata pine) curved front fairing, part E-552, and two Accoya side logo plates, part E-553.",
+      "feet": {"perSide": 2, "attachesTo": "factory rain gutter (drip moulding), PIAA TERZO EF3TM", "positionsFromWindscreenMM": [480, 1290], "positionsFromWindscreenMM_range": {"front": [480, 700], "rear": [1290, 1480], "barSpacingMM": [775, 810]}, "positionsNote": "Same hardware and same range as the half size — see that entry's feet.positionsNote. No fitted side view of a FULL size car could be found, so these are carried over from the half."},
+      "placement": {
+        "frontEdgeFromWindscreenHeaderMM": 270,
+        "frontEdgeRangeMM": [218, 325],
+        "rearEdgeFromWindscreenHeaderMM": 1620,
+        "gapToRearRoofEdgeMM": 270,
+        "gapToRearRoofEdgeRangeMM": [218, 317],
+        "roofLengthUsedMM": 1890,
+        "fractionOfRoof": {"noseAt": 0.14, "tailAt": 0.86},
+        "overhangsRearRoofEdge": false,
+        "overhangsWindscreen": false,
+        "woodNoseSitsOver": "the front door — roughly above the front-seat occupants' heads. NOT over the windscreen, NOT behind the front doors.",
+        "verified": false,
+        "carriedOver": true,
+        "desc": "CARRIED OVER FROM THE HALF SIZE, and reliable because the two share the same 1350 mm side rails, the same brackets A/B/C and the same base carrier — the only difference is width. Centred on the roof with roughly 220-330 mm of bare roof ahead of the wooden nose and 220-320 mm behind the tail, on a roof panel about 1890 mm long. No fitted side-view photograph of a FULL size rack on a JB74 could be found anywhere reachable: every full-size image DAMD, Rakuten auto-craft and the news archive publish (TB-RR1_1, TB-RR1_2, TB-RR1_3, damd-0078_1/2/3) is a studio shot of the bare rack.",
+        "adjustability": "Same as the half size: the rain gutter runs the whole length of the roof and fixes nothing fore-aft; TERZO's basket fitment tables want 400-800 mm between bars, and the rack's bracket B can move a pipe or two on the floor pipes.",
+        "lateral": "At 1000 mm wide it sits inboard of both rain gutters and is centred across the roof, covering most of the base bars — only about 100-150 mm of bare bar shows each side, against the half size's single 600-700 mm strip."
+      },
+      "materials": "Same as the half size: black steel basket with an Accoya (acetylated New Zealand radiata pine) front plate, part E-552, and two Accoya side logo plates, part E-553. See the `wood` object.",
+      "wood": {
+        "pieceCount": 3,
+        "pieces": "ONE front plate (E-552) plus TWO side plates (E-553, identical to the half size's). Nothing else.",
+        "frontPlate": {
+          "part": "E-552",
+          "continuous": true,
+          "slats": 0,
+          "slatNote": "A SINGLE continuous board. Same construction as the half size's, just longer.",
+          "lengthMM": 980,
+          "lengthRangeMM": [950, 1000],
+          "lengthNote": "Spans essentially the whole 1000 mm front edge. Measured on DAMD's own front elevation in the manual (図❷ ※均等にする sub-drawing): the plate is 900 drawing-px inside a 915 px frame representing 1000 mm, so about 985 mm.",
+          "heightMM": 120,
+          "heightRangeMM": [110, 125],
+          "thicknessMM": 15,
+          "thicknessNote": "WEAK, 12-18 mm. No scale reference exists in any photo.",
+          "profile": "FLAT, NOT CURVED — see the half-size entry's evidence. The apparent curve in three-quarter shots is the basket's swept front corner tube behind the board plus the board's half-round ends.",
+          "rakeFromVerticalDeg": 19,
+          "rakeRangeDeg": [15, 23],
+          "rakeDirection": "TOP EDGE REARWARD, BOTTOM EDGE FORWARD, leaning back like a wind fairing. NOT a vertical slab.",
+          "rakeNote": "CARRIED OVER from the two half-size cars that could be measured side-on; no full-size car is photographed side-on anywhere reachable. The mechanism is identical — hang the board on the clamps, 起こす (rotate it up), tighten the knobs — so the angle is set at fitting and is adjustable on both sizes.",
+          "topEdge": "FLUSH, tucked just under the top rim tube; does not stand proud of it.",
+          "bottomEdge": "Down to about the level of the basket floor pipes.",
+          "endShape": "Fully half-round, end radius about 60 mm (half the panel height); all edges eased with a visible chamfer band.",
+          "surface": "Fine combed / wire-brushed honey-amber Accoya with lengthwise grain figure, satin.",
+          "fixings": "THREE M6x70 carriage bolts (A-165), three clamps (E-254), three knobs (E-255) and three M6 nuts (B-109) — one more of each than the half size, and the ONLY difference between the two kits' hardware. The three domed heads show on the wood at about 70% of the panel height down, at roughly 15%, 50% and 85% of the panel length."
+        },
+        "sidePlates": {
+          "part": "E-553",
+          "count": 2,
+          "sizeMM": [185, 115],
+          "shape": "Flat rectangular board, rounded corners, eased edges — identical part to the half size's.",
+          "where": "Outside face of each side wall, straddling the 6th and 7th U-hoop counted from the front (mid-length, about 600-700 mm behind the nose), top edge level with the hoops' weld line so it tucks under the top rail.",
+          "fixings": "Two M5x25 pan screws and flange nuts into two 12 mm pipe clamps gripping the hoops; screw heads about 120 mm apart, one hoop pitch.",
+          "modelNote": "CONFIRMS the model's 'small wood block on each side rail' but CORRECT IT: a flat ~185 x 115 mm plate on the outside of the side WALL, not a block, and not on the rail."
+        },
+        "badge": {
+          "type": "Engraved / branded into the wood — a stadium-shaped (rounded-bar) outline, NOT an oval, containing 'trip basket' in a stencil face with a small slotted-screw glyph engraved at each end.",
+          "sizeMM": [115, 25],
+          "onFrontPlate": "One badge near the left-hand end seen from in front of the car, starting about 70-90 mm in, its centre about 24% of the panel height down from the top edge.",
+          "onSidePlates": "One on each, horizontally centred, slightly above the vertical centre.",
+          "count": 3
+        },
+        "elsewhere": "NO WOOD ANYWHERE ELSE — no rear plate, no floor timber, no wood cap on the rim tube.",
+        "verified": false,
+        "evidence": "Same method and same photographs as the half-size wood entry, plus the full size's own 構成部品表 (roofrack-partslist.pdf: F フロントプレート x1 E-552; B サイドプレート x2 E-553; G/H/I/J x3 each) and the full size's studio shots TB-RR1_1.jpg, TB-RR1_2.jpg, TB-RR1_3.jpg, damd-0078_1/2/3.jpg at 1920x1280. The front plate's height was cross-checked on damd-0078_1.jpg, where the wood occupies 0.76 of the basket's 160 mm front depth = 122 mm. No side-on fitted photograph of a full-size rack exists, so the rake angle is carried over."
+      },
       "price": {"JPY": 64900, "JPY_exTax": 59000, "JPY_withCarrier": 84700, "JPY_withCarrier_exTax": 77000, "AUD": 2488, "verified": true},
       "priceNote": "AUD 2,488 is ozjimny's made-to-order price, 8-10 week lead time.",
       "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
@@ -161,7 +301,7 @@
       ],
       "modelling": "As the half size but 1000 mm across instead of 600 mm, so it reads as a broad tray covering nearly the whole roof rather than a strip down one side. The wooden front fairing is correspondingly wider and is held by THREE clamps instead of two — a visible difference if the nose is modelled in detail.",
       "verified": true,
-      "evidence": "Same sources and same reasoning as the half-size entry above."
+      "evidence": "Same sources and same reasoning as the half-size entry above. The full size has its own Rakuten listing — https://item.rakuten.co.jp/auto-craft/damd-0078/ , TB-RRKJB base carrier kit, ¥88,000 inc. shipping, made to order — which repeats DAMD's サイズ : 1350mm×1000mm×160mm verbatim, so the 1350-is-the-length reading measured on the half size's fitted photos applies to this part number too. That listing quotes the rack weight as 13 kg where DAMD's own page says 16 kg; DAMD's figure is the one to trust."
     },
     {
       "id": "apio_classic_carrier",
@@ -172,7 +312,15 @@
       "weightKG": 13.5,
       "loadKG": 30,
       "feet": {"perSide": null, "attachesTo": "bolt-on legs, assembly required", "positionsFromWindscreenMM": []},
-      "placement": "THE CONTRAST CASE, and the one product where fore-aft position genuinely IS a choice: APIO state the leg spacing is adjustable so the basket can be set forward, centred or rearward on the roof. At only 800 mm fore-aft against the DAMD rack's 1350 mm it occupies roughly the front or rear two-thirds of the roof, whichever the owner picks.",
+      "placement": {
+        "frontEdgeFromWindscreenHeaderMM": null,
+        "gapToRearRoofEdgeMM": null,
+        "roofLengthUsedMM": 1890,
+        "overhangsRearRoofEdge": false,
+        "verified": false,
+        "desc": "NOT A FIXED POSITION — this is the one product where fore-aft placement is explicitly the owner's choice, so no single number applies. APIO's own words: ショートタイプでレッグの幅は調整が効くため、車両ルーフに対し前寄り、中央、後ろ寄りとお好みに合わせた位置に装着が可能です (short type, the leg spacing adjusts, so it can be fitted forward, centred or rearward on the roof to taste). Orientation of APIO's 1250 x 800 is INFERRED, not published: on 4x4 Espoir's fitted photograph of APIO's own cream demo car (https://www.4x4espoir.com/wp-content/uploads/2022/11/apio-classic-carrier.webp, front three-quarter) the basket spans the full roof width gutter to gutter, which on a JB74 is about 1250 mm, so 1250 reads as the ACROSS-CAR width and 800 as the fore-aft length. On that reading an 800 mm basket on a 1890 mm roof leaves about 1090 mm of bare roof to distribute front and back, which is what makes 'forward, centre or rearward' a meaningful choice; on that car it is set well forward, its front rail close to the windscreen header. If the numbers are the other way round (1250 fore-aft) the adjustment range would be only about 640 mm, which still works but makes APIO's own sales line weaker.",
+        "adjustability": "Free: legs bolt on with adjustable spacing, no base carrier."
+      },
       "materials": "ZAM corrosion-resistant steel, painted off-white or black. Retro in styling but NOT wood-trimmed — included here because it is the closest thing to a second vintage-look rack for the JB74, not because it has timber.",
       "price": {"JPY": 92400, "verified": true},
       "priceNote": "tax included",
@@ -187,7 +335,9 @@
     "JST publish no spec sheet at all. The 270/220 mm widths exist only as annotations on one product photograph; every other ladder dimension in this file is measured from photographs using the scale chain recorded in the ladder's evidence field.",
     "The JST ladder's standoff from the tailgate is the weakest number here (40 mm, +/-15). No side-elevation photograph of this ladder exists on any reachable site.",
     "JST publish no tube wall thickness, weight or load rating for the ladder, and do not state 'powder coat' in the form of a spec line — the finish wording comes from their Facebook product posts.",
-    "The JB74's roof panel fore-aft length is not sourced from Suzuki. It is taken as about 1300 mm, inferred from the DAMD rack being 1350 mm and overhanging slightly, and cross-checked against Rhino-Rack's 1300 x 1240 platform being described as almost exactly the roof panel. Every foot position in millimetres scales with this assumption.",
+    "The JB74's roof panel fore-aft length is still not sourced from Suzuki — Suzuki publish no roof dimension. The 1890 mm now used is the mean of three photogrammetric measurements (see roofPanel), so every millimetre figure derived from it carries roughly +/- 2-3%. The superseded 1300 mm assumption was not a measurement at all.",
+    "No fitted SIDE-VIEW photograph of the FULL SIZE trip basket on a JB74 exists on any reachable site — DAMD, both Rakuten sellers and DAMD's own news archive publish only bare-rack studio shots of it. Its placement is carried over from the half size, which is safe because the two share side rails, brackets and base carrier, but it is not observed.",
+    "Only DAMD's own two demo cars could be measured. No owner-built JB74 with this rack was reachable: Instagram (three posts indexed), Shopee, Facebook and mercari all block automated access, minkara's parts reviews for this rack are all on Hustlers, N-VANs and Tafts rather than Jimnys, and croooober returns 404 to the search endpoint. So the 218-325 mm spread in nose position is the spread between two cars set up by the maker, not a survey of how owners actually fit it.",
     "PIAA do not publish the TERZO square bar's section height, and DAMD do not publish the bracket stack height, so floorAboveRoofMM is a computed estimate rather than a measurement.",
     "PIAA do not publish the exact fore-aft gutter positions for the Jimny's TERZO feet; the positions here are measured off PIAA's own fitting photograph.",
     "The NT$19,800 Shopee listing under 藤井74 could not be reached or confirmed. Shopee blocks automated access entirely — its API returns error 90309999 and its pages render only under JavaScript — so no Taiwanese price for the DAMD rack is verified.",
@@ -198,6 +348,20 @@
   ],
 
   "corrections": [
+    "THE WOOD FRONT IS A RAKED PANEL, NOT A VERTICAL SLAB. It leans back about 19 degrees from vertical (measured 22.5 deg on DAMD's little B. car, 15.1 deg on the tan car), top edge rearward and bottom edge forward, like a wind fairing. The angle is set at fitting — DAMD's own step 2 is [H]フロントプレートを起こして[H]ノブを本締めします, rotate the plate up then tighten — so 15-23 degrees is the honest range and 19 is the number to model.",
+    "BUT IT IS FLAT, NOT A BENT OR CURVED FAIRING. The side-view profile is a straight line to within 1 px over the panel's whole height, the parts list draws it as a flat board, and hanging it on clamps and rotating it up only works for a flat board. What makes it LOOK curved in three-quarter shots is the basket's own swept front corner tube behind it plus the board's fully half-round ends (end radius = half the panel height, about 60 mm).",
+    "THE WOOD IS ONE CONTINUOUS BOARD PER PLATE, NOT SLATS. One front plate (E-552 full / E-578 half) plus two side plates (E-553, the same part on both sizes) — three pieces of timber in the whole kit and no more. Front plate about 980 x 120 mm on the full size and 580 x 120 mm on the half; side plates about 185 x 115 mm. Thickness is the one number that could not be established from any photograph: 12-18 mm.",
+    "THE WOOD'S TOP EDGE IS FLUSH, TUCKED UNDER THE RIM TUBE — it does not stand proud of it. In the side view the board's top end sits about 19 mm below the top of the rim tube, level with the tube's centre, and in every close-up the black rail passes in front of the board.",
+    "THE SIDE WOOD IS CONFIRMED BUT MISSHAPEN IN THE MODEL. There ARE two small wood pieces, one per side, but each is a flat plate about 185 x 115 mm on the OUTSIDE FACE of the side WALL — not a block on the rail. Position is specified by DAMD: straddling the 6th and 7th U-hoop counted from the front, i.e. mid-length, about 600-700 mm behind the nose, with the top edge tucked under the top rail. No wood at the rear, on the floor, or as a cap on the rim tube.",
+    "THE BADGE IS ENGRAVED AND IT IS NOT AN OVAL. It is a stadium-shaped (rounded-bar) outline about 115 x 25 mm branded into the timber, containing 'trip basket' in a stencil face with a small slotted-screw glyph engraved at each end — not an applied plate. On the front plate it sits near the LEFT-HAND end seen from in front of the car, about 70-90 mm in, centred about 24% of the panel height down from the top; it is NOT centred on the panel. The same badge appears centred on each side plate, so three in all.",
+    "THE JB74 ROOF PANEL IS ABOUT 1890 mm FORE-AFT, NOT 1150-1350 mm. Measured three times on dead side-on photographs against the 2250 mm wheelbase: 1878, 1889 and 1906 mm. The previous pass of this file assumed 'about 1300 mm' and the brief for this pass assumed 1150-1350 mm; both are short by 40-60%. Corroborated by Suzuki's published 室内長 1,795 mm and by the 1400-1700 mm racks the Jimny aftermarket sells as 全面タイプ (full-roof). This single number is what made the previous pass's placement reasoning wrong.",
+    "THE DAMD RACK DOES NOT RUN THE FULL LENGTH OF THE ROOF, AND ITS WOODEN NOSE IS NOT AT THE WINDSCREEN HEADER. The previous pass claimed '1350 mm is slightly longer than the JB74 roof panel, so its curved wooden nose sits level with or just proud of the windscreen header and its tail reaches the rear roof edge'. That was a consequence of the 1300 mm roof error and it is wrong in both directions. On DAMD's own two fitted cars the nose sits 218 mm (little B. grey/red car) and 325 mm (tan car) BEHIND the windscreen header, and the tail sits 317 mm and 218 mm AHEAD of the rear roof edge. 1350 mm on a 1890 mm roof leaves about 540 mm of bare roof to be split between the two ends.",
+    "THE RACK IS CENTRED, NOT PUSHED BACK EITHER. The owner's instinct that it 'sits further back, toward the rear' is half right — it is nowhere near the windscreen — but the photographs do not support a rearward bias. It sits essentially in the middle, with 220-330 mm of bare roof at each end, and the two demo cars disagree about which end gets the bigger gap. It NEVER overhangs the rear roof edge or the tailgate: the nearest it gets is 218 mm short of it.",
+    "THE WOOD LEADING EDGE SITS OVER THE FRONT DOOR, not over the windscreen and not behind the front doors. At 218-325 mm behind the header it is roughly a third of the way back along the front door, i.e. above the front-seat occupants' heads.",
+    "THE GUTTER DOES NOT CONSTRAIN FORE-AFT POSITION. The JB74's rain gutter is a continuous channel running the whole length of the roof; the TERZO EF3TM feet clamp anywhere along it. The only limits are the gutter's straight run and TERZO's 400-800 mm usable bar spacing, plus a pipe or two of slide where the rack's bracket B clips onto the floor pipes. DAMD's own two cars put the feet 200+ mm apart from each other's stations, which is the proof.",
+    "THE BASE BARS ARE ABOUT 775-810 mm APART, NOT 620 mm, AND THE FEET ARE NOT AT 430 / 1050 mm. Measured on the two fitted side views: 478 and 1286 mm behind the header (bars 808 mm apart) on one car, 701 and 1476 mm (bars 774 mm apart) on the other. The old 430 / 1050 / 620 figures came from PIAA's catalogue photo scaled against the wrong roof length.",
+    "HALF-vs-FULL IS CONFIRMED, AND NOW BY FITTED PHOTOGRAPHS RATHER THAN BY INFERENCE. The half size is NARROWER, not shorter. In both dead side-on fitted photographs the rack measures 1343 mm and 1347 mm nose to tail against the 2250 mm wheelbase — i.e. the published 1350 is the FORE-AFT length, within 0.5%. And every fitted photo of the half size (damd.co.jp JIMNY_half-size.jpg, Rakuten damd-21188.jpg, and the little B. car in images 1.jpg / 4.jpg / 5.jpg) shows the basket offset to one side of the roof with a bare full-length strip of base bar and BOTH TERZO feet exposed on the other side — which is only possible if the basket is narrow and long. DAMD's two 完成図 assembly drawings show the same thing: the full-size tray is drawn with its wooden front plate on the longer visible edge and the half-size tray as a long narrow strip with the plate on its short end, and both manuals give the identical '6th and 7th pipe counted from the front' instruction for the side plates, which requires identical side rails.",
+    "THE 'RETRO ROOF RACK THAT SITS AT THE BACK' IS A REAL PRODUCT, JUST NOT THIS ONE. Two JB64/JB74 racks are deliberately built that way and are the likely source of the impression: KLC 匠 ルーフラック TypeA (¥90,000), whose maker says 昔っぽさを出すためにあえてルーフの半分サイズ and ルーフ全面を使うのではなく、あえてリア側のみのサイズにしたのは、JA22ジムニーなどの純正キャリアなどを意識して — half the roof, rear side only, with a fairing-style leading edge, copying the JA22 Jimny's OEM carrier; and SUXON ルーフラック ハーフVer (¥74,800, inner 660 x 1050 x 70). 4x4 Espoir's buyer's guide states the general rule for this class: 半面タイプならではのメリットがキャリアの前後位置を前方・中央・後方に調整できることです。リアラダーを装着しているなら後方 — a half-roof rack can be set forward, centre or rear, and you set it rearward if you run a tailgate ladder. The DAMD trip basket is NOT in that class: at 1350 mm it is 71% of the roof length, so there is no room to push it anywhere near the back.",
     "LADDER TUBE IS NOT Ø25. It measures about Ø34 mm — consistent with Ø33.7 mm 1-inch NPS steel pipe. Measured independently two ways: from JST's own two-version product photo by tube-to-overall-width ratio, and from MRK's straight-on fitted photo against the JB74's 1645 mm body width.",
     "27 cm AND 22 cm ARE OUTER OVERALL WIDTHS, NOT INNER WIDTHS. On JST's annotated photo the dimension arrows land on the outer faces of the rails. Inner clear width is therefore about 202 mm (standard) and 152 mm (narrow). A 270 mm INNER width would imply a 338 mm outer, which the photos rule out.",
     "The brand name 吉米工坊 IS correct and IS JST — MRK 4X4's own brand page states 「JST（吉米工坊）是一家台灣在地深耕的汽車配件改裝品牌」. It is invisible to Ruten and to Western search engines, which is why it looks non-existent; Yahoo Japan indexes it. The maker's own product name is 尾門梯 / 尾門爬梯, never 圓管尾梯.",
