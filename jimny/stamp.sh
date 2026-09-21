@@ -11,7 +11,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 ID="${1:-$(date -u +%Y%m%d%H%M)}"
-sed -i '' -E "s#from '\./(rig|parts|accessories|wheels)\.js(\?v=[^']*)?'#from './\1.js?v=${ID}'#g" app.html
+sed -i '' -E "s#from '\./(rig|parts|accessories|wheels|fx)\.js(\?v=[^']*)?'#from './\1.js?v=${ID}'#g" app.html
 sed -i '' -E "s#const BUILD = '[^']*'#const BUILD = '${ID}'#" app.html
 grep -c "?v=${ID}'" app.html | xargs echo "imports stamped:"
 echo "build ${ID}"

@@ -3,23 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#16181a">
+<meta name="theme-color" content="#0c1214">
 <title>Jimny JB74 改裝零件目錄</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
+/* Same night-trail palette as the configurator, so the two pages read as one
+   product rather than two sites that happen to link to each other. */
 :root{
-  --bg:#16181a; --panel:#1e2124; --panel-2:#282c30; --ink:#f0f1ee; --ink-2:#9ea49c; --ink-3:#6b7069;
-  --rule:#2c3034; --rule-2:#3d4348; --key:#d8cf3a; --key-dim:#3a3814; --key-ink:#16181a; --warn:#e0913c;
-  --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --disp:"Oswald","Helvetica Neue",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
-  --body:-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
+  --bg:#0c1214; --panel:#131b1e; --panel-2:#1a2428; --ink:#eff4f3; --ink-2:#94a5a8; --ink-3:#61747b;
+  --rule:#223034; --rule-2:#33454c; --key:#ffb24a; --key-dim:#2b2317; --key-ink:#11181a; --warn:#f0b64a;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Archivo","Noto Sans TC","PingFang TC",sans-serif;
+  --body:"Noto Sans TC","PingFang TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
 .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
 header{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:16px}
 .kicker{font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
-h1{font:600 26px/1.1 var(--disp);letter-spacing:.03em;margin:8px 0 0}
+h1{font:800 27px/1.1 var(--disp);letter-spacing:-.01em;margin:8px 0 0}
 header a.back{font:600 13px var(--body);color:var(--key-ink);background:var(--key);padding:10px 14px;border-radius:2px;text-decoration:none}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 6px;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:2;border-bottom:1px solid var(--rule)}
 .chip{font:500 12px var(--body);padding:7px 11px;border:1px solid var(--rule-2);border-radius:20px;background:none;color:var(--ink-2);cursor:pointer}
@@ -28,19 +30,20 @@ header a.back{font:600 13px var(--body);color:var(--key-ink);background:var(--ke
 nav.toc{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 4px;font-size:12.5px}
 nav.toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule-2)}
 section{margin-top:28px}
-section h2{font:600 18px/1.2 var(--disp);letter-spacing:.03em;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
+section h2{font:800 19px/1.2 var(--disp);letter-spacing:-.005em;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
 section h2 small{font:500 10px var(--mono);color:var(--ink-3);letter-spacing:.1em}
 .sub{font-size:12px;color:var(--ink-3);margin:0 0 12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 .card{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:12px 13px 11px;display:flex;flex-direction:column;gap:6px}
 .card.tw{border-color:#4a5a2e}
 .card .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.card b{font:600 14.5px/1.3 var(--body)}
+.card b{font:500 14.5px/1.35 var(--body)}
 .card .brand{font:500 10px var(--mono);letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase;margin-top:2px}
-.card .price{font:600 16px/1 var(--disp);white-space:nowrap;text-align:right}
+.card .price{font:800 17px/1.15 var(--disp);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
 .card .price small{display:block;font:500 9px var(--mono);color:var(--ink-3);letter-spacing:.1em;margin-top:3px}
 .card .price.na{color:var(--ink-3);font-size:12px}
 .card .note{font-size:12px;color:var(--ink-2);line-height:1.5}
+.card .paint{height:34px;border-radius:3px;border:1px solid var(--rule-2)}
 .card .part{font:500 10.5px var(--mono);color:var(--ink-3)}
 .card .acts{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
 .card .acts a{font:600 12px var(--body);padding:6px 10px;border-radius:2px;text-decoration:none;border:1px solid var(--rule-2);color:var(--ink-2)}
@@ -73,16 +76,23 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
   <footer id="foot"></footer>
 </div>
 <script type="module">
-import { LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
-  ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS } from './parts.js';
+import { COLORS, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
+  ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS, HOODS, SPARE_COVERS } from './parts.js';
+import { priceLabel, FX_NOTE } from './fx.js';
 
 // key = the configurator's state key, so "套用" can deep-link into app.html
 const CATS = [
+  ['車身顏色', 'color', COLORS.map(c => ({ ...c, id: c.code, label: `${c.name}　${c.code}`,
+    cur: c.tw ? 'TWD' : 'JPY', price: null, noPrice: true,
+    brand: c.tw === true ? '台灣在售' : c.tw === '雙色' ? '台灣僅雙色（黃黑／藍黑）' : '日規專屬，台灣未導入' })),
+    '台灣官方從未公布車色代碼，此處代碼為日規對應款；色值取自台灣官網與型錄取樣（docs/jb74-colors-tw.json）'],
   ['懸吊舉升', 'lift', LIFTS, '依吋數分組；超過 50mm 需橫樑下降座，3 吋以上需 Caster 修正'],
   ['輪框', 'wheel', WHEELS, '5×139.7、中心孔 108'],
   ['輪胎尺寸', 'tyre', TYRES, '外徑決定舉升需求'],
   ['輪胎型號（胎紋）', 'tread', TYRE_MODELS, '白字＝原廠有 OWL／RWL 版本'],
   ['全車套件', 'kit', KITS.filter(k => k.id !== 'none'), 'DAMD 的整套外觀件：選一款就同時換掉水箱罩與前後保桿。台灣無總代理，授權經銷商為台中 Fujii74、新北 JP Racing、台南 JT Garage'],
+  ['引擎蓋', 'hood', HOODS, ''],
+  ['備胎蓋', 'spareCoverKit', SPARE_COVERS, ''],
   ['前保桿', 'frontBumper', FRONT_BUMPERS, ''],
   ['後保桿', 'rearBumper', REAR_BUMPERS, ''],
   ['水箱護罩', 'grille', GRILLES, ''],
@@ -94,14 +104,12 @@ const CATS = [
   ['後照鏡', 'mirrors', MIRRORS, ''],
   ['其他配件', null, OTHERS, '以配置器的開關對應（側裙、鐵窗、燈具、備胎配件）'],
 ];
-const SYM = { TWD: 'NT$', JPY: '¥', AUD: 'A$', USD: 'US$', GBP: '£', EUR: '€', NZD: 'NZ$' };
 const region = (it) => it.cur === 'TWD' ? 'tw' : it.cur === 'JPY' ? 'jp' : (it.cur ? 'other' : 'none');
-const price = (it) => it.price ? `${SYM[it.cur] ?? ''}${it.price.toLocaleString()}` : (it.price === 0 ? '原廠／—' : '洽詢');
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 let filter = 'all', query = '';
 function card(it, key) {
-  const r = region(it);
+  const r = region(it), p = priceLabel(it);
   const skip = it.id === 'none' || it.id === 'stock' || (it.price === 0 && !it.note);
   if (skip) return '';
   const modelled = key !== null || it.key;
@@ -112,7 +120,8 @@ function card(it, key) {
     : it.key ? `<a class="apply" href="app.html?${it.key}=${it.key === 'wheel' ? 'maxx' : it.key === 'ladder' ? 'fr' : 'true'}">套用到配置器</a>` : '';
   return `<div class="card ${r === 'tw' ? 'tw' : ''}">
     <div class="top"><div><b>${esc(it.label)}</b><div class="brand">${esc(it.brand ?? '')}</div></div>
-      <div class="price ${it.price ? '' : 'na'}">${price(it)}<small>${it.cur ?? ''}${it.price && it.cur === 'JPY' ? ' 含稅' : ''}</small></div></div>
+      ${it.noPrice ? '' : `<div class="price ${it.price ? '' : 'na'}">${p.main}<small>${esc(p.sub)}${p.sub && it.cur === 'JPY' ? ' 含稅' : ''}</small></div>`}</div>
+    ${it.hex != null ? `<div class="paint" style="background:#${it.hex.toString(16).padStart(6, '0')}"></div>` : ''}
     <div>${tags}</div>
     ${it.note ? `<div class="note">${esc(it.note)}</div>` : ''}
     ${it.part ? `<div class="part">P/N ${esc(it.part)}</div>` : ''}
@@ -136,7 +145,7 @@ function render() {
       <div class="grid">${html || '<div class="empty">此篩選下沒有項目</div>'}</div></section>`;
   }).join('');
   document.getElementById('toc').innerHTML = CATS.map(([name, key]) => `<a href="#c-${key ?? 'others'}">${name}</a>`).join('');
-  document.getElementById('foot').textContent = `共 ${total} 項。價格為各廠商／通路頁面標示（日本含稅、澳洲含 GST），匯率與運費另計；標「待查證」者為估值。資料日期 2026-09-16。`;
+  document.getElementById('foot').textContent = `共 ${total} 項，價格一律換算台幣概估。${FX_NOTE} 原始標價為各廠商／通路頁面所示（日本含稅、澳洲含 GST），運費與關稅另計；標「待查證」者為估值。資料日期 2026-09-21。`;
 }
 document.getElementById('bar').addEventListener('click', (e) => {
   const b = e.target.closest('.chip'); if (!b) return;

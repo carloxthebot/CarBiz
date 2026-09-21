@@ -1,0 +1,492 @@
+{
+  "compiled": "2026-09-21",
+  "market": "TW",
+  "model": "Suzuki Jimny Sierra JB74 (3-door, 1.5L) — Taiwan market",
+  "notes": [
+    "Suzuki Taiwan (taiwansuzuki.com.tw, 金鈴汽車) has NEVER published a paint code for any Jimny colour. Every 'code' in this file is mapped from the Japanese-market (JDM) equivalent by matching the official Taiwanese swatch/photo colour against Suzuki Japan's own colour chips. Codes are therefore INFERRED for TW, and marked with codeConfidence.",
+    "The Taiwan car site is taiwansuzuki.com.tw. suzukimotor.com.tw is Taiwan Suzuki MOTORCYCLES (台鈴機車) and does not sell the Jimny — do not use it as a source.",
+    "Taiwan sells ONE trim: JIMNY GLX, 3-door, 1.5L, 4AT, NT$849,000 (2026). The 5-door Jimny Nomade has never been imported — the 2026 TW spec sheet still lists a 2,250mm wheelbase and 3,650mm length.",
+    "TW equipment (headlamp washers, DSBS II, ACC, 9-inch screen) and the fact that TW offers all three black-roof two-tones — which in Japan are JC-grade-only — indicate the TW GLX is built to JDM JC specification.",
+    "Taiwan colour count over time: 6 colours 2019-08 to 2021-12 → 4 colours in 2022 → 5 colours 2023-01 to 2024-05 → 8 colours from 2025-04 to now. Several colours were dropped and later reinstated; see each entry's tw.years.",
+    "hex = the best-evidenced measured value. renderHex = a suggested daylight albedo for a 3D configurator (basecoat only; let the renderer's clearcoat/metallic/flake parameters do the rest). renderHex values are judgement calls, not measurements.",
+    "Suzuki Japan's own web colour chips (irodama_<CODE>.svg) are official but are stylised for two colours: the Chiffon Ivory chip (#f1e4af) is far too yellow and the Medium Gray chip (#94989a) is far too light, versus both the paint database and Suzuki Taiwan's own photography. Those two chips were rejected as the primary hex.",
+    "For two-tone cars the roof is Bluish Black Pearl (ZJ3). Suzuki publishes the combination as a single code (DG5 / 2BW / CZW) rather than two separate codes."
+  ],
+  "sources": {
+    "twOfficialSite": "https://www.taiwansuzuki.com.tw/cars/jimny — 8 colours with official studio photos and an 8-dot swatch strip (sampled pixel-exact)",
+    "twOfficialCatalogue": "https://www.taiwansuzuki.com.tw/uploads/car_list/178393344534.pdf — PDF title '2026_JIMNY CATALOG_R', created 2026-07-13, page 8 '車款顏色' chart (sampled pixel-exact)",
+    "twOfficialSpecSheet": "https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf — PDF title 'THE NEW_JIMNY_規格表', created 2026-07-12; confirms trim name JIMNY GLX",
+    "twArchive": [
+      "https://web.archive.org/web/20190819001021/https://www.taiwansuzuki.com.tw/cars.php?cid=11",
+      "https://web.archive.org/web/20210303214116/https://www.taiwansuzuki.com.tw/Jimny_MINISITE/",
+      "https://web.archive.org/web/20210625072410/https://www.taiwansuzuki.com.tw/Jimny_MINISITE/",
+      "https://web.archive.org/web/20220809003944/https://www.taiwansuzuki.com.tw/cars.php?cid=11",
+      "https://web.archive.org/web/20230119024658/https://www.taiwansuzuki.com.tw/cars/4",
+      "https://web.archive.org/web/20250722180947/https://www.taiwansuzuki.com.tw/cars/jimny"
+    ],
+    "jpOfficial": [
+      "https://www.suzuki.co.jp/car/jimny_sierra/ — code list + official colour chips irodama_<CODE>.svg",
+      "https://www.suzuki.co.jp/car/jimny/ — kei JB64 code list (grade-by-grade)",
+      "https://www.suzuki.co.jp/car/jimny_nomade/ — 5-door code list",
+      "https://web.archive.org/web/20190721004858/https://www.suzuki.co.jp/car/jimny_sierra/styling/ — proves ZZC/DG5/CZW/ZVG/2BW codes unchanged since 2019"
+    ],
+    "paintDatabase": "https://www.paintcolourchart.com/cars/076/jimny.html — colour cards downloaded and sampled pixel-by-pixel",
+    "crossCheck": [
+      "https://www.zigwheels.ph/new-cars/suzuki/jimny/colors",
+      "https://teamghettoracing.com/vehicles/cars/2019-jimny-jb74w/paint-codes/",
+      "https://colorcodesearch.com/jimny/"
+    ]
+  },
+  "colors": [
+    {
+      "code": "DG5",
+      "bodyCode": "ZZB",
+      "nameEn": "Kinetic Yellow with Black 2-tone roof",
+      "nameJa": "キネティックイエロー ブラック2トーンルーフ",
+      "nameTw": "黃黑色",
+      "nameTwSite": "黃黑(2Tone)",
+      "hex": "#c5d31e",
+      "renderHex": "#cbd232",
+      "type": "two-tone (solid yellow body + pearl black roof)",
+      "roofHex": "#161616",
+      "roofCode": "ZJ3",
+      "tw": {
+        "sold": true,
+        "years": "2019-2021, 2023-2026 (absent from the TW range during 2022)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "verified — sampled from the Suzuki Taiwan official site swatch; 2026 TW catalogue print swatch #c6d21f and Suzuki Japan official chip #d0d735 agree within ~5%",
+      "hexSources": {
+        "suzukiTwSiteSwatch": "#c5d31e",
+        "suzukiTwCatalogue2026": "#c6d21f",
+        "suzukiJpOfficialChip": "#d0d735",
+        "paintDatabaseCard": "#bdb830",
+        "twOfficialPhotoPanelShaded": "#a8ad46"
+      },
+      "codeConfidence": "inferred — Taiwan publishes no code; DG5 is the only Suzuki yellow+black-roof combination in the JB74 range and the sampled body colour matches ZZB",
+      "note": "Taiwan has never offered solid Kinetic Yellow — yellow is two-tone only here. Japan offers both."
+    },
+    {
+      "code": "2BW",
+      "bodyCode": "ZVG",
+      "nameEn": "Chiffon Ivory Metallic with Black 2-tone roof",
+      "nameJa": "シフォンアイボリーメタリック ブラック2トーンルーフ",
+      "nameTw": "米黑色",
+      "nameTwSite": "米黑(2Tone)",
+      "hex": "#c7bca6",
+      "renderHex": "#c3b79c",
+      "type": "two-tone (metallic ivory body + pearl black roof)",
+      "roofHex": "#161616",
+      "roofCode": "ZJ3",
+      "tw": {
+        "sold": true,
+        "years": "2019-2026 (continuous — the only TW colour never dropped alongside 軍綠色 and 灰色)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "verified — Suzuki Taiwan official site swatch; 2026 TW catalogue #c7bca5 and paint-database card 75th percentile #bfb3a1 agree",
+      "hexSources": {
+        "suzukiTwSiteSwatch": "#c7bca6",
+        "suzukiTwCatalogue2026": "#c7bca5",
+        "paintDatabaseCardP75": "#bfb3a1",
+        "paintDatabaseCardMean": "#af9d7e",
+        "twOfficialPhotoPanelShaded": "#b9b298",
+        "suzukiJpOfficialChip": "#f1e4af — REJECTED, far too yellow versus every other source"
+      },
+      "codeConfidence": "inferred — high; body colour samples identical to the solid 米色 car, which matches ZVG",
+      "note": "The body paint is identical to solid 米色 (ZVG); sampling the TW photos of 米黑色 and 米色 gives the same #b9b298 panel value."
+    },
+    {
+      "code": "CZW",
+      "bodyCode": "ZWY",
+      "nameEn": "Brisk Blue Metallic with Black 2-tone roof",
+      "nameJa": "ブリスクブルーメタリック ブラック2トーンルーフ",
+      "nameTw": "藍黑色",
+      "nameTwSite": "藍黑(2Tone)",
+      "hex": "#0070a9",
+      "renderHex": "#0f74a8",
+      "type": "two-tone (metallic blue body + pearl black roof)",
+      "roofHex": "#161616",
+      "roofCode": "ZJ3",
+      "tw": {
+        "sold": true,
+        "years": "2019-2021, 2025-2026 (absent from the TW range 2022 to 2024)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "verified — Suzuki Japan official chip; corroborated by the TW official photo body panel #0671a7 and the TW site swatch #0c6897",
+      "hexSources": {
+        "suzukiJpOfficialChip": "#0070a9",
+        "twOfficialPhotoPanel": "#0671a7",
+        "suzukiTwSiteSwatch": "#0c6897",
+        "suzukiTwCatalogue2026": "#0d6898",
+        "paintDatabaseCardMean": "#1490a8 — noticeably more cyan than every other source"
+      },
+      "codeConfidence": "inferred — high",
+      "note": "Taiwan has never offered solid Brisk Blue — blue is two-tone only here. This colour had the longest TW gap: three model years."
+    },
+    {
+      "code": "ZJ3",
+      "nameEn": "Bluish Black Pearl 3",
+      "nameJa": "ブルーイッシュブラックパール3",
+      "nameTw": "黑色",
+      "nameTwSite": "黑",
+      "hex": "#161616",
+      "renderHex": "#16191c",
+      "type": "pearl",
+      "roofHex": null,
+      "roofCode": null,
+      "tw": {
+        "sold": true,
+        "years": "2022-2026 (NOT offered at the 2019 TW launch; first appears 2022-08)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "sampled from the Suzuki Taiwan official studio photo body panel; official chips render it as near-black (#000007) and the paint-database card mean is #24282a",
+      "hexSources": {
+        "twOfficialPhotoPanel": "#161616",
+        "suzukiJpOfficialChip": "#000007",
+        "suzukiTwCatalogue2026": "#05111c",
+        "suzukiTwSiteSwatch": "#000000",
+        "paintDatabaseCardMean": "#24282a"
+      },
+      "codeConfidence": "inferred — high; ZJ3 is the only black in the JB74 range",
+      "note": "A near-black pearl with a faint blue cast (visible in the TW catalogue's #05111c print swatch). For rendering, keep the basecoat dark and let the clearcoat carry the highlights — the paint-database mean #24282a is lifted by the card's gradient shading and looks washed out as an albedo."
+    },
+    {
+      "code": "ZVL",
+      "nameEn": "Medium Gray",
+      "nameJa": "ミディアムグレー",
+      "nameTw": "灰色",
+      "nameTwSite": "灰",
+      "hex": "#5b5c59",
+      "renderHex": "#63645f",
+      "type": "solid",
+      "roofHex": null,
+      "roofCode": null,
+      "tw": {
+        "sold": true,
+        "years": "2019-2026 (continuous)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "verified — paint-database card #5b5c59 and the Suzuki Taiwan official photo body panel #5a5957 match almost exactly; TW catalogue print swatch #565654 agrees",
+      "hexSources": {
+        "paintDatabaseCard": "#5b5c59",
+        "twOfficialPhotoPanel": "#5a5957",
+        "suzukiTwCatalogue2026": "#565654",
+        "suzukiTwSiteSwatch": "#454545",
+        "suzukiJpOfficialChip": "#94989a — REJECTED, far too light versus the photo and the paint card"
+      },
+      "codeConfidence": "inferred — high; ZVL is the only non-silver grey in the JB74 range",
+      "note": "Taiwan's web swatch for 灰色 changed from a light #818181 (2019-2022) to a dark #3f3f3f (2023 onward). Sampling the current official photo gives #5a5957, matching the Medium Gray paint card — the swatch change appears to be web-design inconsistency, not a change of paint. Confidence that this was the SAME paint in 2019 is medium."
+    },
+    {
+      "code": "ZVR",
+      "codeAlternative": "26U",
+      "nameEn": "Pure White Pearl (alternative: Superior White)",
+      "nameJa": "ピュアホワイトパール（別案: スペリアホワイト）",
+      "nameTw": "白色",
+      "nameTwSite": "白",
+      "hex": "#f0f2f2",
+      "renderHex": "#f2f3f0",
+      "type": "pearl (if ZVR) / solid (if 26U)",
+      "roofHex": null,
+      "roofCode": null,
+      "tw": {
+        "sold": true,
+        "years": "2019-2021, 2025-2026 (absent from the TW range 2022 to 2024)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "Suzuki Japan official chip — note Suzuki uses the SAME chip (#f0f2f2) for both 26U and ZVR, so the chip cannot distinguish them",
+      "hexSources": {
+        "suzukiJpOfficialChip": "#f0f2f2",
+        "suzukiTwSiteSwatch": "#ffffff",
+        "suzukiTwCatalogue2026": "#ffffff",
+        "twOfficialPhotoPanelShaded": "#d3d3d3",
+        "paintDatabaseCard26U": "#dbe2df",
+        "paintDatabaseCardZvrP90": "#dbe0dd"
+      },
+      "codeConfidence": "LOW — UNRESOLVED. This is the one code in the TW palette I could not pin down.",
+      "note": "In Japan, 26U Superior White is a JL/XG-grade solid white and ZVR Pure White Pearl is the JC-grade pearl. Taiwan's GLX carries JC-grade equipment (headlamp washers) and all three JC-only black-roof two-tones, which points to ZVR. Against that: Taiwan markets it as plain 白色 with no 珍珠白 wording and draws it as a flat white swatch. No Taiwanese source states either code. Treat as pure white for rendering — the two paints differ mainly in pearl flake, not in hue."
+    },
+    {
+      "code": "ZZC",
+      "nameEn": "Jungle Green",
+      "nameJa": "ジャングルグリーン",
+      "nameTw": "軍綠色",
+      "nameTwSite": "軍綠",
+      "hex": "#353a2e",
+      "renderHex": "#444a3a",
+      "type": "solid",
+      "roofHex": null,
+      "roofCode": null,
+      "tw": {
+        "sold": true,
+        "years": "2019-2026 (continuous)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "verified — the Suzuki Japan official chip and the paint-database card agree EXACTLY at #353a2e; the TW official photo body panel #383e34 corroborates",
+      "hexSources": {
+        "suzukiJpOfficialChip": "#353a2e",
+        "paintDatabaseCard": "#353a2e",
+        "twOfficialPhotoPanelShaded": "#383e34",
+        "suzukiTwSiteSwatch": "#455236",
+        "suzukiTwCatalogue2026": "#465237",
+        "zigwheels": "#474a43"
+      },
+      "codeConfidence": "inferred — high",
+      "note": "The two source families disagree by about one stop: Suzuki Japan and the paint card say #353a2e, Suzuki Taiwan's own swatches say #455236 (lighter and greener). The shaded panel in TW's own photo sits with the darker pair, so #353a2e is the paint and #455236 is a print/web lift. renderHex splits them for a daylight albedo."
+    },
+    {
+      "code": "ZVG",
+      "nameEn": "Chiffon Ivory Metallic",
+      "nameJa": "シフォンアイボリーメタリック",
+      "nameTw": "米色",
+      "nameTwSite": "米",
+      "hex": "#c7bca6",
+      "renderHex": "#c3b79c",
+      "type": "metallic",
+      "roofHex": null,
+      "roofCode": null,
+      "tw": {
+        "sold": true,
+        "years": "2025-2026 (NEW — from 2019 to 2024 Taiwan offered this paint only as the two-tone 米黑色)",
+        "trim": "GLX (single trim)",
+        "current": true
+      },
+      "hexSource": "verified — Suzuki Taiwan official site swatch; 2026 TW catalogue #c7bca5 and paint-database card 75th percentile #bfb3a1 agree",
+      "hexSources": {
+        "suzukiTwSiteSwatch": "#c7bca6",
+        "suzukiTwCatalogue2026": "#c7bca5",
+        "paintDatabaseCardP75": "#bfb3a1",
+        "paintDatabaseCardMean": "#af9d7e",
+        "twOfficialPhotoPanelShaded": "#b9b298",
+        "suzukiJpOfficialChip": "#f1e4af — REJECTED, far too yellow"
+      },
+      "codeConfidence": "inferred — high",
+      "note": "Newest addition to the Taiwan range. A warm greige, not a cream — the official Suzuki Japan web chip is misleadingly yellow and should not be used for rendering."
+    }
+  ],
+  "twoTone": [
+    {
+      "code": "DG5",
+      "nameTw": "黃黑色",
+      "body": {"code": "ZZB", "nameEn": "Kinetic Yellow", "hex": "#c5d31e", "type": "solid"},
+      "roof": {"code": "ZJ3", "nameEn": "Bluish Black Pearl 3", "hex": "#161616", "type": "pearl"},
+      "twCurrent": true
+    },
+    {
+      "code": "2BW",
+      "nameTw": "米黑色",
+      "body": {"code": "ZVG", "nameEn": "Chiffon Ivory Metallic", "hex": "#c7bca6", "type": "metallic"},
+      "roof": {"code": "ZJ3", "nameEn": "Bluish Black Pearl 3", "hex": "#161616", "type": "pearl"},
+      "twCurrent": true
+    },
+    {
+      "code": "CZW",
+      "nameTw": "藍黑色",
+      "body": {"code": "ZWY", "nameEn": "Brisk Blue Metallic", "hex": "#0070a9", "type": "metallic"},
+      "roof": {"code": "ZJ3", "nameEn": "Bluish Black Pearl 3", "hex": "#161616", "type": "pearl"},
+      "twCurrent": true
+    }
+  ],
+  "japanOnly": [
+    {
+      "code": "ZZB",
+      "nameEn": "Kinetic Yellow (solid, no black roof)",
+      "nameJa": "キネティックイエロー",
+      "hex": "#d0d735",
+      "renderHex": "#cbd232",
+      "type": "solid",
+      "hexSource": "Suzuki Japan official chip; paint-database card #bdb830",
+      "note": "Japan sells Kinetic Yellow both solid and as the DG5 two-tone. Taiwan only ever imported the two-tone.",
+      "model": "JB74 3-door"
+    },
+    {
+      "code": "ZWY",
+      "nameEn": "Brisk Blue Metallic (solid, no black roof)",
+      "nameJa": "ブリスクブルーメタリック",
+      "hex": "#0070a9",
+      "renderHex": "#0f74a8",
+      "type": "metallic",
+      "hexSource": "Suzuki Japan official chip",
+      "note": "Japan sells Brisk Blue both solid and as the CZW two-tone. Taiwan only ever imported the two-tone.",
+      "model": "JB74 3-door"
+    },
+    {
+      "code": "Z2S",
+      "nameEn": "Silky Silver Metallic",
+      "nameJa": "シルキーシルバーメタリック",
+      "hex": "#c8c7c3",
+      "renderHex": "#c6c8c7",
+      "type": "metallic",
+      "hexSource": "paint-database card; Suzuki Japan official chip is cooler at #c5ced7",
+      "note": "Available on every Japanese grade (JC and JL) for the whole JB74 run. Never appears in any Taiwanese official list or catalogue, 2019 to 2026.",
+      "model": "JB74 3-door"
+    },
+    {
+      "code": "26U",
+      "nameEn": "Superior White",
+      "nameJa": "スペリアホワイト",
+      "hex": "#f0f2f2",
+      "renderHex": "#f2f3f0",
+      "type": "solid",
+      "hexSource": "Suzuki Japan official chip; paint-database card #dbe2df",
+      "note": "CONDITIONAL entry — Japan's lower-grade solid white (JL/XG). It is Japan-only only if Taiwan's 白色 is ZVR Pure White Pearl, which is likely but unconfirmed. If Taiwan's white is actually 26U, then ZVR is the Japan-only one instead.",
+      "model": "JB74 3-door"
+    },
+    {
+      "code": "DHG",
+      "nameEn": "Kinetic Yellow Black Top 2-tone",
+      "nameJa": "キネティックイエロー ブラックトップ2トーン",
+      "hex": "#d0d735",
+      "roofHex": "#161616",
+      "type": "two-tone",
+      "hexSource": "Suzuki Japan colour list",
+      "note": "Listed on the KEI Jimny (JB64) XC grade only, not on the Jimny Sierra JB74. Included for completeness — do not model it as a Sierra colour.",
+      "model": "JB64 kei Jimny"
+    },
+    {
+      "code": "WA7",
+      "nameEn": "Jungle Green 2",
+      "nameJa": "ジャングルグリーン2",
+      "hex": "#203221",
+      "renderHex": "#2c3b2c",
+      "type": "solid",
+      "hexSource": "Suzuki Japan official chip (irodama_WA7.svg)",
+      "note": "5-door Jimny Nomade only. A darker, cooler green than the 3-door's ZZC.",
+      "model": "JB74 5-door Nomade (2025-)"
+    },
+    {
+      "code": "WB3",
+      "nameEn": "Bluish Black Pearl 4",
+      "nameJa": "ブルーイッシュブラックパール4",
+      "hex": "#070f12",
+      "renderHex": "#171b1f",
+      "type": "pearl",
+      "hexSource": "Suzuki Japan official chip (irodama_WB3.svg)",
+      "note": "5-door Jimny Nomade only. Successor to ZJ3.",
+      "model": "JB74 5-door Nomade (2025-)"
+    },
+    {
+      "code": "WBH",
+      "nameEn": "Celestial Blue Pearl Metallic",
+      "nameJa": "セレスティアルブルーパールメタリック",
+      "hex": "#0f2140",
+      "renderHex": "#1c3358",
+      "type": "pearl metallic",
+      "hexSource": "Suzuki Japan official chip (irodama_WBH.svg)",
+      "note": "5-door Jimny Nomade only. No paint-database card exists for this code yet.",
+      "model": "JB74 5-door Nomade (2025-)"
+    },
+    {
+      "code": "ZTN",
+      "nameEn": "Granite Gray Metallic",
+      "nameJa": "グラナイトグレーメタリック",
+      "hex": "#555555",
+      "renderHex": "#5a5a5b",
+      "type": "metallic",
+      "hexSource": "Suzuki Japan official chip (irodama_ZTN.svg); paint-database card mean #504f4f",
+      "note": "5-door Jimny Nomade only.",
+      "model": "JB74 5-door Nomade (2025-)"
+    },
+    {
+      "code": "ZHJ",
+      "nameEn": "Arctic White Pearl",
+      "nameJa": "アークティックホワイトパール",
+      "hex": "#dddfdc",
+      "renderHex": "#ecebe5",
+      "type": "pearl",
+      "hexSource": "Suzuki Japan official chip (irodama_ZHJ.svg)",
+      "note": "5-door Jimny Nomade only.",
+      "model": "JB74 5-door Nomade (2025-)"
+    },
+    {
+      "code": "E5R",
+      "nameEn": "Sizzling Red Metallic with Black 2-tone roof",
+      "nameJa": "シズリングレッドメタリック ブラック2トーンルーフ",
+      "hex": "#951e23",
+      "renderHex": "#9b2228",
+      "roofHex": "#161616",
+      "roofCode": "WB3",
+      "type": "two-tone (metallic red body + pearl black roof)",
+      "hexSource": "Suzuki Japan official chip (irodama_E5R.svg), body fill #951e23 and roof fill #000007",
+      "note": "5-door Jimny Nomade only. Japan lists the red as two-tone only; there is no solid Sizzling Red chip on the Nomade page. Some paint databases list 'WAA' for Sizzling Red — that code is NOT on Suzuki Japan's Nomade page and I could not verify it.",
+      "model": "JB74 5-door Nomade (2025-)"
+    },
+    {
+      "code": "E5J",
+      "nameEn": "Chiffon Ivory Metallic 2 with Black 2-tone roof",
+      "nameJa": "シフォンアイボリーメタリック2 ブラック2トーンルーフ",
+      "hex": "#dec990",
+      "renderHex": "#d2c093",
+      "roofHex": "#161616",
+      "roofCode": "WB3",
+      "type": "two-tone (metallic ivory body + pearl black roof)",
+      "hexSource": "Suzuki Japan official chip (irodama_E5J.svg), body fill #dec990 and roof fill #000007",
+      "note": "5-door Jimny Nomade only. 'Chiffon Ivory Metallic 2' is a warmer, more yellow reformulation than the 3-door's ZVG — but note Suzuki's ivory chips run yellow generally, so treat #dec990 with the same caution as ZVG's chip.",
+      "model": "JB74 5-door Nomade (2025-)"
+    }
+  ],
+  "corrections": [
+    {
+      "claimed": "ZJ3 = Jungle Green",
+      "actual": "ZJ3 = Bluish Black Pearl 3 (ブルーイッシュブラックパール3). Jungle Green is ZZC.",
+      "evidence": "suzuki.co.jp/car/jimny_sierra/ colour list and the 2019-07-21 archived styling page, which captions a car 'ボディーカラーはジャングルグリーン（ZZC）'"
+    },
+    {
+      "claimed": "ZVR = Kinetic Yellow",
+      "actual": "ZVR = Pure White Pearl (ピュアホワイトパール). Kinetic Yellow is ZZB.",
+      "evidence": "suzuki.co.jp/car/jimny/ grade colour lists (XC grade)"
+    },
+    {
+      "claimed": "ZVL = Chiffon Ivory Metallic",
+      "actual": "ZVL = Medium Gray (ミディアムグレー). Chiffon Ivory Metallic is ZVG.",
+      "evidence": "suzuki.co.jp/car/jimny_sierra/styling/ captions both codes explicitly"
+    },
+    {
+      "claimed": "ZCD = Brisk Blue Metallic",
+      "actual": "Brisk Blue Metallic is ZWY. ZCD is Galactic Grey Metallic and is not a Jimny colour.",
+      "evidence": "Suzuki Japan colour list; paint database"
+    },
+    {
+      "claimed": "ZNM = Bluish Black Pearl 3",
+      "actual": "ZNM does not exist in Suzuki's code tables.",
+      "evidence": "no match in paintcolourchart or Suzuki lists"
+    },
+    {
+      "claimed": "ZMV = Pure White Pearl",
+      "actual": "ZMV is Super Black Metallic and is not a Jimny colour.",
+      "evidence": "paint database"
+    },
+    {
+      "claimed": "A5G is a Jimny colour",
+      "actual": "A5G does not exist in Suzuki's code tables.",
+      "evidence": "no match in any source checked"
+    },
+    {
+      "claimed": "C2G is a Jimny colour",
+      "actual": "C2G is a two-tone combination code (26U body + ZSC Dark Grey Pearl roof) used on other Suzuki models, not on the Jimny.",
+      "evidence": "paint database"
+    },
+    {
+      "claimed": "ZWC = Sizzling Red Metallic / ZWG = Granite Gray Metallic",
+      "actual": "ZWC is Neon Blue Metallic and ZWG is Speedy Blue Pearl; neither is a Jimny colour. Granite Gray Metallic on the Jimny Nomade is ZTN.",
+      "evidence": "paint database; suzuki.co.jp/car/jimny_nomade/"
+    },
+    {
+      "claimed": "'Cool Khaki Pearl Metallic', 'Sierra Blue', 'Denim Blue' are Jimny colours",
+      "actual": "Not JB64/JB74 colours. Cool Khaki Green Metallic (ZVD) is a Hustler/Ignis colour; 'Sierra Blue' and 'Denim Blue' match no Suzuki factory colour name.",
+      "evidence": "paint database; absent from every Suzuki Jimny list checked"
+    },
+    {
+      "claimed": "Taiwan Suzuki's site is suzukimotor.com.tw",
+      "actual": "suzukimotor.com.tw is Taiwan Suzuki MOTORCYCLES. The car importer's site is taiwansuzuki.com.tw.",
+      "evidence": "both sites fetched; suzukimotor.com.tw lists only motorcycles (SUI 125, GSX-8TT, etc.)"
+    }
+  ]
+}

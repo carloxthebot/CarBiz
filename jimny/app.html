@@ -3,104 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#16181a">
+<meta name="theme-color" content="#0c1214">
 <title>Jimny JB74 改裝配置</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
+/* Night-trail palette: the car is the only bright thing on screen, so paint
+   and chrome carry the page and the UI stays out of the way. Committed to one
+   dark world on purpose -- a light variant would fight the 3D backdrop. */
 :root{
-  --stage:#e8eae7; --panel:#16181a; --panel-2:#1e2124; --panel-3:#282c30;
-  --ink:#f0f1ee; --ink-2:#9ea49c; --ink-3:#6b7069;
-  --rule:#2c3034; --rule-2:#3d4348;
-  --key:#d8cf3a; --key-dim:#3a3814; --key-ink:#16181a;
-  --warn:#e0913c; --err:#d2593f;
-  --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --disp:"Oswald","Helvetica Neue",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
-  --body:-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
+  --bg:#0c1214; --sur:#131b1e; --sur2:#1a2428; --sur3:#222f34;
+  --line:#223034; --line2:#33454c;
+  --ink:#eff4f3; --ink2:#94a5a8; --ink3:#61747b;
+  --acc:#ffb24a; --acc-ink:#11181a; --acc-soft:#2b2317; --acc-line:#6a4d1d;
+  --ok:#62cd90; --warn:#f0b64a; --bad:#ff7d66;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Archivo","Noto Sans TC","PingFang TC",sans-serif;
+  --body:"Noto Sans TC","PingFang TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --sheet:214px;
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{background:var(--panel);color:var(--ink);font:15px/1.55 var(--body);
-  -webkit-font-smoothing:antialiased;overflow:hidden;
-  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
-.app{display:grid;grid-template-columns:1fr 360px;height:100%}
-@media(max-width:860px){.app{grid-template-columns:1fr;grid-template-rows:44vh 1fr}}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+.app{display:grid;grid-template-columns:1fr 372px;height:100%}
 
-.stage{position:relative;background:linear-gradient(#f1f2ef 0%,#e6e8e4 55%,#d4d7d2 100%);overflow:hidden;touch-action:none}
+/* ── stage ────────────────────────────────────────────────────────────── */
+.stage{position:relative;overflow:hidden;touch-action:none;
+  background:radial-gradient(88% 70% at 50% 106%,#2d3e44 0%,#182227 44%,#0b1113 100%)}
 #cv{display:block;width:100%;height:100%}
-.badge{position:absolute;top:14px;left:16px;pointer-events:none}
-.badge .mk{font:500 9.5px/1 var(--mono);letter-spacing:.26em;color:#8b908a}
-.badge .md{font:600 21px/1.05 var(--disp);letter-spacing:.04em;color:#22262a;margin-top:4px}
-.views{position:absolute;top:12px;right:14px;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:62%}
-.views button{font:500 11.5px/1 var(--body);padding:6px 9px;border:1px solid #cfd2ce;border-radius:2px;
-  background:#fbfbfaee;color:#3b3f43;cursor:pointer}
-.views button[aria-pressed=true]{background:var(--key);border-color:var(--key);color:var(--key-ink);font-weight:600}
-.hud{position:absolute;left:16px;bottom:12px;font:500 10.5px/1.65 var(--mono);color:#6e736d;pointer-events:none}
-.hud b{color:#22262a}
-#boot{position:absolute;inset:0;display:grid;place-items:center;background:var(--stage);z-index:4;
-  font:500 13px var(--mono);color:#5d625c;text-align:center;padding:20px}
-#boot .bar{width:190px;height:3px;background:#d3d6d1;border-radius:2px;margin:12px auto 0;overflow:hidden}
-#boot .bar i{display:block;height:100%;width:0;background:var(--key);transition:width .2s}
-.credit{position:absolute;right:14px;bottom:10px;font:500 9.5px/1.5 var(--mono);color:#8d928c;
-  text-align:right;max-width:52%}
-.credit a{color:#6e736d}
+.badge{position:absolute;top:18px;left:22px;pointer-events:none}
+.badge .mk{font:500 9.5px/1 var(--mono);letter-spacing:.28em;color:#6f8188}
+.badge .md{font:800 23px/1.05 var(--disp);letter-spacing:-.01em;color:#dfe8e9;margin-top:5px}
+.views{position:absolute;top:16px;right:20px;display:flex;gap:1px;background:var(--line2);
+  border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.views button{font:500 11px/1 var(--body);padding:8px 11px;border:0;cursor:pointer;
+  background:#0f181bcc;color:var(--ink2);backdrop-filter:blur(6px)}
+.views button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:700}
+.hud{position:absolute;left:22px;bottom:18px;font:500 10.5px/1.75 var(--mono);
+  color:#7b8d93;pointer-events:none;letter-spacing:.03em}
+.hud b{color:#dfe8e9}
+#boot{position:absolute;inset:0;display:grid;place-items:center;background:#0b1113;z-index:5;
+  font:500 12.5px var(--mono);color:#7b8d93;text-align:center;padding:20px;letter-spacing:.08em}
+#boot .bar{width:190px;height:2px;background:#223034;margin:14px auto 0;overflow:hidden}
+#boot .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.credit{position:absolute;right:20px;bottom:14px;font:500 9.5px/1.55 var(--mono);color:#5e7076;
+  text-align:right;max-width:46%}
+.credit a{color:#7b8d93}
 
-.panel{background:var(--panel);border-left:1px solid var(--rule);overflow-y:auto;-webkit-overflow-scrolling:touch}
-.head{padding:18px 20px 16px;border-bottom:1px solid var(--rule)}
-.head .kicker{font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
-.head h1{font:600 20px/1.15 var(--disp);letter-spacing:.03em;margin:8px 0 0}
-.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
-  border:1px solid var(--rule);border-radius:3px;margin-top:14px;overflow:hidden}
-.readout div{background:var(--panel-2);padding:9px 10px}
-.readout span{display:block;font:500 9px/1 var(--mono);letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase}
-.readout b{display:block;font:600 16px/1.2 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums}
-.readout small{font-size:10px;font-weight:400;color:var(--ink-3)}
+/* ── panel ────────────────────────────────────────────────────────────── */
+.panel{background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.head{padding:18px 20px 15px;border-bottom:1px solid var(--line);flex:none}
+.head .kicker{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink3);text-transform:uppercase}
+.head .kicker a{color:var(--acc);text-decoration:none;letter-spacing:.06em}
+.head h1{font:800 21px/1.1 var(--disp);letter-spacing:-.01em;margin:9px 0 0}
+.gauge{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:4px;margin-top:14px;overflow:hidden}
+.gauge div{background:var(--sur);padding:9px 10px}
+.gauge span{display:block;font:500 8.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
+.gauge b{display:block;font:800 18px/1.15 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums}
+.gauge small{font:400 10px/1 var(--mono);color:var(--ink3);font-weight:400}
 
-section{border-bottom:1px solid var(--rule)}
-.sec-h{display:flex;align-items:center;gap:11px;width:100%;padding:14px 20px;background:none;border:0;
-  color:var(--ink);cursor:pointer;text-align:left;font:inherit}
-.sec-h .ix{font:600 12px/1 var(--mono);color:var(--key);width:12px;flex:none}
-.sec-h .tt{flex:1;min-width:0}
-.sec-h .tt b{display:block;font:600 14px/1.2 var(--disp);letter-spacing:.03em}
-.sec-h .tt i{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-top:2px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sec-h .ar{color:var(--ink-3);font-size:10px;transition:transform .18s}
-.sec-h[aria-expanded=true] .ar{transform:rotate(180deg)}
-.sec-b{padding:0 20px 18px;display:none}
-.sec-h[aria-expanded=true]+.sec-b{display:block}
-.lbl{font:500 9.5px/1 var(--mono);letter-spacing:.13em;color:var(--ink-3);text-transform:uppercase;margin:16px 0 8px;display:block}
+.steps{display:flex;gap:1px;background:var(--line);border-bottom:1px solid var(--line);flex:none}
+.steps button{flex:1;background:var(--bg);border:0;cursor:pointer;padding:11px 6px 10px;
+  color:var(--ink3);font:inherit;display:grid;gap:3px;justify-items:center;position:relative}
+.steps button b{font:700 13px/1.2 var(--disp);letter-spacing:.02em;color:var(--ink2)}
+.steps button i{font-style:normal;font:500 9.5px/1 var(--mono);letter-spacing:.08em}
+.steps button[aria-selected=true]{background:var(--sur)}
+.steps button[aria-selected=true] b{color:var(--acc)}
+.steps button[aria-selected=true]::after{content:"";position:absolute;inset:auto 0 0 0;height:2px;background:var(--acc)}
+
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
+.pane{display:none;padding:4px 20px 8px}
+.pane.on{display:block}
+.grp{padding:16px 0 4px;border-bottom:1px solid var(--line)}
+.grp:last-child{border-bottom:0}
+.lbl{display:flex;align-items:baseline;gap:8px;font:500 9.5px/1 var(--mono);letter-spacing:.14em;
+  color:var(--ink3);text-transform:uppercase;margin:0 0 10px}
+.lbl em{font-style:normal;margin-left:auto;text-transform:none;letter-spacing:.04em;color:var(--ink3)}
+.hint{font-size:11.5px;color:var(--ink3);line-height:1.55;margin:7px 0 0}
+
+select{width:100%;background:var(--sur);color:var(--ink);border:1px solid var(--line2);border-radius:3px;
+  padding:11px 32px 11px 12px;font:14px var(--body);appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink3) 50%),linear-gradient(135deg,var(--ink3) 50%,transparent 50%);
+  background-position:right 15px top 20px,right 10px top 20px;background-size:5px 5px;background-repeat:no-repeat}
+select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+
+/* segmented control — the lift's "how high" step */
+.seg{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.seg button{flex:1 0 auto;min-width:0;background:var(--sur);border:0;cursor:pointer;padding:9px 4px;
+  font:inherit;color:var(--ink2);display:grid;gap:3px;justify-items:center}
+.seg button b{font:700 13px/1 var(--disp)}
+.seg button i{font-style:normal;font:500 8.5px/1 var(--mono);color:var(--ink3);white-space:nowrap}
+.seg button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
+.seg button[aria-pressed=true] i{color:var(--acc-ink);opacity:.72}
+
+/* product rows */
+.cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.card{background:var(--sur);border:0;width:100%;text-align:left;cursor:pointer;font:inherit;color:var(--ink);
+  display:grid;grid-template-columns:1fr auto;gap:3px 12px;padding:11px 13px;align-items:baseline}
+.card:hover{background:var(--sur2)}
+.card[aria-pressed=true]{background:var(--acc-soft);box-shadow:inset 3px 0 0 var(--acc)}
+.card .nm{font:500 13.5px/1.4 var(--body)}
+.card .brand{display:block;font:500 9px/1.5 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
+.card .pr{font:700 14px/1.2 var(--disp);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.card .pr em{display:block;font:400 9.5px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
+.card .inc{grid-column:1/-1;display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.tag{font:500 9.5px/1 var(--mono);padding:4px 5px;border:1px solid var(--line2);border-radius:2px;
+  color:var(--ink3);white-space:nowrap}
+.tag.on{border-color:var(--acc-line);color:var(--acc);background:var(--acc-soft)}
+.tag.no{opacity:.32;text-decoration:line-through}
+.tag.flare{border-color:#6a4a1d;color:var(--warn)}
+
+/* wheel thumbnails, rendered from parts.glb by tools/render_wheels.mjs */
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{border:1px solid var(--line2);background:none;color:var(--ink2);border-radius:99px;
+  padding:6px 11px;font:500 11.5px/1 var(--body);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.wcard{background:var(--sur);border:1px solid var(--line);border-radius:4px;padding:7px 7px 9px;
+  cursor:pointer;font:inherit;color:var(--ink);text-align:left;display:grid;gap:5px;min-width:0}
+.wcard:hover{background:var(--sur2)}
+.wcard[aria-pressed=true]{border-color:var(--acc);background:var(--acc-soft)}
+.wcard img{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:radial-gradient(60% 60% at 50% 45%,#222f34,#131b1e);border-radius:3px}
+.wcard .wn{font:500 11.5px/1.3 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wcard .wm{font:500 9px/1.35 var(--mono);color:var(--ink3);letter-spacing:.02em}
+.wcard .wm b{color:var(--warn);font-weight:500}
+
 .swatches{display:flex;gap:7px;flex-wrap:wrap}
-.sw{width:34px;height:34px;border-radius:50%;border:2px solid transparent;outline:1px solid var(--rule-2);
-  cursor:pointer;padding:0;position:relative}
-.sw[aria-pressed=true]{border-color:var(--key);outline-color:var(--key)}
-select{width:100%;background:var(--panel-2);color:var(--ink);border:1px solid var(--rule-2);border-radius:2px;
-  padding:10px 11px;font:14px var(--body);appearance:none;
-  background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);
-  background-position:right 14px top 18px,right 9px top 18px;background-size:5px 5px;background-repeat:no-repeat}
-select:focus{outline:2px solid var(--key);outline-offset:-1px}
-.hint{font-size:11px;color:var(--ink-3);line-height:1.5;margin:6px 0 0}
-.toggles{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
-.tg{display:flex;align-items:center;justify-content:space-between;gap:9px;background:var(--panel-2);border:0;
-  padding:12px;color:var(--ink);cursor:pointer;font:inherit;text-align:left;width:100%}
-.tg[aria-pressed=true]{background:var(--key-dim)}
+.sw{width:32px;height:32px;border-radius:50%;border:2px solid transparent;outline:1px solid var(--line2);
+  cursor:pointer;padding:0}
+.sw[aria-pressed=true]{border-color:var(--acc);outline-color:var(--acc)}
+.sw.jp{outline-style:dashed;outline-color:var(--ink3)}
+
+/* tyre ladder — the bar is outer diameter, the right column is whether it fits */
+.ladder{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.trow{background:var(--sur);border:0;font:inherit;color:var(--ink);cursor:pointer;text-align:left;
+  display:grid;grid-template-columns:96px 1fr 86px;gap:10px;align-items:center;padding:9px 12px}
+.trow:hover{background:var(--sur2)}
+.trow[aria-pressed=true]{background:var(--acc-soft);box-shadow:inset 3px 0 0 var(--acc)}
+.trow .sz{font:500 12.5px/1.25 var(--body)}
+.trow .sz em{display:block;font:400 9px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
+.bar{height:8px;background:var(--sur3);border-radius:99px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#4a6068,var(--acc));display:block}
+.fit{font:500 10px/1.4 var(--mono);text-align:right}
+.fit.ok{color:var(--ok)} .fit.warn{color:var(--warn)} .fit.bad{color:var(--bad)}
+
+.tabs{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.tabs button{flex:1;background:var(--sur);border:0;cursor:pointer;padding:9px 4px;font:inherit;color:var(--ink2);
+  display:grid;gap:2px;justify-items:center}
+.tabs button b{font:700 12.5px/1 var(--disp)}
+.tabs button i{font-style:normal;font-size:10px;color:var(--ink3)}
+.tabs button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
+.tabs button[aria-pressed=true] i{color:var(--acc-ink);opacity:.75}
+.treads{display:grid;gap:6px;margin-top:9px}
+.tr{background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:8px 10px;cursor:pointer;
+  font:inherit;color:var(--ink);text-align:left;display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center}
+.tr:hover{background:var(--sur2)}
+.tr[aria-pressed=true]{border-color:var(--acc);background:var(--acc-soft)}
+.tr[disabled]{opacity:.4;cursor:not-allowed}
+.tr canvas{width:30px;height:46px;border-radius:2px;display:block}
+.tr .tb{display:block;font:500 9px/1.4 var(--mono);color:var(--ink3);letter-spacing:.1em}
+.tr .tn{display:block;font:500 12px/1.35 var(--body)}
+
+.live{margin-top:11px;border:1px solid var(--line);border-left:2px solid var(--acc);border-radius:3px;
+  padding:10px 12px;background:var(--sur);display:grid;gap:4px}
+.live b{font:500 12px/1.45 var(--body)}
+.live p{margin:0;font:500 11px/1.65 var(--mono);color:var(--ink2)}
+
+.toggles{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:9px;background:var(--sur);border:0;
+  padding:11px 12px;color:var(--ink);cursor:pointer;font:inherit;text-align:left;width:100%}
+.tg:hover{background:var(--sur2)}
+.tg[aria-pressed=true]{background:var(--acc-soft)}
 .tg .nm{font-size:13px;min-width:0}
-.tg .nm i{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3);margin-top:2px;
+.tg .nm i{display:block;font-style:normal;font-size:10.5px;color:var(--ink3);margin-top:2px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tg[aria-pressed=true] .nm{color:var(--key)}
-.tg .st{font:500 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink-3);flex:none}
-.tg[aria-pressed=true] .st{color:var(--key)}
-.flags{padding:0 20px 16px;display:grid;gap:6px}
-.flag{padding:9px 11px;border-radius:2px;font-size:12px;line-height:1.5;border-left:2px solid}
-.flag.error{background:#2a1714;border-color:var(--err);color:#f0c4ba}
-.flag.warn{background:#2a2113;border-color:var(--warn);color:#f0d8b8}
-.flag.info{background:var(--panel-2);border-color:var(--rule-2);color:var(--ink-2)}
-.flag b{font:600 9.5px/1.6 var(--mono);letter-spacing:.08em;display:block}
-.acts{padding:16px 20px 30px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.acts button{padding:12px;border-radius:2px;font:600 13px var(--body);cursor:pointer;border:1px solid}
-.ghost{background:none;border-color:var(--rule-2);color:var(--ink-2)}
-.solid{background:var(--key);border-color:var(--key);color:var(--key-ink)}
-#out{margin:0 20px 22px;background:var(--panel-2);border:1px solid var(--rule);border-radius:3px;padding:12px;
-  font:11.5px/1.65 var(--mono);color:var(--ink-2);white-space:pre-wrap;display:none}
+.tg[aria-pressed=true] .nm{color:var(--acc)}
+.tg .st{font:500 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink3);flex:none}
+.tg[aria-pressed=true] .st{color:var(--acc)}
+.tg.solo{border:1px solid var(--line);border-radius:3px;margin-top:9px}
+
+.flags{padding:10px 20px 0;display:grid;gap:6px;flex:none}
+.flags:empty{padding:0}
+.flag{padding:9px 11px;border-radius:3px;font-size:12px;line-height:1.55;border-left:2px solid;background:var(--sur)}
+.flag.error{border-color:var(--bad);color:#ffc9bc}
+.flag.warn{border-color:var(--warn);color:#f3ddb4}
+.flag.info{border-color:var(--line2);color:var(--ink2)}
+.flag b{font:600 9.5px/1.7 var(--mono);letter-spacing:.1em;display:block}
+.acts{padding:14px 20px calc(18px + env(safe-area-inset-bottom));display:grid;
+  grid-template-columns:1fr 1fr;gap:7px;flex:none;border-top:1px solid var(--line);margin-top:12px}
+.acts button{padding:12px;border-radius:3px;font:600 13px var(--body);cursor:pointer;border:1px solid}
+.ghost{background:none;border-color:var(--line2);color:var(--ink2)}
+.solid{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);grid-column:1/-1}
+#out{margin:0 20px 20px;background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:12px;
+  font:11.5px/1.7 var(--mono);color:var(--ink2);white-space:pre-wrap;display:none}
 #out.on{display:block}
+
+/* ── phone: the panel becomes a sheet so the car keeps the whole screen ── */
+.grab{display:none}
+@media(max-width:860px){
+  :root{--sheet:198px}
+  .app{grid-template-columns:1fr;grid-template-rows:100%}
+  .stage{grid-area:1/1;align-items:start}
+  /* the sheet covers the bottom of the screen, so the car is framed in what
+     is left above it rather than in the middle of a viewport it cannot use */
+  #cv{height:calc(100% - var(--sheet) + 54px)}
+  .badge{display:none}
+  .views{top:12px;right:12px}
+  .views button{padding:7px 9px;font-size:10.5px}
+  .credit{max-width:42%;bottom:calc(var(--sheet) + 8px);font-size:9px}
+  .hud{max-width:52%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.6}
+  .panel{grid-area:1/1;align-self:end;z-index:3;height:86vh;border-left:0;
+    border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
+    background:#0c1214f2;backdrop-filter:blur(14px);
+    box-shadow:0 -18px 40px #00000066;
+    /* percentages are of the panel's own height, so the peek is exact whatever
+       the browser decides a vh is worth this frame */
+    transform:translateY(calc(100% - var(--sheet)));transition:transform .3s cubic-bezier(.32,.72,0,1)}
+  body.sheet .panel{transform:translateY(0)}
+  .grab{display:block;flex:none;width:100%;border:0;background:none;padding:9px 0 3px;cursor:pointer}
+  .grab span{display:block;width:38px;height:4px;border-radius:99px;background:var(--line2);margin:0 auto}
+  .head{padding-top:6px}
+  .head h1{display:none}
+  .gauge{margin-top:11px}
+  .wgrid{grid-template-columns:repeat(3,1fr)}
+}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -117,57 +245,105 @@ select:focus{outline:2px solid var(--key);outline-offset:-1px}
   </div>
 
   <div class="panel">
+    <button class="grab" id="grab" aria-label="展開或收起設定面板"><span></span></button>
     <div class="head">
-      <div class="kicker">改裝配置器 · <a href="parts.html" style="color:var(--key);text-decoration:none">零件目錄與價格 →</a></div>
+      <div class="kicker"><span>改裝配置器</span><a href="parts.html">零件目錄與價格 →</a></div>
       <h1>Jimny JB74</h1>
-      <div class="readout">
+      <div class="gauge">
         <div><span>總舉升</span><b id="rLift">0<small> mm</small></b></div>
         <div><span>胎外徑</span><b id="rTyre">693<small> mm</small></b></div>
         <div><span>估離地</span><b id="rClear">210<small> mm</small></b></div>
       </div>
     </div>
-    <section><button class="sec-h" aria-expanded="true"><span class="ix">L</span>
-      <span class="tt"><b>懸吊與舉升</b><i id="sumL">原廠</i></span><span class="ar">▾</span></button>
-      <div class="sec-b">
-        <label class="lbl">懸吊舉升</label><select id="selLift"></select><p class="hint" id="hLift"></p>
-      </div></section>
-    <section><button class="sec-h" aria-expanded="false"><span class="ix">W</span>
-      <span class="tt"><b>輪框與輪胎</b><i id="sumW">原廠</i></span><span class="ar">▾</span></button>
-      <div class="sec-b">
-        <label class="lbl">輪框</label><select id="selWheel"></select><p class="hint" id="hWheel"></p>
-        <label class="lbl">輪胎尺寸</label><select id="selTyre"></select><p class="hint" id="hTyre"></p>
-        <label class="lbl">輪胎型號</label><select id="selTread"></select><p class="hint" id="hTread"></p>
-        <button class="tg" id="tgOwl" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
-          <span class="nm">白字胎邊<i id="owlNote">Outlined White Letters</i></span><span class="st">關閉</span></button>
-        <label class="lbl">輪框顏色</label><div class="swatches" id="rimSw"></div>
-      </div></section>
-    <section><button class="sec-h" aria-expanded="false"><span class="ix">E</span>
-      <span class="tt"><b>外觀與配件</b><i id="sumE">原廠</i></span><span class="ar">▾</span></button>
-      <div class="sec-b">
-        <label class="lbl">車身配色</label><div class="swatches" id="colSw"></div>
-        <select id="selColor" style="margin-top:10px"></select>
-        <button class="tg" id="tgTwo" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
-          <span class="nm">雙色車頂<i>ZJ3 Bluish Black Pearl</i></span><span class="st">關閉</span></button>
-        <label class="lbl">全車套件</label><select id="selKit"></select><p class="hint" id="hKit"></p>
-        <label class="lbl">引擎蓋</label><select id="selHood"></select><p class="hint" id="hHood"></p>
-        <label class="lbl">備胎蓋（套件）</label><select id="selSpareKit"></select><p class="hint" id="hSpareKit"></p>
-        <label class="lbl">前保桿</label><select id="selBumper"></select><p class="hint" id="hBumper"></p>
-        <label class="lbl">水箱護罩</label><select id="selGrille"></select><p class="hint" id="hGrille"></p>
-        <label class="lbl">後保桿</label><select id="selRear"></select><p class="hint" id="hRear"></p>
-        <label class="lbl">呼吸管</label><select id="selSnorkel"></select><p class="hint" id="hSnorkel"></p>
-        <label class="lbl">後照鏡</label><select id="selMirror"></select><p class="hint" id="hMirror"></p>
-        <label class="lbl">車頂架</label><select id="selRack"></select><p class="hint" id="hRack"></p>
-        <label class="lbl">車邊帳</label><select id="selAwning"></select><p class="hint" id="hAwning"></p>
-        <button class="tg" id="tgAwnSide" aria-pressed="false" style="margin-top:9px;border:1px solid var(--rule)">
-          <span class="nm">車邊帳安裝側<i>台灣右駕道路習慣裝左側（副駕側）</i></span><span class="st">左側</span></button>
-        <label class="lbl">側踏／岩石滑桿</label><select id="selStep"></select><p class="hint" id="hStep"></p>
-        <label class="lbl">後爬梯</label><select id="selLadder"></select><p class="hint" id="hLadder"></p>
-        <label class="lbl">加裝配件</label><div class="toggles" id="toggles"></div>
-      </div></section>
+
+    <div class="steps" id="steps" role="tablist">
+      <button role="tab" data-s="0" aria-selected="true"><b>底盤</b><i id="sum0">原廠</i></button>
+      <button role="tab" data-s="1" aria-selected="false"><b>外觀</b><i id="sum1">原廠</i></button>
+      <button role="tab" data-s="2" aria-selected="false"><b>裝備</b><i id="sum2">無</i></button>
+    </div>
+
+    <div class="body" id="body">
+      <!-- 1 ── 底盤 -->
+      <div class="pane on" data-p="0">
+        <div class="grp">
+          <p class="lbl">懸吊舉升 <em id="liftCount"></em></p>
+          <div class="seg" id="liftSeg"></div>
+          <div class="cards" id="liftCards" style="margin-top:8px"></div>
+          <div class="live"><b id="liftPick"></b><p id="liftNote"></p></div>
+        </div>
+        <div class="grp">
+          <p class="lbl">輪框 <em id="wheelCount"></em></p>
+          <div class="chips" id="wSize"></div>
+          <div class="chips" id="wKind" style="margin-top:6px"></div>
+          <div class="wgrid" id="wheelGrid" style="margin-top:9px"></div>
+          <div class="live"><b id="wheelPick"></b><p id="wheelNote"></p></div>
+          <p class="lbl" style="margin-top:16px">輪框顏色</p>
+          <div class="swatches" id="rimSw"></div>
+        </div>
+        <div class="grp">
+          <p class="lbl">輪胎尺寸 <em id="tyreEcho"></em></p>
+          <div class="ladder" id="tyreLadder"></div>
+          <p class="lbl" style="margin-top:16px">胎紋個性</p>
+          <div class="tabs" id="patTabs"></div>
+          <div class="treads" id="treadList"></div>
+          <button class="tg solo" id="tgOwl" aria-pressed="false">
+            <span class="nm">白字胎邊<i id="owlNote">Outlined White Letters</i></span><span class="st">關閉</span></button>
+          <div class="live"><b id="tyrePick"></b><p id="tyreNote"></p></div>
+        </div>
+      </div>
+
+      <!-- 2 ── 外觀 -->
+      <div class="pane" data-p="1">
+        <div class="grp">
+          <p class="lbl">車身配色 <em id="colName"></em></p>
+          <div class="swatches" id="colSw"></div>
+          <select id="selColor" style="margin-top:10px" aria-label="車身配色"></select>
+          <button class="tg solo" id="tgTwo" aria-pressed="false">
+            <span class="nm">雙色車頂<i id="twoNote">黑頂 ZJ3</i></span><span class="st">關閉</span></button>
+          <div class="live"><b id="colPick"></b><p id="colNote"></p></div>
+        </div>
+        <div class="grp">
+          <p class="lbl">全車套件</p>
+          <select id="selKit" aria-label="全車套件"></select><p class="hint" id="hKit"></p>
+        </div>
+        <div class="grp">
+          <p class="lbl">前保桿</p><select id="selBumper" aria-label="前保桿"></select><p class="hint" id="hBumper"></p>
+          <p class="lbl" style="margin-top:16px">水箱護罩</p><select id="selGrille" aria-label="水箱護罩"></select><p class="hint" id="hGrille"></p>
+          <p class="lbl" style="margin-top:16px">後保桿</p><select id="selRear" aria-label="後保桿"></select><p class="hint" id="hRear"></p>
+        </div>
+        <div class="grp">
+          <p class="lbl">引擎蓋</p><select id="selHood" aria-label="引擎蓋"></select><p class="hint" id="hHood"></p>
+          <p class="lbl" style="margin-top:16px">備胎蓋（套件）</p><select id="selSpareKit" aria-label="備胎蓋"></select><p class="hint" id="hSpareKit"></p>
+          <p class="lbl" style="margin-top:16px">後照鏡</p><select id="selMirror" aria-label="後照鏡"></select><p class="hint" id="hMirror"></p>
+        </div>
+      </div>
+
+      <!-- 3 ── 裝備 -->
+      <div class="pane" data-p="2">
+        <div class="grp">
+          <p class="lbl">車頂架</p><select id="selRack" aria-label="車頂架"></select><p class="hint" id="hRack"></p>
+          <p class="lbl" style="margin-top:16px">車邊帳</p><select id="selAwning" aria-label="車邊帳"></select><p class="hint" id="hAwning"></p>
+          <button class="tg solo" id="tgAwnSide" aria-pressed="false">
+            <span class="nm">車邊帳安裝側<i>台灣左駕，一般裝副駕（右）側</i></span><span class="st">左側</span></button>
+        </div>
+        <div class="grp">
+          <p class="lbl">側踏／岩石滑桿</p><select id="selStep" aria-label="側踏"></select><p class="hint" id="hStep"></p>
+          <p class="lbl" style="margin-top:16px">後爬梯</p><select id="selLadder" aria-label="後爬梯"></select><p class="hint" id="hLadder"></p>
+          <p class="lbl" style="margin-top:16px">呼吸管</p><select id="selSnorkel" aria-label="呼吸管"></select><p class="hint" id="hSnorkel"></p>
+        </div>
+        <div class="grp">
+          <p class="lbl">加裝配件</p>
+          <div class="toggles" id="toggles"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="flags" id="flags"></div>
-    <div class="acts"><button class="ghost" id="btnDemo">載入範例車</button>
+    <div class="acts">
+      <button class="ghost" id="btnDemo">載入範例車</button>
       <button class="ghost" id="btnReset">全部還原</button>
-      <button class="solid" id="btnExport">匯出這台配置</button></div>
+      <button class="solid" id="btnExport">匯出這台配置</button>
+    </div>
     <pre id="out"></pre>
   </div>
 </div>
@@ -188,13 +364,14 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609210812';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS } from './parts.js?v=202609210812';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609210812';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609210812';
+import { rigJimny, applyConfig } from './rig.js?v=202609210941';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS } from './parts.js?v=202609210941';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609210941';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609210941';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609210941';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609210812';
+const BUILD = '202609210941';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -209,10 +386,6 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure
 
 // Image-based light so chrome and paint have something to reflect; without it
 // metallic surfaces render as flat dark grey.
-// A real photographed environment (Poly Haven "abandoned parking", CC0)
-// replaces the synthetic studio: paint, chrome and glass now reflect an
-// actual space, which is most of what makes a render read as a photo. The
-// studio stays as the fallback until the HDR arrives.
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 scene.environmentIntensity = 1.0;
@@ -221,23 +394,31 @@ new RGBELoader().load(`model/env.hdr?v=${BUILD}`, (hdr) => {
   scene.environmentIntensity = 1.35;
   hdr.dispose();
 });
-scene.add(new THREE.HemisphereLight(0xffffff, 0xc4c8bf, 0.6));
-const kl = new THREE.DirectionalLight(0xffffff, 1.8); kl.position.set(4, 6.5, 4.5);
+scene.add(new THREE.HemisphereLight(0xdfe8ef, 0x2b3a40, 0.55));
+const kl = new THREE.DirectionalLight(0xffffff, 2.1); kl.position.set(4, 6.5, 4.5);
 kl.castShadow = true; kl.shadow.mapSize.set(2048, 2048);
 Object.assign(kl.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .1, far: 26 });
 kl.shadow.bias = -0.0005; scene.add(kl);
-const fl2 = new THREE.DirectionalLight(0xffffff, 0.5); fl2.position.set(-5, 3, -4); scene.add(fl2);
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.ShadowMaterial({ opacity: .18 }));
+// rim light from behind picks the roofline out of the dark backdrop
+const fl2 = new THREE.DirectionalLight(0xbfd6e0, 0.9); fl2.position.set(-5, 3, -4); scene.add(fl2);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.ShadowMaterial({ opacity: .34 }));
 floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
-// soft pool of shade under the car, the way a real car darkens the ground around it
+// On the dark ground the car needs something to stand on, so the floor gets a
+// lit pool first and the contact shadow is laid over it.
 {
-  const c = document.createElement('canvas'); c.width = c.height = 256;
-  const g = c.getContext('2d').createRadialGradient(128, 128, 20, 128, 128, 128);
-  g.addColorStop(0, 'rgba(0,0,0,0.42)'); g.addColorStop(0.6, 'rgba(0,0,0,0.14)'); g.addColorStop(1, 'rgba(0,0,0,0)');
-  const ctx = c.getContext('2d'); ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 256);
-  const pool = new THREE.Mesh(new THREE.PlaneGeometry(6.2, 4.2),
-    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
-  pool.rotation.x = -Math.PI / 2; pool.rotation.z = Math.PI / 2; pool.position.y = 0.002; scene.add(pool);
+  const disc = (stops, w, h, y) => {
+    const c = document.createElement('canvas'); c.width = c.height = 256;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(128, 128, 10, 128, 128, 128);
+    for (const [o, col] of stops) g.addColorStop(o, col);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 256);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false,
+        blending: y > 0.0015 ? THREE.NormalBlending : THREE.AdditiveBlending }));
+    m.rotation.x = -Math.PI / 2; m.rotation.z = Math.PI / 2; m.position.y = y; scene.add(m);
+  };
+  disc([[0, 'rgba(120,145,158,0.30)'], [0.55, 'rgba(70,90,100,0.12)'], [1, 'rgba(0,0,0,0)']], 11, 8, 0.001);
+  disc([[0, 'rgba(0,0,0,0.55)'], [0.6, 'rgba(0,0,0,0.18)'], [1, 'rgba(0,0,0,0)']], 6.2, 4.2, 0.002);
 }
 
 // Desktop gets ambient occlusion through a post-processing chain (crevices,
@@ -297,18 +478,16 @@ const DEMO = { color: 'ZJ3', lift: 'td60', wheel: 'maxx', tyre: 't225r16', tread
   grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', roofLights: false, awning: 'yakima_270s', awningSide: 'left',
   windowGuards: true, guardCan: true, guardBoard: true, shovel: true, ladder: 'tube', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
   mirrors: 'damd', pillarPods: true, snorkel: 'bravo' };
-// toggle buttons read their state from S, so presets and cycling share one path
-function syncToggles() {
-  const t = document.getElementById('toggles'); if (!t) return;
-  const set = (b, on, txt) => { b.setAttribute('aria-pressed', on); b.querySelector('.st').textContent = txt; };
-  const aw = document.getElementById('tgAwnSide'); aw.setAttribute('aria-pressed', S.awningSide === 'right'); aw.querySelector('.st').textContent = S.awningSide === 'left' ? '左側' : '右側';
-  t.querySelectorAll('[data-k]').forEach(b => set(b, !!S[b.dataset.k], S[b.dataset.k] ? '已裝' : '未裝'));
-  document.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.color));
-  document.querySelectorAll('[data-r]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.r === S.rimColor));
-  const owl = document.getElementById('tgOwl'); owl.setAttribute('aria-pressed', S.owl); owl.querySelector('.st').textContent = S.owl ? '開啟' : '關閉';
-  const two = document.getElementById('tgTwo'); two.setAttribute('aria-pressed', S.twoTone); two.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉';
-}
 const find = (l, id) => l.find(x => x.id === id) || l[0];
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ── prices: NT$ up front, the maker's own currency underneath ─────────── */
+function money(o) { const p = priceLabel(o); return p.main === '原廠' ? '' : ' — ' + p.main; }
+function priceCell(o) {
+  const p = priceLabel(o);
+  return `<span class="pr">${p.main}${p.sub ? `<em>${p.sub}</em>` : ''}</span>`;
+}
 
 const loader = new GLTFLoader();
 const draco = new DRACOLoader();
@@ -321,16 +500,19 @@ loader.load('model/jimny-hq.glb', async (g) => {
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   scene.add(rig); rig.userData.BODY.add(accGroup);
   // inspection hook for headless verification scripts; harmless in the page
-  window.__jimny = { THREE, rig, scene, cam, get composer() { return composer; }, update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); } };
-  document.getElementById('boot').style.display = 'none';
+  window.__jimny = { THREE, rig, scene, cam, get composer() { return composer; }, get S() { return S; },
+    update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); },
+    set: (k, v) => { S[k] = v; buildUI(); update(); } };
+  $('boot').style.display = 'none';
   // parts.html links in with ?key=id (booleans as true/false) to preselect a part
   const q = new URLSearchParams(location.search);
   for (const [k, v] of q) if (k in DEF) S[k] = typeof DEF[k] === 'boolean' ? v === 'true' : typeof DEF[k] === 'number' ? +v : v;
-  if ([...q.keys()].length) document.querySelectorAll('.sec-h').forEach(b => b.setAttribute('aria-expanded', 'true'));
   buildUI(); update();
-}, (p) => { if (p.total) document.getElementById('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
-(e) => { document.getElementById('boot').textContent = '模型載入失敗：' + (e?.message || e); });
+  if ([...q.keys()].length) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
+}, (p) => { if (p.total) $('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
+(e) => { $('boot').textContent = '模型載入失敗：' + (e?.message || e); });
 
+/* ═══ scene update ═══════════════════════════════════════════════════════ */
 function update() {
   const lift = find(LIFTS, S.lift), bl = { body: lift.body ?? 0, label: '' };
   const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
@@ -370,176 +552,365 @@ function update() {
   if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint));
   if (S.grille !== 'stock') add(buildAccessory('grille', S.grille, paint));
 
-  const set = (id, v) => document.getElementById(id).innerHTML = v;
-  set('rLift', total + '<small> mm</small>');
-  set('rTyre', ty.dia + '<small> mm</small>');
-  set('rClear', (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>');
-  document.getElementById('sumL').textContent = total ? lift.label : '原廠';
-  document.getElementById('sumW').textContent = wh.label.replace('原廠 ', '') + ' · ' + ty.label.replace('（原廠）', '');
-  const n = ['windowGuards','lightBar','spareBag','spareCover','roofLights','guardCan','guardBoard','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
-    + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
-    + (S.snorkel !== 'none') + (S.mirrors !== 'stock');
-  document.getElementById('sumE').textContent = col.name + (S.twoTone ? ' 雙色' : '') + (n ? ` · ${n} 項配件` : '');
-  document.getElementById('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${col.name}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${ty.label.replace('（原廠）','')}</b><br>版本 ${BUILD}`;
+  $('rLift').innerHTML = total + '<small> mm</small>';
+  $('rTyre').innerHTML = ty.dia + '<small> mm</small>';
+  $('rClear').innerHTML = (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>';
+  $('sum0').textContent = (total ? total + 'mm' : '原廠') + ' · ' + wh.rim + '"';
+  const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
+    + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
+  $('sum1').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
+  const n2 = ['windowGuards','lightBar','spareBag','spareCover','roofLights','guardCan','guardBoard','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
+    + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.snorkel !== 'none');
+  $('sum2').textContent = n2 ? `${n2} 項` : '無';
+  $('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${esc(col.name)}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${esc(ty.label)}</b><br>版本 ${BUILD}`;
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
-  document.getElementById('flags').innerHTML = fl.map(f =>
-    `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${f.msg}</div>`).join('');
+  $('flags').innerHTML = fl.map(f =>
+    `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
+}
+
+/* ═══ step navigation ════════════════════════════════════════════════════ */
+const STEP_OF = { lift:0, wheel:0, tyre:0, tread:0, rimColor:0,
+  color:1, kit:1, frontBumper:1, grille:1, rearBumper:1, hood:1, spareCoverKit:1, mirrors:1 };
+const stepOf = (k) => STEP_OF[k] ?? 2;
+function goStep(i) {
+  document.querySelectorAll('.steps button').forEach(b => b.setAttribute('aria-selected', +b.dataset.s === i));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', +p.dataset.p === i));
+  $('body').scrollTop = 0;
+}
+$('steps').onclick = e => { const b = e.target.closest('[data-s]'); if (!b) return;
+  goStep(+b.dataset.s); document.body.classList.add('sheet'); };
+$('grab').onclick = () => document.body.classList.toggle('sheet');
+
+/* ═══ 1 · lift: pick the height first, then the kit ══════════════════════ */
+const INC = { spring:'彈簧', shock:'避震', hose:'長油管', caster:'Caster 修正', panhard:'橫拉桿', body:'車身墊高' };
+// What a kit ships with, read off the note each entry already carries. Cheaper
+// than a new data field and it cannot drift out of sync with the description.
+function includes(l) {
+  const t = (l.note || '') + ' ' + (l.label || '');
+  return { spring: /彈簧/.test(t) || l.lift > 0, shock: /避震/.test(t), hose: /油管/.test(t),
+    caster: /Caster|caster/.test(t), panhard: /橫拉桿|Panhard|拉桿/.test(t), body: (l.body ?? 0) > 0 };
+}
+const INCHES = () => [...new Set(LIFTS.map(l => l.inch))];
+let liftInch = null;
+function renderLiftSeg() {
+  liftInch = find(LIFTS, S.lift).inch;
+  $('liftSeg').innerHTML = INCHES().map(i => {
+    const ms = LIFTS.filter(l => l.inch === i).map(l => l.lift + (l.body ?? 0));
+    const lo = Math.min(...ms), hi = Math.max(...ms);
+    return `<button data-i="${esc(i)}" aria-pressed="${i === liftInch}">
+      <b>${esc(i)}</b><i>${lo === hi ? lo : lo + '–' + hi}mm</i></button>`;
+  }).join('');
+  $('liftCount').textContent = `${LIFTS.length} 組`;
+}
+function renderLiftCards() {
+  const list = LIFTS.filter(l => l.inch === liftInch);
+  $('liftCards').innerHTML = list.map(l => {
+    const inc = includes(l);
+    const tags = l.id === 'stock' ? '' : '<span class="inc">' + Object.keys(INC).map(k =>
+      `<span class="tag ${inc[k] ? 'on' : 'no'}">${INC[k]}</span>`).join('') + '</span>';
+    return `<button class="card" data-l="${esc(l.id)}" aria-pressed="${l.id === S.lift}">
+      <span class="nm"><span class="brand">${esc(l.brand ?? '')}</span>${esc(l.label)}</span>
+      ${priceCell(l)}${tags}</button>`;
+  }).join('');
+  syncLift();
+}
+function syncLift() {
+  const l = find(LIFTS, S.lift), total = l.lift + (l.body ?? 0);
+  $('liftPick').textContent = `${l.brand ?? ''} ${l.label} — 舉升 ${total}mm`.trim();
+  $('liftNote').textContent = [l.note, l.uncertain ? '（規格或價格未完全查證）' : ''].filter(Boolean).join(' ');
+  $('tyreEcho').textContent = `目前舉升 ${total}mm`;
+}
+$('liftSeg').onclick = e => { const b = e.target.closest('[data-i]'); if (!b) return;
+  liftInch = b.dataset.i;
+  document.querySelectorAll('#liftSeg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  renderLiftCards(); };
+$('liftCards').onclick = e => { const b = e.target.closest('[data-l]'); if (!b) return;
+  S.lift = b.dataset.l;
+  document.querySelectorAll('#liftCards .card').forEach(x => x.setAttribute('aria-pressed', x === b));
+  syncLift(); renderLadder(); update(); };
+
+/* ═══ 2 · wheels: thumbnails rendered from the same parts.glb ════════════ */
+// Grouping for the filter chips. The retro list is the 2026-09 research batch;
+// anything else that is not an OEM part is an off-road wheel.
+const RETRO = new Set(['dean_cross','showa_eight','daytona_ss','super_moon','watanabe_f8','mrk_retro','wildboar_sr','dean_california']);
+const wKind = (w) => w.kind ?? (w.id.startsWith('oem') ? '原廠' : RETRO.has(w.id) ? '復古' : '越野');
+let wSize = 'all', wKindF = 'all';
+const wList = () => WHEELS.filter(w =>
+  (wSize === 'all' || w.rim === +wSize) && (wKindF === 'all' || wKind(w) === wKindF));
+function renderWChips() {
+  $('wSize').innerHTML = [['all','全部尺寸'],['15','15 吋'],['16','16 吋']].map(([v, l]) =>
+    `<button class="chip" data-ws="${v}" aria-pressed="${wSize === v}">${l}</button>`).join('');
+  $('wKind').innerHTML = [['all','全部風格'],['原廠','原廠'],['越野','越野'],['復古','復古']].map(([v, l]) =>
+    `<button class="chip" data-wk="${esc(v)}" aria-pressed="${wKindF === v}">${l}</button>`).join('');
+}
+function renderWheels() {
+  const list = wList();
+  $('wheelCount').textContent = `${WHEELS.length} 款 → ${list.length} 款`;
+  $('wheelGrid').innerHTML = list.map(w => `
+    <button class="wcard" data-w="${esc(w.id)}" aria-pressed="${w.id === S.wheel}">
+      <img src="model/wheels/${esc(w.style)}.webp?v=${BUILD}" alt="${esc(w.label)} 輪框面" loading="lazy" width="120" height="120">
+      <span class="wn" title="${esc(w.label)}">${esc(w.label)}</span>
+      <span class="wm">${w.rim}×${w.width}J ET${w.offset > 0 ? '+' : w.offset < 0 ? '−' : ''}${Math.abs(w.offset)}${w.needsFlares ? '<br><b>需爆龜</b>' : ''}</span>
+    </button>`).join('');
+  syncWheel();
+}
+function syncWheel() {
+  const w = find(WHEELS, S.wheel), p = priceLabel(w);
+  $('wheelPick').textContent = `${w.brand ?? ''} ${w.label}`.trim()
+    + (p.main === '原廠' ? '' : ` · 單顆 ${p.main}${p.sub ? `（${p.sub}）` : ''}`);
+  $('wheelNote').textContent = [w.note, w.uncertain ? '（規格或價格未完全查證）' : ''].filter(Boolean).join(' ');
+}
+$('wSize').onclick = e => { const b = e.target.closest('[data-ws]'); if (!b) return;
+  wSize = b.dataset.ws; renderWChips(); renderWheels(); };
+$('wKind').onclick = e => { const b = e.target.closest('[data-wk]'); if (!b) return;
+  wKindF = b.dataset.wk; renderWChips(); renderWheels(); };
+$('wheelGrid').onclick = e => { const b = e.target.closest('[data-w]'); if (!b) return;
+  const w = find(WHEELS, b.dataset.w), t = find(TYRES, S.tyre);
+  S.wheel = w.id;
+  // a 15" tyre cannot go on a 16" rim, so follow the wheel to a size that fits
+  if (t.rim !== w.rim) { const nt = TYRES.find(x => x.rim === w.rim); if (nt) S.tyre = nt.id; }
+  document.querySelectorAll('#wheelGrid .wcard').forEach(x => x.setAttribute('aria-pressed', x === b));
+  syncWheel(); renderLadder(); update(); };
+
+/* ═══ 3 · tyres: the bar is outer diameter, the right column is the fit ══ */
+const DMIN = 680, DMAX = 850;
+let tyreSwap = '';
+function renderLadder() {
+  const l = find(LIFTS, S.lift), total = l.lift + (l.body ?? 0), rim = find(WHEELS, S.wheel).rim;
+  $('tyreLadder').innerHTML = TYRES.map(t => {
+    const pc = Math.max(4, (t.dia - DMIN) / (DMAX - DMIN) * 100);
+    const need = (t.needLift ?? 0) + (t.needBody ?? 0);
+    const rimOK = t.rim === rim;
+    const cls = !rimOK ? 'warn' : total < need ? 'bad' : t.legal ? 'ok' : 'warn';
+    const txt = !rimOK ? `需 ${t.rim} 吋框` : total < need ? `需 ${need}mm 舉升`
+      : t.legal ? '可裝' : '可裝 · 超法規';
+    return `<button class="trow" data-t="${esc(t.id)}" aria-pressed="${t.id === S.tyre}">
+      <span class="sz">${esc(t.label)}<em>${t.rim} 吋框 · ${t.width}mm 寬</em></span>
+      <span class="bar"><i style="width:${pc.toFixed(1)}%"></i></span>
+      <span class="fit ${cls}">Ø${t.dia}<br>${txt}</span></button>`;
+  }).join('');
+  syncTyre();
+}
+function syncTyre() {
+  const t = find(TYRES, S.tyre), l = find(LIFTS, S.lift), total = l.lift + (l.body ?? 0);
+  const tm = find(TYRE_MODELS, S.tread);
+  const need = (t.needLift ?? 0) + (t.needBody ?? 0), gap = need - total;
+  $('tyrePick').textContent = `${t.label} · ${tm.label}`;
+  $('tyreNote').textContent = [
+    gap > 0 ? `還差 ${gap}mm 舉升才裝得下。` : `目前 ${total}mm 舉升夠。`,
+    `估離地 ${210 + total + Math.round((t.dia - 693) / 2)}mm。`,
+    tyreSwap, t.note,
+  ].filter(Boolean).join(' ');
+  $('owlNote').textContent = tm.owl ? '此型號有白字版本' : '此型號原廠無白字版本（僅示意）';
+}
+$('tyreLadder').onclick = e => { const b = e.target.closest('[data-t]'); if (!b) return;
+  const t = find(TYRES, b.dataset.t);
+  S.tyre = t.id; tyreSwap = '';
+  if (find(WHEELS, S.wheel).rim !== t.rim) {
+    const nw = wList().find(w => w.rim === t.rim) || WHEELS.find(w => w.rim === t.rim);
+    if (nw) { S.wheel = nw.id; tyreSwap = `輪框已一併換成 ${nw.label}。`; renderWheels(); }
+  }
+  renderLadder(); update(); };
+
+/* tread swatch: the muddier the pattern, the fewer and blockier the lugs */
+const TREAD_SPEC = { at: { rows: 9, gapx: .16, jag: .20, void: .36 },
+                     rt: { rows: 7, gapx: .24, jag: .34, void: .44 },
+                     mt: { rows: 5, gapx: .34, jag: .46, void: .54 } };
+function swatch(cv2, pat) {
+  const s = TREAD_SPEC[pat] ?? TREAD_SPEC.at, W = cv2.width = 60, H = cv2.height = 92, x = cv2.getContext('2d');
+  x.fillStyle = '#0d1112'; x.fillRect(0, 0, W, H);
+  const rh = H / s.rows;
+  for (let r = -1; r < s.rows + 1; r++) for (let c = 0; c < 3; c++) {
+    const off = (r % 2) * (W / 6);
+    const bw = (W / 3) * (1 - s.gapx), bh = rh * (1 - s.void * .55);
+    const bx = c * (W / 3) + off + (W / 3 - bw) / 2, by = r * rh + (rh - bh) / 2;
+    const j = s.jag * bw * .5;
+    x.fillStyle = c === 1 ? '#59615e' : '#4a514f';
+    x.beginPath();
+    x.moveTo(bx + j, by); x.lineTo(bx + bw, by + j * .5);
+    x.lineTo(bx + bw - j * .5, by + bh); x.lineTo(bx, by + bh - j);
+    x.closePath(); x.fill();
+    x.strokeStyle = '#7b8582'; x.lineWidth = .6; x.stroke();
+  }
+  x.fillStyle = 'rgba(0,0,0,.45)'; x.fillRect(W / 2 - 1.5, 0, 3, H);
+}
+const PATS = [['at', 'A/T', '全地形'], ['rt', 'R/T', '混合地形'], ['mt', 'M/T', '泥地']];
+function renderTabs() {
+  const cur = find(TYRE_MODELS, S.tread).pattern;
+  $('patTabs').innerHTML = PATS.map(([id, n, d]) =>
+    `<button data-p="${id}" aria-pressed="${id === cur}"><b>${n}</b><i>${d}</i></button>`).join('');
+  const list = TYRE_MODELS.filter(t => t.pattern === cur);
+  $('treadList').innerHTML = list.map(t => `
+    <button class="tr" data-tr="${esc(t.id)}" aria-pressed="${t.id === S.tread}"${t.unavailable ? ' disabled' : ''}>
+      <canvas data-pat="${t.pattern}" aria-hidden="true"></canvas>
+      <span><span class="tb">${esc(t.brand ?? '')}</span><span class="tn">${esc(t.label)}</span></span>
+      ${t.owl ? '<span class="tag on">有白字</span>' : t.unavailable ? '<span class="tag">裝不上</span>' : ''}
+    </button>`).join('');
+  $('treadList').querySelectorAll('canvas').forEach(c => swatch(c, c.dataset.pat));
+}
+$('patTabs').onclick = e => { const b = e.target.closest('[data-p]'); if (!b) return;
+  const first = TYRE_MODELS.find(t => t.pattern === b.dataset.p && !t.unavailable);
+  if (first) { S.tread = first.id; renderTabs(); syncTyre(); update(); } };
+$('treadList').onclick = e => { const b = e.target.closest('[data-tr]'); if (!b || b.disabled) return;
+  S.tread = b.dataset.tr;
+  document.querySelectorAll('#treadList .tr').forEach(x => x.setAttribute('aria-pressed', x === b));
+  syncTyre(); update(); };
+$('tgOwl').onclick = e => { S.owl = !S.owl;
+  e.currentTarget.setAttribute('aria-pressed', S.owl);
+  e.currentTarget.querySelector('.st').textContent = S.owl ? '開啟' : '關閉'; update(); };
+
+/* ═══ the rest of the panel ══════════════════════════════════════════════ */
+function syncToggles() {
+  const t = $('toggles'); if (!t) return;
+  const aw = $('tgAwnSide');
+  aw.setAttribute('aria-pressed', S.awningSide === 'right');
+  aw.querySelector('.st').textContent = S.awningSide === 'left' ? '左側' : '右側';
+  t.querySelectorAll('[data-k]').forEach(b => {
+    b.setAttribute('aria-pressed', !!S[b.dataset.k]);
+    b.querySelector('.st').textContent = S[b.dataset.k] ? '已裝' : '未裝';
+  });
+  document.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.color));
+  document.querySelectorAll('[data-r]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.r === S.rimColor));
+  const owl = $('tgOwl'); owl.setAttribute('aria-pressed', S.owl);
+  owl.querySelector('.st').textContent = S.owl ? '開啟' : '關閉';
+  const two = $('tgTwo'); two.setAttribute('aria-pressed', S.twoTone);
+  two.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉';
 }
 
 function buildUI() {
-  const money = (p, c) => p == null ? '' : (c === 'JPY' ? '¥' : c === 'AUD' ? 'A$' : c === 'GBP' ? '£' : '$') + p.toLocaleString();
-  const opt = (l, v, f) => document.getElementById(l).innerHTML =
-    v.map(o => `<option value="${o.id}"${o.id === f ? ' selected' : ''}>${o.__l(o)}</option>`).join('');
-  LIFTS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  WHEELS.forEach(o => o.__l = x => `${x.label} (${x.rim}×${x.width}J ET${x.offset > 0 ? '+' : ''}${x.offset})`);
-  TYRES.forEach(o => o.__l = x => `${x.label} — Ø${x.dia}mm`);
-  // lifts grouped by inch class
-  document.getElementById('selLift').innerHTML = [...new Set(LIFTS.map(l => l.inch))].map(cls =>
-    `<optgroup label="${cls === '原廠' ? '原廠' : cls + ' 舉升'}">` + LIFTS.filter(l => l.inch === cls).map(o =>
-      `<option value="${o.id}"${o.id === S.lift ? ' selected' : ''}>${o.__l(o)}</option>`).join('') + '</optgroup>').join('');
-  FRONT_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  GRILLES.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  REAR_BUMPERS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  for (const L of [KITS, HOODS, SPARE_COVERS]) L.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  opt('selHood', HOODS, S.hood); opt('selSpareKit', SPARE_COVERS, S.spareCoverKit);
-  opt('selKit', KITS, S.kit); opt('selBumper', FRONT_BUMPERS, S.frontBumper); opt('selGrille', GRILLES, S.grille); opt('selRear', REAR_BUMPERS, S.rearBumper);
-  SNORKELS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  MIRRORS.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  opt('selSnorkel', SNORKELS, S.snorkel); opt('selMirror', MIRRORS, S.mirrors);
-  for (const L of [ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS]) L.forEach(o => o.__l = x => x.label + (x.price ? ' — ' + money(x.price, x.cur) : ''));
-  opt('selRack', ROOF_RACKS, S.roofRack); opt('selAwning', AWNINGS, S.awning); opt('selStep', SIDE_STEPS, S.sideStep); opt('selLadder', LADDERS, S.ladder);
-  opt('selWheel', WHEELS, S.wheel); opt('selTyre', TYRES, S.tyre);
-  document.getElementById('selTread').innerHTML = ['at', 'rt', 'mt'].map(p =>
-    `<optgroup label="${{ at: 'A/T 全地形', rt: 'R/T 混合地形', mt: 'M/T 泥地' }[p]}">` +
-    TYRE_MODELS.filter(t => t.pattern === p).map(t =>
-      `<option value="${t.id}"${t.id === S.tread ? ' selected' : ''}>${t.label}</option>`).join('') + '</optgroup>').join('');
-  document.getElementById('selColor').innerHTML = COLORS.map(c =>
-    `<option value="${c.code}"${c.code === S.color ? ' selected' : ''}>${c.code} ${c.name}</option>`).join('');
-  document.getElementById('colSw').innerHTML = COLORS.map(c =>
-    `<button class="sw" data-c="${c.code}" title="${c.name}" aria-pressed="${c.code === S.color}"
-      style="background:#${c.hex.toString(16).padStart(6,'0')}"></button>`).join('');
-  const TG = [['pillarPods','A 柱小圓燈'],['windowGuards','鐵窗（WLM）'],['guardCan','右鐵窗：油桶＋斧頭'],['guardBoard','左鐵窗：脫困板'],['shovel','車頂架鏟子'],
-    ['flares','輪弧鉚釘'],['sideSkirt','側裙飾板（SHOWA）'],['decals','車門貼字'],['lightBar','車頂燈條'],['roofLights','車頂圓燈'],['spareBag','備胎書包'],['spareCover','備胎硬殼蓋'],['gullwing','鷗翼窗（URNIETA 1970）']];
-  document.getElementById('toggles').innerHTML =
-    '' +
-    TG.map(([k, l]) => `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
-  document.getElementById('rimSw').innerHTML = RIMS.map(h =>
+  const opt = (id, list, cur) => $(id).innerHTML = list.map(o =>
+    `<option value="${esc(o.id)}"${o.id === cur ? ' selected' : ''}>${esc(o.label + money(o))}</option>`).join('');
+  for (const [id, L, cur] of [['selKit', KITS, S.kit], ['selBumper', FRONT_BUMPERS, S.frontBumper],
+    ['selGrille', GRILLES, S.grille], ['selRear', REAR_BUMPERS, S.rearBumper],
+    ['selHood', HOODS, S.hood], ['selSpareKit', SPARE_COVERS, S.spareCoverKit],
+    ['selSnorkel', SNORKELS, S.snorkel], ['selMirror', MIRRORS, S.mirrors],
+    ['selRack', ROOF_RACKS, S.roofRack], ['selAwning', AWNINGS, S.awning],
+    ['selStep', SIDE_STEPS, S.sideStep], ['selLadder', LADDERS, S.ladder]]) opt(id, L, cur);
+
+  renderLiftSeg(); renderLiftCards();
+  renderWChips(); renderWheels(); renderLadder(); renderTabs();
+
+  $('selColor').innerHTML = [['台灣在售', c => c.tw], ['日規專屬', c => !c.tw]].map(([g, f]) => {
+    const list = COLORS.filter(f); if (!list.length) return '';
+    return `<optgroup label="${g}">` + list.map(c =>
+      `<option value="${c.code}"${c.code === S.color ? ' selected' : ''}>${esc(c.name)}　${c.code}</option>`).join('') + '</optgroup>';
+  }).join('');
+  // a ring marks the Japan-only colours so the Taiwan range reads as a set
+  $('colSw').innerHTML = COLORS.map(c =>
+    `<button class="sw${c.tw ? '' : ' jp'}" data-c="${c.code}" title="${esc(c.name)}${c.tw ? '' : '（日規）'}"
+      aria-pressed="${c.code === S.color}" style="background:#${c.hex.toString(16).padStart(6, '0')}"></button>`).join('');
+  $('rimSw').innerHTML = RIMS.map(h =>
     `<button class="sw" data-r="${h}" aria-pressed="${h === S.rimColor}"
       style="background:#${h.toString(16).padStart(6, '0')}"></button>`).join('');
-  document.getElementById('views').innerHTML = VIEWS.map((v, i) =>
+  const TG = [['pillarPods','A 柱小圓燈'],['windowGuards','鐵窗（WLM）'],['guardCan','右鐵窗：油桶＋斧頭'],
+    ['guardBoard','左鐵窗：脫困板'],['shovel','車頂架鏟子'],['flares','輪弧鉚釘'],['sideSkirt','側裙飾板（SHOWA）'],
+    ['decals','車門貼字'],['lightBar','車頂燈條'],['roofLights','車頂圓燈'],['spareBag','備胎書包'],
+    ['spareCover','備胎硬殼蓋'],['gullwing','鷗翼窗（URNIETA 1970）']];
+  $('toggles').innerHTML = TG.map(([k, l]) =>
+    `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
+  $('views').innerHTML = VIEWS.map((v, i) =>
     `<button data-v="${i}" aria-pressed="${i === 0}">${v[0]}</button>`).join('');
-  hints();
-
-  document.getElementById('selTread').onchange = e => { S.tread = e.target.value; hints(); update(); };
-  document.getElementById('tgOwl').onclick = e => { S.owl = !S.owl;
-    e.currentTarget.setAttribute('aria-pressed', S.owl);
-    e.currentTarget.querySelector('.st').textContent = S.owl ? '開啟' : '關閉'; update(); };
-  document.getElementById('rimSw').onclick = e => {
-    const b = e.target.closest('[data-r]'); if (!b) return;
-    S.rimColor = +b.dataset.r;
-    document.querySelectorAll('[data-r]').forEach(x => x.setAttribute('aria-pressed', x === b));
-    update();
-  };
-
-  const on = (id, f) => document.getElementById(id).onchange = e => { f(e.target.value); hints(); update(); };
-  on('selLift', v => S.lift = v); on('selTyre', v => S.tyre = v);
-  document.getElementById('selKit').onchange = e => {
-    S.kit = e.target.value;
-    const k = find(KITS, S.kit);
-    if (k && k.set) Object.assign(S, k.set);
-    buildUI(); hints(); update();
-  };
-  const panel = (id, key) => document.getElementById(id).onchange = e => {
-    S[key] = e.target.value;
-    if (S.kit !== 'none') { S.kit = 'none'; document.getElementById('selKit').value = 'none'; }
-    hints(); update();
-  };
-  panel('selBumper', 'frontBumper'); panel('selGrille', 'grille'); panel('selRear', 'rearBumper');
-  on('selHood', v => S.hood = v); on('selSpareKit', v => S.spareCoverKit = v);
-  on('selSnorkel', v => S.snorkel = v); on('selMirror', v => S.mirrors = v);
-  on('selRack', v => S.roofRack = v); on('selAwning', v => S.awning = v); on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
-  document.getElementById('tgAwnSide').onclick = e => { S.awningSide = S.awningSide === 'left' ? 'right' : 'left'; syncToggles(); update(); };
-  document.getElementById('btnDemo').onclick = () => { S = { ...DEF, ...DEMO }; buildUI(); hints(); update(); };
-  syncToggles();
-  document.getElementById('selWheel').onchange = e => {
-    const w = find(WHEELS, e.target.value), t = find(TYRES, S.tyre);
-    S.wheel = e.target.value;
-    if (t.rim !== w.rim) { const nt = TYRES.find(x => x.rim === w.rim); if (nt) { S.tyre = nt.id; document.getElementById('selTyre').value = nt.id; } }
-    hints(); update();
-  };
-  document.getElementById('selColor').onchange = e => { S.color = e.target.value;
-    document.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.color)); update(); };
-  document.getElementById('colSw').onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return;
-    S.color = b.dataset.c; document.getElementById('selColor').value = S.color;
-    document.querySelectorAll('[data-c]').forEach(x => x.setAttribute('aria-pressed', x === b)); update(); };
-  document.getElementById('tgTwo').onclick = e => { S.twoTone = !S.twoTone;
-    e.currentTarget.setAttribute('aria-pressed', S.twoTone);
-    e.currentTarget.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉'; update(); };
-  document.getElementById('toggles').onclick = e => {
-    const b = e.target.closest('button'); if (!b) return;
-    { const k = b.dataset.k; if (!k) return; S[k] = !S[k];
-      // a bag and a hard cover cannot both sit on the spare
-      const other = { spareBag: 'spareCover', spareCover: 'spareBag' }[k];
-      if (other && S[k] && S[other]) S[other] = false;
-    }
-    syncToggles();
-    update();
-  };
-  document.querySelectorAll('.sec-h').forEach(h => h.onclick = () => {
-    const o = h.getAttribute('aria-expanded') === 'true';
-    document.querySelectorAll('.sec-h').forEach(x => x.setAttribute('aria-expanded', 'false'));
-    h.setAttribute('aria-expanded', String(!o));
-  });
-  document.getElementById('views').onclick = e => { const b = e.target.closest('[data-v]'); if (!b) return;
-    document.querySelectorAll('[data-v]').forEach(x => x.setAttribute('aria-pressed', x === b));
-    const [, az, el, d] = VIEWS[+b.dataset.v]; orbit.az = az; orbit.el = el; orbit.dist = d; applyCam(); };
-  document.getElementById('btnReset').onclick = () => location.reload();
-  document.getElementById('btnExport').onclick = () => {
-    const lift = find(LIFTS, S.lift), bl = { body: lift.body ?? 0, label: '' };
-    const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
-    const col = COLORS.find(c => c.code === S.color);
-    const acc = [S.frontBumper !== 'stock' && '前保桿 ' + find(FRONT_BUMPERS, S.frontBumper).label,
-      S.roofRack !== 'none' && '車頂架 ' + find(ROOF_RACKS, S.roofRack).label, S.awning !== 'none' && '車邊帳 ' + find(AWNINGS, S.awning).label + (S.awningSide === 'left' ? '（左）' : '（右）'),
-      S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
-      S.snorkel !== 'none' && '呼吸管 ' + find(SNORKELS, S.snorkel).label, S.mirrors !== 'stock' && '後照鏡 ' + find(MIRRORS, S.mirrors).label,
-      S.pillarPods && 'A 柱小圓燈', S.sideStep !== 'none' && '側踏 ' + find(SIDE_STEPS, S.sideStep).label, S.ladder !== 'none' && '後爬梯 ' + find(LADDERS, S.ladder).label, S.windowGuards && '鐵窗', S.guardCan && '右鐵窗油桶斧頭', S.guardBoard && '左鐵窗脫困板', S.shovel && '車頂鏟子',
-      S.flares && '輪弧鉚釘', S.sideSkirt && '側裙飾板', S.decals && '車門貼字', S.lightBar && '車頂燈條', S.roofLights && '車頂圓燈', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
-      S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label].filter(Boolean);
-    const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
-    const o = document.getElementById('out');
-    o.textContent = ['JIMNY JB74 改裝配置', '─'.repeat(28),
-      `車色    ${col.code} ${col.name}${S.twoTone ? '（雙色黑頂）' : ''}`,
-      `懸吊    ${lift.label}`, bl.body ? `車身舉升 ${bl.label}` : null,
-      `輪框    ${wh.label}`, `輪胎    ${ty.label} Ø${ty.dia}mm`, '',
-      `總舉升  ${lift.lift + bl.body}mm`,
-      `估離地  ${210 + lift.lift + bl.body + Math.round((ty.dia - 693) / 2)}mm`, '',
-      acc.length ? '配件\n' + acc.map(a => '  · ' + a).join('\n') : '配件    無',
-      fl.length ? '\n注意\n' + fl.map(f => '  ! ' + f.msg).join('\n') : '',
-      '', '※ 價格為概略值，實際以代理商報價為準。'].filter(x => x !== null).join('\n');
-    o.classList.add('on'); o.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  };
+  hints(); syncToggles();
 }
+
 function hints() {
-  const n = o => [o.brand && o.brand !== '—' ? o.brand : '', o.note || '', o.uncertain ? '（未完全查證）' : ''].filter(Boolean).join(' · ');
-  document.getElementById('hLift').textContent = n(find(LIFTS, S.lift));
-  document.getElementById('hWheel').textContent = n(find(WHEELS, S.wheel));
-  document.getElementById('hTyre').textContent = n(find(TYRES, S.tyre));
-  document.getElementById('hKit').textContent = n(find(KITS, S.kit));
-  document.getElementById('hHood').textContent = n(find(HOODS, S.hood));
-  document.getElementById('hSpareKit').textContent = n(find(SPARE_COVERS, S.spareCoverKit));
-  document.getElementById('hBumper').textContent = n(find(FRONT_BUMPERS, S.frontBumper));
-  document.getElementById('hGrille').textContent = n(find(GRILLES, S.grille));
-  document.getElementById('hRear').textContent = n(find(REAR_BUMPERS, S.rearBumper));
-  document.getElementById('hSnorkel').textContent = n(find(SNORKELS, S.snorkel));
-  document.getElementById('hMirror').textContent = n(find(MIRRORS, S.mirrors));
-  document.getElementById('hRack').textContent = n(find(ROOF_RACKS, S.roofRack));
-  document.getElementById('hAwning').textContent = n(find(AWNINGS, S.awning));
-  document.getElementById('hStep').textContent = n(find(SIDE_STEPS, S.sideStep));
-  document.getElementById('hLadder').textContent = n(find(LADDERS, S.ladder));
-  const tm = find(TYRE_MODELS, S.tread);
-  document.getElementById('hTread').textContent = tm.note || '';
-  document.getElementById('owlNote').textContent = tm.owl ? '此型號有白字版本' : '此型號原廠無白字版本（僅示意）';
+  const n = o => [o.brand && o.brand !== '—' ? o.brand : '', o.note || '',
+    o.uncertain ? '（未完全查證）' : ''].filter(Boolean).join(' · ');
+  for (const [id, L, cur] of [['hKit', KITS, S.kit], ['hBumper', FRONT_BUMPERS, S.frontBumper],
+    ['hGrille', GRILLES, S.grille], ['hRear', REAR_BUMPERS, S.rearBumper], ['hHood', HOODS, S.hood],
+    ['hSpareKit', SPARE_COVERS, S.spareCoverKit], ['hSnorkel', SNORKELS, S.snorkel],
+    ['hMirror', MIRRORS, S.mirrors], ['hRack', ROOF_RACKS, S.roofRack], ['hAwning', AWNINGS, S.awning],
+    ['hStep', SIDE_STEPS, S.sideStep], ['hLadder', LADDERS, S.ladder]]) $(id).textContent = n(find(L, cur));
+  const c = COLORS.find(x => x.code === S.color) || COLORS[0];
+  $('colName').textContent = c.code + (c.tw ? '' : ' · 日規');
+  $('colPick').textContent = c.name + (S.twoTone && c.twoTone ? `　雙色 ${c.twoTone}` : '');
+  $('colNote').textContent = [c.tw === '雙色' ? '台灣只有雙色版，請開啟下方雙色車頂。' : '',
+    c.tw ? '' : '台灣未導入。', c.note].filter(Boolean).join(' ');
+  $('twoNote').textContent = c.twoTone ? `黑頂 ZJ3　台灣組合代碼 ${c.twoTone}` : '此色無原廠雙色組合';
 }
+
+/* wiring that does not belong to one picker */
+const on = (id, f) => $(id).onchange = e => { f(e.target.value); hints(); update(); };
+on('selHood', v => S.hood = v); on('selSpareKit', v => S.spareCoverKit = v);
+on('selSnorkel', v => S.snorkel = v); on('selMirror', v => S.mirrors = v);
+on('selRack', v => S.roofRack = v); on('selAwning', v => S.awning = v);
+on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
+$('selKit').onchange = e => {
+  S.kit = e.target.value;
+  const k = find(KITS, S.kit);
+  if (k && k.set) Object.assign(S, k.set);
+  buildUI(); update();
+};
+// changing one panel by hand means this is no longer a factory kit
+const panel = (id, key) => $(id).onchange = e => {
+  S[key] = e.target.value;
+  if (S.kit !== 'none') { S.kit = 'none'; $('selKit').value = 'none'; }
+  hints(); update();
+};
+panel('selBumper', 'frontBumper'); panel('selGrille', 'grille'); panel('selRear', 'rearBumper');
+
+$('rimSw').onclick = e => { const b = e.target.closest('[data-r]'); if (!b) return;
+  S.rimColor = +b.dataset.r;
+  document.querySelectorAll('[data-r]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  update(); };
+$('selColor').onchange = e => { S.color = e.target.value; syncToggles(); hints(); update(); };
+$('colSw').onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return;
+  S.color = b.dataset.c; $('selColor').value = S.color; syncToggles(); hints(); update(); };
+$('tgTwo').onclick = e => { S.twoTone = !S.twoTone;
+  e.currentTarget.setAttribute('aria-pressed', S.twoTone);
+  e.currentTarget.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉'; update(); };
+$('tgAwnSide').onclick = () => { S.awningSide = S.awningSide === 'left' ? 'right' : 'left'; syncToggles(); update(); };
+$('toggles').onclick = e => {
+  const b = e.target.closest('[data-k]'); if (!b) return;
+  const k = b.dataset.k; S[k] = !S[k];
+  // a bag and a hard cover cannot both sit on the spare
+  const other = { spareBag: 'spareCover', spareCover: 'spareBag' }[k];
+  if (other && S[k] && S[other]) S[other] = false;
+  syncToggles(); update();
+};
+$('views').onclick = e => { const b = e.target.closest('[data-v]'); if (!b) return;
+  document.querySelectorAll('[data-v]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const [, az, el, d] = VIEWS[+b.dataset.v]; orbit.az = az; orbit.el = el; orbit.dist = d; applyCam(); };
+$('btnDemo').onclick = () => { S = { ...DEF, ...DEMO }; tyreSwap = ''; buildUI(); update(); };
+$('btnReset').onclick = () => location.reload();
+$('btnExport').onclick = () => {
+  const lift = find(LIFTS, S.lift), bl = { body: lift.body ?? 0 };
+  const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
+  const col = COLORS.find(c => c.code === S.color) || COLORS[3];
+  const acc = [
+    S.kit !== 'none' && '全車套件 ' + find(KITS, S.kit).label,
+    S.frontBumper !== 'stock' && '前保桿 ' + find(FRONT_BUMPERS, S.frontBumper).label,
+    S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
+    S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label,
+    S.hood !== 'stock' && '引擎蓋 ' + find(HOODS, S.hood).label,
+    S.spareCoverKit !== 'none' && '備胎蓋 ' + find(SPARE_COVERS, S.spareCoverKit).label,
+    S.mirrors !== 'stock' && '後照鏡 ' + find(MIRRORS, S.mirrors).label,
+    S.roofRack !== 'none' && '車頂架 ' + find(ROOF_RACKS, S.roofRack).label,
+    S.awning !== 'none' && '車邊帳 ' + find(AWNINGS, S.awning).label + (S.awningSide === 'left' ? '（左）' : '（右）'),
+    S.sideStep !== 'none' && '側踏 ' + find(SIDE_STEPS, S.sideStep).label,
+    S.ladder !== 'none' && '後爬梯 ' + find(LADDERS, S.ladder).label,
+    S.snorkel !== 'none' && '呼吸管 ' + find(SNORKELS, S.snorkel).label,
+    S.pillarPods && 'A 柱小圓燈', S.windowGuards && '鐵窗', S.guardCan && '右鐵窗油桶斧頭',
+    S.guardBoard && '左鐵窗脫困板', S.shovel && '車頂鏟子', S.flares && '輪弧鉚釘',
+    S.sideSkirt && '側裙飾板', S.decals && '車門貼字', S.lightBar && '車頂燈條',
+    S.roofLights && '車頂圓燈', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
+    S.gullwing && '鷗翼窗'].filter(Boolean);
+  const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
+  const total = lift.lift + bl.body;
+  const pr = (o) => { const p = priceLabel(o); return p.main === '原廠' ? '' : `  ${p.main}${p.sub ? `（${p.sub}）` : ''}`; };
+  const o = $('out');
+  o.textContent = ['JIMNY JB74 改裝配置', '─'.repeat(30),
+    `車色    ${col.code} ${col.name}${S.twoTone ? '（雙色黑頂）' : ''}`,
+    `懸吊    ${lift.brand ?? ''} ${lift.label}${pr(lift)}`,
+    `輪框    ${wh.brand ?? ''} ${wh.label}  ${wh.rim}×${wh.width}J ET${wh.offset > 0 ? '+' : wh.offset < 0 ? '−' : ''}${Math.abs(wh.offset)}${pr(wh)}`,
+    `輪胎    ${ty.label} Ø${ty.dia}mm · ${find(TYRE_MODELS, S.tread).label}`, '',
+    `總舉升  ${total}mm`,
+    `估離地  ${210 + total + Math.round((ty.dia - 693) / 2)}mm`, '',
+    acc.length ? '配件\n' + acc.map(a => '  · ' + a).join('\n') : '配件    無',
+    fl.length ? '\n注意\n' + fl.map(f => '  ! ' + f.msg).join('\n') : '',
+    '', `※ ${FX_NOTE}`, '※ 價格為概略值，實際以代理商報價為準。'].filter(x => x !== null).join('\n');
+  o.classList.add('on'); o.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+};
 
 resize(); applyCam();
 (function loop() { if (composer) composer.render(); else renderer.render(scene, cam); requestAnimationFrame(loop); })();
