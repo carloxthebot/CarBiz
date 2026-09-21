@@ -351,6 +351,8 @@ export const MIRRORS = [
 // Roof racks, awnings, side steps and ladders are modelled parts named
 // roofRack_<id>, awning_<id>_<left|right>, sideStep_<id>, ladder_<id>.
 export const ROOF_RACKS = [
+  { id: 'wood', url: null, label: '復古木條行李架（半長）', price: null, cur: 'TWD', brand: '多家', uncertain: true,
+    note: '黑色鐵框＋清漆木條地板＋矮圓管圍欄，長度約車頂的一半、位置偏後。這是一種常見的復古型式，**品牌與規格尚未查證**——若你記得是哪一家，告訴我可以照該款校正' },
   { id: 'none', label: '無', price: 0 },
   // ---- 台灣有售
   { id: 'arb', photo: true, url: 'https://www.ruten.com.tw/item/show?22438729095708', photo: true, label: 'ARB BASE Rack 1545×1285', price: 45000, cur: 'TWD', brand: 'ARB', part: '1770020 + 17900020',
