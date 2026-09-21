@@ -1,0 +1,1958 @@
+{
+ "compiled": "2026-09-21",
+ "vehicle": "Suzuki Jimny Sierra JB74",
+ "fitment": {
+  "pcd": "5x139.7",
+  "hubBore_mm": 108.1,
+  "stud": "M12 x P1.25",
+  "oem": "15x5.5J +5",
+  "oemAlt": "16x5.5J +22",
+  "legalOffsetWindow": "0 to +5"
+ },
+ "rules": [
+  "A bore LARGER than 108.1 fits (it seats on the tapered nuts); a bore SMALLER cannot fit and no ring corrects it.",
+  "Published bores run 108.2 (Enkei) to 110.5 (Hayashi, BRADLEY, older Weds - lug-centric). Store bore per brand, not as a constant.",
+  "PCD 139.7 puts the nut centres at r = 69.9 mm, so a typical 108-110 mm cap cannot reach them: exposed nuts are the default. Only five wheels here cover them (DEAN Cross Country / California / Colorado, SHOWA GARAGE R8, 5ZIGEN TF500 XC-M); APIO Ventura and SR+ need two face states.",
+  "Offset at -5 or deeper protrudes past the fender and needs over-fenders; +20/+22 is the kei JB64 fitment and tucks inside the arch.",
+  "16x6.5J and 16x7J barely exist in 5x139.7; genuine 15x5.5J is rarer still (most 15in options are 6.0J)."
+ ],
+ "corrections": [
+  "BRAID has no JB74 product; Japanese searches for the name return BRADLEY.",
+  "MLJ XJ06 is not made in 5x139.7.",
+  "Enkei APACHE II is 4x100. Enkei's only official JB74 wheel is ALLROAD RPT1.",
+  "RAYS KC DECOR is a brand tier, not a model; the JB74 members are the A-LAP-J family.",
+  "RAYS FDX F7/F7S never came in 5x139.7; the Jimny one is FDX-J.",
+  "Hayashi TYPE HOMURA is a RAYS line, not Hayashi; Hayashi's only JB74 fit is TYPE STJ.",
+  "The DAMD 'little D wheel' is the DEAN Cross Country little D edition, not a DAMD design.",
+  "APIO WILDBOAR Z is kei-only (JB23/JB64); the 16in X is discontinued.",
+  "Tan-Ei-Sya GRANVERD Jimny sizes are marked rear-axle-only by the maker."
+ ],
+ "faceTypes": {
+  "round": "One ring of holes in a solid disc; no spokes.",
+  "slot": "Long slots or D-shaped windows in a pressed-steel-style face.",
+  "spoke": "Discrete spokes hub to rim.",
+  "mesh": "Interwoven or Y-forked arms forming a lattice.",
+  "dish": "Deep smooth bowl, minimal piercing.",
+  "beadlock": "Simulated ring with fake bolt heads."
+ },
+ "source": "https://claude.ai/artifact/VARATv6R47Xn2ucasL2XSe",
+ "wheels": [
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR D",
+   "face": "round",
+   "sizes": "15×6.0J −5 · 16×6.0J ±0 · 16×6.0J −5",
+   "bore": "Not published (Jimny-dedicated)",
+   "finishes": "Gloss Black / smoke-clear rim band · Semi-gloss Black / wood-copper rim band",
+   "cap": "None. OEM cap will not fit; rear-only APIO hub cap optional. Nuts exposed, bore open.",
+   "price": "¥47,300 – ¥48,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Dished face. 16 equal round holes in one ring — the renkon (lotus-root) pattern — each sunk in a countersunk conical well pressed toward the rim, so every hole carries a rolled lip and a hard internal shadow. Raised slightly convex hub plateau holds 5 shallow round lug wells with machined flat seats; nuts exposed and bright against black. 5 small embossed rectangular tabs (JWL/VIA/load ratings) between the lug wells. Open bore ringed by a machined bright chamfer. Smooth stepped lip carrying a contrast-coloured rim band — model as a separate material, it is the signature. No rivets, no beadlock ring, no brand name on the face.",
+   "url": "https://apio.jp/parts/7200-60.html",
+   "flags": [
+    "Newest in range (2026-04)",
+    "Needs over-fenders at −5"
+   ]
+  },
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR SR",
+   "face": "slot",
+   "sizes": "15×6.0J −5 · 16×6.0J −5",
+   "bore": "Not published",
+   "finishes": "Iron Black (matte) · Iron Grey (gloss) · Cotton White (gloss)",
+   "cap": "16-inch ships a dedicated cap covering the bore only — nuts stay outside it. 15-inch has no cap at all.",
+   "price": "¥47,300 – ¥48,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Retro LJ/SJ pressed-steel homage. Flat outer disc band stepping down to a distinctly recessed concave centre plate. Exactly 4 long slim curved arc slots at roughly 1:30 / 4:30 / 7:30 / 10:30 — narrow crescents following the rim curvature, rounded ends, a raised bead rolled around each. Nothing else pierces the face. Hub plate carries 5 raised truncated-cone bosses with the bolt hole through the top; nuts sit inside the cone, semi-recessed but visible. 5 embossed text blocks between the cones (JWL, VIA, JWL-T, T-700KG, P-520KG) in prominent low relief — a real signature, model them. Smooth stepped lip, no rivets.",
+   "url": "https://apio.jp/parts/7200-28.html",
+   "flags": [
+    "Needs over-fenders"
+   ]
+  },
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR SR+",
+   "face": "slot",
+   "sizes": "15×6.0J −5 · 16×6.0J −5",
+   "bore": "Not published",
+   "finishes": "Cotton White · Iron Black · Iron Grey (16-inch grey is run-out stock)",
+   "cap": "None as sold — but accepts APIO's large chrome or body-colour cap, which fully swallows the lug circle. Two face states.",
+   "price": "¥47,300 – ¥48,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "More convincingly pressed-steel than SR. Convex domed hub plate rising out of a shallow dish rather than SR's recessed plate; outer disc band smooth and slightly conical. 4 long arc slots at the same clock positions but narrower, longer and set further inboard, each sunk in a shallow pressed channel with a raised rolled bead. Lug area has 5 short raised round collars on a domed pad, nuts exposed in a shallow countersink. Open bore with a distinct raised annular ring pressed around it — the seat the big optional cap clips into. Multi-step outer flange, 2–3 concentric steps visible. Small cast 15X6J / JWL / JWL-T / VIA on the lower disc band.",
+   "url": "https://apio.jp/parts/7200-40.html",
+   "flags": [
+    "Two cap states",
+    "Needs over-fenders"
+   ]
+  },
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR Ventura",
+   "face": "slot",
+   "sizes": "15×6.0J −5 · 16×6.0J −5",
+   "bore": "Not published",
+   "finishes": "Iron Black · White · Bright Silver · Bright Chrome (chrome ¥72,600; 16-inch is black only)",
+   "cap": "None supplied — but the primary host for APIO's large caps, which cover the nuts entirely. Two face states.",
+   "price": "¥48,400",
+   "priceNote": "per wheel, tax incl · chrome ¥72,600",
+   "modelling": "Classic pressed-steel profile with three clear concentric depth levels: outer conical disc band, stepping down to a recessed circular hub dish, which itself carries a raised inner lug pad. 12 elongated oval / lozenge vent slots in one ring on the outer band, equally spaced, long axis roughly radial-tangential, softly rounded ends, each set in a pressed dimple so the slot edges stand raised. 5 raised round collars with the bolt hole through; nuts exposed and proud. Open bore with a pressed annular seat ring. Smooth stepped outer flange, 2 steps. Small cast 15X6J / JWL / JWL-T / VIA at 7–8 o'clock.",
+   "url": "https://apio.jp/parts/7200-30.html",
+   "flags": [
+    "Two cap states",
+    "Slot count read from a 3/4 photo — verify"
+   ]
+  },
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR X2",
+   "face": "spoke",
+   "sizes": "16×5.5J −5 · 16×6.0J ±0 (concave)",
+   "bore": "Not published",
+   "finishes": "Raid Black (gloss metallic graphite-black) · Iron Black (matte). Raid Black discontinued on the 6.0J.",
+   "cap": "None. OEM cap not usable; rear-only APIO hub cap optional. Nuts fully exposed.",
+   "price": "¥48,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "5 arrow-shape spokes. Each leaves the hub as a narrow stem, widens, then kinks sideways into an arrowhead that runs out over the rim flange, with a pronounced sharp central ridge along its full length. Windows between are big curved triangles. Two distinct face profiles to build: the 5.5J −5 is flat-to-slightly-dished, the 6.0J ±0 is explicitly concave with the spokes sweeping back from rim to hub. 5 tall cylindrical raised bosses at the hub with the bolt hole through the top; nuts sit clearly proud, bright silver against dark spokes. Open bore with a machined bright ring, hub pad about 30% of face. WILDBOAR X engraved into one spoke face, reading outward — the single most identifiable graphic. No pin bolts, no beadlock ring.",
+   "url": "https://apio.jp/parts/7200-43.html",
+   "flags": [
+    "Two face profiles"
+   ]
+  },
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR X (15-inch)",
+   "face": "spoke",
+   "sizes": "15×6.0J −5",
+   "bore": "Not published",
+   "finishes": "Raid Black (gloss) · Gun Black (matte)",
+   "cap": "Body-colour-matched cap included — covers bore and hub pad only, the 5 nuts stay outside it and exposed.",
+   "price": "¥47,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "5 straight tapered flat-topped spokes, simpler and blunter than X2 — each a broad wedge, widest at the hub, tapering slightly outward, with a sharp raised centre ridge and chamfered flanks, flaring into the rim flange. Windows are large rounded triangles. Near-flat face with the spokes set inside the rim lip, so a visible outer lip band stands proud of the spoke tops — deeper-lip read than X2. 5 lug holes as shallow round recesses in a raised flat circular hub pad. Cap is a smooth dome at roughly 28–32% of face diameter. Smooth stepped lip, no rivets, no pin bolts.",
+   "url": "https://apio.jp/parts/7200-15.html",
+   "flags": [
+    "Lightest JB74 fit in the range at 7.35 kg"
+   ]
+  },
+  {
+   "brand": "APIO",
+   "model": "WILDBOAR HR",
+   "face": "dish",
+   "sizes": "15×6.0J −5",
+   "bore": "Not published",
+   "finishes": "Sputtered Chrome — the only finish",
+   "cap": "Dedicated cap included, and uniquely usable on the front wheels too. Small polished dome at 14–18% of face — covers the bore only, nuts exposed.",
+   "price": "¥72,600",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A hot-rod slot-mag, and the most expensive APIO by a wide margin. Deep dish: a broad unbroken mirror-chrome dish wall sweeps inboard from the rim flange to the disc and dominates the read. 5 broad tapered spokes radiate from a raised centre star to the dish wall — smooth convex blades with a soft central crown, everything rounded and highly reflective, no sharp creases. 5 long curved slot windows cut between the spokes where the disc meets the dish wall, each a wide crescent with rounded ends and a thick rolled lip — the classic slot-mag keyhole. Hub is a raised 5-point star boss with the lug positions as deep round wells sunk into the star arms. 5 decorative raised pin heads on the star boss, one between each pair of lug wells. Cap seated in an engraved knurled collar ring.",
+   "url": "https://apio.jp/parts/7200-32c.html",
+   "flags": [
+    "Sierra-exclusive",
+    "Caliper clearance note on JC74 Nomad"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "DAYTONA SS",
+   "face": "round",
+   "sizes": "15×6.0J ±0 · 16×6.0J ±0 · 16×5.5J +20",
+   "bore": "Not published",
+   "finishes": "Black with red/blue line · All White (16×5.5 only) · Chrome (6-hole sizes only)",
+   "cap": "Centreless by design. Rear can take the OEM JB-series cap. Nuts exposed.",
+   "price": "¥28,600 – ¥29,700",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Steel two-piece, not an alloy — build it as pressed metal. Classic Daytona face: flat disc, one ring of ventilation holes around the outer band, a visible welded joint line where disc meets rim, and a stepped rim. The red and blue twin pinstripes on the outer disc edge are the identifier — model them as two concentric fine rings, not a decal. No pin bolts, no fake beadlock.",
+   "url": "https://www.mljinc.co.jp/product/daytona_ss/daytona_ss/",
+   "flags": [
+    "Steel, not alloy"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "XTREME-J XJ03",
+   "face": "round",
+   "sizes": "16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.5",
+   "finishes": "Flat Black / Smoke Flange — one colour only",
+   "cap": "None on either JB74 size; optional JB74-specific cap sold separately. Nuts exposed.",
+   "price": "¥56,100 – ¥57,200",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Retro-future: traditional 4×4 round-window disc crossed with a modern concave. The dish is extreme — fitted reports say the centre is almost invisible from directly side-on, a true mortar-bowl profile, most exaggerated on the 16×6.0J −5. Windows are not true circles but ellipses (renkon holes), each with a chamfered machined edge and a deliberate height step so the ring reads three-dimensional. Outer lip carries a fake beadlock ring with simulated pin bolts right around the circumference, plus a bold stepped flange. No face branding — identity lives on the optional cap.",
+   "url": "https://www.mljinc.co.jp/product/xtreme-j/xj03/",
+   "flags": [
+    "Hole count and pin-bolt count not published — count from photo"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "XTREME-J D:SLOT",
+   "face": "slot",
+   "sizes": "16×5.5J ±0 · 16×5.5J +22",
+   "bore": "φ108.5",
+   "finishes": "Satin Black · Polish",
+   "cap": "None supplied (air valve only). Optional cap ¥3,740. Nuts exposed.",
+   "price": "¥49,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Cheapest MLJ alloy that fits. 5 elongated oval slots in a 1960s American five-slot idiom, arranged around a dish face, each with a generous radius on its outer edge. The distinguishing section detail is the stepped rim: the barrel is built as a staircase, leaving a groove-like structure between lip and face — build that profile or it stops reading as D:SLOT. Face is a moderate dish, not a deep concave. Deliberately clean — no pin bolts, no fake beadlock bolts.",
+   "url": "https://www.mljinc.co.jp/product/xtreme-j/d-slot/",
+   "flags": [
+    "Cheapest MLJ alloy for JB74"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "XTREME-J XJ07",
+   "face": "slot",
+   "sizes": "16×5.5J +20 (deep concave) · 16×6.0J −5 (ultra deep concave)",
+   "bore": "φ108.5",
+   "finishes": "Satin Black · Matte Bronze / Black Rim",
+   "cap": "Capless in 5×139.7. Optional cap is a deliberately ultra-thin flat type, to keep the disc relief visible. Nuts exposed.",
+   "price": "¥61,600 – ¥67,100",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Exactly 8 trapezoid D-windows — confirmed by maker and press, so the count is solid. Deep concave dish, and MLJ grades it explicitly: the 5.5J is DEEP CONCAVE, the 6.0J −5 is ULTRA DEEP CONCAVE, the most aggressive section in their entire range. The optional cap is flat and almost flush by design — if you model it, keep it paper-thin. Ornament is stripped out: no pin bolts, no fake beadlock. The most austere XTREME-J.",
+   "url": "https://www.mljinc.co.jp/product/xtreme-j/xj07/",
+   "flags": [
+    "Third colour has no 5×139.7 size"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "XTREME-J (base)",
+   "face": "slot",
+   "sizes": "16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Flat Black · Gloss Black Milled",
+   "cap": "Optional push-in cap, rear use only, ¥3,740. Nuts exposed as standard.",
+   "price": "¥44,000",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "8 windows with stepped three-dimensional edges. A fake beadlock line runs around the rim, with chrome pierce bolts arranged along it. Notably, XJ lettering is cast into the spoke face itself — one of the few wheels here that carries branding on the face rather than a cap.",
+   "url": "https://www.mljinc.co.jp/product/xtreme-j/xtreme-j/",
+   "flags": [
+    "Cheapest MLJ overall",
+    "Bolt count not published"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "XTREME-J XJ08",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 · 16×6.0J −5 (ultra deep concave)",
+   "bore": "φ108.5",
+   "finishes": "Satin Black · Gloss Machined · Matte Bronze / Black Rim",
+   "cap": "Capless in 5×139.7; Jimny/Sierra-specific low-profile rear cap optional. Nuts exposed.",
+   "price": "¥61,600 – ¥67,100",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The most detailed face in the MLJ range, released 2025-09. Exactly 16 fin spokes drawing a concave toward the centre. The core structure is a double-layer gear: the main fins are joined by sub-spokes rising from the rim at a sharp angle, bridged at their top faces — this creates a deep hollow negative space between two visible layers. Model that second layer or it will not read as XJ08. The rim flange is covered in square through-holes — genuinely pierced, not dimples, functioning as grit and water ejectors. Chrome steel flange bolts run around the outer edge for a real beadlock impression.",
+   "url": "https://www.mljinc.co.jp/product/xtreme-j/xj08/",
+   "flags": [
+    "Newest MLJ (2025-09)",
+    "Square-hole and bolt counts not published"
+   ]
+  },
+  {
+   "brand": "MLJ",
+   "model": "XTREME-J XJ04",
+   "face": "mesh",
+   "sizes": "16×5.5J +22 only",
+   "bore": "φ108.5 (inferred from range)",
+   "finishes": "Satin Black · Gloss Black Machine / Smoke Clear · Matte Bronze / Black Rim (the orange, cement grey and candy red colours have no 5×139.7 size)",
+   "cap": "Optional on this size. Nuts exposed.",
+   "price": "¥59,400 – ¥62,700",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "2×9 extra-thick cross spokes — 9 crossing pairs, 18 tips at the rim, forming a heavy lattice with sharply edged arms. The unusual depth trick: each spoke drops away from its centre origin toward both the hub and the rim simultaneously, giving a two-directional relief you will not get from a flat mesh. Stainless flange bolts (pin bolts) plus an undercut machined into the outer flange produce the beadlock look.",
+   "url": "https://www.mljinc.co.jp/product/xtreme-j/xj04/",
+   "flags": [
+    "Only one JB74 size",
+    "Bolt count not published"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE 06",
+   "face": "spoke",
+   "sizes": "15×6.0J ±0 · 16×5.5J +22 · 16×6.0J −5",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Full Mat Black · Mat Black Polish · Black Polish Bronze-Clear",
+   "cap": "None on 5×139.7 (nut hole φ30). WRV cap sold separately. Nuts exposed.",
+   "price": "¥35,200 – ¥42,350",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "10 straight spokes built as 2×5, with a reverse flare — narrow seen head-on, wide seen from the side — and the top face painted separately from the flanks for a hard edge. Strongly concave, dramatically so on the 16×6.0J −5. The lip is a simulated beadlock: a ring of trapezoid concentric notches with 10 steps around the circumference. That count is confirmed and is the only exact bolt-ring figure Weds publishes anywhere. No physical bolts.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvance06/",
+   "flags": [
+    "Lug-centric bore"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE 07",
+   "face": "spoke",
+   "sizes": "15×6.0J ±0 · 16×5.5J +22",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Full Mat Black · Flint Gray (shot-peened, coarse)",
+   "cap": "Interchangeable centre inserts exist (hairline, red, camo) but not for 5×139.7. Nuts exposed.",
+   "price": "¥35,200 – ¥39,600",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Thick 5 spokes interwoven with slim V-shaped spokes, reading as a 10-point star. Beadlock-style lip and a pronounced concave. No 16×6.0J −5 in this model.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvance07/",
+   "flags": [
+    "Lug-centric bore"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE 08",
+   "face": "mesh",
+   "sizes": "15×6.0J ±0 · 16×5.5J +22 · 16×6.0J −5",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Flint Black (fully shot-peened matte) · Mat Bronze",
+   "cap": "Interchangeable inserts not supplied on 5×139.7 (nut hole φ30). Nuts exposed.",
+   "price": "¥36,300 – ¥40,150",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "8-point mesh with weight in the intersections and closed pouch-shaped spoke ends — not a fine-gauge lattice. The intersections drop away steeply toward the centre. Lip carries a beadlock impression built from continuous trapezoid recesses plus drilled holes, with pierce dots and chevron dimples between.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvance08/",
+   "flags": [
+    "Lug-centric bore",
+    "Bolt count not published"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE SD",
+   "face": "spoke",
+   "sizes": "16×5.5J +22 · 16×6.0J −5",
+   "bore": "φ108.25 (hub-centric)",
+   "finishes": "Full Mat Black · Full Mat Bronze",
+   "cap": "None (nut hole φ32). OEM spare-tyre cap fits, WRV cap does not. Nuts exposed.",
+   "price": "¥38,500 – ¥40,150",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The most distinctive Weds shape. 6 slim Y-shaped spokes with a rib running down each flank, the rib carrying on into the rim fastener area. The Y junction drops away toward the centre at a steep angle. Weds explicitly refused the usual beadlock motif here — instead the outer circumference is cut with longitudinal ribs. The other signature: the spoke tips run over the rim flange, making the wheel read a size larger than it is. MUD VANCE is cast in raised relief on the rim flange, not on a cap — unique placement in the line.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvancesd/",
+   "flags": [
+    "No beadlock motif — deliberate"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE X type F",
+   "face": "slot",
+   "sizes": "16×5.5J +22 · 16×6.0J −5",
+   "bore": "φ108.25 (hub-centric)",
+   "finishes": "Full Mat Black · Flint Bronze",
+   "cap": "None (nut hole φ32). OEM spare cap fits, WRV cap does not. Nuts exposed.",
+   "price": "¥38,500 – ¥40,150",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Shares the outer ring with the other two X wheels. The centre is 12 strongly raked fins, which Weds themselves describe as reading either as 12 fins or as a 12-hole dish — so build it as 12 continuous squared windows in a dish. Deep grooves cut into the rim flange. Branding is bold raised three-dimensional lettering at the centre.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvancex_type_f/"
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE X type M",
+   "face": "mesh",
+   "sizes": "16×5.5J +22 · 16×6.0J −5",
+   "bore": "φ108.25 (hub-centric)",
+   "finishes": "Full Mat Black · Mat Gunmetal",
+   "cap": "None. Nuts exposed.",
+   "price": "¥38,500 – ¥40,150",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "9-point mesh. The centre profile carries an arc that builds a layered three-dimensional read — Weds call it a rugged mesh with movement. Same outer ring as the other X wheels.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvancex_type_m/"
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE X type S",
+   "face": "spoke",
+   "sizes": "15×6.0J ±0 · 16×5.5J +22 · 16×6.0J −5",
+   "bore": "φ108.25 (hub-centric)",
+   "finishes": "Full Mat Black · Flint Gray",
+   "cap": "None. Nuts exposed.",
+   "price": "¥35,200 – ¥40,150",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "6 very thick equally spaced spokes with the centre dropped deeply away for contrast, and detail deliberately minimised. The gear-like read comes from the mismatch in count between the short outer spokes and the 6 centre spokes.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvancex_type_s/",
+   "flags": [
+    "Only X-series wheel with a 15-inch size"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE 04",
+   "face": "mesh",
+   "sizes": "16×5.5J +22",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Black Polish — one colour only",
+   "cap": "None on 5×139.7 (nut hole φ32). Nuts exposed.",
+   "price": "¥38,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Clean Y-branching mesh with a rib at each spoke root. Spoke count shifts between the 5-hole and 6-hole versions so spokes and bolt holes stay naturally offset. Description is from press coverage rather than maker copy — treat as medium confidence.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvance04/",
+   "flags": [
+    "Medium-confidence visual"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "MUD VANCE 05",
+   "face": "dish",
+   "sizes": "15×6.0J ±0 · 16×5.5J +22",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Black Polish — one colour only",
+   "cap": "None on 5×139.7. Nuts exposed.",
+   "price": "¥35,200 – ¥38,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The one figure that matters here is published: rim depth is 56 mm at 15×6.0J and 33 mm at 16×5.5J, and both are reverse rims — the tyre mounts from the back. 56 mm on a 15-inch is extremely deep, so build a deep dish with a tall lip; it looks nothing like the rest of the line. Dark multi-spoke face. Spoke count not published.",
+   "url": "https://www.weds.co.jp/weds_adventure/mudvance05/",
+   "flags": [
+    "Reverse rim",
+    "Spoke count not published"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "HASE SPEC II",
+   "face": "spoke",
+   "sizes": "16×5.5J +22 (Face 1) · 16×5.5J ±0 (Face 2) · 16×6.0J −5 (Face 2)",
+   "bore": "φ108.25 (hub-centric)",
+   "finishes": "Light Gun Metallic · EJ-Bronze",
+   "cap": "None supplied; the ±0 and −5 sizes accept the OEM cap. Nuts exposed.",
+   "price": "¥42,350 – ¥43,450",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The only wheel in the atlas with published weights — 5.87 kg at Face 1, 6.18 and 6.70 kg at Face 2 — which makes it a useful calibration reference for your own mesh density. Two disc depths across the same face design.",
+   "url": "https://www.weds.co.jp/",
+   "flags": [
+    "Published weights"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "KEELER TACTICS",
+   "face": "spoke",
+   "sizes": "15×6.0J ±0",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Hyper Silver · Gloss Black",
+   "cap": "Separate WRV cap. Nuts exposed.",
+   "price": "¥23,650 – ¥24,750",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Tough 5-spoke SUV profile. Maker explicitly lists JB74 and JC74 fitment. This is the cheapest road-legal-offset option anywhere in the atlas — worth carrying as the budget anchor in a configurator.",
+   "url": "https://www.weds.co.jp/",
+   "flags": [
+    "Cheapest legal-offset option in the atlas"
+   ]
+  },
+  {
+   "brand": "Weds",
+   "model": "PRODITA HC2",
+   "face": "spoke",
+   "sizes": "15×6.0J ±0",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Metallic Silver · Black",
+   "cap": "None on 5×139.7. Nuts exposed.",
+   "price": "¥23,650 – ¥24,750",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Budget multi-spoke. Listed under Weds' JB74 vehicle search at 15 inch.",
+   "url": "https://www.search.weds.co.jp/maker/suzuki/jimuniishiera-jb74/adventure-proditahc2/?size=15inch"
+  },
+  {
+   "brand": "Enkei",
+   "model": "ALLROAD RPT1",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0 · 16×6.0J ±0 (JB74 official) · 16×5.5J +20 (JB64 inset)",
+   "bore": "φ108.2 — tightest hub-centric fit in the atlas",
+   "finishes": "Sparkle Silver · Matte Bronze · Matte Dark Gunmetallic · White · Sputtering Black Chrome (Jimny/Sierra exclusive, added 2024-09)",
+   "cap": "None supplied. Maker directs you to the Suzuki OEM Jimny cap, M12 bolts only. Nuts exposed.",
+   "price": "¥47,850 – ¥62,150",
+   "priceNote": "per wheel, list · street seen at ¥28,700",
+   "modelling": "12 spokes arranged as 6 pairs — the RPF1 twin-spoke idiom carried into an off-road wheel. Each pair shares a root near the hub, splits into two near-parallel straight blades and tapers slightly outward. Between pairs sit 6 large triangular-to-trapezoid windows; inside each pair runs a narrow slit converging toward the rim. Not a mesh and not round holes. Concave face, and on the ±0 versions the centre section drops noticeably — give it real depth. Lip is plain and smooth; the outer flange is 11.3 mm wide on the Jimny sizes specifically (17/18-inch use 13.3 mm) and Enkei state there is no protrusion past the rim end face. No rivets, no fake beadlock, no pin bolts. Two rim stickers ship in the box and go on the outer rim face.",
+   "url": "https://www.enkei.co.jp/product/wheels/ALLROAD/RPT1/",
+   "flags": [
+    "Enkei's only official JB74 wheel",
+    "15-inch 5×139.7 announced for autumn 2026 — watch it"
+   ]
+  },
+  {
+   "brand": "Enkei",
+   "model": "all four",
+   "face": "dish",
+   "sizes": "16×5.5J +20",
+   "bore": "φ108.2",
+   "finishes": "Machining Black · Sparkle Silver · Pearl White",
+   "cap": "No Enkei cap — the all-series optional cap explicitly excludes all four. OEM Suzuki cap instead. Nuts exposed.",
+   "price": "¥47,850",
+   "priceNote": "per wheel, list · street ¥30,600",
+   "modelling": "WRC-derived heavy-duty look. Enkei's own design language is a wide centre dish that blocks mud and stone ingress, with openings shaped for stress distribution — so build it as a broad flat dish pierced by large windows cut into the face, rather than as slim spokes. Outer flange 13 mm, no protrusion past the rim end face, no rivets, no fake beadlock. Spoke and opening counts are not stated in any text source — count them from the product photo rather than guessing.",
+   "url": "https://www.enkei.co.jp/product/wheels/all/allfour/",
+   "flags": [
+    "Fits physically but Enkei list only JB64 — +20 narrows track ~30 mm vs stock",
+    "Opening count unverified"
+   ]
+  },
+  {
+   "brand": "DEAN",
+   "model": "CROSS COUNTRY",
+   "face": "slot",
+   "sizes": "16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.8",
+   "finishes": "Matt Black · Margaret White · Burnish Grey · Silver (grey only on the 6.0J)",
+   "cap": "COVERS THE NUTS. Chrome centre plate on 2 Torx screws at 12 and 6, plus a domed chrome cap. Removable, so an open-nut state exists — but no dedicated open-nut cap is sold for either JB74 size.",
+   "price": "¥42,900 – ¥44,000",
+   "priceNote": "per wheel, tax incl",
+   "taiwan": "NT$10,500/wheel — MRK 4X4 (verified)",
+   "modelling": "Land Cruiser 40-series steelie pastiche. Concave and dished with three concentric steps. Exactly 5 long arced capsule slots at 72 degrees, one at 12 o'clock, sitting at about 70% of face radius. The inner chrome plate carries 12 positions at 30 degrees: 10 short arced slots plus the 2 Torx screws at 12 and 6. Smooth rolled lip, no rivets, no beadlock. No pierce bolts beyond the 2 plate screws. Dome cap is about 26% of face diameter, the full plate about 42%. DEAN wordmark appears on the dome only.",
+   "url": "https://www.dean-wheels.com/cross-country/",
+   "flags": [
+    "Cap covers nuts — rare",
+    "The little D edition is this wheel, not a DAMD design"
+   ]
+  },
+  {
+   "brand": "DEAN",
+   "model": "CALIFORNIA",
+   "face": "slot",
+   "sizes": "16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.8",
+   "finishes": "Matt Black · Burnish Grey (+¥2,200)",
+   "cap": "COVERS THE NUTS. Chrome plate on 2 screws at 3 and 9, plus a cap offered in two heights (Lo and Hi) — model both. No open-nut option.",
+   "price": "¥42,900 – ¥46,200",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Neo-retro turbine / bottlecap. Face is flat to slightly concave, sitting behind a deep smooth bowl lip that eats roughly 18–20% of the radius as plain rim. 24 narrow radial stadium-ended slots at 15 degrees, running from about 42% to 78% of radius, with 24 ribs of equal width between them — a clean 50/50 solid-to-void ratio. Smooth stepped lip, no fasteners. Three nested chrome tiers at the centre: an outer smooth plate at about 36% of face diameter, then a knurled rope-textured ring carrying raised COME BACK TO THE ORIGIN lettering top and bottom, then a domed bullet cap at about 20% with DEAN stamped right of the apex.",
+   "url": "https://www.dean-wheels.com/california/",
+   "flags": [
+    "Cap covers nuts",
+    "Two cap heights"
+   ]
+  },
+  {
+   "brand": "DEAN",
+   "model": "BJ MEXICAN",
+   "face": "slot",
+   "sizes": "16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.8",
+   "finishes": "Shot Charcoal Black · Shot Clear — both shot-peened, render a coarse granular micro-surface rather than smooth paint",
+   "cap": "NONE — sold capless. OEM JB64/JB74 cap fits but covers the bore only. Nuts proud and open.",
+   "price": "¥42,900 – ¥44,000",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Heavy vintage Baja truck wheel and the only DEAN that leaves the nuts exposed. Face is flat to mildly concave, slab-like, with raised radial ribs. 10 alternating segments at 36 degrees: 5 mechanical bolt turrets — raised cylindrical bosses with concentric stepped rings on top, one at 12 o'clock then every 72 — interleaved with 5 rounded-rectangle D-windows on the same radius at about 66%, each in a raised frame, with 10 radial ribs between. Lip plain and thick, slightly stepped, with a couple of relief grooves. Open bore about 20% of face diameter. DEAN embossed on the face at 6 o'clock, JWL-T at 7–8, VIA at 4–5.",
+   "url": "https://www.dean-wheels.com/bj-mexican/",
+   "flags": [
+    "Only nuts-exposed DEAN"
+   ]
+  },
+  {
+   "brand": "DEAN",
+   "model": "COLORADO",
+   "face": "beadlock",
+   "sizes": "15×6.0J −5 · 16×5.5J +20",
+   "bore": "φ108.8",
+   "finishes": "Steel Grey · Matt Charcoal Black",
+   "cap": "COVERS THE NUTS. Black centre plate on 8 Torx screws at 45 degrees, plus a domed cap in Hi or Mid height. The open-nut cap is restricted to hub bores of 75.1 and under, so it is not available on JB74 sizes.",
+   "price": "¥39,600 – ¥42,900",
+   "priceNote": "per wheel, tax incl",
+   "taiwan": "NT$10,200/wheel — MRK 4X4 (verified)",
+   "modelling": "Underlying form is a plain dish with three concentric stepped terraces — outer flange, step, bolt-ring terrace, step, raised centre boss — but the bolt ring dominates the read, so treat it as beadlock-look. Exactly 16 large hexagonal pierce bolts at 22.5 degrees, each in a shallow countersunk pocket, on a ring at 60–65% of radius. Lip is plain and smooth; the beadlock impression comes entirely from the bolt ring. Plate about 33% of face diameter with 8 Torx and 8 short curved grooves; dome cap about 19%. DEAN appears three times: embossed at 12 and 6 o'clock — the lower one moulded upside-down — plus on the cap. Note the footnotes change geometry by size: the small sizes have no disc bolts and only the 17×8.0J adds a lip flange-bolt ring. Both JB74 sizes are disc bolts yes, flange bolts no.",
+   "url": "https://www.dean-wheels.com/colorado/",
+   "flags": [
+    "Cheapest DEAN for JB74",
+    "Only DEAN with a 15-inch JB74 size"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "TEAM DAYTONA FDX-J",
+   "face": "beadlock",
+   "sizes": "16×5.5J +20 · 16×5.5J ±0",
+   "bore": "φ108.8",
+   "finishes": "Black / Diamond Cut (one colour). The FDX-J collection variant is all-gloss-black with no diamond cut.",
+   "cap": "None. OEM Jimny cap rear only. Nuts exposed.",
+   "price": "¥50,600",
+   "priceNote": "per wheel, tax incl · street ¥30,110",
+   "modelling": "5 spokes — RAYS call it a 5-hole-specific five-spoke silhouette. Each spoke is a narrow gloss-black rib flanked by two diamond-cut bright strips, splitting into a Y about two-thirds of the way out, the prongs landing on a machined chevron pad. Strongly dished and concave with a deep undercut behind the spokes. Rim depth 67.8 mm is RAYS' headline figure. Two-tier stepped faux-beadlock ring: the outer tier alternates gloss-black arc pads (embossed JWL, JWL-T, VIA, MADE IN JAPAN) with polished diamond-cut segments; the inner tier is the chevron pads. Fake fasteners counted: 2 large serrated-collar pin bolts plus 2 small flat rivets per segment across 5 segments — 10 large and 10 small, 20 total. Five windows, each subdivided near the rim by the Y into a triangle and two slits. RAYS in white on the flange at 6 o'clock, DAYTONA embossed at 4, LIGHT WEIGHT at 8. Bore opening about 27% of face diameter. On the collection variant the diamond cut is replaced by a fine ring of machined dots and the 20 bolts become black-on-black relief.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/171",
+   "flags": [
+    "The Jimny-specific FDX — F7 and F6 base do not fit"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "TEAM DAYTONA F6 boost",
+   "face": "beadlock",
+   "sizes": "16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.8",
+   "finishes": "Dark Bronze · Semi-gloss Black · Black Edition in Semi-gloss Black",
+   "cap": "None on 5×139.7. Nuts exposed.",
+   "price": "¥50,600 – ¥53,900",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "12 spokes as 2×6 — the traditional F6 layout. Six stems leave the hub, each splitting into two blade prongs that lift out of the deep rim toward the beadlock ring, with a narrow keyhole slit between each pair and a large triangular window between groups. Deeply concave, with the spoke crowns standing proud of the ring plane. Wide two-tone faux-beadlock ring: a brushed-look face carrying flat chrome-headed pin bolts alternating with raised gloss-black rectangular tabs, roughly 14 bolts and 14 tabs at about 26-degree spacing (approximate — read from a three-quarter view). TEAM DAYTONA in white outline at 9–10 o'clock, RAYS in white at 6. The Black Edition spec table names JIMNY SIERRA on the 16×6.0J −5 row.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/162",
+   "flags": [
+    "Bolt count approximate"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "TEAM DAYTONA M9+ / M9+ SPEC-M",
+   "face": "mesh",
+   "sizes": "16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.8",
+   "finishes": "M9+ Semi-gloss Black · Black / Disc Clear Smoke. SPEC-M Semi-gloss Super Dark Gunmetal only.",
+   "cap": "Supplied (LPS CAP V2), about 86 mm — roughly 21% of face diameter, so it sits inside the lug circle and the nuts stay exposed.",
+   "price": "¥52,800 – ¥60,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A true web rather than a countable spoke set. Working outward: 5 short hub arms, then a ring of 5 small triangular ports, then 5 medium pentagonal ports, then 5 large pentagon/hexagon ports, then 5 elongated rounded-rectangular slots at the rim edge. Webs are narrow, flat-topped and chamfered. Face flat to slightly concave, set inboard so the outer ring stands proud like a separate part. Faux-beadlock ring with 12 washer-and-bolt heads — a concentric ring plus a centre dot — at 30 degrees; this count is solid. TEAM DAYTONA in white outline at 11 o'clock, RAYS at 6. Cap art: low black dome, black outer ring with about 10 tiny bolt heads, brushed-silver disc, black RAYS wordmark, THE CONCEPT IS RACING arced above and JAPAN QUALITY below, five pointed lobes at the base.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/175",
+   "flags": [
+    "12 ring bolts — confirmed count"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "TEAM DAYTONA M8 / Black Edition / xB",
+   "face": "mesh",
+   "sizes": "16×6.0J −5 only",
+   "bore": "φ108.8",
+   "finishes": "Matt Black · Dark Bronze · Black Edition Semi-gloss Black · xB Dark Bronze or Semi-gloss Arms Grey with E-pro coat",
+   "cap": "None on 5×139.7. Nuts exposed.",
+   "price": "¥51,700 – ¥60,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The busiest face in the RAYS range — a spider-web lattice of narrow flat-topped ribs forming curved triangles, teardrops and small round ports on roughly a 5-fold repeat, but not readable as discrete spokes. Flat face set inboard of a tall faux-beadlock ring carrying about 16 domed light-coloured bolt heads (approximate, 16–18) that contrast hard against bronze or black — visually the loudest element. Two raised dark tabs on the ring carry JWL and VIA. Unusually, TEAM and DAYTONA are printed in white on the hub pad flanking the bore rather than on the lip; RAYS sits in white on the ring at 6 o'clock. The Black Edition spec table reads JIMNY SIERRA outright.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/5",
+   "flags": [
+    "No 5.5J in 5×139.7",
+    "Bolt count approximate"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "TEAM DAYTONA D108",
+   "face": "spoke",
+   "sizes": "16×6.0J −5",
+   "bore": "φ108.8",
+   "finishes": "Matt Black (Dark Bronze is published model-wide but unconfirmed in this size)",
+   "cap": "Supplied (LPS CAP V2), about 21% of face. Nuts exposed.",
+   "price": "¥55,000",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The cleanest classic alloy face in the whole atlas. 8 straight gently tapered flat-topped spokes meeting a plain outer ring with no bolt detail at all, and 8 large rounded-triangle openings. Face flat to very slightly concave. Smooth plain lip — the only texture anywhere is the knurled band in the inner rim well. TEAM DAYTONA in large white outline on the outer lip at 12 o'clock, RAYS embossed on the disc at 2.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/5"
+  },
+  {
+   "brand": "RAYS",
+   "model": "gramLIGHTS 57DR-X",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 (D1 disc) · 16×5.5J ±0 (D2 disc)",
+   "bore": "φ108.8",
+   "finishes": "Super Dark Gunmetal · Jungle Green (limited edition) — the only non-black/bronze/grey RAYS option besides the Desert Edition",
+   "cap": "Cap is 6H-139.7 only, so none on Jimny sizes. Nuts exposed.",
+   "price": "¥48,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Cheapest RAYS that fits. 6 straight strongly tapered spokes — wide at the hub, narrow at the rim — each with a raised centre rib, machined chamfered edges and a concave web between, the classic 57-series section. 6 keyhole/teardrop windows. Concave face forming a shallow bowl. Smooth rounded flange with no bolts or rivets and a subtle step at the outer edge. RAYS embossed in the same colour on one spoke at 3 o'clock — no white text anywhere, the most understated wheel in the atlas.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/42",
+   "flags": [
+    "Cheapest RAYS for JB74"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "A・LAP-J (KC DECOR tier)",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 (S rim) · 16×5.5J ±0 (L rim) · 16×5.5J −20 (F2 face, L rim) · 16×6.0J +5 (L rim)",
+   "bore": "φ108.8",
+   "finishes": "Black / Rim DC · Bronze Anodised. Variants: 2324 Limited in Matt Translucent Black (no bright lip band), Desert Edition in Desert Yellow, PRO in Dash White with red decals and insets +21 / −6.",
+   "cap": "None. OEM cap rear only. Nuts exposed.",
+   "price": "¥63,800 – ¥69,300",
+   "priceNote": "per wheel, tax incl · street ¥35,200",
+   "modelling": "Forged one-piece, 4.8 kg. 10 slender straight tapered flat-topped spokes with sharp chamfers, sitting on small pedestals at the hub ring and landing square on the rim well, with 10 narrow rounded-teardrop windows that widen toward the rim end. Face is flat and set well outboard with a deep step down to the lip — it reads as a flat face over a deep lip. The modellable rim dimension is published: S rim flange 35 mm, L rim flange 55 mm, so the ±0 and −20 insets get a visibly deeper lip. On the Black/Rim DC finish a wide bright diamond-cut band runs on the flange against the gloss-black disc. No bolts, no rivets, no beadlock ring. A・LAP-J in white on one spoke at 9–10 o'clock, RAYS in white opposite at 2–3.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/148",
+   "flags": [
+    "KC DECOR is the brand tier, not a model",
+    "Older ¥41,000 press quotes are outdated"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "A・LAP-07X",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 (F2) · 16×6.0J −5 (F3)",
+   "bore": "φ108.8",
+   "finishes": "Black / Rim DC · Bronze Anodised",
+   "cap": "Cap is 5H-114.3 only. Nuts exposed.",
+   "price": "¥71,500 – ¥74,800",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Spoke count and lip detail could not be confirmed — no clean straight-on 16-inch photo was obtained. Do not model this one from guesswork; pull the product image first.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/148",
+   "flags": [
+    "Geometry unverified — needs a photo pass"
+   ]
+  },
+  {
+   "brand": "RAYS",
+   "model": "VOLK RACING TE37XT for J",
+   "face": "slot",
+   "sizes": "16×5.5J +20 · 16×5.5J ±0 · 16×6.0J −5",
+   "bore": "φ112 — clears the hub but is LUG-CENTRIC, not hub-centric. The UL variant is φ108.8 and hub-centric.",
+   "finishes": "Blast Black · Bronze Anodised, plus VOLK option-colour tiers (+¥3,300 / ¥4,400 / ¥7,700). Variants: UL in Matt Gun Black; Black Shadow LTD in Matt Translucent Black; 30TH Sticker Ver in White or Bronze; 30TH Machining Ver.",
+   "cap": "OEM Jimny cap will NOT fit. Optional cap rear only. Nuts exposed.",
+   "price": "¥75,900 – ¥92,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Forged, and the most expensive face type here. A solid disc with 6 large rounded D-window/trapezoid punches and no spokes at all. Face flat to slightly dished. Tall plain smooth flange carrying one thin machined bright pinstripe just inboard of the edge — that pinstripe is the signature detail. Nuts sit in shallow countersunk recesses. VOLK RACING in large white block letters twice, at 11 and 5 o'clock, with RAYS ENG., FORGED, MADE IN JAPAN, VIA 620KG and JWL embossed. On the 30TH Machining version the lip lettering is CNC-cut into the metal rather than applied as a decal.",
+   "url": "https://www.rayswheels.co.jp/products/brand/detail/132",
+   "flags": [
+    "φ112 lug-centric — flag in configurator",
+    "UL variant is hub-centric at φ108.8"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "CRAG GALVATRE",
+   "face": "round",
+   "sizes": "3-piece: 15×5.5J +0 through 7.0J −19 · 16×5.5J +19 / +7 / −6 / −19 · 16×6.0J +13 / 0 / −12 / −25 · up to 8.0J",
+   "bore": "φ108.5",
+   "finishes": "Disk: Cut Clear · Black Chamfer Machining, plus semi-order White, Silver/Clear Blue, Black Chamfer Imperial Gold, Imperial Gold. Rim: Buff Anodised or Bronze Anodised. Pierce bolts: Chrome, Gold (+¥16,500 each), Black Chrome (+¥5,500 each).",
+   "cap": "None. Nuts exposed.",
+   "price": "¥72,600 – ¥92,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A modern steelie face: flat annular disc with no true spokes, pierced by one ring of about 16 teardrop/comma windows — large rounded end outboard tapering to a point inboard, slightly swept. Face is flat and set well inboard, giving a very deep-lipped read. Stepped polished three-piece barrel. One ring of roughly 40–44 chrome pierce bolts on the disc flange band, round flanged heads with a hex socket dot (count approximate). Five chrome nuts sit proud in scalloped pockets at the bore boss. Crossover Racing Gear embossed in a curved arc twice, upper and lower, between the bore boss and the window ring.",
+   "url": "https://www.work-wheels.co.jp/search/detail/129/",
+   "flags": [
+    "3-piece — offset set by rim depth",
+    "Bolt count approximate"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "CRAG GALVATRE 2",
+   "face": "spoke",
+   "sizes": "3-piece, 16-inch only: 16×5.5J +19 / +7 / −6 / −19 · 16×6.0J +13 / 0 / −12 / −25 · up to 8.0J",
+   "bore": "φ108.5",
+   "finishes": "Disk: Matt Carbon · Cut Clear standard, plus 12 semi-order options including Ashed Titan, Colourism, Imperial Gold. Rim: Buff Anodised standard, plus Bronze, Matt Bronze, Black, Matt Black Anodised, Brushed. Pierce bolts: chrome, black or gold.",
+   "cap": "NONE, deliberately — WORK state they omitted it to push the sporty read. Nuts fully exposed.",
+   "price": "¥79,200 – ¥81,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A 5-spoke star, and completely different geometry from GALVATRE 1 — do not reuse the mesh. Each spoke is a wide flat-topped blade that kinks and steps mid-span before meeting the outer flange ring, giving a swept-star look, and widens slightly toward the rim, with large rounded-triangular windows between. Face slightly concave and stepped, hub proud with the spokes dropping back. Three-piece stepped polished barrel with concentric machining steps. One ring of roughly 40–44 pierce bolts on the flange band (approximate). The 5 lug holes sit on the root of each spoke, one per spoke. Minimal face branding — WORK laser marks on the flange band only.",
+   "url": "https://www.work-wheels.co.jp/search/detail/152/",
+   "flags": [
+    "Price conflict: official ¥79,200 vs magazine ¥59,400"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "CRAG T-GRABIC II MC+",
+   "face": "slot",
+   "sizes": "16×5.5J +20 · 16×5.5J ±0",
+   "bore": "φ108.5",
+   "finishes": "Black Pierce Machining — one colour only",
+   "cap": "Explicitly cannot be fitted on 5H-139.7. Nuts exposed.",
+   "price": "¥49,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "8 straight flat blade spokes, each forking into a shallow Y near the rim, producing tall rounded-rectangular D-window slots. Face flat to very slightly concave at 5.5J. Two-material face: a dark base with machined-bright spoke tops and slot chamfers — that contrast is what MC+ means, so build it as two materials rather than one. Fake-beadlock outer band: a flat machined annulus carrying roughly 20–24 small round simulated studs (approximate); decorative only, this is a one-piece casting. A III WORK laser mark sits on the band at about 12 o'clock.",
+   "url": "https://www.work-wheels.co.jp/search/detail/179/",
+   "flags": [
+    "Stud count approximate"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "CRAG T-GRABIC II / T-GRABIC",
+   "face": "slot",
+   "sizes": "T-GRABIC II 16×5.5J +20 and ±0 · T-GRABIC 16×5.5J +20 only",
+   "bore": "φ108.5",
+   "finishes": "II: Ashed Titan Cut Rim · Grimmit Black Cut Rim. Original: Matt Carbon Cut Rim · Ashed Titan Cut Rim.",
+   "cap": "None on these sizes (air valve only). Nuts exposed.",
+   "price": "¥42,900 – ¥47,300",
+   "priceNote": "per wheel, tax incl · last list before discontinuation",
+   "modelling": "Same D-window family as the MC+. T-GRABIC II is the 8-spoke Y-split face in a cut-rim two-tone — the outer annulus machined to bare bright alloy against coloured spokes, with roughly 20–24 fake beadlock studs. The original T-GRABIC is simpler: about 10–12 long parallel-sided rounded slots, no Y-fork, a wide bright machined band with a stud ring. Both carry a deep concave inner ring.",
+   "url": "https://www.work-wheels.co.jp/",
+   "flags": [
+    "Discontinued 2025 — retail stock remains",
+    "Counts approximate"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "MEISTER S1 1PIECE SUV",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0 (FT1) · 16×6.0J −5 (FT2)",
+   "bore": "φ108.5",
+   "finishes": "Ashed Titan · Matt Black",
+   "cap": "Optional cap is 6H-139.7 only, so none for JB74. WORK supply a disc sticker instead. Nuts exposed.",
+   "price": "¥50,600 – ¥51,700",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "One of only two WORK wheels whose fitment column names JIMNY SIERRA (JB74) outright. 5 broad spokes, each split down the centre by a narrow slot to give a twin-rib read, on a slightly concave face. Smooth lip — no rivet ring, no pierce bolts, no fake beadlock, making it visually the simplest option in the WORK set. Open bore, exposed nuts, WORK decal on the hub face. Fine spoke profile read from catalogue thumbnails; the 5-spoke count is confident.",
+   "url": "https://www.work-wheels.co.jp/search/detail/170/",
+   "flags": [
+    "Names JB74 in the catalogue"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "MEISTER L1 1PIECE SUV",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0 (FT1) · 16×6.0J −5 (FT2)",
+   "bore": "φ108.5",
+   "finishes": "Ashed Titan · Matt Black",
+   "cap": "None for JB74; disc sticker supplied. Nuts exposed.",
+   "price": "¥50,600 – ¥51,700",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Sibling to the S1 and the second WORK wheel naming JB74. 5 flat, wider, slab-like blades with squarer rim shoulders and a flatter face than the S1 — no centre slot. Smooth lip, no rivets, no pierce bolts, no beadlock. Open bore, exposed nuts.",
+   "url": "https://www.work-wheels.co.jp/search/detail/171/",
+   "flags": [
+    "Names JB74 in the catalogue"
+   ]
+  },
+  {
+   "brand": "WORK",
+   "model": "CRAG S1J",
+   "face": "spoke",
+   "sizes": "16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · WORK Black Metal Coat (render as a dark mirror)",
+   "cap": "None. Air valve and disc sticker only. Nuts exposed.",
+   "price": "¥38,500 – ¥48,400",
+   "priceNote": "per wheel, tax incl · last list",
+   "modelling": "Cheapest WORK that fits. 5 broad tapered straight spokes widening toward the rim with softly rounded shoulders, and large rounded-triangular windows. Flat to very slightly dished. Smooth one-piece lip — no rivets, no fake beadlock, no pierce ring. Open bore, 5 exposed nuts. The only face branding is a III WORK decal lying flat on one spoke — model it as a decal plane, not a cap.",
+   "url": "https://www.work-wheels.co.jp/",
+   "flags": [
+    "Discontinued 2025"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "UFO",
+   "face": "round",
+   "sizes": "16×6.0J −5 (Sierra) · 16×5.5J +22 (kei)",
+   "bore": "~φ108",
+   "finishes": "Spattering — chrome-effect speckle, the only finish",
+   "cap": "None referenced. Nuts exposed.",
+   "price": "¥33,000 – ¥38,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Aluminium despite the steel styling. 8 evenly spaced round holes in the renkon idiom. The Sierra version has a markedly deeper mortar-bowl dish than the kei one, plus a fine groove ringing the hub boss for shadow definition. Fine pressed-steel-style stepping on the rim despite being cast. Single-tone — no two-tone.",
+   "url": "https://klc-div.com/heritage/product/wheel/ufo_s/"
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Yamato II",
+   "face": "round",
+   "sizes": "16×6.0J ±0 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "~φ108",
+   "finishes": "Matt Black only",
+   "cap": "None referenced. Nuts exposed in a dimpled surround.",
+   "price": "¥27,500 – ¥29,700",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Cast aluminium made to look like welded two-piece pressed steel. The Sierra version has 15 round through-holes — up from the original Yamato's 10, each made smaller to compensate. Prominent bulged raised centre boss; the disc-to-rim junction is deeply recessed to fake the two-piece look; finely stepped flange. Pressed-steel-style dimples sit beside each nut hole.",
+   "url": "https://klc-div.com/heritage/product/wheel/yamato2_s_n/",
+   "flags": [
+    "Hole count restated only for the Sierra size"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Daytona's Deep",
+   "face": "round",
+   "sizes": "16×8.0J −20",
+   "bore": "φ108 — the only KLC SKU with independently verified bore",
+   "finishes": "Semi-gloss Black only",
+   "cap": "No removable front cap — the hub boss is integral to the stamping. Only the rear accepts the OEM Suzuki cap. Nuts fully open from the visible face.",
+   "price": "¥29,700",
+   "priceNote": "per wheel, tax incl · ¥118,400 per set of 4 verified",
+   "modelling": "Steel. 10 dome-shaped holes — a curve-and-straight hybrid, not true circles. No rim trim-line at all, unusual for a Daytona style. Finely multi-stepped lip throwing strong shadow lines, and a strong concave face.",
+   "url": "https://klc-div.com/heritage/product/wheel/daytonasdeep/",
+   "flags": [
+    "8.0J exceeds a 7J ceiling",
+    "−20 needs over-fenders"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Daytona's Vanilla",
+   "face": "round",
+   "sizes": "16×6.0J −5 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "~φ108",
+   "finishes": "Vanilla White — distinct from plain white or cream, and it carries orange and sky-blue accent pinstripes at the rim",
+   "cap": "OEM Suzuki cap can be reused — small, covers the boss only, 5 nuts stay visible around it.",
+   "price": "¥27,500 – ¥28,600",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Same 10 dome-shaped holes on a concave disc as Daytona's Deep, but this one does carry the twin pinstripe at the rim lip that the Deep lacks — West-Coast/lowrider styling. Steel.",
+   "url": "https://klc-div.com/heritage/product/wheel/daytonasvanilla_s_n/"
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Semi Wide Wheel",
+   "face": "slot",
+   "sizes": "16×5.5J −25 — one universal SKU for Jimny and Sierra",
+   "bore": "~φ108",
+   "finishes": "Semi-gloss Black only",
+   "cap": "None referenced. Nuts exposed.",
+   "price": "¥29,700",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Steel. 5 elongated oval slots around the outer disc. The centre is bulged round then pressed back in, with a finely stepped flange. The whole point is a very deep dish from −25 on a narrow 5.5J.",
+   "url": "https://klc-div.com/heritage/product/wheel/semiwidewheel/",
+   "flags": [
+    "−25 sits at your offset boundary",
+    "KLC warn JB64 needs 40mm+ over-fenders"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Wide Wheel",
+   "face": "slot",
+   "sizes": "16×8.0J −20",
+   "bore": "~φ108",
+   "finishes": "Semi-gloss Black (slightly matte) only",
+   "cap": "None referenced. Nuts exposed.",
+   "price": "¥31,900",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A genuine full-reverse-rim two-piece steel build, which changes the silhouette: because the rim is reversed there is no stepped lip line at all — the barrel runs straight from the mounting face to the flange, giving a continuous bucket-like depth instead of KLC's usual staggered steps. 5 round elongated slots with bulged nut-hole surrounds. KLC themselves call −20 at 8.0J out of spec.",
+   "url": "https://klc-div.com/heritage/product/wheel/widewheel/",
+   "flags": [
+    "8.0J exceeds a 7J ceiling",
+    "No stepped lip — unique silhouette"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Old Country Vanilla",
+   "face": "slot",
+   "sizes": "16×6.0J −5 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "~φ108",
+   "finishes": "Vanilla White (Heritage-exclusive colourway)",
+   "cap": "Chrome centre cap is the model's stated trademark, and on the Sierra version explicitly removable — so cap-on and cap-off are both intended looks. Covers the boss; the 5 nuts sit outside it.",
+   "price": "¥22,000 – ¥25,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Steel. Signature is 5 flattened, squashed-oval holes — distinctly different from the Daytona family's round domes. Flat face profile, not concave. Mid-1970s American steel proportions.",
+   "url": "https://klc-div.com/heritage/product/wheel/oldcountryvanilla_s/",
+   "flags": [
+    "Cheapest wheel in the atlas at ¥22,000",
+    "Two cap states"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Old Country Heritage Spec",
+   "face": "slot",
+   "sizes": "16×7.0J −5",
+   "bore": "~φ108",
+   "finishes": "Chrome only",
+   "cap": "Not restated on this page; assume the sibling's chrome cap — unconfirmed.",
+   "price": "¥30,800",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Steel. A wider and deeper chrome version of Old Country — roughly 25 mm wider and 12–13 mm deeper in the rim than the 6.0J. Takes tyres up to 215 mm in-fender. The hole count is not restated on this page; the same 5-flattened-oval face is a reasonable assumption but is not explicitly confirmed.",
+   "url": "https://klc-div.com/heritage/product/wheel/oldcountryheritage/",
+   "flags": [
+    "One of the few genuine 7.0J options",
+    "Face detail not restated — verify"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "RS For J",
+   "face": "mesh",
+   "sizes": "16×7.0J −5",
+   "bore": "~φ108",
+   "finishes": "Black Polish · Gloss Black",
+   "cap": "None described. Nuts exposed.",
+   "price": "¥36,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Finely cross-hatched thin spokes forming a genuine lattice rather than a spoke pattern. Small pierce bolts are set into the outer perimeter of the mesh — the count is never stated numerically, only described as scattered around the rim edge, so count them from a photo. Deep stepped lip. Despite being a real one-piece casting it is styled to mimic a three-piece, with the lip visually separated from the mesh face.",
+   "url": "https://klc-div.com/heritage/product/wheel/rsforj_s_n/",
+   "flags": [
+    "Genuine 7.0J",
+    "Pierce-bolt count unknown"
+   ]
+  },
+  {
+   "brand": "KLC Heritage",
+   "model": "Magnifique",
+   "face": "dish",
+   "sizes": "16×5.5J +20 (Jimny only)",
+   "bore": "~φ108",
+   "finishes": "Matt Black · Off-White",
+   "cap": "None. Nuts exposed in a subtly raised, pinched surround.",
+   "price": "¥30,800",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Inspired by vintage Land Rover Defender OEM steel wheels. The face is a rounded bulging dome — not flat, not deeply concave — with 4 narrow slit vents cut into the sides of the bulge; slits, not holes. Centre boss and outer disc edge are both pressed inward relative to the bulge, giving a stepped, active silhouette. Finely multi-stepped flange. Useful spec detail: 17HEX M12×P1.25 nuts only, 19HEX will not fit, which confirms a standard exposed hex-nut design.",
+   "url": "https://klc-div.com/heritage/product/wheel/magnifique/",
+   "flags": [
+    "Kei offset — tucks inside a Sierra arch"
+   ]
+  },
+  {
+   "brand": "RS Watanabe",
+   "model": "EIGHT SPOKE F8 Type",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0 (Sierra) · 15×6.0J ±0 · 16×5.5J +22 (kei)",
+   "bore": "φ108.5",
+   "finishes": "Black (gunmetal-tinted Watanabe Black) standard. +¥3,000–3,300: rim-machined silver, gold metallic, silver metallic, matte black, glossy black, mag tone, red, blue, yellow, white.",
+   "cap": "Sold separately, universal octagonal or bullet type, φ60/63/70/108.5, ¥3,000 — and the maker warns it may not fit. Even the largest is far smaller than the 139.7 bolt circle, so the nuts are ALWAYS exposed in a ring outside it.",
+   "price": "¥49,500",
+   "priceNote": "per wheel, tax incl · set of 4 ¥189,090 verified",
+   "modelling": "8 straight gently tapered spokes — no curve, no Y-split, no mesh — radiating from a small recessed hub boss to the rim. Face mildly concave, with the spokes raised as ribs stepping up out of the dish. Moderate rim depth with a single rib/step line running around the barrel to emphasise the lip. No fake beadlock ring, no pin bolts. The brand appears only on the small round cap: RS WATANABE wordmark plus the embossed three-crane logo and JWL/JWL-T marks. Nothing on lip or barrel.",
+   "url": "https://rs-watanabe.co.jp/jimny/",
+   "flags": [
+    "Order the Jimny SKU — the generic catalogue bore varies 95–139"
+   ]
+  },
+  {
+   "brand": "RS Watanabe",
+   "model": "PIERCE",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0",
+   "bore": "φ108.5",
+   "finishes": "Gloss Black / machined silver rim lip — one finish only",
+   "cap": "Newly developed front-specific caps in silver and black. Same geometry — nuts exposed.",
+   "price": "¥55,000",
+   "priceNote": "per wheel, tax incl (¥50,000 ex-tax)",
+   "modelling": "Newest Watanabe, 2026. Still the 8-straight-spoke family, but with a 60 mm deep reverse dish and a glossy clear-coat wet-look finish rather than the F8's shot-blast matte. Same spoke geometry, deeper dish, silver lip contrast.",
+   "url": "https://rs-watanabe.co.jp/tas2026-2-2-3/",
+   "flags": [
+    "2026 release"
+   ]
+  },
+  {
+   "brand": "RS Watanabe",
+   "model": "EIGHT SPOKE R-Type Sierra",
+   "face": "spoke",
+   "sizes": "16×8.0J ±0",
+   "bore": "φ108.5",
+   "finishes": "As F8 range",
+   "cap": "Same small cap — nuts exposed.",
+   "price": "¥60,000 – ¥80,000",
+   "priceNote": "per wheel — ESTIMATED, no storefront found",
+   "modelling": "Same 8-straight-spoke family as the F8 but with a much deeper dish, the disc set far back in a wide rim, a pronounced rib line on the deep barrel and bolder three-dimensional spoke relief.",
+   "url": "https://rs-watanabe.co.jp/jimny/",
+   "flags": [
+    "8.0J exceeds a 7J ceiling",
+    "Maker says wide fenders required",
+    "Price estimated"
+   ]
+  },
+  {
+   "brand": "Hayashi Racing",
+   "model": "Street TYPE STJ",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 · 16×5.5J ±0",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Black Polish only — and explicitly with NO clear coat, so it tarnishes and patinas like a vintage wheel. Shade it as aged polish, not bright chrome.",
+   "cap": "NONE POSSIBLE. Maker states a centre cap cannot be fitted to the STJ type, period. All 5 nuts permanently exposed over an open hub and visible rotor.",
+   "price": "¥44,000 – ¥45,100",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Honest gap: the spoke count and geometry could not be sourced. Hayashi publish no descriptive text and no retailer or blog describes the spoke shape in words — only that it is a nostalgic old-car design sharing the basic STL layout. Confirmed: cast aluminium spoke wheel, 5.7 kg, JWL-T, dished/deep face (an installer specifically praised the depth despite the mild +20), no cap, wide open centre. Pull the product photo before modelling this one.",
+   "url": "https://hayashiracing.com/whee08stj/",
+   "flags": [
+    "Geometry unverified — needs a photo pass",
+    "Site is hayashiracing.com, not hayashi-racing.co.jp",
+    "COBBY lists a 15-inch at ¥31,680 — contradicts the maker; treat as unreliable"
+   ]
+  },
+  {
+   "brand": "BRADLEY",
+   "model": "V",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0 (FACE2) · 16×5.5J +22 · 16×6.0J −6",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Gun Metallic · Pearl White · Matte Black · Matte Bronze · Matte Gun Metallic · Bright Silver · Matte Blue",
+   "cap": "Small cap fitted from the rear — 54 mm low type, or 42–45 mm super-low with a stainless 4x4 Engineering ornament. Against a ~140 mm bolt circle it covers the bore only; all 5 nuts exposed.",
+   "price": "¥44,000 – ¥51,000",
+   "priceNote": "per wheel · sources conflict, see flags",
+   "modelling": "5 straight simple tapered spokes — not curved, not Y-split, not mesh. Low-pressure cast one-piece. Face ranges from flat (FACE2) to noticeably concave (FACE3+), and the FACE1–FACE5 plus FACE4 Deep and Super Deep options are effectively a built-in configurator axis: same spoke design, different disc depth. No bead-lock ring. Branding confirmed only on the cap badge — no BRADLEY wordmark verified on spoke, lip or barrel.",
+   "url": "https://4x4es.co.jp/en/products/wheel/bradley-v/",
+   "flags": [
+    "The brief's bolt ring does not exist here — it is a one-piece casting",
+    "Price conflict: current table ¥49,000–51,000 vs older ¥46,200–48,400",
+    "Site is 4x4es.co.jp"
+   ]
+  },
+  {
+   "brand": "BRADLEY",
+   "model": "V EVOLUTION / SPEC-C",
+   "face": "spoke",
+   "sizes": "Standard 16×5.5J ±0 / +22 · SPEC-C 16×5.5J −20",
+   "bore": "φ110.5 (lug-centric)",
+   "finishes": "Standard: Super Black, Pearl White, Matte Black, Matte Bronze, plus Black Machining Blue on clearance. SPEC-C: Grit Flat Black, Raid White, Steel Blue, Rush Red.",
+   "cap": "Same small rear-mounted matte-black cap family. Nuts exposed. The OEM Jimny rear spare-tyre cap also fits.",
+   "price": "¥39,600 – ¥56,650",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Same 5-spoke family as BRADLEY V but with visibly thinner spokes in cross-section, giving a lighter read — that is the single distinguishing feature to model. Made by the MAT process (cast then spun, marketed as forged-equivalent, still functionally cast). SPEC-C's −20 pushes the disc into a pronounced inverted, dished look.",
+   "url": "https://4x4es.co.jp/en/products/wheel/bradley-v-evolution/",
+   "flags": [
+    "Explicitly listed for JB74",
+    "SPEC-C −20 needs over-fenders"
+   ]
+  },
+  {
+   "brand": "BRADLEY",
+   "model": "FORGED TAKUMI",
+   "face": "spoke",
+   "sizes": "16×6.5J −5",
+   "bore": "φ110.3 (lug-centric)",
+   "finishes": "Matte Deep Grey · Matte Shadow Black · Matte Titanium Bronze. Pure White exists in the line but only on the 6-hole Land Cruiser SKU — do not assume it here.",
+   "cap": "Same small cap family. Nuts exposed.",
+   "price": "¥106,700",
+   "priceNote": "per wheel — ESTIMATED by size-tier analogy; the Jimny announcement showed no price",
+   "modelling": "Genuinely forged rather than the cast MAT process, so the spoke edges are crisper and more machined than the cast V. 5-spoke family with a sculpted three-dimensional disc, deeply dished given −5 on 6.5J. Matte finishes only. No bolt or rivet ring. Ships with anti-bead-slip rim texture, spoke stickers and short rubber valves.",
+   "url": "https://4x4es.co.jp/en/products/wheel/bradley-takumi/",
+   "flags": [
+    "One of the few genuine 6.5J options",
+    "Explicitly for JB74 / JC74",
+    "Price estimated — roughly double anything else"
+   ]
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "R8",
+   "face": "round",
+   "sizes": "15×6.0J ±0",
+   "bore": "Not published (~108 inherited)",
+   "finishes": "Matt Black · Gloss Black",
+   "cap": "COVERS THE NUTS — the only wheel outside DEAN and 5ZIGEN where this is affirmatively the case. Cap carries both the R8 model logo and the SHOWA GARAGE brand logo.",
+   "price": "¥33,550",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Literally egg-shaped holes with an emphasised bevel on each hole's inner wall, set in a dish face. Steps and ribs are deliberately stripped out for a cleaner modern read on the retro shape. One-piece cast, 6.77 kg including cap and valve.",
+   "url": "https://showa-garage.shop/shopdetail/000000000423/",
+   "flags": [
+    "One of only two 15-inch options in the specialist set",
+    "NOT compatible with JC74 Nomad",
+    "Cap covers nuts"
+   ]
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "GUNFIELD",
+   "face": "round",
+   "sizes": "15×6.0J ±0 · 16×6.0J ±0",
+   "bore": "Not published",
+   "finishes": "Black Polish · Sand Black",
+   "cap": "None mentioned. Nuts sit inside the dish sculpting.",
+   "price": "¥36,300 – ¥38,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Dish face where the disc rises up out of the lug-nut area. Oval perforations around the outer perimeter are styled as gravel and mud ejection ducts. Spoke interiors scooped for depth. Double-lip rim profile with a deep lip. 7.6 kg at 15 inch.",
+   "url": "https://showa-garage.shop/shopdetail/000000000855/",
+   "flags": [
+    "Second of only two 15-inch options in the specialist set"
+   ]
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "XENO",
+   "face": "spoke",
+   "sizes": "16×6.0J ±0",
+   "bore": "Not published",
+   "finishes": "Sand Black · Sand Bronze",
+   "cap": "Not stated. Nuts likely visible between spokes.",
+   "price": "¥37,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "6 straight spokes with slits and lightening cutouts near the spoke roots, the spokes flaring wider inward toward the hub for a three-dimensional effect. Stepped rim. Coarse sand-textured paint for a heavy military look — a real shader note. XENO emblem cast into the centre. 7.2 kg.",
+   "url": "https://showa-garage.shop/shopdetail/000000000799/"
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "INSPIRE X",
+   "face": "spoke",
+   "sizes": "16×6.0J ±0",
+   "bore": "Not published",
+   "finishes": "Black Polish · Matt Black",
+   "cap": "Not stated. Nuts exposed.",
+   "price": "¥35,200 – ¥36,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "10 slim spokes at the rim converging into only 5 at the hub — a Y-split fan, and the most distinctive geometry in the Showa range. Black Polish is a polished surface under black coat that shifts with viewing angle; Matt Black adds CNC-machined spoke edges for a sharper, slimmer read. 7.3 kg.",
+   "url": "https://showa-garage.shop/shopdetail/000000000803/"
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "TYPE-M",
+   "face": "spoke",
+   "sizes": "16×6.0J ±0",
+   "bore": "Not published",
+   "finishes": "Matt Black · Gloss Black · Gunmetal · White · Matt Bronze — the widest colour choice in the Showa line",
+   "cap": "Capless by design, but built to accept the genuine Suzuki S-mark OEM cap, so the nuts sit exposed around a small OEM cap.",
+   "price": "¥33,550",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "5 thick curved spokes on a steep concave that rises sharply from the rim edge into a deep-set centre. Showa contrast this motion design against the static straight look of their X-Line. 8.4 kg.",
+   "url": "https://showa-garage.shop/shopdetail/000000000214/",
+   "flags": [
+    "Five colours"
+   ]
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "SNAP-WADE",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0",
+   "bore": "Not published",
+   "finishes": "Gloss Black · Gloss Bronze",
+   "cap": "Not stated. Nuts exposed.",
+   "price": "¥42,900",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "10 sharp spokes on a concave face, flow-formed (cast then spun). The detail worth modelling is a cross-knurled texture machined into the rim bead seat — functional anti-bead-slip, not cosmetic, and it reads beautifully in a close render. Branding is unusual and matters for a configurator: there is no cast-in logo at all. Two adhesive decals ship with the wheel for the buyer to place wherever they like — SNAP-WADE / FLOW FORMED WHEELS at 75×8 mm and SHOWA GARAGE RACING / SGR at 92.5×7.7 mm. Treat branding as an optional user-positioned layer.",
+   "url": "https://showa-garage.shop/shopdetail/000000000875/",
+   "flags": [
+    "Most expensive Showa",
+    "User-placed branding"
+   ]
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "SR432",
+   "face": "mesh",
+   "sizes": "16×6.0J −5",
+   "bore": "Not published",
+   "finishes": "Matt Black · Gloss Black · Matt Bronze",
+   "cap": "Not stated. Nuts exposed.",
+   "price": "¥34,100",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Mesh cross-spoke that deliberately mixes straight and curved spokes at differing heights and depths — so the mesh is NOT planar, which matters for the model. Concave face. Marketed as luxury-saloon dress-up rather than off-road. 8.5 kg.",
+   "url": "https://showa-garage.shop/shopdetail/000000000508/",
+   "flags": [
+    "Non-planar mesh"
+   ]
+  },
+  {
+   "brand": "SHOWA GARAGE",
+   "model": "IGNITION EIGHT",
+   "face": "beadlock",
+   "sizes": "16×6.0J ±0",
+   "bore": "Not published",
+   "finishes": "Matt Black · Matt Bronze",
+   "cap": "Not stated. Real lug nuts sit separately in the dish centre.",
+   "price": "¥37,400",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "8 short fine spokes on a dish face. The defining feature is 8 large billet-style pierce studs on the rim, exactly one per spoke — deliberately oversized to read as real through-bolts, with shadow-casting relief for depth. That is your bolt count: 8. Simulated, not a functional beadlock ring.",
+   "url": "https://showa-garage.shop/shopdetail/000000000808/",
+   "flags": [
+    "8 studs — confirmed count"
+   ]
+  },
+  {
+   "brand": "DAMD",
+   "model": "Cantabile",
+   "face": "dish",
+   "sizes": "15×6.0J −5",
+   "bore": "Not published (~108 inferred)",
+   "finishes": "Silver · Black · Gold — all in a coarse-texture paint, model the granularity",
+   "cap": "Small black cap at about 22% of face, covering the bore only. 5 chrome ball-seat nuts fully exposed.",
+   "price": "¥35,200",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A 1970s–80s mag turbine face. Outer ring carries roughly 10 wide thick raised spokes with 10 dark trapezoid windows between them, each spoke topped by a clear ridge. Inside that, a fan of roughly 20 slender radial fins radiates from the hub — sharp-ridged with deep valleys, and the visual protagonist of the whole wheel. Deeply concave: the outer spoke ring stands highest and the fin cone sinks inward to the hub. Smooth single-step lip, no rivets, no fake beadlock bolts. DAMD 1982 is cast in raised lettering on the flat outer annulus at about 9–10 o'clock, running along the radius — one occurrence only. Counts read from official gallery photography, ±1.",
+   "url": "https://www.damd.co.jp/wheels/cantabile",
+   "flags": [
+    "Counts read from photos",
+    "Not sold in Taiwan"
+   ]
+  },
+  {
+   "brand": "DAMD",
+   "model": "little-g WHEEL",
+   "face": "mesh",
+   "sizes": "16×6.0J −5",
+   "bore": "Not published (~108 inferred)",
+   "finishes": "Silver (machined bright face with pale gunmetal in the recesses) · Black (semi-gloss, machined only at the lip edge)",
+   "cap": "Small black cap at about 22% of face. Chrome nuts exposed outside it.",
+   "price": "¥41,800 – ¥42,900",
+   "priceNote": "per wheel, tax incl · set of 4 ¥167,200–171,600 verified",
+   "modelling": "7 main spokes, each forking into a Y close to the rim, giving roughly 14 tips at the lip — the fork junctions form a coarse mesh with triangular and trapezoid openings. Flat to very slightly concave, not a deep dish. Spokes have edged, faceted surfaces with diamond-cut bright tops against dark recesses — a two-tone face. A fine bright machined ring runs at the lip; the outer lip itself is smooth with no rivets and no fake beadlock bolts. Large open bore with the 5 nut holes on a raised platform. A small DAMD stamp sits at the top edge of the lip face.",
+   "url": "https://www.damd.co.jp/wheels/little-g",
+   "flags": [
+    "Counts read from photos",
+    "Not sold in Taiwan"
+   ]
+  },
+  {
+   "brand": "DAMD",
+   "model": "× OZ Racing Rally Racing 4×4",
+   "face": "slot",
+   "sizes": "16×6.0J −5",
+   "bore": "φ108.3 — published by OZ, one of the few confirmed figures",
+   "finishes": "Racing White with red lettering · Matt Black with silver · Dark Graphite with silver · Matt Bronze with black (JB74-exclusive colour)",
+   "cap": "None — large open centre bore. 5 lug holes are countersunk wells with the nuts fully exposed.",
+   "price": "¥53,900",
+   "priceNote": "per wheel, tax incl · DAMD direct only",
+   "modelling": "The easiest DAMD to model accurately because OZ publish clean renders. The outer ring carries about 24 rounded-rectangle slot windows, equally spaced, each with a pronounced internal chamfer and a raised rim lip, roughly 8–10 mm deep, giving a thick pressed-steel read. Between the window ring and the hub sits a flat annulus carrying O.Z RACING printed tangentially, appearing twice at 180 degrees. Dished: the face sinks from the window ring through one step down to the hub face. Smooth single-step outer lip, no rivets, no fake beadlock bolts. One standalone round hole at 6 o'clock between windows is the valve.",
+   "url": "https://www.damd.co.jp/wheels/rallyracing",
+   "flags": [
+    "Best-documented geometry of the three DAMD wheels"
+   ]
+  },
+  {
+   "brand": "Beyond Japan",
+   "model": "Supermoon",
+   "face": "dish",
+   "sizes": "16×6.0J −5",
+   "bore": "Not published — maker states it seats exactly on the OEM hub and reuses the OEM cap",
+   "finishes": "Black · White · Chrome",
+   "cap": "Takes the OEM Jimny cap, small at roughly 18–20% of face. Nuts exposed.",
+   "price": "¥19,800 – ¥23,100",
+   "priceNote": "per wheel · currently discounted from ¥33,000 / ¥38,500 list",
+   "modelling": "STEEL, not alloy — and the cheapest geometry in the entire atlas. A completely hole-less, spoke-less smooth moon disc. From the outer edge inward: two concentric rolled steps in the lip, then a wide flat annulus, then a smooth conical sink to the hub — a deep, smooth concave. The hub is a raised circular pad carrying 5 exposed nut holes and a large open bore. No rivets, no fake beadlock bolts, no piercing of any kind, and no brand lettering anywhere on the face. The chrome version is a full mirror moon disc.",
+   "url": "https://shop.beyond-jpn.com/products/bewl74-smbl",
+   "flags": [
+    "Beyond's only wheel",
+    "Steel",
+    "Trivially cheap to model"
+   ]
+  },
+  {
+   "brand": "CAN / weds",
+   "model": "JIMLINE TYPE2",
+   "face": "round",
+   "sizes": "15×6.0J ±0 · 16×6.0J −5 · 16×5.5J +22",
+   "bore": "φ108.25 (hub-centric)",
+   "finishes": "Polish · Mat Black",
+   "cap": "Optional JIMLINE cap ¥3,300 in Hi (110 mm tall) or Lo (50 mm), silver-buff or black — rear axle only on Jimny sizes. Covers the bore only; the 5 nuts always sit outside it.",
+   "price": "¥42,900 – ¥48,950",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "No spokes — a solid dished disc pierced by 8 large equal round holes on one bolt circle, evenly spaced. The centre is a raised circular pad carrying the 5 lug holes in shallow machined counterbores plus a big open bore. Face is dished and concave, with the centre pad well behind the rim edge. Lip is a stepped double-ridge flange with two concentric machined steps, smooth — no rivets, no beadlock bolts. On the Polish finish the whole face and lip are bright machined with grey shadowing inside the holes. Small raised VIA and JWL stamps at about 4 and 7 o'clock on the centre pad, beside the valve hole at 6. No brand lettering on the face.",
+   "url": "https://www.weds.co.jp/jimline-type2/",
+   "flags": [
+    "Type 1 is discontinued",
+    "15-inch option with a legal ±0 inset"
+   ]
+  },
+  {
+   "brand": "Kyoho / AME",
+   "model": "PPX MIL:8",
+   "face": "round",
+   "sizes": "16×5.5J ±0 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Semi-gloss Black with a yellow pinstripe on the outer flange — the only colour in the 5-hole size",
+   "cap": "Not included; OEM Jimny cap fits over the bore. Nuts exposed.",
+   "price": "¥39,050",
+   "priceNote": "per wheel, list tax incl · street ¥24,210",
+   "modelling": "Deliberately a Bassett/Daytona steel-racing look. Flat single-plane disc with 8 round holes in one ring; no spokes and no windows beyond the holes. Small raised centre pad with 5 exposed lug holes and an open bore, with a small snap-in cap over the bore only. Smooth flat lip carrying a single painted yellow ring around the outer flange — the signature detail, model it as a ring not a decal. No rivets, no beadlock bolts.",
+   "url": "https://www.kyoho-corp.jp/products/ppx-mil8/"
+  },
+  {
+   "brand": "MAD CROSS",
+   "model": "JB-01",
+   "face": "spoke",
+   "sizes": "16×6.0J ±0 · 16×5.5J +20 · 15×6.0J ±0",
+   "bore": "φ109",
+   "finishes": "Gunmetal · Ash Grey / Rim Polish",
+   "cap": "Not supplied; rear OEM Suzuki cap compatible. Nuts exposed.",
+   "price": "¥41,500 per SET OF 4",
+   "priceNote": "street, tax incl ≈ ¥10,375/wheel · no maker MSRP published",
+   "modelling": "Jimny and Sierra exclusive tooling from HOT STUFF. Maker copy describes a large 5-spoke with slits and a deep rim — read it as 5 wide spokes each carrying a longitudinal slit or groove, 5 large windows, a deep rim, and on the Ash Grey finish a machined polished lip band against the matte face. A clean straight-on render could not be isolated, so treat the spoke detail as maker-text-only.",
+   "url": "https://www.hotstuff-cp.co.jp/product/mad-cross-jb-01/",
+   "flags": [
+    "Cheapest per-wheel cost in the atlas",
+    "Visual from maker text only"
+   ]
+  },
+  {
+   "brand": "Redline Crafts",
+   "model": "MUD WARRIOR-5 (MW5)",
+   "face": "spoke",
+   "sizes": "16×5.5J ±0 (FACE-2, Sierra) · 16×5.5J +20 (FACE-1, kei)",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Matt Black · Matt Gunmetal · White — all the same price",
+   "cap": "None exists and none is supplied. Huge open 110 mm bore, nuts fully exposed.",
+   "price": "¥26,400",
+   "priceNote": "per wheel, tax incl (¥24,000 ex) · set of 4 ¥52,800 verified",
+   "modelling": "5 straight tapered spokes, no splitting and no Y. Spokes run from a small flat central pad straight to the rim flange and are widest at the rim. Flat face with a shallow step down to the centre pad. The 5 lug holes are shallow counterbores with a slight raised seat, sitting right at the spoke roots. Smooth lip, no rivets, no beadlock ring. Small cast JWL-T and VIA stamps at 6 o'clock beside the valve. Two discs to model: FACE-2 (±0) has blunter, wider spokes and a deeper barrel; FACE-1 (+20) is slimmer with a shallower barrel.",
+   "url": "http://redline-crafts.com/products/madwarrior.html",
+   "flags": [
+    "Two disc faces",
+    "Set price published — rare"
+   ]
+  },
+  {
+   "brand": "Redline Crafts",
+   "model": "MUD WARRIOR-10 (MW10)",
+   "face": "beadlock",
+   "sizes": "16×5.5J −5 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "φ108.2 (hub-centric)",
+   "finishes": "Matt Black · Matt Black / Black Clear Disc (machined disc face under black clear, so the spoke faces read as dark machined metal)",
+   "cap": "None exists. Open 108.2 bore, nuts exposed.",
+   "price": "¥28,600 – ¥29,700",
+   "priceNote": "per wheel, tax incl · set of 4 ¥60,500 verified",
+   "modelling": "10 spokes forming 10 large D / teardrop windows around a raised central hub pad, with each of the 5 lug holes on a raised conical boss and a big open bore. The defining element is a raised faux-beadlock outer ring carrying polished silver bolt heads — about 20, count approximate — with roughly 10 small rectangular tabs alternating between them on the ring's inner edge. Face flat to very slightly concave.",
+   "url": "http://redline-crafts.com/products/madwarrior.html",
+   "flags": [
+    "New model",
+    "Bolt count approximate"
+   ]
+  },
+  {
+   "brand": "ORIGIN Labo",
+   "model": "MUD-S7",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 · 16×5.5J −20",
+   "bore": "CB 108 quoted by retailer — right on the threshold, FLAG IT",
+   "finishes": "Gun Metallic · Matt Black · Shine White",
+   "cap": "None. Open bore, nuts exposed. Air valve included, nuts sold separately.",
+   "price": "¥25,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "7 broad spokes running all the way to the rim edge, each with a slight waist and a flat top face, with 7 narrow triangular windows between. Flat face. The strong shape cue is the lug area: the 5 holes sit on pronounced raised cylindrical bosses at the spoke roots. Large open bore, smooth lip, no rivets. JWL, JWL-T and VIA stamps at 6 and about 4 o'clock.",
+   "url": "https://j-origin-labo.jp/products/mud-s7/",
+   "flags": [
+    "Bore quoted at 108 — at or below threshold, verify before listing",
+    "−20 needs over-fenders"
+   ]
+  },
+  {
+   "brand": "ORIGIN Labo",
+   "model": "MUD-SR7",
+   "face": "spoke",
+   "sizes": "16×5.5J +20 · 16×5.5J −20",
+   "bore": "~φ108",
+   "finishes": "Gun Metallic · Matt Black · Shine White",
+   "cap": "None. Nuts exposed.",
+   "price": "¥25,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Also 7 spokes, but each is pinched and waisted in the middle and stops short of the rim edge, leaving a clean smooth lip band all the way round — that is the one-glance difference from the MUD-S7, whose spokes touch the lip. Flat face, raised lug bosses, open bore.",
+   "url": "https://j-origin-labo.jp/product/01wheel/mud-sr7.html",
+   "flags": [
+    "Bore at threshold",
+    "−20 needs over-fenders"
+   ]
+  },
+  {
+   "brand": "5ZIGEN",
+   "model": "TF500 XC-M",
+   "face": "spoke",
+   "sizes": "16×6.0J −5 (Sierra/Nomade exclusive) · 16×5.5J +20 (kei)",
+   "bore": "φ108.5 (hub-centric)",
+   "finishes": "Semi-gloss Black · Black Rim Polish",
+   "cap": "COVERS THE NUTS — a covered-type cap that hides the nut holes entirely. Three types (A universal, B for 16×5.5 +20, C for the 16×6.0 −5 JB74 size). Supplied as standard; spares ¥3,850.",
+   "price": "¥34,100 – ¥36,850",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "One of only a handful of wheels anywhere in this atlas whose cap hides the lug nuts — a large flat disc at roughly 40–45% of face diameter, black with a white ring of 5ZIGEN BORN OUT OF THE RACING text and a red-and-white badge at centre. Build both states. Face is 2×5, 10 arms. The signature, stated by the maker: the spoke tips climb over the flange and reach the outermost edge of the rim, making the face read a size larger than it is. 5 large rounded-rectangular windows between spoke pairs plus 5 narrow slits inside each pair. Flat to shallow concave face, deep barrel. The rim-polish version adds a machined bright band on the flange and outer lip. Small cast 5ZIGEN and TF500 on the flange. Note the nut restriction: through-nuts or closed-end nuts of 28 mm or less.",
+   "url": "https://www.5zigen.co.jp/products/10804",
+   "flags": [
+    "Cap covers nuts — rare",
+    "Nut length restriction"
+   ]
+  },
+  {
+   "brand": "5ZIGEN",
+   "model": "BLACK-MAN G・I",
+   "face": "mesh",
+   "sizes": "16×5.5J ±0 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "φ108.5 (hub-centric)",
+   "finishes": "Matt Black · Matt Bronze · Gloss Black Red Line (+¥3,000) · White (16×5.5J exclusive)",
+   "cap": "Explicitly none on this size. Open bore, nuts fully exposed.",
+   "price": "¥36,300",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "A fine 2×5 / 10-arm mesh. Each of the 5 main arms forks into a slim Y immediately after leaving the hub, and the Y legs of adjacent arms cross and join mid-face, so the whole disc reads as a spider-web lattice of thin sharp ridged arms. The outer ring has 10 slim pointed triangular windows, with 5 smaller openings near the hub. Face near-flat and slightly concave, deep barrel. Open bore with the 5 nut holes tucked in shallow pockets at the arm roots. Smooth flat lip, no rivets, no beadlock. The Gloss Black Red Line version carries a single fine red pinstripe around the outer flange edge. Only small cast 5ZIGEN marks on a spoke underside and the flange.",
+   "url": "https://www.5zigen.co.jp/products/7513",
+   "flags": [
+    "JWL only on the 5-hole size — fine for a 5-number registration, not a 4-number cargo one"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG CS-8",
+   "face": "beadlock",
+   "sizes": "16×5.5J ±0 · 16×5.5J +20 · 16×6.0J −5",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · Gloss Black / Rim Polish",
+   "cap": "Explicitly capless. Big open bore, nuts exposed.",
+   "price": "¥29,500 – ¥32,500",
+   "priceNote": "per wheel, EX-TAX (税抜)",
+   "modelling": "Flat to slightly dished disc with 8 large round holes, a raised circular hub boss carrying 5 exposed nut pockets, and — the strongest identifying feature — a full ring of about 20 round fake-beadlock pin-bolt heads around the outer flange. Two pronounced step ridges on the outer barrel. Crosses between round-hole and beadlock-look; the bolt ring dominates.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_cs_8.html",
+   "flags": [
+    "No 15-inch 5×139.7",
+    "Bolt count approximate"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG CS-9",
+   "face": "beadlock",
+   "sizes": "15×5.5J +5 · 16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · MB / Red Rim · Gunmetal / Rim Polish · Black / Black-Clear Rim",
+   "cap": "Capless. Nuts exposed.",
+   "price": "¥29,000 – ¥31,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "Same family as CS-8 but with 8 large oval or elliptical holes instead of round, a flatter plate face and finer outer ribs. Open bore, 5 exposed nuts, about 20 round fake-beadlock pin bolts on the outer flange.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_cs_9.html",
+   "flags": [
+    "Has a genuine 15×5.5J +5 — very rare",
+    "Bolt count approximate"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG OFF STYLE",
+   "face": "slot",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · White · Grey · Matt Gold · GB/Red Rim · GB/Yellow Rim · Hyper Silver — seven, the widest colour choice in the atlas",
+   "cap": "Capless in 5×139.7. Open bore, nuts exposed.",
+   "price": "¥24,000 – ¥27,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "Retro steel-wheel look. Dished disc with 8 long rectangular capsule slots, evenly spaced. Open bore, 5 exposed nuts on a raised hub pad. Smooth single-step lip, no rivets.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_off_style.html",
+   "flags": [
+    "Seven colours",
+    "Genuine 15×5.5J +5"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG OFF STYLE II",
+   "face": "slot",
+   "sizes": "16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · Ivory · Blue",
+   "cap": "Capless. Nuts exposed.",
+   "price": "¥25,000 – ¥26,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "Heavier and blunter than the original. Flat plate with 8 small slots, an open bore with 5 exposed nuts, and a full ring of round fake-beadlock bolt heads on the outer flange. 8.08–8.49 kg.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_off_style2.html",
+   "flags": [
+    "No 15-inch"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "PREMIX PUDIN",
+   "face": "slot",
+   "sizes": "15×5.5J +5 · 16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "White · Matt Black · MB/Yellow · MB/Blue · Ivory White (several sold out)",
+   "cap": "Cap only supplied on the 4-hole kei sizes, so 5×139.7 is capless. Nuts exposed.",
+   "price": "¥26,000 – ¥32,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "The plainest face in the Lehrmeister set, a JA11 retro. Shallow dished disc with a raised centre platform, and each of the 5 nut holes sits on its OWN separate teardrop-shaped raised boss — deliberate old-steel-wheel mimicry and the detail to get right. 5 small rectangular tabs with tiny lettering sit between them. Outboard of that, 8 slender crescent-shaped slots. Perfectly smooth lip — no step, no rivets, no bolts.",
+   "url": "http://www.lehrmeister.jp/main/var/product/premix_pudin.html",
+   "flags": [
+    "Teardrop nut bosses are the signature"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG DIEZ",
+   "face": "slot",
+   "sizes": "15×5.5J +5 · 16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Olive Green · Bronze · Matt Black · Gloss Black / Bronze Clear",
+   "cap": "Cap note excludes only the 16×5.5J, so the 15-inch appears to include one — confirm with the dealer.",
+   "price": "¥31,500 – ¥35,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "10 short chunky spokes forming 10 D-shaped windows, on a flat-to-slightly-concave face with an open bore and 5 exposed nuts. The flange carries a ring of rectangular raised ribs in a beadlock idiom rather than round bolt heads.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_diez.html",
+   "flags": [
+    "Olive Green is rare — worth offering"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG DS-10",
+   "face": "slot",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · Black / Black-Clear Rim · MB / Red Rim (several sold out)",
+   "cap": "5×139.7 ships without a cap, despite catalogue photos showing one — that cap belongs to the 5/114.3 and 6H versions.",
+   "price": "¥31,500 – ¥35,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "Same 10-spoke, 10-D-window layout as DIEZ, but the flange carries a ring of round fake-beadlock bolt heads rather than rectangular ribs. That ring treatment is the only reliable way to tell the two apart.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_ds_10.html",
+   "flags": [
+    "Catalogue photo shows a cap that does not ship"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG 極 Kiwami",
+   "face": "beadlock",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ110.1 (lug-centric)",
+   "finishes": "Matt Black · Bronze",
+   "cap": "Capless. Nuts exposed.",
+   "price": "¥31,500 – ¥32,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "5 thick straight spokes with 5 big D-windows on a near-flat face, and a ring of roughly 20–24 rectangular rib beadlock elements around the lip. LMG is cast on one spoke near the lip. TPMS-compatible, JWL-T.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_kiwami.html",
+   "flags": [
+    "TPMS-compatible"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG BERETTA",
+   "face": "beadlock",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ108.1 — EXACTLY on the threshold, zero clearance",
+   "finishes": "Matt Black · Bronze · Gloss Black / Black-Clear Rim (16-inch only)",
+   "cap": "Capless. Nuts exposed.",
+   "price": "¥28,500 – ¥31,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "5 spokes each forking into a Y near the lip — 2×5, 10 contact points — with a long slit between the forks. Flat face. About 20 alternating long and short rectangular ribs around the lip. LMG sits on a small upright tab above the hub.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_beretta.html",
+   "flags": [
+    "φ108.1 bore = interference fit, flag it"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG COMPASS",
+   "face": "spoke",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Matt Black · Bronze · White",
+   "cap": "Capless. Nuts exposed.",
+   "price": "¥31,500 – ¥32,000",
+   "priceNote": "per wheel, EX-TAX · set of 4 ¥76,300 incl verified",
+   "modelling": "8 slim straight spokes in the TE37 idiom — narrow at the hub, widening to a flat top — with deep V-notch windows between. Almost perfectly flat face over a deep barrel. Smooth stepped lip, no rivets. Flow-formed and notably light. LMG at about 3–4 o'clock on the hub boss.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_compass.html",
+   "flags": [
+    "Flow-formed"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG ETNA",
+   "face": "beadlock",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ108.1 — exactly on the threshold",
+   "finishes": "Deep Grey · Matt Black",
+   "cap": "Capless. Nuts exposed.",
+   "price": "¥22,000 – ¥23,000",
+   "priceNote": "per wheel, EX-TAX · set of 4 ¥49,200 incl verified",
+   "modelling": "5 fat star-shaped spokes with a pronounced shoulder fold and 5 large windows, on a markedly concave face, with a rectangular rib beadlock ring around the lip. Cheapest Lehrmeister and one of the cheapest wheels in the atlas. The maker lists the 15×5.5J +5 explicitly for Jimny Sierra and Nomade.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_etna.html",
+   "flags": [
+    "φ108.1 bore = interference fit",
+    "Explicitly listed for JB74"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG MS-9W",
+   "face": "mesh",
+   "sizes": "15×5.5J +5 · 16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Gloss Black · Bronze / Rim Polish · Gunmetal / Rim Polish · MB / Red Rim · Black / Black-Clear Rim",
+   "cap": "Capless in 5×139.7 — catalogue photos showing a red-and-white LMG cap are the 6H / 5-114.3 versions. Nuts exposed.",
+   "price": "¥28,500 – ¥31,500",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "The busiest face in the Lehrmeister set — a dense mesh of roughly 20 small outer windows over about 10 inner arms. The polished-lip versions carry a bright machined rivet ring on the flange. Maker markets it as Jimny and Jimny Sierra specific.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_ms_9w.html",
+   "flags": [
+    "Maker calls it Jimny-specific"
+   ]
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "LMG MONTAGNA",
+   "face": "mesh",
+   "sizes": "15×5.5J +5 · 16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black · MB / Red Rim · Black Polish / Black Clear",
+   "cap": "Capless in 5×139.7.",
+   "price": "¥28,500 – ¥31,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "10-arm split mesh with Y-forked interwoven arms on a near-flat face, plus small fake bolts and a partial beadlock-style rib ring on the lip.",
+   "url": "http://www.lehrmeister.jp/main/var/product/lmg_montagna.html"
+  },
+  {
+   "brand": "Lehrmeister",
+   "model": "PREMIX GRAVAS Jr",
+   "face": "dish",
+   "sizes": "15×5.5J +5 · 16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.5",
+   "finishes": "Matt Black / Rim Polish · Black Polish",
+   "cap": "No cap was ever made for this model. Open bore, nuts fully exposed. Valve only in the box.",
+   "price": "¥28,000 – ¥34,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "5 spokes in a 2×5 idiom. Each spoke is a wide arrow-shaped arm with a deep groove cut down its centre, forking into two sharp points near the lip — 10 contact points at the rim. The maker's own phrase is a heavily dropped concave design, and that deep face drop is the defining feature. Smooth machined lip, with a bright outer band on the Rim Polish version; no rivets, no fake beadlock. GRAVAS is cast on the inner barrel wall near the lip, not on the face. Published detail useful for modelling: disc protrusion 1.8 mm at 15 inch, 4.60 mm at 16 inch; 7.2 kg and 7.90 kg.",
+   "url": "http://www.lehrmeister.jp/main/var/product/premix_gravas_jr.html",
+   "flags": [
+    "Sister model GRAVAS-J2 is 5/114.3 — does NOT fit"
+   ]
+  },
+  {
+   "brand": "Tan-Ei-Sya",
+   "model": "GRANVERD SV",
+   "face": "spoke",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Hyper Silver only",
+   "cap": "Not supplied on φ110 sizes. Optional: with logo ¥3,000, plain silver ¥1,800. Plugs the bore only — at PCD 139.7 the nuts sit far outside a φ110 cap.",
+   "price": "¥19,500 – ¥23,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "5 wide flat blade spokes, each carrying a raised central rib that splits into a slim V/Y fork at about 60% of the way out, landing on the rim as 10 contact points. Face is flat with a slight outward crown — not concave. 5 large curved-edge triangular windows. Smooth stepped lip, no rivets, no fake beadlock bolts. JWL/VIA cast on the lower face.",
+   "url": "https://www.taneisya-sales.com/tws_granverd_sv.html"
+  },
+  {
+   "brand": "Tan-Ei-Sya",
+   "model": "GRANVERD NR",
+   "face": "spoke",
+   "sizes": "15×5.5J +5 · 16×5.5J +25",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Silver only for the φ110 Jimny sizes (Black Cut is φ110 6H; Black/Logo Machining is φ106)",
+   "cap": "Not supplied; same optional caps as SV. Nuts exposed.",
+   "price": "¥19,500 – ¥23,000",
+   "priceNote": "per wheel — OPEN PRICE, ESTIMATED by parity with SV",
+   "modelling": "Maker states 5 spokes on the 5-hole version. 5 thick straight spokes, each with a deep polished groove running down the centre that flares into a wide V near the lip. Face flat to slightly concave with 5 big triangular windows. Smooth single-step lip, no rivets. Open bore with 5 chamfered nut seats. Beefier and less sculpted than the SV.",
+   "url": "https://www.taneisya-sales.com/tws_granverd_nr.html",
+   "flags": [
+    "REAR AXLE ONLY",
+    "Price estimated — maker publishes none"
+   ]
+  },
+  {
+   "brand": "Tan-Ei-Sya",
+   "model": "GRANVERD NEO",
+   "face": "spoke",
+   "sizes": "15×5.5J +5 · 16×5.5J +25",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Silver · Black Cut",
+   "cap": "Sold separately in three styles, ¥2,200–4,180: a low flat disc with carbon texture and logo, a tall chrome bell with logo inlay, and a tall plain chrome. All three seal the bore only; nuts always exposed.",
+   "price": "¥22,825",
+   "priceNote": "per wheel — derived from a verified ¥91,300 set of 4",
+   "modelling": "NR's successor, and notable for using 6 spokes even on the 5-hole version — a mismatch that reads distinctly. Straight tapering blades, each with a long raised rib or polished channel from hub to lip. Flat slightly dished face with 6 curved triangular windows. Raised machined hub boss with 5 exposed chamfered nut holes and a big open bore. Smooth lip with a fine step, no rivets.",
+   "url": "https://www.bs-awh.ne.jp/granverd/neo/",
+   "flags": [
+    "6 spokes on a 5-hole wheel",
+    "Three cap styles to model"
+   ]
+  },
+  {
+   "brand": "Tan-Ei-Sya",
+   "model": "GRANVERD Elan",
+   "face": "beadlock",
+   "sizes": "15×5.5J +5",
+   "bore": "φ110 (lug-centric)",
+   "finishes": "Satin Dark Grey only",
+   "cap": "¥2,200 extra, seals the bore only. Nuts exposed.",
+   "price": "¥20,000 – ¥24,000",
+   "priceNote": "per wheel — ESTIMATED, maker publishes no price",
+   "modelling": "7 wide flat-top spokes that widen slightly toward the lip and meet an outer ring, with 7 rounded triangular or trapezoid windows. Face flat to slightly concave. The distinctive element is a full ring of about 20 short evenly-spaced rectangular raised ribs around the lip — a beadlock-style ring. Raised hub pad, 5 chamfered exposed nut holes, open bore. JWL/VIA cast low on the face, small brand mark at a spoke root bottom-left.",
+   "url": "https://www.bs-awh.ne.jp/granverd/elan/",
+   "flags": [
+    "Listed for Jimny Sierra / Nomade",
+    "Price estimated"
+   ]
+  },
+  {
+   "brand": "PIA / PIAA",
+   "model": "Type-J DTS",
+   "face": "dish",
+   "sizes": "16×6.0J +5 (Sierra) · 16×5.5J +20 (kei)",
+   "bore": "≈φ108 (retailer-sourced, not from PIAA)",
+   "finishes": "One only — gloss black body with a diamond-cut machined bright rim",
+   "cap": "PIAA state the Suzuki OEM cap fits the REAR only. The front is an open bore. Nuts exposed.",
+   "price": "¥23,000 – ¥24,000",
+   "priceNote": "per wheel, EX-TAX",
+   "modelling": "Developed exclusively for Jimny and Jimny Sierra, released 2020. Twin 5-spoke — 5 pairs of straight blades forming a star, each pair splayed at the hub and converging at the rim. The whole design premise is rim depth, and the published figures are the numbers that matter for the model: roughly 47 mm at 5.5J and 69 mm at 6.0J, so build a flat disc set very deep in the barrel. Gloss black spokes against a bright diamond-cut outer flange and lip band. 5 lug holes in shallow seats on a small flat centre pad with a large open bore. Smooth lip, no rivets, no beadlock bolts. Type-J DTS branding appears only on packaging and decals, never on the wheel face.",
+   "url": "https://www.piaa.co.jp/category/4rin/wheels/wheel-e/",
+   "flags": [
+    "Rim depth is the defining number",
+    "Inset and bore are retailer-sourced — PIAA's PDF is not text-extractable"
+   ]
+  },
+  {
+   "brand": "Solid Racing",
+   "model": "j metal 2",
+   "face": "beadlock",
+   "sizes": "Street 16×6.0J −5 · Beadlock 16×7.0J −18",
+   "bore": "φ108.5 (hub-centric)",
+   "finishes": "Solid Black · Silver Polish. Beadlock ring in Solid Black or Dia-Cut finish. Race ring +¥3,300, special colour +¥6,600.",
+   "cap": "None exists — the repair-parts list contains no cap item at all. Open φ108.5 bore, nuts fully exposed.",
+   "price": "¥33,000 – ¥50,600",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "The ONLY genuine beadlock in this atlas — everything else labelled beadlock here is cosmetic. 6 straight tapered spokes radiating from a flat central pad, and note the deliberate phase offset: 6 spokes against 5 lug holes, so spokes and nuts never line up. 6 large rounded-triangle or kite windows. Face flat and set deep inside the barrel. Each of the 5 lug holes sits on a raised boss with a conical counterbored seat, nuts protruding clearly. Street spec has a cast-in band around the flange alternating round raised bolt bosses with rectangular recesses, with recessed SOLIDRACING at 12 o'clock and BEADLOCK WHEEL at 6. Beadlock spec bolts a separate thick aluminium ring onto that band, either plain black or lathe-turned into concentric bright rings. Bolt counts from the maker's own parts list for the first generation: race ring 60 mm wide with 32 M10 flanged cap bolts; street ring 52 mm wide, originally 16 bolts, changed to 32 from January 2023. On j metal 2 the count was optimised but not published — photo count is about 28.",
+   "url": "https://solidracing.jp/products/detail/68",
+   "flags": [
+    "Real functional beadlock",
+    "Ring torque 27–32 N·m, no impact wrenches",
+    "7.0J −18 needs over-fenders",
+    "j metal 2 bolt count estimated ~28"
+   ]
+  },
+  {
+   "brand": "MUD BAHN",
+   "model": "XR-800M",
+   "face": "beadlock",
+   "sizes": "16×5.5J ±0 · 16×5.5J +20",
+   "bore": "φ108.8 (109.0 on the bronze variant)",
+   "finishes": "Matt Black / Rim Polish · Gloss Bronze / Rim Polish",
+   "cap": "Not supplied on 16×5.5J; Suzuki rear OEM cap fits. Spare MUD BAHN cap ¥2,200 — a small bore-only cap with a black camouflage field and a white MB horseshoe logo. Nuts stay exposed. Nut hole φ32.",
+   "price": "¥38,500",
+   "priceNote": "per wheel, tax incl (¥35,000 ex)",
+   "modelling": "10 spokes radiating from a raised polygonal hub pad, forming 10 large D or teardrop windows each carrying an internal fin, with 10 small wedge notches between the spoke tips at the rim. Face slightly concave. A strong colour-separation cue: the 5 lug holes sit in machined bright counterbore seats that contrast sharply against the matte body. Four small raised badge plaques (MUD, BAHN, JWL-T, VIA) sit between the lug holes on the hub pad. Large open bore. The outer band reads as a separate machined polished flange ring — a rivet ring — carrying about 24 round rivet-look bolt heads with roughly 12 rectangular tabs alternating on its inner edge (counts approximate, read from the maker render).",
+   "url": "http://milano-wheels.com/product/mudbahn/mud-bahn-xr-800mmbkrp/",
+   "flags": [
+    "Bolt counts approximate"
+   ]
+  },
+  {
+   "brand": "MUD BAHN",
+   "model": "XR-800M ME",
+   "face": "beadlock",
+   "sizes": "16×5.5J +20",
+   "bore": "φ108.8",
+   "finishes": "Chipping Green · Chipping Grey · Chipping Beige — textured chipping paint, matte and slightly granular",
+   "cap": "Same as XR-800M: none supplied, OEM rear cap fits. Nuts exposed.",
+   "price": "¥41,800",
+   "priceNote": "per wheel, tax incl (¥38,000 ex)",
+   "modelling": "Identical face geometry to the XR-800M — same 10 spokes, 10 D-windows, same rivet ring. What changes is the surface: an outdoor and military palette in textured chipping paint, visually distinct enough to be worth a separate material rather than a colour swap.",
+   "url": "http://milano-wheels.com/product/mudbahn/xr800m_me/",
+   "flags": [
+    "Geometry identical to XR-800M — reuse the mesh"
+   ]
+  },
+  {
+   "brand": "MUD BAHN",
+   "model": "XR-600S",
+   "face": "beadlock",
+   "sizes": "15×5.5J +5 · 16×5.5J +20",
+   "bore": "φ109.1",
+   "finishes": "Flat Black (the semi-gloss black / rim polish colour is discontinued)",
+   "cap": "Bore-only cap. Nuts exposed.",
+   "price": "¥34,100 – ¥38,500",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "6 Y-split twin spokes — 12 legs — off a raised hub pad, giving 6 large windows plus 6 smaller triangular cut-outs. Slightly concave face. Faux-beadlock outer ring with about 12 pin bolts. Open bore, 5 exposed lug holes.",
+   "url": "http://milano-wheels.com/product/mudbahn/mud-bahn-xr-600s/",
+   "flags": [
+    "Has a genuine 15×5.5J +5"
+   ]
+  },
+  {
+   "brand": "MUD BAHN",
+   "model": "XR-620 / XR-526 / XR-5 (legacy)",
+   "face": "beadlock",
+   "sizes": "16×5.5J +20 (XR-620, XR-526) · 16×5.5J +19 (XR-5)",
+   "bore": "φ108.0 – 109.0",
+   "finishes": "Silver only on all three",
+   "cap": "XR-5's cap is sold separately; all are bore-only. Nuts exposed.",
+   "price": "¥26,400 – ¥30,800",
+   "priceNote": "per wheel, tax incl",
+   "modelling": "Older MUD BAHN castings retained for completeness. Same design family — multi-spoke faces with faux-beadlock outer rings — but only offered in silver. XR-450T, XR-710C and XR-910K are 6H or 4H and do NOT fit.",
+   "url": "http://milano-wheels.com/product/mudbahn/",
+   "flags": [
+    "Legacy models",
+    "XR-5 bore φ108.0 — at threshold"
+   ]
+  },
+  {
+   "brand": "MRK (Taiwan)",
+   "model": "JIMNY 專用 復古鋁圈 15×6J",
+   "face": "round",
+   "sizes": "15×6.0J −5",
+   "bore": "CB 108.1 — explicitly stated, the only Taiwanese listings that publish it",
+   "finishes": "Ceramic White",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$3,980",
+   "priceNote": "per wheel · MRK 蘆洲/台中",
+   "taiwan": "NT$3,980/wheel — MRK (verified product page)",
+   "modelling": "Retro slot / round-hole steel-style face. MRK's page does not describe the geometry, so treat the face detail as unverified and work from the product photo. Part-number format D110-1665-5-JB74-BK.",
+   "url": "https://www.mrk.com.tw/product_ii.html?ID=1086",
+   "flags": [
+    "Only Taiwanese option with a published 108.1 bore",
+    "Face geometry unverified"
+   ]
+  },
+  {
+   "brand": "MRK (Taiwan)",
+   "model": "JIMNY 專用 復古鋁圈 16×5.5J",
+   "face": "round",
+   "sizes": "16×5.5J +20",
+   "bore": "CB 108.1",
+   "finishes": "Ceramic White · Silver",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$5,500",
+   "priceNote": "per wheel · MRK",
+   "taiwan": "NT$5,500/wheel — MRK (verified)",
+   "modelling": "Same retro family as the 15-inch. Face geometry not described on the listing — verify from the photo.",
+   "url": "https://www.mrk.com.tw/product_ii.html?ID=1093",
+   "flags": [
+    "Published 108.1 bore",
+    "Face geometry unverified"
+   ]
+  },
+  {
+   "brand": "MRK (Taiwan)",
+   "model": "JIMNY 專用 復古鋁圈 16×6.5J",
+   "face": "round",
+   "sizes": "16×6.5J −5",
+   "bore": "CB 108.1",
+   "finishes": "Matte Black · Ceramic White",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$6,500",
+   "priceNote": "per wheel · MRK",
+   "taiwan": "NT$6,500/wheel — MRK (verified)",
+   "modelling": "The widest Taiwanese option and one of the few genuine 6.5J fitments anywhere. Retro face; geometry not described on the listing.",
+   "url": "https://www.mrk.com.tw/product_ii.html?ID=1096",
+   "flags": [
+    "Genuine 6.5J",
+    "Published 108.1 bore",
+    "Needs over-fenders"
+   ]
+  },
+  {
+   "brand": "ShowaGarage / NITRO POWER",
+   "model": "H12 SHOTGUN",
+   "face": "beadlock",
+   "sizes": "16×6.0J −5",
+   "bore": "Not published (~108.1 assumed)",
+   "finishes": "Matte Bronze (Taiwan listing); matte black and others in Japan",
+   "cap": "Small NITRO POWER cap at about 20% of face, covering the bore only. Nuts exposed.",
+   "price": "NT$8,950",
+   "priceNote": "per wheel · MRK Taiwan · JPY list not verified",
+   "taiwan": "NT$8,950/wheel — MRK (verified)",
+   "modelling": "12 round-to-oval holes arranged across the disc face, each ringed by a raised edge that builds thickness and layering. Face is a shallow dish. The outer lip carries a full ring of rivets, giving a beadlock look without being a real beadlock. Brand name sits on the centre cap.",
+   "url": "https://www.mrk.com.tw/product_ii.html?ID=1178",
+   "flags": [
+    "Japanese list price not verified",
+    "Resold by Showa Garage — not their own design"
+   ]
+  },
+  {
+   "brand": "URNIETA (Taiwan)",
+   "model": "1970 UR007 封閉式輪框套件",
+   "face": "dish",
+   "sizes": "Not published on the Taiwan listing",
+   "bore": "Not published",
+   "finishes": "Supports two-tone split painting because the face is a separate cap layer",
+   "cap": "The disc face itself is a removable layered cap covering the wheel — whether the nuts remain visible is unverified.",
+   "price": "NT$9,400",
+   "priceNote": "unclear whether per wheel or per set — confirm before ordering",
+   "taiwan": "NT$9,400 — MRK (verified listing, unit ambiguous)",
+   "modelling": "A fully closed disc with no piercing at all, built as a layered cap structure sitting over the wheel body — which is what makes the two-tone split paint possible. Retro 1970 Suzuki LJ styling. The maker claims it sits flush with the JB74 fender without spacers.",
+   "url": "https://www.mrk.com.tw/product_ii.html?ID=2208",
+   "flags": [
+    "Sizes, offset and bore all unpublished",
+    "Price unit ambiguous"
+   ]
+  },
+  {
+   "brand": "MAXX (Taiwan)",
+   "model": "JB74 旋壓鋁圈",
+   "face": "spoke",
+   "sizes": "16×6.0J ±0",
+   "bore": "Not published",
+   "finishes": "Matte Black · Bronze · Gunmetal · Black with polished lip",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,000 – 4,200",
+   "priceNote": "per wheel · 超前輪業, 真便宜輪胎館, 四個圈 (NT$17,600/set)",
+   "taiwan": "NT$4,000–4,200/wheel — multiple sellers (verified)",
+   "modelling": "Taiwanese flow-formed wheel in a RAYS-like 6-spoke straight-blade idiom, 7.15 kg. Spoke detail not verified against a straight-on image. Note that Taiwanese local wheels almost never publish a centre bore — check before committing it to the configurator.",
+   "url": "https://www.ruten.com.tw/find/?q=JB74%20%E9%8B%81%E5%9C%88",
+   "flags": [
+    "Bore not published",
+    "Spoke detail unverified"
+   ]
+  },
+  {
+   "brand": "耀麒 H598 (Taiwan)",
+   "model": "H598",
+   "face": "spoke",
+   "sizes": "15×7.0J ±0",
+   "bore": "CB 108.2",
+   "finishes": "Military Green · Cream White · Matte Black · Gloss Black · Silver",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,400 – 4,700",
+   "priceNote": "per wheel · 超前輪業, LK (露天)",
+   "taiwan": "NT$4,400–4,700/wheel — verified",
+   "modelling": "Deep-lip concave multi-spoke in 15×7.0J — an unusually wide 15-inch and one of the very few genuine 7J options. Spoke count not verified. The published 108.2 bore clears the hub.",
+   "url": "https://www.ruten.com.tw/find/?q=%E5%90%89%E6%98%9F%20%E9%8B%81%E5%9C%88",
+   "flags": [
+    "Genuine 15×7.0J",
+    "7J at ±0 will need fender clearance checked",
+    "Spoke count unverified"
+   ]
+  }
+ ]
+}
