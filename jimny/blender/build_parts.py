@@ -2072,48 +2072,60 @@ def gullwing_urnieta_1970():
     return root
 
 
-RACK_WOOD = material('RackWood', 0x9a6f42, rough=0.72)
+RACK_WOOD = material('RackWood', 0xb07a3e, rough=0.55)
 
 
-def rack_wood():
-    """Retro half-length wooden roof rack: a black steel frame about half the
-    roof's length sitting toward the rear, floored with varnished timber
-    slats and ringed by a low tube rail. A style rather than one verified
-    product -- the catalogue entry says so."""
-    root = group('roofRack_wood')
-    W, L = 1230, 790
-    top = RACK_TOP
-    zc = RACK_ZC - 120                                       # sits back on the roof
+def rack_wood(size='half'):
+    """DAMD trip basket roof rack, HALF size (TB-HR1): 1350 x 600 x 160 mm,
+    13.5 kg. A black steel WIRE basket -- longitudinal rods over three cross
+    rods -- inside a rounded tube frame on short stanchions, with the wood
+    where it actually is on the product: a curved Accoya panel wrapping the
+    leading edge (carrying the oval trip basket badge) and a small block on
+    each side. It sits at the FRONT of the roof on TERZO cross bars, not on
+    gutter legs."""
+    root = group('roofRack_wood' if size == 'half' else f'roofRack_wood_{size}')
+    W, H = 1350, 160
+    L = 600 if size == 'half' else 1000                      # TB-HR1 / TB-RR1
+    zc = RACK_ZC + (430 if size == 'half' else 250)          # both sit forward on the roof
     z0, z1 = zc - L / 2, zc + L / 2
-    deck = top - 40
-    # steel perimeter and two cross members under the boards
+    deck = RACK_TOP - 30
+    top = deck + H
+    # two TERZO cross bars with gutter feet
+    for zz in (zc - L / 4, zc + L / 4):
+        sweep(f'bar{zz}', [(-660, deck - 34, zz), (660, deck - 34, zz)], rounded_rect(70, 26, 6), BLACK, root)
+        for s in (-1, 1):
+            box(f'foot{s}{zz}', (s * (GUTTER_X + 10), ROOF_Y_EDGE + 16, zz), (60, 74, 52), BLACK, root, bevel=6)
+    # wire floor: rods along the car over three cross rods
+    for i in range(21):
+        x = -W / 2 + 60 + i * (W - 120) / 20
+        lib.cylinder(f'rod{i}', (x, deck, zc), (0, 0, 1), 11, L - 60, BLACK, root, n=8)
+    crosses = (z0 + 40, zc, z1 - 40) if size == 'half' else (z0 + 40, zc - L / 6, zc + L / 6, z1 - 40)
+    for k, zz in enumerate(crosses):
+        lib.cylinder(f'cross{k}', (0, deck - 10, zz), (1, 0, 0), 14, W - 60, BLACK, root, n=8)
+    # rounded tube frame round the rim, on short stanchions
+    loop = [(-W / 2 + 26, top, z0 + 26), (-W / 2 + 26, top, z1 - 26), (W / 2 - 26, top, z1 - 26),
+            (W / 2 - 26, top, z0 + 26), (-W / 2 + 26, top, z0 + 26)]
+    tube('rail', loop, 26, BLACK, root, bend=72)
     for s in (-1, 1):
-        sweep(f'side{s}', [(s * (W / 2 - 20), deck, z0), (s * (W / 2 - 20), deck, z1)], rounded_rect(40, 40, 5), BLACK, root)
-    for zz in (z0 + 20, zc, z1 - 20):
-        sweep(f'cross{zz}', [(-W / 2 + 20, deck - 6, zz), (W / 2 - 20, deck - 6, zz)], rounded_rect(36, 28, 4), BLACK, root)
-    # timber floor: boards across the frame with a gap between them
-    n = 9
-    for i in range(n):
-        z = z0 + 52 + i * (L - 104) / (n - 1)
-        box(f'board{i}', (0, deck + 30, z), (W - 70, 20, 62), RACK_WOOD, root, bevel=3)
-        for s in (-1, 1):                                    # countersunk bolts into the rails
-            lib.cylinder(f'bolt{i}{s}', (s * (W / 2 - 80), deck + 41, z), (0, 1, 0), 13, 6, STEEL, root, n=6)
-    # low tube rail round the edge
-    hy = top + 66
-    loop = [(-W / 2 + 20, hy, z0 + 20), (-W / 2 + 20, hy, z1 - 20), (W / 2 - 20, hy, z1 - 20),
-            (W / 2 - 20, hy, z0 + 20), (-W / 2 + 20, hy, z0 + 20)]
-    tube('rail', loop, 30, BLACK, root, bend=60)
+        for k in range(5 if size == 'half' else 8):
+            n2 = 5 if size == 'half' else 8
+            zz = z0 + 60 + k * (L - 120) / (n2 - 1)
+            lib.cylinder(f'post{s}{k}', (s * (W / 2 - 26), (deck + top) / 2, zz), (0, 1, 0), 12, H, BLACK, root, n=8)
+    for k in range(11):                                      # rear wall uprights
+        x = -W / 2 + 70 + k * (W - 140) / 10
+        lib.cylinder(f'wall{k}', (x, (deck + top) / 2, z0 + 26), (0, 1, 0), 12, H, BLACK, root, n=8)
+    # the wood: a curved panel wrapping the leading edge, blocks on the sides
+    n, span = 9, W - 80
+    for k in range(n):
+        t = (k + 0.5) / n
+        x = -span / 2 + t * span
+        drop = 26 * math.sin(math.pi * t)                    # the panel sweeps down at the middle
+        box(f'front{k}', (x, deck + 64 - drop / 2, z1 - 16), (span / n + 6, 150, 26), RACK_WOOD, root, bevel=6)
+    box('frontLip', (0, deck + 142, z1 - 16), (W - 40, 22, 30), RACK_WOOD, root, bevel=10)
+    lib.cylinder('badge', (-W / 2 + 200, deck + 62, z1 + 4), (0, 0, 1), 110, 6, RACK_WOOD, root, n=24)
+    box('badgeText', (-W / 2 + 200, deck + 62, z1 + 10), (92, 20, 4), TEXBLACK, root, bevel=1)
     for s in (-1, 1):
-        for k in range(3):
-            zz = z0 + 40 + k * (L - 80) / 2
-            box(f'post{s}{k}', (s * (W / 2 - 20), top + 30, zz), (22, 72, 22), BLACK, root, bevel=3)
-    # four gutter legs
-    for s in (-1, 1):
-        for zz in (z0 + 90, z1 - 90):
-            yg = ROOF_Y_EDGE - 6
-            leg = [(s * (GUTTER_X + 18), yg - 25, zz), (s * (GUTTER_X + 18), yg + 40, zz), (s * (W / 2 - 20), deck, zz)]
-            sweep(f'leg{s}{zz}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(58, 20, 5), BLACK, root)
-            box(f'pad{s}{zz}', (s * (GUTTER_X + 5), yg + 3, zz), (40, 8, 60), RUBBER, root, bevel=2)
+        box(f'sideBlock{s}', (s * (W / 2 - 22), deck + 70, zc - L / 5), (28, 130, 130), RACK_WOOD, root, bevel=8)
     return root
 
 
@@ -2342,7 +2354,8 @@ def build():
     rack_platform('ipf', 1250, 1400, slat_dir='across', slats=7, rail=(40, 39), legs=4, deflector=False, hoop=140)
     rack_platform('apio', 1270, 1420, slat_dir='across', slats=4, rail=(28, 60), legs=6, deflector=True, mesh=True)
     rack_platform('showa_foot', 1250, 1500, slat_dir='across', slats=12, rail=(40, 40), legs=6, deflector=False)
-    rack_wood()
+    rack_wood('half')
+    rack_wood('full')
     rack_platform('tw_generic', 1260, 1600, slat_dir='across', slats=7, legs=6, deflector=True, hoop=70)
     # awnings (closed bag L x W x H; hard = aluminium case; hinge = 270/180 pivot at the rear end)
     for side in ('left', 'right'):

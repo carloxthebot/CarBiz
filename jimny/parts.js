@@ -351,8 +351,12 @@ export const MIRRORS = [
 // Roof racks, awnings, side steps and ladders are modelled parts named
 // roofRack_<id>, awning_<id>_<left|right>, sideStep_<id>, ladder_<id>.
 export const ROOF_RACKS = [
-  { id: 'wood', url: null, label: '復古木條行李架（半長）', price: null, cur: 'TWD', brand: '多家', uncertain: true,
-    note: '黑色鐵框＋清漆木條地板＋矮圓管圍欄，長度約車頂的一半、位置偏後。這是一種常見的復古型式，**品牌與規格尚未查證**——若你記得是哪一家，告訴我可以照該款校正' },
+  { id: 'wood', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD trip basket 復古車頂架（半長 TB-HR1）', price: 56000, cur: 'JPY', brand: 'DAMD', part: 'TB-HR1',
+    refs: ['https://www.sunvigor.com.hk/onlineshop/tw/damd/2605-suzukijimny-jimnysierre-damd-roofrack-tripbacket-djbtbdrr1.html'],
+    note: '1350×600×160mm、13.5kg。黑色鋼製鐵線籃，木料是紐西蘭輻射松乙醯化處理的高耐久「Accoya」，做成包覆前緣的弧形擋板與兩側木塊，不是木地板。裝在車頂前段的橫桿上。日本仍在售 ¥56,000／¥61,600 稅込；＋TERZO 基座組 TB-HRKJB ¥74,000' },
+  { id: 'wood_full', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'DAMD trip basket 復古車頂架（全長 TB-RR1）', price: 19800, cur: 'TWD', brand: 'DAMD', part: 'TB-RR1',
+    refs: ['https://www.damd.co.jp/products/suzuki/jimny_theroots/'],
+    note: '1350×1000×160mm、16kg，與半長款同款式。日本 ¥59,000／¥64,900 稅込；＋TERZO 基座組 TB-RRKJB ¥77,000。台灣蝦皮「藤井74」NT$19,800' },
   { id: 'none', label: '無', price: 0 },
   // ---- 台灣有售
   { id: 'arb', photo: true, url: 'https://www.ruten.com.tw/item/show?22438729095708', photo: true, label: 'ARB BASE Rack 1545×1285', price: 45000, cur: 'TWD', brand: 'ARB', part: '1770020 + 17900020',
