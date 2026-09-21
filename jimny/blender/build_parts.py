@@ -1138,7 +1138,7 @@ def snorkel_precleaner(side=RIGHT):
     box('wingSeal', (side * 705, wing_y + 6, 660), (140, 10, 140), RUBBER, root, bevel=4)
     hx, hz = side * (612 + off), 405
     lib.cylinder('stem', (hx, 1625, hz), (0, 1, 0), 89, 50, TEXBLACK, root)
-    lib.cylinder('bowl', (hx, 1690, hz), (0, 1, 0), 180, 80, material('ClearBowl', 0xd9dde2, rough=0.1, metal=0.0), root, n=32)
+    lib.cylinder('bowl', (hx, 1690, hz), (0, 1, 0), 180, 80, material('ClearBowl', 0x9aa3a9, rough=0.28, metal=0.0)   # smoked polycarbonate, not white, root, n=32)
     lib.cylinder('bowlBase', (hx, 1652, hz), (0, 1, 0), 150, 12, TEXBLACK, root, n=32)
     lib.cylinder('bowlTop', (hx, 1734, hz), (0, 1, 0), 184, 10, TEXBLACK, root, n=32)
     lib.cylinder('lid', (hx, 1760, hz), (0, 1, 0), 150, 42, TEXBLACK, root, n=32)
@@ -1259,9 +1259,13 @@ def pillar_pods(sides=(-1, 1), suffix=''):
 
 # ============================================================ MORE VARIANTS
 # Generic builders so each catalogue entry only supplies dimensions.
-def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=6, deflector=True, mesh=False, top=None):
+def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=6, deflector=True, mesh=False, top=None,
+                  hoop=0, round_bars=False):
     """Flat aluminium platform on gutter legs. slat_dir 'across' (Front Runner,
-    ARB) or 'along' (Yakima LockNLoad, Rhino Pioneer)."""
+    ARB) or 'along' (Yakima LockNLoad, Rhino Pioneer). `hoop` adds a tube
+    perimeter standing that many mm above the deck (IPF, JAOS), `round_bars`
+    swaps the flat slats for round crossbars (Yakima LockNLoad) and `mesh`
+    lays a grid floor under them (APIO, Rhino Pioneer)."""
     root = group(f'roofRack_{pid}')
     top = top or RACK_TOP
     deck = top - rail[1]
@@ -1278,6 +1282,9 @@ def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=
         pitch = (L - 60 - 80) / (n - 1)
         for i in range(n):
             z = z0 + 70 + i * pitch
+            if round_bars:
+                tube(f'bar{i}', [(-W / 2 + rail[0], top - 4, z), (W / 2 - rail[0], top - 4, z)], 42, BLACK, root)
+                continue
             box(f'slat{i}', (0, top - 8, z), (W - 2 * rail[0], 15, 62), BLACK, root, bevel=2)
             box(f'slot{i}', (0, top, z), (W - 2 * rail[0] - 20, 1.5, 9), TEXBLACK, root, bevel=0)
     else:
@@ -1303,6 +1310,16 @@ def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=
             box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
     if deflector:
         box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
+    if hoop:                                             # tube perimeter standing proud of the deck
+        hy = top + hoop
+        loop = [(-W / 2 + rail[0], hy, z0 + rail[0]), (-W / 2 + rail[0], hy, z1 - rail[0]),
+                (W / 2 - rail[0], hy, z1 - rail[0]), (W / 2 - rail[0], hy, z0 + rail[0]),
+                (-W / 2 + rail[0], hy, z0 + rail[0])]
+        tube('hoop', loop, 34, BLACK, root, bend=70)
+        for s2 in (-1, 1):
+            for k in range(3):
+                zz = z0 + 120 + k * (L - 240) / 2
+                box(f'stanchion{s2}{k}', (s2 * (W / 2 - rail[0]), top + hoop / 2, zz), (26, hoop, 26), BLACK, root, bevel=3)
     return root
 
 
@@ -2272,14 +2289,14 @@ def build():
     pillar_pods(sides=(-RIGHT,), suffix='_left')
     # catalogue variants (dimensions from parts.js research; see notes there)
     # roof racks (research 2026-09-16: ARB/Yakima TW, Front Runner, Rhino, JAOS, IPF, APIO, SHOWA, TW generic)
-    rack_platform('yakima', 1370, 1520, slat_dir='across', slats=7, legs=4, deflector=False)
+    rack_platform('yakima', 1370, 1520, slat_dir='across', slats=6, legs=4, deflector=False, round_bars=True)
     rack_platform('fr34', 1345, 1156, slat_dir='across', slats=6, legs=4, deflector=True)
-    rack_platform('pioneer', 1339, 1453, slat_dir='along', slats=5, legs=4, deflector=False)
-    rack_platform('jaos', 1250, 1400, slat_dir='across', slats=6, rail=(32, 32), legs=6, deflector=True)
-    rack_platform('ipf', 1250, 1400, slat_dir='across', slats=7, rail=(40, 39), legs=4, deflector=False)
-    rack_platform('apio', 1270, 1420, slat_dir='across', slats=8, rail=(28, 60), legs=6, deflector=True)
-    rack_platform('showa_foot', 1250, 1500, slat_dir='across', slats=9, rail=(40, 40), legs=6, deflector=False)
-    rack_platform('tw_generic', 1260, 1600, slat_dir='across', slats=9, legs=6, deflector=True)
+    rack_platform('pioneer', 1339, 1453, slat_dir='along', slats=4, rail=(56, 52), legs=4, deflector=False, mesh=True)
+    rack_platform('jaos', 1250, 1400, slat_dir='across', slats=6, rail=(32, 32), legs=6, deflector=False, hoop=96)
+    rack_platform('ipf', 1250, 1400, slat_dir='across', slats=7, rail=(40, 39), legs=4, deflector=False, hoop=140)
+    rack_platform('apio', 1270, 1420, slat_dir='across', slats=4, rail=(28, 60), legs=6, deflector=True, mesh=True)
+    rack_platform('showa_foot', 1250, 1500, slat_dir='across', slats=12, rail=(40, 40), legs=6, deflector=False)
+    rack_platform('tw_generic', 1260, 1600, slat_dir='across', slats=7, legs=6, deflector=True, hoop=70)
     # awnings (closed bag L x W x H; hard = aluminium case; hinge = 270/180 pivot at the rear end)
     for side in ('left', 'right'):
         awning_case('arb_touring_2', side, 2200, 130, 130, PVC)
