@@ -433,6 +433,18 @@ def grille_panel(name, root, mat, opening, thick=14, proud=8):
 MM = lib.MM
 
 
+def flatten(obj, centre, k):
+    """Squash a sphere along the car's Z (its depth) into a dome.
+
+    lib.sphere bakes the position into the mesh, so setting obj.scale scales
+    the offset too and the dome slides toward the origin -- an extinguisher
+    cap ended up a metre forward of the bottle it belonged to. Scaling about
+    the object origin and then putting the centre back is the fix."""
+    obj.scale.y = k
+    obj.location.y = P(*centre)[1] * (1 - k)
+    return obj
+
+
 def lamp_bezels(root, mat, style='round'):
     for k, (x, y) in enumerate(LAMP):
         z = face_z(x) + 8
@@ -1685,8 +1697,7 @@ def rear_damd_little_d():
             lib.cylinder(f'lampRim{s}{int(dx)}', (s * dx, yy, zf - 6), (0, 0, 1), dia + 6, 6, CHROME, root, n=22)
             lib.cylinder(f'lampLens{s}{int(dx)}', (s * dx, yy, zf - 10), (0, 0, 1), dia, 12 if dome else 4, mat_, root, n=22)
             if dome:                                         # the lenses are domed, not flat
-                d = lib.sphere(f'lampDome{s}{int(dx)}', (s * dx, yy, zf - 6), dia, mat_, root)
-                d.scale.y = 0.34
+                d = flatten(lib.sphere(f'lampDome{s}{int(dx)}', (s * dx, yy, zf - 6), dia, mat_, root), (s * dx, yy, zf - 6), 0.34)
         box(f'mount{s}', (s * 330, ymid + 30, zc + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
     box('plateStep', (0, 520, zc - 30), (420, 190, 60), TEXBLACK, root, bevel=5)
     box('plate', (RIGHT * 60, 520, zf + 34), (330, 165, 3), PLATE, root, bevel=1)
@@ -1950,8 +1961,7 @@ def rear_urnieta_1970():
             lib.cylinder(f'lampCan{s}{k}', (s * dx, y + 6, zf + 16), (0, 0, 1), 92, 34, TEXBLACK, root, n=24)
             lib.cylinder(f'lampRim{s}{k}', (s * dx, y + 6, zf - 2), (0, 0, 1), 88, 10, CHROME, root, n=24)
             lib.cylinder(f'lampLens{s}{k}', (s * dx, y + 6, zf - 10), (0, 0, 1), 76, 10, red, root, n=24)
-            d = lib.sphere(f'lampDome{s}{k}', (s * dx, y + 6, zf - 14), 76, red, root)
-            d.scale.y = 0.34
+            d = flatten(lib.sphere(f'lampDome{s}{k}', (s * dx, y + 6, zf - 14), 76, red, root), (s * dx, y + 6, zf - 14), 0.34)
         box(f'recess{s}', (s * 372, y + 6, zf + 8), (150, 84, 14), BLACK, root, bevel=6)
         box(f'step{s}', (s * 470, y - H / 2 - 24, z + 10), (250, 12, 170), ALU_CHEQ, root, bevel=2)
         box(f'endPlug{s}', (s * (W / 2 - 22), y, z + 112), (14, 36, 24), BLACK, root, bevel=6)
@@ -2229,8 +2239,7 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
                 lib.cylinder(f'lampHsg{s}{k}', (xx, y, zr + 18), (0, 0, 1), 78, 44, BLACK, root, n=24)
                 lib.cylinder(f'lampRim{s}{k}', (xx, y, zr - 4), (0, 0, 1), 74, 6, CHROME, root, n=24)
                 lib.cylinder(f'lampLens{s}{k}', (xx, y, zr - 9), (0, 0, 1), 66, 6, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
-                d = lib.sphere(f'lampDome{s}{k}', (xx, y, zr - 8), 66, material('TailRed', 0xc0161a, rough=0.2), root)
-                d.scale.y = 0.3
+                d = flatten(lib.sphere(f'lampDome{s}{k}', (xx, y, zr - 8), 66, material('TailRed', 0xc0161a, rough=0.2), root), (xx, y, zr - 8), 0.3)
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
     if lamps == 'klc':
@@ -2496,7 +2505,12 @@ def grille_light(pid):
 EXH_LIFT = 60
 TI_BLUE = material('TitaniumBlue', 0x3d5a7a, rough=0.28, metal=1.0)
 EXH_STEEL = material('ExhaustSteel', 0xc9ced2, rough=0.18, metal=1.0)
-BUMPER_Z = -1735          # rear face of the stock rear bumper
+# Measured off the model 2026-09-22: the rearmost full-width low body panel
+# (the stock rear bumper) ends at z = -1609. The -1735 assumed before put
+# every tail pipe 126 mm too far back, which is what made them look like they
+# were hanging off the car.
+BUMPER_Z = -1612          # rear face of the stock rear bumper
+TIP_L = 110               # length of a tail-pipe tip, off the owner's photo
 
 
 def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrude=35,
@@ -2514,16 +2528,21 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
     pipe = material('ExhaustPipe', 0x6e7276, rough=0.45, metal=0.9)
 
     def tip_at(name, x, zz, yy, ax=(0, 0, -1)):
-        lib.cylinder(name, (x, yy, zz), ax, tip_d, 150, tip_mat, root, n=24)
-        lib.cylinder(name + 'Mouth', (x + ax[0] * 70, yy, zz + ax[2] * 70), ax, tip_d - 10, 14,
+        """`zz` is where the tip's MOUTH is; the body runs forward from there,
+        so a published protrusion lands where it should."""
+        zc = zz - ax[2] * TIP_L / 2
+        xc = x - ax[0] * TIP_L / 2
+        lib.cylinder(name, (xc, yy, zc), ax, tip_d, TIP_L, tip_mat, root, n=24)
+        lib.cylinder(name + 'Mouth', (x - ax[0] * 6, yy, zz - ax[2] * 6), ax, tip_d - 10, 14,
                      material('ExhaustBore', 0x141414, rough=0.9), root, n=24)
         if roll:
-            annulus(name + 'Roll', (x + ax[0] * 66, yy, zz + ax[2] * 66), tip_d / 2 - 3, tip_d / 2 + 5, 12,
+            annulus(name + 'Roll', (x - ax[0] * 8, yy, zz - ax[2] * 8), tip_d / 2 - 3, tip_d / 2 + 5, 12,
                     tip_mat, root, n=24)
+        return (xc - ax[0] * TIP_L / 2, zc - ax[2] * TIP_L / 2)   # forward end, to join a pipe to
 
     if layout == 'cover':
-        tip_at('tipR', side * 430, BUMPER_Z - protrude + 60, y)
-        lib.cylinder('stub', (side * 430, y, BUMPER_Z + 60), (0, 0, -1), tip_d - 22, 140, pipe, root, n=18)
+        fx, fz = tip_at('tipR', side * 430, BUMPER_Z - protrude, y)
+        lib.cylinder('stub', (fx, y, fz + 90), (0, 0, -1), tip_d - 22, 220, pipe, root, n=18)
         return root
 
     if layout == 'side':
@@ -2545,7 +2564,7 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
                 box(f'strap{zz}', (s * 790, y + 30, zz), (md + 16, md + 16, 16), BLACK, root, bevel=4)
         for k in range(tips):
             xx = s * (790 + (k - (tips - 1) / 2) * (tip_d + 12))
-            tip_at(f'tip{k}', xx, zc - (muffler[0] / 2 if muffler else 200) - 60, y + 30)
+            tip_at(f'tip{k}', xx, zc - (muffler[0] / 2 if muffler else 200) - 150, y + 30)
         lib.cylinder('run', (s * 760, y + 50, zc + 420), (0, 0, 1), tip_d - 16, 500, pipe, root, n=16)
         return root
 
@@ -2575,10 +2594,6 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
             # muffler_dy tucks the drum up over the axle, where a compact one
             # actually lives and where it stops showing in a side view
             lib.cylinder('drum', (0, y + 20 + muffler_dy, muffler_z), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
-            if muffler_dy:
-                tube('dropPipe', [(0, y + 20 + muffler_dy, muffler_z - ml / 2),
-                                  (side * 240, y + 10, muffler_z - ml / 2 - 200),
-                                  (side * 430, y, muffler_z - ml / 2 - 330)], tip_d - 24, pipe, root, bend=120)
         lib.cylinder('inlet', (0, y + 30 + muffler_dy, muffler_z + ml / 2 + 180), (0, 0, 1), tip_d - 22, 360, pipe, root, n=16)
 
     if layout == 'quad':
@@ -2587,19 +2602,28 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
         # as one bonded unit inside a squared shroud. The tips clamp to the
         # tail section and hang below the bumper; nothing is cut.
         for xx in (-368, -279, 279, 368):
-            tip_at(f'tip{xx}', xx, BUMPER_Z - protrude + 60, y)
+            tip_at(f'tip{xx}', xx, BUMPER_Z - protrude, y)
         for sd in (-1, 1):
             box(f'shroud{sd}', (sd * 323.5, y, BUMPER_Z + 54), (210, tip_d + 34, 130), BLACK, root, bevel=12)
             lib.cylinder(f'feed{sd}', (sd * 200, y + 26, muffler_z - 150), (sd * 0.62, -0.16, -1), tip_d - 26, 520, pipe, root, n=16)
         return root
     if layout == 'corner':
         for s in (-1, 1):
-            tip_at(f'tip{s}', s * 540, BUMPER_Z - protrude + 60, y)
-            lib.cylinder(f'link{s}', (s * 300, y + 10, muffler_z - 120), (s * 0.9, 0, -0.44), tip_d - 20, 560, pipe, root, n=16)
+            fx, fz = tip_at(f'tip{s}', s * 540, BUMPER_Z - protrude, y)
+            tube(f'link{s}', [(0, y + 20, muffler_z - muffler[0] / 2 if muffler else muffler_z),
+                              (s * 300, y + 8, (muffler_z + fz) / 2), (fx, y, fz + 30)],
+                 tip_d - 22, pipe, root, bend=200)
     else:
         for k in range(tips):
             xx = side * 430 + (k - (tips - 1) / 2) * (tip_d + 14)
-            tip_at(f'tip{k}', xx, BUMPER_Z - protrude + 60, y)
+            fx, fz = tip_at(f'tip{k}', xx, BUMPER_Z - protrude, y)
+            # A tip with nothing joining it to the silencer reads as a chrome
+            # can floating under the car -- this is that pipe.
+            if muffler:
+                z0 = muffler_z - muffler[0] / 2
+                tube(f'tail{k}', [(0, y + 20 + muffler_dy, z0),
+                                  (xx * 0.7, y + 8 + muffler_dy * 0.35, (z0 + fz) / 2),
+                                  (fx, y, fz + 30)], tip_d - 22, pipe, root, bend=220)
     return root
 
 
@@ -2609,30 +2633,41 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
 # a pair of band clamps on the ladder rail, which is what this draws. The two
 # guard positions strap to the MOLLE panel instead.
 def extinguisher(where):
+    """1 kg bottle in a two-band quick-release. Black body with a red label,
+    which is what the owner's car carries -- a fire-engine-red bottle was
+    wrong. On the ladder it sits BETWEEN the rails on the rear face, the way
+    it is actually strapped, not hung off the outside of the hoop."""
     root = group(f'extinguisher_{where}')
-    red = material('ExtinguisherRed', 0xa8211b, rough=0.45)
+    body = material('ExtinguisherBlack', 0x17181a, rough=0.42)
+    red = material('ExtinguisherLabel', 0xb2211c, rough=0.5)
     if where == 'ladder':
         s = RIGHT
-        x, y, z = s * 658, 1010, TAIL_Z - 95
+        x, y, z = s * 482, 1030, TAIL_Z - 62 - 54            # centred in the hoop, proud of the rungs
     else:
         s = RIGHT if where == 'right' else -RIGHT
         q = QUARTER
         x = s * 716 + s * 54
         y = (q['y0'] + q['y1']) / 2 + 10
         z = (q['z0'] + q['z1']) / 2 + 215
-    lib.cylinder('bottle', (x, y, z), (0, 1, 0), 82, 270, red, root, n=22)
-    lib.sphere('domeTop', (x, y + 135, z), 82, red, root).scale.y = 0.45
-    lib.sphere('domeBase', (x, y - 135, z), 82, red, root).scale.y = 0.35
-    box('label', (x + s * 30, y - 20, z), (30, 120, 66), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=2)
+    lib.cylinder('bottle', (x, y, z), (0, 1, 0), 82, 270, body, root, n=22)
+    flatten(lib.sphere('domeTop', (x, y + 135, z), 82, body, root), (x, y + 135, z), 0.45)
+    flatten(lib.sphere('domeBase', (x, y - 135, z), 82, body, root), (x, y - 135, z), 0.35)
+    # the owner's bottle is black with a big red maker's logo low down and a
+    # white instruction panel above it
+    box('label', (x, y - 46, z - 32), (76, 128, 20), red, root, bevel=5)
+    box('labelText', (x, y + 74, z - 32), (72, 44, 18), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=4)
     lib.cylinder('neck', (x, y + 168, z), (0, 1, 0), 34, 70, STEEL, root, n=14)
     box('head', (x, y + 212, z), (56, 40, 76), BLACK, root, bevel=6)
     box('lever', (x, y + 238, z + 6), (40, 12, 96), STEEL, root, bevel=3)
-    lib.cylinder('gauge', (x, y + 206, z + 54), (0, 0, 1), 44, 18, STEEL, root, n=14)
-    tube('hose', [(x, y + 206, z - 40), (x + s * 40, y + 120, z - 60), (x + s * 20, y - 20, z - 52)], 16, RUBBER, root, bend=40)
-    for yy in (y - 92, y + 92):                              # two band clamps
-        annulus(f'band{yy}', (x, yy, z), 44, 56, 26, BLACK, root, n=22)
-        box(f'bandFoot{yy}', (x - s * 44, yy, z), (40, 30, 34), BLACK, root, bevel=3)
+    lib.cylinder('gauge', (x, y + 206, z - 46), (0, 0, 1), 44, 18, STEEL, root, n=14)
+    tube('hose', [(x + s * 24, y + 200, z - 30), (x + s * 46, y + 110, z - 44),
+                  (x + s * 26, y + 10, z - 40)], 16, RUBBER, root, bend=34)
+    for yy in (y - 92, y + 92):                              # two band clamps round the bottle
+        lib.cylinder(f'band{yy}', (x, yy, z), (0, 1, 0), 96, 26, BLACK, root, n=22)
+        box(f'bandFoot{yy}', (x, yy, z + 46), (44, 30, 40), BLACK, root, bevel=3)
     return root
+
+
 
 
 # ============================================================ URNIETA SALADO
@@ -2674,6 +2709,7 @@ def ladder_urnieta():
                           (xup + k * s * half, y1 + 10, zf + 96)], 30, BLACK, root, bend=26)
         box(f'foot{k}', (xlo + k * s * half, y0 + 40, (TAIL_Z + zf) / 2), (56, 90, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
     return root
+
 
 def build():
     for v in ('platform', 'basket'):
