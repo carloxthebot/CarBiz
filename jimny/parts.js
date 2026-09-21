@@ -585,7 +585,8 @@ export const EXHAUSTS = [
   { id: 'taniguchi_compe_r', url: 'https://www.ors-taniguchi.co.jp/', label: 'Compe Muffler R', brand: 'TANIGUCHI',
     price: 102300, cur: 'JPY', note: '唯一會動到保桿本體：管口從右後角「側向」穿出、離地約 560mm，涉水用。原廠保桿要開孔' },
   { id: 'hks_trailmaster', url: 'https://www.hks-power.co.jp/', label: 'LEGAMAX TRAILMASTER', brand: 'HKS', part: '32018-AS006',
-    price: 150700, cur: 'JPY', note: 'JB74 唯一的 HKS：左側出雙管 φ75 燒藍鈦色，整組藏在左側門檻下、後輪前方，外包打孔隔熱罩。後保桿完全不動——從車尾看跟原廠一樣。車主實車配置' },
+    price: 150700, cur: 'JPY', uncertain: true,
+    note: '左側出雙管 φ75 燒藍鈦色，整組藏在左側門檻下、後輪前方。⚠ 車主回報實車的 HKS 與原廠同側（右側後出），並非此型；HKS 的 JB74 產品線重新查證中' },
 ];
 
 // Where a fire extinguisher hangs. No maker sells a JB74 ladder bracket --
