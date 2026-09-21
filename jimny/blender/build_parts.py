@@ -2190,18 +2190,42 @@ def rack_wood(size='half'):
     for k in range(n_wall):                                  # rear wall uprights
         x = xl + 60 + k * (W - 120) / (n_wall - 1)
         lib.cylinder(f'wall{k}', (x, (deck + top) / 2, z0 + 26), (0, 1, 0), 12, H, BLACK, root, n=8)
-    # the wood: a curved panel wrapping the leading edge, blocks on the sides
-    n, span = 9, W - 80
-    for k in range(n):
-        t = (k + 0.5) / n
-        x = xl + 40 + t * span
-        drop = 26 * math.sin(math.pi * t)                    # the panel sweeps down at the middle
-        box(f'front{k}', (x, deck + 64 - drop / 2, z1 - 16), (span / n + 6, 150, 26), RACK_WOOD, root, bevel=6)
-    box('frontLip', (xc, deck + 142, z1 - 16), (W - 40, 22, 30), RACK_WOOD, root, bevel=10)
-    lib.cylinder('badge', (xl + 180, deck + 62, z1 + 4), (0, 0, 1), 110, 6, RACK_WOOD, root, n=24)
-    box('badgeText', (xl + 180, deck + 62, z1 + 10), (92, 20, 4), TEXBLACK, root, bevel=1)
-    for xx in (xl + 22, xr - 22):
-        box(f'sideBlock{xx}', (xx, deck + 70, zc - L / 5), (28, 130, 130), RACK_WOOD, root, bevel=8)
+    # The wood, measured 2026-09-22 off DAMD's own fitted side views and their
+    # parts list (docs/jb74-fitment.json). Three pieces of timber in the whole
+    # kit: one front plate and two side plates. It is NOT a curved wrap and
+    # NOT a slab standing upright -- it is a flat board raked back about 19
+    # degrees like a wind fairing, with fully half-round ends, its top edge
+    # tucked under the rim tube. The installer sets the angle on the clamps,
+    # which is why DAMD's own two demo cars measure 15 and 23 degrees.
+    rake = math.radians(19)
+    ph, pt = 120, 15                                         # plate height and thickness
+    yT, zT = top, z1 - 10                                    # top edge, level with the rim tube
+
+    def face(down, out):
+        """A point on the plate's face: `down` mm from its top edge, `out` mm
+        along its outward normal."""
+        return (yT - down * math.cos(rake) + out * math.sin(rake),
+                zT + down * math.sin(rake) + out * math.cos(rake))
+
+    pw = W - 20                                              # 980 on the full size, 580 on the half
+    prof = [face(0, 0), face(ph, 0), face(ph, -pt), face(0, -pt)]
+    prism('frontPlate', prof, xc - (pw - ph) / 2, xc + (pw - ph) / 2, RACK_WOOD, root)
+    for xe in (xc - (pw - ph) / 2, xc + (pw - ph) / 2):      # half-round ends, radius = half the height
+        (ya, za), (yb, zb) = face(ph / 2, 0), face(ph / 2, -pt)
+        lib.cylinder(f'plateEnd{xe:.0f}', ((xe), (ya + yb) / 2, (za + zb) / 2), (1, 0, 0), ph, pt, RACK_WOOD, root, n=20)
+    # knob bolts: three across the full size, two across the half, 70% down
+    knobs = (0.15, 0.5, 0.85) if size != 'half' else (0.25, 0.75)
+    for k, f in enumerate(knobs):
+        yk, zk = face(ph * 0.7, 8)
+        lib.cylinder(f'knob{k}', (xc - pw / 2 + f * pw, yk, zk), (math.sin(rake), 0, math.cos(rake)), 26, 22, STEEL, root, n=12)
+    # the engraved stadium badge sits off to one side of the front plate
+    (yb0, zb0), (yb1, zb1) = face(ph * 0.24 - 12, 1.5), face(ph * 0.24 + 13, 1.5)
+    prism('badge', [(yb0, zb0), (yb1, zb1), face(ph * 0.24 + 13, 0)[::1], face(ph * 0.24 - 12, 0)[::1]],
+          xc - pw / 2 + 80, xc - pw / 2 + 195, TEXBLACK, root)
+    # side plates: flat boards on the OUTSIDE of each wall, mid-length
+    for xx in (xl - 9, xr + 9):
+        box(f'sidePlate{xx:.0f}', (xx, top - 62, z1 - 650), (16, 115, 185), RACK_WOOD, root, bevel=8)
+        box(f'sideBadge{xx:.0f}', (xx + (9 if xx > xc else -9), top - 62, z1 - 650), (4, 22, 100), TEXBLACK, root, bevel=2)
     return root
 
 
