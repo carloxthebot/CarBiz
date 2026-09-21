@@ -69,8 +69,20 @@
       "note": "runs along the sill between the arches"
     },
     "lightBar": {
-      "w": [1000, 1300],
-      "note": "40 in bar on the windscreen header"
+      "w": [500, 1400],
+      "note": "bars run 21.5 in (546, STEDI ST1K) to 52 in (1320, ST4K); the width here includes the end caps and the A-pillar brackets"
+    },
+    "grilleLight": {
+      "w": [520, 1180],
+      "note": "nose lighting: the Bushranger bar is 717 wide, the STEDI Rally Bar hoop 1120 across its legs"
+    },
+    "exhaust_": {
+      "w": [60, 1200],
+      "note": "a single tail pipe is narrow; the twin-corner and transverse-cannon systems are the wide ones"
+    },
+    "extinguisher_": {
+      "w": [60, 220],
+      "note": "1 kg bottle, 82 across, plus the band clamps"
     },
     "flares": {
       "w": [1500, 1700],
@@ -85,23 +97,23 @@
       "note": "folding shovel along the rack rail"
     },
     "guard": {
-      "d": [500, 800],
-      "note": "kit carried on a quarter-window guard, no longer than the guard"
+      "d": [150, 800],
+      "note": "kit carried on a quarter-window guard, no longer than the guard (600 mm). The axe is the short one: it hangs vertically, so it only takes about 210 mm of the guard's length"
     },
     "decals": {
       "w": [1300, 1500],
       "note": "door lettering, inside the body width"
     },
     "roofLights": {
-      "w": [1000, 1300],
-      "note": "spots on the rack's front rail"
+      "w": [900, 1300],
+      "note": "spots on the rack's front rail; the KC Pro6 six-light bar measures 994 over the lamps"
     }
   },
 
   "parts": {
     "ladder_jst": {
-      "w": [300, 360],
-      "note": "standard version, 270 mm inside the hoop (Shopee listing)"
+      "w": [255, 290],
+      "note": "standard version: 270 mm is the OUTER width of the hoop, re-measured 2026-09-21 against MRK's straight-on photo (docs/jb74-fitment.json). The 27/22 cm in the listing is not the inside dimension"
     },
     "awning_yakima_270s_left": {
       "d": [1800, 2000],
@@ -126,8 +138,8 @@
     "rearBumper_urnieta_1970_rear": { "w": [1380, 1540], "note": "drawn 1617 (UN-JIMNY-FB-028); pulled inside the tyre line" },
     "rearBumper_klc_heritage_rear": {
       "w": [1350, 1500],
-      "y_min": [280, 340],
-      "note": "tube runs above the tail lamps and out past their outer edge (x 680)"
+      "y_min": [420, 460],
+      "note": "tube runs above the tail lamps and out past their outer edge (x 680). y_min is now the bottom of the number plate hanging off the tube; it used to be the tail pipe, which has moved out to its own exhaust family"
     }
   }
 }

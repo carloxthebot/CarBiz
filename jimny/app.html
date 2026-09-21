@@ -57,8 +57,21 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
   font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink3);text-transform:uppercase}
 .head .kicker a{color:var(--acc);text-decoration:none;letter-spacing:.06em}
 .head h1{font:800 21px/1.1 var(--disp);letter-spacing:-.01em;margin:9px 0 0}
+/* Total height is the number people actually ask about -- it decides whether
+   the car still fits the mechanical parking most Taiwanese buildings use --
+   so it gets its own row and is measured off the built model, not guessed. */
+.hero{display:flex;align-items:center;gap:12px;margin-top:14px;padding:11px 13px;
+  background:var(--sur);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:4px}
+.hero .h-l span{display:block;font:500 8.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
+.hero .h-l b{display:block;font:800 30px/1 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums;color:var(--acc)}
+.hero .h-l small{font:400 12px/1 var(--mono);color:var(--ink3);font-weight:400}
+.hero .h-r{margin-left:auto;text-align:right;display:grid;gap:4px}
+.hero .h-r i{font-style:normal;font:500 11px/1.3 var(--mono);color:var(--ink2)}
+.hero .h-r em{font-style:normal;font:500 10.5px/1.35 var(--body);color:var(--ink3)}
+.hero .h-r em.tight{color:var(--warn)}
+.hero .h-r em.over{color:var(--bad)}
 .gauge{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
-  border:1px solid var(--line);border-radius:4px;margin-top:14px;overflow:hidden}
+  border:1px solid var(--line);border-radius:4px;margin-top:9px;overflow:hidden}
 .gauge div{background:var(--sur);padding:9px 10px}
 .gauge span{display:block;font:500 8.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
 .gauge b{display:block;font:800 18px/1.15 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums}
@@ -183,6 +196,17 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .tg .st{font:500 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink3);flex:none}
 .tg[aria-pressed=true] .st{color:var(--acc)}
 .tg.solo{border:1px solid var(--line);border-radius:3px;margin-top:9px}
+/* one row per thing that hangs off a guard: name on the left, which side on
+   the right, because "which side" is the whole decision */
+.sides{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.side-row{display:flex;align-items:center;gap:10px;background:var(--sur);padding:9px 12px}
+.side-row .nm{flex:1;min-width:0;font-size:13px}
+.side-row .nm i{display:block;font-style:normal;font-size:10.5px;color:var(--ink3);margin-top:2px}
+.side-row .pick{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden;flex:none}
+.side-row .pick button{background:var(--sur2);border:0;cursor:pointer;color:var(--ink3);
+  font:500 11px/1 var(--mono);padding:7px 9px;letter-spacing:.06em}
+.side-row .pick button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:600}
+.sides.off{opacity:.45;pointer-events:none}
 
 .flags{padding:10px 20px 0;display:grid;gap:6px;flex:none}
 .flags:empty{padding:0}
@@ -249,6 +273,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     <div class="head">
       <div class="kicker"><span>改裝配置器</span><a href="parts.html">零件目錄與價格 →</a></div>
       <h1>Jimny JB74</h1>
+      <div class="hero">
+        <div class="h-l"><span>總車高</span><b id="rHeight">1730<small> mm</small></b></div>
+        <div class="h-r"><i id="rHeightDelta">原廠高度</i><em id="rPark"></em></div>
+      </div>
       <div class="gauge">
         <div><span>總舉升</span><b id="rLift">0<small> mm</small></b></div>
         <div><span>胎外徑</span><b id="rTyre">693<small> mm</small></b></div>
@@ -330,6 +358,19 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <p class="lbl">側踏／岩石滑桿</p><select id="selStep" aria-label="側踏"></select><p class="hint" id="hStep"></p>
           <p class="lbl" style="margin-top:16px">後爬梯</p><select id="selLadder" aria-label="後爬梯"></select><p class="hint" id="hLadder"></p>
           <p class="lbl" style="margin-top:16px">呼吸管</p><select id="selSnorkel" aria-label="呼吸管"></select><p class="hint" id="hSnorkel"></p>
+          <p class="lbl" style="margin-top:16px">排氣管</p><select id="selExhaust" aria-label="排氣管"></select><p class="hint" id="hExhaust"></p>
+        </div>
+        <div class="grp">
+          <p class="lbl">車頂燈條</p><select id="selLightBar" aria-label="車頂燈條"></select><p class="hint" id="hLightBar"></p>
+          <p class="lbl" style="margin-top:16px">車頂圓燈</p><select id="selRoofLights" aria-label="車頂圓燈"></select><p class="hint" id="hRoofLights"></p>
+          <p class="lbl" style="margin-top:16px">車頭燈條</p><select id="selGrilleLight" aria-label="車頭燈條"></select><p class="hint" id="hGrilleLight"></p>
+        </div>
+        <div class="grp">
+          <p class="lbl">鐵窗掛載 <em>需先裝鐵窗</em></p>
+          <div class="sides" id="sides"></div>
+          <p class="lbl" style="margin-top:16px">滅火器</p>
+          <div class="sides"><div class="side-row"><span class="nm">1kg 乾粉瓶<i id="extNote"></i></span>
+            <span class="pick" data-key="extinguisher" id="extPick"></span></div></div>
         </div>
         <div class="grp">
           <p class="lbl">加裝配件</p>
@@ -364,14 +405,14 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609210941';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS } from './parts.js?v=202609210941';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609210941';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609210941';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609210941';
+import { rigJimny, applyConfig } from './rig.js?v=202609211505';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609211505';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609211505';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609211505';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609211505';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609210941';
+const BUILD = '202609211505';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -468,15 +509,19 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   tread: 'toyo_at3', owl: false, rimColor: 0xc8ccd0,
   kit: 'none', hood: 'stock', spareCoverKit: 'none', gullwing: false, frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
-  sideStep: 'none', lightBar: false, spareBag: false, spareCover: false,
-  roofLights: false, guardCan: false, guardBoard: false, shovel: false, flares: false, decals: false, sideSkirt: false };
+  sideStep: 'none', lightBar: 'none', spareBag: false, spareCover: false,
+  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false };
+// things that hang off a quarter-window guard and therefore pick a side
+const SIDED = ['guardCan', 'guardAxe', 'guardBoard'];
+const SIDE_DEF = { guardCan: 'right', guardAxe: 'right', guardBoard: 'left' };
 let S = { ...DEF }, rig = null, accGroup = new THREE.Group();
 const RIMS = [0xc8ccd0, 0x373b41, 0x8a6a3c, 0xd8d9d6, 0xb8410f];   // matte black reads as a shade of grey so spokes show
 // the owner's own car (from their photos): black JB74 on a 3" lift, 31"
 // Open Country M/T white letters on matte-black MAXX wheels
 const DEMO = { color: 'ZJ3', lift: 'td60', wheel: 'maxx', tyre: 't225r16', tread: 'toyo_mt', owl: true, rimColor: 0x373b41,
-  grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', roofLights: false, awning: 'yakima_270s', awningSide: 'left',
-  windowGuards: true, guardCan: true, guardBoard: true, shovel: true, ladder: 'tube', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
+  grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', roofLights: 'none', awning: 'yakima_270s', awningSide: 'left',
+  exhaust: 'hks_trailmaster', extinguisher: 'ladder',
+  windowGuards: true, guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true, ladder: 'tube', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
   mirrors: 'damd', pillarPods: true, snorkel: 'bravo' };
 const find = (l, id) => l.find(x => x.id === id) || l[0];
 const $ = (id) => document.getElementById(id);
@@ -504,9 +549,18 @@ loader.load('model/jimny-hq.glb', async (g) => {
     update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); },
     set: (k, v) => { S[k] = v; buildUI(); update(); } };
   $('boot').style.display = 'none';
+  // one stock render first, to line the model's measured height up with the
+  // catalogue's 1730 mm before anything is bolted to it
+  update();
+  HEIGHT_CAL = STOCK_H - measuredHeight();
   // parts.html links in with ?key=id (booleans as true/false) to preselect a part
   const q = new URLSearchParams(location.search);
-  for (const [k, v] of q) if (k in DEF) S[k] = typeof DEF[k] === 'boolean' ? v === 'true' : typeof DEF[k] === 'number' ? +v : v;
+  for (const [k, v] of q) {
+    if (!(k in DEF)) continue;
+    S[k] = typeof DEF[k] === 'boolean' ? v === 'true' : typeof DEF[k] === 'number' ? +v : v;
+    // links written before the can/axe/board gained a side still say "true"
+    if (SIDED.includes(k) && (v === 'true' || v === 'false')) S[k] = v === 'true' ? SIDE_DEF[k] : 'none';
+  }
   buildUI(); update();
   if ([...q.keys()].length) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
 }, (p) => { if (p.total) $('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
@@ -533,12 +587,21 @@ function update() {
   accGroup.clear();
   const paint = rig.userData.paintMat;
   const add = (n) => n && accGroup.add(n);
-  for (const k of ['windowGuards', 'lightBar', 'spareBag', 'spareCover', 'roofLights', 'flares', 'decals', 'shovel', 'sideSkirt'])
+  for (const k of ['windowGuards', 'spareBag', 'spareCover', 'flares', 'decals', 'shovel', 'sideSkirt'])
     if (S[k]) add(buildAccessory(k, undefined, paint));
-  if (S.guardBoard && S.windowGuards) add(buildAccessory('guardBoard', undefined, paint));
+  // the IPF bar and the plain pair of spots were the original, unsuffixed
+  // groups; everything added since is a named variant
+  if (S.lightBar !== 'none') add(buildAccessory('lightBar', S.lightBar === 'ipf' ? undefined : S.lightBar, paint));
+  if (S.roofLights !== 'none') add(buildAccessory('roofLights', S.roofLights === 'round' ? undefined : S.roofLights, paint));
+  if (S.grilleLight !== 'none') add(buildAccessory('grilleLight', S.grilleLight, paint));
+  add(buildAccessory('exhaust', S.exhaust, paint));
+  if (S.extinguisher !== 'none') add(buildAccessory('extinguisher', S.extinguisher, paint));
   // the snorkel takes the right-hand pillar, so pods go left only when one is fitted
   if (S.pillarPods) add(buildAccessory('pillarPods', S.snorkel !== 'none' ? 'left' : undefined, paint));
-  if (S.guardCan && S.windowGuards) add(buildAccessory('guardCan', undefined, paint));
+  // the can, the axe and the board each pick their own side of the car, and
+  // each needs a guard to hang from
+  if (S.windowGuards) for (const k of ['guardCan', 'guardAxe', 'guardBoard'])
+    if (S[k] !== 'none') add(buildAccessory(k, S[k], paint));
   if (S.ladder !== 'none') add(buildAccessory('ladder', S.ladder, paint));
   if (S.hood !== 'stock') add(buildAccessory('hood', S.hood, paint));
   if (S.spareCoverKit !== 'none') add(buildAccessory('spareCover', S.spareCoverKit, paint));
@@ -555,17 +618,61 @@ function update() {
   $('rLift').innerHTML = total + '<small> mm</small>';
   $('rTyre').innerHTML = ty.dia + '<small> mm</small>';
   $('rClear').innerHTML = (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>';
+  showHeight();
   $('sum0').textContent = (total ? total + 'mm' : '原廠') + ' · ' + wh.rim + '"';
   const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
   $('sum1').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
-  const n2 = ['windowGuards','lightBar','spareBag','spareCover','roofLights','guardCan','guardBoard','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
+  const n2 = ['windowGuards','spareBag','spareCover','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
+    + SIDED.filter(k => S[k] !== 'none').length
+    + ['lightBar','roofLights','grilleLight','extinguisher'].filter(k => S[k] !== 'none').length
+    + (S.exhaust !== 'stock' ? 1 : 0)
     + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.snorkel !== 'none');
   $('sum2').textContent = n2 ? `${n2} 項` : '無';
   $('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${esc(col.name)}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${esc(ty.label)}</b><br>版本 ${BUILD}`;
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   $('flags').innerHTML = fl.map(f =>
     `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
+}
+
+/* ═══ total height ═══════════════════════════════════════════════════════
+   Measured off the assembled model rather than added up from a table, so a
+   roof rack, a snorkel or an awning case counts without anyone remembering
+   to declare how tall it is. STOCK_H is the catalogue figure for a standard
+   JB74; HEIGHT_CAL lines the model's own stock measurement up with it, and
+   everything after that is a real difference. */
+const STOCK_H = 1730;
+let HEIGHT_CAL = null;
+// Mechanical parking in Taiwan is sold by height class; these are the three
+// classes a車位 is normally advertised as.
+const PARK = [[1550, '一般機械車位（1550mm）'], [1800, '休旅機械車位（1800mm）'], [2050, '大型機械車位（2050mm）']];
+// The roof antenna is the tallest thing on the car (1849 mm in this model,
+// 200 mm above the roof) and no published height includes it, so the sweep
+// skips masts: anything less than 40 mm across cannot be what a car park's
+// height bar hits first.
+const MAST_MM = 40;
+function measuredHeight() {
+  const bb = new THREE.Box3(), one = new THREE.Box3();
+  rig.updateMatrixWorld(true);
+  rig.traverse((o) => {
+    if (!o.isMesh) return;
+    one.setFromObject(o);
+    if ((one.max.x - one.min.x) * 1000 < MAST_MM) return;
+    bb.union(one);
+  });
+  return bb.isEmpty() ? 0 : bb.max.y * 1000;
+}
+function showHeight() {
+  if (!rig) return;
+  const h = Math.round((measuredHeight() + (HEIGHT_CAL ?? 0)) / 5) * 5;
+  const d = h - STOCK_H;
+  $('rHeight').innerHTML = h + '<small> mm</small>';
+  $('rHeightDelta').textContent = d === 0 ? `原廠 ${STOCK_H}mm` : `原廠 ${STOCK_H}mm　${d > 0 ? '+' : '−'}${Math.abs(d)}mm`;
+  const cls = PARK.find(([limit]) => h <= limit - 30);
+  const tight = PARK.find(([limit]) => h <= limit);
+  const el = $('rPark');
+  el.className = cls ? '' : tight ? 'tight' : 'over';
+  el.textContent = cls ? '可進 ' + cls[1] : tight ? '幾乎頂到 ' + tight[1] : '超過 2050mm，機械車位進不去';
 }
 
 /* ═══ step navigation ════════════════════════════════════════════════════ */
@@ -769,6 +876,9 @@ function syncToggles() {
     b.setAttribute('aria-pressed', !!S[b.dataset.k]);
     b.querySelector('.st').textContent = S[b.dataset.k] ? '已裝' : '未裝';
   });
+  $('sides').classList.toggle('off', !S.windowGuards);
+  document.querySelectorAll('.sides .pick').forEach(g =>
+    g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', S[g.dataset.key] === b.dataset.v)));
   document.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.color));
   document.querySelectorAll('[data-r]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.r === S.rimColor));
   const owl = $('tgOwl'); owl.setAttribute('aria-pressed', S.owl);
@@ -785,7 +895,11 @@ function buildUI() {
     ['selHood', HOODS, S.hood], ['selSpareKit', SPARE_COVERS, S.spareCoverKit],
     ['selSnorkel', SNORKELS, S.snorkel], ['selMirror', MIRRORS, S.mirrors],
     ['selRack', ROOF_RACKS, S.roofRack], ['selAwning', AWNINGS, S.awning],
-    ['selStep', SIDE_STEPS, S.sideStep], ['selLadder', LADDERS, S.ladder]]) opt(id, L, cur);
+    ['selStep', SIDE_STEPS, S.sideStep], ['selLadder', LADDERS, S.ladder],
+    ['selExhaust', EXHAUSTS, S.exhaust], ['selLightBar', LIGHT_BARS, S.lightBar],
+    ['selRoofLights', ROOF_LIGHTS, S.roofLights], ['selGrilleLight', GRILLE_LIGHTS, S.grilleLight]]) opt(id, L, cur);
+  $('extPick').innerHTML = EXTINGUISHERS.map(e =>
+    `<button data-v="${e.id}" aria-pressed="${S.extinguisher === e.id}">${esc(e.label.replace('掛', ''))}</button>`).join('');
 
   renderLiftSeg(); renderLiftCards();
   renderWChips(); renderWheels(); renderLadder(); renderTabs();
@@ -802,9 +916,15 @@ function buildUI() {
   $('rimSw').innerHTML = RIMS.map(h =>
     `<button class="sw" data-r="${h}" aria-pressed="${h === S.rimColor}"
       style="background:#${h.toString(16).padStart(6, '0')}"></button>`).join('');
-  const TG = [['pillarPods','A 柱小圓燈'],['windowGuards','鐵窗（WLM）'],['guardCan','右鐵窗：油桶＋斧頭'],
-    ['guardBoard','左鐵窗：脫困板'],['shovel','車頂架鏟子'],['flares','輪弧鉚釘'],['sideSkirt','側裙飾板（SHOWA）'],
-    ['decals','車門貼字'],['lightBar','車頂燈條'],['roofLights','車頂圓燈'],['spareBag','備胎書包'],
+  const SIDE_ITEMS = [['guardCan', '油桶', '7.5L 扁桶'], ['guardAxe', '斧頭', '直立、頭朝上，皮套包刃'],
+    ['guardBoard', '脫困板', '約半個鐵窗高']];
+  $('sides').innerHTML = SIDE_ITEMS.map(([k, n, d]) => `
+    <div class="side-row"><span class="nm">${n}<i>${d}</i></span>
+      <span class="pick" data-key="${k}">${[['none', '不裝'], ['left', '左'], ['right', '右']].map(([v, l]) =>
+        `<button data-v="${v}" aria-pressed="${S[k] === v}">${l}</button>`).join('')}</span></div>`).join('');
+  const TG = [['pillarPods','A 柱小圓燈'],['windowGuards','鐵窗（WLM）'],['shovel','車頂架鏟子'],
+    ['flares','輪弧鉚釘'],['sideSkirt','側裙飾板（SHOWA）'],
+    ['decals','車門貼字'],['spareBag','備胎書包'],
     ['spareCover','備胎硬殼蓋'],['gullwing','鷗翼窗（URNIETA 1970）']];
   $('toggles').innerHTML = TG.map(([k, l]) =>
     `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
@@ -820,7 +940,10 @@ function hints() {
     ['hGrille', GRILLES, S.grille], ['hRear', REAR_BUMPERS, S.rearBumper], ['hHood', HOODS, S.hood],
     ['hSpareKit', SPARE_COVERS, S.spareCoverKit], ['hSnorkel', SNORKELS, S.snorkel],
     ['hMirror', MIRRORS, S.mirrors], ['hRack', ROOF_RACKS, S.roofRack], ['hAwning', AWNINGS, S.awning],
-    ['hStep', SIDE_STEPS, S.sideStep], ['hLadder', LADDERS, S.ladder]]) $(id).textContent = n(find(L, cur));
+    ['hStep', SIDE_STEPS, S.sideStep], ['hLadder', LADDERS, S.ladder],
+    ['hExhaust', EXHAUSTS, S.exhaust], ['hLightBar', LIGHT_BARS, S.lightBar],
+    ['hRoofLights', ROOF_LIGHTS, S.roofLights], ['hGrilleLight', GRILLE_LIGHTS, S.grilleLight]]) $(id).textContent = n(find(L, cur));
+  $('extNote').textContent = n(find(EXTINGUISHERS, S.extinguisher)) || '市面沒有 JB74 尾梯專用架';
   const c = COLORS.find(x => x.code === S.color) || COLORS[0];
   $('colName').textContent = c.code + (c.tw ? '' : ' · 日規');
   $('colPick').textContent = c.name + (S.twoTone && c.twoTone ? `　雙色 ${c.twoTone}` : '');
@@ -835,6 +958,8 @@ on('selHood', v => S.hood = v); on('selSpareKit', v => S.spareCoverKit = v);
 on('selSnorkel', v => S.snorkel = v); on('selMirror', v => S.mirrors = v);
 on('selRack', v => S.roofRack = v); on('selAwning', v => S.awning = v);
 on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
+on('selExhaust', v => S.exhaust = v); on('selLightBar', v => S.lightBar = v);
+on('selRoofLights', v => S.roofLights = v); on('selGrilleLight', v => S.grilleLight = v);
 $('selKit').onchange = e => {
   S.kit = e.target.value;
   const k = find(KITS, S.kit);
@@ -860,6 +985,15 @@ $('tgTwo').onclick = e => { S.twoTone = !S.twoTone;
   e.currentTarget.setAttribute('aria-pressed', S.twoTone);
   e.currentTarget.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉'; update(); };
 $('tgAwnSide').onclick = () => { S.awningSide = S.awningSide === 'left' ? 'right' : 'left'; syncToggles(); update(); };
+document.querySelectorAll('.sides').forEach(el => el.onclick = e => {
+  const b = e.target.closest('[data-v]'); if (!b) return;
+  const k = b.parentElement.dataset.key;
+  S[k] = b.dataset.v;
+  // two things cannot share one guard
+  if (SIDED.includes(k) && S[k] !== 'none')
+    for (const o of SIDED) if (o !== k && S[o] === S[k] && o !== 'guardAxe' && k !== 'guardAxe') S[o] = 'none';
+  syncToggles(); hints(); update();
+});
 $('toggles').onclick = e => {
   const b = e.target.closest('[data-k]'); if (!b) return;
   const k = b.dataset.k; S[k] = !S[k];
@@ -890,10 +1024,16 @@ $('btnExport').onclick = () => {
     S.sideStep !== 'none' && '側踏 ' + find(SIDE_STEPS, S.sideStep).label,
     S.ladder !== 'none' && '後爬梯 ' + find(LADDERS, S.ladder).label,
     S.snorkel !== 'none' && '呼吸管 ' + find(SNORKELS, S.snorkel).label,
-    S.pillarPods && 'A 柱小圓燈', S.windowGuards && '鐵窗', S.guardCan && '右鐵窗油桶斧頭',
-    S.guardBoard && '左鐵窗脫困板', S.shovel && '車頂鏟子', S.flares && '輪弧鉚釘',
-    S.sideSkirt && '側裙飾板', S.decals && '車門貼字', S.lightBar && '車頂燈條',
-    S.roofLights && '車頂圓燈', S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
+    S.exhaust !== 'stock' && '排氣管 ' + find(EXHAUSTS, S.exhaust).label,
+    S.lightBar !== 'none' && '車頂燈條 ' + find(LIGHT_BARS, S.lightBar).label,
+    S.roofLights !== 'none' && '車頂圓燈 ' + find(ROOF_LIGHTS, S.roofLights).label,
+    S.grilleLight !== 'none' && '車頭燈條 ' + find(GRILLE_LIGHTS, S.grilleLight).label,
+    S.extinguisher !== 'none' && '滅火器 ' + find(EXTINGUISHERS, S.extinguisher).label,
+    S.pillarPods && 'A 柱小圓燈', S.windowGuards && '鐵窗',
+    ...SIDED.map(k => S[k] !== 'none' && `${S[k] === 'left' ? '左' : '右'}鐵窗${{ guardCan: '油桶', guardAxe: '斧頭', guardBoard: '脫困板' }[k]}`),
+    S.shovel && '車頂鏟子', S.flares && '輪弧鉚釘',
+    S.sideSkirt && '側裙飾板', S.decals && '車門貼字',
+    S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',
     S.gullwing && '鷗翼窗'].filter(Boolean);
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   const total = lift.lift + bl.body;
@@ -904,8 +1044,10 @@ $('btnExport').onclick = () => {
     `懸吊    ${lift.brand ?? ''} ${lift.label}${pr(lift)}`,
     `輪框    ${wh.brand ?? ''} ${wh.label}  ${wh.rim}×${wh.width}J ET${wh.offset > 0 ? '+' : wh.offset < 0 ? '−' : ''}${Math.abs(wh.offset)}${pr(wh)}`,
     `輪胎    ${ty.label} Ø${ty.dia}mm · ${find(TYRE_MODELS, S.tread).label}`, '',
+    `總車高  ${$('rHeight').textContent.replace(/\s/g, '')}　（原廠 ${STOCK_H}mm）`,
     `總舉升  ${total}mm`,
-    `估離地  ${210 + total + Math.round((ty.dia - 693) / 2)}mm`, '',
+    `估離地  ${210 + total + Math.round((ty.dia - 693) / 2)}mm`,
+    `停車    ${$('rPark').textContent}`, '',
     acc.length ? '配件\n' + acc.map(a => '  · ' + a).join('\n') : '配件    無',
     fl.length ? '\n注意\n' + fl.map(f => '  ! ' + f.msg).join('\n') : '',
     '', `※ ${FX_NOTE}`, '※ 價格為概略值，實際以代理商報價為準。'].filter(x => x !== null).join('\n');

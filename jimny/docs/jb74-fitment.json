@@ -1,0 +1,217 @@
+{
+  "compiled": "2026-09-21",
+  "vehicle": "Suzuki Jimny Sierra JB74W, 2018-, 3-door",
+  "method": "Maker-published figures are marked verified:true and cite the page they came from. Where no maker publishes a number, it is derived from a real fitted photo and the reasoning chain is written out in full in `evidence`. No figure in this file was invented. WebSearch was unavailable (session budget exhausted); everything here came from curl/WebFetch against the makers' own sites plus Yahoo Japan, Ruten's JSON API and Rakuten Taiwan. Google, Bing, DuckDuckGo, Mojeek, Yahoo Taiwan and Shopee all block automated access.",
+
+  "ladder": {
+    "id": "jst_standard",
+    "brand": "JST 吉米工坊",
+    "model": "尾門梯 / 尾門爬梯 JIMNY JB74專用",
+    "part": "JB74003 (MRK 4X4 part number); the same ladder is sold as JST002 by camping retailers",
+    "variants": {
+      "standard": {"widthMM": 270, "note": "標準版"},
+      "narrow": {"widthMM": 220, "note": "窄版 — sold as JST002 at 露營趣/大山野營, whose listing states 尺寸: 寬度22cm"},
+      "stainless": {"note": "新款不銹鋼尾梯 — a newer stainless-steel version of the same shape, NT$8,800 on Shopee shop ew2833 我就愛吉米配件"}
+    },
+    "dims": {
+      "heightMM": 1005,
+      "widthMM": 270,
+      "tubeMM": 34,
+      "rungs": 4,
+      "rungSpacingMM": 195,
+      "standoffMM": 40,
+      "innerWidthMM": 202,
+      "firstRungBelowTopMM": 215,
+      "lastRungAboveBottomMM": 195
+    },
+    "mount": {
+      "plates": 2,
+      "where": "Both plates are on the OUTBOARD (hinge-side) rail only and bolt onto the two factory JB74 tailgate hinges — the hinge side is the RIGHT side viewed from behind. Nothing hooks over the tailgate's top edge and no panel is drilled; the retailer text is 專用固定鎖點，不需勾車，不傷鈑金 / 使用原廠鎖點 (dedicated fixing points, no hooking over the body, no damage to the sheet metal, uses the OEM mounting points). A close-up of the lower mount shows a black bracket wrapping from the ladder's rail across to the hinge body and bolting to it.",
+      "heightsMM": [460, 890],
+      "heightsNote": "measured downward from the top of the loop; plate spacing ≈ 430 mm",
+      "spacingMM": 430
+    },
+    "shape": "A single CLOSED stadium/oval loop of round tube: two straight parallel side rails joined by a generous rounded arch at the top and an equally rounded closed end at the bottom, with four straight rungs between them. The top is ROUNDED — it is neither flat nor hooked over the roof line — and it terminates just below the roof gutter.",
+    "spareWheel": "Sits on the tailgate's hinge (right) side with the spare wheel centre-left of it; it clears the OEM 195/80R16 spare. Clearance is tight — in angled photos the spare cover's edge visually overlaps the ladder's inboard rail — but the wheel protrudes much further rearward than the ladder, so the two do not foul.",
+    "finish": "Matte/satin black powder coat over bent carbon-steel tube. JST's own wording: 產品材質：碳素鋼管、彎管成形表面防銹處理、環保粉體烤漆 (carbon steel tube, bent-tube formed, rust-proofed surface, eco powder coating). A stainless-steel version of the same shape is also sold.",
+    "features": "Has a pre-drilled radio-antenna hole (預留無線電天線孔) near the top of the outboard rail; MRK's fitted photos show a whip antenna and a small accessory box mounted there.",
+    "price": {"TWD": 5800, "TWD_alt": 5200, "TWD_stainless": 8800, "verified": true},
+    "priceNote": "NT$5,800 is MRK 4X4's price for JB74003 and 露營趣/Rakuten's price for JST002; NT$5,200 is 吉姆尼小當家's price for the same ladder (標準版/窄版); NT$8,800 is the stainless version. The NT$5,180 figure carried in the existing accessory atlas is close to the 5,200 listing and is plausible but was never sourced.",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=1581",
+    "urls": [
+      "https://www.mrk.com.tw/product_ii.html?ID=1581",
+      "https://www.mrk.com.tw/brand/JST",
+      "https://www.rakuten.com.tw/shop/camp-tw/product/yzqseicg6/",
+      "https://www.ruten.com.tw/item/show?22522654587581",
+      "https://tw.bid.yahoo.com/item/101028471304",
+      "https://shopee.tw/ew2833"
+    ],
+    "fireExtinguisherAccessory": {
+      "exists": false,
+      "evidence": "JST's complete JB74 catalogue is five parts — JB74001 側踏保桿 (NT$9,000), JB74002 車頂平台含擾流板 (NT$28,300), JB74003 尾門梯 (NT$5,800), JB74004 加強型拖車勾 (NT$12,000), JB74005 後門野餐籃 (NT$6,500) — listed in full on MRK's JST brand page. There is no extinguisher mount in it, none appears in any of the fitted photos, and Ruten returns zero hits for JST 滅火器."
+    },
+    "modelling": "A flat, closed tube loop standing just off the tailgate on the hinge side. Model it as a swept Ø34 tube: two vertical rails 270 mm apart on centres-minus-tube (inner clear 202 mm), joined by semicircular ends of radius 135 mm, total loop height about 1005 mm. Four straight rungs of the same tube at roughly 195 mm pitch, the first about 215 mm below the crown of the top arch. The whole loop sits in one plane roughly 40 mm proud of the tailgate skin, carried on two brackets that reach outboard to the hinges at 460 mm and 890 mm below the crown. The narrow version is the identical part at 220 mm overall width (inner clear about 152 mm) — same height, same tube, same four rungs. Finish is a low-sheen textured black, not gloss.",
+    "verified": true,
+    "evidence": "SHAPE, RUNG COUNT, MOUNTING: read directly off MRK 4X4's own fitted photographs of JB74003 (https://www.mrk.com.tw/upload/imgDB/202506241939149dtp.jpg straight-on rear, .../20250624193914Iyvq.jpg three-quarter, plus four studio shots). WIDTH: 270/220 mm are published as dimension annotations on JST's own two-version product photo (https://img.yec.tw/ob/image/9b9be5c7-5ec7-4a96-aae3-5839e93ad8a4.jpg) and the 22 cm figure is repeated in words by the Rakuten listing. They are OUTER overall widths, not inner: on the annotated photo the arrow tips land on the outer faces of the rails, and the inner faces sit far inside them. SCALE CHAIN for everything else: in MRK's straight-on rear photo (1140x852) the JB74's rear body spans 675 px between the outer edges of the rear fender flares; published JB74 overall width is 1645 mm, giving 2.437 mm/px. The ladder measures 111 px wide on the same image = 271 mm, which reproduces the published 270 mm to within 0.4% and validates the scale. On that scale the ladder measures 413 px tall = 1006 mm; the side-rail tube measures 14.3 px = 34.8 mm (a rung measures the same), so the tube is ~Ø34 — consistent with Ø33.7 mm 1-inch NPS steel pipe, the obvious stock size, and NOT Ø25. Rung centres fall at a uniform 80.9 px = 197 mm pitch. The two mounting brackets sit 176 px = 429 mm apart, at 46% and 88% of the loop's length from the top. STANDOFF is the one weak number: no side-elevation photo of this ladder exists anywhere I could reach, so 40 mm is read off the three-quarter photo as roughly one tube diameter of visible gap between the tube and the tailgate skin, and should be treated as ±15 mm."
+  },
+
+  "fireExtinguisher": {
+    "bottle": {"diaMM": 85, "heightMM": 340, "kg": 1},
+    "bottleNote": "The default above is the Japanese 1 kg car extinguisher that every JB74-specific bracket is designed around: Morita Miyata AFC3C (3型), 1.0 kg of agent, 2.1 kg all-up, 340 mm tall, 85 mm bottle diameter, 135 mm overall width including the handle.",
+    "bottleOptions": [
+      {"id": "jp_1kg", "name": "モリタ宮田 AFC3C (3型)", "kg": 1.0, "diaMM": 85, "heightMM": 340, "widthMM": 135, "totalKG": 2.1, "verified": true, "url": "https://www.kurashi-kan.jp/product/2598"},
+      {"id": "jp_larger", "name": "モリタ宮田 AFC5C / AFC20C", "diaMM": 123, "heightMM": 512, "widthMM": 200, "verified": true, "url": "https://www.moritamiyata.com/products/ext01/subext09/e-11.html"},
+      {"id": "tw_5type", "name": "台灣 5型 蓄壓式乾粉", "agentKG": 1.8, "diaMM": 110, "heightMM": 276, "totalKG": 3.1, "verified": true, "heightNote": "276 mm is the steel cylinder 底部至瓶口; overall height including the handle and valve is not published", "url": "https://www.focal.tw/storage/system/%E8%B1%90%E6%BF%B6-%E4%BD%A9%E7%8E%9F/YL/YL-C01.pdf"},
+      {"id": "tw_10type", "name": "台灣 10型 蓄壓式乾粉", "agentKG": 3.5, "diaMM": 130, "heightMM": 390, "overallHeightMM": 460, "totalKG": 5.6, "verified": true, "heightNote": "390 mm is the cylinder 底部至瓶口 (豐濶 YL-C01 spec sheet); 460 mm is the overall height quoted by 巨達消防 for the same 130 mm diameter bottle, i.e. including handle and valve. The 390-vs-460 reconciliation is inference, not a published statement.", "url": "https://fireking.com.tw/product-detail?id=8"}
+    ],
+    "taiwanSizingNote": "Taiwan does not sell car extinguishers labelled '1 kg' or '2 kg'. The market sizes are 5型 (1.8 kg of agent) and 10型 (3.5 kg). A widely copied '1KG Ø95x330 / 2KG Ø115x400' table circulating on Hong Kong retail sites is internally inconsistent (its 4 kg entry is narrower than its 3 kg entry) and should not be used.",
+    "commonOrientationTaiwan": "unknown",
+    "commonOrientationTaiwanNote": "Not answerable from available evidence. No photograph of a Taiwanese JB74 with an extinguisher on a window guard or a ladder could be found: Mobile01 returns 403 to automated requests, Facebook club post images return empty, Shopee's API is blocked and Instagram serves only thumbnails. What CAN be said is that the guards Taiwanese owners actually buy (WLM, Takumi) are flat MOLLE plates, so anything strapped to them must stand vertically — but that is inferred from the product's shape, not observed on a built car.",
+    "positions": [
+      {
+        "id": "ladder",
+        "exists": false,
+        "orientation": null,
+        "desc": "NO SUCH PRODUCT. No maker of a JB74 tailgate ladder offers an extinguisher mount, and no fitted photograph of an extinguisher on a JB74 ladder could be found in Chinese, Japanese or English. Checked: JST, APIO, RV4 Wild Goose, SPIELER, IPF, C.L.Link, 4x4 Engineering, Takumi. The nearest thing is RV4's どこでもホルダー RG-6108 (100 x 75 x 60 mm, clamps tube of about 29 x 35 mm), which is a shovel holder that owners bolt to a ladder's accessory holes — RV4 publish no extinguisher use for it.",
+        "verified": true
+      },
+      {
+        "id": "guardLeft",
+        "exists": true,
+        "orientation": "vertical",
+        "bracket": "No dedicated extinguisher bracket exists. The rear quarter-window guards sold for the JB74 are flat laser-cut MOLLE panels, not bar cages, so an extinguisher is held by MOLLE webbing or by a MOLLE-footed band clamp — NOT by a two-band quick-release clamp, which needs a round tube to grip.",
+        "bottleLimit": "Load rating is the binding constraint: CarMate INNO NZ868 is rated 5 kg for the whole panel, IPF's EXJ-11 rear window guard only 2 kg and IPF explicitly say it must not be used to secure cargo while driving. A Japanese 1 kg bottle (2.1 kg all-up) is the largest sensible choice; a Taiwanese 10型 at 5.6 kg overloads both.",
+        "desc": "Left rear quarter window, inside the window aperture. Products that advertise this use: WLM 窗戶防護網 Jimny JB74 (Taiwan-made, outside the glass, clamps to the rain gutter, no drilling, NT$5,200 per side, left/right/flip-up versions); Takumi 匠技研 JB74 後窗戰術掛架 (3 mm plate, listing says 可掛滅火器); Pirate Camp Co Side Window Molle Panel (AU$250, 'strap stuff like torches, first aid kits and fire extinguishers to the molle panel').",
+        "verified": true
+      },
+      {
+        "id": "guardRight",
+        "exists": true,
+        "orientation": "vertical",
+        "bracket": "Same as guardLeft.",
+        "desc": "Right rear quarter window. There is no left/right asymmetry anywhere in this category: every guard is sold as a mirror-image pair and can be fitted either side, and no product is specific to one side. Treat guardLeft and guardRight as the same geometry mirrored.",
+        "verified": true
+      },
+      {
+        "id": "seatRail",
+        "exists": true,
+        "orientation": "horizontal",
+        "bracket": "Laser-cut steel plate that bolts to the FACTORY SEAT-RAIL bolts, no drilling; the bottle is held by a single flip-over collar, a Quick Fist clamp or Fire One clips.",
+        "desc": "THIS IS THE POSITION THAT ACTUALLY EXISTS as a JB74-specific product, and it is not on the list in the brief. The bottle lies flat on the floor between the front seat rail and the footwell edge, running fore-and-aft with its nozzle toward the front of the car, usually on the passenger side. Every named JB74 extinguisher bracket in the world is this one, and every one is specified for a 1 kg bottle. Named products: Pirate Camp Co 'Fire Extinguisher Bracket To Suit Suzuki Jimny JB74' AU$89-129 (its own photo caption reads '1kg fire extinguisher pictured'); KAP Industries AU$85, T40 install, no drilling; TLR Products TLR662401, NT$1,362, 350 x 100 x 100 mm, 2.0 mm zinc-plated steel, fits 'most 1kg fire extinguishers'; Legendex MR-JNY-B-F-P; 4x4 Network; F4 Fabrications MK3.",
+        "url": "https://megajimny.com/products/tlr-fire-extinguisher-mount",
+        "verified": true
+      },
+      {
+        "id": "tubeClamp",
+        "exists": true,
+        "orientation": "vertical",
+        "bracket": "TWO-BAND QUICK-RELEASE — this is where that bracket type actually lives. A die-cast aluminium base gripped to a round tube by two stainless hose clamps, with the bottle held in a flip-over collar closed by a quick-release knob (gold, silver or red).",
+        "desc": "Generic roll-bar / tube mount, sold for ATV, UTV and Jeep Wrangler JK/JL and used on any round tube. NT$585-864 on Ruten. The bottle hangs vertically alongside the tube. Sellers do not publish the tube diameter range the clamps accept. This is the bracket the brief describes, but nobody sells it as a JB74 ladder or window-guard fitment.",
+        "url": "https://www.ruten.com.tw/item/show?22611241805462",
+        "verified": true
+      }
+    ],
+    "windowApertureMM": {"widthMM": 591, "heightMM": 365, "verified": true, "note": "Taken from CarMate INNO NZ868 ジムニー専用モールパネル, H365 x W591 x D12 mm, which is a JB64/JB74-specific panel designed to drop exactly into the rear side window frame. Use this as the scale reference for the rear quarter window, not 390 x 330.", "url": "https://www.carmate.co.jp/news/press/202401/nz868.html"},
+    "modelling": "Model the bottle as a plain cylinder with a black plastic handle/valve head: 85 mm diameter x 340 mm tall for the Japanese 1 kg default, or 110 x 276 (5型) / 130 x 460 (10型) for a Taiwanese car. For the seat-rail position lay it on its side, axis fore-aft, low in the passenger footwell — this is the only position with real JB74-specific hardware behind it. For a window guard, stand it vertically flat against a 591 x 365 mm panel. For a tube clamp, stand it vertically beside the tube with two visible band clamps and a red or gold quick-release knob."
+  },
+
+  "roofRacks": [
+    {
+      "id": "damd_trip_basket_half",
+      "brand": "DAMD Styling Effect",
+      "model": "trip basket ルーフラック ROOF RACK KIT HALF SIZE",
+      "part": "TB-HR1 (rack alone) / TB-HRKJB (rack + base carrier kit)",
+      "dims": {"lengthMM": 1350, "widthMM": 600, "heightMM": 160, "floorAboveRoofMM": 175},
+      "weightKG": 13.5,
+      "feet": {
+        "perSide": 2,
+        "attachesTo": "factory rain gutter (drip moulding) — PIAA TERZO EF3TM rain-moulding feet, four of them, plus two square main bars; DAMD's base carrier kit is JB64/JB74-specific and weighs 5 kg",
+        "positionsFromWindscreenMM": [430, 1050]
+      },
+      "placement": "THE HALF SIZE IS HALF THE WIDTH, NOT HALF THE LENGTH. It is 1350 mm fore-and-aft — exactly the same as the full size — and is narrowed from 1000 mm to 600 mm across the car. So the question of whether it sits forward, centred or set back does not arise: it runs essentially the whole roof, and because 1350 mm is slightly longer than the JB74 roof panel, its curved wooden nose sits level with or just proud of the windscreen header and its tail reaches the rear roof edge. The variable that IS free is lateral: the rack is offset to ONE SIDE of the roof, leaving a bare strip of base bar about 600-700 mm wide alongside it. That strip is the entire point of the half size — DAMD's own copy says 余ったスペースで、スキー板やサーフボードの積載が可能に (the space left over lets you carry skis or a surfboard), which only makes sense for a full-length strip beside the basket, never for a 600 mm gap behind it. DAMD's fitted photograph shows it offset to one side with both base bars protruding bare on the other. Fore-aft position has a little adjustment because bracket B clips onto the rack's floor pipes from below and can slide, but the rack is longer than the roof so the range is small.",
+      "materials": "Steel basket, black. The front plate and the two side plates are Accoya (アコヤ) — acetylated NEW ZEALAND radiata pine, a natural timber, honey/amber in colour with a satin finish and the 'trip basket' logo branded into it. The curved front plate is a full-width fairing that wraps down over the leading edge.",
+      "mount": "The rack does not touch the roof. Four TERZO EF3TM feet clamp the rain gutters, two square bars span the roof, and the rack clamps to those bars at four points: bracket A (E-256) over the bar, bracket C (E-258) under it, bracket B (E-257) clipped up onto the rack's floor pipes, drawn together by an M6x55 cap bolt and a knob star. DAMD recommend placing each bracket between the 3rd and 4th floor pipe from the end. The wooden side plates mount on the 6th and 7th pipe counted from the front.",
+      "price": {"JPY": 61600, "JPY_exTax": 56000, "JPY_withCarrier": 81400, "JPY_withCarrier_exTax": 74000, "TWD": 19800, "verified": true},
+      "priceNote": "JPY are DAMD list, tax included where shown. The TWD 19,800 is the user's sighting of a Shopee listing under the seller name 藤井74 and is NOT verified — Shopee blocks automated access (API error 90309999) and its search pages render only via JavaScript. It is however consistent: ¥61,600 is about NT$13,100 at roughly 4.7 JPY/TWD, and NT$19,800 is a 51% markup, inside the 40-70% band Taiwanese sellers add to Japanese list. Do not confuse it with DAMD's ¥19,800 'trip basket ウッドパネル', which is a different product (see corrections).",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
+      "manuals": [
+        "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/manual/roofrack_halfsize.pdf",
+        "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/manual/roofrack-partslist_halfsize.pdf"
+      ],
+      "modelling": "A long, narrow, shallow steel wire basket lying along one side of the roof. 1350 long x 600 wide x 160 tall, floor about 175 mm above the gutter line so the top rail is roughly 335 mm above the roof — enough to take a standard JB74 from 1730 mm to about 2065 mm and out of a 2.0 m height-limited car park. Side walls are vertical U-hoops of round tube welded to a heavier perimeter rail; the floor is longitudinal pipes. The only non-black elements are three pieces of honey-coloured timber: the curved 600 mm front fairing (part E-578) and two small rectangular logo plates on the sides at the 6th/7th pipe. Under it sit two black square bars on four arched black gutter feet with a small 'terzo' logo on each.",
+      "verified": true,
+      "evidence": "DIMENSIONS are DAMD's own published figures: フルサイズ : 1350mm×1000mm×160mm / 重量 : 16kg, ハーフサイズ： 1350mm × 600mm × 160mm / 重量：13.5kg. That 1350 is the FORE-AFT length and the 600/1000 the across-car width is established five independent ways. (1) The Australian distributor states it in words for the full size — '135cms long, 100cms wide, 16cms high'. (2) Both installation manuals give the SAME instruction for the wooden side plates — mount them level with the 6th and 7th pipe counted from the front — which is only possible if both versions have identical side rails, hence identical length. (3) The two parts lists differ in exactly the parts that would change if the WIDTH changed and in nothing else: the front plate is E-552 on the full size and E-578 on the half, and the full size needs THREE front-plate clamps, knobs, nuts and carriage bolts against the half's TWO, while the side plates are the same part E-553 on both and all four brackets A/B/C are common. (4) DAMD's marketing rationale — leftover space for skis and surfboards — requires a full-length strip beside the basket. (5) Photo check: in DAMD's studio shots the apparent width-to-depth ratio is 1.33 for the full size and 1.11 for the half; the true ratios under the length-constant reading are 0.74 and 0.44, implying foreshortening factors of 1.8 and 2.5 for the receding axis, which are physically possible, whereas the width-constant reading would require the receding axis to appear LONGER than life, which is impossible. FEET: DAMD state the base carrier kit is JB64/JB74-specific PIAA TERZO feet (4) plus main bars (2) totalling 5 kg; PIAA's foot table gives the rain-moulding foot EF3TM at 3.1 kg for four, leaving about 1.9 kg for two bars, so EF3TM is the foot — and PIAA's own product photograph for EF3TM is of a Jimny with the feet clamped on its rain gutters. FOOT POSITIONS are estimated from that photograph, which is a near side-on view of the roof showing both near-side feet: measuring along the gutter, the roof front corner is at 325 px, the front foot at 495 px, the rear foot at 700 px and the rear corner at 775 px, so the feet sit at 0.38 and 0.83 of the gutter span; correcting modestly for the rear of the roof being further from the camera gives about 0.34 and 0.81, and on a JB74 roof panel taken as about 1300 mm fore-aft that is roughly 430 mm and 1050 mm behind the windscreen header, the bars about 620 mm apart and the rear foot about 250 mm ahead of the rear roof edge. FLOOR HEIGHT is computed, not published: PIAA publish EF3TM's バー下寸法 (height to the underside of the bar) as 142 mm; the rack then sits on top of the bar plus bracket A, and neither the TERZO square bar's section height nor the bracket's thickness is published, so 175 mm carries roughly +/-20 mm."
+    },
+    {
+      "id": "damd_trip_basket_full",
+      "brand": "DAMD Styling Effect",
+      "model": "trip basket ルーフラック ROOF RACK KIT (full size)",
+      "part": "TB-RR1 (rack alone) / TB-RRKJB (rack + base carrier kit)",
+      "dims": {"lengthMM": 1350, "widthMM": 1000, "heightMM": 160, "floorAboveRoofMM": 175},
+      "weightKG": 16.0,
+      "feet": {"perSide": 2, "attachesTo": "factory rain gutter (drip moulding), PIAA TERZO EF3TM", "positionsFromWindscreenMM": [430, 1050]},
+      "placement": "Runs 1350 mm fore-and-aft, slightly longer than the JB74 roof panel, so the wooden nose sits level with or just proud of the windscreen header and the tail reaches the rear roof edge. At 1000 mm wide it sits inboard of both rain gutters and is centred across the roof, covering most of the base bars. Same fore-aft footprint as the half size.",
+      "materials": "Same as the half size: black steel basket with an Accoya (acetylated New Zealand radiata pine) curved front fairing, part E-552, and two Accoya side logo plates, part E-553.",
+      "price": {"JPY": 64900, "JPY_exTax": 59000, "JPY_withCarrier": 84700, "JPY_withCarrier_exTax": 77000, "AUD": 2488, "verified": true},
+      "priceNote": "AUD 2,488 is ozjimny's made-to-order price, 8-10 week lead time.",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
+      "manuals": [
+        "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/manual/roofrack.pdf",
+        "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_little-b/manual/roofrack-partslist.pdf"
+      ],
+      "modelling": "As the half size but 1000 mm across instead of 600 mm, so it reads as a broad tray covering nearly the whole roof rather than a strip down one side. The wooden front fairing is correspondingly wider and is held by THREE clamps instead of two — a visible difference if the nose is modelled in detail.",
+      "verified": true,
+      "evidence": "Same sources and same reasoning as the half-size entry above."
+    },
+    {
+      "id": "apio_classic_carrier",
+      "brand": "APIO",
+      "model": "Classic Carrier",
+      "part": "3630-03W (off-white) / 3630-03B (black)",
+      "dims": {"lengthMM": 1250, "widthMM": 800, "heightMM": 140, "floorAboveRoofMM": null},
+      "weightKG": 13.5,
+      "loadKG": 30,
+      "feet": {"perSide": null, "attachesTo": "bolt-on legs, assembly required", "positionsFromWindscreenMM": []},
+      "placement": "THE CONTRAST CASE, and the one product where fore-aft position genuinely IS a choice: APIO state the leg spacing is adjustable so the basket can be set forward, centred or rearward on the roof. At only 800 mm fore-aft against the DAMD rack's 1350 mm it occupies roughly the front or rear two-thirds of the roof, whichever the owner picks.",
+      "materials": "ZAM corrosion-resistant steel, painted off-white or black. Retro in styling but NOT wood-trimmed — included here because it is the closest thing to a second vintage-look rack for the JB74, not because it has timber.",
+      "price": {"JPY": 92400, "verified": true},
+      "priceNote": "tax included",
+      "url": "https://apio.jp/parts/3630-03w.html",
+      "modelling": "A short, deliberately old-fashioned steel basket — 1250 x 800 x 140 excluding the legs — in the Monte Carlo rally idiom, and the only roof carrier for this car offered in off-white. Its 30 kg limit matches Suzuki's roof rating exactly. Dimensions quoted by APIO as キャリア外寸：およそ1250mm x 800mm x 140mm（脚部含まず）.",
+      "verified": true,
+      "evidence": "All figures published on APIO's own product page; height above roof and leg count are not published there."
+    }
+  ],
+
+  "gaps": [
+    "JST publish no spec sheet at all. The 270/220 mm widths exist only as annotations on one product photograph; every other ladder dimension in this file is measured from photographs using the scale chain recorded in the ladder's evidence field.",
+    "The JST ladder's standoff from the tailgate is the weakest number here (40 mm, +/-15). No side-elevation photograph of this ladder exists on any reachable site.",
+    "JST publish no tube wall thickness, weight or load rating for the ladder, and do not state 'powder coat' in the form of a spec line — the finish wording comes from their Facebook product posts.",
+    "The JB74's roof panel fore-aft length is not sourced from Suzuki. It is taken as about 1300 mm, inferred from the DAMD rack being 1350 mm and overhanging slightly, and cross-checked against Rhino-Rack's 1300 x 1240 platform being described as almost exactly the roof panel. Every foot position in millimetres scales with this assumption.",
+    "PIAA do not publish the TERZO square bar's section height, and DAMD do not publish the bracket stack height, so floorAboveRoofMM is a computed estimate rather than a measurement.",
+    "PIAA do not publish the exact fore-aft gutter positions for the Jimny's TERZO feet; the positions here are measured off PIAA's own fitting photograph.",
+    "The NT$19,800 Shopee listing under 藤井74 could not be reached or confirmed. Shopee blocks automated access entirely — its API returns error 90309999 and its pages render only under JavaScript — so no Taiwanese price for the DAMD rack is verified.",
+    "No photograph of a Taiwanese JB74 with a fire extinguisher mounted on a window guard or a ladder could be found, so the 'common orientation in Taiwan' question is unanswered. Mobile01 returns 403, Facebook club images return empty, Instagram serves only thumbnails.",
+    "The generic two-band quick-release tube bracket's usable tube diameter range is not published by any seller, so whether it would actually fit the JST ladder's Ø34 tube is unknown.",
+    "No official overall height (including handle and valve) is published for Taiwan's 5型 extinguisher; only the cylinder height of 276 mm.",
+    "WebSearch was unavailable for this entire task (session budget of 600 calls already exhausted), and the Chrome browser extension was not connected. Research was done with curl and WebFetch. If Shopee, Mobile01, Instagram or Facebook content is needed, this has to be redone from a real browser session."
+  ],
+
+  "corrections": [
+    "LADDER TUBE IS NOT Ø25. It measures about Ø34 mm — consistent with Ø33.7 mm 1-inch NPS steel pipe. Measured independently two ways: from JST's own two-version product photo by tube-to-overall-width ratio, and from MRK's straight-on fitted photo against the JB74's 1645 mm body width.",
+    "27 cm AND 22 cm ARE OUTER OVERALL WIDTHS, NOT INNER WIDTHS. On JST's annotated photo the dimension arrows land on the outer faces of the rails. Inner clear width is therefore about 202 mm (standard) and 152 mm (narrow). A 270 mm INNER width would imply a 338 mm outer, which the photos rule out.",
+    "The brand name 吉米工坊 IS correct and IS JST — MRK 4X4's own brand page states 「JST（吉米工坊）是一家台灣在地深耕的汽車配件改裝品牌」. It is invisible to Ruten and to Western search engines, which is why it looks non-existent; Yahoo Japan indexes it. The maker's own product name is 尾門梯 / 尾門爬梯, never 圓管尾梯.",
+    "The ladder's part number is JB74003 (MRK) or JST002 (camping retailers). There is also a newer stainless-steel version at NT$8,800, so 'the standard version' now means the powder-coated carbon-steel 標準版 as opposed to both the 窄版 and the stainless one.",
+    "JST DOES NOT SELL A FIRE EXTINGUISHER MOUNT. Their complete JB74 catalogue is five parts, JB74001 to JB74005, and none is an extinguisher bracket.",
+    "NO FIRE EXTINGUISHER MOUNTS ON A JB74 TAILGATE LADDER, from any maker, anywhere. The premise that this is one of three common positions is wrong.",
+    "THE ACTUAL COMMON POSITION IS THE FRONT SEAT RAIL, HORIZONTAL, 1 kg — and it was not in the brief. Every JB74-specific extinguisher bracket in existence (Pirate Camp Co, KAP Industries, TLR, Legendex, 4x4 Network, F4 Fabrications) bolts to the factory seat-rail bolts and lays a 1 kg bottle flat in the footwell.",
+    "THE TWO-BAND QUICK-RELEASE BRACKET IS A ROUND-TUBE MOUNT, not a window-guard mount. Window guards for this car are flat MOLLE plates with no tube to clamp, so an extinguisher there is held by webbing.",
+    "THE REAR QUARTER WINDOW APERTURE IS ABOUT 591 x 365 mm, NOT 390 x 330. Source: CarMate INNO NZ868, a JB64/JB74-specific panel designed to fit the frame exactly, published as H365 x W591 x D12 mm. Use 591 x 365 as the scale reference.",
+    "DAMD'S 'HALF SIZE' ROOF RACK IS HALF THE WIDTH, NOT HALF THE LENGTH. Both sizes are 1350 mm fore-and-aft; the half is narrowed from 1000 mm to 600 mm. This is the single most load-bearing correction in this file — see the evidence field for the five-way confirmation.",
+    "'DJBTBDRR1' IS NOT A DAMD PART NUMBER and returns nothing anywhere. DAMD's numbers are TB-RR1, TB-RRKJB, TB-HR1 and TB-HRKJB.",
+    "THE WOOD IS ACCOYA — ACETYLATED NEW ZEALAND RADIATA PINE, NOT FINNISH TIMBER. DAMD state ラジアタパインと呼ばれるニュージーランド産の松をアセチル化処理した高耐久化天然木材「アコヤ」. The 'Finland-sourced timber' wording used by ozjimny, and the 'FINNISH WOOD panelling' recorded in this repo's existing jb74-accessory-atlas.json, are both wrong.",
+    "The existing jb74-accessory-atlas.json entry 'DAMD Styling Effect / Little B Trip Basket Vintage' is the FULL size only and misses the half size, the part numbers, the JPY prices and the TERZO base-carrier requirement. It also lists 'Four feet and hardware included', which is true only of the TB-RRKJB kit — TB-RR1 is the bare rack and needs the base carrier separately.",
+    "DAMD'S ¥19,800 'trip basket ウッドパネル' IS NOT THE ROOF RACK. It is the wood insert for the スラッシュガーニッシュ rear-quarter garnish. The numerical coincidence with the NT$19,800 Shopee price is just a coincidence.",
+    "The existing atlas entry for the JST ladder ('Two plates on the tailgate hinge side', TWD 5,180 unverified, 'OD 25 tube, closed oval loop; inner width 270 standard, 220 narrow') is right about the two plates, the hinge side and the closed loop, but wrong about the tube diameter and about 270/220 being inner widths; its price should become NT$5,800 (MRK) or NT$5,200 (吉姆尼小當家), both verified."
+  ]
+}

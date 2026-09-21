@@ -77,7 +77,8 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
 </div>
 <script type="module">
 import { COLORS, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
-  ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS, HOODS, SPARE_COVERS } from './parts.js';
+  ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS, HOODS, SPARE_COVERS,
+  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js';
 import { priceLabel, FX_NOTE } from './fx.js';
 
 // key = the configurator's state key, so "套用" can deep-link into app.html
@@ -101,6 +102,11 @@ const CATS = [
   ['側踏／岩石滑桿', 'sideStep', SIDE_STEPS, ''],
   ['後爬梯', 'ladder', LADDERS, ''],
   ['呼吸管', 'snorkel', SNORKELS, 'JB74 1.5L 進氣在右側'],
+  ['排氣管', 'exhaust', EXHAUSTS, 'JB74 原廠從右側出；多數系統從外面只看得到管口，真正改變側面輪廓的是側出與橫置砲管那幾套'],
+  ['車頂燈條', 'lightBar', LIGHT_BARS, '車頂動態載重 30kg，扣掉車頂架後留給燈的不多'],
+  ['車頂圓燈', 'roofLights', ROOF_LIGHTS, 'KC 的「微笑燈」是黑底黃的 logo 燈罩，不是另一種燈'],
+  ['車頭燈條', 'grilleLight', GRILLE_LIGHTS, 'STEDI 沒有 Jimny 的格柵內支架；Rally Bar 是裝在水箱罩「前方」，真正裝在格柵後方的是 Bushranger'],
+  ['滅火器', 'extinguisher', EXTINGUISHERS, '沒有任何廠商做 JB74 尾梯專用架；鐵窗 MOLLE 板載重只有 2–5kg'],
   ['後照鏡', 'mirrors', MIRRORS, ''],
   ['其他配件', null, OTHERS, '以配置器的開關對應（側裙、鐵窗、燈具、備胎配件）'],
 ];

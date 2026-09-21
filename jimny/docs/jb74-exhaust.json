@@ -1,0 +1,897 @@
+{
+  "compiled": "2026-09-21",
+  "vehicle": {
+    "model": "Suzuki Jimny Sierra JB74W",
+    "chassis": "3BA-JB74W",
+    "engine": "K15B 1.5 NA",
+    "years": "2018.07 - (type 1-4 to 2025.10; type 5 from 2025.11)",
+    "sibling": "JB64W (kei, R06A turbo) - different pipe diameters and different part numbers; never share an entry",
+    "note": "Jimny Nomade JC74W (5-door, 2025.04-) shares the K15B but NOT the exhaust routing on most systems."
+  },
+  "scaleReference": {
+    "note": "Everything in this file that is marked estimated was scaled off product photos using these anchors.",
+    "stockTyre": "195/80R15, outer diameter 693 mm, so rear axle centre sits 346 mm above ground",
+    "stockGroundClearance": "210 mm (Suzuki figure; HKS quotes the same 210 mm as the lowest point of its own kit)",
+    "rearBumperLowerEdge": "approx 520 mm above ground on a stock-height car (estimated from APIO and Monster Sport full-car photos)",
+    "method": "Measure tyre outer diameter in pixels in the same photo, divide into 693 mm (or the fitted tyre's OD), then apply that mm/px scale to the tip centre height above the contact patch."
+  },
+
+  "rules": [
+    {
+      "id": "stock-exit",
+      "text": "The JB74's factory tail pipe exits at the REAR RIGHT - the driver's side in a JDM RHD car - below the rear bumper, pointing rearward and very slightly down. It is a plain unfinished pipe of roughly 38-45 mm outer diameter with no decorative tip, and it does NOT protrude past the bumper face: it sits flush to about 10 mm behind it, so from directly behind the car you see a dark hole under the bumper rather than a tip. Centre height is about 330 mm above ground (estimated: measured off APIO's and Monster Sport's full-car rear photos against the tyre OD; consistent with FUJITSUBO publishing 320 mm as the minimum ground clearance at the front of its tail on the same car). EVIDENCE for the side: (a) Kakimoto's spec tables give 出口方向 S(右) for both the GTbox 06&S cat-back and the Class KR rear-piece-only, and a rear-piece-only bolts to the factory centre pipe so it cannot change sides; (b) Kakimoto's own fitted photo of the GTbox shows the tip on the flank where the steering wheel is visible through the door glass, and the car is RHD, so that flank is the car's right; (c) the fuel filler flap is on that same right-hand rear quarter; (d) Monster Sport states its Sp-X exit aligns with the stock bumper position and its photos put the tip on the same side."
+    },
+    {
+      "id": "exit-families",
+      "text": "For a configurator there are only FIVE distinct rear-end silhouettes, and geometry can be shared inside each: (1) REAR RIGHT SINGLE - stock position, one tip under the right of the bumper (Fujitsubo A-K, Kakimoto GTbox, Kakimoto Class KR rear piece, Monster Sport Sp-X/Sp-R, JAOS BATTLEZ, Showa Comfort, APIO Shizuka Gozen). (2) REAR TWIN LEFT+RIGHT - one tip under each bumper corner, symmetric (Kakimoto Class KR S71355S, GReddy Cross Exhaust). (3) SIDE EXIT LEFT, TWIN - two tips out of the left rocker just ahead of the rear wheel, rear bumper untouched (HKS LEGAMAX TrailMaster, Kakimoto Class KR DS edi.). (4) SIDE EXIT LEFT, SINGLE, at the bumper corner (Showa Garage Links / Links Blue Tail). (5) SIDE EXIT RIGHT, SINGLE, high bullet through a hole in the rear bumper (TANIGUCHI Compe Muffler R). APIO's Yoshimura systems are family 1 but with the silencer itself turned into the visual feature."
+    },
+    {
+      "id": "jasma-jqr-legal",
+      "text": "Japan no longer uses a JASMA sticker as the legal gate. Since the 2010 (Heisei 22) acceleration-noise rules, a replacement muffler must carry a pre-certification display - in practice a JQR number on a welded plate - and every system in this file that is sold for road use in Japan carries one: HKS TrailMaster JQR20202008, Fujitsubo A-K JQR10181118, Kakimoto GTbox JQR30192030, Class KR L+R JQR20192028, Class KR rear piece JQR10191029, Class KR DS edi. JQR20252140, JAOS BATTLEZ ZS JQR20183167. FUJITSUBO additionally displays the JASMA mark. Certification is per-variant, so read the fine print: APIO's Shizuka Gozen is certified for JB64 all types and JB74 type 5, but NOT for JB74 types 1-4 (those need the centre-muffler version); TANIGUCHI's Compe R is a certified product yet measures 91 dB proximity on a JB74 against 81 dB stock, which is legal in Japan but loud; HKS's TrailMaster is not certified for the type-5 AT car. The Australian systems (GReddy is JDM but sold there, Manta, Redback) carry no JQR plate. For TAIWAN the relevant test is the local noise limit measured at the tailpipe, not a Japanese certificate: a Japanese JQR plate has no legal standing at a Taiwanese inspection, and a system measuring 88-92 dB proximity (HKS 88, Kakimoto GTbox 92, TANIGUCHI 91, GReddy 92 per side) is at or over what a Taiwanese annual inspection will pass on a 2018+ car. The quiet ones - Fujitsubo A-K at 84 dB, JAOS BATTLEZ at 83 dB, Kakimoto Class KR rear piece at 84-85 dB, Showa Comfort at 86 dB - are the realistic Taiwan choices. NOTHING here was verified against a published Taiwanese ruling; treat the Taiwan half of this rule as engineering judgement, not law."
+    },
+    {
+      "id": "bumper-clash",
+      "text": "Rear bumper and exhaust are NOT independent choices in this configurator. Documented interactions: FUJITSUBO A-K is 標準バンパー車専用, stock bumper only, and the OEM mud flaps must be removed or cut. JAOS BATTLEZ ZS (B702518B) needs a partial cut of the stock bumper and cannot coexist with the OEM mud flap set; JAOS sells a SEPARATE part number (B702513A) for cars wearing the JAOS rear sports cowl. APIO ships every Yoshimura and Shizuka Gozen system in two part numbers, one for the OEM bumper and one for APIO's own tactical bumper, because the pipe run differs. TANIGUCHI's Compe R needs a hole drilled through the stock rear bumper and is designed to fit TANIGUCHI's own rear bumpers without cutting - and the cover garnish that hides the hole is made for JB64 types 1-3 only, so on a JB74 with the stock bumper the cut edge stays raw. SHOWA GARAGE's Links is designed around Showa Garage's own bumper spoiler; on a stock bumper it needs a partial cut, it leaves only 10-15 mm clearance to the spoiler when correctly seated, and Showa explicitly says fitment to JB74 type 4-5 stock bumpers is unconfirmed. HKS's TrailMaster and Kakimoto's DS edi. sidestep the whole problem by exiting through the rocker, but the HKS kit needs the floor undercover modified on type 4 and later cars. WHAT IS NOT KNOWN: no maker publishes compatibility with KLC, DAMD, URNIETA or ARB rear bumpers. Every one of those replaces the bumper's lower rear face, which is exactly where a rear-exit tip passes, so the configurator should treat any rear-exit system plus a non-OEM rear bumper as UNVERIFIED rather than silently allowing it. The two side-exit families are the only ones that are safe to combine with an arbitrary rear bumper."
+    },
+    {
+      "id": "quad-exits",
+      "text": "No true quad-exit (four tips) system exists for the JB74 from any maker checked. The maximum is TWO tips, in three arrangements: one tip per side at the rear (Kakimoto Class KR S71355S, 96 mm slash; GReddy Cross Exhaust G-Style, 90 mm), both tips on the left rocker (HKS LEGAMAX TrailMaster, 75 x 2; Kakimoto Class KR DS edi., 70 x 2), or a single tip. BLITZ does build a NUR-SPEC Quad Model but its fitment list has no Jimny of either body. An earlier note calling the Showa Garage Links Blue Tail a dual system is wrong - see corrections."
+    },
+    {
+      "id": "type5-break",
+      "text": "The November 2025 facelift (type 5) breaks fitment in both directions and the configurator must carry the year. HKS TrailMaster fits types 1-5 but NOT the type-5 AT. APIO's Shizuka Gozen uses different part numbers for JB74 type 5 (2004-03R/03P) than for the earlier car. JAOS BATTLEZ ZS explicitly does not fit 2025.11+ cars. Kakimoto certifies the same parts for both eras but publishes different noise figures (GTbox 92 dB on 2018-2025 cars, 89 dB on type 5). Fujitsubo's 750-81927 covers both eras with one number and also supersedes the discontinued 750-81901."
+    },
+    {
+      "id": "cat-back-vs-axle-back",
+      "text": "Weight is the quick tell for how much of the car changes. A REAR SECTION ONLY (axle-back) weighs 3.5-4.5 kg and replaces just the last silencer and tip: Fujitsubo A-K 3.7 kg (stock rear section 4.4 kg), Kakimoto Class KR rear piece 4.1 kg (stock 4.5 kg), Monster Sport Sp-X/Sp-R 3.6 kg. A CAT-BACK weighs 8-11 kg and changes the whole visible under-run from the catalyst back: Kakimoto GTbox 8.8 kg (stock 8.7), Class KR L+R 10.2 kg, DS edi. 9.5 kg, HKS TrailMaster 9.0 kg, JAOS BATTLEZ 10.3 kg, APIO Shizuka Gozen with centre pipe about 10 kg (stock 8.5). The APIO/Yoshimura titanium system is the outlier at 4.2 kg for a full system against roughly 8 kg stock. For a 3D model this matters because an axle-back only needs new geometry behind the rear axle, while a cat-back changes what is visible along the whole right-hand underbody in a low side view."
+    },
+    {
+      "id": "hks-which-system",
+      "text": "There is exactly ONE HKS muffler in the HKS catalogue for the JB74W: LEGAMAX TRAILMASTER, code 32018-AS006. HKS's other muffler lines (Super Turbo, Hi-Power Spec-L II, LEGAMAX Sports, LEGAMAX Premium, SSM, Cool Style II, Hi-Power Spec-R, Superior Spec-R, Silent Hi-Power, Hi-Power 409, LEGAMAX, LEGAL) have no JB74 entry - Cool Style II's fitment table was checked line by line and contains no Jimny of either body. Do not confuse 32018-AS006 with 31021-AS004: that is the JB64 kei version, a different price (¥149,600) and a different noise figure, and its centre pipe is sized for the R06A turbo. HKS is also the co-development partner behind TANIGUCHI's Compe Muffler R and Nomad Compe N, which is why those two look and sound like HKS products without carrying the HKS name."
+    },
+    {
+      "id": "taiwan-market",
+      "text": "Taiwan has almost no real JB74 exhaust market. What is actually on sale locally (Ruten, verified 2026-09) is cosmetic slip-over tip covers at TWD 618-1,610 from a dozen resellers - these change the visible tip without changing a single pipe, which is worth its own configurator entry because it is what most Taiwanese JB74s actually wear. Beyond that, MyRack lists the JAOS BATTLEZ ZS at about TWD 22,000 (plain) / TWD 24,000 (titanium-colour tail) and a Taiwanese retailer has listed the APIO x Yoshimura stainless Cyclone at about TWD 72,500. HKS's Taiwan distributor is 昶和企業 (hks.com.tw); its site carries no Jimny catalogue at all, so a TrailMaster is a special order with no published TWD price. Everything else - Kakimoto, Fujitsubo, Showa Garage, TANIGUCHI, Monster Sport - reaches Taiwan only by personal import. Expect roughly 1.4-1.7x the Japanese list price landed, on the same pattern the wheel atlas records."
+    },
+    {
+      "id": "side-exit-heat",
+      "text": "Both twin side-exit systems put hot pipework immediately below the left rocker, ahead of the rear wheel, where a side step or rock slider would normally go. HKS fits a branded perforated heat shield over that run and Kakimoto ships a 17-piece bracket kit (STF.KIT66) to hang it. In the configurator, a side-exit exhaust and a left-hand side step/slider should be treated as a probable clash - no maker publishes compatibility either way."
+    }
+  ],
+
+  "systems": [
+    {
+      "id": "hks_legamax_trailmaster_jb74",
+      "brand": "HKS",
+      "name": "LEGAMAX TRAILMASTER (Jimny Sierra, side-exit dual)",
+      "part": "32018-AS006",
+      "type": "cat-back",
+      "fitment": "JB74W 3BA, K15B, 2018.07- , types 1-5. Type-5 AT NOT covered. Type 4 onward requires the floor undercover to be modified.",
+      "tip": {
+        "shape": "round",
+        "odMM": 75,
+        "count": 2,
+        "finish": "burnt blue / titanium-look tip ends on a polished SUS304 system",
+        "cut": "slash",
+        "arrangement": "the two tips sit side by side on the same (left) side, staggered slightly fore-and-aft, pointing rearward and angled a few degrees outboard and down"
+      },
+      "position": {
+        "side": "left",
+        "exit": "side exit through the rocker line, ahead of the rear wheel - the rear bumper is not touched at all",
+        "protrusionMM": 0,
+        "protrusionNote": "Nothing protrudes past the rear bumper. What matters instead is lateral: the tips stand roughly 20-40 mm proud of the rocker's outer face (estimated from the HKS demo-car side photo against the tyre OD).",
+        "heightMM": 300,
+        "heightNote": "ESTIMATED. HKS publishes 210 mm as the lowest point of the whole kit; the tip centres sit above the silencer, read off the demo-car photo at roughly 290-310 mm above ground on stock suspension.",
+        "longitudinal": "tips finish about 150-250 mm ahead of the rear wheel's leading edge (estimated from the demo-car photo)"
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "This is the single most silhouette-changing exhaust for the car. In a pure side view of the LEFT flank you see a bright perforated cylindrical silencer running under the rocker and two burnt-blue tips at its rear end. From directly behind, the car looks completely stock.",
+        "lengthMM": 450,
+        "diaMM": 100,
+        "sizeNote": "ESTIMATED from the demo-car photo. There is also a second, larger oval/box silencer further forward in the system (visible in HKS's parts photo) that is hidden by the body in a side view.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 150700, "JPYExTax": 137000 },
+      "tw": { "available": false, "note": "HKS Taiwan (昶和企業, hks.com.tw) is the official agent but publishes no Jimny catalogue or price. Special order only." },
+      "jasma": true,
+      "cert": "JQR20202008",
+      "noiseDb": { "proximity": 88, "stock": 81 },
+      "weightKg": 9.0,
+      "pipeMM": "centre pipe 50.8 tapering to 45 x 2",
+      "groundClearanceMM": 210,
+      "modelling": "Model this as a LEFT-FLANK feature, not a rear feature - it is the only system here that is invisible from behind. Under the left rocker, from roughly the B-pillar back to just ahead of the rear wheel, lay a horizontal polished cylinder about 100 mm in diameter and 450 mm long, wrapped in a perforated heat shield with a visible bead-rolled band and a small HKS-logo plate. Out of its rear face run two round 75 mm tubes side by side, turned a few degrees outboard, ending in slash-cut mouths with heavy blue-to-gold heat gradation on the last 40-60 mm - the classic burnt-titanium look, darkest blue right at the rim with a rolled lip. Tip centres roughly 300 mm above ground, 20-40 mm proud of the rocker face, finishing 150-250 mm ahead of the rear tyre. The rear bumper and the stock right-hand exhaust hole are both removed from view: the stock tip geometry must be deleted when this system is fitted, and nothing replaces it under the bumper. A viewer looking at the rear three-quarter from the right will see an empty bumper underside and wonder where the exhaust went - that is correct.",
+      "verified": true,
+      "source": "https://www.hks-power.co.jp/product_db/muffler/db/21550 (spec table and fitted photo), https://www.hks-power.co.jp/product_search/product/1/type/105/stock (fitment table)"
+    },
+
+    {
+      "id": "fujitsubo_authorize_k",
+      "brand": "FUJITSUBO",
+      "name": "AUTHORIZE K (A-K)",
+      "part": "750-81927",
+      "type": "axle-back (rear section only)",
+      "fitment": "JB64W, JB74W, JC74W and the type-5 JB64W/JB74W all on one part number. JB74W MT and AT, type 5 included. Standard bumper cars ONLY. Supersedes the discontinued 750-81901.",
+      "tip": {
+        "shape": "round",
+        "odMM": 70,
+        "count": 1,
+        "finish": "polished stainless; a chargeable BG option gives a burnt-colour gradation (heat-tinted) tip",
+        "cut": "slash, 21 degrees",
+        "arrangement": "single, tip axis parallel to the car, slash face opening rearward and slightly outboard"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position",
+        "protrusionMM": 35,
+        "protrusionNote": "ESTIMATED from Fujitsubo's fitted photo - a 70 mm tip on a 21 degree slash shows roughly 30-40 mm of tip beyond the bumper's rearmost face.",
+        "heightMM": 330,
+        "heightNote": "Derived from Fujitsubo's own published figure: minimum ground clearance 320 mm measured at the front of the tail, so the tip centre sits a little above that."
+      },
+      "muffler": {
+        "visible": false,
+        "visibleNote": "At 3.7 kg the silencer is small and tucks behind the bumper; in a side view you see the tip and little else.",
+        "lengthMM": 350,
+        "diaMM": 120,
+        "sizeNote": "ESTIMATED from the product photo and the 3.7 kg mass.",
+        "bumperCut": false,
+        "mudFlapConflict": "OEM mud flaps must be removed or cut"
+      },
+      "price": { "JPY": 72380, "JPYExTax": 65800 },
+      "tw": { "available": false, "note": "personal import only" },
+      "jasma": true,
+      "cert": "JQR10181118 / JASMA marked",
+      "noiseDb": { "idle": 58, "proximity4500": 84, "stockIdle": 54, "stockProximity4500": 79 },
+      "weightKg": 3.7,
+      "pipeMM": "45.0 - 50.8",
+      "groundClearanceMM": 320,
+      "modelling": "The most restrained option and the right default for a 'tasteful' preset. Keep the stock rear silhouette and change only the tip: a single 70 mm polished round pipe under the RIGHT of the rear bumper, cut at 21 degrees so the mouth is a clean ellipse rather than a circle, sticking about 35 mm past the bumper face with its centre roughly 330 mm above ground. Two finish states are needed because the BG option is a paid variant: bright mirror stainless, and the same geometry with a blue-gold heat gradation over the last 50 mm. No fat silencer to draw in side view. If the car also wears OEM mud flaps, the right-hand flap has to be removed or trimmed in the model.",
+      "verified": true,
+      "source": "https://www.fujitsubo.co.jp/products/detail/3148"
+    },
+
+    {
+      "id": "kakimoto_gtbox_06s",
+      "brand": "Kakimoto Racing",
+      "name": "GTbox 06&S (2010 acceleration-noise compliant)",
+      "part": "S44355",
+      "type": "cat-back",
+      "fitment": "JB74W 3BA, K15B, 4WD, JC/JL, 2018.07-2025.11 and 2025.11- , 5MT/4AT",
+      "tip": {
+        "shape": "round",
+        "odMM": 80,
+        "count": 1,
+        "finish": "all stainless, polished, with a burnt-blue heat gradation on the tip mouth",
+        "cut": "straight with a rolled edge",
+        "arrangement": "single, pointing rearward"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position",
+        "protrusionMM": 45,
+        "protrusionNote": "ESTIMATED from Kakimoto's fitted photo; the 80 mm tip clears the bumper by roughly half a tip diameter.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED. Kakimoto publishes no ground clearance; scaled off their fitted rear photo against the tyre."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "Kakimoto publishes the silencer body as 115 mm diameter. It is a polished cylinder lying transversely behind the rear axle, visible from below and just catching the eye at the lower edge of a side view.",
+        "lengthMM": 400,
+        "diaMM": 115,
+        "sizeNote": "Diameter is published (タイコ径 115). Length ESTIMATED from the fitted photo at roughly 3.5 tube diameters.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 115500, "JPYExTax": 105000 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "JQR30192030",
+      "noiseDb": { "proximity": 92, "idle": 62, "proximityType5": 89, "idleType5": 63 },
+      "weightKg": 8.8,
+      "pipeMM": 50,
+      "innerSilencerOption": "SIS001, JPY 7,700 each - the system is certified WITHOUT it",
+      "modelling": "The loud, obvious, cheap-looking-in-a-good-way choice. One 80 mm polished round tip under the right of the bumper - noticeably fatter than the Fujitsubo's 70 mm and with a blue-burnt ring at the mouth rather than a slash cut, so the opening reads as a full circle. Behind it, a 115 mm polished cylinder about 400 mm long lying across the car just behind the rear axle; in an underbody or low rear three-quarter view that cylinder is the second thing you see. Tip about 45 mm past the bumper, centre near 330 mm. Compared with the stock car this is a two-part change: a new bright tip AND a bright can where the stock car has a dull one.",
+      "verified": true,
+      "source": "https://www.kakimotoracing.co.jp/products/detail_product.cgi?rid=880"
+    },
+
+    {
+      "id": "kakimoto_classkr_lr",
+      "brand": "Kakimoto Racing",
+      "name": "Class KR 左右出し センター付き (left+right twin, with centre pipe)",
+      "part": "S71355S",
+      "type": "cat-back",
+      "fitment": "JB74W, 2018.07-2025.11 and 2025.11- , 5MT/4AT",
+      "tip": {
+        "shape": "round",
+        "odMM": 96,
+        "count": 2,
+        "finish": "all stainless, polished, burnt-blue gradation ring at each mouth",
+        "cut": "slash",
+        "arrangement": "one tip under each rear bumper corner, mirrored, both pointing rearward"
+      },
+      "position": {
+        "side": "both (left and right)",
+        "exit": "below the rear bumper, one at each corner",
+        "protrusionMM": 30,
+        "protrusionNote": "ESTIMATED from Kakimoto's fitted rear photo - the tips finish close to the bumper face, less proud than the GTbox despite being fatter.",
+        "heightMM": 345,
+        "heightNote": "ESTIMATED; the tips sit a little higher than a single-exit system because they tuck into the bumper corners."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "Kakimoto lists タイコ径 as '-' : there is no fat silencer drum. What is visible instead is a slim rectangular-section resonator box lying transversely under the number plate with the two tip pipes sweeping out of it left and right.",
+        "lengthMM": 420,
+        "diaMM": 110,
+        "sizeNote": "ESTIMATED from the fitted photo; the body reads as a flattened box roughly 420 x 150 x 110 mm rather than a round can.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 170500, "JPYExTax": 155000 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "JQR20192028",
+      "noiseDb": { "proximity": 92, "idle": 63, "proximityType5": 90, "idleType5": 62 },
+      "weightKg": 10.2,
+      "pipeMM": 50,
+      "modelling": "The most dramatic REAR view available for this car and the obvious hero for a rear-facing camera angle. Two 96 mm slash-cut tips, one under each bumper corner, symmetric about the centreline, each with a blue-burnt ring at the mouth - at 96 mm they are the largest tips in this file and they read as almost half the height of the bumper's lower face. Between them a slim transverse box silencer sits directly under the number plate with two pipes sweeping outward and rearward to the tips; that S-curve of bright pipe across the underbody is as recognisable as the tips themselves. Tips about 30 mm past the bumper, centres near 345 mm. Note the car gains 1.5 kg of visible stainless compared with stock.",
+      "verified": true,
+      "source": "https://www.kakimotoracing.co.jp/products/detail_product.cgi?rid=878"
+    },
+
+    {
+      "id": "kakimoto_classkr_rear",
+      "brand": "Kakimoto Racing",
+      "name": "Class KR 右出し リアピースのみ (right exit, rear piece only)",
+      "part": "S71355R",
+      "type": "axle-back (rear section only)",
+      "fitment": "JB74W both eras, plus JC74W Nomade type 1 (2025.04-2026.07); Nomade type 2 onward not confirmed and not JQR certified",
+      "tip": {
+        "shape": "round",
+        "odMM": 96,
+        "count": 1,
+        "finish": "all stainless, polished, burnt-blue gradation at the mouth",
+        "cut": "slash",
+        "arrangement": "single, rearward"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position",
+        "protrusionMM": 30,
+        "protrusionNote": "ESTIMATED, same tip and bracketry as the twin version.",
+        "heightMM": 340,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": false,
+        "visibleNote": "4.1 kg, lighter than the stock rear section's 4.5 kg, and no drum silencer - almost nothing shows in side view except the tip.",
+        "lengthMM": 380,
+        "diaMM": 100,
+        "sizeNote": "ESTIMATED.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 69300, "JPYExTax": 63000 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "JQR10191029",
+      "noiseDb": { "proximity": 84, "idle": 63, "proximityType5": 85, "idleType5": 58 },
+      "weightKg": 4.1,
+      "pipeMM": 50,
+      "modelling": "Same 96 mm slash tip as the twin system but only one of them, on the right, and nothing else visible. This is the cheapest way to get the biggest tip diameter in the catalogue onto the car, so in a configurator it is the 'big tip, quiet car' option - 84 dB, the second quietest here. Geometry can be shared with kakimoto_classkr_lr: take the right-hand tip of that system and delete the left-hand branch and the transverse box.",
+      "verified": true,
+      "source": "https://www.kakimotoracing.co.jp/products/detail_product.cgi?rid=879"
+    },
+
+    {
+      "id": "kakimoto_classkr_ds_side",
+      "brand": "Kakimoto Racing",
+      "name": "Class KR DS edi. サイド出し (side exit, online-store exclusive)",
+      "part": "S71355WS",
+      "type": "cat-back",
+      "fitment": "JB74W, 2018.07-2025.11 and 2025.11- , 5MT/4AT. Sold only through Kakimoto's own online store.",
+      "tip": {
+        "shape": "round",
+        "odMM": 70,
+        "count": 2,
+        "finish": "all stainless, polished, burnt-blue gradation at the mouths",
+        "cut": "slash",
+        "arrangement": "two tips side by side on the left rocker, pointing rearward, angled slightly outboard"
+      },
+      "position": {
+        "side": "left",
+        "exit": "side exit through the rocker line, ahead of the rear wheel; rear bumper untouched",
+        "protrusionMM": 0,
+        "protrusionNote": "Nothing past the rear bumper. Laterally the tips stand roughly 20-40 mm proud of the rocker face (ESTIMATED from the fitted side photo).",
+        "heightMM": 300,
+        "heightNote": "ESTIMATED from the fitted side photo against the tyre OD."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "A slim polished tube runs along under the left rocker into the tip pair - less bulky than the HKS because there is no perforated shield, so what you see is bare bright pipework.",
+        "lengthMM": 500,
+        "diaMM": 80,
+        "sizeNote": "ESTIMATED from the fitted photo; the visible run reads as plain 80 mm pipe rather than a silencer can.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 121000, "JPYExTax": 110000 },
+      "tw": { "available": false, "note": "online-store exclusive in Japan; harder than usual to get out of the country" },
+      "jasma": true,
+      "cert": "JQR20252140",
+      "noiseDb": { "proximity": 90, "idle": 62 },
+      "weightKg": 9.5,
+      "pipeMM": 50,
+      "extraHardware": "STF.KIT66 bracket kit, 17 distinct fasteners and hangers, JPY 15,180",
+      "modelling": "Kakimoto's answer to the HKS TrailMaster and visually its close cousin - twin round tips out of the LEFT rocker ahead of the rear wheel - but two things separate them in a model: the tips are 70 mm not 75 mm, and there is no perforated heat shield, so the run under the rocker is plain bright polished tube instead of a textured drum. Geometry can largely be shared with the HKS entry; swap the shield cylinder for a smooth pipe and shrink the tips. Rear bumper stays stock and the stock right-hand tip must be deleted.",
+      "verified": true,
+      "source": "https://www.kakimotoracing.co.jp/products/detail_product.cgi?rid=1022"
+    },
+
+    {
+      "id": "showa_links",
+      "brand": "SHOWA GARAGE",
+      "name": "Links Muffler JB74 (左出し, co-developed with 5ZIGEN)",
+      "part": "P00005",
+      "type": "cat-back (centre muffler + end muffler)",
+      "fitment": "JB74W MT/AT types 1-5. Fitment to the type 4-5 STOCK bumper is explicitly unconfirmed by the maker. Does NOT fit JC74 Nomade.",
+      "tip": {
+        "shape": "round",
+        "odMM": 70,
+        "count": 1,
+        "finish": "polished stainless, heavy rolled/curled lip, 'Showa Garage Links' etched on the silencer body",
+        "cut": "straight with a pronounced rolled edge, mounted on a down-angle",
+        "arrangement": "single, offset from the silencer axis, angled downward - Showa calls it a ダウン形状 (down shape) tail"
+      },
+      "position": {
+        "side": "left",
+        "exit": "left rear corner, below/through the bumper area; designed for Showa Garage's own bumper spoiler, needs a partial cut of the stock bumper",
+        "protrusionMM": 25,
+        "protrusionNote": "ESTIMATED. Showa publishes the clearance to their bumper spoiler as 10-15 mm when correctly seated, which caps how far the tip can stand proud.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "A polished cylindrical 'bullet' silencer with the tip poking out of its end face at an angle - motorcycle-can styling. Visible at the lower left rear in a side view.",
+        "lengthMM": 420,
+        "diaMM": 115,
+        "sizeNote": "ESTIMATED from the product photo.",
+        "bumperCut": true
+      },
+      "price": { "JPY": 83600 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "compliant with the April-2022 noise standard (no JQR number published on the shop page)",
+      "noiseDb": { "proximity": 87, "acceleration": 75 },
+      "pipeMM": "main 50, necked to 45 at the silencer",
+      "modelling": "The distinguishing feature is the ROLLED LIP: the 70 mm mouth has a fat curled edge about 8-10 mm deep, so in close-up it reads as a doughnut rim rather than a thin-walled pipe. The tip sits off-axis on the end cap of a polished bullet silencer and points downward as well as rearward, which makes it catch light very differently from a straight slash cut. It is on the LEFT, opposite the stock side, so a viewer comparing stock and modified from behind sees the exhaust jump across the car. Model the bumper cut too - this system does not fit an untouched stock bumper.",
+      "verified": true,
+      "source": "https://www.showa-garage.shop/shopdetail/000000000281/"
+    },
+
+    {
+      "id": "showa_links_blue",
+      "brand": "SHOWA GARAGE",
+      "name": "Links Muffler Blue Tail JB74",
+      "part": "P00211",
+      "type": "cat-back (centre muffler + end muffler)",
+      "fitment": "JB74W MT/AT types 1-5; type 4-5 stock bumper fitment unconfirmed; not for JC74",
+      "tip": {
+        "shape": "round",
+        "odMM": 70,
+        "count": 1,
+        "finish": "titanium-look BLUE coating over the last section of the tip, with a rolled lip, on a polished stainless bullet silencer. Showa warns the coating is a surface treatment and will come off if polished with abrasives.",
+        "cut": "straight with a rolled edge, down-angled",
+        "arrangement": "single"
+      },
+      "position": {
+        "side": "left",
+        "exit": "left rear corner; Showa bumper spoiler or a partially cut stock bumper",
+        "protrusionMM": 25,
+        "protrusionNote": "ESTIMATED, as P00005.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": true,
+        "lengthMM": 420,
+        "diaMM": 115,
+        "sizeNote": "ESTIMATED from the product photo.",
+        "bumperCut": true
+      },
+      "price": { "JPY": 89650 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "compliant with the April-2022 noise standard",
+      "noiseDb": { "proximity": 87, "acceleration": 75 },
+      "claimedGain": "+0.5 kgm torque, +6.2 ps on a Dynapack against stock",
+      "pipeMM": "main 50, necked to 45 at the silencer",
+      "modelling": "Geometrically identical to P00005 - reuse the mesh - and differs only in the tip material state. The blue is not a subtle heat tint: Showa's own close-up shows a deep saturated blue rolled rim shading through gold and purple back into raw stainless over roughly 60 mm, with the brightest blue right on the curled lip. If the configurator supports a tip-finish swatch, this is the strongest blue in the whole set, stronger than the Kakimoto and HKS heat gradations. SINGLE tip - see corrections, an earlier note wrongly described this as a dual system.",
+      "verified": true,
+      "source": "https://www.showa-garage.shop/shopdetail/000000000851/"
+    },
+
+    {
+      "id": "showa_comfort",
+      "brand": "SHOWA GARAGE",
+      "name": "Comfort Muffler (JB64/JB74, co-developed with 5ZIGEN)",
+      "part": "P00007",
+      "type": "cat-back (from the centre pipe back)",
+      "fitment": "JB64 types 1-5 and JB74 types 1-5, MT/AT. Not for JC74 Nomade. Fits the STOCK bumper with no cutting at all.",
+      "tip": {
+        "shape": "round",
+        "odMM": 89,
+        "count": 1,
+        "finish": "polished stainless, rolled edge",
+        "cut": "straight with a rolled lip, angled slightly outboard",
+        "arrangement": "single"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position, no bumper modification",
+        "protrusionMM": 40,
+        "protrusionNote": "ESTIMATED from Showa's underbody photo.",
+        "heightMM": 335,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "Showa deliberately put a LARGE silencer at the rear end and shrank the centre one to protect ground clearance, so this is one of the systems where a fat polished drum really is visible under the back of the car.",
+        "lengthMM": 430,
+        "diaMM": 130,
+        "sizeNote": "ESTIMATED from the underbody photo against the rear axle tube.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 83600 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "compliant with the April-2022 noise standard",
+      "noiseDb": { "proximityJB74": 86, "accelerationJB74": 75 },
+      "pipeMM": 50,
+      "modelling": "The 'looks stock but better' entry, and the only Showa system that needs no bumper work. Keep the stock right-hand exit; enlarge the tip to 89 mm polished with a rolled lip sticking about 40 mm past the bumper. The part a 3D model must not skip is the silencer: a bright 130 mm drum about 430 mm long lying transversely at the very back, plus a visibly SMALL centre silencer further forward - the opposite proportions to most systems, and the reason the car keeps its ground clearance.",
+      "verified": true,
+      "source": "https://www.showa-garage.shop/shopdetail/000000000438/"
+    },
+
+    {
+      "id": "taniguchi_compe_r",
+      "brand": "TANIGUCHI (ORS)",
+      "name": "コンペマフラー R (Compe Muffler R, co-developed with HKS)",
+      "part": "not published as a code; ordered by name",
+      "type": "cat-back, three-piece",
+      "fitment": "JB64 types 1-4 and JB74 types 1-4. Types 5 not listed.",
+      "tip": {
+        "shape": "round",
+        "odMM": 75,
+        "count": 1,
+        "finish": "titanium-coloured (heat-tinted) tail on a SUS304L stainless system",
+        "cut": "straight bullet mouth",
+        "arrangement": "single, mounted at a right angle to the car - the tip turns outboard and exits sideways, high up"
+      },
+      "position": {
+        "side": "right",
+        "exit": "THROUGH the rear bumper - the outlet is high, not under the bumper. On a stock JB74 bumper a hole must be drilled. TANIGUCHI's own rear bumpers accept it without cutting.",
+        "protrusionMM": 20,
+        "protrusionNote": "ESTIMATED. The tip pokes laterally through the bumper skin rather than rearward past it.",
+        "heightMM": 560,
+        "heightNote": "ESTIMATED and deliberately HIGH - TANIGUCHI's selling point is an outlet raised out of the way for water crossings and off-road work, which puts it up in the bumper's own height band rather than below it."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "A three-piece system with an oval silencer; the striking part is the bullet turning out through the bumper corner.",
+        "lengthMM": 450,
+        "diaMM": 140,
+        "sizeNote": "ESTIMATED - TANIGUCHI publishes only pipe and tail diameters.",
+        "bumperCut": true
+      },
+      "price": { "JPY": 102300 },
+      "accessory": "純正バンパー用マフラーガーニッシュ JPY 7,700 covers the drilled hole - but it is made for JB64 types 1-3 ONLY and does not fit a JB74",
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "certified to the 2010 acceleration-noise regulation (車検対応)",
+      "noiseDb": { "proximityJB74": 91, "stockJB74": 81, "proximityJB64": 85 },
+      "pipeMM": "centre 50.8, tail 75",
+      "modelling": "The only system that changes the rear BUMPER, not just what hangs under it. Cut a round hole about 90-100 mm across in the right rear bumper corner, high - roughly level with the middle of the bumper's vertical face - and push a 75 mm titanium-coloured bullet through it so it stands about 20 mm proud and points outboard and slightly rearward. The tip colour is a warm gold-bronze heat tint, not the blue that Kakimoto and Showa use. On a stock JB74 bumper leave the cut edge raw in the model: the garnish that would tidy it is a JB64-only part. Loud at 91 dB and a type 1-4 part only.",
+      "verified": true,
+      "source": "https://www.ors-taniguchi.co.jp/parts-cat/jb_soup/page/2/"
+    },
+
+    {
+      "id": "apio_yoshimura_r77j_ti",
+      "brand": "APIO x YOSHIMURA",
+      "name": "突撃 R-77J チタンサイクロン (Totsugeki R-77J Titanium Cyclone)",
+      "part": "2004-7T (OEM bumper, titanium blue) / 2004-7S (APIO tactical bumper, titanium blue) / 2004-7TX / 2004-7SX (titanium grey)",
+      "type": "full system",
+      "fitment": "JB74 types 1-4, MT and AT. Two part numbers because the routing differs between the OEM and APIO tactical rear bumpers.",
+      "tip": {
+        "shape": "round",
+        "odMM": 68,
+        "count": 1,
+        "finish": "full titanium - hand-burned BLUE on 2004-7T/7S, raw natural titanium GREY on 2004-7TX/7SX",
+        "cut": "straight, double-wall with a rolled curl end and two tone holes drilled in the outer sleeve",
+        "arrangement": "single, at the outboard end of a motorcycle-style cannon"
+      },
+      "position": {
+        "side": "right of centre",
+        "exit": "below the rear bumper; the outlet sits at the right-hand end of a transverse cannon, roughly two thirds of the way across the car",
+        "protrusionMM": 30,
+        "protrusionNote": "ESTIMATED from APIO's full-car photo.",
+        "heightMM": 333,
+        "heightNote": "ESTIMATED by pixel-scaling APIO's own JB74 photo: fitted AT tyre OD taken as 720 mm, giving about 3.5 mm per pixel, and the silencer/outlet centre measured 95 px above the contact patch."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "YES - this is the whole point of the system. A large titanium cannon lies transversely under the rear bumper with the YOSHIMURA logo on its flank, fully exposed and easily the most conspicuous silencer body of any system here.",
+        "lengthMM": 550,
+        "diaMM": 115,
+        "sizeNote": "ESTIMATED by the same pixel scaling as the height figure.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 363000, "JPYGrey": 348700 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "pre-certified for MT and AT, meets the current inspection standard",
+      "noiseDb": { "proximityMT": 91.0, "proximityAT": 90.0, "accelerationMT": 77.0, "accelerationAT": 76.0 },
+      "weightKg": 4.2,
+      "stockWeightKg": 8,
+      "pipeMM": "about 50.8, with 42.7 sections",
+      "modelling": "Model the SILENCER, not the tip. Under the rear bumper, running across the car, sits a titanium cannon roughly 115 mm in diameter and 550 mm long with a YOSHIMURA logo plate on its side and a welded certification plate underneath - it reads exactly like a superbike slip-on bolted sideways under a 4x4. At its right-hand end a 68 mm double-wall outlet with a rolled curl and two small drilled tone holes in the outer sleeve. Two colour states share one mesh: hand-burned blue (mottled purple-blue-gold, uneven and organic, not a uniform anodise) and raw natural titanium grey with a faint matte sheen. Because the system is titanium it is 4.2 kg against about 8 kg stock, so it can hang higher and tighter than any steel system - do not sag it. Separate part numbers exist for the OEM and APIO tactical bumpers, so if the configurator offers the APIO bumper the pipe run forward of the cannon changes.",
+      "verified": true,
+      "source": "https://apio.jp/parts/2004-7.html"
+    },
+
+    {
+      "id": "apio_yoshimura_stainless",
+      "brand": "APIO x YOSHIMURA",
+      "name": "ステンレスサイクロン (Stainless Cyclone)",
+      "part": "2004-7AS (APIO tactical bumper) / 2004-7NS (OEM bumper)",
+      "type": "full system",
+      "fitment": "JB74",
+      "tip": { "shape": "round", "odMM": 68, "count": 1, "finish": "polished bright stainless with a Yoshimura emblem", "cut": "straight with a rolled curl end", "arrangement": "single at the end of a transverse cannon" },
+      "position": { "side": "right of centre", "exit": "below the rear bumper", "protrusionMM": 30, "protrusionNote": "ESTIMATED, same geometry family as the titanium version.", "heightMM": 333, "heightNote": "ESTIMATED, same as the titanium version." },
+      "muffler": { "visible": true, "lengthMM": 550, "diaMM": 115, "sizeNote": "ESTIMATED, same body as the titanium version.", "bumperCut": false },
+      "price": { "JPY": 231000 },
+      "tw": { "available": true, "TWD": 72500, "note": "listed by a Taiwanese retailer; carried over from the accessory atlas and NOT re-verified in this pass" },
+      "jasma": true,
+      "weightKg": 6.7,
+      "pipeMM": "about 50.8, with 42.7 sections",
+      "modelling": "Same cannon geometry as the titanium R-77J - share the mesh - in mirror-bright polished stainless instead of titanium, with the Yoshimura emblem badge catching light on the flank. It is the brightest, most chrome-looking object under the car in this whole file, and 2.5 kg heavier than the titanium version. Use it as the 'same shape, cheaper finish' sibling state.",
+      "verified": false,
+      "verifyNote": "Part numbers, price and weight carried over from the earlier accessory atlas; apio.jp/parts/2004-7as.html was not re-fetched in this pass.",
+      "source": "https://apio.jp/parts/2004-7as.html"
+    },
+
+    {
+      "id": "apio_shizuka_gozen",
+      "brand": "APIO",
+      "name": "静香御前マフラー (Shizuka Gozen)",
+      "part": "JB74 type 5: 2004-03R (OEM bumper) / 2004-03P (tactical). JB64 types 1-5: 2004-40S / 2004-40T. JC74: 2004-04S / 2004-04T.",
+      "type": "rear muffler",
+      "fitment": "JB64 types 1-5 certified; JB74 TYPE 5 ONLY certified; JB74 types 1-4 are NOT certified with this part and need the centre-pipe version below. JC74 type 1 certified.",
+      "tip": {
+        "shape": "round",
+        "odMM": 76.3,
+        "count": 1,
+        "finish": "stainless (steel flanges)",
+        "cut": "double-wall with a rolled curl end and a tone hole",
+        "arrangement": "single"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position; compatible with the OEM mud flaps",
+        "protrusionMM": 35,
+        "protrusionNote": "ESTIMATED.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "APIO publishes an overall muffler length of 1,030 mm - this is a long assembly running fore-aft, with internal Jet Stream Fins and a welded certification plate under the body.",
+        "lengthMM": 1030,
+        "diaMM": 130,
+        "sizeNote": "Length is PUBLISHED (1,030 mm overall). Diameter ESTIMATED from the product photo.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 75900 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "認証取得済み for the listed variants",
+      "pipeMM": "42.7 / 50.8",
+      "modelling": "A 76.3 mm double-wall curl-end tip in plain stainless under the right of the bumper - visually the closest thing here to an upmarket OEM part, no colour, no drama. The modelling detail that distinguishes it is the double wall: the mouth shows an inner tube recessed a few millimetres inside a rolled outer sleeve, with a small drilled tone hole in the sleeve. The body is long (1,030 mm) and runs fore-aft rather than across the car, with a small welded rectangular certification plate on its underside. WATCH THE FITMENT: with this part number the system is only certified on a type-5 JB74.",
+      "verified": true,
+      "source": "https://apio.jp/parts/2004-40s.html"
+    },
+
+    {
+      "id": "apio_shizuka_gozen_center",
+      "brand": "APIO",
+      "name": "静香御前 センターパイプ付き (Shizuka Gozen with centre pipe)",
+      "part": "2004-03S (OEM bumper) / 2004-03T (APIO tactical bumper)",
+      "type": "full system, three pieces (front muffler, centre pipe, rear muffler)",
+      "fitment": "JB74 types 1-4, MT and AT. Cannot be combined with APIO transfer guards.",
+      "tip": { "shape": "round", "odMM": 76.3, "count": 1, "finish": "stainless with steel flanges", "cut": "double-wall with a rolled safety edge", "arrangement": "single" },
+      "position": { "side": "right", "exit": "below the rear bumper", "protrusionMM": 35, "protrusionNote": "ESTIMATED.", "heightMM": 330, "heightNote": "ESTIMATED." },
+      "muffler": { "visible": true, "visibleNote": "Three-piece, so the WHOLE underbody run changes, not just the back.", "lengthMM": 1030, "diaMM": 130, "sizeNote": "ESTIMATED / shared with the rear-only version.", "bumperCut": false },
+      "price": { "JPY": 137500 },
+      "tw": { "available": false },
+      "jasma": true,
+      "cert": "pre-certified for MT and AT, welded certification plate",
+      "weightKg": 10.0,
+      "stockWeightKg": 8.5,
+      "pipeMM": "front piece 42.7, centre 42.7, rear 42.7/50.8",
+      "modelling": "Same visible tip as the rear-only Shizuka Gozen - reuse that geometry - but because it is a three-piece system the bright stainless run extends forward past the front silencer, which matters for any camera angle that looks under the car from the side or front three-quarter. This is the type 1-4 JB74 answer where the rear-only part is not certified.",
+      "verified": true,
+      "source": "https://apio.jp/parts/2004-03s.html"
+    },
+
+    {
+      "id": "jaos_battlez_zs",
+      "brand": "JAOS",
+      "name": "BATTLEZ Muffler ZS (OEM bumper)",
+      "part": "B702518B (stainless) / B702518BTC (titanium-colour tail)",
+      "type": "cat-back, three-piece",
+      "fitment": "JB74 2018.07-2025.11, all grades. Does NOT fit 2025.11+ type-5 cars.",
+      "tip": {
+        "shape": "round",
+        "odMM": 101,
+        "count": 1,
+        "finish": "B702518B polished stainless; B702518BTC has a burnt titanium-colour tail. Both carry a BATTLEZ logo embossed into the tip sleeve.",
+        "cut": "circle type - a straight, square-cut mouth, not a slash",
+        "arrangement": "single"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper; a partial bumper cut is required",
+        "protrusionMM": 40,
+        "protrusionNote": "ESTIMATED from JAOS's own close-up photo, where the tip clears the bumper lip by roughly 40% of its own diameter.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "10.3 kg three-piece system; the rear silencer sits transversely behind the axle and shows under the bumper.",
+        "lengthMM": 400,
+        "diaMM": 130,
+        "sizeNote": "ESTIMATED - JAOS publishes pipe diameters but not silencer dimensions.",
+        "bumperCut": true,
+        "mudFlapConflict": "incompatible with the OEM mud flap set; with the JAOS Mud Guard III rear set the flap must be cut using the supplied template"
+      },
+      "price": { "JPY": 74800, "JPYExTax": 68000, "JPYTitaniumColour": 81400 },
+      "tw": { "available": true, "TWD": 22000, "TWDTitaniumColour": 24000, "note": "MyRack, Taiwan. The most readily available real system in Taiwan." },
+      "jasma": true,
+      "cert": "JQR20183167, 平成22年騒音規制適合 plate fitted",
+      "noiseDb": { "proximity": 83, "acceleration": 73 },
+      "weightKg": 10.3,
+      "pipeMM": "centre 45, rear 50",
+      "installTimeH": 1.0,
+      "variants": [
+        { "part": "B702513A", "for": "cars wearing the JAOS rear sports cowl", "price": { "JPY": 74800 }, "weightKg": 12.2, "noiseDb": { "proximity": 82, "acceleration": 74 } }
+      ],
+      "modelling": "The biggest SINGLE round tip in the file at 101 mm, and the only one whose mouth is a plain circle square to the car rather than a slash - so from directly behind it reads as a perfect bright ring, and that ring plus the embossed BATTLEZ wordmark on the sleeve is what makes it recognisable. It dominates the underside of the right bumper corner. Two finish states share the mesh: mirror stainless (B702518B) and burnt titanium colour (B702518BTC). Model the partial bumper cut and remember the OEM mud flap on that side has to go - a JB74 wearing this system and untouched OEM flaps is a combination that does not exist. Not available for type-5 cars.",
+      "verified": true,
+      "source": "https://www.jaos.co.jp/product/B702518B/2601/"
+    },
+
+    {
+      "id": "monster_sport_sp_x",
+      "brand": "MONSTER SPORT",
+      "name": "TYPE Sp-X Muffler",
+      "part": "241590-5600M",
+      "type": "axle-back (rear section)",
+      "fitment": "One part number covers JB64W and JB74W, types 1-5 (some type-5 MT confirmation gaps). Exit position matches the stock bumper.",
+      "tip": {
+        "shape": "round",
+        "odMM": 76.3,
+        "count": 1,
+        "finish": "SUS304 polished stainless",
+        "cut": "slash face with a curled (rolled) edge",
+        "arrangement": "single, on the end of a bullet-shaped silencer"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position, no bumper work",
+        "protrusionMM": 45,
+        "protrusionNote": "ESTIMATED from Monster Sport's own fitted rear photo, where the tip stands clearly proud of the bumper's lower lip.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "Straight-through silencer, bullet-shaped and polished; at 3.6 kg it is slim, so in side view it is a glint rather than a slab.",
+        "lengthMM": 400,
+        "diaMM": 100,
+        "sizeNote": "ESTIMATED from the product photo and the 3.6 kg mass.",
+        "bumperCut": false
+      },
+      "price": { "JPY": 68200, "JPYExTax": 62000 },
+      "tw": { "available": false },
+      "jasma": null,
+      "certNote": "Monster Sport publishes no JQR/JASMA number on this product page - flagged as unverified rather than assumed legal.",
+      "noiseDb": { "proximityJB74": 83, "proximityJB64": 86 },
+      "weightKg": 3.6,
+      "pipeMM": "45 - 50.8",
+      "modelling": "A 76.3 mm polished bullet with a slash face AND a curled edge - the combination is the tell: the mouth is an ellipse because of the slash, but the rim is rolled rather than knife-edged, so it catches a thick highlight along the long side of the ellipse. Stock right-hand position, about 45 mm proud of the bumper, no bumper cut, and the quietest Monster option at 83 dB on the JB74. Note the same part number is sold for the JB64, so do not treat the part code as a JB74 identifier.",
+      "verified": true,
+      "source": "https://www.monster-sport.com/product/parts/muff/jb64w_type_sp_x/index.html"
+    },
+
+    {
+      "id": "monster_sport_sp_r",
+      "brand": "MONSTER SPORT",
+      "name": "TYPE Sp-R Muffler",
+      "part": "241590-5500M",
+      "type": "axle-back (rear section)",
+      "fitment": "JB74W types 1-5 (type 5 AT listed); one part number shared with the JB64W",
+      "tip": {
+        "shape": "round",
+        "odMM": 76.3,
+        "count": 1,
+        "finish": "SUS304 with a GRADATION (heat-tint) finish on the bullet tail - Monster's own wording",
+        "cut": "bullet-shaped tail",
+        "arrangement": "single"
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper, stock position",
+        "protrusionMM": 45,
+        "protrusionNote": "ESTIMATED, same family as the Sp-X.",
+        "heightMM": 330,
+        "heightNote": "ESTIMATED."
+      },
+      "muffler": { "visible": true, "lengthMM": 400, "diaMM": 100, "sizeNote": "ESTIMATED.", "bumperCut": false },
+      "price": { "JPY": 71500, "JPYExTax": 65000 },
+      "tw": { "available": false },
+      "jasma": null,
+      "certNote": "no JQR/JASMA number published on the product page",
+      "noiseDb": { "proximityJB74": 83, "proximityJB64": 86 },
+      "weightKg": 3.6,
+      "pipeMM": "45 - 50.8",
+      "modelling": "Share the Sp-X mesh and change only the tail finish: the Sp-R's selling point is a heat-gradation bullet tail, a warm straw-to-blue tint over the last 60-80 mm rather than plain mirror. JPY 3,300 more than the Sp-X for that one difference, which makes them a natural finish-toggle pair in a configurator.",
+      "verified": true,
+      "source": "https://www.monster-sport.com/product/parts/muff/jb64w_type_sp_r/index.html"
+    },
+
+    {
+      "id": "greddy_cross_exhaust_g_style",
+      "brand": "GReddy (TRUST)",
+      "name": "Cross Exhaust G-STYLE",
+      "part": "10193801",
+      "type": "cat-back (from after the second catalyst)",
+      "fitment": "JB74 2018-current (GLX / Lite 3-door in the Australian listing)",
+      "tip": {
+        "shape": "round",
+        "odMM": 90,
+        "count": 2,
+        "finish": "SUS stainless with a titanium-like heat gradation",
+        "cut": "not published - reads as a straight rolled mouth in the product photos",
+        "arrangement": "one tip under each rear bumper corner"
+      },
+      "position": {
+        "side": "both (left and right)",
+        "exit": "below the rear bumper, one per corner",
+        "protrusionMM": 35,
+        "protrusionNote": "ESTIMATED from the product photos.",
+        "heightMM": 300,
+        "heightNote": "Derived from GReddy's own published clearances - 268 mm at the logo plate and 278 mm at the rear silencer body - which put the tips a little above that."
+      },
+      "muffler": {
+        "visible": true,
+        "visibleNote": "GReddy is the only maker here that publishes ground clearance, and at 268-278 mm this system hangs lower than most - the rear silencer body is genuinely visible in a side view.",
+        "lengthMM": 450,
+        "diaMM": 140,
+        "sizeNote": "ESTIMATED; only the clearances are published.",
+        "bumperCut": false
+      },
+      "price": { "AUD": 3799, "AUDSale": 3514.07 },
+      "tw": { "available": false },
+      "jasma": null,
+      "certNote": "no JQR plate referenced on the Australian listing",
+      "noiseDb": { "at4000rpm": 92, "stockAt4000rpm": 80 },
+      "pipeMM": "2-split, 50 phi after the second catalyst",
+      "modelling": "The second twin-exit option and the direct rival to Kakimoto's Class KR left+right. Two 90 mm round tips, one under each bumper corner, in a titanium-like heat gradation rather than mirror - so unlike the Kakimoto the tips are coloured along their whole visible length, not just at a ring near the mouth. The system sits low: model the rear silencer body with its underside around 278 mm above ground and a logo plate at 268 mm, which is the lowest hanging exhaust hardware in this file and worth showing if the configurator has an off-road/clearance readout. Expensive - roughly twice the Kakimoto twin in local money.",
+      "verified": true,
+      "source": "https://ozjimny.com/products/greddy-cross-exhaust-g-style"
+    },
+
+    {
+      "id": "rossomodello_dussel",
+      "brand": "Rosso Modello",
+      "name": "DUSSEL GT-X / Ti-C / SPORT",
+      "part": "not captured",
+      "type": "cat-back",
+      "fitment": "JB74 - variants not re-verified",
+      "tip": { "shape": "round", "odMM": null, "count": 1, "finish": "GT-X plain stainless, Ti-C titanium tail, SPORT titanium tail", "cut": null, "arrangement": "single" },
+      "position": { "side": "right for GT-X and Ti-C, LEFT for the SPORT", "exit": "below the rear bumper (GT-X, Ti-C) / left side exit (SPORT)", "protrusionMM": null, "heightMM": null },
+      "muffler": { "visible": null, "lengthMM": null, "diaMM": null, "bumperCut": null },
+      "price": { "JPYGtX": 39600, "JPYTiC": 44000, "JPYSport": 81400 },
+      "tw": { "available": false },
+      "jasma": null,
+      "modelling": "Listed here only so nobody re-researches it from scratch. Its value to the configurator is the DUSSEL SPORT, which is a LEFT-side exit at roughly half the price of the HKS - potentially a cheap way to offer the side-exit silhouette. Nothing about its tip diameter, finish detail or mounting was verified in this pass, so do not model it from this entry: fetch the maker page first.",
+      "verified": false,
+      "verifyNote": "Prices and exit sides carried over from the earlier accessory atlas (street-price roundup). rossomodello.com responded but was not parsed in this pass. Treat every number here as unconfirmed.",
+      "source": "https://rossomodello.com/"
+    },
+
+    {
+      "id": "manta_jb74",
+      "brand": "Manta (Australia)",
+      "name": "Performance Exhaust System",
+      "part": "MKSZ0001",
+      "type": "cat-back (also sold as a full system with manifold)",
+      "fitment": "JB74 2018+",
+      "tip": { "shape": "round", "odMM": 76, "count": 1, "finish": "chrome", "cut": "straight", "arrangement": "single", "odNote": "3 inch nominal = 76.2 mm" },
+      "position": { "side": "right", "exit": "below the rear bumper", "protrusionMM": null, "heightMM": null },
+      "muffler": { "visible": true, "visibleNote": "2.5 inch mandrel-bent cat-back with a centre 'hotdog' resonator plus a rear muffler.", "lengthMM": null, "diaMM": null, "bumperCut": null },
+      "price": { "AUDAluminised": 1318, "AUDStainless": 1768, "AUDFullAluminised": 2568, "AUDFullStainless": 3008 },
+      "tw": { "available": false },
+      "jasma": false,
+      "modelling": "A bright CHROME 3 inch tip - a different material read from every Japanese system here, which are polished stainless or titanium. Chrome sits colder and bluer and shows a harder specular line. Useful if the configurator wants an 'Australian overland' flavour. Dimensions beyond the nominal 3 inch tip were not published.",
+      "verified": false,
+      "verifyNote": "Carried over from the earlier accessory atlas; not re-fetched in this pass.",
+      "source": "https://ozjimny.com/products/manta-manta-performance-exhaust-system-jimny-year-2018"
+    },
+
+    {
+      "id": "tw_cosmetic_tip_cover",
+      "brand": "Taiwan aftermarket (unbranded)",
+      "name": "排氣管裝飾尾喉 / slip-over decorative tail tip",
+      "part": "none",
+      "type": "tip cover only (no pipework changes)",
+      "fitment": "JB64 / JB74 2019-2025, clamps over the stock tail pipe",
+      "tip": {
+        "shape": "round",
+        "odMM": 76,
+        "count": 1,
+        "finish": "304 stainless, polished; some listings black",
+        "cut": "straight or slash depending on seller",
+        "arrangement": "single",
+        "odNote": "ESTIMATED - sellers publish no dimension. A slip-over cover for a 38-45 mm factory pipe typically finishes at 70-90 mm outer diameter."
+      },
+      "position": {
+        "side": "right",
+        "exit": "below the rear bumper - exactly the stock position, because nothing moves",
+        "protrusionMM": 60,
+        "protrusionNote": "ESTIMATED. A slip-over cover is the ONLY way the stock car gains protrusion: it extends the flush factory pipe rearward past the bumper, typically by 50-80 mm.",
+        "heightMM": 330,
+        "heightNote": "Same as stock."
+      },
+      "muffler": { "visible": false, "visibleNote": "Nothing under the car changes at all.", "lengthMM": null, "diaMM": null, "bumperCut": false },
+      "price": { "TWD": 675 },
+      "priceRange": { "TWDLow": 618, "TWDHigh": 1610 },
+      "tw": { "available": true, "note": "verified across Ruten sellers pitifa, haiyang1111, jania1, fds566 and others" },
+      "jasma": true,
+      "certNote": "Changes nothing acoustically, so it cannot fail a noise test.",
+      "modelling": "Do not skip this one - it is what most Taiwanese JB74s actually wear, and it is the cheapest visible change in the whole catalogue. Model it as a state change on the STOCK tip only: take the factory pipe, which normally sits flush behind the bumper and reads as a dark hole, and slide a polished 76 mm stainless sleeve over it so roughly 60 mm now stands proud of the bumper's lower right corner. Same height, same side, same everything else. It is the only entry where the correct 3D edit is additive geometry on the stock part rather than a replacement system.",
+      "verified": true,
+      "source": "https://www.ruten.com.tw/find/?q=JB74%20%E6%8E%92%E6%B0%A3%E7%AE%A1"
+    }
+  ],
+
+  "gaps": [
+    "No maker publishes tip PROTRUSION past the rear bumper or tip HEIGHT above ground. Every protrusionMM and most heightMM values in this file are photo-scaled estimates, flagged individually. The only published height-class figures are FUJITSUBO 320 mm (minimum ground clearance at the front of the tail), HKS 210 mm (lowest point of the whole kit) and GReddy 268/278 mm (logo plate / rear silencer body).",
+    "Silencer body dimensions are almost never published. Only two hard numbers exist: Kakimoto's タイコ径 115 mm for the GTbox and APIO's 1,030 mm overall muffler length for the Shizuka Gozen. Everything else is estimated from photos.",
+    "The exact lateral offset of the HKS and Kakimoto side-exit tips from the rocker face could not be measured - both are estimated at 20-40 mm from side photos. If the configurator needs to check clearance against a side step, this number must be measured on a real car.",
+    "5ZIGEN's own exhaust search lists ジムニーシエラ and ジムニーシエラ(ショートバンパー用) as selectable vehicles, but the results page is JavaScript-only and no part number, price or spec could be retrieved. 5ZIGEN is confirmed as the co-development partner on all three SHOWA GARAGE systems; whether they also sell an own-brand JB74 muffler is UNRESOLVED.",
+    "BLITZ: the muffler line index and the NUR-SPEC StyleD fitment page were checked and contain no Jimny of either body. BLITZ's 2026 new-product feed for JB74W lists only a suction kit and lift-up dampers. No BLITZ JB74 exhaust was found, but BLITZ's partsnavi search is form-driven and could not be queried directly, so this is a strong negative rather than a proven one.",
+    "Sense Brand could not be located at all - sense-brand.jp, sense-brand.com and sense-brand.co.jp all fail DNS. Either the domain is different or the company no longer trades. No Sense Brand JB74 exhaust was found.",
+    "TANIGUCHI does not publish a product code for the Compe Muffler R, and the 'Exceed' muffler recorded in the earlier accessory atlas does not appear anywhere in TANIGUCHI's current catalogue - see corrections.",
+    "No maker publishes compatibility between any exhaust and the KLC, DAMD, URNIETA or ARB rear bumpers. This is the single biggest unknown for a configurator that lets both be fitted.",
+    "Kakimoto's 出口方向 letter codes (S / W) are undocumented. The parenthetical side - 右 / 左 / 左右 - was used instead and cross-checked against their fitted photos; the letter itself is ignored here.",
+    "Taiwanese pricing exists only for JAOS (MyRack) and one APIO listing. No Taiwanese price could be found for HKS, Kakimoto, Fujitsubo, Monster Sport, Showa Garage or TANIGUCHI, and HKS's own Taiwan agent publishes no Jimny catalogue.",
+    "Noise figures are maker-measured proximity readings under the Japanese method. No independent measurement, and nothing measured under a Taiwanese test procedure, was found for any system."
+  ],
+
+  "corrections": [
+    "SHOWA GARAGE Links Blue Titanium P00211 is NOT a dual-exit system. The earlier accessory atlas recorded it as 'DUAL side exit' with two 70 mm tips; Showa's own product text describes a single テールエンド 70φ ダウン形状 and the product photo shows one tip. It is a single left exit with a blue-coated rolled-lip tip. Corrected here.",
+    "TANIGUCHI 'Exceed' does not exist in TANIGUCHI's catalogue. A full sweep of ors-taniguchi.co.jp returns only the Compe Muffler R (JB64/JB74 types 1-4), the Nomad Compe N (JC74), the Competition Muffler 3 Quiet (JB23-43) and accessories. The 'Exceed' entry in the earlier atlas came from a third-party price roundup and could not be substantiated.",
+    "HKS's JB74 system is NOT 'Regal / Regal Ti'. The earlier atlas listed an HKS Regal at about JPY 30,515 with nothing verified because hks-power.co.jp appeared JS-gated. It is not: the product database is plain HTML at /product_db/muffler/db/. The one and only HKS muffler for the JB74W is the LEGAMAX TRAILMASTER 32018-AS006 at JPY 150,700 - five times the price the old entry carried, and a completely different product (twin side exit, not rear centre).",
+    "Almost every 'rear centre' exit recorded in the earlier accessory atlas is wrong. The JB74 has no centre exit. Stock and the great majority of aftermarket systems exit REAR RIGHT; a minority exit rear left+right, left-side or right-side. Entries previously marked 'rear centre' for JAOS, FUJITSUBO, APIO, Monster Sport, Kakimoto, 5ZIGEN and HKS have been re-sided in this file from maker spec tables and fitted photographs.",
+    "Kakimoto's JB74 range is four products, not one. The earlier atlas recorded only an unverified 'Class KR' at a street price of JPY 44,921. The real line-up is GTbox 06&S S44355 at JPY 115,500, Class KR left+right S71355S at JPY 170,500, Class KR rear piece S71355R at JPY 69,300 and Class KR DS edi. side exit S71355WS at JPY 121,000.",
+    "Monster Sport Sp-X and Sp-R are NOT separate JB64 and JB74 parts. One part number each - 241590-5600M and 241590-5500M - covers both bodies. The tail end on both is 76.3 mm, not unpublished as previously recorded.",
+    "JAOS BATTLEZ ZS requires a partial rear bumper cut. The earlier atlas recorded it as a straightforward one-hour fit with no bumper work; JAOS's own page says 一部バンパーカットが必要 and that it cannot be used with the OEM mud flap set.",
+    "FUJITSUBO 750-81901 is discontinued and superseded by 750-81927. The A-K tail is φ70 with a 21-degree slash - the earlier atlas recorded the dimension as 'NOT PUBLISHED'."
+  ],
+
+  "method": {
+    "searchBudget": "The session's web-search quota was exhausted before this research began, so no search engine was usable. Everything here came from direct fetches of maker sites plus reading the product photographs themselves.",
+    "sideDetermination": "Left and right were established photographically, not assumed. A flank photograph of a JDM RHD car shows the steering wheel on the near side only when the camera is on the car's right; Kakimoto's GTbox fitted photo shows exactly that, together with the fuel filler flap on the same quarter, and the tip on that same flank - which matches Kakimoto's own 出口方向 S(右). The same test applied to Kakimoto's DS edi. and HKS's demo car places both of those side-exit systems on the car's LEFT.",
+    "dimensionEstimates": "Where a dimension is marked ESTIMATED it was scaled from a product photograph using the fitted tyre's outer diameter as the ruler, and the reasoning is written into the field's own Note. No dimension in this file was invented."
+  }
+}

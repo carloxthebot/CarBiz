@@ -968,13 +968,15 @@ def decals():
     return root
 
 
-def guard_can():
-    """Flat 7.5 L can and an axe on the RIGHT window guard (owner's photos):
-    can forward with its cap on the forward top corner, a round centre boss
-    with a latch bar, an octagonal raised rim; axe at the rear end, head up,
-    blade forward under a tan leather sheath, two black band clamps."""
-    root = group('guardCan')
-    s = RIGHT
+def guard_can(side=RIGHT):
+    """Flat 7.5 L can on a quarter-window guard (owner's photos): can forward
+    with its cap on the forward top corner, a round centre boss with a latch
+    bar, an octagonal raised rim, two black straps. Built per side -- the can,
+    the axe and the recovery board used to be welded to one side each, which
+    is not how anybody actually loads a car."""
+    sfx = 'right' if side == RIGHT else 'left'
+    root = group(f'guardCan_{sfx}')
+    s = side
     q = QUARTER
     cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
     face = s * 716
@@ -992,27 +994,47 @@ def guard_can():
     box('label', (face + s * 101, cy - 130, czc - 40), (2, 40, 110), material('LabelGrey', 0x8a8d90, rough=0.6), root, bevel=0.5)
     for z in (czc - 180, czc + 160):
         box(f'strap{z}', (face + s * 55, cy - 10, z), (114, 36, 24), BLACK, root, bevel=3)
-    # axe at the rear end of the guard
-    ax = cz - 250
-    lib.cylinder('handle', (face + s * 30, cy - 10, ax), (0, 1, 0), 26, 480, WOOD, root, n=14)
-    box('eye', (face + s * 30, cy + 240, ax), (34, 70, 44), STEEL, root, bevel=5)
-    prism('bit', [(cy + 205, ax + 22), (cy + 275, ax + 22), (cy + 300, ax + 120), (cy + 180, ax + 120)], face + s * 18, face + s * 42, STEEL, root)
-    box('poll', (face + s * 30, cy + 240, ax - 42), (30, 44, 40), STEEL, root, bevel=4)
-    leather = material('Leather', 0xb98a55, rough=0.75)
-    prism('sheath', [(cy + 170, ax + 30), (cy + 285, ax + 30), (cy + 310, ax + 135), (cy + 150, ax + 135)], face + s * 12, face + s * 48, leather, root)
-    for zz in (ax + 70, ax + 115):
-        lib.cylinder(f'stud{zz}', (face + s * 50, cy + 280, zz), (1, 0, 0), 14, 4, material('Brass', 0xb08d3c, rough=0.4, metal=1.0), root, n=10)
-    for y in (cy - 170, cy + 110):                           # black band clamps with a shackle on the outside
-        box(f'axeClamp{y}', (face + s * 20, y, ax), (44, 20, 60), BLACK, root, bevel=3)
-        box(f'shackle{y}', (face + s * 26, y, ax - 50), (24, 18, 30), BLACK, root, bevel=4)
     return root
 
 
-def guard_board():
-    """Perforated recovery board on the LEFT window guard: about half the
+def guard_axe(side=RIGHT):
+    """Full axe strapped to the rear end of a quarter-window guard, handle
+    straight down and head up -- which is how it is carried, and how the
+    owner's car wears it. The head clears the guard's top rail by about
+    130 mm; the two band clamps bite onto the guard itself so the axe cannot
+    read as floating alongside the car."""
+    sfx = 'right' if side == RIGHT else 'left'
+    root = group(f'guardAxe_{sfx}')
+    s = side
+    q = QUARTER
+    cz = (q['z0'] + q['z1']) / 2
+    face = s * 716
+    ax = cz - 230                                            # rear end of the guard
+    y0, y1 = q['y0'] + 10, q['y1'] + 130                     # handle butt, top of the head
+    hy = y0 + (y1 - 120 - y0) / 2                            # handle butt at y0, top inside the eye
+    lib.cylinder('handle', (face + s * 30, hy, ax), (0, 1, 0), 26, y1 - 120 - y0, WOOD, root, n=14)
+    box('eye', (face + s * 30, y1 - 84, ax), (34, 84, 46), STEEL, root, bevel=5)
+    prism('bit', [(y1 - 126, ax + 22), (y1 - 40, ax + 22), (y1 - 6, ax + 124), (y1 - 150, ax + 124)],
+          face + s * 18, face + s * 42, STEEL, root)
+    box('poll', (face + s * 30, y1 - 84, ax - 46), (30, 46, 42), STEEL, root, bevel=4)
+    leather = material('Leather', 0xb98a55, rough=0.75)
+    prism('sheath', [(y1 - 150, ax + 30), (y1 - 24, ax + 30), (y1 + 4, ax + 140), (y1 - 178, ax + 140)],
+          face + s * 12, face + s * 48, leather, root)
+    for yy in (y1 - 120, y1 - 60):
+        lib.cylinder(f'stud{yy}', (face + s * 50, yy, ax + 104), (1, 0, 0), 14, 4,
+                     material('Brass', 0xb08d3c, rough=0.4, metal=1.0), root, n=10)
+    for y in (q['y0'] + 90, q['y1'] - 90):                   # band clamps onto the guard frame
+        box(f'axeClamp{y}', (face + s * 16, y, ax), (48, 22, 62), BLACK, root, bevel=3)
+        box(f'shackle{y}', (face + s * 30, y, ax - 52), (24, 18, 30), BLACK, root, bevel=4)
+    return root
+
+
+def guard_board(side=-RIGHT):
+    """Perforated recovery board on a quarter-window guard: about half the
     guard's height, centred, a grid of square holes, strapped at both ends."""
-    root = group('guardBoard')
-    s = -RIGHT
+    sfx = 'right' if side == RIGHT else 'left'
+    root = group(f'guardBoard_{sfx}')
+    s = side
     q = QUARTER
     cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
     face = s * 716
@@ -2115,10 +2137,17 @@ def rack_wood(size='half'):
     each side. It sits at the FRONT of the roof on TERZO cross bars, not on
     gutter legs."""
     root = group('roofRack_wood' if size == 'half' else f'roofRack_wood_{size}')
-    W, H = 1350, 160
-    L = 600 if size == 'half' else 1000                      # TB-HR1 / TB-RR1
-    zc = RACK_ZC + (430 if size == 'half' else 250)          # both sit forward on the roof
-    z0, z1 = zc - L / 2, zc + L / 2
+    # Corrected 2026-09-21 (docs/jb74-fitment.json): DAMD's half size takes
+    # 400 mm off the WIDTH, not the length. Both are 1350 mm front to back and
+    # both run the length of the roof with the wood leading edge up at the
+    # windscreen header; the half leaves ~600 mm of bare cross bar beside it,
+    # which is what DAMD's own copy means by room for skis and boards.
+    H, L = 160, 1350
+    W = 600 if size == 'half' else 1000                      # TB-HR1 / TB-RR1
+    xc = 350 if size == 'half' else 0                        # the half sits over to one side
+    z1 = ROOF_Z_FRONT - 20
+    z0 = z1 - L
+    zc = (z0 + z1) / 2
     deck = RACK_TOP - 30
     top = deck + H
     # two TERZO cross bars with gutter feet
@@ -2126,37 +2155,39 @@ def rack_wood(size='half'):
         sweep(f'bar{zz}', [(-660, deck - 34, zz), (660, deck - 34, zz)], rounded_rect(70, 26, 6), BLACK, root)
         for s in (-1, 1):
             box(f'foot{s}{zz}', (s * (GUTTER_X + 10), ROOF_Y_EDGE + 16, zz), (60, 74, 52), BLACK, root, bevel=6)
-    # wire floor: rods along the car over three cross rods
-    for i in range(21):
-        x = -W / 2 + 60 + i * (W - 120) / 20
+    xl, xr = xc - W / 2, xc + W / 2                          # the basket's own left and right
+    # wire floor: rods along the car over cross rods
+    n_rod = max(9, int(W / 48))
+    for i in range(n_rod):
+        x = xl + 40 + i * (W - 80) / (n_rod - 1)
         lib.cylinder(f'rod{i}', (x, deck, zc), (0, 0, 1), 11, L - 60, BLACK, root, n=8)
-    crosses = (z0 + 40, zc, z1 - 40) if size == 'half' else (z0 + 40, zc - L / 6, zc + L / 6, z1 - 40)
-    for k, zz in enumerate(crosses):
-        lib.cylinder(f'cross{k}', (0, deck - 10, zz), (1, 0, 0), 14, W - 60, BLACK, root, n=8)
+    for k in range(5):
+        zz = z0 + 40 + k * (L - 80) / 4
+        lib.cylinder(f'cross{k}', (xc, deck - 10, zz), (1, 0, 0), 14, W - 60, BLACK, root, n=8)
     # rounded tube frame round the rim, on short stanchions
-    loop = [(-W / 2 + 26, top, z0 + 26), (-W / 2 + 26, top, z1 - 26), (W / 2 - 26, top, z1 - 26),
-            (W / 2 - 26, top, z0 + 26), (-W / 2 + 26, top, z0 + 26)]
+    loop = [(xl + 26, top, z0 + 26), (xl + 26, top, z1 - 26), (xr - 26, top, z1 - 26),
+            (xr - 26, top, z0 + 26), (xl + 26, top, z0 + 26)]
     tube('rail', loop, 26, BLACK, root, bend=72)
-    for s in (-1, 1):
-        for k in range(5 if size == 'half' else 8):
-            n2 = 5 if size == 'half' else 8
-            zz = z0 + 60 + k * (L - 120) / (n2 - 1)
-            lib.cylinder(f'post{s}{k}', (s * (W / 2 - 26), (deck + top) / 2, zz), (0, 1, 0), 12, H, BLACK, root, n=8)
-    for k in range(11):                                      # rear wall uprights
-        x = -W / 2 + 70 + k * (W - 140) / 10
+    for s, xx in ((-1, xl + 26), (1, xr - 26)):
+        for k in range(9):
+            zz = z0 + 60 + k * (L - 120) / 8
+            lib.cylinder(f'post{s}{k}', (xx, (deck + top) / 2, zz), (0, 1, 0), 12, H, BLACK, root, n=8)
+    n_wall = max(5, int(W / 95))
+    for k in range(n_wall):                                  # rear wall uprights
+        x = xl + 60 + k * (W - 120) / (n_wall - 1)
         lib.cylinder(f'wall{k}', (x, (deck + top) / 2, z0 + 26), (0, 1, 0), 12, H, BLACK, root, n=8)
     # the wood: a curved panel wrapping the leading edge, blocks on the sides
     n, span = 9, W - 80
     for k in range(n):
         t = (k + 0.5) / n
-        x = -span / 2 + t * span
+        x = xl + 40 + t * span
         drop = 26 * math.sin(math.pi * t)                    # the panel sweeps down at the middle
         box(f'front{k}', (x, deck + 64 - drop / 2, z1 - 16), (span / n + 6, 150, 26), RACK_WOOD, root, bevel=6)
-    box('frontLip', (0, deck + 142, z1 - 16), (W - 40, 22, 30), RACK_WOOD, root, bevel=10)
-    lib.cylinder('badge', (-W / 2 + 200, deck + 62, z1 + 4), (0, 0, 1), 110, 6, RACK_WOOD, root, n=24)
-    box('badgeText', (-W / 2 + 200, deck + 62, z1 + 10), (92, 20, 4), TEXBLACK, root, bevel=1)
-    for s in (-1, 1):
-        box(f'sideBlock{s}', (s * (W / 2 - 22), deck + 70, zc - L / 5), (28, 130, 130), RACK_WOOD, root, bevel=8)
+    box('frontLip', (xc, deck + 142, z1 - 16), (W - 40, 22, 30), RACK_WOOD, root, bevel=10)
+    lib.cylinder('badge', (xl + 180, deck + 62, z1 + 4), (0, 0, 1), 110, 6, RACK_WOOD, root, n=24)
+    box('badgeText', (xl + 180, deck + 62, z1 + 10), (92, 20, 4), TEXBLACK, root, bevel=1)
+    for xx in (xl + 22, xr - 22):
+        box(f'sideBlock{xx}', (xx, deck + 70, zc - L / 5), (28, 130, 130), RACK_WOOD, root, bevel=8)
     return root
 
 
@@ -2184,12 +2215,10 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
                 box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
         elif lamps == 'klc':
-            # tube runs along the body's lower edge; the stock lamps sit in
-            # housings hung from the tube, faces set back from the tube
-            # steel boxes on the tube's ends, tops level with the tube, holding the stock lamps;
-            # a red tow hook drops from each box's inner bottom corner
-            # the car's own tail lamps stay; the bar only carries a hook each side
-            box(f'hook{s}', (s * 330, y - 150, -1560), (14, 110, 50), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
+            # the car's own tail lamps stay; the bar only carries a hook each
+            # side. The hook has to bite into the tube -- hung 150 mm below it
+            # with nothing between, it read as a red tag floating in mid-air.
+            box(f'hook{s}', (s * 330, y - 72, z), (14, 116, 54), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -2204,18 +2233,22 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
                 d.scale.y = 0.3
         if steps:
             box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
-    if lamps == 'klc':                                       # plate on two tabs right under the tube
+    if lamps == 'klc':
+        # Plate on two tabs right under the tube. Every dimension here is
+        # measured off the tube's own underside and rear face so the tabs
+        # always bite into the tube and the plate always sits against the
+        # tabs -- the old absolute offsets left visible daylight between all
+        # three once the bar's diameter changed.
+        ty, tz = y - tube_d / 2, z - tube_d / 2
         for s in (-1, 1):
-            box(f'plateTab{s}', (s * 110, y - tube_d / 2 - 10, z - 6), (24, 40, 6), mat, root, bevel=1)
-        box('plate', (0, y - tube_d / 2 - 100, z - tube_d / 2 + 2), (330, 165, 3), PLATE, root, bevel=1)
+            box(f'plateTab{s}', (s * 110, ty - 38, tz - 12), (24, 96, 34), mat, root, bevel=1)
+        box('plate', (0, ty - 92, tz - 27), (330, 165, 3), PLATE, root, bevel=1)
     else:
         box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
         box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
         for s in (-1, 1):
             box(f'corner{s}', (s * min(740, W / 2 - 30), 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
-    else:
-        lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
 
@@ -2322,18 +2355,267 @@ def ladder_jst():
     root = group('ladder_jst')
     s = RIGHT
     zf = TAIL_Z - 62
-    xi, xo = s * 330, s * 625
-    y0, y1 = 640, 1560
-    r = abs(xo - xi) / 2
-    loop = [(xi, y0 + 60, zf), (xi, y1, zf), (xo, y1, zf), (xo, y0, zf), (xi, y0, zf), (xi, y0 + 120, zf)]
-    tube('hoop', loop, 32, BLACK, root, bend=70)
+    # Re-measured 2026-09-21 against MRK's straight-on photo, scaled on the
+    # 1645 mm body width: the tube is 34 mm (not 25) and the published 270 mm
+    # is the OUTER width, so the tube centres are 236 mm apart. Four rungs at
+    # 195 mm, overall 1005 mm tall, and the hoop's rounded top stops under the
+    # gutter -- it does not hook over the roof.
+    xo = s * 600
+    xi = xo - s * 236
+    y0, y1 = 620, 1625
+    loop = [(xi, y0 + 70, zf), (xi, y1, zf), (xo, y1, zf), (xo, y0, zf), (xi, y0, zf), (xi, y0 + 140, zf)]
+    tube('hoop', loop, 34, BLACK, root, bend=88)
     for k in range(4):
-        y = y0 + 170 + k * 215
+        y = y0 + 150 + k * 195
         tube(f'rung{k}', [(xi, y, zf), (xo, y, zf)], 26, BLACK, root)
-    for y in (y0 + 260, y1 - 260):
-        box(f'tab{y}', (xi + s * 20, y, (TAIL_Z + zf) / 2), (60, 70, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
+    for y in (y0 + 250, y1 - 250):                           # two plates onto the factory tailgate hinges
+        box(f'tab{y}', (xi + s * 20, y, (TAIL_Z + zf) / 2), (60, 84, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
     return root
 
+
+
+# =================================================================== LIGHTING
+# Sizes from docs/jb74-lighting.json (maker spec sheets). The STEDI bars are
+# the ones people actually put on a Jimny roof; the amber is a clip-on filter
+# on the ST3K/ST4K and a bonded yellow lens on the ST1K, so the ST1K reads
+# yellow even switched off.
+AMBER = material('AmberLens', 0xe08a1e, rough=0.15)
+STEDI_YELLOW = material('StediYellow', 0xe8b823, rough=0.14)
+KC_YELLOW = material('KCYellow', 0xe0aa18, rough=0.45)
+
+
+def light_bar_gen(pid, L, hh, dd, segs, rows=1, lens_mat=None):
+    """Roof-height light bar on A-pillar brackets, sized from the maker's own
+    spec sheet: L x hh x dd in mm and `segs` emitters across. Two rows means
+    a double-stack bar (ST4K)."""
+    root = group(f'lightBar_{pid}')
+    lens_mat = lens_mat or LENS
+    y, z = ROOF_Y_EDGE + 70, ROOF_Z_FRONT + 90
+    sweep('housing', [(-L / 2, y, z), (L / 2, y, z)], rounded_rect(hh, dd, min(12, hh / 4), 4), BLACK, root)
+    box('bezel', (0, y, z + dd / 2 - 6), (L - 24, hh - 12, 4), BLACK, root, bevel=1)
+    box('lens', (0, y, z + dd / 2 - 3), (L - 44, hh - 22, 2), lens_mat, root, bevel=0.5)
+    n = max(2, segs // rows)
+    cup = max(10, min(46, (L - 80) / n - 5))
+    for row in range(rows):
+        ry = y + (0 if rows == 1 else (row * 2 - 1) * hh / 4.2)
+        for k in range(n):
+            xk = -L / 2 + 42 + k * (L - 84) / (n - 1)
+            lib.cylinder(f'cup{row}{k}', (xk, ry, z + dd / 2 - 9), (0, 0, 1), cup, 6, CHROME, root, n=10)
+    for k in range(24):                                      # heat-sink fins down the back
+        box(f'fin{k}', (-L / 2 + 30 + k * (L - 60) / 23, y, z - dd / 2 - 4), (5, hh - 6, 12), BLACK, root, bevel=0)
+    for s in (-1, 1):
+        arm = [(s * 610, ROOF_Y_EDGE - 150, ROOF_Z_FRONT + 40), (s * 620, ROOF_Y_EDGE - 20, ROOF_Z_FRONT + 60),
+               (s * (L / 2 + 15), y, z)]
+        sweep(f'bracket{s}', [tuple(p) for p in fillet(arm, 40)], rounded_rect(50, 8, 2), BLACK, root)
+        box(f'endCap{s}', (s * (L / 2 + 6), y, z), (12, hh + 12, dd + 8), BLACK, root, bevel=3)
+    return root
+
+
+def roof_lights_kc():
+    """KC HiLiTES Pro6 six-light gravity bar (91307): 994 x 154 x 85 overall,
+    six 152.4 mm lamps at a 156.6 mm pitch, each wearing the black-and-yellow
+    KC cover that gives the bar its face. Sits on the rack's front rail."""
+    root = group('roofLights_kc_pro6')
+    z = RACK_ZC + ARB_L / 2 + 10
+    y = RACK_TOP + 120
+    pitch = 156.6
+    sweep('bar', [(-470, y - 96, z - 34), (470, y - 96, z - 34)], rounded_rect(58, 46, 8, 3), BLACK, root)
+    for s in (-1, 1):
+        box(f'foot{s}', (s * 400, RACK_TOP - 30, z - 34), (70, 130, 66), BLACK, root, bevel=4)
+    for k in range(6):
+        x = (k - 2.5) * pitch
+        lib.cylinder(f'can{k}', (x, y, z - 36), (0, 0, 1), 150, 76, BLACK, root, n=28)
+        annulus(f'bezel{k}', (x, y, z + 6), 66, 78, 12, BLACK, root, n=28)
+        lib.cylinder(f'bowl{k}', (x, y, z + 1), (0, 0, 1), 132, 5, CHROME, root, n=28)
+        lib.cylinder(f'lens{k}', (x, y, z + 5), (0, 0, 1), 132, 3, LENS, root, n=28)
+        lib.cylinder(f'cover{k}', (x, y, z + 12), (0, 0, 1), 156, 6, KC_YELLOW, root, n=28)
+        # the cover's face IS the KC logo -- black letters over a smile
+        # curve. A straight bar across the middle reads as a road sign.
+        text(f'kc{k}', 'KC', (x, y + 6, z + 16), 52, 4, BLACK, root,
+             font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+        for j in range(9):
+            t = j / 8
+            sx = (t - 0.5) * 104
+            sy = y - 30 - 22 * math.sin(math.pi * t)
+            box(f'smile{k}{j}', (x + sx, sy, z + 16), (16, 11, 3), BLACK, root, bevel=1)
+        box(f'stem{k}', (x, y - 84, z - 36), (26, 64, 22), BLACK, root, bevel=3)
+    return root
+
+
+def grille_light(pid):
+    """Lighting that lives at the nose rather than on the roof.
+
+    'rally'      STEDI Rally Bar (ST-11-JMN-001): a 63 mm stainless tube
+                 across the front of the grille on two legs, carrying an
+                 ST1K 21.5 in yellow bar. STEDI's only Jimny nose product --
+                 they make no behind-the-grille bracket for this car.
+    'lower'      ST1K 21.5 in (546 x 38 x 80) sitting in the lower bumper
+                 aperture, the common DIY answer.
+    'bushranger' Bushranger NHBGS450LB, 717 mm single row of 21, mounted
+                 BEHIND the lower grille with the splash tray trimmed."""
+    root = group(f'grilleLight_{pid}')
+    zf = nose_z(0)
+    if pid == 'rally':
+        y = 690
+        tube('hoop', [(-560, y, zf + 46), (560, y, zf + 46)], 63, STEEL, root)
+        for s in (-1, 1):
+            leg = [(s * 540, y, zf + 46), (s * 540, 480, zf + 30), (s * 540, 430, zf - 30)]
+            tube(f'leg{s}', [tuple(p) for p in fillet(leg, 60)], 63, STEEL, root)
+            box(f'plate{s}', (s * 540, 415, zf - 40), (90, 40, 90), STEEL, root, bevel=4)
+        L, hh, dd, n = 546, 38, 80, 20
+        y2 = y + 70
+        sweep('housing', [(-L / 2, y2, zf + 40), (L / 2, y2, zf + 40)], rounded_rect(hh, dd, 8, 3), BLACK, root)
+        box('lens', (0, y2, zf + 40 + dd / 2 - 3), (L - 40, hh - 16, 2), STEDI_YELLOW, root, bevel=0.5)
+        for k in range(n):
+            xk = -L / 2 + 34 + k * (L - 68) / (n - 1)
+            lib.cylinder(f'cup{k}', (xk, y2, zf + 40 + dd / 2 - 8), (0, 0, 1), 22, 6, CHROME, root, n=10)
+        for s in (-1, 1):
+            box(f'clamp{s}', (s * (L / 2 - 30), y2 - 40, zf + 44), (30, 80, 30), BLACK, root, bevel=3)
+    else:
+        L, hh, dd, n, lens = ((546, 38, 80, 20, STEDI_YELLOW) if pid == 'lower'
+                              else (717, 62, 78, 21, LENS))
+        y = 520 if pid == 'lower' else 470
+        zc = zf - (6 if pid == 'lower' else 34)              # the Bushranger sits behind the grille
+        sweep('housing', [(-L / 2, y, zc), (L / 2, y, zc)], rounded_rect(hh, dd, 8, 3), BLACK, root)
+        box('lens', (0, y, zc + dd / 2 - 3), (L - 40, hh - 18, 2), lens, root, bevel=0.5)
+        for k in range(n):
+            xk = -L / 2 + 34 + k * (L - 68) / (n - 1)
+            lib.cylinder(f'cup{k}', (xk, y, zc + dd / 2 - 8), (0, 0, 1), min(30, (L - 68) / n - 4), 6, CHROME, root, n=10)
+        for s in (-1, 1):
+            box(f'brk{s}', (s * (L / 2 - 20), y - 50, zc - 10), (24, 110, 40), BLACK, root, bevel=3)
+    return root
+
+
+# ================================================================== EXHAUSTS
+# docs/jb74-exhaust.json. The tail pipe used to be drawn by one rear bumper,
+# which meant every other bumper silently deleted the car's exhaust. It is a
+# product family of its own now.
+#
+# Heights in that file are ground clearances in world mm; parts hang off BODY,
+# which already carries the 60 mm the model lifts the shell by, so subtract it.
+EXH_LIFT = 60
+TI_BLUE = material('TitaniumBlue', 0x3d5a7a, rough=0.28, metal=1.0)
+EXH_STEEL = material('ExhaustSteel', 0xc9ced2, rough=0.18, metal=1.0)
+BUMPER_Z = -1735          # rear face of the stock rear bumper
+
+
+def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrude=35,
+            cut=0.0, tip_mat=None, muffler=None, muffler_z=-1250, roll=False):
+    """One tail-pipe system. `layout` picks the silhouette:
+       'rear'    drum behind the axle, tip out under the bumper
+       'corner'  a tip under each rear bumper corner
+       'side'    silencer under the left rocker, tips out ahead of the wheel
+       'through' the tip turns outboard through the bumper corner, high up
+       'cover'   a slip-over sleeve on the stock pipe, nothing else changes
+    """
+    root = group(f'exhaust_{pid}')
+    tip_mat = tip_mat or EXH_STEEL
+    y = tip_y - EXH_LIFT
+    pipe = material('ExhaustPipe', 0x6e7276, rough=0.45, metal=0.9)
+
+    def tip_at(name, x, zz, yy, ax=(0, 0, -1)):
+        lib.cylinder(name, (x, yy, zz), ax, tip_d, 150, tip_mat, root, n=24)
+        lib.cylinder(name + 'Mouth', (x + ax[0] * 70, yy, zz + ax[2] * 70), ax, tip_d - 10, 14,
+                     material('ExhaustBore', 0x141414, rough=0.9), root, n=24)
+        if roll:
+            annulus(name + 'Roll', (x + ax[0] * 66, yy, zz + ax[2] * 66), tip_d / 2 - 3, tip_d / 2 + 5, 12,
+                    tip_mat, root, n=24)
+
+    if layout == 'cover':
+        tip_at('tipR', side * 430, BUMPER_Z - protrude + 60, y)
+        lib.cylinder('stub', (side * 430, y, BUMPER_Z + 60), (0, 0, -1), tip_d - 22, 140, pipe, root, n=18)
+        return root
+
+    if layout == 'side':
+        # HKS TrailMaster and the Kakimoto DS: everything happens under the
+        # left rocker, ahead of the rear wheel; the rear bumper is untouched.
+        s = -RIGHT
+        # HKS's own demo-car photo puts the tips 150-250 mm ahead of the rear
+        # tyre's leading edge. On a 744 mm tyre on the -1047 axle that edge is
+        # at z = -675, so the tips finish near -475 and the canister sits
+        # forward of them, under the door.
+        zc = -110
+        if muffler:
+            ml, md = muffler
+            lib.cylinder('canister', (s * 790, y + 30, zc), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
+            for k in range(9):                               # perforated heat shield
+                lib.cylinder(f'perf{k}', (s * 790, y + 30 + md / 2 - 4, zc - ml / 2 + 40 + k * (ml - 80) / 8),
+                             (0, 1, 0), 16, 8, BLACK, root, n=8)
+            for zz in (zc - ml / 2 - 10, zc + ml / 2 + 10):
+                box(f'strap{zz}', (s * 790, y + 30, zz), (md + 16, md + 16, 16), BLACK, root, bevel=4)
+        for k in range(tips):
+            xx = s * (790 + (k - (tips - 1) / 2) * (tip_d + 12))
+            tip_at(f'tip{k}', xx, zc - (muffler[0] / 2 if muffler else 200) - 60, y + 30)
+        lib.cylinder('run', (s * 760, y + 50, zc + 420), (0, 0, 1), tip_d - 16, 500, pipe, root, n=16)
+        return root
+
+    if layout == 'through':
+        # TANIGUCHI Compe R: the bullet turns out through the bumper corner,
+        # high enough to stay out of a water crossing.
+        yy = 560 - EXH_LIFT
+        x = side * 620
+        lib.cylinder('bullet', (x - side * 60, yy, BUMPER_Z + 130), (1, 0, 0), tip_d + 60, 300, EXH_STEEL, root, n=24)
+        tip_at('tip', x + side * 50, BUMPER_Z + 130, yy, ax=(side, 0, 0))
+        lib.cylinder('down', (side * 500, yy - 140, BUMPER_Z + 200), (0, 1, 0), tip_d - 12, 260, pipe, root, n=16)
+        return root
+
+    if muffler:
+        ml, md = muffler
+        if layout == 'corner':
+            box('resonator', (0, y + 20, muffler_z), (ml, md, md * 0.8), EXH_STEEL, root, bevel=18)
+        elif pid.startswith('apio_yoshimura'):
+            # a motorcycle cannon lying across the car, which is the whole
+            # point of this system
+            lib.cylinder('cannon', (side * 60, y + 26, muffler_z), (1, 0, 0), md, ml, tip_mat, root, n=28)
+            annulus('cannonEndL', (side * 60 - ml / 2, y + 26, muffler_z), md / 2 - 8, md / 2 + 2, 14, EXH_STEEL, root, n=28)
+            box('logo', (side * 60, y + 26 + md / 2 - 4, muffler_z), (200, 6, 40), BLACK, root, bevel=2)
+            for zz in (muffler_z - 70, muffler_z + 70):
+                box(f'hanger{zz}', (side * 60 - ml / 2 + 40, y + 26 + md / 2 + 20, zz), (60, 50, 14), BLACK, root, bevel=3)
+        else:
+            lib.cylinder('drum', (0, y + 20, muffler_z), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
+        lib.cylinder('inlet', (0, y + 30, muffler_z + ml / 2 + 180), (0, 0, 1), tip_d - 22, 360, pipe, root, n=16)
+
+    if layout == 'corner':
+        for s in (-1, 1):
+            tip_at(f'tip{s}', s * 540, BUMPER_Z - protrude + 60, y)
+            lib.cylinder(f'link{s}', (s * 300, y + 10, muffler_z - 120), (s * 0.9, 0, -0.44), tip_d - 20, 560, pipe, root, n=16)
+    else:
+        for k in range(tips):
+            xx = side * 430 + (k - (tips - 1) / 2) * (tip_d + 14)
+            tip_at(f'tip{k}', xx, BUMPER_Z - protrude + 60, y)
+    return root
+
+
+# ============================================================ FIRE EXTINGUISHER
+# 1 kg dry-powder bottle, 80 mm across and about 280 mm tall plus the head.
+# There is no maker-supplied ladder mount for a JB74 -- the owner's car wears
+# a pair of band clamps on the ladder rail, which is what this draws. The two
+# guard positions strap to the MOLLE panel instead.
+def extinguisher(where):
+    root = group(f'extinguisher_{where}')
+    red = material('ExtinguisherRed', 0xa8211b, rough=0.45)
+    if where == 'ladder':
+        s = RIGHT
+        x, y, z = s * 658, 1010, TAIL_Z - 95
+    else:
+        s = RIGHT if where == 'right' else -RIGHT
+        q = QUARTER
+        x = s * 716 + s * 54
+        y = (q['y0'] + q['y1']) / 2 + 10
+        z = (q['z0'] + q['z1']) / 2 + 215
+    lib.cylinder('bottle', (x, y, z), (0, 1, 0), 82, 270, red, root, n=22)
+    lib.sphere('domeTop', (x, y + 135, z), 82, red, root).scale.y = 0.45
+    lib.sphere('domeBase', (x, y - 135, z), 82, red, root).scale.y = 0.35
+    box('label', (x + s * 30, y - 20, z), (30, 120, 66), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=2)
+    lib.cylinder('neck', (x, y + 168, z), (0, 1, 0), 34, 70, STEEL, root, n=14)
+    box('head', (x, y + 212, z), (56, 40, 76), BLACK, root, bevel=6)
+    box('lever', (x, y + 238, z + 6), (40, 12, 96), STEEL, root, bevel=3)
+    lib.cylinder('gauge', (x, y + 206, z + 54), (0, 0, 1), 44, 18, STEEL, root, n=14)
+    tube('hose', [(x, y + 206, z - 40), (x + s * 40, y + 120, z - 60), (x + s * 20, y - 20, z - 52)], 16, RUBBER, root, bend=40)
+    for yy in (y - 92, y + 92):                              # two band clamps
+        annulus(f'band{yy}', (x, yy, z), 44, 56, 26, BLACK, root, n=22)
+        box(f'bandFoot{yy}', (x - s * 44, yy, z), (40, 30, 34), BLACK, root, bevel=3)
+    return root
 
 def build():
     for v in ('platform', 'basket'):
@@ -2363,9 +2645,33 @@ def build():
     rear_bumper_tube()
     ladder_tube()
     ladder_jst()
-    guard_can()
-    guard_board()
+    for sd in (RIGHT, -RIGHT):
+        guard_can(sd)
+        guard_axe(sd)
+        guard_board(sd)
     shovel()
+    # lighting (docs/jb74-lighting.json)
+    light_bar_gen('stedi_st3k', 1300, 51, 55, 50, lens_mat=AMBER)
+    light_bar_gen('stedi_st4k', 1320, 110, 105, 100, rows=2, lens_mat=AMBER)
+    light_bar_gen('stedi_st1k', 546, 38, 80, 20, lens_mat=STEDI_YELLOW)
+    light_bar_gen('stedi_st2k', 1016, 60, 70, 16, lens_mat=AMBER)
+    roof_lights_kc()
+    for gl in ('rally', 'lower', 'bushranger'):
+        grille_light(gl)
+    # exhausts (docs/jb74-exhaust.json)
+    exhaust('stock', tip_d=48, protrude=0, muffler=(360, 120), muffler_z=-1240)
+    exhaust('tw_tip', layout='cover', tip_d=76, protrude=60, roll=True)
+    exhaust('fujitsubo_ak', tip_d=70, tip_y=330, protrude=35, muffler=(350, 120))
+    exhaust('monster_sp_x', tip_d=76, tip_y=330, protrude=45, muffler=(400, 100), roll=True)
+    exhaust('jaos_zs', tip_d=101, tip_y=330, protrude=40, muffler=(400, 130), roll=True)
+    exhaust('kakimoto_kr_lr', layout='corner', tip_d=96, tip_y=345, protrude=30, muffler=(420, 150))
+    exhaust('apio_yoshimura_ti', tip_d=68, tip_y=333, protrude=30, tip_mat=TI_BLUE,
+            muffler=(550, 115), muffler_z=-1560, roll=True)
+    exhaust('taniguchi_compe_r', layout='through', tip_d=75, tip_mat=TI_BLUE)
+    exhaust('hks_trailmaster', layout='side', tip_d=75, tips=2, tip_y=300, tip_mat=TI_BLUE,
+            muffler=(450, 100))
+    for wh in ('ladder', 'left', 'right'):
+        extinguisher(wh)
     flares()
     decals()
     side_skirt()

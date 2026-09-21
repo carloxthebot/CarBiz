@@ -524,6 +524,82 @@ export const SIMPLE = {
   spareBag:     { label: '備胎書包', brands: '多家', uncertain: true },
 };
 
+// Auxiliary lighting (docs/jb74-lighting.json, compiled 2026-09-21 from maker
+// spec sheets). Sizes there are what the 3D parts are built to. Note STEDI
+// makes no behind-the-grille bracket for a Jimny -- the Rally Bar sits in
+// FRONT of the grille, and the true behind-the-grille bar is Bushranger's.
+export const LIGHT_BARS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'ipf', url: 'https://www.ipf-light.com/catalog/642jm2.php', label: '600 S-Series 40 吋燈條', brand: 'IPF',
+    part: '642SD + 642JM2', price: null, cur: 'JPY', uncertain: true, note: '白光；A 柱專用支架 642JM2' },
+  { id: 'stedi_st3k', url: 'https://www.stedi.com.au/', label: 'ST3K 51.5 吋（琥珀濾片）', brand: 'STEDI',
+    price: 394, cur: 'AUD', note: '1300×51mm、50 顆；濾片可拆，裝上由 5700K 變 2500K 琥珀。4.25kg，是唯一不吃掉車頂 30kg 載重的全寬選項。台灣經銷 Jimny Plus' },
+  { id: 'stedi_st4k', url: 'https://www.stedi.com.au/', label: 'ST4K 52 吋（琥珀濾片）', brand: 'STEDI',
+    price: 519, cur: 'AUD', note: '1320×110×105mm、雙排 100 顆、6.62kg；加車頂架後接近 30kg 上限' },
+  { id: 'stedi_st1k', url: 'https://www.stedi.com.au/', label: 'ST1K 21.5 吋 黃光', brand: 'STEDI',
+    price: 219, cur: 'AUD', note: '546×38×80mm、20 顆；原廠黏合黃色鏡片，熄燈也是黃的（全系列唯一原生上色）' },
+  { id: 'stedi_st2k', url: 'https://www.stedi.com.au/', label: 'ST2K TOUCH 40 吋 白／琥珀', brand: 'STEDI',
+    price: 649, cur: 'AUD', note: '1016mm、16 段；白／琥珀雙色 DRL 觸控切換。斷面未公布' },
+];
+
+// Round spot lights on the rack's front rail. The KC "smiley" look is the
+// black-and-yellow logo cover, not a different lamp.
+export const ROOF_LIGHTS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'round', label: '車頂圓燈（一對）', brand: '多家', price: null, uncertain: true, note: '一般 7 吋圓燈一對，鎖在車頂架前橫桿' },
+  { id: 'kc_pro6', url: 'https://www.kchilites.com/', label: 'Pro6 六燈排燈（微笑燈罩）', brand: 'KC HiLiTES',
+    part: '91307', price: 1615, cur: 'USD',
+    note: '994×154×85mm、六顆 152.4mm、間距 156.6mm，附黑底黃 KC 燈罩。11.34kg，加平盤車頂架已超過 JB74 車頂 30kg 動態載重。台灣 MRK 代理，燈罩單買 NT$600' },
+];
+
+// Nose lighting. Sits in front of, in, or behind the grille -- three quite
+// different looks from the outside.
+export const GRILLE_LIGHTS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'rally', url: 'https://www.stedi.com.au/', label: 'Rally Bar ＋ ST1K 黃光', brand: 'STEDI',
+    part: 'ST-11-JMN-001', price: 544, cur: 'AUD',
+    note: '63mm 白鐵管橫過水箱罩「前方」，燈條鎖在管上。STEDI 沒有 Jimny 的格柵內支架，這是他們唯一的 Jimny 車頭件（管 A$325 ＋ ST1K A$219）' },
+  { id: 'lower', url: 'https://www.stedi.com.au/', label: 'ST1K 21.5 吋 下氣壩', brand: 'STEDI',
+    price: 219, cur: 'AUD', note: '546mm 黃光條塞在下保桿開口，最常見的 DIY 解法' },
+  { id: 'bushranger', label: 'Night Hawk 28 吋（格柵後）', brand: 'Bushranger', part: 'NHBGS450LB',
+    price: 600, cur: 'AUD', note: '717mm 單排 21 顆 OSRAM；原廠文案明寫裝在下水箱罩「後方」，需修下護板' },
+];
+
+// Tail pipes (docs/jb74-exhaust.json). What matters here is what shows from
+// outside: JB74 exits on the RIGHT from the factory, and only a few systems
+// change the silhouette at all.
+export const EXHAUSTS = [
+  { id: 'stock', label: '原廠', brand: 'SUZUKI', price: 0, note: '右側出，管口與保桿幾乎切齊，從外面幾乎看不到' },
+  { id: 'tw_tip', label: '裝飾尾飾管（套接）', brand: '台灣市售', price: 675, cur: 'TWD',
+    note: '套在原廠管上，往後多伸 50–80mm；底下完全不動。台灣 JB74 最常見的改法' },
+  { id: 'fujitsubo_ak', url: 'https://www.fujitsubo.co.jp/', label: 'AUTHORIZE K', brand: 'FUJITSUBO', part: '750-81927',
+    price: 72380, cur: 'JPY', note: 'φ70 斜切 21°、離地 320mm，原廠位置最斯文的一套；原廠土除需拆或裁。另有燒色尾管選項' },
+  { id: 'monster_sp_x', url: 'https://www.monster-sport.com/', label: 'TYPE Sp-X', brand: 'MONSTER SPORT', part: '241590-5600M',
+    price: 68200, cur: 'JPY', note: 'φ76.3 斜切捲邊、子彈型消音筒 3.6kg，右側原廠位置免修保桿' },
+  { id: 'jaos_zs', url: 'https://www.jaos.co.jp/', label: 'BATTLEZ ZS', brand: 'JAOS', part: 'B702518B',
+    price: 74800, cur: 'JPY', note: 'φ101 正圓管口（全表最大單出）＋BATTLEZ 壓字，需局部修保桿。台灣 MyRack 約 NT$22,000，是台灣最買得到的真系統' },
+  { id: 'kakimoto_kr_lr', url: 'https://www.kakimoto.co.jp/', label: 'Class KR 左右出', brand: '柿本改', part: 'S71355S',
+    price: 170500, cur: 'JPY', note: 'φ96 雙出、左右保桿下角各一，是車尾正面視角最搶眼的一套；沒有胖消音筒，取而代之是扁平共鳴箱' },
+  { id: 'apio_yoshimura_ti', url: 'https://apio.jp/', label: '突擊 R-77J 鈦砲管', brand: 'APIO × YOSHIMURA', part: '2004-7T',
+    price: 363000, cur: 'JPY', note: '重點是消音筒本身：550×115mm 鈦砲管橫躺在後保桿下，手工燒藍，辨識度全表最高' },
+  { id: 'taniguchi_compe_r', url: 'https://www.ors-taniguchi.co.jp/', label: 'Compe Muffler R', brand: 'TANIGUCHI',
+    price: 102300, cur: 'JPY', note: '唯一會動到保桿本體：管口從右後角「側向」穿出、離地約 560mm，涉水用。原廠保桿要開孔' },
+  { id: 'hks_trailmaster', url: 'https://www.hks-power.co.jp/', label: 'LEGAMAX TRAILMASTER', brand: 'HKS', part: '32018-AS006',
+    price: 150700, cur: 'JPY', note: 'JB74 唯一的 HKS：左側出雙管 φ75 燒藍鈦色，整組藏在左側門檻下、後輪前方，外包打孔隔熱罩。後保桿完全不動——從車尾看跟原廠一樣。車主實車配置' },
+];
+
+// Where a fire extinguisher hangs. No maker sells a JB74 ladder bracket --
+// the owner's car wears a pair of band clamps on the ladder rail, and the
+// guard positions strap to the MOLLE panel (2-5 kg rated, so a 1 kg bottle).
+export const EXTINGUISHERS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'ladder', label: '掛尾梯', brand: '雙環快拆', price: null, uncertain: true,
+    note: '圓管專用雙環架；車主實車配置。市面沒有 JB74 尾梯專用架' },
+  { id: 'left', label: '左鐵窗', brand: 'MOLLE 板', price: null, uncertain: true, note: '鐵窗板載重僅 2–5kg，只能綁 1kg 瓶並垂直固定' },
+  { id: 'right', label: '右鐵窗', brand: 'MOLLE 板', price: null, uncertain: true, note: '同左側' },
+];
+
+
 // Extras that map to configurator toggles (`key`) rather than a select list
 export const OTHERS = [
   { id: 'showa_skirt', url: 'https://www.heekis.com/products/showasidecover', refs: ['https://www.showa-garage.shop/'], label: 'AES 車門下側裙飾板', price: 14500, cur: 'TWD', brand: 'SHOWA GARAGE', photo: true, key: 'sideSkirt',
@@ -534,8 +610,6 @@ export const OTHERS = [
     note: '每片；795×533 雷射切割方孔板、雨槽夾固定，可掀式；配置器「鐵窗（WLM）」' },
   { id: 'fr_ladder', key: 'ladder', url: 'https://ozjimny.com/products/front-runner-ladder-jimny-models-2023-current-xl', label: 'Jimny 尾門後爬梯', price: null, cur: 'AUD', brand: 'Front Runner', part: 'LASJ004', uncertain: true,
     note: '4 階、鉸鏈側；配置器「後爬梯」' },
-  { id: 'ipf_bar', key: 'lightBar', url: 'https://www.ipf-light.com/catalog/642jm2.php', label: '600 S-Series 40 吋燈條＋A 柱支架', price: null, cur: 'JPY', brand: 'IPF', part: '642SD + 642JM2', uncertain: true,
-    note: '配置器「車頂燈條」' },
   { id: 'suzuki_cover', key: 'spareCover', url: 'https://jdmyamato.com/products/y08-sz0001-00024', label: '原廠硬式備胎蓋', price: null, cur: 'JPY', brand: 'SUZUKI', part: '9923B-77R21-003', uncertain: true,
     note: '硬質樹脂面＋皮革背；配置器「備胎硬殼蓋」' },
   { id: 'trasharoo', key: 'spareBag', url: 'https://agileoffroad.com/products/trasharoo-spare-tire-trash-bag', label: '備胎書包（Trasharoo）', price: null, cur: 'USD', brand: 'Trasharoo', uncertain: true,
@@ -577,6 +651,25 @@ export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   }
   if (wheel.offset <= -20) {
     out.push({ level: 'info', msg: `offset ${wheel.offset} 會明顯外擴輪距，需確認輪拱覆蓋與法規` });
+  }
+  if (cfg.extinguisher === 'ladder' && cfg.ladder === 'none') {
+    out.push({ level: 'error', msg: '滅火器掛在尾梯上，但目前沒有裝尾梯' });
+  }
+  if ((cfg.extinguisher === 'left' || cfg.extinguisher === 'right') && !cfg.windowGuards) {
+    out.push({ level: 'error', msg: '滅火器綁在鐵窗的 MOLLE 板上，但目前沒有裝鐵窗' });
+  }
+  // JB74 roof load is 30 kg dynamic. A tray is 14-18 kg on its own, so a
+  // heavy light set on top of one is over the limit before anything is
+  // strapped down.
+  if (cfg.roofRack !== 'none' && (cfg.roofLights === 'kc_pro6' || cfg.lightBar === 'stedi_st4k')) {
+    out.push({ level: 'warn',
+      msg: 'JB74 車頂動態載重只有 30kg；平盤車頂架 14–18kg 加上這組燈（KC Pro6 11.3kg／ST4K 6.6kg）已經吃滿，不要再放行李' });
+  }
+  if (cfg.exhaust === 'taniguchi_compe_r' && cfg.rearBumper !== 'stock') {
+    out.push({ level: 'warn', msg: 'TANIGUCHI Compe R 的管口要從後保桿右角穿出；社外後保桿沒有任何一家公布相容性，需實車確認' });
+  }
+  if ((cfg.exhaust === 'jaos_zs' || cfg.exhaust === 'showa_links') && cfg.rearBumper !== 'stock') {
+    out.push({ level: 'info', msg: '這套排氣管原廠保桿要局部裁切；換成社外後保桿後是否還需要修改，請向店家確認' });
   }
   return out;
 }
