@@ -1895,7 +1895,7 @@ def rear_urnieta_salado():
             box(f'stepArm{s}{k}', (s * 470 + k * 110, y - H / 2 - 16, z + 10), (16, 40, 150), TEXBLACK, root, bevel=2)
         box(f'endPlug{s}', (s * (W / 2 - 24), y, z + 118), (14, 40, 26), BLACK, root, bevel=6)
     box('platePanel', (0, y - 24, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
-    box('plate', (0, y - 24, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
+    box('plate', (0, y - 24, zf - 1), (330, 165, 3), PLATE, root, bevel=1)   # sits ON the panel, not 1.5 mm off it
     lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
@@ -2500,7 +2500,7 @@ BUMPER_Z = -1735          # rear face of the stock rear bumper
 
 
 def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrude=35,
-            cut=0.0, tip_mat=None, muffler=None, muffler_z=-1250, roll=False):
+            cut=0.0, tip_mat=None, muffler=None, muffler_z=-1250, muffler_dy=0, roll=False):
     """One tail-pipe system. `layout` picks the silhouette:
        'rear'    drum behind the axle, tip out under the bumper
        'corner'  a tip under each rear bumper corner
@@ -2572,9 +2572,26 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
             for zz in (muffler_z - 70, muffler_z + 70):
                 box(f'hanger{zz}', (side * 60 - ml / 2 + 40, y + 26 + md / 2 + 20, zz), (60, 50, 14), BLACK, root, bevel=3)
         else:
-            lib.cylinder('drum', (0, y + 20, muffler_z), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
-        lib.cylinder('inlet', (0, y + 30, muffler_z + ml / 2 + 180), (0, 0, 1), tip_d - 22, 360, pipe, root, n=16)
+            # muffler_dy tucks the drum up over the axle, where a compact one
+            # actually lives and where it stops showing in a side view
+            lib.cylinder('drum', (0, y + 20 + muffler_dy, muffler_z), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
+            if muffler_dy:
+                tube('dropPipe', [(0, y + 20 + muffler_dy, muffler_z - ml / 2),
+                                  (side * 240, y + 10, muffler_z - ml / 2 - 200),
+                                  (side * 430, y, muffler_z - ml / 2 - 330)], tip_d - 24, pipe, root, bend=120)
+        lib.cylinder('inlet', (0, y + 30 + muffler_dy, muffler_z + ml / 2 + 180), (0, 0, 1), tip_d - 22, 360, pipe, root, n=16)
 
+    if layout == 'quad':
+        # URNIETA SALADO: one central silencer splitting two ways, two tips a
+        # side at 279 and 368 mm off centre -- 89 mm apart, so each pair reads
+        # as one bonded unit inside a squared shroud. The tips clamp to the
+        # tail section and hang below the bumper; nothing is cut.
+        for xx in (-368, -279, 279, 368):
+            tip_at(f'tip{xx}', xx, BUMPER_Z - protrude + 60, y)
+        for sd in (-1, 1):
+            box(f'shroud{sd}', (sd * 323.5, y, BUMPER_Z + 54), (210, tip_d + 34, 130), BLACK, root, bevel=12)
+            lib.cylinder(f'feed{sd}', (sd * 200, y + 26, muffler_z - 150), (sd * 0.62, -0.16, -1), tip_d - 26, 520, pipe, root, n=16)
+        return root
     if layout == 'corner':
         for s in (-1, 1):
             tip_at(f'tip{s}', s * 540, BUMPER_Z - protrude + 60, y)
@@ -2615,6 +2632,47 @@ def extinguisher(where):
     for yy in (y - 92, y + 92):                              # two band clamps
         annulus(f'band{yy}', (x, yy, z), 44, 56, 26, BLACK, root, n=22)
         box(f'bandFoot{yy}', (x - s * 44, yy, z), (40, 30, 34), BLACK, root, bevel=3)
+    return root
+
+
+# ============================================================ URNIETA SALADO
+# docs/urnieta-salado.json. Every dimension here is measured off URNIETA's own
+# scale drawings (UN-JIMNY-FB-010/012/013), not estimated from photographs.
+def ladder_urnieta():
+    """SALADO rear ladder (0702026), drawing UN-JIMNY-FB-013: 1015 x 390, a
+    single closed loop of 34 mm tube with four 28 mm rungs at 158/378/603/862
+    above its foot. The frame is NOT flat -- its upper half steps 91 mm
+    inboard between the first and second rungs, which is the published
+    'up to 235/75 clearance' geometry that lets it pass the spare wheel. The
+    top hooks over the tailgate's upper edge, not over the roof."""
+    root = group('ladder_urnieta')
+    s = RIGHT
+    zf = TAIL_Z - 58
+    y0 = 545                                                 # foot of the ladder
+    y1 = y0 + 1015
+    half = 254 / 2                                           # climbing frame, outboard post extra
+    xlo, xup = s * 560, s * (560 - 91)                       # lower run outboard, upper run inboard
+    for k in (-1, 1):                                        # the two side rails, each with its S-bend
+        rail = [(xlo + k * s * half, y0, zf), (xlo + k * s * half, y0 + 600, zf),
+                (xup + k * s * half, y0 + 860, zf), (xup + k * s * half, y1, zf)]
+        tube(f'rail{k}', [tuple(pt) for pt in fillet(rail, 90)], 34, BLACK, root, bend=40)
+    tube('topBow', [(xup - s * half, y1, zf), (xup + s * half, y1, zf)], 34, BLACK, root, bend=30)
+    tube('footBow', [(xlo - s * half, y0, zf), (xlo + s * half, y0, zf)], 34, BLACK, root, bend=30)
+    for k, dy in enumerate((158, 378, 603, 862)):
+        xc = xlo if dy < 600 else xup
+        tube(f'rung{k}', [(xc - s * half, y0 + dy, zf), (xc + s * half, y0 + dy, zf)], 28, BLACK, root)
+    box('gripPad', (xlo, y0 + 158, zf - 16), (180, 34, 22), RUBBER, root, bevel=6)
+    # accessory post outboard of the frame: flag socket, aerial mount, two light points
+    xp = xlo + s * (390 - 254 + half) * 0.55
+    lib.cylinder('post', (xp, y0 + 560, zf), (0, 1, 0), 30, 700, BLACK, root, n=14)
+    for dy in (300, 820):
+        box(f'postArm{dy}', (xp - s * 30, y0 + dy, zf), (70, 26, 26), BLACK, root, bevel=3)
+    lib.cylinder('flagSocket', (xp, y1 - 120, zf), (0, 1, 0), 38, 70, STEEL, root, n=14)
+    # hooks over the tailgate upper edge; clamp on the lower hinge
+    for k in (-1, 1):
+        tube(f'hook{k}', [(xup + k * s * half, y1, zf), (xup + k * s * half, y1 + 34, zf + 40),
+                          (xup + k * s * half, y1 + 10, zf + 96)], 30, BLACK, root, bend=26)
+        box(f'foot{k}', (xlo + k * s * half, y0 + 40, (TAIL_Z + zf) / 2), (56, 90, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
     return root
 
 def build():
@@ -2670,8 +2728,25 @@ def build():
     exhaust('taniguchi_compe_r', layout='through', tip_d=75, tip_mat=TI_BLUE)
     exhaust('hks_trailmaster', layout='side', tip_d=75, tips=2, tip_y=300, tip_mat=TI_BLUE,
             muffler=(450, 100))
+    # HKS LEGAL K-1: right side, straight out the back under the bumper, one
+    # 74.7 tip. The drum is small (4.0 kg) and sits up over the rear axle, so
+    # from the side the tip is all you see.
+    exhaust('hks_legal', tip_d=75, tip_y=325, protrude=45, muffler=(250, 150),
+            muffler_z=-1060, muffler_dy=150, roll=True)
+    exhaust('hks_legal_ti', tip_d=75, tip_y=325, protrude=45, tip_mat=TI_BLUE,
+            muffler=(250, 150), muffler_z=-1060, muffler_dy=150, roll=True)
+    exhaust('urnieta_salado', layout='quad', tip_d=80, tip_y=330, protrude=40,
+            muffler=(500, 150), muffler_z=-1180, roll=True)
     for wh in ('ladder', 'left', 'right'):
         extinguisher(wh)
+    # URNIETA SALADO (docs/urnieta-salado.json)
+    ladder_urnieta()
+    # 1890 x 1366 is dimensioned on drawing UN-JIMNY-FB-012; it overhangs this
+    # model's 1825 mm roof slightly at both ends, which is what the fitted
+    # photos show. The half-roof SKU is not dimensioned anywhere -- 1100 is a
+    # guess from the product photos and is flagged as such in parts.js.
+    rack_platform('urnieta_salado', 1366, 1890, slat_dir='across', slats=7, rail=(52, 48), legs=6, deflector=True)
+    rack_platform('urnieta_salado_half', 1366, 1100, slat_dir='across', slats=5, rail=(52, 48), legs=4, deflector=True)
     flares()
     decals()
     side_skirt()

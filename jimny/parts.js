@@ -384,6 +384,10 @@ export const MIRRORS = [
 // Roof racks, awnings, side steps and ladders are modelled parts named
 // roofRack_<id>, awning_<id>_<left|right>, sideStep_<id>, ladder_<id>.
 export const ROOF_RACKS = [
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-roof-rack-for-jimny-jb74-jc74/', label: 'SALADO 全頂行李架', price: 30900, cur: 'TWD', brand: 'URNIETA', part: '0702024',
+    note: '1890×1366mm 平板式：7 根橫向 50mm 滑槽條（中段 220mm 間距）、中央縱向脊樑、外圍矮圓管框、前方鋁沖壓導風板。原廠雨槽每側一根長軌、每側 3 個腳座。尺寸取自原廠圖 UN-JIMNY-FB-012；離車頂高度原廠未公布' },
+  { id: 'urnieta_salado_half', url: 'https://urnieta.com/product/salado-roof-rack-for-jimny-jb74-jc74/', label: 'SALADO 半頂行李架', price: 25200, cur: 'TWD', brand: 'URNIETA', part: '0702034', uncertain: true,
+    note: '同款的短版，每側 2 個腳座。原廠沒有公布半頂的長度，模型長度為依照片推估' },
   { id: 'wood', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'trip basket 復古車頂架（半長）', price: 56000, cur: 'JPY', brand: 'DAMD', part: 'TB-HR1',
     refs: ['https://www.sunvigor.com.hk/onlineshop/tw/damd/2605-suzukijimny-jimnysierre-damd-roofrack-tripbacket-djbtbdrr1.html'],
     note: '1350×600×160mm、13.5kg。黑色鋼製鐵線籃，木料是紐西蘭輻射松乙醯化處理的高耐久「Accoya」，做成包覆前緣的弧形擋板與兩側木塊，不是木地板。裝在車頂前段的橫桿上。日本仍在售 ¥56,000／¥61,600 稅込；＋TERZO 基座組 TB-HRKJB ¥74,000' },
@@ -501,6 +505,8 @@ export const LADDERS = [
     note: '4 階、鉸鏈側、勾尾門上緣' },
   { id: 'jst', photo: true, url: 'https://shopee.tw/search?keyword=JST%20%E5%B0%BE%E9%96%80%E6%A2%AF%20Jimny', label: '標準版尾門後爬梯', price: 5180, cur: 'TWD', brand: 'JST 吉米工坊',
     note: 'Ø25 圓管封閉橢圓環、內寬 27cm（窄版 22cm）、四階，兩座片鎖尾門鉸鏈側；台灣製' },
+  { id: 'urnieta', url: 'https://urnieta.com/product/salado-rear-ladder-kit-for-jimny-jb74-jc74-jb64/', label: 'SALADO 後爬梯', price: 19500, cur: 'TWD', brand: 'URNIETA', part: '0702026',
+    note: '1015×390mm、Ø34 主管＋Ø28 四階（離底 158／378／603／862mm，間距不等）。上端勾尾門上緣、下端夾尾門下鉸鍊，不動車頂。中段有 91mm 往外的 S 形偏移閃備胎，可上到 235/75。附旗桿座、天線座與兩個輔助燈點。尺寸取自原廠圖 UN-JIMNY-FB-013' },
   { id: 'tube', photo: true, label: '管狀環形後爬梯', price: null, cur: 'TWD', brand: '多家', uncertain: true,
     note: 'Ø32 管環、勾車頂架後緣、附滅火器座（車主實車配置）' },
 ];
@@ -584,9 +590,17 @@ export const EXHAUSTS = [
     price: 363000, cur: 'JPY', note: '重點是消音筒本身：550×115mm 鈦砲管橫躺在後保桿下，手工燒藍，辨識度全表最高' },
   { id: 'taniguchi_compe_r', url: 'https://www.ors-taniguchi.co.jp/', label: 'Compe Muffler R', brand: 'TANIGUCHI',
     price: 102300, cur: 'JPY', note: '唯一會動到保桿本體：管口從右後角「側向」穿出、離地約 560mm，涉水用。原廠保桿要開孔' },
+  { id: 'hks_legal', url: 'https://www.hks-power.co.jp/', label: 'LEGAL Muffler K-1', brand: 'HKS', part: '31013-AS017',
+    price: 13800, cur: 'TWD',
+    note: 'φ74.7 單出、拋光 SUS304、右側後出（與原廠同側同位置），伸出保桿約 45mm。消音鼓只有 4.0kg 藏在後軸上方，側面幾乎看不到；近接排氣音 83dB（原廠 81），免切保桿。台灣唯一有公司貨標價的 HKS 吉姆尼排氣，日本 ¥49,500。車主實車配置' },
+  { id: 'hks_legal_ti', url: 'https://www.hks-power.co.jp/', label: 'LEGAL Muffler K-1（鈦燒色尾管）', brand: 'HKS', part: '31013-AS020',
+    price: 16900, cur: 'TWD', note: '與 K-1 同一支，尾管換成鈦燒色；日本 ¥71,500' },
+  { id: 'urnieta_salado', url: 'https://urnieta.com/product/salado-exhaust-kit-for-jimny-jb74-jc74/', label: 'SALADO 四出排氣', brand: 'URNIETA', part: '0702019',
+    price: 44800, cur: 'TWD',
+    note: '真的四根管：一顆中央消音器分兩路，每側兩根 Ø80 尾管（離中線 279／368mm，同側相距 89mm 幾乎相貼，共用一個方形外罩），全部朝後。電子閥門＋無線遙控，中尾段 cat-back，不需切保桿——SALADO 後保桿是半高的，本來就露出這一區。尺寸取自原廠圖 UN-JIMNY-FB-010' },
   { id: 'hks_trailmaster', url: 'https://www.hks-power.co.jp/', label: 'LEGAMAX TRAILMASTER', brand: 'HKS', part: '32018-AS006',
-    price: 150700, cur: 'JPY', uncertain: true,
-    note: '左側出雙管 φ75 燒藍鈦色，整組藏在左側門檻下、後輪前方。⚠ 車主回報實車的 HKS 與原廠同側（右側後出），並非此型；HKS 的 JB74 產品線重新查證中' },
+    price: 150700, cur: 'JPY',
+    note: '左側出雙管 φ75 燒藍鈦色，整組藏在左側門檻下、後輪前方，後保桿完全不動。HKS 給 JB74 的另一條路線，與 LEGAL 的右側後出完全不同' },
 ];
 
 // Where a fire extinguisher hangs. No maker sells a JB74 ladder bracket --
@@ -693,7 +707,7 @@ export const KITS = [
     set: { grille: 'damd_little_g_trad', frontBumper: 'damd_little_g_trad', rearBumper: 'damd_little_g_trad_rear' },
     note: 'JB74 車身件套件未塗裝 ¥547,800，烤漆另加 ¥145,200。含引擎蓋罩與蓋上方向燈（尚未建模）' },
   { id: 'urnieta_salado', url: 'https://urnieta.com/', label: 'SALADO 遠征越野套件', price: null, cur: 'TWD', brand: 'URNIETA', uncertain: true,
-    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear', sideStep: 'urnieta_salado', hood: 'urnieta_salado', spareCoverKit: 'urnieta_salado' },
+    set: { grille: 'urnieta_salado', frontBumper: 'urnieta_salado', rearBumper: 'urnieta_salado_rear', sideStep: 'urnieta_salado', hood: 'urnieta_salado', spareCoverKit: 'urnieta_salado', roofRack: 'urnieta_salado', ladder: 'urnieta', exhaust: 'urnieta_salado' },
     note: '中國東莞斯塔克工業（歐尼塔）；官網不標價，僅後保桿在台灣蝦皮有 NT$27,000。整套另有鋁引擎蓋、管狀側桿、行李架、後梯、四出排氣、涉水管（部分尚未建模）。只支援 JB74／JC74' },
   { id: 'urnieta_1970', url: 'https://urnieta.com/', label: '1970 復古套件（70 年代風）', price: 49400, cur: 'TWD', brand: 'URNIETA',
     set: { grille: 'urnieta_1970', frontBumper: 'urnieta_1970', rearBumper: 'urnieta_1970_rear', sideStep: 'urnieta_1970', hood: 'urnieta_1970', spareCoverKit: 'urnieta_1970' },

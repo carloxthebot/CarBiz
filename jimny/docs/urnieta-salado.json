@@ -1,0 +1,252 @@
+{
+  "compiled": "2026-09-22",
+  "brand": "URNIETA",
+  "brandNote": "URNIETA is NOT a Spanish maker. It is the offroad brand of Starks Automotive / Stark Industrial, Dongguan, China, established 2018, selling through 26 dealers in 20 countries (dealer list at https://urnieta.com/contact/). The name is Basque-sounding by design only. The existing parts.js note (中國東莞斯塔克工業品牌，中文名歐尼塔) is correct; the 'Spanish maker' framing in the research brief is not.",
+  "sourceNote": "urnieta.com blocks plain curl with HTTP 403 and defeats r.jina.ai with a CAPTCHA interstitial, but WebFetch reads it, and static assets under /wp-content/uploads/ are fetchable with a browser User-Agent. Every dimension marked verified below is read off URNIETA's own dimensioned engineering drawing PNG for that part, downloaded and measured pixel-wise; the drawings carry two labelled dimensions each, which cross-check the derived scale to better than 0.3%.",
+
+  "products": [
+    {
+      "id": "salado_roof_rack",
+      "name": "SALADO Roof Rack for Jimny JB74 / JC74",
+      "part": "0702034 (3-door short/half) / 0702024 (3-door long/full) / 0702023 (5-door JC74)",
+      "partNote": "The three SKUs are printed together on the product page with no mapping. The mapping above comes from the manufacturer's own store starks2018.com, which lists them separately: 0702034 '3-DOOR SHORT JB74', 0702024 '3-DOOR LONG JB74', 0702023 '5-DOOR JC74'. Taiwan retailers corroborate it with three variants at three prices (半頂 / 全頂 / 五門). MRK 4X4 re-badges the set as UR002-1 / UR002-2 / UR002-3.",
+      "line": "SALADO",
+      "url": "https://urnieta.com/product/salado-roof-rack-for-jimny-jb74-jc74/",
+      "drawing": {
+        "number": "UN-JIMNY-FB-012",
+        "partNameOnDrawing": "ROOF ROCK",
+        "partNameNote": "'ROOF ROCK' is URNIETA's own typo on the drawing title block; the product is a roof rack.",
+        "scale": "1:8",
+        "units": "MM",
+        "view": "plan (top-down), vehicle front at drawing left",
+        "file": "https://urnieta.com/wp-content/uploads/2026/06/14/salado-roof-rack-for-jimny-jb74-jc74-design-drawing.png"
+      },
+      "dims": {
+        "lengthMM": 1890,
+        "widthMM": 1366,
+        "lengthMM_5door": 2214,
+        "widthMM_5door": 1368,
+        "dimsVerified": true,
+        "dimsNote": "1890 and 1366 are labelled dimensions on the drawing (full-length 3-door). 'NOTICE: 5-DOOR 2214 * 1368' is printed on the same drawing. The 3-door-to-5-door length delta of 324 mm matches the JC74's +340 mm wheelbase, which corroborates both figures. The HALF-roof variant is not dimensioned anywhere.",
+        "heightMM": null,
+        "heightNote": "NOT PUBLISHED anywhere - the drawing is a plan view only, and no elevation exists. ESTIMATED: platform floor about 90 mm above the roof skin (+/-25), crossbar tops about 105 mm, top of the perimeter tube rim about 145 mm. Reasoning: in the front-corner close-up (real-photo-05) the perimeter tube's end cap is seen near face-on and measures ~72 px; the apparent vertical rise from the beige roof skin to the deck at the same point is ~190 px, i.e. 2.6 tube diameters; with a rim tube in the usual Ø32-38 band that is 84-100 mm apparent, and the shot looks down at roughly 40 degrees so the true vertical is ~1.3x the apparent, giving ~110-130 mm to the crossbar tops. Taking the floor panel as sitting ~20 mm below the crossbar tops gives ~90 mm. Treat as LOW CONFIDENCE; it is the weakest number in this file for the rack.",
+        "slatCount": 7,
+        "slatWidthMM": 50,
+        "slatLengthMM": 1071,
+        "slatPitchMM": [185, 222, 219, 220, 220, 196],
+        "slatNote": "7 slats measured off the drawing at scale 2.6069 mm/px (1890/725 px horizontally and 1366/524 px vertically agree to 4 significant figures, so the drawing is isotropic). Slat edge-pairs sit at drawing x = 590-609, 661-680, 746-765, 830-849, 915-933, 999-1018, 1074-1093; each is 19 px = 50 mm wide. The five middle bays are a uniform ~220 mm pitch; the front bay (185 mm) and rear bay (196 mm) are tighter. The 5-door rack is not drawn, but 2214 mm at the same slat field density implies about 9 slats - real-photo-05 (a JC74) shows roughly 9-10, consistent.",
+        "centreSpineMM": 26,
+        "centreSpineNote": "Every slat is interrupted at mid-width: each vertical run splits into two 200 px (521 mm) segments with a 10 px (26 mm) gap at drawing y=325-334. That is a longitudinal centre spine running the length of the tray under the slats."
+      },
+      "mount": {
+        "type": "factory rain gutter, via a full-length side rail per side",
+        "feetPerSide": 3,
+        "feetTotal": 6,
+        "feetNote": "Full-length version: 3 foot plates per side (6 total), each with 2 bolts, visible outboard of the tray on the drawing. Foot-plate centres measured at drawing x = 527, 915, 1093, i.e. about 209 mm, 1220 mm and 1684 mm back from the rack's front edge (rack front edge at x=447). The spacing is deliberately uneven - a long ~1010 mm unsupported span in the middle of the roof, then two feet close together (~464 mm apart) at the rear. The product page states '4 or 6 mounting feet' depending on half/full roof, so the HALF version is 2 per side.",
+        "notGutterClamp": false,
+        "mountNote": "The tray does not touch the roof directly. A full-length side rail per side sits along the JB74's factory drip rail / rain gutter (clearly visible in real-photo-02, -03 and -05 as a black strip along the roof edge carrying a 'Salado' script and URNIETA badges); the foot plates clamp that rail and the tray bolts to it. The JB74 has no factory rail holes and the rack does not use its own free-standing feet. Published hardware: M6 carriage bolts, M6 lock nuts, M5/M6 washers and Allen screws, plus cup-head hex M5x20 screws at the front and M6x20 at the rear. URNIETA does not state in words that the feet clamp the gutter - that is read off the photographs.",
+        "railBadgeNote": "The side rail is body-coloured and badged per kit line: 'Salado' script on SALADO builds, '1970 SERIES' on 1970 builds (see the ladder page's real-photo-06). Same rail, different badge/finish, as far as the photos show."
+      },
+      "construction": {
+        "type": "flat slatted tray with a raised round-tube perimeter rim",
+        "detail": "Not a plain flat tray and not a deep basket. The deck is a ribbed floor panel carrying 7 transverse extruded slats with a T-slot channel in the top face; a round tube rim (rounded corners) runs along both sides and across the rear, standing proud of the deck on short posts, giving a low basket lip. The front of the rim is closed by the stamped aluminium wind deflector instead of tube.",
+        "slatDirection": "across the car (transverse), spaced along the length",
+        "slatDirectionNote": "Unambiguous on the drawing: the 1890 mm dimension is horizontal with the windscreen at drawing left, so the page-horizontal axis is the vehicle's longitudinal axis; the 7 slat lines run page-vertical, i.e. laterally. This is Front Runner Slimline II style architecture, which matches URNIETA's own claim that the rack 'shares main structural design with URNIETA's LC platform rack'.",
+        "windDeflector": true,
+        "windDeflectorNote": "Yes - full-width stamped aluminium deflector at the front, carrying a white 'URNIETA(R)' wordmark. It projects forward of the roof's leading edge, over the top of the windscreen; part of the 1890 mm overall length is deflector overhang.",
+        "lightBarMount": false,
+        "lightBarNote": "No dedicated front light-bar mount is published or visible. The T-slot channels in the slat tops and the modular accessory channel pattern are the generic mounting interface. (The LED bar that appears in URNIETA's photography sits on the LADDER, not on the rack.)",
+        "tieDownRails": true,
+        "tieDownNote": "Yes - 'modular accessory channels' in the slat tops, tie-down tabs moulded into the ribbed floor (two per bay, visible in real-photo-05), and the raised tube rim itself works as a continuous side tie-down rail."
+      },
+      "materialFinish": "aluminum-magnesium alloy / stainless iron / rubber, black",
+      "weightKG": 24,
+      "fitment": "JB74 3-door 2018-present direct fit; JC74 5-door 2023-present direct fit; JB64 NOT compatible",
+      "price": {
+        "EUR": null,
+        "TWD": 30900,
+        "USD": 958,
+        "CZK": 30492,
+        "priceNote": "NO EUR list price is published anywhere - urnieta.com is quote-only and the only European dealer with public pricing quotes in CZK. TWD 30,900 is the 3-door FULL-roof price; the 3-door half-roof is NT$25,200 and the 5-door is NT$32,400 (heekis and MRK 4X4 agree on all three). USD 958 is the manufacturer's own store price for 0702024 (3-door long); 0702034 (3-door short) is USD 848 and 0702023 (5-door) USD 958. CZK 30,492 incl. 21% VAT (25,200 ex VAT) is a single undifferentiated price at the Czech dealer. A Shopee reseller (GOAT Wild explorer, 南投名間) asks NT$30,900-36,900, about NT$4,500 over the two importers.",
+        "priceUrls": [
+          "https://www.heekis.com/products/urnieta-salado-jimny-jb74-jc74-roof-rack",
+          "https://www.mrk.com.tw/product_ii.html?ID=2203",
+          "https://www.improveyouroffroad.eu/cs/eshop/urnieta/jimny/salado-stresni-nosic-pro-jimmy-jb74-jc74/"
+        ]
+      },
+      "modelling": "Model as a 1890 x 1366 mm rectangle with generously rounded corners, floating about 90 mm above the roof skin (ESTIMATED). Deck = 7 transverse slats 50 x 1071 mm, 20 mm or so proud of a ribbed floor panel, split at mid-width by a 26 mm longitudinal spine; slat centres at 209, 394, 616, 835, 1055, 1275 and 1471 mm back from the rack's front edge (derived from the measured pitch list). Perimeter = a round tube rim (Ø32-38, ESTIMATED) on both sides and the rear, standing ~40 mm above the deck, with rounded corners; the front is closed instead by a full-width stamped aluminium deflector that rakes forward and down over the windscreen. Under the tray, one black side rail per side along the drip rail, with 3 foot plates per side at 209 / 1220 / 1684 mm from the front. For the 5-door use 2214 x 1368 mm and about 9 slats. The half-roof variant has no published dimensions - do not guess its length; it covers roughly the rear 55% of the roof in real-photo-02 and -03 and uses 2 feet per side.",
+      "verified": true,
+      "evidence": "Product page https://urnieta.com/product/salado-roof-rack-for-jimny-jb74-jc74/ read via WebFetch (SKU, weight 24 kg, material, finish, half/full configurations, stamped aluminium deflector, LC platform architecture, fitment, 4-or-6 feet). All geometry measured from URNIETA's own drawing UN-JIMNY-FB-012 (salado-roof-rack-for-jimny-jb74-jc74-design-drawing.png, 1620x688), downloaded with curl + browser UA. Scale established twice and cross-checked: horizontal dimension line at y=625 spans x 447-1172 = 725 px for the labelled 1890 mm (2.6069 mm/px); vertical dimension line at x=1205 spans y 67-591 = 524 px for the labelled 1366 mm (2.6069 mm/px). Identical to 4 s.f., so the drawing is isotropic and the scale is trustworthy. Construction, deflector, rim tube, floor tabs and side-rail mounting confirmed against real-photo-01 through -06 from the same upload directory."
+    },
+
+    {
+      "id": "salado_rear_ladder",
+      "name": "SALADO Rear Ladder Kit for Jimny JB74 / JC74 / JB64",
+      "part": "0702026",
+      "line": "SALADO",
+      "lineNote": "SALADO-named, but URNIETA's own photography (real-photo-06 on this product page) shows it fitted to a 1970-badged car, so it is the ladder for both lines - the 1970 line's 8 products contain no ladder of its own.",
+      "url": "https://urnieta.com/product/salado-rear-ladder-kit-for-jimny-jb74-jc74-jb64/",
+      "drawing": {
+        "number": "UN-JIMNY-FB-013",
+        "partNameOnDrawing": "REAR LADDER",
+        "scale": "1:8",
+        "units": "MM",
+        "rev": "14 / 2026.04",
+        "drawnBy": "Feng",
+        "view": "rear elevation (face-on)",
+        "file": "https://urnieta.com/wp-content/uploads/2026/06/14/salado-rear-ladder-kit-for-jimny-jb74-jc74-jb64-design-drawing.png"
+      },
+      "dims": {
+        "heightMM": 1015,
+        "widthMM": 390,
+        "dimsVerified": true,
+        "dimsNote": "Both are labelled dimensions on the drawing. 1015 spans the vertical dimension line at x=952, y 43-615 = 572 px (1.7745 mm/px); 390 spans the horizontal dimension line at y=648, x 699-919 = 220 px (1.7727 mm/px). The two agree to 0.1%. The 390 mm overall width includes the outboard accessory post - the climbing frame itself is narrower (below).",
+        "railTubeDiaMM": 34,
+        "rungTubeDiaMM": 28,
+        "tubeNote": "Measured on the drawing: side-rail edge pairs at y=180 sit at x 699-718 and 823-842, i.e. 19 px = 34 mm OD. Every rung measures 16 px = 28 mm OD between its top and bottom edge lines. Ø34 is consistent with Ø33.7 mm 1-inch NPS tube, the obvious stock size, and matches the Ø34 already recorded for the JST ladder in jb74-fitment.json.",
+        "rungCount": 4,
+        "rungHeightsMM": [158, 378, 603, 862],
+        "rungPitchMM": [220, 225, 259],
+        "rungNote": "Four rungs, measured upward from the bottom of the ladder (drawing y=615). Rung tube centres fall at drawing y = 526, 402, 275, 129. The pitch is NOT uniform: 220 mm, then 225 mm, then 259 mm for the top gap. The bottom rung carries a moulded grip/step pad, clearly visible in the rear close-up.",
+        "frameOuterWidthMM": 254,
+        "rungClearWidthMM": 186,
+        "widthDetailNote": "Climbing frame outer width 254 mm across the upper section (rails at drawing x 699-842) and about 245 mm across the lower section; clear step width between the rails about 186 mm, with the rung tube itself spanning 209-217 mm. The remaining span out to the 390 mm overall is the accessory post on the outboard side.",
+        "lateralStepMM": 91,
+        "lateralStepNote": "The frame is not planar-straight: the upper section is offset about 91 mm INBOARD of the lower section (rail-pair centres at drawing x 770.5 upper vs 822 lower), with a smooth S-bend between rung 1 and rung 2, i.e. between roughly 600 and 860 mm above the ladder's bottom. This is the published 'Up To 235/75 Clearance' geometry: the lower/middle run is pushed outboard to clear a 235/75R15 spare (741 mm OD, so its crown sits right in that 600-860 mm band), and the ladder steps back inboard once it is above the tyre.",
+        "standoffMM": null,
+        "standoffNote": "NOT PUBLISHED. The drawing is a rear elevation, so the depth axis is absent entirely, and the one true side-elevation photograph (real-photo-06) is of a 1970 car at an angle that will not yield a trustworthy scale. ESTIMATED at roughly 50 mm from the tailgate skin to the tube centreline, from the lower-mount close-up where the bracket wraps from the hinge body (itself ~25-30 mm proud) outboard to the rail. Treat as +/-20 mm and LOW CONFIDENCE - the same weakness jb74-fitment.json already records for the JST ladder (40 mm +/-15)."
+      },
+      "mount": {
+        "mountsTo": "the tailgate itself - top edge plus the lower hinge",
+        "side": "tailgate hinge side = the RIGHT side viewed from behind",
+        "sideNote": "Matches the convention already established in jb74-accessory-atlas.json and jb74-fitment.json ('the hinge side is the RIGHT side viewed from behind'). Confirmed independently here: in URNIETA's straight-on rear photograph the ladder and the tailgate lower hinge both sit about 320 mm to the viewer's right of the vehicle centreline, with the spare wheel inboard of it.",
+        "topAttachment": "hooks over the TOP EDGE OF THE TAILGATE",
+        "topAttachmentAnswer": "It does NOT hook over the roof edge and does NOT reach the gutter. URNIETA's install step 03 is explicit: 'Install the rear ladder main body by first hooking its upper end onto the top edge of the tailgate until fully engaged.' The ladder terminates at the tailgate's upper edge, below the drip rail, and the rounded top arch sits just under the roof line.",
+        "bottomAttachment": "M6x15 cup-head socket screws at the lower end, plus a reinforced sheet-metal anti-sag clamp bracket bolted to the TAILGATE LOWER HINGE with M8x40 flange bolts and large M8 washers",
+        "prepRequired": "The OEM tailgate lower hinge trim panel and its screws must be removed first.",
+        "swingsWithTailgate": true,
+        "swingNote": "Because it hooks the tailgate's top edge and bolts at the tailgate lower hinge, the ladder travels with the door. URNIETA's step 04 has you open the tailgate to set the ladder-to-body clearance before final torque.",
+        "notSpareCarrier": "It does NOT mount to the spare-wheel carrier and it does NOT mount to the rear bumper.",
+        "accessories": "Integrated flag pole mount, radio antenna mount and 2 auxiliary light mounting points, all on an outboard accessory post carried on two clamp collars - this post is what takes the overall width out to 390 mm. A spotlight bracket is fitted with M6x25 cup-head socket screws."
+      },
+      "materialFinish": "aluminum-magnesium alloy / stainless iron, black",
+      "weightKG": 3.5,
+      "fitment": "JB74 3-door, JC74 5-door AND JB64 kei - direct fit on all three. This is the only one of these three products that fits the JB64.",
+      "price": {
+        "EUR": null,
+        "TWD": 19500,
+        "USD": 588,
+        "CZK": 18150,
+        "priceNote": "No EUR list price published. TWD 19,500 at both Taiwanese importers (heekis SKU 0702026, MRK 4X4 as UR013) - they agree exactly. USD 588 at the manufacturer's own store. CZK 18,150 incl. 21% VAT (15,000 ex VAT) at the Czech dealer. Not listed on Shopee, Ruten or Yahoo Taiwan at all.",
+        "priceUrls": [
+          "https://www.heekis.com/products/urnieta-salado-jimny-jb64-jb74-jc74-rear-ladder-kit",
+          "https://www.mrk.com.tw/product_ii.html?ID=2213",
+          "https://www.improveyouroffroad.eu/cs/eshop/urnieta/jimny/salado-zadni-zebrik-pro-jimmy-jb74-jc74-jb64/"
+        ]
+      },
+      "modelling": "A single CLOSED bent-tube loop of Ø34 tube, 1015 mm tall, standing in a plane roughly 50 mm proud of the tailgate skin (ESTIMATED) on the hinge side. Two parallel rails 254 mm apart outer-to-outer in the upper section, joined by a generous rounded arch at the top and an equally rounded closed end at the bottom. Four Ø28 rungs at 158 / 378 / 603 / 862 mm above the bottom - note the non-uniform pitch, the top gap is 259 mm against 220-225 mm lower down. Put an S-bend between rung 1 and rung 2 that carries the upper section 91 mm INBOARD; that dogleg is the whole point of the part and reads clearly in side and three-quarter views. Bottom rung gets a grip pad. Add the outboard accessory post as a short parallel Ø34 stub on two clamp collars, taking overall width to 390 mm. Top ends in a bracket hooked over the tailgate's upper edge - do NOT run it onto the roof or into the gutter. Bottom ends in a clamp bracket wrapping to the tailgate lower hinge.",
+      "verified": true,
+      "evidence": "Product page https://urnieta.com/product/salado-rear-ladder-kit-for-jimny-jb74-jc74-jb64/ read via WebFetch, including the full verbatim Installation Overview and In-the-Crate list (this is where the 'hooking its upper end onto the top edge of the tailgate' wording and the M8x40 lower-hinge bracket come from), cross-checked against heekis (price NT$19,500, SKU 0702026, 3.5 kg). All geometry measured from URNIETA's own drawing UN-JIMNY-FB-013 (salado-rear-ladder-kit-for-jimny-jb74-jc74-jb64-design-drawing.png, 1620x687). Scale established twice: vertical dimension line x=952, y 43-615 = 572 px for 1015 mm (1.7745 mm/px); horizontal dimension line y=648, x 699-919 = 220 px for 390 mm (1.7727 mm/px); agreement 0.1%. Rung positions taken from paired horizontal edge runs at y=121/137, 267/283, 394/410, 518/534. Mounting, hinge bracket, grip pad and accessory post confirmed against real-photo-01, -03, -05 and the rear close-up crop."
+    }
+  ],
+
+  "exhaust": {
+    "exists": true,
+    "finding": "YES - URNIETA sells a real four-exit exhaust for the JB74, and it is four physical pipes and tips, not four holes in a bumper. The SALADO Exhaust Kit is a valve-controlled cat-back (mid-pipe to tail) with ONE central silencer that splits into two banks, each bank terminating in TWO rear-facing tips: four tips total, two per side. URNIETA's parts list is unambiguous - '4x Exhaust Tip (MATTE BLACK)' in the crate, and install step 03 reads 'Install the four new tailpipe tips onto the rear exhaust section'. The drawing UN-JIMNY-FB-010 shows all four in plan with a labelled 815 mm outer-to-outer span, and the product photographs show four separate tips hanging under the rear bumper. The configurator's note was right; the earlier exhaust survey's conclusion that no maker offers a four-exit system for this car (maximum two) is WRONG and should be corrected.",
+    "notBumperHoles": "Explicitly ruled out. The four-tip look is NOT cutouts in the SALADO rear bumper. The tips are separate clamped-on pieces mounted to the exhaust's own tail section and hang BELOW the bumper's lower edge in clear air, each with a machined face, a three-port decorative bezel and 'URNIETA' embossed on the body. The SALADO rear bumper is half-height and leaves that area open, which is why they read so cleanly.",
+    "name": "SALADO Exhaust Kit for Jimny JB74 / JC74",
+    "part": "0702019 (3-door) / 0702020 (5-door)",
+    "partNote": "The product page prints both SKUs with no mapping. The 3-door / 5-door split comes from the manufacturer's own store starks2018.com, which lists 0702019 as 3-DOOR and 0702020 as 5-DOOR at the same USD 1,388. This is consistent with install step 02, which says the JC74 needs a 'dedicated five-door extended center pipe (purchased separately)' - so the difference may be the centre-pipe part rather than the kit; treat the mapping as SOURCED BUT NOT CONFIRMED by URNIETA itself.",
+    "line": "SALADO",
+    "lineNote": "SALADO-line only. URNIETA's 1970 line (8 Jimny products) contains no exhaust.",
+    "url": "https://urnieta.com/product/salado-exhaust-kit-for-jimny-jb74-jc74/",
+    "tips": 4,
+    "detail": {
+      "drawing": {
+        "number": "UN-JIMNY-FB-010",
+        "partNameOnDrawing": "EXHAUST SYSTEM",
+        "scale": "1:8",
+        "units": "MM",
+        "rev": "28 / 2026.05",
+        "drawnBy": "Feng",
+        "view": "plan (top-down), vehicle front at drawing left",
+        "file": "https://urnieta.com/wp-content/uploads/2026/06/14/salado-exhaust-kit-for-jimny-jb74-jc74-design-drawing.png"
+      },
+      "overallLengthMM": 1808,
+      "overallWidthMM": 815,
+      "dimsVerified": true,
+      "dimsNote": "Both labelled on the drawing. 1808 spans the horizontal dimension line at y=574, x 333-1286 = 953 px (1.8972 mm/px); 815 spans the vertical dimension line at x=1319, y 115-544 = 429 px (1.8998 mm/px). Agreement 0.14%. The 815 mm is the outer-to-outer span of the four tips, not a pipe width - the outermost tip edges measured independently at y=114 and y=544 give 430 px = 816 mm, reproducing the label to 0.1% and confirming both the scale and the reading of the view.",
+      "tipCount": 4,
+      "tipsPerSide": 2,
+      "tipOuterDiaMM": 80,
+      "tipDiaNote": "ESTIMATED-BUT-TIGHT: each tip measures 42 px across on the drawing at 1.8972 mm/px = 79.7 mm, and all four measure identically. Cross-checked against the straight-on rear photograph, where the tips scale to 72-79 mm against the rear bumper width. URNIETA publishes no tip diameter, so 80 mm is derived, not quoted.",
+      "tipLateralOffsetsMM": [-368, -279, 279, 368],
+      "tipPairSpacingMM": 89,
+      "tipPositionNote": "Tip centres measured on the drawing at y = 135, 182, 476, 523 px against an assembly centreline of y = 329 px, giving +/-279 mm and +/-368 mm from the vehicle centreline. Within each side the two tips are 89 mm apart on centres, i.e. nearly touching at 80 mm OD - they read as a bonded pair, and the photographs show them sharing one squared black shroud per side.",
+      "exitSide": "both sides - two tips left, two tips right",
+      "exitDirection": "rearward",
+      "exitDirectionNote": "Straight back. The tips are slash-cut with the machined logo face pointing rearward; install step 03 says to orient each 'so the shiny LOGO face points outward'. No side-exit or downturn.",
+      "heightAboveGroundMM": null,
+      "heightNote": "NOT PUBLISHED, and a ground figure would be misleading anyway because every URNIETA photograph is of a lifted car on oversized tyres. The useful modelling reference is vehicle-relative and measurable: the tips hang just below the rear bumper's lower edge, tip TOPS roughly flush with the bumper underside and tip CENTRES about 45 mm below it (ESTIMATED from the straight-on rear photograph using the 80 mm tip OD as the ruler). On the photographed lifted car the tip centreline scales to roughly 570 mm above ground; on a stock-height JB74 expect materially less.",
+      "finish": "matte black tips with a bright machined outlet ring and a three-port decorative bezel, 'URNIETA' embossed on each tip body; stainless steel system",
+      "material": "stainless steel / aluminum-magnesium alloy",
+      "weightKG": 10,
+      "valves": true,
+      "valveNote": "Two electronic valves, one per side ('connecting the left and right exhaust valve harnesses'). Closed gives OEM-equivalent noise, open gives the full note. Control via an included wireless remote, the URNIETA steering-wheel expansion switch, or the URNIETA roof console panel. Powered from the cigarette-lighter wiring; harness routed into the cabin through the factory grommet.",
+      "systemType": "cat-back - replaces the OEM centre and rear exhaust sections from the mid-pipe back. One central silencer marked URNIETA, single front flange, single mid-pipe with one lateral S-bend before the silencer.",
+      "bumperCut": false,
+      "bumperCutNote": "NO cutting. URNIETA's four-step installation never mentions the bumper, and the photographs show the tips passing UNDER the bumper's lower edge rather than through it.",
+      "requiresSaladoRearBumper": false,
+      "bumperCompatNote": "NOT required. The page's only wording is a styling suggestion - 'Pair with the Salado Rear Bumper for a complete system look'. Fitment is never conditioned on it. HOWEVER: every photograph shows it with the half-height SALADO rear bumper, and URNIETA publishes nothing about the OEM bumper or any other maker's. Because the OEM JB74 rear bumper's lower valance hangs down and rearward exactly where these tips sit at +/-279 mm, the configurator should treat SALADO exhaust + OEM (or any non-URNIETA) rear bumper as UNVERIFIED - the same rule jb74-exhaust.json already applies to rear-exit systems under KLC / DAMD / URNIETA / ARB bumpers.",
+      "fitment": "JB74 3-door 2018-present direct fit; JC74 5-door 2023-present direct fit (needs the separately-purchased extended centre pipe); JB64 NOT compatible",
+      "inTheCrate": [
+        "1x Mid-Pipe to Tail Section Assembly (STAINLESS)",
+        "4x Exhaust Tip (MATTE BLACK)",
+        "1x Electronic Control Valve System",
+        "1x Wireless Remote",
+        "1x Exhaust Hanger Hardware (complete)",
+        "1x Wiring Harness for URNIETA Integration",
+        "1x Installation Manual, Illustrated",
+        "1x URNIETA Chassis Tag"
+      ],
+      "modelling": "Model as a cat-back: front flange at the vehicle's mid-pipe joint, a single pipe running back with one lateral S-bend, into one transverse silencer box on the centreline carrying an URNIETA wordmark, then a Y-split to two banks. Each bank carries an electronic valve body and ends in TWO Ø80 mm rear-facing slash-cut tips 89 mm apart on centres, the pair sharing a squared black shroud. Tip centres at +/-279 and +/-368 mm from the centreline; total tip span 815 mm; total system length 1808 mm from the front flange to the tip faces. Sit the tips just under the rear bumper's lower edge - tops flush with it, centres about 45 mm below - not through it. No bumper cut.",
+      "price": {
+        "EUR": null,
+        "TWD": 44800,
+        "USD": 1388,
+        "CZK": 44286,
+        "priceNote": "No EUR list price published. TWD 44,800 at heekis only (SKUs 0702019/0702020 both quoted); MRK 4X4 does not import it, and there is no Shopee, Ruten or Yahoo Taiwan listing for a URNIETA Jimny exhaust at all. USD 1,388 at the manufacturer's own store for both SKUs. CZK 44,286 incl. 21% VAT (36,600 ex VAT) at the Czech dealer.",
+        "priceUrls": [
+          "https://www.heekis.com/products/urnieta-salado-jimny-jb74-jc74-valve-exhaust-kit",
+          "https://www.improveyouroffroad.eu/cs/eshop/urnieta/jimny/salado-vyfukova-souprava-pro-jimmy-jb74-jc74/"
+        ]
+      }
+    },
+    "verified": true,
+    "evidence": "Product page https://urnieta.com/product/salado-exhaust-kit-for-jimny-jb74-jc74/ read verbatim via WebFetch - the 'Quad-Tip Outlet' feature block, the four-step Installation Overview and the In-the-Crate list ('4x Exhaust Tip') are all quoted from it. Geometry measured from URNIETA's own drawing UN-JIMNY-FB-010, scale double-anchored (1808/953 px and 815/429 px agree to 0.14%) and independently re-validated by measuring the four tips' outer span at 816 mm against the labelled 815 mm. Four tips, their pairing, the shared per-side shroud, the rearward slash-cut faces and their position below the bumper all confirmed in real-photo-01 (straight-on rear of a complete car), -02 (one pair under the bumper), -03 (single-tip close-up) and -05 (tip pair close-up)."
+  },
+
+  "gaps": [
+    "SALADO Roof Rack: no HEIGHT is published in any source - the drawing is plan-only and no elevation exists. The 90 mm platform-floor / 145 mm rim-top figures in this file are photo-derived estimates with roughly +/-25 mm, and are the weakest numbers here.",
+    "SALADO Roof Rack: the HALF-roof variant (SKU 0702034) is not dimensioned anywhere - no length, no slat count. It covers roughly the rear 55% of the roof in URNIETA's photographs and uses 2 feet per side; do not invent a length.",
+    "SALADO Roof Rack: perimeter rim tube diameter is not published (assumed Ø32-38 from photos), nor is the tray's static or dynamic load rating, nor tube wall thickness.",
+    "SALADO Rear Ladder: STANDOFF from the tailgate skin is not published and cannot be measured reliably - the drawing is a rear elevation with no depth axis, and the only true side-elevation photo is of a 1970 car at an angle with no usable scale reference. The ~50 mm figure is an inference from the lower bracket geometry.",
+    "SALADO Exhaust: no tip diameter, no ground clearance and no pipe diameter are published by URNIETA. The 80 mm tip OD is measured off the drawing, not quoted.",
+    "SALADO Exhaust: compatibility with the OEM JB74 rear bumper, or any non-URNIETA rear bumper, is not published. Every photograph uses the half-height SALADO rear bumper. Treat other bumper combinations as unverified.",
+    "SALADO Exhaust: the 0702019 = 3-door / 0702020 = 5-door mapping comes from the manufacturer's own store, not from urnieta.com, and may instead distinguish the kit from the 5-door extended centre pipe.",
+    "NO EUR list price exists for any of the three. urnieta.com is quote-only. The only European dealer with public pricing is Czech (improveyouroffroad.eu) and quotes CZK. The German dealer TOM'S FAHRZEUGTECHNIK stocks only URNIETA's Land Cruiser 70 range and carries no SALADO Jimny part; the Polish dealer has no web shop. Any EUR figure would be a self-made conversion - none is recorded in this file.",
+    "All three parts show as 售完 (sold out) at heekis at time of compiling; MRK 4X4 does not flag stock but also does not import the exhaust. Lead times unknown.",
+    "The body-coloured roof side rail that the rack sits on is badged 'Salado' on SALADO cars and '1970 SERIES' on 1970 cars. Whether that rail is part of the roof rack SKU or a separate item is not stated anywhere; it does not appear as its own product in URNIETA's 30-item Jimny list.",
+    "URNIETA publishes no weight capacity, no TUV/ADR type approval and no wall thicknesses for any of the three."
+  ],
+
+  "corrections": [
+    "BRAND ORIGIN: URNIETA is not Spanish. It is a Chinese brand - Starks Automotive / Stark Industrial of Dongguan, established 2018, Chinese name 歐尼塔 - selling through 26 dealers in 20 countries. The research brief's 'Spanish maker' premise is wrong; parts.js already records this correctly.",
+    "QUAD EXHAUST - the exhaust survey is WRONG. jb74-exhaust.json concludes that no maker offers a four-exit system for this car and that the maximum is two. URNIETA's SALADO Exhaust Kit is a genuine four-exit system: four physical tips, two per side, rear-facing, fed by one central silencer through two electronically valved banks. The configurator's original note was correct and should stand.",
+    "The 'quad exhaust' is NOT four cutouts in the SALADO rear bumper. That hypothesis is disproved - the tips are separate clamped-on components hanging below the bumper, and the bumper is not cut.",
+    "jb74-exhaust.json states that no maker publishes compatibility between any exhaust and the URNIETA rear bumper. That is now partly resolved: URNIETA's own exhaust and its own SALADO rear bumper are designed and photographed together. The unresolved half is the reverse - URNIETA's exhaust with a NON-URNIETA or OEM rear bumper.",
+    "parts.js ROOF_RACKS and LADDERS contain no URNIETA entry at all. Both of these are net-new additions, not edits to an existing record.",
+    "The SALADO Rear Ladder is the only one of these three that fits the JB64 - the roof rack and the exhaust are both listed 'Not Compatible' with JB64, matching the JB64 incompatibility already recorded for URNIETA's mirrors.",
+    "The three roof-rack SKUs printed together on urnieta.com resolve to 0702034 = 3-door half/short, 0702024 = 3-door full/long, 0702023 = 5-door JC74, at three distinct prices - they are variants, not a bundle."
+  ]
+}
