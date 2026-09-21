@@ -670,7 +670,7 @@ def rim(style):
     prof = [(R, -W / 2), (R + 14, -W / 2), (R + 14, -W / 2 + 8), (R + 2, -W / 2 + 12), (R + 2, W / 2 - 14),
             (R + 16, W / 2 - 8), (R + 16, W / 2), (R + 4, W / 2), (R - 4, W / 2 - 6), (R - 4, -W / 2 + 6), (R - 8, -W / 2 + 2)]
     lathe('barrel', prof, RIM_DARK, root)
-    dish = W / 2 - (24 if style in ('steel', 'daytona', 'moon', 'slot5') else 38)   # face plane, inset from the outer lip
+    dish = W / 2 - (24 if style in ('steel', 'daytona', 'moon', 'slot5', 'renkon', 'arc4') else 38)   # face plane, inset from the outer lip
     face_r = R - 6
     # the face: a disc with the windows cut out, spokes are what remains
     face = lathe('face', [(0, dish - 6), (0, dish + 6), (face_r, dish + 10), (face_r, dish - 12)], RIM_FACE, root, n=96)
@@ -691,6 +691,34 @@ def rim(style):
                         bevel=11, rot=Matrix.Rotation(-a, 3, 'X'))
                 c.modifiers['bevel'].segments = 4
                 cutters.append(c)
+    elif style == 'renkon':
+        # APIO WILDBOAR D: one ring of 16 countersunk round holes
+        for k in range(16):
+            a = 2 * math.pi * k / 16
+            cutters.append(lib.cylinder(f'hole{k}', (dish, 0.66 * R * math.sin(a), 0.66 * R * math.cos(a)),
+                                        (1, 0, 0), 52, 60, RIM_FACE, None, n=20))
+    elif style == 'arc4':
+        # APIO WILDBOAR SR: four long slim arc slots on the clock diagonals
+        for k in range(4):
+            a0 = math.pi / 4 + 2 * math.pi * k / 4
+            for t in range(5):
+                a = a0 - 0.30 + 0.60 * t / 4
+                cutters.append(lib.cylinder(f'arc{k}{t}', (dish, 0.62 * R * math.sin(a), 0.62 * R * math.cos(a)),
+                                            (1, 0, 0), 46, 60, RIM_FACE, None, n=16))
+    elif style == 'dwindow':
+        # MLJ XTREME-J XJ07: eight trapezoid D-windows in a deep concave
+        for k in range(8):
+            a = 2 * math.pi * k / 8
+            c = box(f'win{k}', (dish, 0.60 * R * math.sin(a), 0.60 * R * math.cos(a)), (60, 74, 128), RIM_FACE, None,
+                    bevel=22, rot=Matrix.Rotation(-a, 3, 'X'))
+            c.modifiers['bevel'].segments = 4
+            cutters.append(c)
+    elif style == 'turbine':
+        # DEAN California: 24 narrow radial stadium slots, half solid half void
+        for k in range(24):
+            a = 2 * math.pi * k / 24
+            cutters.append(box(f'slot{k}', (dish, 0.60 * R * math.sin(a), 0.60 * R * math.cos(a)), (60, 22, 150), RIM_FACE, None,
+                               bevel=10, rot=Matrix.Rotation(-a, 3, 'X')))
     elif style == 'slot5':
         # five wide slots lying across the face, a rounded bar each
         for k in range(5):
@@ -731,8 +759,11 @@ def rim(style):
         nut = lib.cylinder(f'nut{k}', (dish + 6, 69.85 * math.sin(a), 69.85 * math.cos(a)), (1, 0, 0), 21, 20, NUT, root, n=6)
     if style == 'moon':                                        # a smooth disc laid over the whole face
         lib.cylinder('moonDisc', (dish + 24, 0, 0), (1, 0, 0), 1.52 * R, 7, RIM_FACE, root, n=64, bevel=4)
-    elif style == 'slot5':                                     # removable chrome centre plate
+    elif style in ('slot5', 'turbine'):                        # bolt-on chrome centre plate over the nuts
         lib.cylinder('plate', (dish + 9, 0, 0), (1, 0, 0), 168, 7, NUT, root, n=44, bevel=3)
+        if style == 'turbine':
+            lib.cylinder('plateRope', (dish + 13, 0, 0), (1, 0, 0), 120, 6, NUT, root, n=40, bevel=2)
+            lib.cylinder('plateDome', (dish + 18, 0, 0), (1, 0, 0), 82, 10, NUT, root, n=32, bevel=4)
     elif style in ('watanabe', 'daytona'):
         pass                                                   # these run with the hub open, no cap
     else:
@@ -2323,7 +2354,8 @@ def build():
     bumper_showa()
     bumper_klc()
     bumper_outclass()
-    for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock', 'moon', 'daytona', 'slot5', 'watanabe', 'eightpin'):
+    for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock', 'moon', 'daytona', 'slot5', 'watanabe', 'eightpin',
+               'renkon', 'arc4', 'dwindow', 'turbine'):
         rim(st)
     roof_rack_arb()
     roof_lights()
