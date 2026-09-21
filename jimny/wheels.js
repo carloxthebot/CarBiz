@@ -155,14 +155,29 @@ const lateral = (u, v, P, phase, w, slope, vmid, e) =>
 const circG = (u, v, vc, w, amp, period, e) => smooth(Math.abs(v - vc - amp * tri(u, period)) - w / 2, e);
 const band = (v, a, b, e) => smooth(Math.max(a - v, v - b), e);           // 1 inside [a, b]
 
+// Pitch is not constant on a real tyre: makers cycle three to five block
+// lengths so the tread does not sing at one frequency (Toyo publish "5
+// pitch" for the A/T III, Yokohama "Five Pitch Block Variation" for the
+// X-AT). A constant pitch is the clearest tell that a tread is CG, so the
+// lateral grooves are walked through this ratio instead. M/T patterns
+// deliberately vary least, hence the flatter sequence.
+const PITCH_MIX = { at: [0.82, 1.0, 1.18], rt: [0.86, 1.0, 1.14], mt: [0.94, 1.0, 1.06] };
+const pitchAt = (u, P, mix) => {
+  // map u onto a cycle of len(mix) blocks whose lengths follow `mix`
+  const span = P * mix.reduce((a, b) => a + b, 0);
+  let t = ((u % span) + span) % span, i = 0;
+  while (t > P * mix[i]) { t -= P * mix[i]; i = (i + 1) % mix.length; }
+  return { P: P * mix[i], phase: u - t };
+};
+
 const PATTERNS = {
   // 5-rib all-terrain (KO2 / Open Country A/T III): narrow zig-zag grooves,
   // small blocks, heavy siping, shoulder blocks just over the edge.
   at(tw, circ, shArc) {
-    const n = Math.round(circ / 50), P = circ / n, e = 1.2, half = tw / 2;
+    const n = Math.round(circ / 30), P = circ / n, e = 1.2, half = tw / 2;   // ~74 pitches on a 16in
     const g1 = tw * 0.14, g2 = tw * 0.38;
     return {
-      P, depth: 14, sideScale: 0.5,
+      P, depth: 10, sideScale: 0.5,
       g(u, v) {
         const av = Math.abs(v), sg = v < 0 ? -1 : 1;
         let g = Math.max(circG(u, av, g1, 12, 5, 2 * P, e), circG(u, av, g2, 13, 5, 2 * P, e));
@@ -185,10 +200,10 @@ const PATTERNS = {
   // centre rows, wider voids than an A/T, alternating long and short shoulder
   // lugs that reach a little way down the sidewall.
   rt(tw, circ, shArc) {
-    const n = Math.round(circ / 52), P = circ / n, e = 1.6, half = tw / 2;
+    const n = Math.round(circ / 38), P = circ / n, e = 1.6, half = tw / 2;   // between A/T and M/T
     const rowIn = tw * 0.03, rowOut = tw * 0.25, voidC = tw * 0.31;
     return {
-      P, depth: 14, sideScale: 0.7,
+      P, depth: 11, sideScale: 0.7,
       g(u, v) {
         const av = Math.abs(v), sg = v < 0 ? -1 : 1;
         let g = circG(u, v, 0, 10, 5, P, e);
@@ -210,10 +225,10 @@ const PATTERNS = {
   // mud-terrain (Open Country M/T, KM3): three ribs, huge blocks, wide open
   // voids, scalloped shoulder lugs wrapping well down the sidewall.
   mt(tw, circ, shArc) {
-    const n = Math.round(circ / 68), P = circ / n, e = 1.8, half = tw / 2;
+    const n = Math.round(circ / 75), P = circ / n, e = 1.8, half = tw / 2;   // ~30 pitches, measured
     const rowIn = tw * 0.03, rowOut = tw * 0.24, voidC = tw * 0.31;
     return {
-      P, depth: 17, sideScale: 0.8,
+      P, depth: 15.5, sideScale: 0.8,
       g(u, v) {
         const av = Math.abs(v), sg = v < 0 ? -1 : 1;
         let g = circG(u, v, 0, 9, 5, P, e);
