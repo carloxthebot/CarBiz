@@ -250,10 +250,18 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     transform:translateY(calc(100% - var(--sheet)));transition:transform .3s cubic-bezier(.32,.72,0,1)}
   body.sheet .panel{transform:translateY(0)}
   .grab{display:block;flex:none;width:100%;border:0;background:none;padding:10px 0 4px;cursor:grab;touch-action:none}
-  .head{touch-action:pan-x}
+  .head{touch-action:pan-x;cursor:pointer}
   .grab span{display:block;width:38px;height:4px;border-radius:99px;background:var(--line2);margin:0 auto}
   .head{padding-top:6px}
   .head h1{display:none}
+  /* three stacked full-width buttons ate a third of the sheet on a phone;
+     one compact row leaves that space to the parts */
+  .acts{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;
+    padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
+  .acts button{padding:10px 4px;font-size:12px;border-radius:2px}
+  .acts .solid{grid-column:auto}
+  .flags{padding:8px 16px 0}
+  #out{margin:0 16px 14px;font-size:11px}
   .gauge{margin-top:11px}
   .wgrid{grid-template-columns:repeat(3,1fr)}
 }
@@ -409,14 +417,14 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609211744';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609211744';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609211744';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609211744';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609211744';
+import { rigJimny, applyConfig } from './rig.js?v=202609212323';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609212323';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609212323';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609212323';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609212323';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609211744';
+const BUILD = '202609212323';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -732,7 +740,9 @@ addEventListener('resize', setPeek);
   };
   const up = () => {
     if (y0 === null) return;
-    const d = moved, tap = from === $('grab');
+    // a tap anywhere along the top -- handle or header -- still opens and
+    // closes it, the way it did before the drag was added
+    const d = moved, tap = from === $('grab') || from === document.querySelector('.head');
     stop();
     if (Math.abs(d) > 40) document.body.classList.toggle('sheet', d < 0);
     else if (tap && Math.abs(d) < 8) document.body.classList.toggle('sheet');
