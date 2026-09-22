@@ -1205,39 +1205,56 @@ def snorkel_urnieta(side=RIGHT):
 
 def snorkel_cowl(side=RIGHT):
     """The low-profile A-pillar duct sold on Shopee as a JB64/74 涉水器, and
-    what the owner's car wears (their photos, 2026-09-22).
+    what the owner's car wears.
 
-    It is not a tube snorkel at all: a flat textured moulding replaces the
-    A-pillar trim, continues forward along the top of the fender to the
-    airbox, and takes its air through a rectangular louvred panel screwed
-    into the outer face near the TOP of the pillar. Nothing rises above the
-    roof gutter, which is most of why people buy it -- the car keeps its
-    registered height.
+    Redrawn 2026-09-22 against the model's own geometry rather than guessed
+    offsets. Measured here: the A-pillar's outer face is at |x| = 672, the
+    pillar runs from (y 1177, z 584) at the cowl to (y 1534, z 340) at the
+    roof, and the windscreen glass spans y 1157-1557 over z 371-681. The
+    first attempt hung the moulding off a hand-written path that missed the
+    pillar entirely and laid its duct along the top of the fender like a
+    roof bar; the duct actually sits in the scuttle, tucked against the
+    bonnet's rear corner.
 
-    Sizes are read off the owner's photos against the JB74's 185 mm mirror
-    head and 1645 mm body width, so they are ESTIMATED to about +-10 mm."""
+    Nothing rises above the roof gutter, which is the whole point: the car
+    keeps its registered height."""
     root = group('snorkel_cowl')
-    off = 30
-    # the pillar moulding: wide and shallow, hugging the trim line
-    pts = fillet(_pillar_path(side, off, 1576), 80, steps=8)
-    sweep('pillar', [tuple(p) for p in pts], rounded_rect(78, 46, 16, 4), TEXBLACK, root)
-    # forward along the fender top, beside the bonnet edge, to the airbox
-    duct = [(side * 700, 992, 648), (side * 690, 980, 840), (side * 676, 968, 1010)]
-    sweep('cowlDuct', [tuple(p) for p in fillet(duct, 70, steps=6)],
-          rounded_rect(58, 112, 18, 4), TEXBLACK, root)
-    box('ductEnd', (side * 672, 966, 1030), (118, 54, 26), TEXBLACK, root, bevel=8)
-    for z in (880, 960):                                     # the moulded ribs along the duct
-        box(f'rib{z}', (side * 640, 984, z), (8, 34, 52), TEXBLACK, root, bevel=2)
-    # the intake: a louvred panel screwed into the outer face near the top
-    vx, vy, vz = side * (612 + off + 22), 1496, 418   # right up under the gutter, as in the photos
-    box('ventFrame', (vx, vy, vz), (26, 196, 84), TEXBLACK, root, bevel=5)
-    box('ventWell', (vx + side * 7, vy, vz), (14, 172, 64), BLACK, root, bevel=2)
-    for k in range(9):                                       # horizontal louvre bars
-        box(f'louvre{k}', (vx + side * 12, vy - 74 + k * 18.5, vz), (5, 8, 60), RUBBER, root, bevel=0)
-    for dy, dz in ((-88, -32), (-88, 32), (88, -32), (88, 32)):
-        lib.cylinder(f'screw{dy}{dz}', (vx + side * 11, vy + dy, vz + dz), (side, 0, 0), 11, 6, STEEL, root, n=10)
-    for (y, z, x) in ((1240, 580, 652), (1480, 452, 624)):
-        box(f'clip{y}', (side * (x + off / 2), y, z), (off + 8, 16, 30), TEXBLACK, root, bevel=2)
+    s = side
+    rake = math.atan2(584 - 340, 1534 - 1177)                # 34 deg off vertical
+    xo = s * 678                                             # a few mm proud of the pillar face
+    # the moulding, following the pillar from the scuttle to just under the gutter
+    path = [(xo, 1150, 604), (xo, 1240, 543), (xo, 1380, 448), (xo, 1500, 366), (xo, 1556, 328)]
+    sweep('pillar', [tuple(p) for p in fillet(path, 70, steps=6)],
+          rounded_rect(88, 32, 13, 4), TEXBLACK, root)
+    # the scuttle piece: forward and down off the pillar's foot, beside the
+    # bonnet's rear corner, where the factory cowl trim is
+    # It runs INTO the scuttle, not out over the wing: the cowl surface is at
+    # y = 1131 at z = 680 (measured), and the piece tucks inboard toward the
+    # bonnet's rear corner rather than standing proud of the fender.
+    cowl = [(s * 668, 1152, 608), (s * 628, 1128, 664), (s * 562, 1120, 716)]
+    sweep('scuttle', [tuple(p) for p in fillet(cowl, 45, steps=5)],
+          rounded_rect(66, 30, 12, 4), TEXBLACK, root)
+    for (x, z) in ((610, 690), (568, 716)):
+        lib.cylinder(f'screw{z}', (s * x, 1130, z), (0, 1, 0), 11, 7, TEXBLACK, root, n=10)
+
+    # the intake: a tall louvred panel set into the moulding's outer face,
+    # about a quarter of the way down from the gutter
+    R = Matrix.Rotation(-rake * s, 3, 'X')
+    vy, vz = 1452, 398
+    box('ventFrame', (xo + s * 8, vy, vz), (22, 196, 78), TEXBLACK, root, bevel=14, rot=R)
+    box('ventWell', (xo + s * 16, vy, vz), (12, 168, 58), BLACK, root, bevel=8, rot=R)
+    for k in range(9):
+        d = (k - 4) * 19
+        box(f'louvre{k}', (xo + s * 20, vy + d * math.cos(rake), vz - d * math.sin(rake)),
+            (5, 9, 54), RUBBER, root, bevel=0, rot=R)
+    for a in (-1, 1):
+        for bq in (-1, 1):
+            dy, dz = a * 88, bq * 30
+            lib.cylinder(f'vs{a}{bq}', (xo + s * 14, vy + dy * math.cos(rake) - dz * math.sin(rake),
+                                        vz - dy * math.sin(rake) - dz * math.cos(rake)),
+                         (s, 0, 0), 11, 7, STEEL, root, n=10)
+    for (y, z) in ((1240, 543), (1440, 405)):                # clips onto the pillar
+        box(f'clip{y}', (xo - s * 16, y, z), (26, 16, 34), TEXBLACK, root, bevel=2)
     return root
 
 
