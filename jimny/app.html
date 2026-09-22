@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220028" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220130" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -54,10 +54,18 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 .hud .stats{color:#93a5aa}
 .hud .stats i{font-style:normal;color:#eef4f3;font-weight:600;font-size:12.5px;font-variant-numeric:tabular-nums}
 .hud .ver{color:#56676d;font-size:9.5px}
-#boot{position:absolute;inset:0;display:grid;place-items:center;background:#0b1113;z-index:5;
-  font:500 12.5px var(--mono);color:#7b8d93;text-align:center;padding:20px;letter-spacing:.08em}
-#boot .bar{width:190px;height:2px;background:#223034;margin:14px auto 0;overflow:hidden}
-#boot .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+/* The car draws itself in as the model arrives: the outline's dash offset is
+   the load progress, so the wait shows you what you are waiting for. */
+#boot{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:18px;
+  background:#0b1113;z-index:5;font:500 12px var(--mono);color:#6d8087;text-align:center;
+  padding:20px;letter-spacing:.14em;transition:opacity .45s ease}
+#boot.gone{opacity:0;pointer-events:none}
+#bootcar{width:min(300px,62vw);height:auto;overflow:visible}
+#bootcar path,#bootcar circle{fill:none;stroke:var(--acc);stroke-width:2.4;
+  stroke-linejoin:round;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;opacity:.9}
+#bootcar .w{stroke:#4d6169;stroke-width:3}
+#bootmsg{opacity:.85}
 .credit{position:absolute;right:20px;bottom:14px;font:500 9.5px/1.55 var(--mono);color:#5e7076;
   text-align:right;max-width:46%}
 .credit a{color:#7b8d93}
@@ -76,6 +84,10 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
   background:var(--sur);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:4px}
 .hero .h-l span{display:block;font:500 8.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
 .hero .h-l b{display:block;font:800 30px/1 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums;color:var(--acc)}
+.hero .h-l i{font-style:normal}
+/* when a change pushes the car out of a parking class, say so with a blink */
+@keyframes parkWarn{0%,100%{opacity:1}22%,66%{opacity:.25}}
+.hero .h-r em.blink{animation:parkWarn .9s ease 2}
 .hero .h-l small{font:400 12px/1 var(--mono);color:var(--ink3);font-weight:400}
 .hero .h-r{margin-left:auto;text-align:right;display:grid;gap:4px}
 .hero .h-r i{font-style:normal;font:500 11px/1.3 var(--mono);color:var(--ink2)}
@@ -95,7 +107,17 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 
 .body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;touch-action:pan-y}
 .pane{display:none;padding:4px 20px 8px}
-.pane.on{display:block}
+.pane.on{display:block;animation:paneIn .3s cubic-bezier(.22,.78,.24,1) both}
+/* which way the step moved, so the content comes from the side you swiped */
+.pane.on.back{animation-name:paneInBack}
+@keyframes paneIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes paneInBack{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+/* the groups inside arrive just behind it, a beat apart */
+.pane.on > .grp{animation:grpIn .34s cubic-bezier(.22,.78,.24,1) both}
+.pane.on > .grp:nth-child(2){animation-delay:.045s}
+.pane.on > .grp:nth-child(3){animation-delay:.09s}
+.pane.on > .grp:nth-child(4){animation-delay:.135s}
+@keyframes grpIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .grp{padding:16px 0 4px;border-bottom:1px solid var(--line)}
 .grp:last-child{border-bottom:0}
 .lbl{display:flex;align-items:baseline;gap:8px;font:500 9.5px/1 var(--mono);letter-spacing:.14em;
@@ -290,7 +312,16 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 <div class="app">
   <div class="stage">
     <canvas id="cv"></canvas>
-    <div id="boot">載入 3D 模型…<div class="bar"><i id="bootbar"></i></div></div>
+    <div id="boot">
+      <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
+        <path id="bootline" pathLength="1"
+          d="M24 104 L24 62 L58 62 L74 30 L206 30 L222 62 L276 62 L276 104 Z
+             M74 30 L74 62 M206 30 L206 62 M14 62 L24 62 M276 62 L286 62"/>
+        <circle class="w" cx="76" cy="104" r="21" pathLength="1"/>
+        <circle class="w" cx="224" cy="104" r="21" pathLength="1"/>
+      </svg>
+      <span id="bootmsg">載入 3D 模型…</span>
+    </div>
     <div class="badge"><div class="mk">SUZUKI · JB74W</div><div class="md">JIMNY SIERRA</div></div>
     <div class="views" id="views"></div>
     <div class="hud" id="hud">
@@ -309,7 +340,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <div class="kicker"><span>改裝配置器</span><a href="parts.html">零件目錄與價格 →</a></div>
       <h1>Jimny JB74</h1>
       <div class="hero">
-        <div class="h-l"><span>總車高</span><b id="rHeight">1730<small> mm</small></b></div>
+        <div class="h-l"><span>總車高</span><b><i id="rHeightN">1730</i><small> mm</small></b></div>
         <div class="h-r"><i id="rHeightDelta">原廠高度</i><em id="rPark"></em></div>
       </div>
     </div>
@@ -441,15 +472,16 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220028';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220028';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220028';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220028';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220028';
+import { rigJimny, applyConfig } from './rig.js?v=202609220130';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220130';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220130';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220130';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220130';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220028';
+const BUILD = '202609220130';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -483,8 +515,9 @@ const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.ShadowMa
 floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
 // On the dark ground the car needs something to stand on, so the floor gets a
 // lit pool first and the contact shadow is laid over it.
+let POOL = null;
 {
-  const disc = (stops, w, h, y) => {
+  const disc = (stops, w, h, y) => {   // returns the mesh so the loop can breathe on it
     const c = document.createElement('canvas'); c.width = c.height = 256;
     const ctx = c.getContext('2d');
     const g = ctx.createRadialGradient(128, 128, 10, 128, 128, 128);
@@ -494,16 +527,25 @@ floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
       new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false,
         blending: y > 0.0015 ? THREE.NormalBlending : THREE.AdditiveBlending }));
     m.rotation.x = -Math.PI / 2; m.rotation.z = Math.PI / 2; m.position.y = y; scene.add(m);
+    return m;
   };
-  disc([[0, 'rgba(120,145,158,0.30)'], [0.55, 'rgba(70,90,100,0.12)'], [1, 'rgba(0,0,0,0)']], 11, 8, 0.001);
+  POOL = disc([[0, 'rgba(120,145,158,0.30)'], [0.55, 'rgba(70,90,100,0.12)'], [1, 'rgba(0,0,0,0)']], 11, 8, 0.001);
   disc([[0, 'rgba(0,0,0,0.55)'], [0.6, 'rgba(0,0,0,0.18)'], [1, 'rgba(0,0,0,0)']], 6.2, 4.2, 0.002);
+}
+// The lit patch of floor drifts and breathes very slowly, so a car sitting
+// still is never a completely frozen frame.
+function ambient(t) {
+  if (!POOL || REDUCED) return;
+  POOL.material.opacity = 0.9 + 0.14 * Math.sin(t / 2600);
+  POOL.scale.setScalar(1 + 0.03 * Math.sin(t / 3900));
+  POOL.position.z = 0.09 * Math.sin(t / 5200);
 }
 
 // Desktop gets ambient occlusion through a post-processing chain (crevices,
 // grille slats and rack slats stop looking pasted on); phones render direct,
 // the second scene pass GTAO needs is too much for them.
 const HQ = matchMedia('(min-width: 900px)').matches && !/Mobi|Android/i.test(navigator.userAgent);
-let composer = null;
+let composer = null, outline = null;
 if (HQ) {
   composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { samples: 4, type: THREE.HalfFloatType }));
   composer.setPixelRatio(renderer.getPixelRatio());
@@ -514,6 +556,13 @@ if (HQ) {
   ao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 4, radiusExponent: 1, rings: 2, samples: 16 });
   ao.blendIntensity = 0.9;
   composer.addPass(ao);
+  // Desktop only: a part that has just been fitted, or whose menu you are
+  // hovering, gets drawn round so you can find it on the car. The pass costs
+  // a second render of the selected objects, which phones do not have spare.
+  outline = new OutlinePass(new THREE.Vector2(1, 1), scene, cam);
+  outline.edgeStrength = 3.4; outline.edgeGlow = 0.35; outline.edgeThickness = 1.6;
+  outline.visibleEdgeColor.set(0xffb24a); outline.hiddenEdgeColor.set(0x6a4d1d);
+  composer.addPass(outline);
   composer.addPass(new OutputPass());
 }
 
@@ -526,7 +575,8 @@ function applyCam() {
   cam.lookAt(0, orbit.ty, 0);
 }
 let drag = null, pinch = 0;
-cv.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointerdown', e => { stopTween('cam'); stopTween('dolly');
+  drag = { x: e.clientX, y: e.clientY }; cv.setPointerCapture(e.pointerId); });
 cv.addEventListener('pointermove', e => { if (!drag) return;
   orbit.az -= (e.clientX - drag.x) * .008; orbit.el += (e.clientY - drag.y) * .006;
   drag = { x: e.clientX, y: e.clientY }; applyCam(); });
@@ -537,7 +587,7 @@ cv.addEventListener('touchmove', e => { if (e.touches.length !== 2) return; e.pr
   if (pinch) { orbit.dist *= pinch / d; applyCam(); } pinch = d; }, { passive: false });
 cv.addEventListener('touchend', () => pinch = 0);
 function resize() { const w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
-  renderer.setSize(w, h, false); composer?.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  renderer.setSize(w, h, false); composer?.setSize(w, h); outline?.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); }
 addEventListener('resize', resize);
 const VIEWS = [['前側', .8, .18, 9], ['側面', Math.PI / 2, .08, 8.6], ['後側', 2.4, .18, 9],
   ['正前', 0, .1, 8], ['俯視', .6, 1.0, 10]];
@@ -594,7 +644,18 @@ loader.load('model/jimny-hq.glb', async (g) => {
   window.__jimny = { THREE, rig, scene, cam, get composer() { return composer; }, get S() { return S; },
     update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); },
     set: (k, v) => { S[k] = v; buildUI(); update(); } };
-  $('boot').style.display = 'none';
+  // Open on a high three-quarter and swing down to the working view while
+  // the light comes up, rather than cutting to a finished picture.
+  if (!REDUCED) {
+    Object.assign(orbit, { az: 1.35, el: 0.62, dist: 13.5 });
+    applyCam();
+    const envTo = scene.environmentIntensity;
+    scene.environmentIntensity = 0.15;
+    tween({ ms: 1100, ease: outCubic, step: (v) => { scene.environmentIntensity = 0.15 + (envTo - 0.15) * v; } });
+    flyTo(0.8, 0.18, 9, 1200);
+  }
+  $('boot').classList.add('gone');
+  setTimeout(() => { $('boot').style.display = 'none'; }, 480);
   // one stock render first, to line the model's measured height up with the
   // catalogue's 1730 mm before anything is bolted to it
   update();
@@ -609,15 +670,24 @@ loader.load('model/jimny-hq.glb', async (g) => {
   }
   buildUI(); update();
   if ([...q.keys()].length) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
-}, (p) => { if (p.total) $('bootbar').style.width = (p.loaded / p.total * 100) + '%'; },
-(e) => { $('boot').textContent = '模型載入失敗：' + (e?.message || e); });
+}, (p) => { if (!p.total) return;
+  const k = p.loaded / p.total;
+  for (const el of $('bootcar').children) el.style.strokeDashoffset = String(1 - k);
+  $('bootmsg').textContent = k < 1 ? `載入 3D 模型… ${Math.round(k * 100)}%` : '組裝中…'; },
+(e) => { $('bootmsg').textContent = '模型載入失敗：' + (e?.message || e); });
 
 /* ═══ scene update ═══════════════════════════════════════════════════════ */
+let prevS = null, prevGeom = null, prevPaint = null;
+const BUILT = {};                       // family -> the node currently on the car
 function update() {
   const lift = find(LIFTS, S.lift), bl = { body: lift.body ?? 0, label: '' };
   const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
   const col = COLORS.find(c => c.code === S.color) || COLORS[3];
   const total = lift.lift + bl.body;
+  // Which choices moved this time. Everything animated below keys off this,
+  // so a redraw that changes nothing stays perfectly still.
+  const chg = new Set();
+  if (prevS) for (const k of Object.keys(S)) if (S[k] !== prevS[k]) chg.add(k);
   applyConfig(THREE, rig, {
     bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK, lift: total,
     tyreDia: ty.dia, tyreWidth: ty.width, rimDia: wh.rim, wheelStyle: wh.style,
@@ -632,39 +702,59 @@ function update() {
   // is a modelled part already positioned for this car (see accessories.js).
   accGroup.clear();
   const paint = rig.userData.paintMat;
-  const add = (n) => n && accGroup.add(n);
+  let flash = null;
+  /** Add a part, and if it is the one that just changed, land it in place. */
+  const add = (n, key) => {
+    if (!n) return;
+    accGroup.add(n);
+    if (key) BUILT[key] = n;
+    if (key && chg.has(key) && prevS) { settleIn(n); flash = n; }
+  };
   for (const k of ['windowGuards', 'spareBag', 'spareCover', 'flares', 'decals', 'shovel', 'sideSkirt'])
-    if (S[k]) add(buildAccessory(k, undefined, paint));
+    if (S[k]) add(buildAccessory(k, undefined, paint), k);
   // the IPF bar and the plain pair of spots were the original, unsuffixed
   // groups; everything added since is a named variant
-  if (S.lightBar !== 'none') add(buildAccessory('lightBar', S.lightBar === 'ipf' ? undefined : S.lightBar, paint));
-  if (S.roofLights !== 'none') add(buildAccessory('roofLights', S.roofLights === 'round' ? undefined : S.roofLights, paint));
-  if (S.grilleLight !== 'none') add(buildAccessory('grilleLight', S.grilleLight, paint));
-  add(buildAccessory('exhaust', S.exhaust, paint));
-  if (S.extinguisher !== 'none') add(buildAccessory('extinguisher', S.extinguisher, paint));
+  if (S.lightBar !== 'none') add(buildAccessory('lightBar', S.lightBar === 'ipf' ? undefined : S.lightBar, paint), 'lightBar');
+  if (S.roofLights !== 'none') add(buildAccessory('roofLights', S.roofLights === 'round' ? undefined : S.roofLights, paint), 'roofLights');
+  if (S.grilleLight !== 'none') add(buildAccessory('grilleLight', S.grilleLight, paint), 'grilleLight');
+  add(buildAccessory('exhaust', S.exhaust, paint), 'exhaust');
+  if (S.extinguisher !== 'none') add(buildAccessory('extinguisher', S.extinguisher, paint), 'extinguisher');
   // the snorkel takes the right-hand pillar, so pods go left only when one is fitted
-  if (S.pillarPods) add(buildAccessory('pillarPods', S.snorkel !== 'none' ? 'left' : undefined, paint));
+  if (S.pillarPods) add(buildAccessory('pillarPods', S.snorkel !== 'none' ? 'left' : undefined, paint), 'pillarPods');
   // the can, the axe and the board each pick their own side of the car, and
   // each needs a guard to hang from
   if (S.windowGuards) for (const k of ['guardCan', 'guardAxe', 'guardBoard'])
-    if (S[k] !== 'none') add(buildAccessory(k, S[k], paint));
-  if (S.ladder !== 'none') add(buildAccessory('ladder', S.ladder, paint));
-  if (S.hood !== 'stock') add(buildAccessory('hood', S.hood, paint));
-  if (S.spareCoverKit !== 'none') add(buildAccessory('spareCover', S.spareCoverKit, paint));
-  if (S.gullwing) add(buildAccessory('gullwing', undefined, paint));
-  if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint));
-  if (S.snorkel !== 'none') add(buildAccessory('snorkel', S.snorkel, paint));
-  if (S.mirrors !== 'stock') add(buildAccessory('mirrors', S.mirrors, paint));
-  if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint));
-  if (S.awning !== 'none') add(buildAccessory('awning', `${S.awning}_${S.awningSide}`, paint));
-  if (S.sideStep !== 'none') add(buildAccessory('sideStep', S.sideStep, paint));
-  if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint));
-  if (S.grille !== 'stock') add(buildAccessory('grille', S.grille, paint));
+    if (S[k] !== 'none') add(buildAccessory(k, S[k], paint), k);
+  if (S.ladder !== 'none') add(buildAccessory('ladder', S.ladder, paint), 'ladder');
+  if (S.hood !== 'stock') add(buildAccessory('hood', S.hood, paint), 'hood');
+  if (S.spareCoverKit !== 'none') add(buildAccessory('spareCover', S.spareCoverKit, paint), 'spareCoverKit');
+  if (S.gullwing) add(buildAccessory('gullwing', undefined, paint), 'gullwing');
+  if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint), 'rearBumper');
+  if (S.snorkel !== 'none') add(buildAccessory('snorkel', S.snorkel, paint), 'snorkel');
+  if (S.mirrors !== 'stock') add(buildAccessory('mirrors', S.mirrors, paint), 'mirrors');
+  if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint), 'roofRack');
+  if (S.awning !== 'none') add(buildAccessory('awning', `${S.awning}_${S.awningSide}`, paint), 'awning');
+  if (S.sideStep !== 'none') add(buildAccessory('sideStep', S.sideStep, paint), 'sideStep');
+  if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint), 'frontBumper');
+  if (S.grille !== 'stock') add(buildAccessory('grille', S.grille, paint), 'grille');
+
+  // ride height, tyre size and paint all ease into their new values
+  if (prevS && prevGeom) {
+    settleRide(total - prevGeom.lift, prevGeom.dia / ty.dia);
+    fadePaint(prevPaint, col.hex, rig.userData.paintMat);
+    if (S.twoTone !== prevS.twoTone && rig.userData.roofMat)
+      fadePaint(S.twoTone ? prevPaint : ROOF_BLACK, S.twoTone ? ROOF_BLACK : col.hex, rig.userData.roofMat, 420, 90);
+  }
+  prevGeom = { lift: total, dia: ty.dia };
+  prevPaint = col.hex;
+  if (flash) highlight(flash);
+  // a big panel swap gets a small camera nudge, so you see what changed
+  if (prevS && ['frontBumper', 'rearBumper', 'roofRack', 'kit', 'grille', 'awning'].some(k => chg.has(k))) dolly();
 
   showHeight();
-  $('hLiftN').textContent = total;
-  $('hTyreN').textContent = ty.dia;
-  $('hClearN').textContent = 210 + total + Math.round((ty.dia - 693) / 2);
+  countTo($('hLiftN'), total);
+  countTo($('hTyreN'), ty.dia);
+  countTo($('hClearN'), 210 + total + Math.round((ty.dia - 693) / 2));
   $('sum0').textContent = (total ? total + 'mm' : '原廠') + ' · ' + wh.rim + '"';
   $('sum1').textContent = ty.label + '·' + find(TYRE_MODELS, S.tread).pattern.toUpperCase().replace(/(.)(.)/, '$1/$2');
   const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
@@ -678,9 +768,142 @@ function update() {
   $('sum3').textContent = n2 ? `${n2} 項` : '無';
   $('hCol').textContent = col.name;
   $('hVer').textContent = accessoriesIn ? `版本 ${BUILD}` : `版本 ${BUILD} · 配件載入中…`;
+  prevS = { ...S };
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   $('flags').innerHTML = fl.map(f =>
     `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
+}
+
+/* ═══ motion ═════════════════════════════════════════════════════════════
+   One clock, one list of tweens, stepped from the render loop that is
+   already running. Everything below hangs off it, and every one of them is
+   a no-op when the viewer has asked for less motion. */
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const outCubic = (t) => 1 - (1 - t) ** 3;
+const inOutCubic = (t) => (t < .5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+// a damped spring: overshoots once and settles, which is what a car on
+// springs does when you change its ride height
+const settleCurve = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -9 * t) * Math.cos(t * 11));
+
+const tweens = [];
+function tween({ from = 0, to = 1, ms = 400, ease = outCubic, delay = 0, step, done, tag }) {
+  if (tag) for (let i = tweens.length - 1; i >= 0; i--) if (tweens[i].tag === tag) tweens.splice(i, 1);
+  if (REDUCED) { step?.(to, 1); done?.(); return; }
+  tweens.push({ t0: performance.now() + delay, ms, ease, step, done, from, to, tag });
+}
+function stopTween(tag) { for (let i = tweens.length - 1; i >= 0; i--) if (tweens[i].tag === tag) tweens.splice(i, 1); }
+function runTweens(t) {
+  for (let i = tweens.length - 1; i >= 0; i--) {
+    const w = tweens[i];
+    if (t < w.t0) continue;
+    const k = w.ms > 0 ? Math.min(1, (t - w.t0) / w.ms) : 1;
+    w.step?.(w.from + (w.to - w.from) * w.ease(k), k);
+    if (k >= 1) { tweens.splice(i, 1); w.done?.(); }
+  }
+}
+
+/** Fly the camera round an arc instead of teleporting. */
+function flyTo(az, el, dist, ms = 680) {
+  const a0 = orbit.az, e0 = orbit.el, d0 = orbit.dist;
+  let da = az - a0;
+  while (da > Math.PI) da -= Math.PI * 2;
+  while (da < -Math.PI) da += Math.PI * 2;
+  tween({ ms, ease: inOutCubic, tag: 'cam',
+    step: (v) => { orbit.az = a0 + da * v; orbit.el = e0 + (el - e0) * v; orbit.dist = d0 + (dist - d0) * v; applyCam(); } });
+}
+/** Nudge in and back out, to say "look here". */
+function dolly(k = 0.93, ms = 760) {
+  const d0 = orbit.dist;
+  tween({ ms, tag: 'dolly', ease: (t) => Math.sin(t * Math.PI),
+    step: (v) => { orbit.dist = d0 * (1 + (k - 1) * v); applyCam(); },
+    done: () => { orbit.dist = d0; applyCam(); } });
+}
+
+/** Roll a number up to its new value rather than swapping it. */
+function countTo(el, value, ms = 520) {
+  const from = parseFloat(el.textContent.replace(/[^\d.-]/g, '')) || 0;
+  if (from === value) { el.textContent = value; return; }
+  tween({ from, to: value, ms, tag: 'n' + el.id,
+    step: (v) => { el.textContent = Math.round(v); },
+    done: () => { el.textContent = value; } });
+}
+
+/**
+ * Land a freshly fitted part instead of teleporting it in: it fades up while
+ * dropping the last 20 mm into place. Materials come straight out of the
+ * shared parts file, so the node gets its own copies for the duration and
+ * hands them back at the end.
+ */
+function settleIn(node) {
+  if (REDUCED) return;
+  // one clone per distinct material, not per mesh: a roof rack is a couple of
+  // hundred little boxes sharing four materials between them
+  const mats = [], byOrig = new Map();
+  node.traverse((o) => {
+    if (!o.isMesh || !o.material) return;
+    o.userData.__m = o.material;
+    let c = byOrig.get(o.material);
+    if (!c) {
+      c = o.material.clone();
+      c.transparent = true; c.opacity = 0; c.depthWrite = false;
+      byOrig.set(o.material, c); mats.push(c);
+    }
+    o.material = c;
+  });
+  const box = new THREE.Box3().setFromObject(node);
+  const c = box.getCenter(new THREE.Vector3());
+  const dir = c.lengthSq() > 1e-6 ? c.clone().normalize() : new THREE.Vector3(0, 1, 0);
+  const S0 = 0.955;
+  tween({ ms: 300, ease: outCubic,
+    step: (v) => {
+      const k = S0 + (1 - S0) * v;
+      node.scale.setScalar(k);
+      node.position.copy(c).multiplyScalar(1 - k).addScaledVector(dir, 0.02 * (1 - v));
+      for (const m of mats) m.opacity = v;
+    },
+    done: () => {
+      node.scale.setScalar(1); node.position.set(0, 0, 0);
+      node.traverse((o) => { if (o.userData.__m) { o.material = o.userData.__m; delete o.userData.__m; } });
+      for (const m of mats) m.dispose();
+    } });
+}
+
+/** Cross-fade the paint rather than snapping to the new swatch. */
+function fadePaint(from, to, mat, ms = 240, delay = 0) {
+  if (!mat || REDUCED || from === to) return;
+  const a = new THREE.Color(from), b = new THREE.Color(to);
+  tween({ ms, delay, tag: 'paint' + mat.name, ease: inOutCubic,
+    step: (v) => mat.color.copy(a).lerp(b, v), done: () => mat.color.copy(b) });
+}
+
+/**
+ * Ride height and tyre size settle on a spring. The model is rebuilt at the
+ * new size immediately -- what moves is an offset on top of it, so nothing is
+ * re-meshed per frame.
+ */
+function settleRide(dLiftMM, tyreRatio) {
+  if (REDUCED) return;
+  const BODY = rig.userData.BODY, W = rig.userData.WHEELS;
+  if (dLiftMM) {
+    const baseY = BODY.position.y;
+    tween({ ms: 620, ease: settleCurve, tag: 'ride',
+      step: (v) => { BODY.position.y = baseY - (dLiftMM / 1000) * (1 - v); },
+      done: () => { BODY.position.y = baseY; } });
+  }
+  if (W && tyreRatio && Math.abs(tyreRatio - 1) > 0.002) {
+    tween({ ms: 520, ease: settleCurve, tag: 'tyre',
+      step: (v) => { const k = tyreRatio + (1 - tyreRatio) * v; for (const w of W.children) w.scale.setScalar(k); },
+      done: () => { for (const w of W.children) w.scale.setScalar(1); } });
+  }
+}
+
+/** Draw a line round one part for a moment. No-op without the outline pass. */
+let hlTimer = 0;
+function highlight(node, ms = 900) {
+  if (!outline || REDUCED) return;
+  outline.selectedObjects = node ? [node] : [];
+  clearTimeout(hlTimer);
+  if (node && ms) hlTimer = setTimeout(() => { outline.selectedObjects = []; }, ms);
 }
 
 /* ═══ total height ═══════════════════════════════════════════════════════
@@ -714,13 +937,21 @@ function showHeight() {
   if (!rig) return;
   const h = Math.round((measuredHeight() + (HEIGHT_CAL ?? 0)) / 5) * 5;
   const d = h - STOCK_H;
-  $('rHeight').innerHTML = h + '<small> mm</small>';
+  countTo($('rHeightN'), h);
   $('rHeightDelta').textContent = d === 0 ? `原廠 ${STOCK_H}mm` : `原廠 ${STOCK_H}mm　${d > 0 ? '+' : '−'}${Math.abs(d)}mm`;
   const cls = PARK.find(([limit]) => h <= limit - 30);
   const tight = PARK.find(([limit]) => h <= limit);
   const el = $('rPark');
-  el.className = cls ? '' : tight ? 'tight' : 'over';
+  const was = el.dataset.cls ?? '';
+  const now = cls ? '' : tight ? 'tight' : 'over';
+  el.dataset.cls = now;
+  el.className = now;
   el.textContent = cls ? '可進 ' + cls[1] : tight ? '幾乎頂到 ' + tight[1] : '超過 2050mm，機械車位進不去';
+  // crossing into a tighter class is worth noticing
+  if (prevS && now !== was && now !== '' && !REDUCED) {
+    el.classList.add('blink');
+    setTimeout(() => el.classList.remove('blink'), 1900);
+  }
 }
 
 /* ═══ step navigation ════════════════════════════════════════════════════ */
@@ -728,9 +959,17 @@ const STEP_OF = { lift:0, wheel:0, rimColor:0, tyre:1, tread:1, owl:1,
   color:2, kit:2, frontBumper:2, grille:2, rearBumper:2, hood:2, spareCoverKit:2, mirrors:2 };
 const stepOf = (k) => STEP_OF[k] ?? 3;
 const STEPS = 4;
+let stepAt = 0;
 function goStep(i) {
+  const back = i < stepAt;
+  stepAt = i;
   document.querySelectorAll('.steps button').forEach(b => b.setAttribute('aria-selected', +b.dataset.s === i));
-  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', +p.dataset.p === i));
+  document.querySelectorAll('.pane').forEach(p => {
+    const on = +p.dataset.p === i;
+    p.classList.toggle('back', back);
+    if (on) { p.classList.remove('on'); void p.offsetWidth; }   // restart the entrance
+    p.classList.toggle('on', on);
+  });
   $('body').scrollTop = 0;
 }
 $('steps').onclick = e => { const b = e.target.closest('[data-s]'); if (!b) return;
@@ -785,9 +1024,11 @@ addEventListener('resize', setPeek);
     // a tap anywhere along the top -- handle or header -- still opens and
     // closes it, the way it did before the drag was added
     const d = moved, tap = from === $('grab') || from === document.querySelector('.head');
+    const was = document.body.classList.contains('sheet');
     stop();
     if (Math.abs(d) > 40) document.body.classList.toggle('sheet', d < 0);
     else if (tap && Math.abs(d) < 8) document.body.classList.toggle('sheet');
+    if (document.body.classList.contains('sheet') !== was) sheetSettled();
   };
   for (const el of [$('grab'), document.querySelector('.head'), $('body')]) {
     el.addEventListener('pointerdown', down);
@@ -797,6 +1038,15 @@ addEventListener('resize', setPeek);
   }
   // a tap on the handle alone still toggles, and the header's link still works
   document.querySelector('.head a').addEventListener('pointerdown', (e) => e.stopPropagation());
+}
+
+/** A tick of haptics as it snaps, and the car slides up out of the way. */
+function sheetSettled() {
+  navigator.vibrate?.(8);
+  const open = document.body.classList.contains('sheet');
+  const y0 = orbit.ty, y1 = open ? 1.02 : 0.85;
+  tween({ ms: 380, ease: inOutCubic, tag: 'ty',
+    step: (v) => { orbit.ty = y0 + (y1 - y0) * v; applyCam(); } });
 }
 
 /* Swipe sideways across the list to change step, the way the four tabs
@@ -816,7 +1066,10 @@ addEventListener('resize', setPeek);
   const end = (e) => {
     if (swipeAxis === 'x') {
       const dx = e.clientX - x0;
-      if (Math.abs(dx) > 55) goStep(Math.max(0, Math.min(STEPS - 1, cur() - Math.sign(dx))));
+      if (Math.abs(dx) > 55) {
+        const next = Math.max(0, Math.min(STEPS - 1, cur() - Math.sign(dx)));
+        if (next !== cur()) { navigator.vibrate?.(6); goStep(next); }
+      }
     }
     swipeAxis = null;
   };
@@ -1092,6 +1345,18 @@ function hints() {
   $('twoNote').textContent = c.twoTone ? `黑頂 ZJ3　台灣組合代碼 ${c.twoTone}` : '此色無原廠雙色組合';
 }
 
+/* Hovering a menu on a desktop draws a line round the part it controls, so
+   you can tell which thing on the car it is before you change anything. */
+for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], ['selRear', 'rearBumper'],
+  ['selHood', 'hood'], ['selSpareKit', 'spareCoverKit'], ['selMirror', 'mirrors'], ['selRack', 'roofRack'],
+  ['selAwning', 'awning'], ['selStep', 'sideStep'], ['selLadder', 'ladder'], ['selSnorkel', 'snorkel'],
+  ['selExhaust', 'exhaust'], ['selLightBar', 'lightBar'], ['selRoofLights', 'roofLights'],
+  ['selGrilleLight', 'grilleLight']]) {
+  const el = $(id); if (!el) continue;
+  el.addEventListener('pointerenter', () => highlight(BUILT[key] ?? null, 0));
+  el.addEventListener('pointerleave', () => highlight(null));
+}
+
 /* wiring that does not belong to one picker */
 const on = (id, f) => $(id).onchange = e => { f(e.target.value); hints(); update(); };
 on('selHood', v => S.hood = v); on('selSpareKit', v => S.spareCoverKit = v);
@@ -1144,7 +1409,7 @@ $('toggles').onclick = e => {
 };
 $('views').onclick = e => { const b = e.target.closest('[data-v]'); if (!b) return;
   document.querySelectorAll('[data-v]').forEach(x => x.setAttribute('aria-pressed', x === b));
-  const [, az, el, d] = VIEWS[+b.dataset.v]; orbit.az = az; orbit.el = el; orbit.dist = d; applyCam(); };
+  const [, az, el, d] = VIEWS[+b.dataset.v]; flyTo(az, el, d, 720); };
 $('btnDemo').onclick = () => { S = { ...DEF, ...DEMO }; tyreSwap = ''; buildUI(); update(); };
 $('btnReset').onclick = () => location.reload();
 $('btnExport').onclick = () => {
@@ -1195,7 +1460,12 @@ $('btnExport').onclick = () => {
 };
 
 resize(); setPeek(); applyCam();
-(function loop() { if (composer) composer.render(); else renderer.render(scene, cam); requestAnimationFrame(loop); })();
+(function loop(t) {
+  runTweens(t || performance.now());
+  ambient(t || 0);
+  if (composer) composer.render(); else renderer.render(scene, cam);
+  requestAnimationFrame(loop);
+})();
 new ResizeObserver(resize).observe(cv.parentElement);
 </script>
 </body>
