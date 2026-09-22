@@ -22,7 +22,10 @@ from mathutils import Vector
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
-GLB = argv[0] if argv else os.path.join(ROOT, 'model', 'parts.glb')
+# the wheels ship in their own file so the page can draw the car sooner, so
+# the gate has to read both or it silently stops checking the rims
+GLBS = argv[:1] if argv else [os.path.join(ROOT, 'model', 'parts.glb'),
+                              os.path.join(ROOT, 'model', 'rims.glb')]
 SPECS = argv[1] if len(argv) > 1 else os.path.join(ROOT, 'tools', 'calib', 'specs.json')
 
 # glTF export maps car (X, Y, Z) -> (X, -Z, Y); undo it on the way back in
@@ -32,7 +35,9 @@ def to_car(v):
 
 def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    bpy.ops.import_scene.gltf(filepath=GLB)
+    for g in GLBS:
+        if os.path.exists(g):
+            bpy.ops.import_scene.gltf(filepath=g)
 
     parts = {}
     for o in bpy.context.scene.objects:

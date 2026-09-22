@@ -17,6 +17,7 @@ if grep -qiE "Traceback|SyntaxError|^Error:" "$LOG"; then
   echo "FAIL: the build script raised"; grep -iE -A6 "Traceback|SyntaxError|^Error:" "$LOG" | head -30; exit 1
 fi
 
+npx gltf-transform draco model/rims.glb model/rims.glb | tail -1
 npx gltf-transform draco model/parts.glb model/parts.glb | tail -1
 
 echo "checking dimensions ..."

@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c1214">
 <title>Jimny JB74 改裝配置</title>
+<!-- The two files the first frame cannot do without. Without these the
+     browser does not learn they exist until three.js has downloaded, parsed
+     and run, which on a phone is seconds of an idle connection. -->
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220028" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
 /* Night-trail palette: the car is the only bright thing on screen, so paint
@@ -39,9 +45,15 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 .views button{font:500 11px/1 var(--body);padding:8px 11px;border:0;cursor:pointer;
   background:#0f181bcc;color:var(--ink2);backdrop-filter:blur(6px)}
 .views button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:700}
-.hud{position:absolute;left:22px;bottom:18px;font:500 10.5px/1.75 var(--mono);
-  color:#7b8d93;pointer-events:none;letter-spacing:.03em}
-.hud b{color:#dfe8e9}
+/* The lift, tyre diameter and ground clearance live over the 3D rather than
+   in the panel: they describe what you are looking at, and on a phone the
+   panel's height is better spent on the list you are choosing from. */
+.hud{position:absolute;left:22px;bottom:18px;display:grid;gap:3px;
+  font:500 10.5px/1.6 var(--mono);color:#7b8d93;pointer-events:none;letter-spacing:.03em}
+.hud b{color:#dfe8e9;font-weight:500}
+.hud .stats{color:#93a5aa}
+.hud .stats i{font-style:normal;color:#eef4f3;font-weight:600;font-size:12.5px;font-variant-numeric:tabular-nums}
+.hud .ver{color:#56676d;font-size:9.5px}
 #boot{position:absolute;inset:0;display:grid;place-items:center;background:#0b1113;z-index:5;
   font:500 12.5px var(--mono);color:#7b8d93;text-align:center;padding:20px;letter-spacing:.08em}
 #boot .bar{width:190px;height:2px;background:#223034;margin:14px auto 0;overflow:hidden}
@@ -70,23 +82,18 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 .hero .h-r em{font-style:normal;font:500 10.5px/1.35 var(--body);color:var(--ink3)}
 .hero .h-r em.tight{color:var(--warn)}
 .hero .h-r em.over{color:var(--bad)}
-.gauge{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
-  border:1px solid var(--line);border-radius:4px;margin-top:9px;overflow:hidden}
-.gauge div{background:var(--sur);padding:9px 10px}
-.gauge span{display:block;font:500 8.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
-.gauge b{display:block;font:800 18px/1.15 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums}
-.gauge small{font:400 10px/1 var(--mono);color:var(--ink3);font-weight:400}
 
 .steps{display:flex;gap:1px;background:var(--line);border-bottom:1px solid var(--line);flex:none}
 .steps button{flex:1;background:var(--bg);border:0;cursor:pointer;padding:11px 6px 10px;
   color:var(--ink3);font:inherit;display:grid;gap:3px;justify-items:center;position:relative}
-.steps button b{font:700 13px/1.2 var(--disp);letter-spacing:.02em;color:var(--ink2)}
-.steps button i{font-style:normal;font:500 9.5px/1 var(--mono);letter-spacing:.08em}
+.steps button b{font:700 12.5px/1.2 var(--disp);letter-spacing:.01em;color:var(--ink2)}
+.steps button i{font-style:normal;font:500 8.5px/1.25 var(--mono);letter-spacing:.01em;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .steps button[aria-selected=true]{background:var(--sur)}
 .steps button[aria-selected=true] b{color:var(--acc)}
 .steps button[aria-selected=true]::after{content:"";position:absolute;inset:auto 0 0 0;height:2px;background:var(--acc)}
 
-.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;touch-action:pan-y}
 .pane{display:none;padding:4px 20px 8px}
 .pane.on{display:block}
 .grp{padding:16px 0 4px;border-bottom:1px solid var(--line)}
@@ -240,7 +247,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .views{top:12px;right:12px}
   .views button{padding:7px 9px;font-size:10.5px}
   .credit{max-width:42%;bottom:calc(var(--sheet) + 8px);font-size:9px}
-  .hud{max-width:52%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.6}
+  .hud{max-width:64%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.55;gap:2px}
+  .hud .stats i{font-size:11.5px}
+  .credit{max-width:34%}
   .panel{grid-area:1/1;align-self:end;z-index:3;height:92dvh;border-left:0;
     border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
     background:#0c1214f2;backdrop-filter:blur(14px);
@@ -263,10 +272,6 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   body.sheet .hero .h-l b{font-size:21px;margin-top:2px}
   body.sheet .hero .h-r i{font-size:10px}
   body.sheet .hero .h-r em{font-size:9.5px}
-  body.sheet .gauge{margin-top:6px}
-  body.sheet .gauge div{padding:5px 9px}
-  body.sheet .gauge span{font-size:8px}
-  body.sheet .gauge b{font-size:14px;margin-top:2px}
   body.sheet .steps button{padding:8px 6px 7px}
   /* three stacked full-width buttons ate a third of the sheet on a phone;
      one compact row leaves that space to the parts */
@@ -276,7 +281,6 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .acts .solid{grid-column:auto}
   .flags{padding:8px 16px 0}
   #out{margin:0 16px 14px;font-size:11px}
-  .gauge{margin-top:11px}
   .wgrid{grid-template-columns:repeat(3,1fr)}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -289,7 +293,12 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     <div id="boot">載入 3D 模型…<div class="bar"><i id="bootbar"></i></div></div>
     <div class="badge"><div class="mk">SUZUKI · JB74W</div><div class="md">JIMNY SIERRA</div></div>
     <div class="views" id="views"></div>
-    <div class="hud" id="hud"></div>
+    <div class="hud" id="hud">
+      <span class="tip">拖曳旋轉 · 雙指縮放</span>
+      <b id="hCol">—</b>
+      <span class="stats">舉升 <i id="hLiftN">0</i> · 胎徑 <i id="hTyreN">693</i> · 離地 <i id="hClearN">210</i> mm</span>
+      <span class="ver" id="hVer"></span>
+    </div>
     <div class="credit">3D 模型 “2023 Suzuki Jimny Sierra” by tonielpro520,<br>
       <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></div>
   </div>
@@ -303,17 +312,13 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
         <div class="h-l"><span>總車高</span><b id="rHeight">1730<small> mm</small></b></div>
         <div class="h-r"><i id="rHeightDelta">原廠高度</i><em id="rPark"></em></div>
       </div>
-      <div class="gauge">
-        <div><span>總舉升</span><b id="rLift">0<small> mm</small></b></div>
-        <div><span>胎外徑</span><b id="rTyre">693<small> mm</small></b></div>
-        <div><span>估離地</span><b id="rClear">210<small> mm</small></b></div>
-      </div>
     </div>
 
     <div class="steps" id="steps" role="tablist">
       <button role="tab" data-s="0" aria-selected="true"><b>底盤</b><i id="sum0">原廠</i></button>
-      <button role="tab" data-s="1" aria-selected="false"><b>外觀</b><i id="sum1">原廠</i></button>
-      <button role="tab" data-s="2" aria-selected="false"><b>裝備</b><i id="sum2">無</i></button>
+      <button role="tab" data-s="1" aria-selected="false"><b>輪胎</b><i id="sum1">原廠</i></button>
+      <button role="tab" data-s="2" aria-selected="false"><b>外觀</b><i id="sum2">原廠</i></button>
+      <button role="tab" data-s="3" aria-selected="false"><b>裝備</b><i id="sum3">無</i></button>
     </div>
 
     <div class="body" id="body">
@@ -334,10 +339,16 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <p class="lbl" style="margin-top:16px">輪框顏色</p>
           <div class="swatches" id="rimSw"></div>
         </div>
+      </div>
+
+      <!-- 2 ── 輪胎 -->
+      <div class="pane" data-p="1">
         <div class="grp">
           <p class="lbl">輪胎尺寸 <em id="tyreEcho"></em></p>
           <div class="ladder" id="tyreLadder"></div>
-          <p class="lbl" style="margin-top:16px">胎紋個性</p>
+        </div>
+        <div class="grp">
+          <p class="lbl">胎紋個性</p>
           <div class="tabs" id="patTabs"></div>
           <div class="treads" id="treadList"></div>
           <button class="tg solo" id="tgOwl" aria-pressed="false">
@@ -346,8 +357,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
         </div>
       </div>
 
-      <!-- 2 ── 外觀 -->
-      <div class="pane" data-p="1">
+      <!-- 3 ── 外觀 -->
+      <div class="pane" data-p="2">
         <div class="grp">
           <p class="lbl">車身配色 <em id="colName"></em></p>
           <div class="swatches" id="colSw"></div>
@@ -372,8 +383,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
         </div>
       </div>
 
-      <!-- 3 ── 裝備 -->
-      <div class="pane" data-p="2">
+      <!-- 4 ── 裝備 -->
+      <div class="pane" data-p="3">
         <div class="grp">
           <p class="lbl">車頂架</p><select id="selRack" aria-label="車頂架"></select><p class="hint" id="hRack"></p>
           <p class="lbl" style="margin-top:16px">車邊帳</p><select id="selAwning" aria-label="車邊帳"></select><p class="hint" id="hAwning"></p>
@@ -431,14 +442,14 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609212328';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609212328';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609212328';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609212328';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609212328';
+import { rigJimny, applyConfig } from './rig.js?v=202609220028';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220028';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220028';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220028';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220028';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609212328';
+const BUILD = '202609220028';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -564,9 +575,18 @@ const loader = new GLTFLoader();
 const draco = new DRACOLoader();
 draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/libs/draco/');
 loader.setDRACOLoader(draco);
-const partsReady = Promise.all([loadParts(loader, `model/parts.glb?v=${BUILD}`, THREE), loadTreadMasks(TYRE_MODELS, `model/tread/`)]);
+// Staged so the car appears as early as it can. The wheels (540 KB) and the
+// tread masks have to be in before the first frame; the accessories (7.4 MB)
+// do not, so they stream in behind and the scene is rebuilt when they land.
+const firstFrame = Promise.all([loadParts(loader, `model/rims.glb?v=${BUILD}`, THREE),
+                                loadTreadMasks(TYRE_MODELS, `model/tread/`)]);
+let accessoriesIn = false;
+const accessoriesReady = loadParts(loader, `model/parts.glb?v=${BUILD}`, THREE).then(() => {
+  accessoriesIn = true;
+  if (rig) update();                       // whatever is selected now gets built
+});
 loader.load('model/jimny-hq.glb', async (g) => {
-  await partsReady;
+  await firstFrame;
   rig = rigJimny(THREE, g.scene);
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   scene.add(rig); rig.userData.BODY.add(accGroup);
@@ -641,21 +661,23 @@ function update() {
   if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint));
   if (S.grille !== 'stock') add(buildAccessory('grille', S.grille, paint));
 
-  $('rLift').innerHTML = total + '<small> mm</small>';
-  $('rTyre').innerHTML = ty.dia + '<small> mm</small>';
-  $('rClear').innerHTML = (210 + total + Math.round((ty.dia - 693) / 2)) + '<small> mm</small>';
   showHeight();
+  $('hLiftN').textContent = total;
+  $('hTyreN').textContent = ty.dia;
+  $('hClearN').textContent = 210 + total + Math.round((ty.dia - 693) / 2);
   $('sum0').textContent = (total ? total + 'mm' : '原廠') + ' · ' + wh.rim + '"';
+  $('sum1').textContent = ty.label + '·' + find(TYRE_MODELS, S.tread).pattern.toUpperCase().replace(/(.)(.)/, '$1/$2');
   const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
-  $('sum1').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
+  $('sum2').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
   const n2 = ['windowGuards','spareBag','spareCover','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
     + SIDED.filter(k => S[k] !== 'none').length
     + ['lightBar','roofLights','grilleLight','extinguisher'].filter(k => S[k] !== 'none').length
     + (S.exhaust !== 'stock' ? 1 : 0)
     + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.snorkel !== 'none');
-  $('sum2').textContent = n2 ? `${n2} 項` : '無';
-  $('hud').innerHTML = `拖曳旋轉 · 雙指縮放<br><b>${esc(col.name)}</b><br>舉升 <b>${total}mm</b> · 胎 <b>${esc(ty.label)}</b><br>版本 ${BUILD}`;
+  $('sum3').textContent = n2 ? `${n2} 項` : '無';
+  $('hCol').textContent = col.name;
+  $('hVer').textContent = accessoriesIn ? `版本 ${BUILD}` : `版本 ${BUILD} · 配件載入中…`;
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   $('flags').innerHTML = fl.map(f =>
     `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
@@ -702,9 +724,10 @@ function showHeight() {
 }
 
 /* ═══ step navigation ════════════════════════════════════════════════════ */
-const STEP_OF = { lift:0, wheel:0, tyre:0, tread:0, rimColor:0,
-  color:1, kit:1, frontBumper:1, grille:1, rearBumper:1, hood:1, spareCoverKit:1, mirrors:1 };
-const stepOf = (k) => STEP_OF[k] ?? 2;
+const STEP_OF = { lift:0, wheel:0, rimColor:0, tyre:1, tread:1, owl:1,
+  color:2, kit:2, frontBumper:2, grille:2, rearBumper:2, hood:2, spareCoverKit:2, mirrors:2 };
+const stepOf = (k) => STEP_OF[k] ?? 3;
+const STEPS = 4;
 function goStep(i) {
   document.querySelectorAll('.steps button').forEach(b => b.setAttribute('aria-selected', +b.dataset.s === i));
   document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', +p.dataset.p === i));
@@ -712,6 +735,10 @@ function goStep(i) {
 }
 $('steps').onclick = e => { const b = e.target.closest('[data-s]'); if (!b) return;
   goStep(+b.dataset.s); document.body.classList.add('sheet'); };
+
+/* Which way a gesture on the list is going, decided once per gesture: the
+   sheet drag and the step swipe both live on the same element. */
+let swipeAxis = null;
 
 /* ═══ phone: the panel is a sheet you drag ═══════════════════════════════
    Tapping the handle works, but a sheet that only responds to a 38-pixel
@@ -744,6 +771,7 @@ addEventListener('resize', setPeek);
   };
   const move = (e) => {
     if (y0 === null) return;
+    if (swipeAxis === 'x') { stop(); return; }      // the step swipe has it
     moved = e.clientY - y0;
     // an open sheet scrolled to the top still has to let the list scroll up
     if (wasOpen && moved < 0 && from === $('body')) { stop(); return; }
@@ -769,6 +797,31 @@ addEventListener('resize', setPeek);
   }
   // a tap on the handle alone still toggles, and the header's link still works
   document.querySelector('.head a').addEventListener('pointerdown', (e) => e.stopPropagation());
+}
+
+/* Swipe sideways across the list to change step, the way the four tabs
+   above it read as a strip you move along. */
+{
+  const list = $('body');
+  let x0 = 0, y0 = 0;
+  const cur = () => [...document.querySelectorAll('.steps button')]
+    .findIndex(b => b.getAttribute('aria-selected') === 'true');
+  list.addEventListener('pointerdown', (e) => { x0 = e.clientX; y0 = e.clientY; swipeAxis = null; });
+  list.addEventListener('pointermove', (e) => {
+    if (swipeAxis === 'y') return;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    if (!swipeAxis && Math.hypot(dx, dy) > 12) swipeAxis = Math.abs(dx) > Math.abs(dy) * 1.3 ? 'x' : 'y';
+    if (swipeAxis === 'x' && e.cancelable) e.preventDefault();
+  }, { passive: false });
+  const end = (e) => {
+    if (swipeAxis === 'x') {
+      const dx = e.clientX - x0;
+      if (Math.abs(dx) > 55) goStep(Math.max(0, Math.min(STEPS - 1, cur() - Math.sign(dx))));
+    }
+    swipeAxis = null;
+  };
+  list.addEventListener('pointerup', end);
+  list.addEventListener('pointercancel', end);
 }
 
 /* ═══ 1 · lift: pick the height first, then the kit ══════════════════════ */

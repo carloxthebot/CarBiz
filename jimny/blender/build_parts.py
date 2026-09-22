@@ -26,6 +26,7 @@ from mathutils import Vector  # noqa: E402
 
 CAR = json.load(open(os.path.join(HERE, 'car.json')))
 OUT = os.path.join(HERE, '..', 'model', 'parts.glb')
+RIMS_OUT = os.path.join(HERE, '..', 'model', 'rims.glb')
 
 lib.reset()
 
@@ -2926,7 +2927,16 @@ def build():
     grille_generic('kpro_folksy', h_slats=6, mat=material('WhiteGel', 0xeeeee8, rough=0.35), wire=False)
     grille_generic('prostaff_minig', v_slots=9, bezel='square')
     grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', bezel='square', mat=PAINT)
-    lib.export(os.path.abspath(OUT))
+    # Two files, because they are needed at different moments: the car cannot
+    # be drawn at all without its wheels, but nothing needs an awning until
+    # somebody picks one. Splitting them takes about 1.5 MB off what has to
+    # arrive before the first frame.
+    roots = [o for o in bpy.data.objects if o.parent is None and o.type == 'EMPTY']
+    rims = [o for o in roots if o.name.startswith('rim_')]
+    rest = [o for o in roots if not o.name.startswith('rim_')]
+    lib.export(os.path.abspath(RIMS_OUT), only=rims)
+    lib.export(os.path.abspath(OUT), only=rest)
+    print(f'exported {len(rims)} rims and {len(rest)} parts')
 
 
 build()

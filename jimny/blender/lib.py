@@ -306,6 +306,20 @@ def prism(name, poly, x0, x1, mat, parent=None, smooth=False):
     return new_object(name, bm, mat, parent, smooth=smooth)
 
 
-def export(path, draco=False):
+def export(path, draco=False, only=None):
+    """Write a GLB. `only` is a list of top-level group objects to export on
+    their own -- the page needs the wheels before it can show anything and
+    the accessories not until someone picks one, so they ship as two files."""
+    sel = False
+    if only is not None:
+        bpy.ops.object.select_all(action='DESELECT')
+        for root in only:
+            root.select_set(True)
+            for ob in root.children_recursive:
+                ob.select_set(True)
+        sel = True
     bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', export_yup=True, export_apply=True,
-                              export_extras=False, export_draco_mesh_compression_enable=draco)
+                              export_extras=False, export_draco_mesh_compression_enable=draco,
+                              use_selection=sel)
+    if sel:
+        bpy.ops.object.select_all(action='DESELECT')
