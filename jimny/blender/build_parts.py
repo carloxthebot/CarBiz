@@ -1256,18 +1256,18 @@ def snorkel_cowl(side=RIGHT):
     # joint, so the seam disappears -- as separate pieces it read as a blade
     # with a wedge parked beside it, not connected to anything.
     JOINT = (X(681), 1196, 543)
-    JOINT_SEC = rounded_rect(32, 130, 11, 5)
+    JOINT_SEC = rounded_rect(32, 138, 11, 5)
     blade = [JOINT, (X(676), 1250, 506), (X(667), 1330, 456),
              (X(657), 1410, 416), (X(647), 1490, 371), (X(630), 1568, 335)]
     # u runs along car X (thickness, +u inboard), v across the pillar (+v aft)
     lib.loft('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
-             JOINT_SEC, rounded_rect(23, 116, 9, 5), TEXBLACK, root)
+             JOINT_SEC, rounded_rect(24, 124, 9, 5), TEXBLACK, root)
 
     # the foot: out of the joint, forward and down, ending ON the cowl (probed
     # at y 1123-1140 over z 620-760) instead of stopping in mid air above it
     boot = [JOINT, (X(674), 1170, 592), (X(662), 1150, 650), (X(649), 1138, 712)]
     lib.loft('boot', [tuple(p) for p in fillet(boot, 48, steps=5)],
-             JOINT_SEC, rounded_rect(42, 88, 13, 5),
+             JOINT_SEC, rounded_rect(46, 76, 22, 5),
              TEXBLACK, root, ease=lambda t: t ** 0.8)
     box('flange', (X(640), 1116, 686), (36, 10, 112), TEXBLACK, root, bevel=4)
     for z in (640, 726):
@@ -1278,19 +1278,21 @@ def snorkel_cowl(side=RIGHT):
     # `out` steps away from the face. |x| tracks the face, which pulls inboard
     # as it rises.
     ay, az = 0.888, -0.459
-    cy, cz = 1433, 373
+    # On the owner's own car the mesh is nearly as wide as the moulding, its
+    # cells are coarse (about four and a half across), and it stops roughly
+    # 60% of the way down with plain moulding below. Centred on the face, not
+    # pushed to its rear edge.
+    cy, cz = 1470, 380
     def place(u, v, out=0):
-        return (X(665 - 0.16 * u + out), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
+        return (X(661 - 0.15 * u + out), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
     # the well behind the mesh, so the holes read as holes
-    sweep('well', [place(-122, 0, -11), place(122, 0, -11)], rounded_rect(14, 54, 9, 4), BLACK, root)
-    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 236, 50, cell=17, bar=2.6)
-    # the plate itself: a flat rounded rectangle, square at both ends
-    ring = [place(130, -34), place(130, 34), place(-130, 34), place(-130, -34)]
-    sweep('plate', [tuple(p) for p in fillet(ring + ring[:2], 18, steps=3)],
-          rounded_rect(12, 16, 4, 3), TEXBLACK, root, closed=True, caps=False)
-    for u in (118, -118):
-        for v in (-25, 25):
-            lib.cylinder(f'ps{u}{v}', place(u, v, 6), (s, 0, 0), 11, 7, STEEL, root, n=10)
+    sweep('well', [place(-80, 0, -12), place(80, 0, -12)], rounded_rect(14, 82, 12, 4), BLACK, root)
+    # coarse cells: about three and a half across and seven down on the car
+    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 152, 82, cell=24, bar=3.0)
+    # a wide bezel around it, deep enough for the mesh to sit down inside
+    ring = [place(92, -54), place(92, 54), place(-92, 54), place(-92, -54)]
+    sweep('plate', [tuple(p) for p in fillet(ring + ring[:2], 24, steps=3)],
+          rounded_rect(16, 20, 5, 3), TEXBLACK, root, closed=True, caps=False)
     return root
 
 
