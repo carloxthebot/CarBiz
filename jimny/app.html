@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221614" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221654" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -71,19 +71,6 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
   stroke-dasharray:1;stroke-dashoffset:1;opacity:.92}
 #bootcar .win{stroke-width:1.7;opacity:.6}
 #bootcar .w{stroke:#71868e;stroke-width:2.6}
-#bootcar .sp{stroke:#71868e;stroke-width:1.8}
-/* Once the model is in and the car is being assembled, it drives: the whole
-   svg bobs on its springs and the wheels turn. Both are transform animations,
-   which the compositor keeps running even while the build blocks the main
-   thread -- see #bootbar. */
-#boot.assembling #bootcar{animation:bootbob .58s ease-in-out infinite alternate}
-@keyframes bootbob{from{transform:translateY(0) rotate(-.5deg)}
-  to{transform:translateY(-3px) rotate(.5deg)}}
-#bootcar .hub{transform-box:fill-box;transform-origin:center}
-#boot.assembling .hub{animation:bootroll .62s linear infinite}
-@keyframes bootroll{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){#boot.assembling #bootcar,
-  #boot.assembling .hub{animation:none}}
 #bootmsg{opacity:.85}
 /* Assembling the car blocks the main thread, so the wait indicator has to be
    something the compositor can run on its own: a transform animation keeps
@@ -349,20 +336,6 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 /* Hovering an option pops its details: what it costs in both currencies, the
    part number, what it actually is, and a link to the maker's own page. It
    stays up while the pointer is inside it, so the link is reachable. */
-/* A dot on every part of the car you can actually change. Point at one and
-   the same catalogue card the menus use comes up, so you can shop from the
-   model instead of hunting down the right menu. */
-#spots{position:absolute;inset:0;z-index:3;pointer-events:none}
-.spot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:0;padding:0;
-  background:none;pointer-events:auto;cursor:pointer;display:grid;place-items:center;
-  opacity:0;transition:opacity .3s ease}
-#spots.on .spot{opacity:1}
-.spot i{width:9px;height:9px;border-radius:50%;background:var(--acc);
-  box-shadow:0 0 0 4px #ffb24a24,0 0 0 1px #0006,0 2px 6px #0009;
-  transition:transform .2s cubic-bezier(.34,1.3,.5,1)}
-.spot:hover i,.spot:focus-visible i,.spot.act i{transform:scale(1.65);box-shadow:0 0 0 7px #ffb24a2e,0 0 0 1px #0006}
-.spot:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:50%}
-@media (prefers-reduced-motion:reduce){.spot,.spot i{transition:none}}
 #card[hidden]{display:none}
 #card{position:fixed;z-index:40;width:min(330px,calc(100vw - 24px));
   background:#101a1ef2;backdrop-filter:blur(16px);border:1px solid var(--line2);
@@ -390,12 +363,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
         <!-- traced from model/jimny-hq.glb by tools/silhouette.mjs + .py -->
         <path class="body" pathLength="1" d="M113.4 4.0L61.4 4.0L43.0 5.2L39.4 31.2L27.0 31.2L25.0 33.2L22.6 42.0L21.8 53.2L23.8 73.6L26.6 78.8L30.2 79.6L29.4 87.2L30.6 92.8L38.6 96.4L43.4 96.8L42.6 100.0L45.4 103.6L46.2 109.2L50.6 116.4L55.8 121.2L61.8 124.4L75.4 125.6L86.6 120.8L102.2 105.2L127.8 107.6L133.4 102.8L180.6 102.4L187.8 107.6L191.0 106.4L205.8 106.8L223.8 122.4L232.6 125.6L241.4 125.6L250.2 122.4L257.0 116.8L260.6 111.2L263.0 104.4L263.0 99.6L265.0 97.6L273.4 96.8L277.8 93.2L277.4 74.4L273.4 72.0L271.8 72.8L267.8 71.6L270.6 65.2L270.6 54.0L265.0 46.8L241.0 43.2L205.8 40.4L204.6 38.0L200.2 36.0L202.2 38.4L198.2 38.0L199.0 36.0L195.8 35.6L180.6 10.8L175.8 7.2L159.8 4.8L113.8 4.4Z"/>
-        <path class="win" pathLength="1" d="M178.6 9.2L178.2 10.4L179.4 12.4L174.6 15.2L171.4 13.6L120.6 13.2L117.8 14.0L116.6 16.4L117.8 42.8L121.8 44.0L123.8 46.0L157.4 46.4L163.8 48.4L183.0 48.4L184.2 46.8L188.6 46.8L189.0 40.8L195.4 40.4L198.2 39.2L179.0 9.6Z"/>
-        <path class="win" pathLength="1" d="M100.2 14.0L59.0 14.0L57.0 14.8L55.0 18.0L44.6 14.0L42.2 28.0L41.4 41.6L44.2 42.8L52.6 43.6L54.2 40.4L57.4 42.8L67.4 43.2L71.0 45.2L107.0 45.2L109.0 42.8L109.0 22.8L107.8 20.4L103.0 19.6L102.2 15.6L100.6 14.4Z"/>
+        <path class="win" pathLength="1" d="M178.6 9.2L179.4 12.4L174.6 15.2L117.8 14.0L117.8 42.8L123.8 46.0L163.8 48.4L188.6 46.8L189.0 40.8L198.2 39.2L179.0 9.6Z"/>
+        <path class="win" pathLength="1" d="M100.2 14.0L59.0 14.0L55.0 18.0L44.6 14.0L41.4 41.6L107.0 45.2L109.0 22.8L100.6 14.4Z"/>
         <circle class="w" pathLength="1" cx="71.3" cy="99.4" r="26.1"/>
         <circle class="w" pathLength="1" cx="236.0" cy="99.4" r="26.1"/>
-        <g class="hub"><path class="sp" pathLength="1" d="M58.2 99.4L84.4 99.4M71.3 86.3L71.3 112.5"/></g>
-        <g class="hub"><path class="sp" pathLength="1" d="M222.9 99.4L249.1 99.4M236.0 86.3L236.0 112.5"/></g>
       </svg>
     <span id="bootmsg">載入 3D 模型…</span>
     <div id="bootbar" aria-hidden="true"><i></i></div>
@@ -403,7 +374,6 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 <div class="app">
   <div class="stage">
     <canvas id="cv"></canvas>
-    <div id="spots" aria-hidden="true"></div>
     <div class="badge"><div class="mk">SUZUKI · JB74W</div><div class="md">JIMNY SIERRA</div></div>
     <div class="views" id="views"></div>
     <div class="hud" id="hud">
@@ -559,14 +529,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609221614';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221614';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221614';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221614';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609221614';
+import { rigJimny, applyConfig } from './rig.js?v=202609221654';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221654';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221654';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221654';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609221654';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609221614';
+const BUILD = '202609221654';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -661,12 +631,11 @@ function applyCam() {
 }
 let drag = null, pinch = 0;
 cv.addEventListener('pointerdown', e => { stopTween('cam'); stopTween('dolly');
-  drag = { x: e.clientX, y: e.clientY }; cv.setPointerCapture(e.pointerId);
-  showSpots(false); hideCard(true); });
+  drag = { x: e.clientX, y: e.clientY }; cv.setPointerCapture(e.pointerId); hideCard(true); });
 cv.addEventListener('pointermove', e => { if (!drag) return;
   orbit.az -= (e.clientX - drag.x) * .008; orbit.el += (e.clientY - drag.y) * .006;
   drag = { x: e.clientX, y: e.clientY }; applyCam(); });
-addEventListener('pointerup', () => { drag = null; showSpots(true); });
+addEventListener('pointerup', () => drag = null);
 cv.addEventListener('wheel', e => { e.preventDefault(); orbit.dist *= 1 + Math.sign(e.deltaY) * .09; applyCam(); }, { passive: false });
 cv.addEventListener('touchmove', e => { if (e.touches.length !== 2) return; e.preventDefault();
   const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
@@ -726,8 +695,17 @@ const accessoriesReady = loadParts(loader, `model/parts.glb?v=${BUILD}`, THREE).
 // Yield between those stages so the boot screen at least repaints, and let the
 // sweeping bar under it run on the compositor so it keeps moving regardless.
 const yieldFrame = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+/** Draw the boot outline in to `k` of its length. querySelectorAll, not
+    .children: the wheel spokes live inside a <g> that rotates. */
+const drawCar = (k) => {
+  for (const el of $('bootcar').querySelectorAll('path,circle'))
+    el.style.strokeDashoffset = String(1 - k);
+};
 loader.load('model/jimny-hq.glb', async (g) => {
   await firstFrame;
+  // the model is in; whatever the progress events did or did not report, the
+  // car is now complete on screen
+  drawCar(1);
   $('boot').classList.add('assembling');
   await yieldFrame();
   rig = rigJimny(THREE, g.scene);
@@ -736,9 +714,7 @@ loader.load('model/jimny-hq.glb', async (g) => {
   // inspection hook for headless verification scripts; harmless in the page
   window.__jimny = { THREE, rig, scene, cam, get composer() { return composer; }, get S() { return S; },
     update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); },
-    set: (k, v) => { S[k] = v; buildUI(); update(); },
-    get spots() { return { keys: [...spots.keys()], hidden: [...hidden],
-      world: (k) => spotWorld(k, new THREE.Vector3())?.toArray().map(n => +n.toFixed(2)) }; } };
+    set: (k, v) => { S[k] = v; buildUI(); update(); } };
   await yieldFrame();
   // one stock render first, to line the model's measured height up with the
   // catalogue's 1730 mm before anything is bolted to it
@@ -775,11 +751,11 @@ loader.load('model/jimny-hq.glb', async (g) => {
     flyTo(0.8, 0.18, 9, 1200);
   }
   $('boot').classList.add('gone');
-  setTimeout(() => { $('boot').style.display = 'none'; showSpots(true); }, 900);
+  setTimeout(() => { $('boot').style.display = 'none'; }, 480);
   if (preset) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
 }, (p) => { if (!p.total) return;
   const k = p.loaded / p.total;
-  for (const el of $('bootcar').children) el.style.strokeDashoffset = String(1 - k);
+  drawCar(k);
   $('bootmsg').textContent = k < 1 ? `載入 3D 模型… ${Math.round(k * 100)}%` : '組裝中…';
   if (k >= 1) $('boot').classList.add('assembling'); },
 (e) => { $('bootmsg').textContent = '模型載入失敗：' + (e?.message || e); });
@@ -817,7 +793,7 @@ function update() {
   const add = (n, key) => {
     if (!n) return;
     accGroup.add(n);
-    if (key) { BUILT[key] = n; n.userData.spot = spotAnchor(n); }
+    if (key) BUILT[key] = n;
     if (key && chg.has(key) && prevS) { settleIn(n); flash = n; }
   };
   for (const k of ['windowGuards', 'spareBag', 'spareCover', 'flares', 'decals', 'shovel', 'sideSkirt'])
@@ -884,7 +860,6 @@ function update() {
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   $('flags').innerHTML = fl.map(f =>
     `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
-  syncSpots();
 }
 
 /**
@@ -1610,175 +1585,32 @@ for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], 
     lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS }[key];
   el.addEventListener('pointerenter', () => {
     highlight(BUILT[key] ?? null, 0);
-    if (list && matchMedia('(hover: hover)').matches) showCard(find(list, S[key]), el);
+    if (list && matchMedia('(hover: hover)').matches) {
+      const it = find(list, S[key]);
+      showCard(it, el, shotFor(key, it));
+    }
   });
   el.addEventListener('pointerleave', () => { highlight(null); hideCard(); });
 }
 
-/* ═══ hotspots on the car ════════════════════════════════════════════════
-   A dot sits on every fitted part that has a catalogue entry. Point at the
-   dot and the same card the menus show comes up, with the part's own render,
-   its price and a link to where it is sold -- so the model itself is the
-   menu. Each dot's anchor is stored in BODY space when the part is built, so
-   the lift carries it and the per-frame cost is one matrix multiply. */
-const spotsEl = $('spots');
-const SPOT_LIST = {
+/* Each card shows the part fitted to THIS car -- a render of our own model,
+   made by tools/partshots.mjs driving this same page. The makers' product
+   photos are theirs, so those stay behind the "看產品頁" link. */
+const SHOT_LIST = {
   frontBumper: () => FRONT_BUMPERS, grille: () => GRILLES, rearBumper: () => REAR_BUMPERS,
   hood: () => HOODS, spareCoverKit: () => SPARE_COVERS, mirrors: () => MIRRORS,
   roofRack: () => ROOF_RACKS, awning: () => AWNINGS, sideStep: () => SIDE_STEPS,
   ladder: () => LADDERS, snorkel: () => SNORKELS, exhaust: () => EXHAUSTS,
   lightBar: () => LIGHT_BARS, roofLights: () => ROOF_LIGHTS, grilleLight: () => GRILLE_LIGHTS,
   extinguisher: () => EXTINGUISHERS,
-  // the running gear has no BUILT node; it hangs off the wheels instead
-  wheel: () => WHEELS, tyre: () => TYRES, lift: () => LIFTS,
 };
-const WHEEL_KEYS = new Set(['wheel', 'tyre', 'lift']);
-const _v = new THREE.Vector3(), _b = new THREE.Box3();
+const shotFor = (key, item) =>
+  !item || item.id === 'none' || item.id === 'stock' ? null
+    : `model/shots/${key}-${item.id}.webp?v=${BUILD}`;
 
-/** Candidate anchors for a part, in BODY space, so the lift moves them with
-    the car. One per top-level piece, because a left-and-right part like the
-    mirrors has its centroid in the middle of the cabin, inside the bodywork. */
-function spotAnchor(node) {
-  const toLocal = (b) => rig.userData.BODY.worldToLocal(b.getCenter(new THREE.Vector3()));
-  const out = [];
-  for (const c of node.children) {
-    _b.setFromObject(c);
-    if (isFinite(_b.min.x)) out.push(toLocal(_b));
-  }
-  if (!out.length) {
-    _b.setFromObject(node);
-    if (isFinite(_b.min.x)) out.push(toLocal(_b));
-  }
-  return out.length ? out : null;
-}
-
-const spots = new Map();                                 // key -> button element
-function syncSpots() {
-  if (!rig) return;
-  const want = new Set();
-  for (const key of Object.keys(SPOT_LIST)) {
-    const item = find(SPOT_LIST[key](), S[key]);
-    if (!item || item.id === 'none' || item.id === 'stock') continue;
-    if (!WHEEL_KEYS.has(key) && !BUILT[key]) continue;    // fitted but not modelled yet
-    want.add(key);
-    if (spots.has(key)) continue;
-    const el = document.createElement('button');
-    el.className = 'spot';
-    el.type = 'button';
-    el.dataset.spot = key;
-    el.innerHTML = '<i></i>';
-    spotsEl.append(el);
-    spots.set(key, el);
-  }
-  for (const [key, el] of spots) if (!want.has(key)) { el.remove(); spots.delete(key); }
-  for (const [key, el] of spots) {
-    const it = find(SPOT_LIST[key](), S[key]);
-    el.setAttribute('aria-label', (it?.brand ? it.brand + ' ' : '') + (it?.label ?? key));
-  }
-}
-
-/** The wheel on the camera's side, front or rear. */
-function nearWheel(front) {
-  const gs = rig.userData.wheelGroups || [];
-  const side = Math.sign(cam.position.x) || 1;
-  let best = null, bz = null;
-  for (const g of gs) {
-    g.getWorldPosition(_v);
-    if (Math.sign(_v.x) !== side) continue;
-    if (bz === null || (front ? _v.z > bz : _v.z < bz)) { bz = _v.z; best = g; }
-  }
-  return best || gs[0] || null;
-}
-
-/** Where a dot's anchor is in the world right now: the piece of the part
-    nearest the camera, lifted a little off its skin so it is not buried. */
-const _c = new THREE.Vector3();
-function spotWorld(key, out) {
-  if (WHEEL_KEYS.has(key)) {
-    const g = nearWheel(key !== 'tyre');
-    if (!g) return null;
-    g.getWorldPosition(out);
-    // clear of the tyre AND the flare over it, or the dot never shows
-    out.x += (Math.sign(cam.position.x) || 1) * 0.25;
-    if (key === 'lift') out.y += 0.34;
-  } else {
-    const list = BUILT[key]?.userData.spot;
-    if (!list || !list.length) return null;
-    const M = rig.userData.BODY.matrixWorld;
-    let best = null, bd = Infinity;
-    for (const a of list) {
-      _c.copy(a).applyMatrix4(M);
-      const d = _c.distanceToSquared(cam.position);
-      if (d < bd) { bd = d; best = best ? best.copy(_c) : _c.clone(); }
-    }
-    out.copy(best);
-  }
-  // float it 12 cm toward the viewer, clear of its own skin and its neighbours
-  return out.add(_c.copy(cam.position).sub(out).normalize().multiplyScalar(0.12));
-}
-
-// Occlusion: a dot on the far side of the car would otherwise float over the
-// bodywork. One raycast per dot, but only a few times a second, and a hit on
-// the part's OWN skin does not count -- the anchor is inside it.
-const rc = new THREE.Raycaster();
-let hidden = new Set(), lastOcc = 0;
-const under = (o, root) => { for (let p = o; p; p = p.parent) if (p === root) return true; return false; };
-function checkOcclusion() {
-  const meshes = [];
-  rig.traverse((o) => { if (o.isMesh && o.visible) meshes.push(o); });
-  const next = new Set();
-  for (const key of spots.keys()) {
-    // the running gear always rides on the wheel nearest the camera, so it is
-    // visible by construction; testing it just loses to the flare's top edge
-    if (WHEEL_KEYS.has(key)) continue;
-    if (!spotWorld(key, _v)) continue;
-    const own = BUILT[key];
-    const d = _v.distanceTo(cam.position);
-    rc.set(cam.position, _v.clone().sub(cam.position).normalize());
-    rc.far = d - 0.16;                    // a neighbour brushing past does not count
-    if (rc.intersectObjects(meshes, false).some((h) => !own || !under(h.object, own))) next.add(key);
-  }
-  hidden = next;
-}
-
-const _p = new THREE.Vector3();
-function layoutSpots(t) {
-  if (!rig || !spots.size) return;
-  if (t - lastOcc > 180) { lastOcc = t; checkOcclusion(); }
-  const r = cv.getBoundingClientRect(), st = spotsEl.getBoundingClientRect();
-  for (const [key, el] of spots) {
-    if (!spotWorld(key, _p)) { el.style.display = 'none'; continue; }
-    _p.project(cam);
-    const on = _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02 && !hidden.has(key);
-    el.style.display = on ? '' : 'none';
-    if (!on) continue;
-    el.style.left = (r.left - st.left + (_p.x * .5 + .5) * r.width) + 'px';
-    el.style.top = (r.top - st.top + (-_p.y * .5 + .5) * r.height) + 'px';
-  }
-}
-
-// dots appear once the car has settled, and get out of the way while dragging
-function showSpots(on) { spotsEl.classList.toggle('on', !!on); }
-const spotItem = (key) => find(SPOT_LIST[key](), S[key]);
-spotsEl.addEventListener('pointerover', (e) => {
-  const el = e.target.closest('.spot'); if (!el) return;
-  el.classList.add('act');
-  showCard(spotItem(el.dataset.spot), el, spotThumb(spotItem(el.dataset.spot), el.dataset.spot));
-});
-spotsEl.addEventListener('pointerout', (e) => {
-  const el = e.target.closest('.spot'); if (!el) return;
-  el.classList.remove('act');
-  if (!e.relatedTarget || !spotsEl.contains(e.relatedTarget)) hideCard();
-});
-spotsEl.addEventListener('click', (e) => {
-  const el = e.target.closest('.spot'); if (!el) return;
-  const key = el.dataset.spot;
-  showCard(spotItem(key), el, spotThumb(spotItem(key), key));
-  highlight(BUILT[key] ?? null, 1400);
-});
 // hooks for tools/partshots.mjs, which drives this page to render the card
 // thumbnails; nothing in the page itself reads them
-window.__jimnyLists = Object.fromEntries(Object.entries(SPOT_LIST).map(([k, f]) => [k, f()]));
+window.__jimnyLists = Object.fromEntries(Object.entries(SHOT_LIST).map(([k, f]) => [k, f()]));
 window.__jimnyAim = aimFor;
 window.__jimnyDefault = (k) => DEF[k];
 window.__jimnyShotBox = (key) => {
@@ -1803,14 +1635,6 @@ window.__jimnyShotBox = (key) => {
   cy = Math.max(r.top + h / 2, Math.min(r.bottom - h / 2, cy));
   return { x: Math.round(cx - w / 2), y: Math.round(cy - h / 2), width: Math.round(w), height: Math.round(h) };
 };
-
-/** The part's own render, where we have one. */
-function spotThumb(item, key) {
-  if (!item || item.id === 'none' || item.id === 'stock') return null;
-  if (key === 'wheel') return `model/wheels/${item.style}.webp?v=${BUILD}`;
-  if (key === 'tyre' || key === 'lift') return null;
-  return `model/shots/${key}-${item.id}.webp?v=${BUILD}`;
-}
 
 cardsOn('liftCards', 'l', () => LIFTS);
 cardsOn('wheelGrid', 'w', () => WHEELS, (w) => `model/wheels/${w.style}.webp?v=${BUILD}`);
@@ -1925,7 +1749,6 @@ resize(); setPeek(); applyCam();
 (function loop(t) {
   runTweens(t || performance.now());
   ambient(t || 0);
-  layoutSpots(t || 0);
   if (composer) composer.render(); else renderer.render(scene, cam);
   requestAnimationFrame(loop);
 })();

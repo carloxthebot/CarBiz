@@ -134,7 +134,9 @@ def main():
     for i, g in enumerate(blobs(denoise(glass))):
         if len(g) < 900:                            # skip slivers: wiper, mirror glass
             continue
-        d_g, n = path(g, 1.6)
+        # the side windows are square openings with rounded corners; traced at
+        # a fine tolerance they come out wobbly, which does not read as glass
+        d_g, n = path(g, 5.5)
         print(f'<path class="win" pathLength="1" d="{d_g}"/>   <!-- window {i}, {n} pts -->')
     # road wheels only: the tailgate spare reads as a bubble in a side outline
     ws = json.load(open(f'{SRC}/sil_wheels.json'))

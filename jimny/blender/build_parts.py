@@ -1251,23 +1251,27 @@ def snorkel_cowl(side=RIGHT):
     # ---- the moulding: pillar blade, then the scuttle boot ----------------
     # centre = probed pillar band, moved 26 mm forward onto the glass edge,
     # and half the 26 mm thickness out from the probed face
-    blade = [(X(682), 1175, 551), (X(676), 1250, 506), (X(667), 1330, 456),
+    # ONE continuous moulding: down the pillar, round the corner, then forward
+    # and down into the scuttle. Two lofts that SHARE their section at the
+    # joint, so the seam disappears -- as separate pieces it read as a blade
+    # with a wedge parked beside it, not connected to anything.
+    JOINT = (X(681), 1196, 543)
+    JOINT_SEC = rounded_rect(32, 130, 11, 5)
+    blade = [JOINT, (X(676), 1250, 506), (X(667), 1330, 456),
              (X(657), 1410, 416), (X(647), 1490, 371), (X(630), 1568, 335)]
     # u runs along car X (thickness, +u inboard), v across the pillar (+v aft)
     lib.loft('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
-             rounded_rect(28, 134, 10, 5), rounded_rect(23, 116, 9, 5),
-             TEXBLACK, root)
+             JOINT_SEC, rounded_rect(23, 116, 9, 5), TEXBLACK, root)
 
-    # the boot: off the blade's foot, forward and down into the trough between
-    # the windscreen base and the bonnet's rear edge. Stays inboard of the
-    # fender shoulder and sits on the cowl.
-    boot = [(X(674), 1204, 540), (X(668), 1182, 588), (X(657), 1166, 644), (X(646), 1154, 702)]
-    lib.loft('boot', [tuple(p) for p in fillet(boot, 55, steps=5)],
-             rounded_rect(40, 114, 13, 5), rounded_rect(44, 76, 13, 5),
-             TEXBLACK, root, ease=lambda t: t ** 0.7)
-    box('flange', (X(634), 1124, 672), (34, 10, 104), TEXBLACK, root, bevel=4)
-    for z in (628, 722):
-        lib.cylinder(f'footScrew{z}', (X(638 - (z - 628) * 0.06), 1126, z), (0, 1, 0), 12, 9, STEEL, root, n=10)
+    # the foot: out of the joint, forward and down, ending ON the cowl (probed
+    # at y 1123-1140 over z 620-760) instead of stopping in mid air above it
+    boot = [JOINT, (X(674), 1170, 592), (X(662), 1150, 650), (X(649), 1138, 712)]
+    lib.loft('boot', [tuple(p) for p in fillet(boot, 48, steps=5)],
+             JOINT_SEC, rounded_rect(42, 88, 13, 5),
+             TEXBLACK, root, ease=lambda t: t ** 0.8)
+    box('flange', (X(640), 1116, 686), (36, 10, 112), TEXBLACK, root, bevel=4)
+    for z in (640, 726):
+        lib.cylinder(f'footScrew{z}', (X(644 - (z - 640) * 0.06), 1118, z), (0, 1, 0), 12, 9, STEEL, root, n=10)
 
     # ---- the intake plate, bolted to the moulding's outboard face ---------
     # u runs up the pillar from the plate's centre, v across it (+v forward);
