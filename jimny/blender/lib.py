@@ -172,6 +172,33 @@ def sweep(name, path_mm, profile, mat, parent=None, caps=True, smooth=True, clos
     return new_object(name, bm, mat, parent, smooth=smooth)
 
 
+def loft(name, path_mm, prof_a, prof_b, mat, parent=None, smooth=True, ease=None, caps=True):
+    """Like sweep(), but the profile blends from prof_a at the first station to
+    prof_b at the last, so a duct can swell or taper along its run. Both
+    profiles need the same vertex count (rounded_rect with the same n).
+    `ease(s) -> s` reshapes where the change happens."""
+    path = [P(*p) for p in path_mm]
+    frames = _frames(path)
+    bm = bmesh.new()
+    rings = []
+    last = max(len(path) - 1, 1)
+    for i, (p, (t, n, bn)) in enumerate(zip(path, frames)):
+        s = i / last
+        if ease:
+            s = ease(s)
+        prof = [(a[0] + (b[0] - a[0]) * s, a[1] + (b[1] - a[1]) * s) for a, b in zip(prof_a, prof_b)]
+        rings.append([bm.verts.new(p + n * (u * MM) + bn * (v * MM)) for (u, v) in prof])
+    k = len(prof_a)
+    for r0, r1 in zip(rings, rings[1:]):
+        for j in range(k):
+            bm.faces.new((r0[j], r0[(j + 1) % k], r1[(j + 1) % k], r1[j]))
+    if caps:
+        bm.faces.new(list(reversed(rings[0])))
+        bm.faces.new(rings[-1])
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return new_object(name, bm, mat, parent, smooth=smooth)
+
+
 def circle(r, n=16):
     return [(r * math.cos(2 * math.pi * i / n), r * math.sin(2 * math.pi * i / n)) for i in range(n)]
 

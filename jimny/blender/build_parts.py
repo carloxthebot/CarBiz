@@ -468,28 +468,41 @@ def wire_mesh(root, mat, cx, cy, z, w, h, pitch=10, bar=1.6):
         box(f'mh{cx}{cy}{j}', (cx, y, z), (w, bar, bar), mat, root, bevel=0)
 
 
-def hex_mesh(root, mat, cx, cy, z, w, h, cell=25, bar=2.4):
-    """Honeycomb: flat-topped hexagons, edges drawn once."""
+def hex_edges(w, h, cell=25):
+    """Flat-topped honeycomb over a w x h rectangle centred on (0, 0), each
+    edge listed once. Returns [((u0, v0), (u1, v1)), ...] in mm."""
     r = cell / 2 / math.cos(math.pi / 6)              # circumradius for a cell `cell` across flats
-    dx, dy = 1.5 * r, cell
+    du, dv = 1.5 * r, cell
     edges = set()
     col = 0
-    x = cx - w / 2 + r
-    while x < cx + w / 2 - r * 0.5:
-        y0 = cy - h / 2 + (dy / 2 if col % 2 else 0) + cell / 2
-        y = y0
-        while y < cy + h / 2 - cell * 0.45:
+    u = -w / 2 + r
+    while u < w / 2 - r * 0.5:
+        v = -h / 2 + (dv / 2 if col % 2 else 0) + cell / 2
+        while v < h / 2 - cell * 0.45:
             for k in range(6):
                 a0, a1 = math.pi / 3 * k, math.pi / 3 * (k + 1)
-                p0 = (round(x + r * math.cos(a0)), round(y + r * math.sin(a0)))
-                p1 = (round(x + r * math.cos(a1)), round(y + r * math.sin(a1)))
+                p0 = (round(u + r * math.cos(a0)), round(v + r * math.sin(a0)))
+                p1 = (round(u + r * math.cos(a1)), round(v + r * math.sin(a1)))
                 edges.add(tuple(sorted((p0, p1))))
-            y += dy
-        x += dx
+            v += dv
+        u += du
         col += 1
-    for i, ((x0, y0), (x1, y1)) in enumerate(sorted(edges)):
-        sweep(f'hx{i}', [(x0, y0, z), (x1, y1, z)], [(-bar / 2, -bar / 2), (bar / 2, -bar / 2), (bar / 2, bar / 2), (-bar / 2, bar / 2)],
-              mat, root, smooth=False)
+    return sorted(edges)
+
+
+def hex_mesh(root, mat, cx, cy, z, w, h, cell=25, bar=2.4):
+    """Honeycomb in the X-Y plane at a fixed Z -- a grille face."""
+    sq = [(-bar / 2, -bar / 2), (bar / 2, -bar / 2), (bar / 2, bar / 2), (-bar / 2, bar / 2)]
+    for i, ((u0, v0), (u1, v1)) in enumerate(hex_edges(w, h, cell)):
+        sweep(f'hx{i}', [(cx + u0, cy + v0, z), (cx + u1, cy + v1, z)], sq, mat, root, smooth=False)
+
+
+def hex_panel(root, mat, place, w, h, cell=22, bar=2.8, prefix='hx'):
+    """Honeycomb on an arbitrary plane: `place(u, v) -> (x, y, z)` maps the
+    panel's own millimetres onto the car."""
+    sq = [(-bar / 2, -bar / 2), (bar / 2, -bar / 2), (bar / 2, bar / 2), (-bar / 2, bar / 2)]
+    for i, ((u0, v0), (u1, v1)) in enumerate(hex_edges(w, h, cell)):
+        sweep(f'{prefix}{i}', [place(u0, v0), place(u1, v1)], sq, mat, root, smooth=False)
 
 
 # SHOWA GARAGE ABS front grille (E00500): stock outline, round lamp bezels,
@@ -1204,57 +1217,83 @@ def snorkel_urnieta(side=RIGHT):
 
 
 def snorkel_cowl(side=RIGHT):
-    """The low-profile A-pillar duct sold on Shopee as a JB64/74 涉水器, and
-    what the owner's car wears.
+    """The low-profile A-pillar duct sold in Taiwan as a JB64/74 涉水器, and
+    what the owner's car wears. Rebuilt 2026-09-22 (third attempt) from the
+    owner's own close-ups plus a raycast probe of this model's body.
 
-    Redrawn 2026-09-22 against the model's own geometry rather than guessed
-    offsets. Measured here: the A-pillar's outer face is at |x| = 672, the
-    pillar runs from (y 1177, z 584) at the cowl to (y 1534, z 340) at the
-    roof, and the windscreen glass spans y 1157-1557 over z 371-681. The
-    first attempt hung the moulding off a hand-written path that missed the
-    pillar entirely and laid its duct along the top of the fender like a
-    roof bar; the duct actually sits in the scuttle, tucked against the
-    bonnet's rear corner.
+    Probed here, right side (blender/probe-style raycasts, 20 mm grid):
+      A-pillar outer face  |x| 663 at y 1250 falling to 616 at y 1570
+      A-pillar band centre  z  480 at y 1250 falling to 310 at y 1570
+      cowl / bonnet top      y  1123-1140 over z 620-760 at |x| 640-660
+      fender shoulder rolls over between |x| 660 and 700
+
+    What the photos show, and what the last two attempts got wrong:
+      * it is a FLAT WIDE BLADE lying on the pillar, roughly as wide fore-aft
+        as the pillar itself and only ~45 mm proud -- not a fat post. The
+        previous profile had the 88 mm on the sideways axis and the 32 mm
+        fore-aft, i.e. exactly backwards.
+      * the intake is a HONEYCOMB panel on a raised pod at the TOP of the
+        blade, hanging off its REAR edge, with a corner screw at each end and
+        a spear-shaped taper where the pod dies back into the blade.
+      * the bottom does not run out over the fender. It swells into a smooth
+        boot that sweeps forward and DOWN into the scuttle, ending on the cowl
+        at the bonnet's rear corner, screwed down through a flange.
 
     Nothing rises above the roof gutter, which is the whole point: the car
     keeps its registered height."""
     root = group('snorkel_cowl')
     s = side
-    rake = math.atan2(584 - 340, 1534 - 1177)                # 34 deg off vertical
-    xo = s * 678                                             # a few mm proud of the pillar face
-    # the moulding, following the pillar from the scuttle to just under the gutter
-    path = [(xo, 1150, 604), (xo, 1240, 543), (xo, 1380, 448), (xo, 1500, 366), (xo, 1556, 328)]
-    sweep('pillar', [tuple(p) for p in fillet(path, 70, steps=6)],
-          rounded_rect(88, 32, 13, 4), TEXBLACK, root)
-    # the scuttle piece: forward and down off the pillar's foot, beside the
-    # bonnet's rear corner, where the factory cowl trim is
-    # It runs INTO the scuttle, not out over the wing: the cowl surface is at
-    # y = 1131 at z = 680 (measured), and the piece tucks inboard toward the
-    # bonnet's rear corner rather than standing proud of the fender.
-    cowl = [(s * 668, 1152, 608), (s * 628, 1128, 664), (s * 562, 1120, 716)]
-    sweep('scuttle', [tuple(p) for p in fillet(cowl, 45, steps=5)],
-          rounded_rect(66, 30, 12, 4), TEXBLACK, root)
-    for (x, z) in ((610, 690), (568, 716)):
-        lib.cylinder(f'screw{z}', (s * x, 1130, z), (0, 1, 0), 11, 7, TEXBLACK, root, n=10)
+    X = lambda v: s * v
 
-    # the intake: a tall louvred panel set into the moulding's outer face,
-    # about a quarter of the way down from the gutter
-    R = Matrix.Rotation(-rake * s, 3, 'X')
-    vy, vz = 1452, 398
-    box('ventFrame', (xo + s * 8, vy, vz), (22, 196, 78), TEXBLACK, root, bevel=14, rot=R)
-    box('ventWell', (xo + s * 16, vy, vz), (12, 168, 58), BLACK, root, bevel=8, rot=R)
-    for k in range(9):
-        d = (k - 4) * 19
-        box(f'louvre{k}', (xo + s * 20, vy + d * math.cos(rake), vz - d * math.sin(rake)),
-            (5, 9, 54), RUBBER, root, bevel=0, rot=R)
-    for a in (-1, 1):
-        for bq in (-1, 1):
-            dy, dz = a * 88, bq * 30
-            lib.cylinder(f'vs{a}{bq}', (xo + s * 14, vy + dy * math.cos(rake) - dz * math.sin(rake),
-                                        vz - dy * math.sin(rake) - dz * math.cos(rake)),
-                         (s, 0, 0), 11, 7, STEEL, root, n=10)
-    for (y, z) in ((1240, 543), (1440, 405)):                # clips onto the pillar
-        box(f'clip{y}', (xo - s * 16, y, z), (26, 16, 34), TEXBLACK, root, bevel=2)
+    # ---- the blade on the pillar -------------------------------------------
+    # centre = probed pillar face + half the blade's 44 mm thickness
+    blade = [(X(690), 1175, 525), (X(685), 1250, 480), (X(676), 1330, 430),
+             (X(666), 1410, 390), (X(656), 1490, 345), (X(640), 1568, 308)]
+    # u runs along car X (thickness), v across the pillar (fore-aft)
+    sweep('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
+          rounded_rect(38, 130, 9, 5), TEXBLACK, root)
+
+    # ---- the boot in the scuttle -------------------------------------------
+    # Off the blade's foot, forward and down into the trough between the
+    # windscreen base and the bonnet's rear edge. It has to stay INBOARD of
+    # the fender shoulder (probed at |x| 660-680, y 1110-1130) and sit ON the
+    # cowl (y 1123-1140 over z 620-760) -- the second attempt was a fat lump
+    # hanging in the air outside the wing.
+    boot = [(X(676), 1204, 524), (X(670), 1182, 578), (X(658), 1166, 640), (X(646), 1154, 700)]
+    lib.loft('boot', [tuple(p) for p in fillet(boot, 55, steps=5)],
+             rounded_rect(54, 96, 14, 5), rounded_rect(48, 74, 13, 5),
+             TEXBLACK, root, ease=lambda t: t ** 0.7)
+    # the flange it is screwed down through, lying on the cowl
+    box('flange', (X(634), 1124, 672), (34, 10, 104), TEXBLACK, root, bevel=4)
+    for z in (628, 722):
+        lib.cylinder(f'footScrew{z}', (X(638 - (z - 628) * 0.06), 1126, z), (0, 1, 0), 12, 9, STEEL, root, n=10)
+
+    # ---- the intake pod on the blade's top, rear edge -----------------------
+    # blade rear edge = pillar band centre - 66; the pod straddles it
+    pod = [(X(678), 1322, 378), (X(680), 1390, 340), (X(671), 1470, 298), (X(663), 1552, 255)]
+    lib.loft('pod', [tuple(p) for p in pod],
+             rounded_rect(12, 30, 5, 5), rounded_rect(62, 86, 13, 5),
+             TEXBLACK, root, ease=lambda t: min(1.0, t / 0.34))
+
+    # the honeycomb face, mapped onto the pod's outer flank. u runs up the
+    # pillar from the panel centre, v across it.
+    ay, az = 0.888, -0.459                       # unit vector up the pillar
+    cy, cz, half = 1466, 302, 70
+    def place(u, v):
+        t = (u + half) / (2 * half)              # 0 at the panel's foot, 1 at its head
+        return (X(700 - 12 * t), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
+    # the dark well behind the mesh, so the holes read as holes
+    sweep('well', [place(-half - 4, 0), place(half + 4, 0)], rounded_rect(14, 62, 10, 4), BLACK, root)
+    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 2 * half - 10, 54, cell=20, bar=3.0)
+    # a raised lip around the panel, and a screw at each end
+    ring = [place(-half - 9, 0), place(-half - 9, 33), place(half + 9, 33),
+            place(half + 9, -33), place(-half - 9, -33)]
+    sweep('lip', [tuple(p) for p in fillet(ring + [ring[1]], 16, steps=3)],
+          rounded_rect(16, 12, 4, 3), TEXBLACK, root, closed=True, caps=False)
+    for u in (-half - 9, half + 9):
+        for v in (-26, 26):
+            x, y, z = place(u, v)
+            lib.cylinder(f'ps{round(u)}{v}', (x + X(3), y, z), (s, 0, 0), 11, 8, STEEL, root, n=10)
     return root
 
 

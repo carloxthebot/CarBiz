@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220845" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221006" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -58,7 +58,10 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 .hud .ver{color:#56676d;font-size:10.5px}
 /* The car draws itself in as the model arrives: the outline's dash offset is
    the load progress, so the wait shows you what you are waiting for. */
-#boot{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:18px;
+/* fixed, not absolute: .stage clips its children, and a clipped subtree takes
+   the wait indicator's animation off the compositor -- which is the one place
+   it must not be, because assembling the car blocks the main thread. */
+#boot{position:fixed;inset:0;display:grid;place-content:center;justify-items:center;gap:18px;
   background:#0b1113;z-index:5;font:500 13px var(--mono);color:#6d8087;text-align:center;
   padding:20px;letter-spacing:.14em;transition:opacity .45s ease}
 #boot.gone{opacity:0;pointer-events:none}
@@ -68,6 +71,21 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
   stroke-dasharray:1;stroke-dashoffset:1;opacity:.9}
 #bootcar .w{stroke:#4d6169;stroke-width:3}
 #bootmsg{opacity:.85}
+/* Assembling the car blocks the main thread, so the wait indicator has to be
+   something the compositor can run on its own: a transform animation keeps
+   moving while JS is busy, where a JS-driven or dash-offset one just freezes. */
+/* shown from the first frame, never faded in: Chrome does not composite an
+   animation inside an opacity:0 subtree, so hiding it until 組裝中 is exactly
+   what made it freeze when the main thread got busy. */
+#bootbar{width:min(280px,58vw);height:3px;border-radius:3px;background:#1a2427}
+/* the bar travels exactly its own track, so nothing has to clip it -- a
+   rounded overflow:hidden parent takes the animation off the compositor,
+   and then it stops dead the moment the main thread is busy, which is the
+   one moment it has to keep moving */
+#bootbar i{display:block;width:38%;height:100%;border-radius:3px;background:var(--acc);
+  will-change:transform;animation:bootsweep 1.05s ease-in-out infinite alternate}
+@keyframes bootsweep{from{transform:translateX(0)}to{transform:translateX(163%)}}
+@media (prefers-reduced-motion:reduce){#bootbar i{animation:none;width:100%}}
 .credit{position:absolute;right:20px;bottom:14px;font:500 10.5px/1.55 var(--mono);color:#5e7076;
   text-align:right;max-width:46%}
 .credit a{color:#7b8d93}
@@ -339,19 +357,20 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 </style>
 </head>
 <body>
+<div id="boot">
+    <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
+      <path id="bootline" pathLength="1"
+        d="M24 104 L24 62 L58 62 L74 30 L206 30 L222 62 L276 62 L276 104 Z
+           M74 30 L74 62 M206 30 L206 62 M14 62 L24 62 M276 62 L286 62"/>
+      <circle class="w" cx="76" cy="104" r="21" pathLength="1"/>
+      <circle class="w" cx="224" cy="104" r="21" pathLength="1"/>
+    </svg>
+    <span id="bootmsg">載入 3D 模型…</span>
+    <div id="bootbar" aria-hidden="true"><i></i></div>
+  </div>
 <div class="app">
   <div class="stage">
     <canvas id="cv"></canvas>
-    <div id="boot">
-      <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
-        <path id="bootline" pathLength="1"
-          d="M24 104 L24 62 L58 62 L74 30 L206 30 L222 62 L276 62 L276 104 Z
-             M74 30 L74 62 M206 30 L206 62 M14 62 L24 62 M276 62 L286 62"/>
-        <circle class="w" cx="76" cy="104" r="21" pathLength="1"/>
-        <circle class="w" cx="224" cy="104" r="21" pathLength="1"/>
-      </svg>
-      <span id="bootmsg">載入 3D 模型…</span>
-    </div>
     <div class="badge"><div class="mk">SUZUKI · JB74W</div><div class="md">JIMNY SIERRA</div></div>
     <div class="views" id="views"></div>
     <div class="hud" id="hud">
@@ -507,14 +526,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220845';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220845';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220845';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220845';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220845';
+import { rigJimny, applyConfig } from './rig.js?v=202609221006';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221006';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221006';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221006';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609221006';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220845';
+const BUILD = '202609221006';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -668,8 +687,15 @@ const accessoriesReady = loadParts(loader, `model/parts.glb?v=${BUILD}`, THREE).
   accessoriesIn = true;
   if (rig) update();                       // whatever is selected now gets built
 });
+// Assembling the car blocks the main thread for a second or two: rigging the
+// glTF, building the wheels and compiling every material are all synchronous.
+// Yield between those stages so the boot screen at least repaints, and let the
+// sweeping bar under it run on the compositor so it keeps moving regardless.
+const yieldFrame = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
 loader.load('model/jimny-hq.glb', async (g) => {
   await firstFrame;
+  $('boot').classList.add('assembling');
+  await yieldFrame();
   rig = rigJimny(THREE, g.scene);
   rig.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   scene.add(rig); rig.userData.BODY.add(accGroup);
@@ -677,8 +703,33 @@ loader.load('model/jimny-hq.glb', async (g) => {
   window.__jimny = { THREE, rig, scene, cam, get composer() { return composer; }, get S() { return S; },
     update: () => update(), setOrbit: (o) => { Object.assign(orbit, o); applyCam(); },
     set: (k, v) => { S[k] = v; buildUI(); update(); } };
+  await yieldFrame();
+  // one stock render first, to line the model's measured height up with the
+  // catalogue's 1730 mm before anything is bolted to it
+  update();
+  HEIGHT_CAL = STOCK_H - measuredHeight();
+  // parts.html links in with ?key=id (booleans as true/false) to preselect a part
+  const q = new URLSearchParams(location.search);
+  let preset = false;
+  for (const [k, v] of q) {
+    if (!(k in DEF)) continue;
+    S[k] = typeof DEF[k] === 'boolean' ? v === 'true' : typeof DEF[k] === 'number' ? +v : v;
+    // links written before the can/axe/board gained a side still say "true"
+    if (SIDED.includes(k) && (v === 'true' || v === 'false')) S[k] = v === 'true' ? SIDE_DEF[k] : 'none';
+    preset = true;
+  }
+  await yieldFrame();
+  buildUI();
+  if (preset) update();          // a second full rebuild is only worth it if something moved
+  // let the loop draw a frame or two behind the overlay, so the shader compile
+  // that the first visible frame would otherwise stall on is already paid for.
+  // (renderer.compileAsync is not the answer: without KHR_parallel_shader_compile
+  // it blocks anyway, and it compiles every material in the scene, not the
+  // handful this view actually shows.)
+  await yieldFrame(); await yieldFrame();
   // Open on a high three-quarter and swing down to the working view while
-  // the light comes up, rather than cutting to a finished picture.
+  // the light comes up, rather than cutting to a finished picture. Started
+  // last, because a tween running behind a blocked main thread just jumps.
   if (!REDUCED) {
     Object.assign(orbit, { az: 1.35, el: 0.62, dist: 13.5 });
     applyCam();
@@ -689,24 +740,12 @@ loader.load('model/jimny-hq.glb', async (g) => {
   }
   $('boot').classList.add('gone');
   setTimeout(() => { $('boot').style.display = 'none'; }, 480);
-  // one stock render first, to line the model's measured height up with the
-  // catalogue's 1730 mm before anything is bolted to it
-  update();
-  HEIGHT_CAL = STOCK_H - measuredHeight();
-  // parts.html links in with ?key=id (booleans as true/false) to preselect a part
-  const q = new URLSearchParams(location.search);
-  for (const [k, v] of q) {
-    if (!(k in DEF)) continue;
-    S[k] = typeof DEF[k] === 'boolean' ? v === 'true' : typeof DEF[k] === 'number' ? +v : v;
-    // links written before the can/axe/board gained a side still say "true"
-    if (SIDED.includes(k) && (v === 'true' || v === 'false')) S[k] = v === 'true' ? SIDE_DEF[k] : 'none';
-  }
-  buildUI(); update();
-  if ([...q.keys()].length) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
+  if (preset) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
 }, (p) => { if (!p.total) return;
   const k = p.loaded / p.total;
   for (const el of $('bootcar').children) el.style.strokeDashoffset = String(1 - k);
-  $('bootmsg').textContent = k < 1 ? `載入 3D 模型… ${Math.round(k * 100)}%` : '組裝中…'; },
+  $('bootmsg').textContent = k < 1 ? `載入 3D 模型… ${Math.round(k * 100)}%` : '組裝中…';
+  if (k >= 1) $('boot').classList.add('assembling'); },
 (e) => { $('bootmsg').textContent = '模型載入失敗：' + (e?.message || e); });
 
 /* ═══ scene update ═══════════════════════════════════════════════════════ */
