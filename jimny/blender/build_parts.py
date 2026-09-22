@@ -2703,40 +2703,56 @@ def extinguisher(where):
 # docs/urnieta-salado.json. Every dimension here is measured off URNIETA's own
 # scale drawings (UN-JIMNY-FB-010/012/013), not estimated from photographs.
 def ladder_urnieta():
-    """SALADO rear ladder (0702026), drawing UN-JIMNY-FB-013: 1015 x 390, a
-    single closed loop of 34 mm tube with four 28 mm rungs at 158/378/603/862
-    above its foot. The frame is NOT flat -- its upper half steps 91 mm
-    inboard between the first and second rungs, which is the published
-    'up to 235/75 clearance' geometry that lets it pass the spare wheel. The
-    top hooks over the tailgate's upper edge, not over the roof."""
+    """SALADO rear ladder (0702026), drawing UN-JIMNY-FB-013: 1015 x 390 over
+    the accessory post, a closed loop of 34 mm tube with four 28 mm rungs at
+    158/378/603/862 above its foot.
+
+    Redrawn 2026-09-22. The first attempt built the two rails, the top bow and
+    the foot bow as four separate pieces and ran the accessory post the whole
+    height of the ladder: above the S-bend the frame steps 91 mm inboard and
+    the post did not, so it crossed the rail and floated. It is one continuous
+    loop per side now, the bend is short enough to read as a step rather than
+    a lean, and the post is bracketed to the lower section where the drawing's
+    390 mm width comes from."""
     root = group('ladder_urnieta')
     s = RIGHT
     zf = TAIL_Z - 58
     y0 = 545                                                 # foot of the ladder
     y1 = y0 + 1015
-    half = 254 / 2                                           # climbing frame, outboard post extra
+    half = 254 / 2
     xlo, xup = s * 560, s * (560 - 91)                       # lower run outboard, upper run inboard
-    for k in (-1, 1):                                        # the two side rails, each with its S-bend
-        rail = [(xlo + k * s * half, y0, zf), (xlo + k * s * half, y0 + 600, zf),
-                (xup + k * s * half, y0 + 860, zf), (xup + k * s * half, y1, zf)]
-        tube(f'rail{k}', [tuple(pt) for pt in fillet(rail, 90)], 34, BLACK, root, bend=40)
-    tube('topBow', [(xup - s * half, y1, zf), (xup + s * half, y1, zf)], 34, BLACK, root, bend=30)
-    tube('footBow', [(xlo - s * half, y0, zf), (xlo + s * half, y0, zf)], 34, BLACK, root, bend=30)
+    yb0, yb1 = y0 + 640, y0 + 800                            # the S-bend, kept short
+
+    # one closed loop: up one side, over the top, down the other
+    def side(k):
+        return [(xlo + k * s * half, y0 + 40, zf), (xlo + k * s * half, yb0, zf),
+                (xup + k * s * half, yb1, zf), (xup + k * s * half, y1 - 40, zf)]
+    loop = ([(xlo - s * half, y0 + 90, zf)] + side(-1)[1:] +
+            [(xup - s * half, y1, zf), (xup + s * half, y1, zf)] +
+            list(reversed(side(1))) + [(xlo + s * half, y0, zf), (xlo - s * half, y0, zf),
+                                       (xlo - s * half, y0 + 90, zf)])
+    tube('loop', loop, 34, BLACK, root, bend=58)
     for k, dy in enumerate((158, 378, 603, 862)):
-        xc = xlo if dy < 600 else xup
+        xc = xlo if dy < 620 else xup
         tube(f'rung{k}', [(xc - s * half, y0 + dy, zf), (xc + s * half, y0 + dy, zf)], 28, BLACK, root)
-    box('gripPad', (xlo, y0 + 158, zf - 16), (180, 34, 22), RUBBER, root, bevel=6)
-    # accessory post outboard of the frame: flag socket, aerial mount, two light points
-    xp = xlo + s * (390 - 254 + half) * 0.55
-    lib.cylinder('post', (xp, y0 + 560, zf), (0, 1, 0), 30, 700, BLACK, root, n=14)
-    for dy in (300, 820):
-        box(f'postArm{dy}', (xp - s * 30, y0 + dy, zf), (70, 26, 26), BLACK, root, bevel=3)
-    lib.cylinder('flagSocket', (xp, y1 - 120, zf), (0, 1, 0), 38, 70, STEEL, root, n=14)
-    # hooks over the tailgate upper edge; clamp on the lower hinge
+    box('gripPad', (xlo, y0 + 158, zf - 16), (188, 34, 22), RUBBER, root, bevel=6)
+
+    # accessory post: outboard of the LOWER section only, which is where the
+    # drawing's 390 mm overall width comes from. Flag socket on top.
+    xp = xlo + s * (half + 34)
+    lib.cylinder('post', (xp, y0 + 400, zf), (0, 1, 0), 30, 520, BLACK, root, n=14)
+    for dy in (y0 + 180, y0 + 600):
+        box(f'postArm{dy}', (xlo + s * (half + 17), dy, zf), (40, 26, 26), BLACK, root, bevel=3)
+    lib.cylinder('flagSocket', (xp, y0 + 690, zf), (0, 1, 0), 38, 80, STEEL, root, n=14)
+    lib.cylinder('aerial', (xp, y0 + 900, zf), (0, 1, 0), 10, 340, STEEL, root, n=8)
+
+    # the top wraps forward over the tailgate's upper edge; the bottom clamps
+    # the lower hinge. Neither reaches the roof.
     for k in (-1, 1):
-        tube(f'hook{k}', [(xup + k * s * half, y1, zf), (xup + k * s * half, y1 + 34, zf + 40),
-                          (xup + k * s * half, y1 + 10, zf + 96)], 30, BLACK, root, bend=26)
-        box(f'foot{k}', (xlo + k * s * half, y0 + 40, (TAIL_Z + zf) / 2), (56, 90, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
+        tube(f'hook{k}', [(xup + k * s * half, y1 - 6, zf), (xup + k * s * half, y1 + 18, zf + 34),
+                          (xup + k * s * half, y1 + 6, zf + 78)], 30, BLACK, root, bend=22)
+        box(f'foot{k}', (xlo + k * s * half, y0 + 60, (TAIL_Z + zf) / 2), (56, 110, abs(TAIL_Z - zf)), BLACK, root, bevel=4)
+        box(f'plate{k}', (xlo + k * s * half, y0 + 60, TAIL_Z - 8), (76, 130, 10), BLACK, root, bevel=4)
     return root
 
 

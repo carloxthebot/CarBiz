@@ -1,5 +1,5 @@
 {
- "compiled": "2026-09-21",
+ "compiled": "2026-09-22",
  "vehicle": "Suzuki Jimny Sierra JB74",
  "fitment": {
   "pcd": "5x139.7",
@@ -14,7 +14,15 @@
   "Published bores run 108.2 (Enkei) to 110.5 (Hayashi, BRADLEY, older Weds - lug-centric). Store bore per brand, not as a constant.",
   "PCD 139.7 puts the nut centres at r = 69.9 mm, so a typical 108-110 mm cap cannot reach them: exposed nuts are the default. Only five wheels here cover them (DEAN Cross Country / California / Colorado, SHOWA GARAGE R8, 5ZIGEN TF500 XC-M); APIO Ventura and SR+ need two face states.",
   "Offset at -5 or deeper protrudes past the fender and needs over-fenders; +20/+22 is the kei JB64 fitment and tucks inside the arch.",
-  "16x6.5J and 16x7J barely exist in 5x139.7; genuine 15x5.5J is rarer still (most 15in options are 6.0J)."
+  "16x6.5J and 16x7J barely exist in 5x139.7; genuine 15x5.5J is rarer still (most 15in options are 6.0J).",
+  "TAIWAN — how to read a price here. Almost every Taiwanese Jimny wheel listing is PER WHEEL (單顆價), and the shops that mean a set say so in words. Three exceptions found, and all three are traps: 花蓮太陽輪胎's 15×8.0J −19 is NT$16,000 四顆合售 (per set); LikeShop's 15×7.0J −10 shows NT$5,000 in search results which is a DEPOSIT against a NT$18,800 set; and i-PICKUP's 類OZ NT$6,800 is EX-TAX (未稅), so the real figure is ~NT$7,140. A fourth, URNIETA UR007 at NT$9,400, is sold by MRK with a 單顆 option and by 希琦 as a set of four — the two distributors contradict each other and this is unresolved.",
+  "TAIWAN — bore is the thing nobody publishes, and it is the one number that cannot be corrected later. Of everything buyable here, only MRK's own retro range (108.1), EP61143 (108.1), AI-DESIGN-D ID7 (108.1), 超鑫 A-3718 / 耀麒 H598 (108.2) and MAHOM MFF-37x (110.2) publish a figure. 小茵輪胎舘 and i-PICKUP print '中心孔108', which is a rounded label rather than a measurement — 108.0 would not go on. Every Japanese wheel sold here (DEAN, SHOWA GARAGE, NITRO POWER, JAOS, EvoCorse) is sold with NO bore stated on the Taiwanese page at all.",
+  "TAIWAN — the market splits cleanly in three. (1) NT$3,300–5,500 per wheel: Taiwanese flow-formed castings, ARTC tested, sold by tyre shops on Ruten and Yahoo 拍賣 — MAXX, 耀麒 H598, MAHOM, EP61143, 小茵, 代號90. (2) NT$7,450–10,500 per wheel: Japanese brands with a real Taiwanese distributor — 希琦企業 (SHOWA GARAGE R8 / GUNFIELD / SR432 / IGNITION EIGHT, DEAN Cross Country) and MRK 4X4 (DEAN Cross Country / COLORADO, NITRO POWER H12, URNIETA), plus JAOS via MyRack. (3) Everything else in this atlas — APIO, MLJ XTREME-J, Weds MUD VANCE, BRADLEY, RS Watanabe, WORK, Enkei, most of RAYS — has NO Taiwanese stock and NO published NT$ price. 傑誠國際 JP Racing (新北) will special-order them and quotes by Line only.",
+  "TAIWAN — the default is MAXX 16×6.0J ±0, NT$4,000–4,400 per wheel (NT$17,600 a set). It appears at 超前輪業, 超鑫國際, 四個圈輪業, 真便宜輪胎館, Ruten, Yahoo 拍賣 and BigGo; 7.15 kg, flow-formed, made in Taiwan. If a Taiwanese shop puts an aftermarket wheel on a JB74 without the owner asking for anything specific, this is it. The cheapest credible option is EP61143 16×6.5J ±0 at NT$3,400 ex-tax from 超前輪業 — published 108.1 bore, but 8 kg and a 15–21 day lead.",
+  "TAIWAN — Taiwan-made lookalikes of the Japanese faces exist and are HONEST about it. 超前輪業 and 超鑫國際 title their listings 類RAYS and 類RAYS TE37X CK; i-PICKUP titles its 16×5.5J −20 類OZ; a Shopee seller lists a 類WORK. 類 means 'resembling', it is printed in the product title rather than buried, and no Taiwanese seller found in this sweep claimed a copy was genuine. The one place a brand name IS asserted is 超前輪業's NT$14,000 「日本正品 RAYS 鍛造鋁圈」, which is a parallel-import single wheel and does not name a model at all.",
+  "TAIWAN — the 15-inch market here is a different shape from Japan's. Japan sells 15×6.0J; Taiwan has standardised on 15×7.0J ±0 (耀麒 H598, 超鑫 A-3718/A-634, 代號90 EL, 花蓮太陽輪胎), a width that barely exists in the Japanese catalogues, plus 15×7.0J at −10 and −25 and a 15×8.0J at −19. Military green and cream white are stock colours here and are almost absent from the Japanese ranges.",
+  "TAIWAN — 希琦 (HEEKIS) prices a not-yet-available product at NT$999,999. INSPIRE X, TYPE-M and the SHOWA GARAGE × RAYS VERSUS VV21SX collab all carry it. Do not read those as prices and do not show them in a configurator.",
+  "TAIWAN — 超鑫國際 SX-Garage prices a call-for-quote product at NT$88,888 or NT$888,888 on Ruten and Yahoo 拍賣 (耀麒 H598, BC Forged TD01). Same rule."
  ],
  "corrections": [
   "BRAID has no JB74 product; Japanese searches for the name return BRADLEY.",
@@ -25,7 +33,15 @@
   "Hayashi TYPE HOMURA is a RAYS line, not Hayashi; Hayashi's only JB74 fit is TYPE STJ.",
   "The DAMD 'little D wheel' is the DEAN Cross Country little D edition, not a DAMD design.",
   "APIO WILDBOAR Z is kei-only (JB23/JB64); the 16in X is discontinued.",
-  "Tan-Ei-Sya GRANVERD Jimny sizes are marked rear-axle-only by the maker."
+  "Tan-Ei-Sya GRANVERD Jimny sizes are marked rear-axle-only by the maker.",
+  "TW: the atlas previously carried the URNIETA UR007 as NT$9,400 with the unit unresolved. Still unresolved, but now for a sharper reason: MRK sells it with a purchase option labelled 「UR007-1 單顆」 (single) while 希琦 describes the same NT$9,400 as a set of four 15×7.0J ET0. Both cannot be right. 希琦 also quotes ~10 kg for the set, which is impossible for four 15-inch wheels, so 希琦's product copy is unreliable here. Recorded as perSet: null.",
+  "TW: the configurator's 'maxx' entry is specified as 16×7.0J −10. The MAXX JB74 wheel actually sold in Taiwan is 16×6.0J ±0 in 5×139.7 (7.15 kg, NT$4,000–4,400 per wheel). The 6.8 kg ET39 version of the same casting is 5×114.3 for a Town Ace and will not fit a JB74. Fix the size, offset and the needsFlares flag — at ±0 it does not need flares.",
+  "TW: the configurator prices DEAN Cross Country at NT$10,200 sourced to 希琦企業. 希琦 sells it at NT$9,500; NT$10,200–10,500 is MRK 4X4's price. Both per wheel. 希琦 is the cheaper of the two, not the source of the 10,200 figure.",
+  "TW: MRK's 15-inch retro wheel is NT$3,980 in 陶瓷白 but NT$5,500 in 消光黑 — the price moves with the colour and the previous entry recorded only the white price.",
+  "TW: DEAN COLORADO is listed by MRK in nine fitments from NT$10,200 to NT$13,000, but only two of them are 5×139.7 (15×6.0J −5 and 16×5.5J +20, both NT$10,200). The rest are 6-lug or 10-lug and do NOT fit a JB74.",
+  "TW: 真便宜輪胎館's spec table prints the MAHOM MFF-37x 16×8.0J as 6/139.7. That is a typo — an MFF-37x sold for a Jimny is 5×139.7.",
+  "TW: Ruten and Yahoo 拍賣 searches for XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, APIO WILDBOAR, Enkei RPT1, ADVAN RJ-D2, Delta Force and beadlock JB74 wheels all return ZERO matching listings. The configurator's generic 'beadlock' option has no Taiwanese product behind it; the closest thing buyable here is the NITRO POWER H12 SHOTGUN's rivet ring, which is a fake beadlock.",
+  "TW: 超前輪業's NT$14,000 RAYS forged wheel is identified in this atlas as TE37XT for J by inference from its two size/offset pairs (16×6.0J −5 and 16×5.5J ±0), not from the seller, who names no model. Marked PROBABLE."
  ],
  "faceTypes": {
   "round": "One ring of holes in a solid disc; no spokes.",
@@ -52,7 +68,15 @@
    "flags": [
     "Newest in range (2026-04)",
     "Needs over-fenders at −5"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "APIO",
@@ -68,7 +92,15 @@
    "url": "https://apio.jp/parts/7200-28.html",
    "flags": [
     "Needs over-fenders"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "APIO",
@@ -85,7 +117,15 @@
    "flags": [
     "Two cap states",
     "Needs over-fenders"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "APIO",
@@ -102,7 +142,15 @@
    "flags": [
     "Two cap states",
     "Slot count read from a 3/4 photo — verify"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "APIO",
@@ -118,7 +166,15 @@
    "url": "https://apio.jp/parts/7200-43.html",
    "flags": [
     "Two face profiles"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "APIO",
@@ -134,7 +190,15 @@
    "url": "https://apio.jp/parts/7200-15.html",
    "flags": [
     "Lightest JB74 fit in the range at 7.35 kg"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "APIO",
@@ -167,7 +231,15 @@
    "url": "https://www.mljinc.co.jp/product/daytona_ss/daytona_ss/",
    "flags": [
     "Steel, not alloy"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "MLJ",
@@ -215,7 +287,15 @@
    "url": "https://www.mljinc.co.jp/product/xtreme-j/xj07/",
    "flags": [
     "Third colour has no 5×139.7 size"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "MLJ",
@@ -266,7 +346,15 @@
    "flags": [
     "Only one JB74 size",
     "Bolt count not published"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "Weds",
@@ -282,7 +370,15 @@
    "url": "https://www.weds.co.jp/weds_adventure/mudvance06/",
    "flags": [
     "Lug-centric bore"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "Weds",
@@ -468,7 +564,15 @@
    "flags": [
     "Enkei's only official JB74 wheel",
     "15-inch 5×139.7 announced for autumn 2026 — watch it"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "Enkei",
@@ -503,7 +607,17 @@
    "flags": [
     "Cap covers nuts — rare",
     "The little D edition is this wheel, not a DAMD design"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "希琦企業 HEEKIS (高雄) · MRK 4X4 (蘆洲/台中)",
+    "url": "https://www.heekis.com/products/deancc16",
+    "TWD": "9,500 (希琦) / 10,200–10,500 (MRK)",
+    "perSet": false,
+    "note": "Two distributors, and the cheaper one is NOT the Jimny specialist: 希琦 lists NT$9,500, MRK NT$10,200–10,500 (MRK’s own Ruten/Yahoo/Rakuten storefronts all carry the same two prices). Both are per wheel — MRK’s page enumerates per-size prices, which only makes sense per wheel. 希琦’s page does not say 單顆 in words; treat NT$9,500 as per wheel by parity with every other 希琦 wheel listing, and confirm on order. MRK quotes 20 working days; 希琦 holds stock.",
+    "sizesTW": "16×6.0J −5 · 16×5.5J +20 — both DEAN sizes are stocked here",
+    "finishesTW": "Marguerite White · Matte Black · Silver; chrome-grey on selected sizes only"
+   }
   },
   {
    "brand": "DEAN",
@@ -520,7 +634,15 @@
    "flags": [
     "Cap covers nuts",
     "Two cap heights"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese stock found. 希琦 and MRK both carry DEAN but only CROSS COUNTRY and COLORADO; JP Racing’s DEAN page lists Cross and COLORADO only. Special order at best."
+   }
   },
   {
    "brand": "DEAN",
@@ -554,7 +676,17 @@
    "flags": [
     "Cheapest DEAN for JB74",
     "Only DEAN with a 15-inch JB74 size"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MRK 4X4 (蘆洲/台中)",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=1272",
+    "TWD": "10,200",
+    "perSet": false,
+    "note": "Per wheel. MRK lists COLORADO in 9 fitments from NT$10,200 to NT$13,000; only the 15×6.0J −5 and 16×5.5J +20 entries are 5-139.7 and only those fit a JB74. 希琦 does not carry COLORADO.",
+    "sizesTW": "15×6.0J −5 · 16×5.5J +20 (the two 5×139.7 sizes; MRK’s larger COLORADO sizes are 6-lug or 10-lug and do NOT fit)",
+    "finishesTW": "灰色 Grey · 碳黑色 Carbon Black, each offered 有鉚釘 (with rivets) and 無鉚釘 (no rivets) — the rivet ring is a purchase option here, which matters for the face model"
+   }
   },
   {
    "brand": "RAYS",
@@ -602,7 +734,15 @@
    "url": "https://www.rayswheels.co.jp/products/brand/detail/175",
    "flags": [
     "12 ring bolts — confirmed count"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese stock and no published NT$ price. JP Racing lists it on its JB74 wheel page and quotes by phone/Line only."
+   }
   },
   {
    "brand": "RAYS",
@@ -665,7 +805,15 @@
    "flags": [
     "KC DECOR is the brand tier, not a model",
     "Older ¥41,000 press quotes are outdated"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese stock and no published NT$ price. JP Racing lists it on its JB74 wheel page and quotes by phone/Line only."
+   }
   },
   {
    "brand": "RAYS",
@@ -681,7 +829,15 @@
    "url": "https://www.rayswheels.co.jp/products/brand/detail/148",
    "flags": [
     "Geometry unverified — needs a photo pass"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese stock and no published NT$ price. JP Racing lists it on its JB74 wheel page and quotes by phone/Line only."
+   }
   },
   {
    "brand": "RAYS",
@@ -698,7 +854,16 @@
    "flags": [
     "φ112 lug-centric — flag in configurator",
     "UL variant is hub-centric at φ108.8"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "超前輪業 (新北) — parallel import, not a RAYS agent",
+    "url": "https://www.ruten.com.tw/item/22314390460745/",
+    "TWD": "14,000",
+    "perSet": false,
+    "note": "PROBABLE, NOT CONFIRMED. The listing says only 「日本正品 RAYS 鍛造鋁圈 16吋 5/139.7 6J ET-5」 and never names a model. Those two size/offset pairs exist in 5×139.7 only as TE37XT for J, so the identification is an inference from the spec, not from the seller. Odd-lot parallel import: one wheel in stock, no agent, no warranty path. RAYS has no Jimny-wheel distributor in Taiwan.",
+    "sizesTW": "16×6.0J −5 (grey) and 16×5.5J ±0 (black, machined lip) — sold one wheel at a time, stock of 1"
+   }
   },
   {
    "brand": "WORK",
@@ -764,7 +929,15 @@
    "flags": [
     "Discontinued 2025 — retail stock remains",
     "Counts approximate"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "WORK",
@@ -988,7 +1161,15 @@
    "url": "https://rs-watanabe.co.jp/jimny/",
    "flags": [
     "Order the Jimny SKU — the generic catalogue bore varies 95–139"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "RS Watanabe",
@@ -1058,7 +1239,15 @@
     "The brief's bolt ring does not exist here — it is a one-piece casting",
     "Price conflict: current table ¥49,000–51,000 vs older ¥46,200–48,400",
     "Site is 4x4es.co.jp"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "BRADLEY",
@@ -1111,7 +1300,17 @@
     "One of only two 15-inch options in the specialist set",
     "NOT compatible with JC74 Nomad",
     "Cap covers nuts"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/showawheelr8",
+    "TWD": "7,850",
+    "perSet": false,
+    "note": "Per wheel. 希琦 publishes 6.77 kg and JB43/JB74 fitment. Centre bore not published on the Taiwan listing.",
+    "sizesTW": "15×6.0J ±0 only",
+    "finishesTW": "Cast finish, centre cap included"
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1127,7 +1326,17 @@
    "url": "https://showa-garage.shop/shopdetail/000000000855/",
    "flags": [
     "Second of only two 15-inch options in the specialist set"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/showagunfield",
+    "TWD": "8,890",
+    "perSet": false,
+    "note": "Per wheel. 希琦 publishes ~7.6 kg for the 15-inch and describes the face as a dish with oval holes around the outer ring. Bore not published.",
+    "sizesTW": "15×6.0J ±0 · 16×6.0J ±0 — both sizes stocked",
+    "finishesTW": "Black Polish · Sand Black"
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1140,7 +1349,15 @@
    "price": "¥37,400",
    "priceNote": "per wheel, tax incl",
    "modelling": "6 straight spokes with slits and lightening cutouts near the spoke roots, the spokes flaring wider inward toward the hub for a three-dimensional effect. Stepped rim. Coarse sand-textured paint for a heavy military look — a real shader note. XENO emblem cast into the centre. 7.2 kg.",
-   "url": "https://showa-garage.shop/shopdetail/000000000799/"
+   "url": "https://showa-garage.shop/shopdetail/000000000799/",
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "Not carried by 希琦 (which stocks R8, GUNFIELD, SR432, IGNITION EIGHT) and not found on Ruten, Yahoo or PChome."
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1153,7 +1370,15 @@
    "price": "¥35,200 – ¥36,300",
    "priceNote": "per wheel, tax incl",
    "modelling": "10 slim spokes at the rim converging into only 5 at the hub — a Y-split fan, and the most distinctive geometry in the Showa range. Black Polish is a polished surface under black coat that shifts with viewing angle; Matt Black adds CNC-machined spoke edges for a sharper, slimmer read. 7.3 kg.",
-   "url": "https://showa-garage.shop/shopdetail/000000000803/"
+   "url": "https://showa-garage.shop/shopdetail/000000000803/",
+   "tw": {
+    "available": false,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/showa-x-inspire-x-16%C3%9760j-%C2%B10-%E9%BB%91%E8%89%B2%E6%8B%8B%E5%85%89%E9%8B%81%E5%9C%88%EF%BC%88%E5%96%AE%E9%A1%86%EF%BC%89%EF%BD%9Cjimny-jb74-jc74-%E5%B0%88%E7%94%A8",
+    "TWD": null,
+    "perSet": null,
+    "note": "LISTED BUT NOT BUYABLE. 希琦 shows NT$999,999, which is this shop’s placeholder for not-yet-priced / pre-order — the same figure appears on TYPE-M and the RAYS VERSUS collab. Page publishes 16×6.0J ±0, 5H-139.7, ~7.3 kg, Black Polish."
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1169,7 +1394,15 @@
    "url": "https://showa-garage.shop/shopdetail/000000000214/",
    "flags": [
     "Five colours"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/categories/jimnywheels",
+    "TWD": null,
+    "perSet": null,
+    "note": "LISTED BUT NOT BUYABLE — NT$999,999 placeholder at 希琦, same as INSPIRE X."
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1186,7 +1419,15 @@
    "flags": [
     "Most expensive Showa",
     "User-placed branding"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "Not carried by 希琦 (which stocks R8, GUNFIELD, SR432, IGNITION EIGHT) and not found on Ruten, Yahoo or PChome."
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1202,7 +1443,16 @@
    "url": "https://showa-garage.shop/shopdetail/000000000508/",
    "flags": [
     "Non-planar mesh"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/showasr432",
+    "TWD": "7,450",
+    "perSet": false,
+    "note": "Per wheel, but the 希琦 page shows 售完 (sold out) at time of compiling — listed, not in stock.",
+    "sizesTW": "16×6.0J −5 only"
+   }
   },
   {
    "brand": "SHOWA GARAGE",
@@ -1218,7 +1468,17 @@
    "url": "https://showa-garage.shop/shopdetail/000000000808/",
    "flags": [
     "8 studs — confirmed count"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/6960893babaccb9c20bc77d6",
+    "TWD": "8,950",
+    "perSet": false,
+    "note": "Per wheel, confirmed. 希琦 publishes ~8.8 kg — the heaviest Jimny wheel on the Taiwanese market. Bore not published.",
+    "sizesTW": "16×6.0J ±0 only",
+    "finishesTW": "Matte Black (W00235) · Matte Bronze (W00236)"
+   }
   },
   {
    "brand": "DAMD",
@@ -1252,7 +1512,15 @@
    "flags": [
     "Counts read from photos",
     "Not sold in Taiwan"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": "傑誠國際 JP Racing (新北) — special order only",
+    "url": "http://jpracing0707.blogspot.com/2020/11/jimny-jb74.html",
+    "TWD": null,
+    "perSet": null,
+    "note": "Listed on JP Racing’s JB74 wheel page (which also carries ADVAN RJ-D2, Delta Force, WALD and the DEAN×DAMD collab) with NO price — quote by phone/Line, order from Japan. Nothing on Ruten, Yahoo, PChome or Momo. Treat as not stock-buyable in Taiwan."
+   }
   },
   {
    "brand": "DAMD",
@@ -1286,7 +1554,15 @@
     "Beyond's only wheel",
     "Steel",
     "Trivially cheap to model"
-   ]
+   ],
+   "tw": {
+    "available": false,
+    "seller": null,
+    "url": null,
+    "TWD": null,
+    "perSet": null,
+    "note": "No Taiwanese seller found. Brand-name searches on Ruten and Yahoo 拍賣 (XTREME-J, MUD VANCE, BRADLEY, 渡邊/Watanabe, Supermoon) return zero matching listings, and neither 希琦 nor MRK imports the brand."
+   }
   },
   {
    "brand": "CAN / weds",
@@ -1842,7 +2118,17 @@
    "flags": [
     "Only Taiwanese option with a published 108.1 bore",
     "Face geometry unverified"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MRK 4X4 (蘆洲/台中)",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=1086",
+    "TWD": "3,980 (陶瓷白) / 5,500 (消光黑)",
+    "perSet": false,
+    "note": "Per wheel — MRK writes 單顆價 in the listing title. Part-number format D110-<size>-JB74-<colour>. Still the only Taiwanese wheels that publish 中心孔 108.1 in the product copy.",
+    "sizesTW": "15×6.0J −5",
+    "finishesTW": "Ceramic White NT$3,980 · Matte Black NT$5,500 — the colour changes the price, which MRK’s category page does not make obvious"
+   }
   },
   {
    "brand": "MRK (Taiwan)",
@@ -1860,7 +2146,17 @@
    "flags": [
     "Published 108.1 bore",
     "Face geometry unverified"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MRK 4X4 (蘆洲/台中)",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=1093",
+    "TWD": "5,500",
+    "perSet": false,
+    "note": "Per wheel — MRK writes 單顆價 in the listing title. Part-number format D110-<size>-JB74-<colour>. Still the only Taiwanese wheels that publish 中心孔 108.1 in the product copy.",
+    "sizesTW": "16×5.5J +20",
+    "finishesTW": "Ceramic White · Silver"
+   }
   },
   {
    "brand": "MRK (Taiwan)",
@@ -1879,7 +2175,17 @@
     "Genuine 6.5J",
     "Published 108.1 bore",
     "Needs over-fenders"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MRK 4X4 (蘆洲/台中)",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=1096",
+    "TWD": "6,500",
+    "perSet": false,
+    "note": "Per wheel — MRK writes 單顆價 in the listing title. Part-number format D110-<size>-JB74-<colour>. Still the only Taiwanese wheels that publish 中心孔 108.1 in the product copy.",
+    "sizesTW": "16×6.5J −5",
+    "finishesTW": "Matte Black · Ceramic White"
+   }
   },
   {
    "brand": "ShowaGarage / NITRO POWER",
@@ -1897,7 +2203,17 @@
    "flags": [
     "Japanese list price not verified",
     "Resold by Showa Garage — not their own design"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MRK 4X4 (蘆洲/台中)",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=1178",
+    "TWD": "8,950",
+    "perSet": false,
+    "note": "Per wheel. Also on MRK’s Ruten and Rakuten storefronts at the same price. The only fake-beadlock face buyable in Taiwan.",
+    "sizesTW": "16×6.0J −5",
+    "finishesTW": "Matte Bronze (the only finish on the Taiwan listing)"
+   }
   },
   {
    "brand": "URNIETA (Taiwan)",
@@ -1915,7 +2231,16 @@
    "flags": [
     "Sizes, offset and bore all unpublished",
     "Price unit ambiguous"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MRK 4X4 (蘆洲/台中) · 希琦企業 HEEKIS (高雄)",
+    "url": "https://www.mrk.com.tw/product_ii.html?ID=2208",
+    "TWD": "9,400",
+    "perSet": null,
+    "note": "THE TWO SELLERS CONTRADICT EACH OTHER ON THE UNIT AND I HAVE NOT RESOLVED IT. MRK sells NT$9,400 with the purchase option labelled \"UR007-1 單顆\" (single). 希琦 sells NT$9,400 described as a set of four 15×7.0J ET0 weighing ~10 kg. A set of four 15-inch wheels cannot weigh 10 kg, so 希琦’s weight is wrong or refers to something else — but a 4:1 price difference between two distributors of the same part is also implausible. Ask before ordering. URNIETA’s own SALADO wheel kit (part 0702008, the sister product) IS a kit of 4 forged 15-inch wheels + 2 front caps + 2 rear caps + 20 lug nuts, which is where the set reading comes from.",
+    "sizesTW": "15×7.0J ±0 per the 希琦 listing; MRK publishes no size at all"
+   }
   },
   {
    "brand": "MAXX (Taiwan)",
@@ -1933,7 +2258,17 @@
    "flags": [
     "Bore not published",
     "Spoke detail unverified"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "四個圈輪業 (林口) · 超前輪業 · 超鑫國際 SX-Garage · 真便宜輪胎館",
+    "url": "https://4wheels.com.tw/product/vsforged/680",
+    "TWD": "4,000–4,400 per wheel · 17,600 per set of four (四個圈)",
+    "perSet": false,
+    "note": "THE TAIWAN DEFAULT. Carried by every wheel shop that touches a Jimny, priced NT$4,000 (超前輪業 Ruten) / NT$4,200 (超鑫國際) / NT$4,400 (四個圈, also quoted as NT$17,600 a set). Flow-formed, 7.15 kg, made in Taiwan, ARTC tested. 四個圈 publishes 中心孔 108 for the ET0 version — that is a rounded figure, not a measured one; MRK is the only Taiwanese seller that writes 108.1.",
+    "sizesTW": "16×6.0J ±0 only in 5×139.7 (the ET39 / 5×114.3 version of the same casting is for a Town Ace and will not fit)",
+    "finishesTW": "平光黑 Matte Black · 古銅金 Matte Bronze · 鐵灰 Gunmetal · 亮黑＋拋光唇 Gloss Black with machined lip"
+   }
   },
   {
    "brand": "耀麒 H598 (Taiwan)",
@@ -1952,7 +2287,469 @@
     "Genuine 15×7.0J",
     "7J at ±0 will need fender clearance checked",
     "Spoke count unverified"
-   ]
+   ],
+   "tw": {
+    "available": true,
+    "seller": "超前輪業 · 鋁圈輪胎商城 · 超鑫國際 SX-Garage (as code A-3718) · 真便宜輪胎館",
+    "url": "https://www.ruten.com.tw/item/22103776248709/",
+    "TWD": "4,400–4,700",
+    "perSet": false,
+    "note": "Per wheel. NT$4,400 at 鋁圈輪胎商城 / NT$4,500 direct / NT$4,700 at 超前輪業 and 超鑫國際. 超鑫 sells the identical 15×7.0J ET0 lipped-concave wheel under its own code A-3718 and publishes 中心孔 108.2 plus ARTC certification and 台灣製造 — that is the bore number to trust for this casting.",
+    "sizesTW": "15×7.0J ±0 only",
+    "finishesTW": "軍綠 Military Green (black lip) · 奶油米白 Cream White (bright lip) · 平光黑 Matte Black · 亮黑車邊 Gloss Black machined lip · 高亮銀 Bright Silver"
+   }
+  },
+  {
+   "brand": "JAOS",
+   "model": "VICTRON EXCEL JX3",
+   "face": "spoke",
+   "sizes": "16×5.5J +22 · 16×6.0J ±0",
+   "bore": "Not published on the Taiwan listing. JAOS quotes a Jimny-dedicated bore in Japan; treat as unverified here.",
+   "finishes": "消光槍黑 Matte Gunmetal Black — the only finish sold in Taiwan",
+   "cap": "Not stated on the Taiwan listing. Nuts almost certainly exposed at 5×139.7.",
+   "price": "NT$9,000 (16×5.5J +22) – NT$9,200 (16×6.0J ±0)",
+   "priceNote": "per wheel (單顆價, stated in the listing title) · MyRack 車架專家",
+   "modelling": "NOT MODELLED FROM A VERIFIED IMAGE — the Taiwanese listings carry spec text only. What is certain: a JAOS off-road face in a single matte gunmetal, sold in both the +22 kei-style tuck and the ±0 Sierra fitment, so the same face exists at two very different dish depths and the configurator needs both. Read the spoke count and any rivet ring off JAOS's own JX3 product photography before building the face; do not guess from the name.",
+   "url": "https://www.ruten.com.tw/item/22038384304007/",
+   "flags": [
+    "Face geometry NOT verified",
+    "Bore not published",
+    "Only Japanese-brand Jimny wheel with a published NT$ price outside 希琦/MRK"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "MyRack 車架專家 (Ruten / Yahoo 拍賣 / Rakuten)",
+    "url": "https://www.ruten.com.tw/item/22038384304007/",
+    "TWD": "9,000–9,200",
+    "perSet": false,
+    "note": "Per wheel, explicitly — both titles end 單顆價. Shipping NT$500, 8–14 day lead. The same seller fronts MRK's DEAN listings, so this is an importer's storefront rather than a JAOS agency.",
+    "sizesTW": "16×5.5J +22 · 16×6.0J ±0"
+   }
+  },
+  {
+   "brand": "EvoCorse (Italy)",
+   "model": "DakarZero for Jimny",
+   "face": "spoke",
+   "sizes": "16×7.0J ±0",
+   "bore": "Not published by 希琦.",
+   "finishes": "Not published on the Taiwan listing.",
+   "cap": "Not stated.",
+   "price": "NT$16,800 – NT$17,800",
+   "priceNote": "希琦 category page shows this range across variants; the product page itself publishes no price and the unit is NOT stated — the most expensive Jimny wheel sold in Taiwan either way",
+   "modelling": "Cast A356-T6 low-pressure rally wheel, 12 kg per wheel and rated 1200 kg — twice the mass of every Taiwanese flow-formed option here, and that heft should read in the model as thick spokes and a deep, heavily filleted rim section rather than thin blades. A genuine 7.0J at ±0, one of only two 7J fitments on the Taiwanese market. Face geometry not described by 希琦; build it from EvoCorse's own DakarZero photography.",
+   "url": "https://www.heekis.com/products/evocorsedakarzeroforjimny",
+   "flags": [
+    "Per-wheel vs per-set NOT stated — ask before ordering",
+    "Bore not published",
+    "Face geometry unverified",
+    "7.0J ±0 needs fender clearance checked"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/evocorsedakarzeroforjimny",
+    "TWD": "16,800–17,800",
+    "perSet": null,
+    "note": "The category page shows the range; the product page shows no price at all and never says 單顆 or 一組. Given 希琦 prices every other wheel per wheel, per-wheel is the likely reading — but NT$67k–71k a set is a real possibility for an Italian cast rally wheel and I am not guessing. Confirm.",
+    "sizesTW": "16×7.0J ±0"
+   }
+  },
+  {
+   "brand": "Showa Garage × RAYS",
+   "model": "VERSUS VV21SX (limited collab)",
+   "face": "mesh",
+   "sizes": "16×6.0J +5 (Sierra/Nomade) · 16×6.0J +20 (kei)",
+   "bore": "Not published.",
+   "finishes": "Showa Garage Semi Gloss Black",
+   "cap": "Not stated.",
+   "price": "Not published",
+   "priceNote": "希琦 shows the NT$999,999 placeholder — not priced, not buyable",
+   "modelling": "Fine Y-spoke lattice with RAYS 'Relief Pocket' weight relief — pockets milled into the spoke backs, so the face reads thin and sharp from straight on while the underside is scalloped. 8.3 kg. Semi-gloss black throughout, no contrast machining. Note the offset: +5 for the Sierra, which is the only JB74 wheel here at the OEM offset exactly, so it tucks inside the arch and needs no flares.",
+   "url": "https://www.heekis.com/products/6983042af13e03e4fccadb24",
+   "flags": [
+    "LISTED BUT NOT PRICED — NT$999,999 placeholder",
+    "+5 Sierra fitment is unusually close to OEM"
+   ],
+   "tw": {
+    "available": false,
+    "seller": "希琦企業 HEEKIS (高雄)",
+    "url": "https://www.heekis.com/products/6983042af13e03e4fccadb24",
+    "TWD": null,
+    "perSet": null,
+    "note": "Announced by 希琦 as a limited collab but carrying the shop's NT$999,999 not-yet-priced placeholder, same as INSPIRE X and TYPE-M. Watch this one — it is the only RAYS-made Jimny wheel with any Taiwanese channel at all."
+   }
+  },
+  {
+   "brand": "AI-DESIGN-D (Taiwan)",
+   "model": "ID7",
+   "face": "spoke",
+   "sizes": "16×5.5J −20",
+   "bore": "CB 108.1 — published by the seller, and one of only three Taiwanese listings that do",
+   "finishes": "亮黑 Bright Black",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$6,000 per wheel · NT$24,000 per set of four",
+   "priceNote": "四個圈輪業 publishes BOTH figures, which is why this entry can be trusted on the unit",
+   "modelling": "Taiwanese flow-formed (旋壓) wheel, load-rated 620 kg. The −20 offset at only 5.5J is the defining fact: a narrow rim pushed 20 mm outboard, so the face sits proud of the arch and the barrel is almost all inboard — model it with a shallow, nearly flat face and a short outer flange rather than a dish. Spoke count not published and not verified from a straight-on image. Bright black only, no machined highlights.",
+   "url": "https://4wheels.com.tw/product/egowheels/3932",
+   "flags": [
+    "Published 108.1 bore",
+    "−20 offset — needs over-fenders",
+    "Spoke count unverified",
+    "Both per-wheel and per-set prices published"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "四個圈輪業 4WHEELS (林口)",
+    "url": "https://4wheels.com.tw/product/egowheels/3932",
+    "TWD": "6,000 per wheel · 24,000 per set of four",
+    "perSet": false,
+    "note": "One of the two Jimny wheels 四個圈 stocks (the other is MAXX). Stock shown as 4 pieces — exactly one car.",
+    "sizesTW": "16×5.5J −20",
+    "finishesTW": "亮黑 Bright Black"
+   }
+  },
+  {
+   "brand": "MAHOM (Taiwan)",
+   "model": "MFF-37x",
+   "face": "spoke",
+   "sizes": "16×6.0J −25 · 16×8.0J ±0 · 16×6.0J ±0 (sold by 超前輪業 as the 鐵灰 '類RAYS' variant)",
+   "bore": "CB 110.2 on the −25 and 8.0J sizes (published by 真便宜輪胎館) — comfortably clears 108.1",
+   "finishes": "平光黑 Matte Black · 平光古銅金 Matte Bronze-gold · 鐵灰 Gunmetal",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,000 (16×6.0J ±0, 超前輪業) – NT$4,500 (16×6.0J −25, 超鑫國際)",
+   "priceNote": "per wheel · 超鑫國際 SX-Garage, 超前輪業, 真便宜輪胎館",
+   "modelling": "Taiwanese flow-formed wheel sold openly as 類RAYS — a RAYS-idiom straight-blade face, not a copy of one specific model. 7.24 kg at 16×6.0J, 7.62 kg at 16×8.0J, ARTC tested. The −25 offset version is the deepest-dished thing on the Taiwanese market and the face sits well proud of the arch; the ±0 version reads much flatter. Spoke count not published and not verified. Note 真便宜's spec table prints the 8.0J PCD as 6/139.7, which is a typo — an 8.0J MFF-37x sold for a Jimny is 5×139.7.",
+   "url": "https://www.ruten.com.tw/item/22133518218624/",
+   "flags": [
+    "Published 110.2 bore",
+    "−25 needs over-fenders",
+    "8.0J at ±0 needs fender clearance checked",
+    "Openly sold as 類RAYS",
+    "Spoke count unverified"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "超鑫國際 SX-Garage (新北) · 超前輪業 · 真便宜輪胎館",
+    "url": "https://www.ruten.com.tw/item/22133518218624/",
+    "TWD": "4,000–4,500",
+    "perSet": false,
+    "note": "Per wheel. 超鑫 shows 888 units and an 8–14 day lead, i.e. made to order rather than held. 超前輪業 lists the same maker's ±0 gunmetal at NT$4,000 under a 類RAYS title.",
+    "sizesTW": "16×6.0J −25 · 16×6.0J ±0 · 16×8.0J ±0",
+    "finishesTW": "平光黑 · 平光古銅金 · 鐵灰"
+   }
+  },
+  {
+   "brand": "EP61143 (Taiwan, unbranded casting)",
+   "model": "EP61143 / 「類RAYS TE37X」",
+   "face": "spoke",
+   "sizes": "16×6.5J ±0",
+   "bore": "CB 108.1 — published verbatim in one seller's spec line (「16吋 ~ 5孔139.7 ~ 6.5J ~ ET0 ~ 108.1」)",
+   "finishes": "亮黑 Gloss Black · 古銅 Bronze",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$3,400 – NT$4,500",
+   "priceNote": "per wheel · 超前輪業 NT$3,400, other Ruten sellers NT$4,000, iOPEN Mall NT$4,500",
+   "modelling": "THE CHEAPEST CREDIBLE JB74 WHEEL IN TAIWAN. Sold in its own listing titles as 類RAYS TE37X CK — a six-straight-spoke TE37 idiom: six flat blades running hub to rim with a narrow gap between each pair, a flat-to-barely-concave face, and a plain flange with no lip step. 8 kg, which is heavy for the size and consistent with a gravity cast rather than a flow-form. No rivets, no fake beadlock, no branding on the face — the honest way to model it is the TE37 silhouette with every RAYS marking left off. 超前輪業 also lists an otherwise identical 16×6.5J ±0 「類RAYS」 in 消光古銅車溝 and 亮黑車溝 at the same NT$3,400; on spec and price it is the same casting.",
+   "url": "https://www.ruten.com.tw/item/22042649157473/",
+   "flags": [
+    "Published 108.1 bore",
+    "Cheapest credible option",
+    "Openly sold as a TE37X lookalike",
+    "8 kg — heavy for 16×6.5J",
+    "15–21 day lead time"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "超前輪業 (新北) · 鋁圈輪胎 Ruten sellers · iOPEN Mall",
+    "url": "https://www.ruten.com.tw/item/22042649157473/",
+    "TWD": "3,400–4,500",
+    "perSet": false,
+    "note": "Per wheel (超前輪業 prints 現金未稅價, cash ex-tax — so the real number is ~5% higher). Stock is 1 組 and the seller asks you to phone before bidding: made to order, 15–21 days.",
+    "sizesTW": "16×6.5J ±0",
+    "finishesTW": "亮黑 · 古銅"
+   }
+  },
+  {
+   "brand": "小茵輪胎舘 (Taiwan)",
+   "model": "六爪 16×6.5J (six-claw)",
+   "face": "spoke",
+   "sizes": "16×6.5J ±0",
+   "bore": "中心孔 108 as printed — a ROUNDED figure. 108.0 would not fit; the casting is almost certainly 108.1–108.2 and the listing is being loose. Confirm before ordering.",
+   "finishes": "鋼琴黑烤漆＋銑刻字 Piano Black with machined lettering · 消光古銅金＋銑刻字 Matte Bronze-gold with machined lettering",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,000",
+   "priceNote": "per wheel · 小茵輪胎舘 (員林), Yahoo 拍賣 and Ruten",
+   "modelling": "Six spokes — the shop's own word is 六爪, six claws, which in Taiwanese wheel copy means six discrete tapered blades rather than a mesh. The named detail is 銑刻字: lettering CNC-cut into the metal, not printed, so it should be modelled as engraved geometry on the face or flange rather than a decal. Face profile and lip not described; read them off the listing photo.",
+   "url": "https://tw.bid.yahoo.com/item/100783069994",
+   "flags": [
+    "Bore printed as 108 (rounded) — verify",
+    "Machined lettering is engraved, not a decal",
+    "Face profile unverified"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "小茵輪胎舘 (員林)",
+    "url": "https://tw.bid.yahoo.com/item/100783069994",
+    "TWD": "4,000",
+    "perSet": false,
+    "note": "Per wheel. Also on Ruten at the same price. 小茵 is a tyre shop, not a Jimny specialist, but it carries three distinct JB74 fitments.",
+    "sizesTW": "16×6.5J ±0",
+    "finishesTW": "鋼琴黑＋銑刻字 · 消光古銅金＋銑刻字"
+   }
+  },
+  {
+   "brand": "GT (Taiwan-market 4X4 brand)",
+   "model": "GT 4X4 16×8.0J",
+   "face": "spoke",
+   "sizes": "16×8.0J −5",
+   "bore": "中心孔 110 — published, and clears 108.1 comfortably",
+   "finishes": "銀車面 Silver machined face",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$5,500",
+   "priceNote": "per wheel · 小茵輪胎舘 (員林)",
+   "modelling": "THE WIDEST WHEEL BUYABLE IN TAIWAN FOR A JB74 — 8.0J at −5, which is 2.5J wider than OEM and pushed outboard, so it needs over-fenders and will look extreme in the configurator. Sold as a 4X4 精品 wheel with a machined silver face. Spoke count and face profile are not described anywhere in the listing; the only verified visual fact is the bright machined face over a darker base. Build the face from the listing photo, not from the name.",
+   "url": "https://tw.bid.yahoo.com/item/101279281681",
+   "flags": [
+    "Published 110 bore",
+    "8.0J −5 — over-fenders mandatory",
+    "Face geometry unverified",
+    "Brand 'GT' is a Taiwanese trade label, not a known wheel maker"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "小茵輪胎舘 (員林)",
+    "url": "https://tw.bid.yahoo.com/item/101279281681",
+    "TWD": "5,500",
+    "perSet": false,
+    "note": "Per wheel.",
+    "sizesTW": "16×8.0J −5",
+    "finishesTW": "銀車面 Silver machined face"
+   }
+  },
+  {
+   "brand": "小茵輪胎舘 (Taiwan)",
+   "model": "4X4精品 15×7J −25",
+   "face": "spoke",
+   "sizes": "15×7.0J −25",
+   "bore": "中心孔 108 as printed — rounded, same caveat as the six-claw above",
+   "finishes": "平光黑 Matte Black",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,400",
+   "priceNote": "per wheel · 小茵輪胎舘 (員林)",
+   "modelling": "A genuine 15×7.0J at −25, the deepest 15-inch offset on the Taiwanese market and one of very few 7J fifteens anywhere. At −25 the whole face sits outboard of the arch: model with a flat face, a tall visible outer flange and essentially no dish. Design not described in the listing at all — read it off the photo.",
+   "url": "https://tw.bid.yahoo.com/item/101166022316",
+   "flags": [
+    "Bore printed as 108 (rounded) — verify",
+    "−25 — over-fenders mandatory",
+    "Face geometry unverified"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "小茵輪胎舘 (員林)",
+    "url": "https://tw.bid.yahoo.com/item/101166022316",
+    "TWD": "4,400",
+    "perSet": false,
+    "note": "Per wheel.",
+    "sizesTW": "15×7.0J −25",
+    "finishesTW": "平光黑"
+   }
+  },
+  {
+   "brand": "超鑫國際 SX-Garage (Taiwan)",
+   "model": "A-3718 / A-634 15×7J",
+   "face": "spoke",
+   "sizes": "15×7.0J ±0",
+   "bore": "CB 108.2 — published, and the same figure 真便宜輪胎館 gives for the 耀麒 H598 casting",
+   "finishes": "A-3718: 亮黑車邊 · 平光黑 · 軍綠 · 亮銀車面. A-634: 鋼琴黑車面",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$3,300 (A-634) – NT$4,700 (A-3718)",
+   "priceNote": "per wheel · 超鑫國際 SX-Garage (新北), Ruten and Yahoo 拍賣",
+   "modelling": "台灣製造, ARTC certified, and the listing describes the face in two words that are the whole model: 唇 (a distinct raised outer lip) and 內凹 (a concave face sunk inside it). So: a stepped outer flange, then a face that dishes inward from it, with the lug plateau at the bottom of the dish. Spoke count not published. The shop claims 195–245 section tyres fit without modification. This is almost certainly the same 15×7.0J ±0 CB108.2 casting sold elsewhere as 耀麒 H598 — same size, same offset, same bore, same colour palette, different shop code; A-634 at NT$3,300 is a cheaper trim of the same idea.",
+   "url": "https://www.ruten.com.tw/item/21931334059954/",
+   "flags": [
+    "Published 108.2 bore",
+    "ARTC certified, Taiwan-made",
+    "Probably the same casting as 耀麒 H598 under a shop code",
+    "Spoke count unverified"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "超鑫國際 SX-Garage (新北)",
+    "url": "https://www.ruten.com.tw/item/21931334059954/",
+    "TWD": "3,300–4,700",
+    "perSet": false,
+    "note": "Per wheel. WARNING about this seller: several of its Jimny listings (耀麒 H598, BC Forged TD01) show NT$88,888 or NT$888,888 — a Ruten convention for 'call for price', not a real figure. Do not read those as prices.",
+    "sizesTW": "15×7.0J ±0"
+   }
+  },
+  {
+   "brand": "i-PICKUP (Taiwan)",
+   "model": "JB74 越野輪框 「類OZ」",
+   "face": "spoke",
+   "sizes": "16×5.5J −20",
+   "bore": "中心孔 108 as published — rounded; clears only if the true figure is ≥108.1. Verify.",
+   "finishes": "白 White · 黑 Black",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$6,800 per wheel, EX-TAX (未稅) — add 5% VAT",
+   "priceNote": "i-PICKUP publishes the ex-tax figure, so the real cost is about NT$7,140 per wheel",
+   "modelling": "Sold openly as 類OZ — an OZ Racing Rally Racing idiom in a narrow 5.5J pushed out to −20, load-rated 700 kg. The OZ Rally face is a multi-spoke with slim paired blades and a small flat hub plateau; at 5.5J −20 there is almost no dish, so model it as a flat multi-spoke face standing proud of a short outer flange. White is the signature finish of the original and is offered here. Spoke count not published — verify against OZ's Rally Racing 4×4 before committing.",
+   "url": "https://i-pickup.com.tw/product/rim-ubs-jimny-2024/",
+   "flags": [
+    "Price is EX-TAX — the only Taiwanese listing here that is",
+    "Bore printed as 108 (rounded) — verify",
+    "−20 — over-fenders mandatory",
+    "Openly sold as an OZ lookalike",
+    "Spoke count unverified"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "i-PICKUP (台灣皮卡精品)",
+    "url": "https://i-pickup.com.tw/product/rim-ubs-jimny-2024/",
+    "TWD": "6,800 ex-tax (~7,140 incl.)",
+    "perSet": false,
+    "note": "Per wheel and EX-TAX — the misleading-listing trap in this market is usually per-set-vs-per-wheel, but here it is tax.",
+    "sizesTW": "16×5.5J −20",
+    "finishesTW": "白 · 黑"
+   }
+  },
+  {
+   "brand": "花蓮太陽輪胎 (Taiwan)",
+   "model": "台製復古洞洞鋁圈 15×7J",
+   "face": "round",
+   "sizes": "15×7.0J ±0",
+   "bore": "Not published.",
+   "finishes": "消光黑 Matte Black",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,000",
+   "priceNote": "per wheel — the listing says 售一顆售4000元 in words, which is as unambiguous as this market gets",
+   "modelling": "The shop's own name for it is 復古洞洞鋁圈 — retro hole wheel: a ring of plain round holes punched through an otherwise solid disc, the same face family as the APIO WILDBOAR D renkon pattern but far simpler and without countersinking. Matte black throughout, no machining, no rivets, no branding. Made in Taiwan with inspection certification. Hole count not published — count them off the listing photo.",
+   "url": "https://www.ruten.com.tw/item/22104825855282/",
+   "flags": [
+    "Bore not published",
+    "Hole count unverified",
+    "13 units sold — actually moving, not a dead listing"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "花蓮太陽輪胎 (花蓮)",
+    "url": "https://www.ruten.com.tw/item/22104825855282/",
+    "TWD": "4,000",
+    "perSet": false,
+    "note": "Per wheel, stated in words. Four in stock. Local pickup in Hualien or freight elsewhere.",
+    "sizesTW": "15×7.0J ±0",
+    "finishesTW": "消光黑"
+   }
+  },
+  {
+   "brand": "花蓮太陽輪胎 (Taiwan)",
+   "model": "五星深唇外擴 15×8J −19",
+   "face": "spoke",
+   "sizes": "15×8.0J −19",
+   "bore": "Not published — and at this offset that is the risk, not the price.",
+   "finishes": "Dark/black in the photos; not named in the listing.",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$16,000 PER SET OF FOUR (≈ NT$4,000 per wheel)",
+   "priceNote": "the listing says 四顆合售16000元 — one of only two Taiwanese Jimny wheel listings that price a set rather than a wheel",
+   "modelling": "五星深唇 — five spokes over a deep polished-or-painted lip, the classic outward-flared 4×4 look. At 15×8.0J −19 the lip is enormous and the face sits far outboard: model it as a shallow five-spoke star recessed well inside a very tall outer barrel, with the lip occupying a third of the face radius. Sold as a multi-fit Suzuki wheel (吉星, 金吉星, 吉米, Sportage), not JB74-specific, which is why no bore is quoted.",
+   "url": "https://www.ruten.com.tw/item/22211244829322/",
+   "flags": [
+    "PRICED PER SET — the exception in this market",
+    "Bore not published and the wheel is not JB74-specific",
+    "−19 — over-fenders mandatory",
+    "Spoke arrangement read from the listing text only"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "花蓮太陽輪胎 (花蓮)",
+    "url": "https://www.ruten.com.tw/item/22211244829322/",
+    "TWD": "16,000 per set of four",
+    "perSet": true,
+    "note": "Explicitly a set of four. This is the reason a per-wheel/per-set field is needed at all: at a glance NT$16,000 looks like a premium wheel and it is in fact the same NT$4,000 per corner as everything else.",
+    "sizesTW": "15×8.0J −19"
+   }
+  },
+  {
+   "brand": "LikeShop (Taiwan)",
+   "model": "越野鋁圈 15×7J −10",
+   "face": "spoke",
+   "sizes": "15×7.0J −10",
+   "bore": "Not published.",
+   "finishes": "Not named in the listing.",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$18,800 PER SET OF FOUR (≈ NT$4,700 per wheel). The NT$18,800 is the real price; the NT$5,000 shown on the search page is a DEPOSIT, not the item price.",
+   "priceNote": "the single most misleading Jimny wheel listing found in Taiwan — search results show NT$5,000 and the product page shows a NT$18,800 set",
+   "modelling": "NOT MODELLED — the listing carries a size and nothing else: no finish, no spoke count, no face description, no bore. Included here only because the price trap is worth recording. Do not build a face from this entry.",
+   "url": "https://www.ruten.com.tw/item/22339797544959/",
+   "flags": [
+    "NT$5,000 in search results is a DEPOSIT (訂金), not the price",
+    "Priced per set",
+    "Nothing about the face is published"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "LikeShop 輪圈含週邊商品專賣 (台北)",
+    "url": "https://www.ruten.com.tw/item/22339797544959/",
+    "TWD": "18,800 per set of four (NT$5,000 is a deposit)",
+    "perSet": true,
+    "note": "The canonical per-wheel-vs-per-set trap in this market, and worse than usual because the misleading number is a deposit rather than a unit price. Two sets in stock, 8–14 days.",
+    "sizesTW": "15×7.0J −10"
+   }
+  },
+  {
+   "brand": "機油倉庫 (Taiwan retailer, China-made)",
+   "model": "JIMNY05 16×6J −25.5",
+   "face": "spoke",
+   "sizes": "16×6.0J −25.5",
+   "bore": "Not published.",
+   "finishes": "Not named in the listing.",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,200",
+   "priceNote": "per wheel — the page sells in quantities of 1 to 10",
+   "modelling": "NOT MODELLED — no face description and no photograph description is published. Recorded for the fitment claim, which is the interesting part: the seller states 無須再墊輪框墊片，跟輪弧切齊 (no spacers needed, sits flush with the arch) at −25.5, which is the deepest offset claimed by any Taiwanese seller to fit without flares. Treat that claim sceptically — the atlas rule puts anything at −5 or deeper past the fender.",
+   "url": "https://www.oilwarehouse.com.tw/product.php?pno=JIMNY05",
+   "flags": [
+    "Made in China, stated by the seller",
+    "Bore not published",
+    "Seller's no-flares-at-−25.5 claim contradicts every other source",
+    "Freight-only shipping (大榮貨運)"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "機油倉庫 (oilwarehouse.com.tw)",
+    "url": "https://www.oilwarehouse.com.tw/product.php?pno=JIMNY05",
+    "TWD": "4,200",
+    "perSet": false,
+    "note": "Per wheel. The seller is candid that the wheel is made in China and exported to Japan. Also listed on Ruten at NT$4,100.",
+    "sizesTW": "16×6.0J −25.5"
+   }
+  },
+  {
+   "brand": "代號90 EL (Taiwan)",
+   "model": "15×7J ±0 唇",
+   "face": "spoke",
+   "sizes": "15×7.0J ±0",
+   "bore": "Not published.",
+   "finishes": "亮軍綠 Bright Military Green · 消光黑 Matte Black",
+   "cap": "Not stated; nuts exposed.",
+   "price": "NT$4,500",
+   "priceNote": "per wheel · 惡駒輪業 (Ruten), free shipping",
+   "modelling": "Another 15×7.0J ±0 lipped wheel — the size that has become the Taiwanese 15-inch standard. The only face word in the listing is 唇 (a distinct outer lip). Bright military green is the draw and is the same colour family 耀麒 H598 sells; the two are probably competing castings on the same recipe rather than the same part, since the offsets match but the shop codes and prices do not. Spoke count unverified.",
+   "url": "https://www.ruten.com.tw/item/22134770214182/",
+   "flags": [
+    "Bore not published",
+    "Spoke count unverified",
+    "Military green is a genuinely Taiwan-market colour — it barely exists in the Japanese catalogues"
+   ],
+   "tw": {
+    "available": true,
+    "seller": "惡駒輪業 (Ruten)",
+    "url": "https://www.ruten.com.tw/item/22134770214182/",
+    "TWD": "4,500",
+    "perSet": false,
+    "note": "Per wheel, free shipping, ships in 3 days.",
+    "sizesTW": "15×7.0J ±0",
+    "finishesTW": "亮軍綠 · 消光黑"
+   }
   }
- ]
+ ],
+ "twLayerCompiled": "2026-09-22"
 }

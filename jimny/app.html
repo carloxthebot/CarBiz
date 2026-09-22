@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220447" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220515" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -313,6 +313,28 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   #out{margin:0 16px 14px;font-size:12px}
   .wgrid{grid-template-columns:repeat(3,1fr)}
 }
+
+/* Hovering an option pops its details: what it costs in both currencies, the
+   part number, what it actually is, and a link to the maker's own page. It
+   stays up while the pointer is inside it, so the link is reachable. */
+#card{position:fixed;z-index:40;width:min(330px,calc(100vw - 24px));
+  background:#101a1ef2;backdrop-filter:blur(16px);border:1px solid var(--line2);
+  border-radius:6px;box-shadow:0 18px 44px #00000080;padding:13px 14px;display:grid;gap:7px;
+  animation:cardIn .16s ease both}
+@keyframes cardIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+#card .b{font:500 10px/1 var(--mono);letter-spacing:.14em;color:var(--acc);text-transform:uppercase}
+#card h4{margin:0;font:600 15.5px/1.35 var(--body)}
+#card .p{display:flex;align-items:baseline;gap:9px}
+#card .p b{font:800 20px/1 var(--disp);color:var(--ink);font-variant-numeric:tabular-nums}
+#card .p em{font-style:normal;font:500 11.5px/1 var(--mono);color:var(--ink2)}
+#card .pn{font:500 11px/1.4 var(--mono);color:var(--ink2)}
+#card .n{font-size:12.5px;line-height:1.6;color:var(--ink2);max-height:8.2em;overflow:auto}
+#card .tags{display:flex;gap:5px;flex-wrap:wrap}
+#card a{justify-self:start;margin-top:2px;font:600 12.5px/1 var(--body);color:var(--acc-ink);
+  background:var(--acc);padding:8px 12px;border-radius:3px;text-decoration:none}
+#card img{width:100%;aspect-ratio:16/10;object-fit:contain;border-radius:4px;
+  background:radial-gradient(60% 60% at 50% 45%,#233037,#131b1e)}
+@media(hover:none){#card{width:min(330px,calc(100vw - 24px))}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -465,6 +487,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     </div>
     <pre id="out"></pre>
   </div>
+  <div id="card" hidden></div>
 </div>
 
 <script type="importmap">
@@ -484,14 +507,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220447';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220447';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220447';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220447';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220447';
+import { rigJimny, applyConfig } from './rig.js?v=202609220515';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220515';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220515';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220515';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220515';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220447';
+const BUILD = '202609220515';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -759,8 +782,7 @@ function update() {
   prevGeom = { lift: total, dia: ty.dia };
   prevPaint = col.hex;
   if (flash) highlight(flash);
-  // a big panel swap gets a small camera nudge, so you see what changed
-  if (prevS && ['frontBumper', 'rearBumper', 'roofRack', 'kit', 'grille', 'awning'].some(k => chg.has(k))) dolly();
+  if (prevS && chg.size) aimAt([...chg]);
 
   showHeight();
   countTo($('hLiftN'), total);
@@ -942,6 +964,49 @@ function highlight(node, ms = 900) {
   outline.selectedObjects = node ? [node] : [];
   clearTimeout(hlTimer);
   if (node && ms) hlTimer = setTimeout(() => { outline.selectedObjects = []; }, ms);
+}
+
+/* ═══ aiming the camera at what changed ══════════════════════════════════
+   Fitting a rear ladder while looking at the nose shows you nothing. Each
+   family knows roughly where it lives on the car; if the camera is already
+   pointed that way it just nudges, and if it is not, it swings round.
+   az 0 looks at the front, PI at the back, +az walks round the LEFT side. */
+const LEFT_AZ = 1.30, RIGHT_AZ = -1.30;
+function sideAz(v) { return v === 'right' ? RIGHT_AZ : LEFT_AZ; }
+function aimFor(k) {
+  switch (k) {
+    case 'frontBumper': case 'grille': case 'grilleLight': return [0.55, 0.16, 7.8];
+    case 'hood': return [0.5, 0.52, 8.4];
+    case 'rearBumper': case 'ladder': case 'spareCoverKit': case 'spareCover': case 'spareBag':
+      return [2.55, 0.18, 8.2];
+    case 'roofRack': case 'lightBar': case 'roofLights': case 'shovel': return [0.95, 0.62, 9.6];
+    case 'lift': case 'tyre': case 'wheel': case 'tread': case 'rimColor': case 'owl':
+      return [1.18, 0.08, 7.6];
+    case 'color': case 'twoTone': case 'kit': case 'decals': case 'flares': return [0.8, 0.2, 9.4];
+    case 'snorkel': return [RIGHT_AZ * 0.72, 0.28, 8.2];          // the airbox is on the right
+    case 'mirrors': case 'pillarPods': return [0.72, 0.3, 7.4];
+    case 'sideStep': case 'sideSkirt': case 'windowGuards': case 'gullwing': return [LEFT_AZ, 0.12, 8.4];
+    case 'awning': return [sideAz(S.awningSide), 0.24, 9.4];
+    case 'guardCan': case 'guardAxe': case 'guardBoard': return [sideAz(S[k]), 0.26, 7.8];
+    case 'extinguisher': return S.extinguisher === 'ladder' ? [2.55, 0.2, 7.8] : [sideAz(S.extinguisher), 0.26, 7.8];
+    case 'exhaust': return /trailmaster|_ds|kakimoto_kr_ds/.test(S.exhaust) ? [LEFT_AZ, 0.05, 7.6] : [2.5, 0.06, 7.6];
+    default: return null;
+  }
+}
+function aimAt(keys) {
+  if (REDUCED) return;
+  for (const k of keys) {
+    const v = aimFor(k);
+    if (!v) continue;
+    const [az, el, dist] = v;
+    let d = az - orbit.az;
+    while (d > Math.PI) d -= Math.PI * 2;
+    while (d < -Math.PI) d += Math.PI * 2;
+    // already looking more or less at it -- just lean in rather than swing
+    if (Math.abs(d) < 0.8) dolly(0.94, 700);
+    else flyTo(az, el, dist, 820);
+    return;
+  }
 }
 
 /* ═══ total height ═══════════════════════════════════════════════════════
@@ -1384,6 +1449,73 @@ function hints() {
   $('twoNote').textContent = c.twoTone ? `黑頂 ZJ3　台灣組合代碼 ${c.twoTone}` : '此色無原廠雙色組合';
 }
 
+/* ═══ the hover card ═════════════════════════════════════════════════════ */
+const cardEl = $('card');
+let cardTimer = 0, cardOver = false;
+function hideCard(now = false) {
+  clearTimeout(cardTimer);
+  if (now) { cardEl.hidden = true; return; }
+  cardTimer = setTimeout(() => { if (!cardOver) cardEl.hidden = true; }, 160);
+}
+cardEl.addEventListener('pointerenter', () => { cardOver = true; clearTimeout(cardTimer); });
+cardEl.addEventListener('pointerleave', () => { cardOver = false; hideCard(); });
+
+/** Show the details of one catalogue entry beside the element you pointed at. */
+function showCard(item, anchor, thumb) {
+  if (!item || item.id === 'none' || item.id === 'stock') { hideCard(); return; }
+  const p = priceLabel(item);
+  const tags = [
+    item.photo ? '已依實照校正' : '',
+    item.cur === 'TWD' ? '台灣有售' : '',
+    item.uncertain ? '規格待查證' : '',
+    item.needsFlares ? '輪胎外凸' : '',
+    item.part ? '' : '',
+  ].filter(Boolean).map(t => `<span class="tag">${t}</span>`).join('');
+  cardEl.innerHTML = [
+    thumb ? `<img src="${esc(thumb)}" alt="">` : '',
+    item.brand ? `<div class="b">${esc(item.brand)}</div>` : '',
+    `<h4>${esc(item.label ?? item.name ?? '')}</h4>`,
+    p.main === '原廠' ? '' : `<div class="p"><b>${p.main}</b>${p.sub ? `<em>${p.sub}</em>` : ''}</div>`,
+    item.part ? `<div class="pn">P/N ${esc(item.part)}</div>` : '',
+    tags ? `<div class="tags">${tags}</div>` : '',
+    item.note ? `<div class="n">${esc(item.note)}</div>` : '',
+    item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener">看產品頁 ↗</a>` : '',
+  ].filter(Boolean).join('');
+  cardEl.hidden = false;
+  // place it beside the row, clamped into the window
+  const r = anchor.getBoundingClientRect(), c = cardEl.getBoundingClientRect();
+  let x = r.left - c.width - 12;
+  if (x < 12) x = Math.min(r.right + 12, innerWidth - c.width - 12);
+  cardEl.style.left = Math.max(12, x) + 'px';
+  cardEl.style.top = Math.max(12, Math.min(r.top - 6, innerHeight - c.height - 12)) + 'px';
+}
+
+/**
+ * Wire a container so pointing at one of its rows shows that row's card.
+ * Touch has no hover, so a long press does the same thing.
+ */
+function cardsOn(containerId, attr, list, thumbOf) {
+  const box = $(containerId); if (!box) return;
+  const itemOf = (el) => list().find((x) => String(x.id) === el.dataset[attr]);
+  let press = 0;
+  box.addEventListener('pointerover', (e) => {
+    if (!matchMedia('(hover: hover)').matches) return;
+    const el = e.target.closest(`[data-${attr.toLowerCase()}]`); if (!el) return;
+    const it = itemOf(el); if (it) showCard(it, el, thumbOf?.(it));
+  });
+  box.addEventListener('pointerout', (e) => {
+    if (e.relatedTarget && box.contains(e.relatedTarget)) return;
+    hideCard();
+  });
+  box.addEventListener('pointerdown', (e) => {
+    if (matchMedia('(hover: hover)').matches) return;
+    const el = e.target.closest(`[data-${attr.toLowerCase()}]`); if (!el) return;
+    clearTimeout(press);
+    press = setTimeout(() => { const it = itemOf(el); if (it) showCard(it, el, thumbOf?.(it)); }, 420);
+  });
+  for (const ev of ['pointerup', 'pointercancel', 'pointermove']) box.addEventListener(ev, () => clearTimeout(press));
+}
+
 /* Hovering a menu on a desktop draws a line round the part it controls, so
    you can tell which thing on the car it is before you change anything. */
 for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], ['selRear', 'rearBumper'],
@@ -1392,9 +1524,22 @@ for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], 
   ['selExhaust', 'exhaust'], ['selLightBar', 'lightBar'], ['selRoofLights', 'roofLights'],
   ['selGrilleLight', 'grilleLight']]) {
   const el = $(id); if (!el) continue;
-  el.addEventListener('pointerenter', () => highlight(BUILT[key] ?? null, 0));
-  el.addEventListener('pointerleave', () => highlight(null));
+  const list = { frontBumper: FRONT_BUMPERS, grille: GRILLES, rearBumper: REAR_BUMPERS, hood: HOODS,
+    spareCoverKit: SPARE_COVERS, mirrors: MIRRORS, roofRack: ROOF_RACKS, awning: AWNINGS,
+    sideStep: SIDE_STEPS, ladder: LADDERS, snorkel: SNORKELS, exhaust: EXHAUSTS,
+    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS }[key];
+  el.addEventListener('pointerenter', () => {
+    highlight(BUILT[key] ?? null, 0);
+    if (list && matchMedia('(hover: hover)').matches) showCard(find(list, S[key]), el);
+  });
+  el.addEventListener('pointerleave', () => { highlight(null); hideCard(); });
 }
+cardsOn('liftCards', 'l', () => LIFTS);
+cardsOn('wheelGrid', 'w', () => WHEELS, (w) => `model/wheels/${w.style}.webp?v=${BUILD}`);
+cardsOn('tyreLadder', 't', () => TYRES);
+cardsOn('treadList', 'tr', () => TYRE_MODELS);
+cardsOn('selKit', 'k', () => KITS);
+addEventListener('scroll', () => hideCard(true), true);
 
 /* wiring that does not belong to one picker */
 const on = (id, f) => $(id).onchange = e => { f(e.target.value); hints(); update(); };
