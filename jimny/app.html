@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220430" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220438" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -210,10 +210,15 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .tr .tb{display:block;font:500 10.5px/1.45 var(--mono);color:var(--ink2);letter-spacing:.1em}
 .tr .tn{display:block;font:500 13.5px/1.35 var(--body)}
 
-.live{margin-top:11px;border:1px solid var(--line);border-left:2px solid var(--acc);border-radius:3px;
-  padding:10px 12px;background:var(--sur);display:grid;gap:4px}
-.live b{font:500 13px/1.45 var(--body)}
-.live p{margin:0;font:500 12px/1.65 var(--mono);color:var(--ink2)}
+/* What is fitted right now. It sat under the list of options, looked exactly
+   like one of them, and you had to scroll past every choice to reach it --
+   so it read as another thing you could pick. It belongs at the top, above
+   the choices, and it must not look like a card. */
+.live{margin:0 0 11px;padding:0 0 0 11px;border-left:2px solid var(--acc);display:grid;gap:3px}
+.live::before{content:"現在";font:600 10px/1 var(--mono);letter-spacing:.18em;color:var(--acc)}
+.live b{font:600 13.5px/1.4 var(--body);color:var(--ink)}
+.live p{margin:0;font:500 12px/1.6 var(--body);color:var(--ink2)}
+.live:empty{display:none}
 
 .toggles{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
 .tg{display:flex;align-items:center;justify-content:space-between;gap:9px;background:var(--sur);border:0;
@@ -360,9 +365,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <div class="pane on" data-p="0">
         <div class="grp">
           <p class="lbl">懸吊舉升 <em id="liftCount"></em></p>
+          <div class="live"><b id="liftPick"></b><p id="liftNote"></p></div>
           <div class="seg" id="liftSeg"></div>
           <div class="cards" id="liftCards" style="margin-top:8px"></div>
-          <div class="live"><b id="liftPick"></b><p id="liftNote"></p></div>
         </div>
       </div>
 
@@ -370,15 +375,16 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <div class="pane" data-p="1">
         <div class="grp">
           <p class="lbl">輪框 <em id="wheelCount"></em></p>
+          <div class="live"><b id="wheelPick"></b><p id="wheelNote"></p></div>
           <div class="chips" id="wSize"></div>
           <div class="chips" id="wKind" style="margin-top:6px"></div>
           <div class="wgrid" id="wheelGrid" style="margin-top:9px"></div>
-          <div class="live"><b id="wheelPick"></b><p id="wheelNote"></p></div>
           <p class="lbl" style="margin-top:16px">輪框顏色</p>
           <div class="swatches" id="rimSw"></div>
         </div>
         <div class="grp">
           <p class="lbl">輪胎尺寸 <em id="tyreEcho"></em></p>
+          <div class="live"><b id="tyrePick"></b><p id="tyreNote"></p></div>
           <div class="ladder" id="tyreLadder"></div>
         </div>
         <div class="grp">
@@ -387,7 +393,6 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <div class="treads" id="treadList"></div>
           <button class="tg solo" id="tgOwl" aria-pressed="false">
             <span class="nm">白字胎邊<i id="owlNote">Outlined White Letters</i></span><span class="st">關閉</span></button>
-          <div class="live"><b id="tyrePick"></b><p id="tyreNote"></p></div>
         </div>
       </div>
 
@@ -395,11 +400,11 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <div class="pane" data-p="2">
         <div class="grp">
           <p class="lbl">車身配色 <em id="colName"></em></p>
+          <div class="live"><b id="colPick"></b><p id="colNote"></p></div>
           <div class="swatches" id="colSw"></div>
           <select id="selColor" style="margin-top:10px" aria-label="車身配色"></select>
           <button class="tg solo" id="tgTwo" aria-pressed="false">
             <span class="nm">雙色車頂<i id="twoNote">黑頂 ZJ3</i></span><span class="st">關閉</span></button>
-          <div class="live"><b id="colPick"></b><p id="colNote"></p></div>
         </div>
         <div class="grp">
           <p class="lbl">全車套件</p>
@@ -477,14 +482,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220430';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220430';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220430';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220430';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220430';
+import { rigJimny, applyConfig } from './rig.js?v=202609220438';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220438';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220438';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220438';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220438';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220430';
+const BUILD = '202609220438';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
