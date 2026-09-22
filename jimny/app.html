@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221449" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221531" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -66,10 +66,24 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
   padding:20px;letter-spacing:.14em;transition:opacity .45s ease}
 #boot.gone{opacity:0;pointer-events:none}
 #bootcar{width:min(300px,62vw);height:auto;overflow:visible}
-#bootcar path,#bootcar circle{fill:none;stroke:var(--acc);stroke-width:2.4;
+#bootcar path,#bootcar circle{fill:none;stroke:var(--acc);stroke-width:2.2;
   stroke-linejoin:round;stroke-linecap:round;
-  stroke-dasharray:1;stroke-dashoffset:1;opacity:.9}
-#bootcar .w{stroke:#4d6169;stroke-width:3}
+  stroke-dasharray:1;stroke-dashoffset:1;opacity:.92}
+#bootcar .win{stroke-width:1.7;opacity:.6}
+#bootcar .w{stroke:#71868e;stroke-width:2.6}
+#bootcar .sp{stroke:#71868e;stroke-width:1.8}
+/* Once the model is in and the car is being assembled, it drives: the whole
+   svg bobs on its springs and the wheels turn. Both are transform animations,
+   which the compositor keeps running even while the build blocks the main
+   thread -- see #bootbar. */
+#boot.assembling #bootcar{animation:bootbob .58s ease-in-out infinite alternate}
+@keyframes bootbob{from{transform:translateY(0) rotate(-.5deg)}
+  to{transform:translateY(-3px) rotate(.5deg)}}
+#bootcar .hub{transform-box:fill-box;transform-origin:center}
+#boot.assembling .hub{animation:bootroll .62s linear infinite}
+@keyframes bootroll{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#boot.assembling #bootcar,
+  #boot.assembling .hub{animation:none}}
 #bootmsg{opacity:.85}
 /* Assembling the car blocks the main thread, so the wait indicator has to be
    something the compositor can run on its own: a transform animation keeps
@@ -335,6 +349,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 /* Hovering an option pops its details: what it costs in both currencies, the
    part number, what it actually is, and a link to the maker's own page. It
    stays up while the pointer is inside it, so the link is reachable. */
+#card[hidden]{display:none}
 #card{position:fixed;z-index:40;width:min(330px,calc(100vw - 24px));
   background:#101a1ef2;backdrop-filter:blur(16px);border:1px solid var(--line2);
   border-radius:6px;box-shadow:0 18px 44px #00000080;padding:13px 14px;display:grid;gap:7px;
@@ -358,13 +373,16 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 </head>
 <body>
 <div id="boot">
-    <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
-      <path id="bootline" pathLength="1"
-        d="M24 104 L24 62 L58 62 L74 30 L206 30 L222 62 L276 62 L276 104 Z
-           M74 30 L74 62 M206 30 L206 62 M14 62 L24 62 M276 62 L286 62"/>
-      <circle class="w" cx="76" cy="104" r="21" pathLength="1"/>
-      <circle class="w" cx="224" cy="104" r="21" pathLength="1"/>
-    </svg>
+      <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
+        <!-- traced from model/jimny-hq.glb by tools/silhouette.mjs + .py -->
+        <path class="body" pathLength="1" d="M113.4 4.0L61.4 4.0L43.0 5.2L39.4 31.2L27.0 31.2L25.0 33.2L22.6 42.0L21.8 53.2L23.8 73.6L26.6 78.8L30.2 79.6L29.4 87.2L30.6 92.8L38.6 96.4L43.4 96.8L42.6 100.0L45.4 103.6L46.2 109.2L50.6 116.4L55.8 121.2L61.8 124.4L75.4 125.6L86.6 120.8L102.2 105.2L127.8 107.6L133.4 102.8L180.6 102.4L187.8 107.6L191.0 106.4L205.8 106.8L223.8 122.4L232.6 125.6L241.4 125.6L250.2 122.4L257.0 116.8L260.6 111.2L263.0 104.4L263.0 99.6L265.0 97.6L273.4 96.8L277.8 93.2L277.4 74.4L273.4 72.0L271.8 72.8L267.8 71.6L270.6 65.2L270.6 54.0L265.0 46.8L241.0 43.2L205.8 40.4L204.6 38.0L200.2 36.0L202.2 38.4L198.2 38.0L199.0 36.0L195.8 35.6L180.6 10.8L175.8 7.2L159.8 4.8L113.8 4.4Z"/>
+        <path class="win" pathLength="1" d="M178.6 9.2L178.2 10.4L179.4 12.4L174.6 15.2L171.4 13.6L120.6 13.2L117.8 14.0L116.6 16.4L117.8 42.8L121.8 44.0L123.8 46.0L157.4 46.4L163.8 48.4L183.0 48.4L184.2 46.8L188.6 46.8L189.0 40.8L195.4 40.4L198.2 39.2L179.0 9.6Z"/>
+        <path class="win" pathLength="1" d="M100.2 14.0L59.0 14.0L57.0 14.8L55.0 18.0L44.6 14.0L42.2 28.0L41.4 41.6L44.2 42.8L52.6 43.6L54.2 40.4L57.4 42.8L67.4 43.2L71.0 45.2L107.0 45.2L109.0 42.8L109.0 22.8L107.8 20.4L103.0 19.6L102.2 15.6L100.6 14.4Z"/>
+        <circle class="w" pathLength="1" cx="71.3" cy="99.4" r="26.1"/>
+        <circle class="w" pathLength="1" cx="236.0" cy="99.4" r="26.1"/>
+        <g class="hub"><path class="sp" pathLength="1" d="M58.2 99.4L84.4 99.4M71.3 86.3L71.3 112.5"/></g>
+        <g class="hub"><path class="sp" pathLength="1" d="M222.9 99.4L249.1 99.4M236.0 86.3L236.0 112.5"/></g>
+      </svg>
     <span id="bootmsg">載入 3D 模型…</span>
     <div id="bootbar" aria-hidden="true"><i></i></div>
   </div>
@@ -526,14 +544,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609221449';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221449';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221449';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221449';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609221449';
+import { rigJimny, applyConfig } from './rig.js?v=202609221531';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221531';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221531';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221531';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609221531';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609221449';
+const BUILD = '202609221531';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
