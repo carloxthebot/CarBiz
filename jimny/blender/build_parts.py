@@ -1218,26 +1218,24 @@ def snorkel_urnieta(side=RIGHT):
 
 def snorkel_cowl(side=RIGHT):
     """The low-profile A-pillar duct sold in Taiwan as a JB64/74 涉水器, and
-    what the owner's car wears. Rebuilt 2026-09-22 (third attempt) from the
-    owner's own close-ups plus a raycast probe of this model's body.
+    what the owner's car wears. Fourth attempt, 2026-09-22, after the owner
+    drew the part's outline and its intake straight onto his own photo.
 
-    Probed here, right side (blender/probe-style raycasts, 20 mm grid):
+    Probed off this model, right side (raycasts on a 20 mm grid):
       A-pillar outer face  |x| 663 at y 1250 falling to 616 at y 1570
       A-pillar band centre  z  480 at y 1250 falling to 310 at y 1570
       cowl / bonnet top      y  1123-1140 over z 620-760 at |x| 640-660
       fender shoulder rolls over between |x| 660 and 700
 
-    What the photos show, and what the last two attempts got wrong:
-      * it is a FLAT WIDE BLADE lying on the pillar, roughly as wide fore-aft
-        as the pillar itself and only ~45 mm proud -- not a fat post. The
-        previous profile had the 88 mm on the sideways axis and the 32 mm
-        fore-aft, i.e. exactly backwards.
-      * the intake is a HONEYCOMB panel on a raised pod at the TOP of the
-        blade, hanging off its REAR edge, with a corner screw at each end and
-        a spear-shaped taper where the pod dies back into the blade.
-      * the bottom does not run out over the fender. It swells into a smooth
-        boot that sweeps forward and DOWN into the scuttle, ending on the cowl
-        at the bonnet's rear corner, screwed down through a flange.
+    The part is ONE tapered moulding: narrow under the roof gutter, widening
+    down the pillar, then sweeping forward and down into the scuttle and
+    screwed to the cowl beside the bonnet's rear corner. The intake is a long
+    honeycomb vent recessed INTO its outboard face over the top half, coming
+    to a point at its lower end.
+
+    The third attempt hung that vent on a raised pod off the moulding's rear
+    edge. That pod is not part of the snorkel at all -- it is the window
+    visor's leading edge, which sits right beside it in every photo.
 
     Nothing rises above the roof gutter, which is the whole point: the car
     keeps its registered height."""
@@ -1245,55 +1243,44 @@ def snorkel_cowl(side=RIGHT):
     s = side
     X = lambda v: s * v
 
-    # ---- the blade on the pillar -------------------------------------------
-    # centre = probed pillar face + half the blade's 44 mm thickness
+    # ---- the moulding: pillar blade, tapered, then the scuttle boot --------
+    # centre |x| = probed pillar face + half the section's thickness
     blade = [(X(690), 1175, 525), (X(685), 1250, 480), (X(676), 1330, 430),
              (X(666), 1410, 390), (X(656), 1490, 345), (X(640), 1568, 308)]
-    # u runs along car X (thickness), v across the pillar (fore-aft)
-    sweep('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
-          rounded_rect(38, 130, 9, 5), TEXBLACK, root)
+    # u runs along car X (thickness, +u inboard), v across the pillar (+v aft)
+    lib.loft('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
+             rounded_rect(46, 140, 12, 5), rounded_rect(34, 96, 10, 5),
+             TEXBLACK, root, ease=lambda t: t ** 1.25)
 
-    # ---- the boot in the scuttle -------------------------------------------
-    # Off the blade's foot, forward and down into the trough between the
-    # windscreen base and the bonnet's rear edge. It has to stay INBOARD of
-    # the fender shoulder (probed at |x| 660-680, y 1110-1130) and sit ON the
-    # cowl (y 1123-1140 over z 620-760) -- the second attempt was a fat lump
-    # hanging in the air outside the wing.
+    # the boot: off the blade's foot, forward and down into the trough between
+    # the windscreen base and the bonnet's rear edge. Stays inboard of the
+    # fender shoulder and sits on the cowl.
     boot = [(X(676), 1204, 524), (X(670), 1182, 578), (X(658), 1166, 640), (X(646), 1154, 700)]
     lib.loft('boot', [tuple(p) for p in fillet(boot, 55, steps=5)],
-             rounded_rect(54, 96, 14, 5), rounded_rect(48, 74, 13, 5),
+             rounded_rect(54, 112, 14, 5), rounded_rect(48, 74, 13, 5),
              TEXBLACK, root, ease=lambda t: t ** 0.7)
-    # the flange it is screwed down through, lying on the cowl
     box('flange', (X(634), 1124, 672), (34, 10, 104), TEXBLACK, root, bevel=4)
     for z in (628, 722):
         lib.cylinder(f'footScrew{z}', (X(638 - (z - 628) * 0.06), 1126, z), (0, 1, 0), 12, 9, STEEL, root, n=10)
 
-    # ---- the intake pod on the blade's top, rear edge -----------------------
-    # blade rear edge = pillar band centre - 66; the pod straddles it
-    pod = [(X(678), 1322, 378), (X(680), 1390, 340), (X(671), 1470, 298), (X(663), 1552, 255)]
-    lib.loft('pod', [tuple(p) for p in pod],
-             rounded_rect(12, 30, 5, 5), rounded_rect(62, 86, 13, 5),
-             TEXBLACK, root, ease=lambda t: min(1.0, t / 0.34))
-
-    # the honeycomb face, mapped onto the pod's outer flank. u runs up the
-    # pillar from the panel centre, v across it.
-    ay, az = 0.888, -0.459                       # unit vector up the pillar
-    cy, cz, half = 1466, 302, 70
-    def place(u, v):
-        t = (u + half) / (2 * half)              # 0 at the panel's foot, 1 at its head
-        return (X(700 - 12 * t), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
-    # the dark well behind the mesh, so the holes read as holes
-    sweep('well', [place(-half - 4, 0), place(half + 4, 0)], rounded_rect(14, 62, 10, 4), BLACK, root)
-    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 2 * half - 10, 54, cell=20, bar=3.0)
-    # a raised lip around the panel, and a screw at each end
-    ring = [place(-half - 9, 0), place(-half - 9, 33), place(half + 9, 33),
-            place(half + 9, -33), place(-half - 9, -33)]
-    sweep('lip', [tuple(p) for p in fillet(ring + [ring[1]], 16, steps=3)],
-          rounded_rect(16, 12, 4, 3), TEXBLACK, root, closed=True, caps=False)
-    for u in (-half - 9, half + 9):
-        for v in (-26, 26):
-            x, y, z = place(u, v)
-            lib.cylinder(f'ps{round(u)}{v}', (x + X(3), y, z), (s, 0, 0), 11, 8, STEEL, root, n=10)
+    # ---- the intake, recessed into the moulding's outboard face ------------
+    # u runs up the pillar from the vent's centre, v across it (+v forward).
+    # |x| tracks the blade's outer face, which pulls inboard as it rises.
+    ay, az = 0.888, -0.459
+    cy, cz = 1436, 345
+    def place(u, v, out=0):
+        return (X(680 - 0.157 * u + out), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
+    # the well, so the holes read as holes, and the honeycomb just proud of it
+    lib.loft('well', [place(-124, 0, -12), place(-70, 0, -12), place(112, 0, -12)],
+             rounded_rect(16, 26, 8, 4), rounded_rect(16, 54, 10, 4),
+             BLACK, root, ease=lambda t: min(1.0, t / 0.5))
+    hex_panel(root, TEXBLACK, lambda u, v: place(u + 12, v - 5), 186, 46, cell=17, bar=2.6)
+    # the raised lip: square across the top, a point at the bottom
+    ring = [place(114, -36), place(114, 26), place(-72, 26), place(-124, -6), place(-72, -36)]
+    sweep('lip', [tuple(p) for p in fillet(ring + [ring[0], ring[1]], 14, steps=3)],
+          rounded_rect(18, 11, 4, 3), TEXBLACK, root, closed=True, caps=False)
+    for (u, v) in ((106, -28), (106, 19), (-64, -28), (-64, 19)):
+        lib.cylinder(f'ps{u}{v}', place(u, v, 4), (s, 0, 0), 10, 8, STEEL, root, n=10)
     return root
 
 
