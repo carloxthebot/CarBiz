@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220130" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220412" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -29,7 +29,7 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
+body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
   -webkit-font-smoothing:antialiased;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .app{display:grid;grid-template-columns:1fr 372px;height:100%}
 
@@ -39,25 +39,25 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 #cv{display:block;width:100%;height:100%}
 .badge{position:absolute;top:18px;left:22px;pointer-events:none}
 .badge .mk{font:500 9.5px/1 var(--mono);letter-spacing:.28em;color:#6f8188}
-.badge .md{font:800 23px/1.05 var(--disp);letter-spacing:-.01em;color:#dfe8e9;margin-top:5px}
+.badge .md{font:800 25px/1.05 var(--disp);letter-spacing:-.01em;color:#dfe8e9;margin-top:5px}
 .views{position:absolute;top:16px;right:20px;display:flex;gap:1px;background:var(--line2);
   border:1px solid var(--line2);border-radius:3px;overflow:hidden}
-.views button{font:500 11px/1 var(--body);padding:8px 11px;border:0;cursor:pointer;
+.views button{font:500 12px/1 var(--body);padding:8px 11px;border:0;cursor:pointer;
   background:#0f181bcc;color:var(--ink2);backdrop-filter:blur(6px)}
 .views button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:700}
 /* The lift, tyre diameter and ground clearance live over the 3D rather than
    in the panel: they describe what you are looking at, and on a phone the
    panel's height is better spent on the list you are choosing from. */
 .hud{position:absolute;left:22px;bottom:18px;display:grid;gap:3px;
-  font:500 10.5px/1.6 var(--mono);color:#7b8d93;pointer-events:none;letter-spacing:.03em}
+  font:500 11.5px/1.6 var(--mono);color:#7b8d93;pointer-events:none;letter-spacing:.03em}
 .hud b{color:#dfe8e9;font-weight:500}
 .hud .stats{color:#93a5aa}
-.hud .stats i{font-style:normal;color:#eef4f3;font-weight:600;font-size:12.5px;font-variant-numeric:tabular-nums}
-.hud .ver{color:#56676d;font-size:9.5px}
+.hud .stats i{font-style:normal;color:#eef4f3;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
+.hud .ver{color:#56676d;font-size:10.5px}
 /* The car draws itself in as the model arrives: the outline's dash offset is
    the load progress, so the wait shows you what you are waiting for. */
 #boot{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:18px;
-  background:#0b1113;z-index:5;font:500 12px var(--mono);color:#6d8087;text-align:center;
+  background:#0b1113;z-index:5;font:500 13px var(--mono);color:#6d8087;text-align:center;
   padding:20px;letter-spacing:.14em;transition:opacity .45s ease}
 #boot.gone{opacity:0;pointer-events:none}
 #bootcar{width:min(300px,62vw);height:auto;overflow:visible}
@@ -66,7 +66,7 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
   stroke-dasharray:1;stroke-dashoffset:1;opacity:.9}
 #bootcar .w{stroke:#4d6169;stroke-width:3}
 #bootmsg{opacity:.85}
-.credit{position:absolute;right:20px;bottom:14px;font:500 9.5px/1.55 var(--mono);color:#5e7076;
+.credit{position:absolute;right:20px;bottom:14px;font:500 10.5px/1.55 var(--mono);color:#5e7076;
   text-align:right;max-width:46%}
 .credit a{color:#7b8d93}
 
@@ -74,32 +74,32 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 .panel{background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
 .head{padding:18px 20px 15px;border-bottom:1px solid var(--line);flex:none}
 .head .kicker{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
-  font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink3);text-transform:uppercase}
+  font:500 10.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink3);text-transform:uppercase}
 .head .kicker a{color:var(--acc);text-decoration:none;letter-spacing:.06em}
-.head h1{font:800 21px/1.1 var(--disp);letter-spacing:-.01em;margin:9px 0 0}
+.head h1{font:800 23px/1.1 var(--disp);letter-spacing:-.01em;margin:9px 0 0}
 /* Total height is the number people actually ask about -- it decides whether
    the car still fits the mechanical parking most Taiwanese buildings use --
    so it gets its own row and is measured off the built model, not guessed. */
 .hero{display:flex;align-items:center;gap:12px;margin-top:14px;padding:11px 13px;
   background:var(--sur);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:4px}
-.hero .h-l span{display:block;font:500 8.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
-.hero .h-l b{display:block;font:800 30px/1 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums;color:var(--acc)}
+.hero .h-l span{display:block;font:500 9.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
+.hero .h-l b{display:block;font:800 33px/1 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums;color:var(--acc)}
 .hero .h-l i{font-style:normal}
 /* when a change pushes the car out of a parking class, say so with a blink */
 @keyframes parkWarn{0%,100%{opacity:1}22%,66%{opacity:.25}}
 .hero .h-r em.blink{animation:parkWarn .9s ease 2}
-.hero .h-l small{font:400 12px/1 var(--mono);color:var(--ink3);font-weight:400}
+.hero .h-l small{font:400 13px/1 var(--mono);color:var(--ink3);font-weight:400}
 .hero .h-r{margin-left:auto;text-align:right;display:grid;gap:4px}
-.hero .h-r i{font-style:normal;font:500 11px/1.3 var(--mono);color:var(--ink2)}
-.hero .h-r em{font-style:normal;font:500 10.5px/1.35 var(--body);color:var(--ink3)}
+.hero .h-r i{font-style:normal;font:500 12px/1.3 var(--mono);color:var(--ink2)}
+.hero .h-r em{font-style:normal;font:500 11.5px/1.35 var(--body);color:var(--ink3)}
 .hero .h-r em.tight{color:var(--warn)}
 .hero .h-r em.over{color:var(--bad)}
 
 .steps{display:flex;gap:1px;background:var(--line);border-bottom:1px solid var(--line);flex:none}
 .steps button{flex:1;background:var(--bg);border:0;cursor:pointer;padding:11px 6px 10px;
   color:var(--ink3);font:inherit;display:grid;gap:3px;justify-items:center;position:relative}
-.steps button b{font:700 12.5px/1.2 var(--disp);letter-spacing:.01em;color:var(--ink2)}
-.steps button i{font-style:normal;font:500 8.5px/1.25 var(--mono);letter-spacing:.01em;
+.steps button b{font:700 14px/1.2 var(--disp);letter-spacing:.01em;color:var(--ink2)}
+.steps button i{font-style:normal;font:500 9.5px/1.25 var(--mono);letter-spacing:.01em;
   max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .steps button[aria-selected=true]{background:var(--sur)}
 .steps button[aria-selected=true] b{color:var(--acc)}
@@ -120,13 +120,13 @@ body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);
 @keyframes grpIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .grp{padding:16px 0 4px;border-bottom:1px solid var(--line)}
 .grp:last-child{border-bottom:0}
-.lbl{display:flex;align-items:baseline;gap:8px;font:500 9.5px/1 var(--mono);letter-spacing:.14em;
+.lbl{display:flex;align-items:baseline;gap:8px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;
   color:var(--ink3);text-transform:uppercase;margin:0 0 10px}
 .lbl em{font-style:normal;margin-left:auto;text-transform:none;letter-spacing:.04em;color:var(--ink3)}
-.hint{font-size:11.5px;color:var(--ink3);line-height:1.55;margin:7px 0 0}
+.hint{font-size:12.5px;color:var(--ink3);line-height:1.55;margin:7px 0 0}
 
 select{width:100%;background:var(--sur);color:var(--ink);border:1px solid var(--line2);border-radius:3px;
-  padding:11px 32px 11px 12px;font:14px var(--body);appearance:none;cursor:pointer;
+  padding:12px 32px 12px 13px;font:15.5px var(--body);appearance:none;cursor:pointer;
   background-image:linear-gradient(45deg,transparent 50%,var(--ink3) 50%),linear-gradient(135deg,var(--ink3) 50%,transparent 50%);
   background-position:right 15px top 20px,right 10px top 20px;background-size:5px 5px;background-repeat:no-repeat}
 select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
@@ -135,8 +135,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .seg{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden}
 .seg button{flex:1 0 auto;min-width:0;background:var(--sur);border:0;cursor:pointer;padding:9px 4px;
   font:inherit;color:var(--ink2);display:grid;gap:3px;justify-items:center}
-.seg button b{font:700 13px/1 var(--disp)}
-.seg button i{font-style:normal;font:500 8.5px/1 var(--mono);color:var(--ink3);white-space:nowrap}
+.seg button b{font:700 14.5px/1 var(--disp)}
+.seg button i{font-style:normal;font:500 9.5px/1 var(--mono);color:var(--ink3);white-space:nowrap}
 .seg button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
 .seg button[aria-pressed=true] i{color:var(--acc-ink);opacity:.72}
 
@@ -146,12 +146,12 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   display:grid;grid-template-columns:1fr auto;gap:3px 12px;padding:11px 13px;align-items:baseline}
 .card:hover{background:var(--sur2)}
 .card[aria-pressed=true]{background:var(--acc-soft);box-shadow:inset 3px 0 0 var(--acc)}
-.card .nm{font:500 13.5px/1.4 var(--body)}
-.card .brand{display:block;font:500 9px/1.5 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
-.card .pr{font:700 14px/1.2 var(--disp);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
-.card .pr em{display:block;font:400 9.5px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
+.card .nm{font:500 14.5px/1.4 var(--body)}
+.card .brand{display:block;font:500 10px/1.5 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
+.card .pr{font:700 15.5px/1.2 var(--disp);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.card .pr em{display:block;font:400 10.5px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
 .card .inc{grid-column:1/-1;display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
-.tag{font:500 9.5px/1 var(--mono);padding:4px 5px;border:1px solid var(--line2);border-radius:2px;
+.tag{font:500 10.5px/1 var(--mono);padding:4px 6px;border:1px solid var(--line2);border-radius:2px;
   color:var(--ink3);white-space:nowrap}
 .tag.on{border-color:var(--acc-line);color:var(--acc);background:var(--acc-soft)}
 .tag.no{opacity:.32;text-decoration:line-through}
@@ -160,7 +160,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 /* wheel thumbnails, rendered from parts.glb by tools/render_wheels.mjs */
 .chips{display:flex;gap:5px;flex-wrap:wrap}
 .chip{border:1px solid var(--line2);background:none;color:var(--ink2);border-radius:99px;
-  padding:6px 11px;font:500 11.5px/1 var(--body);cursor:pointer}
+  padding:7px 12px;font:500 12.5px/1 var(--body);cursor:pointer}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
 .wcard{background:var(--sur);border:1px solid var(--line);border-radius:4px;padding:7px 7px 9px;
@@ -168,8 +168,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .wcard:hover{background:var(--sur2)}
 .wcard[aria-pressed=true]{border-color:var(--acc);background:var(--acc-soft)}
 .wcard img{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:radial-gradient(60% 60% at 50% 45%,#222f34,#131b1e);border-radius:3px}
-.wcard .wn{font:500 11.5px/1.3 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wcard .wm{font:500 9px/1.35 var(--mono);color:var(--ink3);letter-spacing:.02em}
+.wcard .wn{font:500 12.5px/1.3 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wcard .wm{font:500 10px/1.35 var(--mono);color:var(--ink3);letter-spacing:.02em}
 .wcard .wm b{color:var(--warn);font-weight:500}
 
 .swatches{display:flex;gap:7px;flex-wrap:wrap}
@@ -184,18 +184,18 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   display:grid;grid-template-columns:96px 1fr 86px;gap:10px;align-items:center;padding:9px 12px}
 .trow:hover{background:var(--sur2)}
 .trow[aria-pressed=true]{background:var(--acc-soft);box-shadow:inset 3px 0 0 var(--acc)}
-.trow .sz{font:500 12.5px/1.25 var(--body)}
-.trow .sz em{display:block;font:400 9px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
+.trow .sz{font:500 13.5px/1.25 var(--body)}
+.trow .sz em{display:block;font:400 10px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
 .bar{height:8px;background:var(--sur3);border-radius:99px;position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#4a6068,var(--acc));display:block}
-.fit{font:500 10px/1.4 var(--mono);text-align:right}
+.fit{font:500 11px/1.4 var(--mono);text-align:right}
 .fit.ok{color:var(--ok)} .fit.warn{color:var(--warn)} .fit.bad{color:var(--bad)}
 
 .tabs{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden}
 .tabs button{flex:1;background:var(--sur);border:0;cursor:pointer;padding:9px 4px;font:inherit;color:var(--ink2);
   display:grid;gap:2px;justify-items:center}
-.tabs button b{font:700 12.5px/1 var(--disp)}
-.tabs button i{font-style:normal;font-size:10px;color:var(--ink3)}
+.tabs button b{font:700 14px/1 var(--disp)}
+.tabs button i{font-style:normal;font-size:11px;color:var(--ink3)}
 .tabs button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
 .tabs button[aria-pressed=true] i{color:var(--acc-ink);opacity:.75}
 .treads{display:grid;gap:6px;margin-top:9px}
@@ -205,52 +205,53 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .tr[aria-pressed=true]{border-color:var(--acc);background:var(--acc-soft)}
 .tr[disabled]{opacity:.4;cursor:not-allowed}
 .tr canvas{width:30px;height:46px;border-radius:2px;display:block}
-.tr .tb{display:block;font:500 9px/1.4 var(--mono);color:var(--ink3);letter-spacing:.1em}
-.tr .tn{display:block;font:500 12px/1.35 var(--body)}
+.tr .tb{display:block;font:500 10px/1.4 var(--mono);color:var(--ink3);letter-spacing:.1em}
+.tr .tn{display:block;font:500 13.5px/1.35 var(--body)}
 
 .live{margin-top:11px;border:1px solid var(--line);border-left:2px solid var(--acc);border-radius:3px;
   padding:10px 12px;background:var(--sur);display:grid;gap:4px}
-.live b{font:500 12px/1.45 var(--body)}
-.live p{margin:0;font:500 11px/1.65 var(--mono);color:var(--ink2)}
+.live b{font:500 13px/1.45 var(--body)}
+.live p{margin:0;font:500 12px/1.65 var(--mono);color:var(--ink2)}
 
 .toggles{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
 .tg{display:flex;align-items:center;justify-content:space-between;gap:9px;background:var(--sur);border:0;
   padding:11px 12px;color:var(--ink);cursor:pointer;font:inherit;text-align:left;width:100%}
 .tg:hover{background:var(--sur2)}
 .tg[aria-pressed=true]{background:var(--acc-soft)}
-.tg .nm{font-size:13px;min-width:0}
-.tg .nm i{display:block;font-style:normal;font-size:10.5px;color:var(--ink3);margin-top:2px;
+.tg .nm{font-size:14px;min-width:0}
+.tg .nm i{display:block;font-style:normal;font-size:11.5px;color:var(--ink3);margin-top:2px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tg[aria-pressed=true] .nm{color:var(--acc)}
-.tg .st{font:500 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink3);flex:none}
+.tg .st{font:500 10.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink3);flex:none}
 .tg[aria-pressed=true] .st{color:var(--acc)}
+.tg[disabled]{opacity:.45;cursor:not-allowed}
 .tg.solo{border:1px solid var(--line);border-radius:3px;margin-top:9px}
 /* one row per thing that hangs off a guard: name on the left, which side on
    the right, because "which side" is the whole decision */
 .sides{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
 .side-row{display:flex;align-items:center;gap:10px;background:var(--sur);padding:9px 12px}
-.side-row .nm{flex:1;min-width:0;font-size:13px}
-.side-row .nm i{display:block;font-style:normal;font-size:10.5px;color:var(--ink3);margin-top:2px}
+.side-row .nm{flex:1;min-width:0;font-size:14px}
+.side-row .nm i{display:block;font-style:normal;font-size:11.5px;color:var(--ink3);margin-top:2px}
 .side-row .pick{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden;flex:none}
 .side-row .pick button{background:var(--sur2);border:0;cursor:pointer;color:var(--ink3);
-  font:500 11px/1 var(--mono);padding:7px 9px;letter-spacing:.06em}
+  font:500 12px/1 var(--mono);padding:8px 10px;letter-spacing:.06em}
 .side-row .pick button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:600}
 .sides.off{opacity:.45;pointer-events:none}
 
 .flags{padding:10px 20px 0;display:grid;gap:6px;flex:none}
 .flags:empty{padding:0}
-.flag{padding:9px 11px;border-radius:3px;font-size:12px;line-height:1.55;border-left:2px solid;background:var(--sur)}
+.flag{padding:10px 12px;border-radius:3px;font-size:13px;line-height:1.55;border-left:2px solid;background:var(--sur)}
 .flag.error{border-color:var(--bad);color:#ffc9bc}
 .flag.warn{border-color:var(--warn);color:#f3ddb4}
 .flag.info{border-color:var(--line2);color:var(--ink2)}
-.flag b{font:600 9.5px/1.7 var(--mono);letter-spacing:.1em;display:block}
+.flag b{font:600 10.5px/1.7 var(--mono);letter-spacing:.1em;display:block}
 .acts{padding:14px 20px calc(18px + env(safe-area-inset-bottom));display:grid;
   grid-template-columns:1fr 1fr;gap:7px;flex:none;border-top:1px solid var(--line);margin-top:12px}
-.acts button{padding:12px;border-radius:3px;font:600 13px var(--body);cursor:pointer;border:1px solid}
+.acts button{padding:13px;border-radius:3px;font:600 14px var(--body);cursor:pointer;border:1px solid}
 .ghost{background:none;border-color:var(--line2);color:var(--ink2)}
 .solid{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);grid-column:1/-1}
-#out{margin:0 20px 20px;background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:12px;
-  font:11.5px/1.7 var(--mono);color:var(--ink2);white-space:pre-wrap;display:none}
+#out{margin:0 20px 20px;background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:13px;
+  font:12.5px/1.7 var(--mono);color:var(--ink2);white-space:pre-wrap;display:none}
 #out.on{display:block}
 
 /* ── phone: the panel becomes a sheet so the car keeps the whole screen ── */
@@ -267,11 +268,11 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   #cv{height:calc(100% - var(--sheet) + 54px)}
   .badge{display:none}
   .views{top:12px;right:12px}
-  .views button{padding:7px 9px;font-size:10.5px}
+  .views button{padding:8px 10px;font-size:11.5px}
   .credit{max-width:42%;bottom:calc(var(--sheet) + 8px);font-size:9px}
   .hud{max-width:64%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.55;gap:2px}
-  .hud .stats i{font-size:11.5px}
-  .credit{max-width:34%}
+  .hud .stats i{font-size:13px}
+  .credit{max-width:34%;font-size:9.5px}
   .panel{grid-area:1/1;align-self:end;z-index:3;height:92dvh;border-left:0;
     border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
     background:#0c1214f2;backdrop-filter:blur(14px);
@@ -291,18 +292,18 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   body.sheet .head{padding:2px 16px 8px}
   body.sheet .hero{margin-top:8px;padding:7px 11px}
   body.sheet .hero .h-l span{font-size:8px}
-  body.sheet .hero .h-l b{font-size:21px;margin-top:2px}
-  body.sheet .hero .h-r i{font-size:10px}
-  body.sheet .hero .h-r em{font-size:9.5px}
+  body.sheet .hero .h-l b{font-size:23px;margin-top:2px}
+  body.sheet .hero .h-r i{font-size:11px}
+  body.sheet .hero .h-r em{font-size:10.5px}
   body.sheet .steps button{padding:8px 6px 7px}
   /* three stacked full-width buttons ate a third of the sheet on a phone;
      one compact row leaves that space to the parts */
   .acts{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;
     padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
-  .acts button{padding:10px 4px;font-size:12px;border-radius:2px}
+  .acts button{padding:11px 4px;font-size:13px;border-radius:2px}
   .acts .solid{grid-column:auto}
   .flags{padding:8px 16px 0}
-  #out{margin:0 16px 14px;font-size:11px}
+  #out{margin:0 16px 14px;font-size:12px}
   .wgrid{grid-template-columns:repeat(3,1fr)}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -347,7 +348,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 
     <div class="steps" id="steps" role="tablist">
       <button role="tab" data-s="0" aria-selected="true"><b>底盤</b><i id="sum0">原廠</i></button>
-      <button role="tab" data-s="1" aria-selected="false"><b>輪胎</b><i id="sum1">原廠</i></button>
+      <button role="tab" data-s="1" aria-selected="false"><b>胎框</b><i id="sum1">原廠</i></button>
       <button role="tab" data-s="2" aria-selected="false"><b>外觀</b><i id="sum2">原廠</i></button>
       <button role="tab" data-s="3" aria-selected="false"><b>裝備</b><i id="sum3">無</i></button>
     </div>
@@ -361,6 +362,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <div class="cards" id="liftCards" style="margin-top:8px"></div>
           <div class="live"><b id="liftPick"></b><p id="liftNote"></p></div>
         </div>
+      </div>
+
+      <!-- 2 ── 胎框 -->
+      <div class="pane" data-p="1">
         <div class="grp">
           <p class="lbl">輪框 <em id="wheelCount"></em></p>
           <div class="chips" id="wSize"></div>
@@ -370,10 +375,6 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <p class="lbl" style="margin-top:16px">輪框顏色</p>
           <div class="swatches" id="rimSw"></div>
         </div>
-      </div>
-
-      <!-- 2 ── 輪胎 -->
-      <div class="pane" data-p="1">
         <div class="grp">
           <p class="lbl">輪胎尺寸 <em id="tyreEcho"></em></p>
           <div class="ladder" id="tyreLadder"></div>
@@ -474,14 +475,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220130';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220130';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220130';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220130';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220130';
+import { rigJimny, applyConfig } from './rig.js?v=202609220412';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220412';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220412';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220412';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220412';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220130';
+const BUILD = '202609220412';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -684,6 +685,7 @@ function update() {
   const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
   const col = COLORS.find(c => c.code === S.color) || COLORS[3];
   const total = lift.lift + bl.body;
+  syncOwl();
   // Which choices moved this time. Everything animated below keys off this,
   // so a redraw that changes nothing stays perfectly still.
   const chg = new Set();
@@ -755,8 +757,8 @@ function update() {
   countTo($('hLiftN'), total);
   countTo($('hTyreN'), ty.dia);
   countTo($('hClearN'), 210 + total + Math.round((ty.dia - 693) / 2));
-  $('sum0').textContent = (total ? total + 'mm' : '原廠') + ' · ' + wh.rim + '"';
-  $('sum1').textContent = ty.label + '·' + find(TYRE_MODELS, S.tread).pattern.toUpperCase().replace(/(.)(.)/, '$1/$2');
+  $('sum0').textContent = total ? total + 'mm 舉升' : '原廠';
+  $('sum1').textContent = wh.rim + '" · ' + ty.label;
   const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
   $('sum2').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
@@ -772,6 +774,28 @@ function update() {
   const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
   $('flags').innerHTML = fl.map(f =>
     `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
+}
+
+/**
+ * White letters are a per-SIZE thing, not a per-model one: Open Country M/T
+ * has them in 30x9.50R15 and in the Taiwanese 225/75R16 but not in
+ * 31x10.50R15. Offering the switch on a tyre that is black-walled would be
+ * a lie, so the switch turns itself off and says which sizes do have them.
+ */
+function syncOwl() {
+  const t = find(TYRES, S.tyre), tm = find(TYRE_MODELS, S.tread);
+  const sized = Array.isArray(tm.owlSizes);
+  const ok = !!tm.owl && (!sized || tm.owlSizes.includes(t.id));
+  if (!ok) S.owl = false;
+  const b = $('tgOwl');
+  b.disabled = !ok;
+  b.setAttribute('aria-pressed', S.owl);
+  b.querySelector('.st').textContent = !ok ? '無此尺寸' : S.owl ? '開啟' : '關閉';
+  $('owlNote').textContent = !tm.owl ? `${tm.brand} 這條原廠全尺寸都沒有白字`
+    : !sized ? '此型號部分尺寸有白字，實際請向通路確認'
+    : tm.owlSizes.includes(t.id) ? `${t.label} 原廠有白字版本`
+    : `白字只有 ${tm.owlSizes.map(id => find(TYRES, id).label).join('、')}`;
+  return ok;
 }
 
 /* ═══ motion ═════════════════════════════════════════════════════════════
@@ -955,7 +979,7 @@ function showHeight() {
 }
 
 /* ═══ step navigation ════════════════════════════════════════════════════ */
-const STEP_OF = { lift:0, wheel:0, rimColor:0, tyre:1, tread:1, owl:1,
+const STEP_OF = { lift:0, wheel:1, rimColor:1, tyre:1, tread:1, owl:1,
   color:2, kit:2, frontBumper:2, grille:2, rearBumper:2, hood:2, spareCoverKit:2, mirrors:2 };
 const stepOf = (k) => STEP_OF[k] ?? 3;
 const STEPS = 4;
@@ -1197,7 +1221,7 @@ function syncTyre() {
     `估離地 ${210 + total + Math.round((t.dia - 693) / 2)}mm。`,
     tyreSwap, t.note,
   ].filter(Boolean).join(' ');
-  $('owlNote').textContent = tm.owl ? '此型號有白字版本' : '此型號原廠無白字版本（僅示意）';
+  syncOwl();
 }
 $('tyreLadder').onclick = e => { const b = e.target.closest('[data-t]'); if (!b) return;
   const t = find(TYRES, b.dataset.t);
@@ -1251,9 +1275,8 @@ $('treadList').onclick = e => { const b = e.target.closest('[data-tr]'); if (!b 
   S.tread = b.dataset.tr;
   document.querySelectorAll('#treadList .tr').forEach(x => x.setAttribute('aria-pressed', x === b));
   syncTyre(); update(); };
-$('tgOwl').onclick = e => { S.owl = !S.owl;
-  e.currentTarget.setAttribute('aria-pressed', S.owl);
-  e.currentTarget.querySelector('.st').textContent = S.owl ? '開啟' : '關閉'; update(); };
+$('tgOwl').onclick = e => { if (e.currentTarget.disabled) return;
+  S.owl = !S.owl; update(); };
 
 /* ═══ the rest of the panel ══════════════════════════════════════════════ */
 function syncToggles() {
@@ -1270,8 +1293,8 @@ function syncToggles() {
     g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', S[g.dataset.key] === b.dataset.v)));
   document.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.color));
   document.querySelectorAll('[data-r]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.r === S.rimColor));
-  const owl = $('tgOwl'); owl.setAttribute('aria-pressed', S.owl);
-  owl.querySelector('.st').textContent = S.owl ? '開啟' : '關閉';
+  const owl = $('tgOwl');
+  if (!owl.disabled) { owl.setAttribute('aria-pressed', S.owl); owl.querySelector('.st').textContent = S.owl ? '開啟' : '關閉'; }
   const two = $('tgTwo'); two.setAttribute('aria-pressed', S.twoTone);
   two.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉';
 }
