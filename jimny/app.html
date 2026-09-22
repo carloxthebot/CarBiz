@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220412" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220430" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -19,7 +19,9 @@
 :root{
   --bg:#0c1214; --sur:#131b1e; --sur2:#1a2428; --sur3:#222f34;
   --line:#223034; --line2:#33454c;
-  --ink:#eff4f3; --ink2:#94a5a8; --ink3:#61747b;
+  /* --ink3 was #61747b, which is 3.5:1 on the panel and too faint for the
+     labels that tell you what a control IS. Both muted greys come up. */
+  --ink:#eff4f3; --ink2:#a9babd; --ink3:#83969c;
   --acc:#ffb24a; --acc-ink:#11181a; --acc-soft:#2b2317; --acc-line:#6a4d1d;
   --ok:#62cd90; --warn:#f0b64a; --bad:#ff7d66;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -74,7 +76,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 .panel{background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
 .head{padding:18px 20px 15px;border-bottom:1px solid var(--line);flex:none}
 .head .kicker{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
-  font:500 10.5px/1 var(--mono);letter-spacing:.2em;color:var(--ink3);text-transform:uppercase}
+  font:500 11px/1 var(--mono);letter-spacing:.16em;color:var(--ink2);text-transform:uppercase}
 .head .kicker a{color:var(--acc);text-decoration:none;letter-spacing:.06em}
 .head h1{font:800 23px/1.1 var(--disp);letter-spacing:-.01em;margin:9px 0 0}
 /* Total height is the number people actually ask about -- it decides whether
@@ -82,7 +84,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
    so it gets its own row and is measured off the built model, not guessed. */
 .hero{display:flex;align-items:center;gap:12px;margin-top:14px;padding:11px 13px;
   background:var(--sur);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:4px}
-.hero .h-l span{display:block;font:500 9.5px/1 var(--mono);letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
+.hero .h-l span{display:block;font:600 11.5px/1 var(--body);letter-spacing:.1em;color:var(--ink2)}
 .hero .h-l b{display:block;font:800 33px/1 var(--disp);margin-top:5px;font-variant-numeric:tabular-nums;color:var(--acc)}
 .hero .h-l i{font-style:normal}
 /* when a change pushes the car out of a parking class, say so with a blink */
@@ -90,16 +92,16 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 .hero .h-r em.blink{animation:parkWarn .9s ease 2}
 .hero .h-l small{font:400 13px/1 var(--mono);color:var(--ink3);font-weight:400}
 .hero .h-r{margin-left:auto;text-align:right;display:grid;gap:4px}
-.hero .h-r i{font-style:normal;font:500 12px/1.3 var(--mono);color:var(--ink2)}
-.hero .h-r em{font-style:normal;font:500 11.5px/1.35 var(--body);color:var(--ink3)}
+.hero .h-r i{font-style:normal;font:500 12.5px/1.35 var(--mono);color:var(--ink)}
+.hero .h-r em{font-style:normal;font:500 12px/1.4 var(--body);color:var(--ink2)}
 .hero .h-r em.tight{color:var(--warn)}
 .hero .h-r em.over{color:var(--bad)}
 
 .steps{display:flex;gap:1px;background:var(--line);border-bottom:1px solid var(--line);flex:none}
 .steps button{flex:1;background:var(--bg);border:0;cursor:pointer;padding:11px 6px 10px;
   color:var(--ink3);font:inherit;display:grid;gap:3px;justify-items:center;position:relative}
-.steps button b{font:700 14px/1.2 var(--disp);letter-spacing:.01em;color:var(--ink2)}
-.steps button i{font-style:normal;font:500 9.5px/1.25 var(--mono);letter-spacing:.01em;
+.steps button b{font:700 15px/1.2 var(--disp);letter-spacing:.01em;color:var(--ink)}
+.steps button i{font-style:normal;font:500 10.5px/1.3 var(--mono);letter-spacing:.01em;color:var(--ink2);
   max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .steps button[aria-selected=true]{background:var(--sur)}
 .steps button[aria-selected=true] b{color:var(--acc)}
@@ -120,10 +122,10 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 @keyframes grpIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .grp{padding:16px 0 4px;border-bottom:1px solid var(--line)}
 .grp:last-child{border-bottom:0}
-.lbl{display:flex;align-items:baseline;gap:8px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;
-  color:var(--ink3);text-transform:uppercase;margin:0 0 10px}
-.lbl em{font-style:normal;margin-left:auto;text-transform:none;letter-spacing:.04em;color:var(--ink3)}
-.hint{font-size:12.5px;color:var(--ink3);line-height:1.55;margin:7px 0 0}
+.lbl{display:flex;align-items:baseline;gap:8px;font:600 12px/1.3 var(--body);letter-spacing:.06em;
+  color:var(--ink);margin:0 0 10px}
+.lbl em{font-style:normal;margin-left:auto;font:500 11px/1.3 var(--mono);letter-spacing:.02em;color:var(--ink3)}
+.hint{font-size:12.5px;color:var(--ink2);line-height:1.55;margin:7px 0 0}
 
 select{width:100%;background:var(--sur);color:var(--ink);border:1px solid var(--line2);border-radius:3px;
   padding:12px 32px 12px 13px;font:15.5px var(--body);appearance:none;cursor:pointer;
@@ -136,7 +138,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .seg button{flex:1 0 auto;min-width:0;background:var(--sur);border:0;cursor:pointer;padding:9px 4px;
   font:inherit;color:var(--ink2);display:grid;gap:3px;justify-items:center}
 .seg button b{font:700 14.5px/1 var(--disp)}
-.seg button i{font-style:normal;font:500 9.5px/1 var(--mono);color:var(--ink3);white-space:nowrap}
+.seg button i{font-style:normal;font:500 10px/1 var(--mono);color:var(--ink2);white-space:nowrap}
 .seg button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
 .seg button[aria-pressed=true] i{color:var(--acc-ink);opacity:.72}
 
@@ -147,19 +149,19 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .card:hover{background:var(--sur2)}
 .card[aria-pressed=true]{background:var(--acc-soft);box-shadow:inset 3px 0 0 var(--acc)}
 .card .nm{font:500 14.5px/1.4 var(--body)}
-.card .brand{display:block;font:500 10px/1.5 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
+.card .brand{display:block;font:500 10.5px/1.5 var(--mono);letter-spacing:.1em;color:var(--ink2);text-transform:uppercase}
 .card .pr{font:700 15.5px/1.2 var(--disp);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
-.card .pr em{display:block;font:400 10.5px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
+.card .pr em{display:block;font:400 11px/1.5 var(--mono);font-style:normal;color:var(--ink2)}
 .card .inc{grid-column:1/-1;display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
 .tag{font:500 10.5px/1 var(--mono);padding:4px 6px;border:1px solid var(--line2);border-radius:2px;
-  color:var(--ink3);white-space:nowrap}
+  color:var(--ink2);white-space:nowrap}
 .tag.on{border-color:var(--acc-line);color:var(--acc);background:var(--acc-soft)}
 .tag.no{opacity:.32;text-decoration:line-through}
 .tag.flare{border-color:#6a4a1d;color:var(--warn)}
 
 /* wheel thumbnails, rendered from parts.glb by tools/render_wheels.mjs */
 .chips{display:flex;gap:5px;flex-wrap:wrap}
-.chip{border:1px solid var(--line2);background:none;color:var(--ink2);border-radius:99px;
+.chip{border:1px solid var(--line2);background:none;color:var(--ink);border-radius:99px;
   padding:7px 12px;font:500 12.5px/1 var(--body);cursor:pointer}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
@@ -169,7 +171,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .wcard[aria-pressed=true]{border-color:var(--acc);background:var(--acc-soft)}
 .wcard img{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:radial-gradient(60% 60% at 50% 45%,#222f34,#131b1e);border-radius:3px}
 .wcard .wn{font:500 12.5px/1.3 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wcard .wm{font:500 10px/1.35 var(--mono);color:var(--ink3);letter-spacing:.02em}
+.wcard .wm{font:500 10.5px/1.4 var(--mono);color:var(--ink2);letter-spacing:.02em}
 .wcard .wm b{color:var(--warn);font-weight:500}
 
 .swatches{display:flex;gap:7px;flex-wrap:wrap}
@@ -185,7 +187,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .trow:hover{background:var(--sur2)}
 .trow[aria-pressed=true]{background:var(--acc-soft);box-shadow:inset 3px 0 0 var(--acc)}
 .trow .sz{font:500 13.5px/1.25 var(--body)}
-.trow .sz em{display:block;font:400 10px/1.5 var(--mono);font-style:normal;color:var(--ink3)}
+.trow .sz em{display:block;font:400 10.5px/1.5 var(--mono);font-style:normal;color:var(--ink2)}
 .bar{height:8px;background:var(--sur3);border-radius:99px;position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#4a6068,var(--acc));display:block}
 .fit{font:500 11px/1.4 var(--mono);text-align:right}
@@ -195,7 +197,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .tabs button{flex:1;background:var(--sur);border:0;cursor:pointer;padding:9px 4px;font:inherit;color:var(--ink2);
   display:grid;gap:2px;justify-items:center}
 .tabs button b{font:700 14px/1 var(--disp)}
-.tabs button i{font-style:normal;font-size:11px;color:var(--ink3)}
+.tabs button i{font-style:normal;font-size:11.5px;color:var(--ink2)}
 .tabs button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink)}
 .tabs button[aria-pressed=true] i{color:var(--acc-ink);opacity:.75}
 .treads{display:grid;gap:6px;margin-top:9px}
@@ -205,7 +207,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .tr[aria-pressed=true]{border-color:var(--acc);background:var(--acc-soft)}
 .tr[disabled]{opacity:.4;cursor:not-allowed}
 .tr canvas{width:30px;height:46px;border-radius:2px;display:block}
-.tr .tb{display:block;font:500 10px/1.4 var(--mono);color:var(--ink3);letter-spacing:.1em}
+.tr .tb{display:block;font:500 10.5px/1.45 var(--mono);color:var(--ink2);letter-spacing:.1em}
 .tr .tn{display:block;font:500 13.5px/1.35 var(--body)}
 
 .live{margin-top:11px;border:1px solid var(--line);border-left:2px solid var(--acc);border-radius:3px;
@@ -219,10 +221,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .tg:hover{background:var(--sur2)}
 .tg[aria-pressed=true]{background:var(--acc-soft)}
 .tg .nm{font-size:14px;min-width:0}
-.tg .nm i{display:block;font-style:normal;font-size:11.5px;color:var(--ink3);margin-top:2px;
+.tg .nm i{display:block;font-style:normal;font-size:12px;color:var(--ink2);margin-top:2px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tg[aria-pressed=true] .nm{color:var(--acc)}
-.tg .st{font:500 10.5px/1 var(--mono);letter-spacing:.1em;color:var(--ink3);flex:none}
+.tg .st{font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--ink2);flex:none}
 .tg[aria-pressed=true] .st{color:var(--acc)}
 .tg[disabled]{opacity:.45;cursor:not-allowed}
 .tg.solo{border:1px solid var(--line);border-radius:3px;margin-top:9px}
@@ -231,9 +233,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .sides{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
 .side-row{display:flex;align-items:center;gap:10px;background:var(--sur);padding:9px 12px}
 .side-row .nm{flex:1;min-width:0;font-size:14px}
-.side-row .nm i{display:block;font-style:normal;font-size:11.5px;color:var(--ink3);margin-top:2px}
+.side-row .nm i{display:block;font-style:normal;font-size:12px;color:var(--ink2);margin-top:2px}
 .side-row .pick{display:flex;gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden;flex:none}
-.side-row .pick button{background:var(--sur2);border:0;cursor:pointer;color:var(--ink3);
+.side-row .pick button{background:var(--sur2);border:0;cursor:pointer;color:var(--ink2);
   font:500 12px/1 var(--mono);padding:8px 10px;letter-spacing:.06em}
 .side-row .pick button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:600}
 .sides.off{opacity:.45;pointer-events:none}
@@ -248,7 +250,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .acts{padding:14px 20px calc(18px + env(safe-area-inset-bottom));display:grid;
   grid-template-columns:1fr 1fr;gap:7px;flex:none;border-top:1px solid var(--line);margin-top:12px}
 .acts button{padding:13px;border-radius:3px;font:600 14px var(--body);cursor:pointer;border:1px solid}
-.ghost{background:none;border-color:var(--line2);color:var(--ink2)}
+.ghost{background:none;border-color:var(--line2);color:var(--ink)}
 .solid{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);grid-column:1/-1}
 #out{margin:0 20px 20px;background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:13px;
   font:12.5px/1.7 var(--mono);color:var(--ink2);white-space:pre-wrap;display:none}
@@ -475,14 +477,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220412';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220412';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220412';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220412';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220412';
+import { rigJimny, applyConfig } from './rig.js?v=202609220430';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220430';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220430';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220430';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220430';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220412';
+const BUILD = '202609220430';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -758,7 +760,7 @@ function update() {
   countTo($('hTyreN'), ty.dia);
   countTo($('hClearN'), 210 + total + Math.round((ty.dia - 693) / 2));
   $('sum0').textContent = total ? total + 'mm 舉升' : '原廠';
-  $('sum1').textContent = wh.rim + '" · ' + ty.label;
+  $('sum1').textContent = ty.label;
   const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
   $('sum2').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
@@ -845,9 +847,14 @@ function dolly(k = 0.93, ms = 760) {
 
 /** Roll a number up to its new value rather than swapping it. */
 function countTo(el, value, ms = 520) {
+  // Cancel first, THEN decide whether to animate: bailing out early on an
+  // equal value used to leave an older roll still running, which is how the
+  // total height sat at 1640 while every other reading said 1730.
+  const tag = 'n' + el.id;
+  stopTween(tag);
   const from = parseFloat(el.textContent.replace(/[^\d.-]/g, '')) || 0;
-  if (from === value) { el.textContent = value; return; }
-  tween({ from, to: value, ms, tag: 'n' + el.id,
+  if (from === value || REDUCED) { el.textContent = value; return; }
+  tween({ from, to: value, ms, tag,
     step: (v) => { el.textContent = Math.round(v); },
     done: () => { el.textContent = value; } });
 }
@@ -958,7 +965,7 @@ function measuredHeight() {
   return bb.isEmpty() ? 0 : bb.max.y * 1000;
 }
 function showHeight() {
-  if (!rig) return;
+  if (!rig || HEIGHT_CAL === null) return;   // the calibration pass has nothing true to show yet
   const h = Math.round((measuredHeight() + (HEIGHT_CAL ?? 0)) / 5) * 5;
   const d = h - STOCK_H;
   countTo($('rHeightN'), h);
