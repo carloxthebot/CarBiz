@@ -26,7 +26,8 @@ const families = want.length ? FAMILIES.filter(f => want.includes(f)) : FAMILIES
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true,
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
-const page = await browser.newPage({ viewport: { width: 880, height: 600 }, deviceScaleFactor: 1 });
+// the part is framed to fill the shot, so 1x is already a sharp card image
+const page = await browser.newPage({ viewport: { width: 900, height: 620 }, deviceScaleFactor: 1 });
 const errs = [];
 page.on('pageerror', e => errs.push(e.message));
 await page.goto(APP);
@@ -57,13 +58,14 @@ for (const key of families) {
       const J = window.__jimny;
       J.S[key] = id;
       J.update();
-      const aim = window.__jimnyAim(key);
-      if (aim) J.setOrbit({ az: aim[0], el: aim[1], dist: aim[2] * 0.72 });
-      await new Promise(r => { let i = 0; const f = () => (++i > 7 ? r() : requestAnimationFrame(f)); f(); });
+      window.__jimnyFrame(key);
+      // the loop must not re-aim the camera, so hold it across the frames
+      await new Promise(r => { let i = 0; const f = () => { window.__jimnyFrame(key); (++i > 7 ? r() : requestAnimationFrame(f)); }; f(); });
       return window.__jimnyShotBox(key);
     }, [key, id]);
     if (!box) { skipped++; continue; }
-    await spin(3);
+    await page.evaluate((k) => new Promise(r => { let i = 0;
+      const f = () => { window.__jimnyFrame(k); (++i > 4 ? r() : requestAnimationFrame(f)); }; f(); }), key);
     try {
       const buf = await page.screenshot({ clip: box, type: 'webp', quality: 86, timeout: 120000 });
       fs.writeFileSync(file, buf);

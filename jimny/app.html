@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221730" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221850" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -529,14 +529,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609221730';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221730';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221730';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221730';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609221730';
+import { rigJimny, applyConfig } from './rig.js?v=202609221850';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221850';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221850';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221850';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609221850';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609221730';
+const BUILD = '202609221850';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -1613,6 +1613,23 @@ const shotFor = (key, item) =>
 window.__jimnyLists = Object.fromEntries(Object.entries(SHOT_LIST).map(([k, f]) => [k, f()]));
 window.__jimnyAim = aimFor;
 window.__jimnyDefault = (k) => DEF[k];
+// frame the part itself: at the whole-car distance a snorkel is a few pixels,
+// so the crop ends up being most of the car
+window.__jimnyFrame = (key) => {
+  const n = BUILT[key]; if (!n) return false;
+  const b = new THREE.Box3().setFromObject(n);
+  if (!isFinite(b.min.x)) return false;
+  const c = b.getCenter(new THREE.Vector3());
+  const r = Math.max(0.1, b.getSize(new THREE.Vector3()).length() / 2);
+  const [az, el] = aimFor(key) || [0.8, 0.2];
+  const d = Math.max(0.85, Math.min(9, r / Math.tan(cam.fov * Math.PI / 360) * 1.75));
+  cam.position.set(c.x + Math.cos(el) * Math.sin(az) * d,
+                   c.y + Math.sin(el) * d,
+                   c.z + Math.cos(el) * Math.cos(az) * d);
+  cam.lookAt(c);
+  cam.updateProjectionMatrix();
+  return true;
+};
 window.__jimnyShotBox = (key) => {
   const n = BUILT[key]; if (!n) return null;
   const b = new THREE.Box3().setFromObject(n);
@@ -1627,7 +1644,8 @@ window.__jimnyShotBox = (key) => {
   // pad out to 8:5 around the part, so every card image crops the same way
   const pad = 0.22 * Math.max(x1 - x0, y1 - y0);
   let cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
-  let w = Math.max(x1 - x0 + pad * 2, (y1 - y0 + pad * 2) * 1.6, 440);
+  // the part is framed to fill the shot, so this only floors the tiny ones
+  let w = Math.max(x1 - x0 + pad * 2, (y1 - y0 + pad * 2) * 1.6, 200);
   let h = w / 1.6;
   const fit = Math.min(1, r.width / w, r.height / h);
   w *= fit; h *= fit;
