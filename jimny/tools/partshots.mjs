@@ -46,10 +46,13 @@ const items = await page.evaluate((fams) => Object.fromEntries(fams.map((k) => {
 })), families);
 
 let made = 0, skipped = 0;
+const failed = [];
 for (const key of families) {
   for (const id of items[key] || []) {
     if (id === 'none' || id === 'stock') { skipped++; continue; }
     const file = path.join(OUT, `${key}-${id}.webp`);
+    // resumable: a run that dies part way through does not redo the rest
+    if (!process.env.FORCE && fs.existsSync(file)) { skipped++; continue; }
     const box = await page.evaluate(async ([key, id]) => {
       const J = window.__jimny;
       J.S[key] = id;
@@ -61,13 +64,16 @@ for (const key of families) {
     }, [key, id]);
     if (!box) { skipped++; continue; }
     await spin(3);
-    const buf = await page.screenshot({ clip: box, type: 'webp', quality: 86 });
-    fs.writeFileSync(file, buf);
+    try {
+      const buf = await page.screenshot({ clip: box, type: 'webp', quality: 86, timeout: 120000 });
+      fs.writeFileSync(file, buf);
+    } catch (e) { failed.push(`${key}/${id}: ${e.message.split('\n')[0]}`); continue; }
     made++;
     process.stderr.write(`\r${made} shots  (${key}/${id})            `);
   }
   await page.evaluate((k) => { window.__jimny.S[k] = window.__jimnyDefault(k); window.__jimny.update(); }, key);
 }
-console.error(`\n${made} written, ${skipped} skipped, ${errs.length} page errors`);
+console.error(`\n${made} written, ${skipped} skipped, ${failed.length} failed, ${errs.length} page errors`);
+if (failed.length) console.error(failed.slice(0, 8).join('\n'));
 if (errs.length) console.error(errs.slice(0, 5));
 await browser.close();
