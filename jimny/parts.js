@@ -363,16 +363,30 @@ export const GRILLES = [
 // Snorkel kits sold for the JB74; all mount on the right (1.5L airbox side).
 export const SNORKELS = [
   { id: 'none', label: '不裝', price: 0 },
-  { id: 'safari', photo: true, url: 'https://www.ironman4x4.com.au/products/4x4-snorkel-for-suzuki-jimny-jb74w', photo: true, label: 'Safari 圓管呼吸管', price: 451, cur: 'AUD', brand: 'Ironman 4x4', part: 'ISNORKEL070',
-    note: 'Ø89 LLDPE 圓管、前向進氣頭；需切葉子板' },
-  { id: 'bravo', photo: true, url: 'https://bravosnorkel.com/en/suzuki/106-suzuki-jimny-2018-.html', refs: ['https://shopee.tw/JIMNY-JB74%E5%B0%88%E7%94%A8%E5%91%BC%E5%90%B8%E7%AE%A1-i.15564603.6673859917'], photo: true, label: 'SSJN 方管呼吸管', price: 399, cur: 'EUR', brand: 'Bravo Snorkel',
-    note: '西班牙製、方形管身貼 A 柱、彎頭側向網狀進氣；免鑽孔（換掉葉子板角飾板）' },
-  { id: 'urnieta', url: 'https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/', photo: true, label: 'Salado 呼吸管', price: 14000, cur: 'TWD', brand: 'URNIETA', part: '0702021',
-    refs: ['https://shopee.tw/product/7996649/29595052138'], note: '台灣蝦皮 NT$14,000。附標準頭與預濾頭兩種可換頭；取代原廠引擎蓋飾板，不需切葉子板。ABS 方管、矩形百葉進氣頭、側面開槽；免鑽孔，另附旋風前濾頭' },
-  { id: 'precleaner', photo: true, url: 'https://www.jimnybits.com/snorkel-air-pre-filter-pre-cleaner-head-for-3-snorkels-1.html', photo: true, label: '旋風前濾頭呼吸管組', price: null, cur: 'GBP', brand: 'Safari + PC35', uncertain: true,
-    note: 'Ø180 透明旋風碗，先甩掉粉塵' },
-  { id: 'sleek', photo: true, url: 'https://megajimny.com/products/supa-sleek-snorkel-system', photo: true, label: 'Supa-Sleek 隱藏式呼吸管', price: 649, cur: 'AUD', brand: 'Mega Jimny',
-    note: '2 吋不鏽鋼細管貼 A 柱、後向小進氣口；免鑽孔、幾乎看不見' },
+  // Corrected 2026-09-22 against every maker's own page (docs/jb74-snorkels.json).
+  // Safari, ARB's own line, Rival, Dobinsons and APIO make NOTHING for a JB74 --
+  // the part filed here under Safari is Ironman's. The airbox is on the right,
+  // so every one of these runs the right A-pillar.
+  { id: 'safari', photo: true, url: 'https://www.ironman4x4.com.au/products/4x4-snorkel-for-suzuki-jimny-jb74w',
+    label: '圓管呼吸管 ISNORKEL070', price: 451, cur: 'AUD', brand: 'Ironman 4x4', part: 'ISNORKEL070',
+    note: '前向六角網格 ram 進氣頭，束環固定可轉向。管徑與材質 Ironman 未公布（先前記的 Ø89／LLDPE／需切葉子板三項都沒有出處）。原本掛在 Safari 名下是錯的——Safari 從來沒做過 JB74' },
+  { id: 'bravo', photo: true, url: 'https://bravosnorkel.com/en/suzuki/174-suzuki-jimny-jb74-2018-.html',
+    label: 'SSJN 呼吸管', price: 18800, cur: 'TWD', brand: 'Bravo Snorkel', part: 'SSJN',
+    note: '西班牙 Girona 製。頭部正圓 Ø89、前向彎頭用束環固定可 360° 轉向；要鑽孔也要切葉子板（原廠手冊印著 Drill／Cut，還要拆引擎蓋，附兩顆 M6 鉚帽）——「免鑽孔」是經銷商的說法不是廠方的。台灣 MRK／希琦 NT$18,800，歐洲 EUR 399' },
+  { id: 'urnieta', url: 'https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/', photo: true,
+    label: 'SALADO 呼吸管', price: 14000, cur: 'TWD', brand: 'URNIETA', part: '0702021',
+    refs: ['https://shopee.tw/product/7996649/29595052138'],
+    note: '原廠圖 UN-JIMNY-FB-006：全長 1048×全高 675mm、2.3kg，JB64 不相容。標準頭是整圈 360° 百葉的圓鼓，另附一顆旋風前濾頭可換；取代原廠引擎蓋飾板。台灣蝦皮 NT$14,000' },
+  { id: 'precleaner', photo: true, url: 'https://www.jimnybits.com/snorkel-air-pre-filter-pre-cleaner-head-for-3-snorkels-1.html',
+    label: '旋風前濾頭（Ø180）', price: 20, cur: 'GBP', brand: 'jimnybits', part: 'PC35',
+    note: 'Ø180 透明旋風碗，先把粉塵甩掉再進濾芯。配 3.5 吋（89mm）管口，不是 3 吋。PC35 是 jimnybits 的店內貨號，該商品頁沒有標廠牌——先前記成「Safari + PC35」是掛錯' },
+  { id: 'sleek', photo: true, url: 'https://megajimny.com/products/supa-sleek-snorkel-system',
+    label: 'Supa-Sleek V4 隱藏式', price: 649, cur: 'AUD', brand: 'Mega Jimny',
+    note: '2 吋不鏽鋼管完全藏在黑色飾板裡看不到，進氣是 A 柱頂端朝「外」的百葉面板，不是朝後的進氣口。免鑽孔' },
+  { id: 'tw_frp', label: 'FRP 呼吸管（巴西式樣）', price: 10000, cur: 'TWD', brand: '台灣店家自售', uncertain: true,
+    note: '台灣多家店自售、沒有一家標示製造商：機油倉庫 NT$10,000（另加工資 3,500）、南國吉米 10,500、台中烏日 12,000–18,000。葉子板開孔約 83–110mm、A 柱另鑽四個 8mm 固定孔' },
+  { id: 'tw_nodrill', label: '免鑽孔呼吸管', price: 8350, cur: 'TWD', brand: '台灣店家自售', uncertain: true,
+    note: 'JIMNY74 風格選物；規格未公布' },
 ];
 
 export const MIRRORS = [
@@ -668,6 +682,14 @@ export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   }
   if (wheel.offset <= -20) {
     out.push({ level: 'info', msg: `offset ${wheel.offset} 會明顯外擴輪距，需確認輪拱覆蓋與法規` });
+  }
+  // Public-road note, from 公路總局 2023-03-17 via the ministry's 2023-04-12
+  // reply: a modular snorkel is inspectable and needs no registration change,
+  // and is not counted into the vehicle's height. What fails is the height on
+  // the registration document not matching the car.
+  if (cfg.snorkel !== 'none') {
+    out.push({ level: 'info',
+      msg: '呼吸管在台灣屬模組化套件，安裝牢固即可驗車、免辦變更登記，也不計入車高；真正會被開單的是實際車高與行照不符（容許約 2cm）' });
   }
   if (cfg.extinguisher === 'ladder' && cfg.ladder === 'none') {
     out.push({ level: 'error', msg: '滅火器掛在尾梯上，但目前沒有裝尾梯' });

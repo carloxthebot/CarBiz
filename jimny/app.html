@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220515" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609220601" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -507,14 +507,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609220515';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220515';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220515';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220515';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609220515';
+import { rigJimny, applyConfig } from './rig.js?v=202609220601';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609220601';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609220601';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609220601';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609220601';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609220515';
+const BUILD = '202609220601';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -764,7 +764,9 @@ function update() {
   if (S.spareCoverKit !== 'none') add(buildAccessory('spareCover', S.spareCoverKit, paint), 'spareCoverKit');
   if (S.gullwing) add(buildAccessory('gullwing', undefined, paint), 'gullwing');
   if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint), 'rearBumper');
-  if (S.snorkel !== 'none') add(buildAccessory('snorkel', S.snorkel, paint), 'snorkel');
+  // 'safari' is a legacy id kept so old links still work; the part is Ironman's
+  if (S.snorkel !== 'none')
+    add(buildAccessory('snorkel', S.snorkel === 'safari' ? 'ironman' : /^tw_/.test(S.snorkel) ? 'bravo' : S.snorkel, paint), 'snorkel');
   if (S.mirrors !== 'stock') add(buildAccessory('mirrors', S.mirrors, paint), 'mirrors');
   if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint), 'roofRack');
   if (S.awning !== 'none') add(buildAccessory('awning', `${S.awning}_${S.awningSide}`, paint), 'awning');

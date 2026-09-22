@@ -1,0 +1,1063 @@
+{
+ "compiled": "2026-09-22",
+ "vehicle": {
+  "model": "Suzuki Jimny Sierra JB74W",
+  "chassis": "3BA-JB74W",
+  "engine": "K15B 1.5 NA petrol",
+  "years": "2018.07 -",
+  "bodyWidthMM": 1645,
+  "roofHeightMM": 1730,
+  "sibling": "JB64W (kei, R06A turbo) shares the body shell but NOT the intake: URNIETA and Mega Jimny both list the JB64 as NOT compatible. The 5-door JC74W Nomade/XL IS covered by Torqit, URNIETA, Mega Jimny and Bravo."
+ },
+ "scope": "Every raised air intake sold for the JB74, plus the cyclone pre-cleaner heads that clamp onto one, plus what is actually on sale in Taiwan. Compiled for a 3D configurator, so silhouette and geometry matter more than marketing copy.",
+ "scaleReference": {
+  "note": "Everything marked ESTIMATED in this file was scaled off product photos using these anchors.",
+  "bodyWidthMM": 1645,
+  "roofHeightMM": 1730,
+  "guardTopMM": "1120-1180 above ground at the A-pillar base. ESTIMATED - Suzuki publishes no such figure. So a snorkel has only about 550-610 mm of vertical run between the fender line and the roofline, and every product here uses nearly all of it.",
+  "pillarRun": "The configurator's own A-pillar path (blender/build_parts.py) runs from y=1160,z=630 at the fender to y=1590,z=405 at the roofline: about 430 mm of rise against 225 mm of fore-aft travel, so the pillar leans roughly 27-28 degrees from vertical. URNIETA's factory drawing independently gives 25.1 degrees for its riser, which is the only external check available on that number and it agrees.",
+  "tubeAsRuler": "The most reliable in-photo ruler is the snorkel's own top spigot, because 89 mm (3.5 in) is the industry interface size: Bravo publishes 89 mm, Torqit's whole tube is 88.9 mm, jimnybits' pre-cleaner is a 3.5 in fitting. Measure that in pixels and the rest of the photo scales from it."
+ },
+ "researchNote": "This session's WebSearch budget was exhausted (600/600) before the work began, so nothing here came from a search engine. Sources were direct fetches of maker sites, sitemaps, Shopify JSON endpoints and fitting-guide PDFs; YouTube video metadata; the Ruten and PChome APIs; BigGo (which aggregates Shopee, Yahoo TW, Ruten, PChome, Rakuten TW and Coupang); and the Taiwanese company registry. Shopee TW returns 403 to every non-browser client, so Shopee PRICES here are the ones BigGo republishes and Shopee DESCRIPTIONS could not be read at all.",
+ "rules": [
+  {
+   "id": "airbox-right",
+   "confirmed": true,
+   "text": "CONFIRMED - the JB74's airbox is on the RIGHT of the engine bay, and every snorkel made for the car runs the RIGHT A-pillar. No maker offers a left-hand version and none claims one. Bravo's own installation guide has a 'FITMENT SIDE: Right' header on page 1; URNIETA's fitting steps begin by removing the right-side A-pillar corner cover; ARB's Torqit listing names the driver's-side guard (Australia is RHD). The same kit serves LHD and RHD cars - Bravo's install video states the SSJN is 'valid for all engine versions and LHD & RHD' - because the airbox does not move with the steering wheel. The configurator's existing assumption is therefore correct, including app.html's rule that the A-pillar pods shift to the left when a snorkel is fitted."
+  },
+  {
+   "id": "what-it-buys-petrol",
+   "text": "On a naturally-aspirated petrol JB74 a raised air intake buys LESS than most listings imply, and the honest breakdown is worth carrying in the UI. (1) WATER: it removes ONE failure mode - water going straight down the intake and hydro-locking the engine, which is the expensive one. It does NOT make the car amphibious, because the intake is not the first thing to flood. Suzuki publishes no wading depth for the JB74 at all; what floods first on a stock car is the axle, transfer and gearbox BREATHERS, whose stock hoses terminate low in the engine bay - the fact that FOUR different makers sell a JB74 breather-extension kit - ARB, TJM, Harrop, and Oz Jimny's own 'No Drill' Differential Breather Adaptor Kit V2 - is the clearest evidence that fitting a snorkel alone leaves the job half done. After the breathers come the alternator, the starter, the cabin floor and the door seals. A snorkel is one item on a wading checklist, not the checklist. (2) DUST: this is the benefit owners actually feel, and it applies every dry weekend rather than once a year. The intake moves from inside the engine bay to roof height, above the dust cloud the car's own wheels throw up, which is why cyclone pre-cleaner heads exist - Donaldson publishes 75% separation for its plain cyclone and 99% (ISO 5011 / SAE J726) for the TopSpin, all of it dust the paper element never has to see. (3) POWER: essentially nothing. The 'ram air' framing is marketing. At Taiwanese road and trail speeds the dynamic pressure recovered is negligible, a snorkel ADDS length and bends to the intake tract, and the K15B is naturally aspirated with no intercooler for cooler air to help. One installer's own honest wording is 'a marginal gain in response'. (4) A REAL COST: intake resonance. A long hard tube up the pillar can drone - there is a published owner video specifically about a Bravo-fitted Jimny's 'harmonic resonance issue'. Worth saying out loud in a configurator, because it is the complaint that surprises people. (5) THE STRONGEST SOURCE ON ALL OF THIS IS A SELLER. Torqit, who will happily sell you an AUD 1,690 JB74 snorkel: 'A snorkel does not turn your vehicle into a submarine. It protects the air intake, but safe water crossings still depend on good preparation. Your vehicle still has electrical components, transmission and differential breathers, door seals, bearings and other parts that may be affected by water.' And Safari's own FAQ on factory raised intakes: 'Factory snorkels are often designed for styling rather than for performance, and most are Raised Air Intakes thus not watertight.' (6) SAFARI GRADES ITS OWN RANGE THE SAME WAY: V-SPEC is sold as MAINTAINING factory-level airflow, and only the 4-inch ARMAX claims 'up to 70% more airflow'. A standard snorkel does not add flow - the maker says so. If flow is the goal, the part that moves the needle is the AIRBOX: AVO Turboworld claims >4 kW at the wheels for its sealed JB74 airbox and larger intake tube, on the grounds that the factory throttle hose makes turbulence, and Torqit likewise sells its stainless airbox as the flow product and the snorkel as the protection product. (7) BE HONEST ABOUT THE EVIDENCE THAT DOES NOT EXIST. There is no dyno test of any snorkel on this car, in either direction. There is no published dust-ingestion comparison between a roof-height and a guard-height intake - Donaldson's impressive figures are for FILTRATION, not intake height. Suzuki publishes no wading depth for the JB74 in any market (the Australian spec sheet gives only the 36/27/47-degree angles and 210 mm clearance), so the widely repeated '300 mm' has no traceable source and must never be quoted as a spec. And the JB74's alternator height, ECU location and cooling-fan type could not be established from any reachable source, so do not claim which one floods first. (8) A SNORKEL ADDS RISKS OF ITS OWN: leaking joints, a forward-facing head scooping water in heavy rain, condensate. The makers' countermeasures - drain slots, Torqit's rear-facing mouth, duckbill drain valves in the airbox floor, Donaldson water evacuators - are themselves the evidence those risks are real. Snorkel socks clog in about 45 minutes of dusty driving; Safari only recommends them below 40 km/h with daily cleaning. (9) DIESEL vs PETROL: the whole snorkel industry's argument is written for diesels, which hydro-lock on much less water because of high compression and small clearance volume. The K15B is more tolerant of a small ingestion - a difference of degree, not immunity. And 'no intercooler so it's pointless' does not hold: an intercooler sits downstream of a turbo and is not on the path water takes in. Intake HEIGHT and sealing are the only things that decide whether water gets swallowed."
+  },
+  {
+   "id": "tw-legality",
+   "text": "TAIWAN - a snorkel IS legal, does NOT need a 變更登記, and does NOT have to come off at 驗車, PROVIDED it does not exceed the vehicle height and width recorded on the 行照. That is not an inference: it is a 交通部公路總局 ruling of 2023-03-17, and the 交通部 confirmed it in writing on 2023-04-12 in its reply to the public e-petition 「吉普車強化升級檢驗變更」 (5,276 signatures): 「涉水管及車外附加燈光(工作燈或聚光燈)之變更部分，本部公路總局已研訂檢驗實務認定標準，供檢驗單位據以辦理」. The ruling's four conditions, as published by the petitioners (臺灣極地救援聯盟): the snorkel must be a 模組化套件 - a bought kit, not a shop fabrication - it must be 安裝牢固, it is 不列入車體結構 (not counted as body structure and NOT counted toward vehicle height), and it 不得超過車高及車寬的限制. Result: 可合法驗車，也無需變更登記. STATUTORY BACKING: 第23條 requires registration for changes to 車身式樣 and the rest, but the operative list is its 附件十五, which is EXHAUSTIVE - and the words 涉水管, 呼吸管 and 進氣 do not appear in it once. For contrast a winch sits in point 3 and a ROOF RACK in point 1, the strictest (VSCC structural 審驗 plus registration). A snorkel is in none of the four points, so it was never declared a registrable modification at all. 第23-1條's prohibited list does not reach it either: the engine prohibitions are limited to 機械或渦輪增壓系統 and 氮氣導入裝置, the body ones to 車身外附加燈飾 and lamp tinting. Note the trap next door though - a supercharger or turbo IS prohibited, so a snorkel fitted alongside one of the JB74 supercharger kits sold here inherits that problem, and the snorkel is not what fails. THE 外部突出物 RED HERRING: 車輛安全檢測基準 附件七十七 (M1 車外突出, harmonised with UN R26) and 附件七十八 (N-class, UN R61) are 附表 to 第14條 of the 車輛型式安全審驗管理辦法, whose 第2條 defines that 審驗 as applying 車輛申請新領牌照前 and whose 第3條 binds only manufacturers, body builders and importers. THEY DO NOT BIND AN OWNER'S RETROFIT and are not a periodic-inspection item. Confirming it, VSCC's 使用中車輛變更審驗 list has only 7 items and a snorkel is not one. 第39-1條 (定期檢驗, 27 items) has no 突出物 item at all - its only external item is #7 「車輛尺度、顏色、車身式樣與紀錄相符」 - and the single 突出物 mention in 第39條 is confined to item 23, towed trailers. WHERE IT ACTUALLY FAILS: REGISTERED HEIGHT. The absolute ceiling is irrelevant - 第38條 caps a small car at 1.5x its width or 2.85 m, so a 1645 mm-wide JB74 may legally be 2467 mm tall against an actual 1725 mm. What bites is item #7, 車輛尺度與紀錄相符. Owners report a tolerance of about 2 cm and that the measuring rigs tightened from July 2024 (PTT car, 2024-10-21: 「原本登記 173 目前 168 只有 2 公分的容許範圍…7 月後設備更新 車高精度準確」). So a snorkel whose crown clears the roofline - the Torqit hairpin and the Ironman scoop both do - moves from 'nobody's problem' to 'height does not match the 行照', which is the one failure mode with a written rule, an instrument and precedent behind it. EMISSIONS DO NOT CARE: 空污法 第37條's 空氣污染防制設備 list is an exhaustive 14 items (catalyst, EGR, canister, PCV, thermal reactor, secondary air, O2 sensor, deceleration control, DPF, OBD, ECU and so on) and intake ducting is not among them. The only real emissions risk is a badly sealed install drawing false air and wrecking the CO/HC reading - mechanical, not legal. HOW MUCH THIS IS ARGUED ABOUT IN PRACTICE: almost not at all. PTT car / Off-road / CarShop return ZERO threads for 呼吸管; Mobile01 has no dedicated thread; and most tellingly the inspectors' own public forum 「汽車檢驗員資料庫」 returns ZERO hits for both 呼吸管 and 涉水管 while a control search (太陽能板) returns one. Not a single report of a snorkel being ordered off or failing 驗車 was found anywhere. The only owner discussion located is a 2026-08-10 post in the New Jimny JB74 Taiwan Club asking whether a snorkel has to come off, answered 「呼吸管已符合法規唯獨不能超過車頂所規定之高度」 - which matches the 2023 ruling exactly. THE ONE CAVEAT TO CARRY: the 檢驗實務認定標準 itself has never been published. 交通部行政解釋查詢 returns 0 results for both 涉水管 and 呼吸管, it is not in 附件十五, and VSCC does not list it. It is an internal circular to the 監理所 with no citable document number, so an owner has nothing to put in front of an inspector who disagrees. CUTTING THE FENDER: no Taiwanese rule addresses it. 附件十五's only sheet-metal clause covers 廂式平頭小貨車, not passenger cars; 第23-1條 does not prohibit panel work; and a front-fender pass-through does not touch the VIN stamping location (第39-1條 item 1). Whether a grommeted hole counts as a 車身式樣 change is unwritten and entirely the inspector's eye. If it were ever treated as an unreported equipment change the penalties are 處罰條例 第16條 NT$900-1,800 or 第18條 NT$2,400-9,600. WHAT TO TELL AN OWNER: buy a bought kit rather than a shop fabrication, mount it solidly, KEEP THE TOP BELOW THE ROOFLINE, and fit it AFTER the car is plated - 新領牌照檢驗 compares against the 車輛型式安全審驗合格證明書 rather than the 行照, and 車輛型式安全審驗管理辦法 第5條第6款 catches a dealer who modifies a car before plating."
+  },
+  {
+   "id": "no-safari-no-arb",
+   "text": "There is NO Safari snorkel and NO ARB-branded snorkel for the JB74, and there never has been. ARB's full product sitemap (11,429 product URLs, read 2026-09-22) carries exactly one Safari snorkel for any Suzuki - SS820HF, for the pre-2012-facelift JB43 - and nothing at all for JB74, JB64 or Sierra. Safari's own site lists only the 1998-2012 1.3L Jimny. ARB owns Safari, and it fills the JB74 gap by reselling TORQIT under ARB part numbers SN02SS and SN02MB. Any listing that says 'Safari snorkel for JB74' is wrong about either the brand or the car."
+  },
+  {
+   "id": "ss1130hf-is-a-jeep",
+   "text": "SS1130HF is NOT a Jimny part. ARB's catalogue gives it as 'Safari V-Spec Snorkel, Jeep Cherokee KJ with 2.4L or 3.7L engine'. SS1130HP does not exist in the ARB catalogue at all - it is not a real part number. Do not carry either against a Jimny."
+  },
+  {
+   "id": "no-rival-no-dobinsons-no-apio",
+   "text": "Three more brands that do NOT make a JB74 snorkel, each checked against the maker's own catalogue. RIVAL 4X4 does not make snorkels for any vehicle: its sitemap has zero 'snorkel' URLs and its categories are bumpers, skid plates, roof racks and winch mounts. DOBINSONS does make snorkels but has no Suzuki entry of any kind - the range covers Ford, Holden, Isuzu, Jeep, Mazda, Mitsubishi, Nissan, Toyota and VW only (useful side fact: its replacement heads come in 77, 85 and 90 mm). APIO returns 'no results' for both シュノーケル and スノーケル and has no air-intake category at all. Do not offer any of the three for this car."
+  },
+  {
+   "id": "two-install-families",
+   "text": "Every JB74 snorkel is in one of two install families, and they look completely different on the car. (1) CUT THE GUARD - the classic Australian/European pattern: a hole is cut in the right front fender's outer skin, a template and usually a grommet or pinch-weld are in the box, and the body starts low on the fender and climbs the entire A-pillar, standing clearly proud of it. Ironman ISNORKEL070, Torqit SN02SS, TJM Airtec, Bravo SSJN, the Taiwanese FRP units and every Chinese generic are in this family. (2) NO CUT, NO DRILL - the body REPLACES a factory trim panel instead: URNIETA's Salado replaces the black hood/fender-top garnish strip, Mega Jimny's Supa-Sleek replaces the A-pillar and cowl trim. These hug the body and are far less visible. Only TWO products are genuinely in family 2. Bravo is NOT one of them, despite how its Australian retailer titles it. WHAT THE CUT ACTUALLY IS, for anyone modelling the hole: Safari's own procedure for this class of part is mark the template, drill 4 mm pilot holes, open with an 83 mm HOLE SAW, extend with an air saw, deburr, touch up the paint against rust, then drill four 8 mm holes in the A-pillar for the brackets. The Brazilian template sold in Taiwan gives the same hole as an oval about 110 mm long with R30 corners, aligned off an existing factory hole in the fender. So the guard opening is roughly 83-110 mm across and the A-pillar carries four small fixings, typically hidden behind the snorkel body."
+  },
+  {
+   "id": "bravo-no-modification-is-marketing",
+   "text": "Bravo's SSJN is sold in Australia as a 'Complete No-Modification Snorkel Kit' and that title is misleading. Bravo's own installation guide PDF (BRAVO_SNORKEL_SUZUKI_JIMNY_Installation_Guide_SSJN.pdf, linked from the retailer's page) carries the step callouts 'Remove', 'Bend', 'Drill', 'Cut' and 'Relocate', and a footnote 'Remove the car's bonnet to install the snorkel'. The kit contains two M6x14 rivnuts, which only exist to be set into a drilled panel. THE GUARD IS CUT. Treat the retailer's title as a sales label, not a fitting fact."
+  },
+  {
+   "id": "89mm-is-the-standard",
+   "text": "89 mm (3.5 inch) is the de-facto interface diameter at the top of a JB74 snorkel, which is why heads and cyclone pre-cleaners swap across brands. Bravo's guide lists part 2 as 'Snorkel head 89 mm / 3,5\"'; Torqit's entire tube is 88.9 mm; jimnybits sells its pre-cleaner as a 3.5 in fitting; Donaldson's cyclones for this class come in 89 mm and 102 mm. The exceptions are Mega Jimny's Supa-Sleek (2 in / 50.8 mm stainless pipework, concealed, no external head at all) and URNIETA (about 80 mm at the collar). For modelling, 89 mm is the number to use for the visible spigot."
+  },
+  {
+   "id": "head-rotates-when-the-spigot-is-round",
+   "text": "Whether a head rotates comes down to one thing: is the joint a round spigot with a band clamp, or moulded in? Bravo's head is a separate 89 mm elbow held by a 'Black clamp' (part 3 in its own kit list), so it turns a full 360 degrees and lifts off. Ironman's upper goose-neck is joined by a visible band clamp, so it can be indexed on assembly - inferred from the photo, not published. URNIETA ships TWO heads, a standard one and a cyclone pre-cleaner, explicitly to be hot-swapped for the terrain. Torqit is the opposite extreme: the mouth is a 180-degree hairpin formed in the same one-piece mandrel-bent pipe, so there is nothing to rotate and nothing to remove. Mega Jimny has no head at all - just a louvred faceplate screwed to the pillar housing."
+  },
+  {
+   "id": "nobody-publishes-geometry",
+   "text": "The biggest obstacle to modelling these: almost no snorkel maker publishes a dimension. Across every brand in this file the only published numbers are Bravo's 89 mm head, 79x38x16 cm box and 3 kg; Torqit's 3.5 in tube and 2 mm wall; Mega Jimny's 2 in pipework; and URNIETA's factory drawing UN-JIMNY-FB-006 (1048 mm long x 675 mm tall). HEIGHT ABOVE THE FENDER LINE, STAND-OFF FROM THE A-PILLAR and BEND RADII are NOT PUBLISHED by anybody for any product. Every such figure here is a photo-scaled estimate, individually marked ESTIMATED with its reasoning and its scale reference."
+  },
+  {
+   "id": "tw-what-is-actually-sold",
+   "text": "WHAT IS ACTUALLY ON SALE IN TAIWAN, swept 2026-09-22 across Ruten's API, PChome's API, Yahoo TW auctions and BigGo (which aggregates Shopee + Yahoo + Ruten + PChome + Rakuten TW + Coupang). The market splits into four price bands. (1) NT$2,250-4,069 - the unbranded Chinese copy of the TJM Airtec moulding. About 40 Ruten sellers plus Shopee and Yahoo, all the same item, none publishing a diameter, material or head type; 74 hits for 「JB74 呼吸管」 and 83 for 「Jimny 呼吸管」 are essentially all this one product. (2) NT$5,600-8,350 - small Taiwanese shops: 雲林連合吉普's ABS unit at NT$5,600 collected / NT$6,500 fitted, and JIMNY74風格選物's 免鑽孔 one at NT$8,350. (3) NT$10,000-18,000 - Taiwanese HAND-MADE FRP snorkels, 巴西式樣 (Brazilian pattern), black gelcoat, made in Taiwan, shipped with a 1:1 hole template: 機油倉庫 NT$10,000 (Yahoo) / NT$10,600 (Shopee) plus NT$3,500 fitting, 南國吉米 NT$10,500, and tien0811 of 臺中烏日 at NT$12,000-18,000 with colour options including yellow. These are the only Taiwanese-MADE snorkels for this car. (4) NT$14,000-18,800 - the two genuine imports: URNIETA Salado at NT$14,000 (GOAT Wild explorer, 南投名間) and the Spanish Bravo SSJN at NT$18,800 through MRK 4X4, who re-badge it JB072. NOT sold in Taiwan at all: Ironman ISNORKEL070 (a Ruten search for 「Ironman 涉水喉」 returns zero), TJM Airtec, Torqit/ARB, Mega Jimny, and of course Safari - though Ruten does carry Safari snorkels for OTHER vehicles at NT$39,330-87,400, which is what a genuine Safari would cost here. Two more things a configurator should know. (a) THE CHINESE GENERICS TRACE TO ONE SOURCE: the product photos carry the watermark of 廣州杜克汽車配件有限公司 and a 1688 shop URL, with 4WDUNITY and 廣塑塑料 GS as rebadges. They come in TWO body designs - design A, a flat one-piece body hugging the pillar with the forward square-mesh intake MOULDED IN at the top and a second hex-mesh panel low on the body; and design B, a round tube with a SEPARATE rotatable hex-mesh ram head copying the Ironman head, around NT$2,492-3,192. The box holds the body, a blue or black corrugated hose, a 90-degree elbow, three stainless clamps, a short connector, one bracket and hardware. (b) THE NT$625-780 LISTINGS ARE FAKE PRICES - 27 of them. The same sellers list 662 / 2,750 / 3,182 against identical photos of the same complete kit, and NT$662 is about RMB 150, exactly the 1688 wholesale price, so the dropship feed is republishing the RMB figure unconverted. Do not use them as a price floor. (c) momo and PChome carry NO car snorkels at all - both searches return diving gear. (d) Cyclone pre-cleaner heads (蘑菇頭 / 冬菇頭 / 集沙杯) are sold loose in Taiwan at NT$310-670 in 3\" and 3.5\", with 76 / 90 / 101 mm elements - a cheap head-swap option worth carrying as a separate configurator state. (e) Two Taiwanese listings are NOT snorkels and should not be counted: 泰山美研社 NT$4,800 (料號 22030320) is an INTAKE PIPE for a car that already has a snorkel, and JW WORKS NT$1,250 is an intake cover that fits onto an existing head."
+  },
+  {
+   "id": "brazilian-pattern",
+   "text": "The Taiwanese FRP snorkels at NT$10,000-18,000 describe themselves as 巴西式樣 - 'Brazilian pattern'. That is a real lineage, not a flourish: the BigJimny channel's JB74 snorkel series describes its own kit as 'based on the elusive official Suzuki \"Brazilian\" snorkel', a factory-accessory snorkel Suzuki sold in Brazil for the Jimny. I could not reach a Suzuki Brazil catalogue page for the original's part number or photo (suzukiveiculos.com.br returned HTTP 500), so the original's exact shape is an open gap. What the Taiwanese sellers do publish is enough to say the copies are hand-laid FRP (fibreglass), black gelcoat, and that they cut the guard - one seller ships a 1:1 paper cutting template in the box."
+  },
+  {
+   "id": "generics-are-tjm-pattern-not-mitsubishi",
+   "text": "The cheap unbranded JB74 snorkels are copies of the TJM AIRTEC moulding, not of anything Mitsubishi. Taiwanese listings say so outright: 「涉水喉 jb74 jb64 tjm 版本改裝件」. 'Mitsubishi-style' snorkels are a SEPARATE product line - Pajero V33/V43/V73 and Triton/L200 patterns, themselves copies of the Safari SS66x series - and they are not JB74 parts. If a seller offers a 'Mitsubishi style' snorkel for a Jimny, it is a universal body being cross-listed, not a JB74-specific kit. The tell on a photo is the grille face: Ironman's carries a lattice with its logo, the TJM-pattern copies are plain and unbadged."
+  }
+ ],
+ "families": [
+  {
+   "id": "aus-ram",
+   "label": "Australian ram-head plastic",
+   "members": [
+    "ironman_isnorkel070",
+    "tjm_airtec",
+    "generic_cn_tjm_pattern"
+   ],
+   "silhouette": "Textured black moulded tube out of the guard top, up the A-pillar standing 40-60 mm proud of it, a band-clamp ring about a third of the way up, then a forward goose-neck carrying a rectangular grille-faced scoop above the roofline. This is the shape most people picture when they hear 'snorkel'."
+  },
+  {
+   "id": "stainless-hairpin",
+   "label": "One-piece stainless hairpin",
+   "members": [
+    "torqit_sn02"
+   ],
+   "silhouette": "Constant 88.9 mm bright or satin-black round pipe, no head part at all, ending in a 180-degree candy-cane at roof height with the mouth pointing back and slightly down. Reads as a flattened J laid against the body."
+  },
+  {
+   "id": "euro-elbow",
+   "label": "European rotomould with a clamped elbow head",
+   "members": [
+    "bravo_ssjn"
+   ],
+   "silhouette": "Wide flat foot along the fender top, a sweeping riser that narrows to a true 89 mm circular spigot, then a separate 90-degree elbow head clamped on and aimed forward."
+  },
+  {
+   "id": "panel-replacement",
+   "label": "No-cut panel replacement",
+   "members": [
+    "urnieta_salado",
+    "megajimny_supasleek"
+   ],
+   "silhouette": "Barely breaks the stock profile. URNIETA swaps the hood-edge garnish strip for a ducted one and puts a drum head on the pillar top; Mega Jimny swaps the A-pillar trim for a moulding with a louvred faceplate and hides the pipe entirely. Neither projects above the roofline."
+  },
+  {
+   "id": "tw-frp",
+   "label": "Taiwanese FRP 'Brazilian pattern'",
+   "members": [
+    "tw_frp_brazilian",
+    "tw_tien0811",
+    "tw_south_jimny",
+    "tw_jimny74"
+   ],
+   "silhouette": "Hand-laid fibreglass, thicker-walled and squarer-shouldered than a rotomoulded plastic one, usually with a simple forward-facing box scoop. Sold in colours as well as black because FRP is gelcoated or painted, not moulded in colour - tien0811 lists a yellow one."
+  },
+  {
+   "id": "precleaner-head",
+   "label": "Cyclone pre-cleaner head",
+   "members": [
+    "jimnybits_pc35",
+    "donaldson_h001249a",
+    "donaldson_h002437a",
+    "donaldson_h002852a",
+    "urnieta_salado"
+   ],
+   "silhouette": "A squat drum, Ø180 mm for the 89 mm fitting, roughly as tall as it is wide: black domed lid over a clear polycarbonate bowl, air entering through the annular gap between them and dust spinning down into the visible bowl. Replaces the ram head on the same 89 mm spigot, so it is a head swap on an existing body, not a different snorkel."
+  }
+ ],
+ "products": [
+  {
+   "id": "ironman_isnorkel070",
+   "configuratorId": "safari",
+   "maker": "Ironman 4x4 (Australia)",
+   "name": "4x4 Snorkel for Suzuki Jimny JB74W",
+   "part": "ISNORKEL070",
+   "barcode": "9326626031985",
+   "url": "https://ironman4x4.com.au/products/4x4-snorkel-for-suzuki-jimny-jb74w",
+   "fitment": "Suzuki Jimny 2018+ (JB74W)",
+   "side": "right",
+   "sideNote": "NOT stated in Ironman's text. Read off the maker photo and consistent with the right-hand airbox. No source claims left.",
+   "head": {
+    "type": "forward-facing HEX-MESH ram-air scoop",
+    "rotates": "yes - a band clamp joins the upper goose-neck to the lower tube at about windscreen-base height. Corroborated from an unexpected direction: the Chinese generics that copy this head (design B, NT$2,492-3,192) are sold explicitly as a round tube with a SEPARATE ROTATABLE hex-mesh ram head. Ironman itself does not say so.",
+    "removable": "yes - a separate bolt-on moulding, a screw is visible at the head/body joint",
+    "faceMM": "about 150 wide x 190 tall for the grille face. ESTIMATED against the roof-rack tube in the same photo (25-32 mm aftermarket rail), low confidence."
+   },
+   "section": {
+    "shape": "round",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED. ESTIMATED 95-105 mm for the lower tube, scaled against the roof-rack rail tube in Ironman's own photo (typical 25-32 mm), so 3.3-3.5x that. Low-to-medium confidence."
+   },
+   "heightAboveFenderMM": null,
+   "heightNote": "NOT PUBLISHED and no reliable estimate is possible - Ironman only shows a close crop with no full-vehicle reference. Its own copy says the intake sits 'close to the vehicle's roofline'.",
+   "standoffMM": null,
+   "standoffNote": "NOT PUBLISHED.",
+   "bends": "Three zones, two-piece body: (1) about 90 degrees at the fender, turning up out of the guard; (2) a long shallow sweep up the A-pillar, with the band-clamp joint roughly a third of the way up; (3) a forward goose-neck of about 60-70 degrees at the top that throws the head forward of the pillar and above the roofline. Angles ESTIMATED from the product photo.",
+   "material": "NOT SPECIFIED beyond Ironman's 'high-quality, UV-resistant materials'. Visibly UV-stabilised textured matte black moulded plastic with IRONMAN 4X4 embossed into the body. Almost certainly rotomoulded LLDPE, but Ironman does not say so - do not record LLDPE as published.",
+   "finish": "textured matte black (orange-peel), not gloss",
+   "fenderCut": "NOT PUBLISHED on the product page - Ironman links only a generic fitting-instructions index with no per-part PDF. Given the fitment style a guard cut and template are near-certain, but that is inference.",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "weightKG": null,
+   "weightNote": "The Shopify weight field reads 0.0 kg - a placeholder, not a figure.",
+   "price": {
+    "AUD": 451.0,
+    "AUD_sale": 360.88,
+    "AUD_saleSource": "ozjimny.com",
+    "verified": true
+   },
+   "tw": {
+    "available": false,
+    "note": "No Taiwanese seller. A Ruten search for 「Ironman 涉水喉」 returns zero results."
+   },
+   "modelling": "The classic Australian moulded-plastic silhouette, and the one the configurator already has. A round tube leaves the top of the RIGHT front guard just behind the wheel arch, sweeps up along the A-pillar hugging its face, passes a visible band-clamp RING at roughly windscreen-base height, then the upper section thickens slightly and curves forward and outboard into a short goose-neck. The neck ends in a rectangular scoop box wider than the tube, its face a slab-like lattice grille raked about 35-45 degrees from vertical, pointing forward and slightly up, sitting above the roofline. Surface uniformly textured, never glossy. The features that identify it in a render are the embossed IRONMAN 4X4 text running up the neck, the lattice grille face, and that single band-clamp ring."
+  },
+  {
+   "id": "torqit_sn02",
+   "configuratorId": null,
+   "maker": "Torqit (Australia); also sold by ARB under ARB part numbers",
+   "name": "3.5\" Stainless Steel Snorkel for Suzuki Jimny",
+   "part": "SN02SS (brushed 304 stainless, 320 grit) / SN02MB (matte black powder coat)",
+   "partNote": "ARB lists the same two products as ARB SN02SS and SN02MB - the ARB URL slug literally reads 'torqit-snorkel-...-suzuki-jimny'. Same physical part, two catalogues.",
+   "url": "https://torqit.com.au/product/3-5-stainless-steel-snorkel-for-suzuki-jimny/",
+   "urlARB": "https://www.arb.com.au/product/sn02ss-torqit-snorkel-3-5-inch-stainless-steel-suzuki-jimny",
+   "fitment": "Suzuki Jimny JB74 / JC74 XL, 1.5L, 04/2019+ (also tagged 01/2024 for the 5-door)",
+   "side": "right",
+   "sideNote": "ARB's listing names the driver's-side guard, and Australia is RHD. Confirmed against Torqit's fitted photos.",
+   "head": {
+    "type": "none - a 180-degree hairpin formed in the pipe itself",
+    "rotates": false,
+    "removable": false,
+    "faceMM": null,
+    "detail": "Torqit's own words: 'Rear-facing and angled slightly down... designed to avoid rain, insects, and water from entering the snorkel's mouth.' There is no scoop, no grille and no separate part - the mouth is the open end of the pipe. That the rearward turn is made by a full 180-degree hairpin rather than a shorter rearward kink is read from Torqit's fitted photos; the maker only says 'rear-facing'."
+   },
+   "section": {
+    "shape": "round",
+    "odMM": 88.9,
+    "odNote": "PUBLISHED as 3.5 inch. Wall up to 2 mm, also published. Constant diameter end to end, one-piece mandrel bent, zero joins."
+   },
+   "heightAboveFenderMM": 630,
+   "heightNote": "ESTIMATED 600-660 mm. Method: the published 88.9 mm tube OD used as the in-photo ruler on Torqit's own SN02MB-WEB-1.png fitted side shot - guard top to the underside of the U-bend measures roughly 5-5.5 tube diameters, plus about 2 more for the hairpin, so 7-7.5 x 88.9 mm. Sanity check against the car: roof 1730 mm, guard top about 1120-1180 mm, so the guard-to-roofline budget is 550-610 mm and in the photo the crown of the U sits slightly ABOVE the roof rail. The two agree. Confidence +/-15%.",
+   "standoffMM": 100,
+   "standoffNote": "ESTIMATED 90-110 mm centreline offset - the riser sits about one tube diameter clear of the pillar face in the fitted photos. Low confidence. NOT PUBLISHED.",
+   "bends": "PUBLISHED only as 'mandrel bent pipe', 'one-piece construction eliminates all joins' and 'a constant wide diameter with minimal bends'. The rest is read off Torqit's fitted photography and is ESTIMATED: three bend zones - (1) about 90 degrees at the guard entry, apparently near the FRONT of the right guard just aft of the headlight and above the arch flare, turning the pipe from inboard/down to fore-aft; (2) a large-radius 85-90 degrees at the top-rear of the guard / base of the A-pillar, turning the horizontal run upward; (3) a 180-degree hairpin at roughly roof-gutter height, returning the mouth rearward and about 10-20 degrees below horizontal. Torqit's text does NOT say where the pipe leaves the guard, so the front-of-guard exit is a photo reading, not a stated fact - and it is the one thing that most distinguishes this silhouette from the plastic snorkels, so verify it against a photo before committing geometry.",
+   "material": "304-grade stainless steel, up to 2 mm wall",
+   "finish": "brushed bare stainless to 320 grit (SN02SS) or matte black powder coat (SN02MB). The brushed one is the only BRIGHT snorkel in this file - visually the opposite of the usual textured black.",
+   "fenderCut": true,
+   "templateSupplied": "yes - a thick moulded card template pre-formed to the panel shape",
+   "bungSupplied": "supplied: full fitting kit, OEM-certified clear touch-up paint for the cut edge, rubber pinch weld; connects to the standard airbox with supplied connectors",
+   "weightKG": null,
+   "weightNote": "ARB shows 14 kg net, which is packaged/shipping weight - a bare 3.5 in stainless snorkel does not weigh 14 kg.",
+   "price": {
+    "AUD": 1690.0,
+    "AUD_matteBlack": 1790.0,
+    "AUD_ARB_SN02MB": 1590.0,
+    "AUD_ARB_SN02SS": 1690.0,
+    "AUD_ARB_fitting": 240.0,
+    "note": "Torqit sells matte black as a +AUD100 finish option on SN02SS; ARB lists it as its own SKU at 1,590. ARB quotes 'plus estimated $240.00 ARB fitting charge'. A Torqit stainless airbox AB02SS/AB02MB is a further AUD 1,590.",
+    "verified": true
+   },
+   "tw": {
+    "available": false,
+    "note": "No Taiwanese seller on Ruten, PChome, Yahoo TW or Shopee."
+   },
+   "installTime": "about 1 hour; +30 min with the Torqit airbox. Made in Australia, 5-year warranty.",
+   "modelling": "Constant-diameter 88.9 mm round tube, no diameter changes anywhere, no separate head part, no flanges, no grille. Sweep path: start inside the right front guard near the headlight; exit through a round hole in the guard's outer skin at the FRONT of the guard, above the arch flare - note this is much further forward than the plastic snorkels, which come out at the back of the guard; the tube immediately turns aft and runs horizontally along the top shoulder of the guard, hugging the body, passing just above the side indicator repeater; at the trailing edge of the guard it sweeps up on a generous radius onto the A-pillar, running straight and near-parallel to the pillar rake; at roof-gutter height it makes a tight 180-degree hairpin whose crown sits marginally above the roof rail, bringing the open mouth back down and rearward, tilted 10-20 degrees below horizontal. Silhouette is a flattened J laid against the body with a candy-cane top. Two finishes to model: mirror-ish brushed stainless, and flat black."
+  },
+  {
+   "id": "tjm_airtec",
+   "configuratorId": null,
+   "maker": "TJM (Australia); manufacturer field at dealers reads 'Airflow Vector', TJM's snorkel arm",
+   "name": "Airtec Snorkel, Suzuki Jimny 2018-",
+   "part": "011SAT0157X",
+   "url": "https://www.escape4x4.cz/snorchl-tjm-airtec-suzuki-jimny-18-e18930.htm",
+   "urlNote": "tjm.com.au, tjm.co.nz and tjm4x4.com are all behind Cloudflare and return 403 to every fetch method tried, so everything below comes from authorised European dealers, not from TJM.",
+   "fitment": "Suzuki Jimny 2018- (JB74/JB64)",
+   "side": "right",
+   "sideNote": "NOT PUBLISHED by any accessible source. Assigned right because the airbox is right and no source claims left. Treat as unverified by text.",
+   "head": {
+    "type": "NOT PUBLISHED",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED",
+    "faceMM": null,
+    "detail": "TJM's Airtec range uses a forward-facing ram head generally, but no JB74-specific photo could be retrieved (the dealer gallery is lazy-loaded, the maker site is blocked). Recorded as NOT PUBLISHED rather than assumed. The Chinese generics that copy this moulding have a plain unbadged forward ram scoop, which is the best indirect evidence of the original's shape."
+   },
+   "section": {
+    "shape": "round",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED. The dealer's 'size' field says only 'Made in Australia and designed to deliver the correct volume of air to the engine'."
+   },
+   "heightAboveFenderMM": null,
+   "heightNote": "NOT PUBLISHED",
+   "standoffMM": null,
+   "standoffNote": "NOT PUBLISHED",
+   "bends": "NOT PUBLISHED",
+   "material": "PUBLISHED by the dealer: high-quality polyethylene resistant to UV radiation (UV20-UV24); fasteners stainless steel. Made in Australia.",
+   "finish": "textured black (not published, but standard for the range)",
+   "fenderCut": "NOT PUBLISHED for this part; the comparable kit listing confirms bolts, rivets, templates, rubber parts and clamps are the normal contents of this class, so a guard cut is near-certain.",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "weightKG": null,
+   "price": {
+    "AUD": 549.0,
+    "AUD_sale": 494.88,
+    "AUD_source": "ozjimny.com RRP/sale",
+    "CZK_incVAT": 15350.0,
+    "CZK_source": "escape4x4.cz, authorised dealer",
+    "verified": true,
+    "rejected": "A second Czech listing (4x4.tomot.cz) shows CZK 2,057, but that page also mis-states the engine list as G13B/M13A - the old Jimny - so both the fitment and the price on it are unreliable. Do not use."
+   },
+   "tw": {
+    "available": false,
+    "note": "No genuine TJM part on Taiwanese marketplaces. Ruten does sell 「TJM 版本」 copies of this moulding at NT$2,250-2,420 - see generic_cn_tjm_pattern."
+   },
+   "modelling": "INSUFFICIENT DATA. Do not borrow the Ironman or Torqit silhouette for this one - they are materially different designs, and the only thing known about the TJM shape is what its copies look like. If it has to be modelled, model it as the generic (which is a copy of it) and say so."
+  },
+  {
+   "id": "bravo_ssjn",
+   "configuratorId": "bravo",
+   "maker": "BRAVO EMPORION SL, C/ Garrotxa 11, 17486 Castello d'Empuries, Girona, SPAIN",
+   "name": "Bravo Snorkel, Suzuki Jimny (2018 - On.)",
+   "part": "SSJN",
+   "url": "https://bravosnorkel.com/en/suzuki/174-suzuki-jimny-2018-.html",
+   "urlNote": "The configurator's current URL .../106-suzuki-jimny-2018-.html is a stale PrestaShop duplicate - it resolves, but renders as a bare category tile titled 'copy of SUZUKI JIMNY (2018 - )'. Use 174.",
+   "fitment": "Suzuki Jimny 2018-, all engine versions, LHD and RHD (maker's own install video). Australian retailer lists XL 5-door, GLX and Lite 3-door.",
+   "side": "right",
+   "sideNote": "PUBLISHED - 'FITMENT SIDE: Right' is printed in the header of Bravo's own installation guide PDF.",
+   "head": {
+    "type": "forward-facing ram-air elbow with a louvred chevron grille face",
+    "rotates": true,
+    "rotatesNote": "The head is kit part 2, 'Snorkel head 89 mm / 3,5\"', held by kit part 3, 'Black clamp', onto a round spigot - so it turns a full 360 degrees and lifts off.",
+    "removable": true,
+    "faceMM": null
+   },
+   "section": {
+    "shape": "round at the top, flattening to an oval/D-section going down",
+    "odMM": 89,
+    "odNote": "89 mm is PUBLISHED, for the head/top spigot, which is a plain cylinder stamped 'BRAVO REF SSJN'. The riser below it widens to roughly 129 mm fore-aft at its base - ESTIMATED. It is NOT a square tube."
+   },
+   "heightAboveFenderMM": 500,
+   "heightNote": "ESTIMATED 480-520 mm, by two independent methods that agree. (a) Photo scale: the top spigot measures 110 px in the maker's kit photo and is the published 89 mm, giving 0.81 mm/px; the riser then measures about 450 mm along its axis and the horizontal foot about 400 mm, and the resulting straight-line max dimension of about 750 mm cross-checks against the published 790 mm box length. (b) Fitted photo: the head top sits just below the roof gutter, and with the roof at 1730 mm and the guard top at about 1180 mm the available run is about 550 mm, so a head slightly below the roof means about 500 mm.",
+   "standoffMM": 40,
+   "standoffNote": "ESTIMATED 30-50 mm from the fitted photo. NOT PUBLISHED.",
+   "bends": "About 90 degrees at the fender base where the horizontal foot turns into the riser, a roughly 10-degree kink about two-thirds of the way up the riser, plus a separate 90-degree elbow head clamped on at the top. Three direction changes, one of which is a removable part.",
+   "material": "ExxonMobil LLDPE LL 8446.21 - a UV-stabilised linear low-density polyethylene, rotomoulded. Density 0.936 g/cm3, melt index 5.0 g/10min, Long Term UV-8 stabilizer. All of this is printed on page 1 of the maker's installation guide.",
+   "finish": "textured matte black",
+   "fenderCut": true,
+   "fenderCutNote": "CONFIRMED from Bravo's own installation guide, which carries the step callouts 'Remove', 'Bend', 'Drill', 'Cut' and 'Relocate', plus the note 'Remove the car's bonnet to install the snorkel'. The kit contains 2x M6x14 rivnuts, which exist only to be set into a drilled panel. The Australian retailer's title 'Complete No-Modification Snorkel Kit' is a sales label and is wrong as a fitting fact.",
+   "templateSupplied": "yes - the maker's spec line reads 'Includes snorkel, Head, template and accessories' (ES: 'snorkel, head, plantilla y accesorios'). Note the template is NOT itemised in the guide's 16-part list, so it ships loose.",
+   "kitContents": "From the guide's own parts table: 1 snorkel body, 2 snorkel head 89 mm/3.5\", 3 black clamp, 4 Allen bolt M6x30 x2, 5 washer M6x18 x2, 6 rivnut M6x14 x2, 7 Allen bolt M6x12 x4, 8 nyloc nut M6x10 x1, 9 washer M6x14 x2, 10 metal bracket x1, 11 clamp 60-80 mm x2, 12 flex hose 70 mm dia / 350-1050 mm x1, 13 zip tie x1, 14 hex bolt M6x16 x1, 15 metal bracket x1, 16 EPDM adapter x1.",
+   "bungSupplied": "an EPDM adapter and a 70 mm flex hose connect to the standard airbox; no separate bung",
+   "weightKG": 3.0,
+   "packingCM": "79 x 38 x 16",
+   "certification": "EC directives certificate, validated by REINVAC. 5-year warranty.",
+   "price": {
+    "EUR": 399.0,
+    "EUR_note": "tax excluded, maker list",
+    "AUD": 798.0,
+    "AUD_sale": 698.0,
+    "AUD_source": "ozjimny.com",
+    "CZK": 10570.0,
+    "CZK_alt": 12465.0,
+    "CZK_source": "shop4x4.cz / escape4x4.cz",
+    "verified": true
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 18800,
+    "seller": "MRK 4X4 皮卡配件 / MyRack 車架專家, 新北市蘆洲區 - Yahoo item 101726145413, Shopee 19212802/56303904060, Rakuten myrack/85cfhrtgy, plus a second Yahoo store listing it as JB072",
+    "twPart": "JB072 (MRK's own internal code - not a Bravo number)",
+    "seller2": "希琦 HEEKIS (heekis.com) also lists it at NT$18,800, currently shown as sold out.",
+    "note": "Listed in Chinese as 西班牙【BravoSnorkel】SUZUKI JIMNY JB74 (2018 - )專用呼吸管 SSJN, i.e. the seller correctly calls it Spanish. NT$18,800 is about 2.4x the EUR list before tax - a normal Taiwanese landed markup on a bulky low-volume import.",
+    "twWarnings": "Two things to check before quoting this. (1) MRK also lists a 「BravoSnorkel Jimny 專用呼吸管 JB072」 at the same NT$18,800 whose title does NOT say JB74 - it may be Bravo's part for an older Jimny generation, so JB072 should not be treated as a synonym for SSJN without asking MRK. (2) 希琦's Taiwanese copy claims 「歐洲設計製造 免外觀切割」 (no bodywork cutting), which directly contradicts Bravo's own installation guide - it says Cut and Drill and the kit contains a template and two rivnuts. Do not repeat the no-cut claim."
+   },
+   "taiwaneseBravo": "NONE. There is no Taiwanese company trading as 'Bravo' in off-road parts; the only Taiwanese appearance of the name is MRK's distributor listing for the Spanish product.",
+   "modelling": "A rotomoulded matte-black LLDPE one-piece body on the RIGHT A-pillar. Start at the fender: a flat-bottomed moulded foot about 400 mm long lying fore-aft along the fender top, about 130 mm wide, with two screw bosses and a BRAVO embossed panel on its outer face; its forward end tapers to a round outlet spigot pointing inboard and forward into the engine bay, where a 70 mm flex hose takes over. The foot sweeps through about 90 degrees into a riser climbing the A-pillar, leaning back with the pillar rake, about 450 mm long. The riser is an oval/D-section, roughly 129 mm fore-aft at the base narrowing to a true 89 mm CIRCLE at the top spigot; three shallow longitudinal ribs run up the outer face at the lower third, and a shallow 10-degree kink sits about two-thirds up. A band clamp on the top spigot holds a separate 90-degree ram-head elbow whose mouth is a rounded-rectangle grille filled with angular chevron mesh, FACING DEAD FORWARD, its top edge level with the roof gutter. Because the socket is circular the head can be yawed to any angle. The whole thing stands 30-50 mm proud of the pillar."
+  },
+  {
+   "id": "urnieta_salado",
+   "configuratorId": "urnieta",
+   "maker": "URNIETA - NOT Spanish despite the Basque-sounding name. The site carries simplified-Chinese copy (硬核越野 · 精工鑄造) and a Hong Kong phone number (+852 9823 8165); the project's own docs/urnieta-salado.json attributes it to Starks Automotive / 斯塔克工業, Dongguan, China (Chinese name 歐尼塔). Both are consistent - HK registration, mainland manufacture.",
+   "name": "SALADO Snorkel Kit for Jimny JB74/JC74",
+   "part": "0702021",
+   "drawing": "UN-JIMNY-FB-006, PART NAME 'SNORKEL', scale 1:8, units mm, REV 19/2026.03",
+   "url": "https://urnieta.com/product/salado-snorkel-kit-for-jimny-jb74-jc74/",
+   "fitment": "JB74 3-door and JC74 5-door. JB64 explicitly NOT compatible.",
+   "side": "right",
+   "sideNote": "PUBLISHED via the fitting steps - 'remove the right-side A-pillar corner cover'.",
+   "head": {
+    "type": "TWO heads in the box, interchangeable: a standard head and a cyclone PRE-CLEANER head. The standard one shown fitted is a round drum with a circumferential louvre band and URNIETA embossed - a 360-degree RADIAL intake, not a directional scoop. A square-profile head of the same envelope also exists per the manual.",
+    "rotates": "moot - the fitted head is radial, so yaw does not change anything; it is clamped, so it can be turned and it lifts off",
+    "removable": true,
+    "envelopeMM": "about 155 fore-aft x 98 tall - DERIVED from the calibrated factory drawing"
+   },
+   "section": {
+    "shape": "tapered flat-sided moulding, NOT a constant square tube",
+    "odMM": 80,
+    "odNote": "About 80 mm at the collar just below the head, widening to about 119 mm fore-aft at the foot. DERIVED from the drawing. The word 'square' in the maker's own copy refers to a HEAD option ('square-head or round-head'), not the body section."
+   },
+   "heightAboveFenderMM": 551,
+   "heightNote": "DERIVED, not estimated: the drawing UN-JIMNY-FB-006 carries two labelled dimensions, 1048 mm overall length and 675 mm overall height. Measured pixel-wise these give 1.4181 and 1.4162 mm/px - 0.13% agreement - so the scale is sound and the head top sits about 551 mm above the top surface of the horizontal duct, i.e. above the fender line.",
+   "standoffMM": null,
+   "standoffNote": "NOT PUBLISHED and not derivable from a side-elevation drawing.",
+   "bends": "Two direction changes: the long horizontal fender-top duct turns up through about 90 degrees at the flared foot, and the riser then leans 25.1 degrees from vertical following the A-pillar (that 25.1 is DERIVED from the drawing). No head elbow - the head sits square on top of the collar.",
+   "material": "ABS with stainless/iron fittings; the airbox hose is silicone rubber rated -30 to +60 C",
+   "finish": "black",
+   "fenderCut": false,
+   "fenderCutNote": "CONFIRMED no cut - 'Replaces the OEM hood trim panel - not a fender-cut installation.' The long horizontal duct IS the black garnish strip along the hood/fender top edge. Caveat: install step 2 screws the body onto the fender with supplied screws and screw clips, and step 1 removes the hood, the cowl/rain panel and the right A-pillar corner cover. Whether every screw lands in an existing hole is NOT PUBLISHED.",
+   "templateSupplied": "n/a - nothing is cut",
+   "bungSupplied": "silicone hose and hardware supplied; the standard airbox is kept",
+   "weightKG": 2.3,
+   "overallMM": "1048 long x 675 tall (both PUBLISHED on the drawing)",
+   "price": {
+    "TWD": 14000.0,
+    "TWD_verified": true,
+    "TWD_source": "Shopee TW listing 7996649/29595052138, seller GOAT Wild explorer co., 南投縣名間鄉, title 「URNIETA x Jimny吉米JB74涉水器套件涉水呼吸管#涉水喉#溯溪#越野#吉姆尼#salado」. Price confirmed via BigGo, which republishes Shopee listings; Shopee itself is unreadable to any non-browser client.",
+    "CZK_incVAT": 15609.0,
+    "CZK_exVAT": 12900.0,
+    "CZK_source": "improveyouroffroad.eu",
+    "makerPrice": "NOT PUBLISHED - urnieta.com quotes through dealers only",
+    "note": "The NT$14,000 Taiwanese price is about 35% under the EU distributor's inc-VAT figure (about NT$21,800). That is a large gap; a grey import is the likely explanation, but it is a real, live listing."
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 14000,
+    "seller": "GOAT Wild explorer co. (Shopee), 南投縣名間鄉"
+   },
+   "modelling": "Right-hand side, a two-element black assembly 1048 mm long x 675 mm tall overall - and unlike every other snorkel here, most of its length is HORIZONTAL. The lower element is a moulded fender-top garnish strip: a shallow, gently crowned duct about 794 mm long and a constant 61 mm tall, running fore-aft along the joint between the hood edge and the right front fender, stepping down slightly toward its forward end where it terminates in a round corrugated-hose cuff with a worm clamp. At its rear end it swells into a roughly 244 mm flared foot that turns upward into the riser. The riser leans 25 degrees from vertical following the A-pillar, tapering from about 119 mm fore-aft at the foot to about 80 mm at the collar, flat-sided, with URNIETA embossed vertically on the outer face and a small A-pillar bracket clamping it about two-thirds up. A hose clamp at the top carries the head: a squat round drum about 155 mm across and 98 mm tall, with a horizontal louvre band running the whole way around and URNIETA on the band - air enters radially, through 360 degrees. The head top sits about 551 mm above the fender line, just proud of the roof gutter. Second state to model: the cyclone pre-cleaner head on the same collar."
+  },
+  {
+   "id": "megajimny_supasleek",
+   "configuratorId": "sleek",
+   "maker": "Mega Jimny (Australia)",
+   "name": "Supa-Sleek 'No Drill' Snorkel System V4",
+   "part": null,
+   "partNote": "Mega Jimny does not publish a part number; V4 is the current version.",
+   "url": "https://megajimny.com/products/supa-sleek-snorkel-system",
+   "fitment": "JB74 3-door 2018+, JC74 5-door XL/Nomade 2023+. NOT JB64.",
+   "side": "right",
+   "sideNote": "Not stated in text; determined from the maker photo (the camera is on the vehicle's right) and consistent with the right-hand airbox and an Australian RHD maker.",
+   "head": {
+    "type": "no head at all - a louvred faceplate set flush into the OUTBOARD face of a compact housing at the top of the A-pillar, just below the roof gutter",
+    "rotates": false,
+    "removable": "the faceplate unscrews (four stainless dome screws) but it is not a directional head",
+    "faceMM": "about 95 wide x 255 tall, ESTIMATED +/-25%",
+    "detail": "A tall rounded-rectangle plate, COLOUR-MATCHED to the body (shown in Kinetic Yellow), with horizontal louvre slots above and below and 'MEGA JIMNY' cut clean through the middle. Air enters sideways through the slots and through the pierced lettering."
+   },
+   "section": {
+    "shape": "round, concealed",
+    "odMM": 50.8,
+    "odNote": "PUBLISHED: '304 Grade Stainless Steel 2\" Intake Pipework'. But the 2 in stainless pipe is INSIDE the moulding and under the guard - you never see it on the car. The visible external part is black textured moulded plastic matching the OEM A-pillar/cowl trim."
+   },
+   "heightAboveFenderMM": 0,
+   "heightNote": "Nothing projects above the roofline and nothing stands clear of the pillar. The intake is at the top of the pillar, below the gutter.",
+   "standoffMM": 32,
+   "standoffNote": "ESTIMATED 25-40 mm over the stock pillar. NOT PUBLISHED.",
+   "bends": "NOT PUBLISHED, and largely invisible - the routing is inside the moulding and under the guard.",
+   "material": "304 stainless pipework (concealed) inside a black textured moulded plastic body; custom silicone couplers printed with fitment markings; A-pillar securing bracket with pre-applied double-sided tape",
+   "finish": "Four pipework finishes offered: raw stainless, satin black, burst purple (colour-shift), marble pink. The visible moulding is textured black; the louvred faceplate is colour-matched to the car.",
+   "fenderCut": false,
+   "fenderCutNote": "CONFIRMED no cut and no drill, in the maker's own words: 'our snorkels require absolutely NO drilling or holes to be cut into the body for fitment, unlike a tradition snorkel does'... 'No huge holes in your front guard/A-pillar here!'... 'completely reversible'. It is a full panel-replacement system; the A-pillar bracket is double-sided tape, not screws. A third-party install video for the earlier 3.0 confirms the route: remove wiper arms, remove the plenum metal panel, remove the driver's-side trim panel and its support, remove the 10 mm bolt at the back of the guard, remove the bonnet hinge, fit, then swap the factory intake pipe for the new one. Nothing is cut.",
+   "templateSupplied": "n/a",
+   "bungSupplied": "custom silicone couplers with fitment markings plus clamps; the airbox-end coupler is printed 'Airbox / MEGA JIMNY'",
+   "weightKG": null,
+   "price": {
+    "AUD": 649.0,
+    "verified": true,
+    "AUD_withTorqitAirbox": 2149.0,
+    "TWD_equiv": "about 13,600 at ~21 NT$/AUD - a conversion, not a Taiwanese price"
+   },
+   "tw": {
+    "available": false,
+    "note": "No Taiwanese seller found."
+   },
+   "installTime": "1-2 hours; Phillips driver, 10/12 mm ratchet, clip tool. Kit: snorkel body, stainless pipework, silicone couplers and clamps, A-pillar bracket with pre-applied tape, fasteners, 2 Allen keys, QR install guide.",
+   "modelling": "Right-hand A-pillar, and deliberately near-flush - the silhouette barely breaks the stock profile, which is the entire point of the product. Model a slim black textured moulding that FILLS THE CHANNEL between the windscreen rubber and the A-pillar's outer edge, running the full pillar from the roof gutter down to the cowl and following the pillar rake. It is widest and deepest at the top, where it swells into a compact housing that wraps over the pillar's outer corner; from there it tapers steadily downward and flares again at the bottom into a low moulded panel lying across the cowl/fender top, secured with two visible black screws and disappearing under the bonnet shut-line. Set flush into the OUTBOARD face of the top housing, held by four stainless dome screws at the corners, is a colour-matched louvred faceplate - a tall rounded rectangle roughly 95 x 255 mm with horizontal slots top and bottom and MEGA JIMNY pierced through the middle. Nothing projects above the roofline and there is no external tube anywhere. The 2 in stainless pipe and its black silicone airbox coupler are internal and invisible."
+  },
+  {
+   "id": "jimnybits_pc35",
+   "configuratorId": "precleaner",
+   "maker": "UNBRANDED / generic. PC35 is jimnybits' own retail SKU, not a manufacturer part number, and the product page shows no brand at all.",
+   "name": "Snorkel Air Pre Filter / Pre Cleaner head for 3.5\" snorkels",
+   "part": "PC35 (retailer SKU)",
+   "url": "https://www.jimnybits.com/snorkel-air-pre-filter-pre-cleaner-head-for-3-snorkels-1.html",
+   "urlNote": "The slug reads 'for-3-snorkels' because the .5\" was stripped when the URL was generated. The page itself says 3.5\".",
+   "fitment": "3.5 inch (89 mm) snorkels - i.e. Bravo, Torqit, Ironman and most generics. OVERSIZED for a 3 in (76 mm) neck without an adapter.",
+   "side": "right (it is a head, it goes wherever the snorkel is)",
+   "head": {
+    "type": "cyclone / mushroom pre-cleaner",
+    "rotates": "n/a - radial intake",
+    "removable": true,
+    "bowlDiaMM": 180,
+    "bowlNote": "180 mm is PUBLISHED and is correct for an 89 mm neck."
+   },
+   "section": {
+    "shape": "round drum",
+    "odMM": 180,
+    "odNote": "PUBLISHED"
+   },
+   "heightAboveFenderMM": null,
+   "heightMM": 140,
+   "heightNote": "ESTIMATED 130-150 mm tall, from the photo's roughly 1.35:1 diameter-to-height ratio against the published 180 mm. Height NOT PUBLISHED.",
+   "standoffMM": null,
+   "bends": "n/a",
+   "material": "black moulded lid over a clear polycarbonate bowl",
+   "finish": "black + transparent",
+   "fenderCut": "n/a",
+   "weightKG": 0.6,
+   "price": {
+    "GBP": 19.8,
+    "GBP_was": 23.76,
+    "verified": true
+   },
+   "tw": {
+    "available": "a generic equivalent is",
+    "priceTWD": "400-1,800",
+    "seller": "Ruten 21530207328531, 「涉水器 涉水喉 防雨 集沙杯 集塵器 集塵杯 蘑菇頭 冬菇頭 全新改良 吉米 藍哥 吉星 排砂杯」 - a mushroom/cyclone head sold loose, fitting 吉米 (Jimny), 藍哥 (Ranger) and 吉星 (Vitara). Diameter and neck size NOT PUBLISHED."
+   },
+   "modelling": "A squat cylinder, Ø180 mm, roughly 130-150 mm tall, in two stacked parts. Upper: a BLACK shallow dome, slightly crowned, with a small upright plastic tab on its apex, occupying the top ~55% of the height. Lower: a CLEAR polycarbonate bowl, a straight cylinder of the same diameter with a subtle taper, banded top and bottom in black, carrying three moulded instruction pictograms around its wall. The bowl necks down sharply at the bottom to a black 89 mm circular socket that slips over the snorkel tube and takes a worm clamp. Air enters through the annular gap between lid and bowl; dust spins out into the clear bowl where it is visible - which is the whole visual point of the part, so the bowl must read as transparent with a dust line inside, not as a white or grey solid."
+  },
+  {
+   "id": "donaldson_h001249a",
+   "configuratorId": null,
+   "maker": "Donaldson",
+   "name": "Donaldson Original Cyclone 89 mm",
+   "part": "H001249A",
+   "url": "https://bravosnorkel.com/en/ (HEADS > DONALDSON section - Bravo publishes the Donaldson references and spec sheets)",
+   "fitment": "any 89 mm snorkel spigot; 102 mm versions also exist (EUR 349 / 399, part numbers not captured)",
+   "side": "right (head)",
+   "head": {
+    "type": "cyclone pre-cleaner",
+    "rotates": "n/a - radial",
+    "removable": true
+   },
+   "section": {
+    "shape": "round drum",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED - Donaldson publishes the NECK size (89 mm), not the bowl diameter. The jimnybits generic at the same 89 mm neck is 180 mm across, which is the right order."
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "n/a",
+   "material": "removable bowl, emptied by hand; plastic + reinforced steel; 75% efficiency; 5-9 m3/min",
+   "finish": "black (HD version is bare stainless/alloy)",
+   "fenderCut": "n/a",
+   "weightKG": null,
+   "price": {
+    "EUR": 69.0,
+    "EUR_note": "ex VAT, via Bravo's catalogue",
+    "verified": true
+   },
+   "tw": {
+    "available": false
+   },
+   "modelling": "Same drum silhouette as the generic pre-cleaner above; the TopSpin variants add a moulded turbine hub visible through the bowl and a self-emptying ejector slot around the lower band. The HD is metal, so it reads as a machined bright or satin drum rather than black plastic over clear."
+  },
+  {
+   "id": "donaldson_h002437a",
+   "configuratorId": null,
+   "maker": "Donaldson",
+   "name": "Donaldson TopSpin Cyclone 89 mm",
+   "part": "H002437A",
+   "url": "https://bravosnorkel.com/en/ (HEADS > DONALDSON section - Bravo publishes the Donaldson references and spec sheets)",
+   "fitment": "any 89 mm snorkel spigot; 102 mm versions also exist (EUR 349 / 399, part numbers not captured)",
+   "side": "right (head)",
+   "head": {
+    "type": "cyclone pre-cleaner",
+    "rotates": "n/a - radial",
+    "removable": true
+   },
+   "section": {
+    "shape": "round drum",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED - Donaldson publishes the NECK size (89 mm), not the bowl diameter. The jimnybits generic at the same 89 mm neck is 180 mm across, which is the right order."
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "n/a",
+   "material": "SELF-EMPTYING; plastic + reinforced steel; 99% efficiency (ISO 5011 / SAE J726); 6-13 m3/min; interior power turbine",
+   "finish": "black (HD version is bare stainless/alloy)",
+   "fenderCut": "n/a",
+   "weightKG": null,
+   "price": {
+    "EUR": 199.0,
+    "EUR_note": "ex VAT, via Bravo's catalogue",
+    "verified": true
+   },
+   "tw": {
+    "available": false
+   },
+   "modelling": "Same drum silhouette as the generic pre-cleaner above; the TopSpin variants add a moulded turbine hub visible through the bowl and a self-emptying ejector slot around the lower band. The HD is metal, so it reads as a machined bright or satin drum rather than black plastic over clear."
+  },
+  {
+   "id": "donaldson_h002852a",
+   "configuratorId": null,
+   "maker": "Donaldson",
+   "name": "Donaldson TopSpin HD Cyclone 89 mm",
+   "part": "H002852A",
+   "url": "https://bravosnorkel.com/en/ (HEADS > DONALDSON section - Bravo publishes the Donaldson references and spec sheets)",
+   "fitment": "any 89 mm snorkel spigot; 102 mm versions also exist (EUR 349 / 399, part numbers not captured)",
+   "side": "right (head)",
+   "head": {
+    "type": "cyclone pre-cleaner",
+    "rotates": "n/a - radial",
+    "removable": true
+   },
+   "section": {
+    "shape": "round drum",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED - Donaldson publishes the NECK size (89 mm), not the bowl diameter. The jimnybits generic at the same 89 mm neck is 180 mm across, which is the right order."
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "n/a",
+   "material": "SELF-EMPTYING; STAINLESS STEEL + ALUMINIUM body, not plastic; 99% efficiency (ISO 5011 / SAE J726); 8-11 m3/min",
+   "finish": "black (HD version is bare stainless/alloy)",
+   "fenderCut": "n/a",
+   "weightKG": null,
+   "price": {
+    "EUR": 349.0,
+    "EUR_note": "ex VAT, via Bravo's catalogue",
+    "verified": true
+   },
+   "tw": {
+    "available": false
+   },
+   "modelling": "Same drum silhouette as the generic pre-cleaner above; the TopSpin variants add a moulded turbine hub visible through the bowl and a self-emptying ejector slot around the lower band. The HD is metal, so it reads as a machined bright or satin drum rather than black plastic over clear."
+  },
+  {
+   "id": "tw_frp_brazilian",
+   "configuratorId": null,
+   "maker": "Unnamed Taiwanese FRP fabricator. Sold under the shop's own name by several retailers; nobody names the maker.",
+   "name": "JIMNY JB74 專用涉水呼吸管（巴西式樣）",
+   "part": null,
+   "url": "https://tw.bid.yahoo.com/item/101154616136",
+   "urlAlt": "https://shopee.tw/product/29729193/12906572379",
+   "fitment": "JB74",
+   "side": "right",
+   "sideNote": "Not stated in the listing; the airbox rule settles it.",
+   "head": {
+    "type": "NOT PUBLISHED - the listing gives no head description. Brazilian-pattern snorkels use a forward-facing box scoop.",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED"
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED by any Taiwanese seller of this item."
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "NOT PUBLISHED",
+   "material": "FRP (fibreglass) - PUBLISHED. This is the only JB74 snorkel in the file that is hand-laid composite rather than rotomoulded plastic or bent metal.",
+   "finish": "black - PUBLISHED",
+   "origin": "CONFLICTED. The Taiwanese listing says 產地:台灣. But the listing's own photos show a PORTUGUESE-language installation manual and a Brazilian 1:1 cutting template, headed '...TECH' and footed 'HPE'. Either it is a Taiwan-made copy shipped with the original Brazilian paperwork, or the 產地 field is wrong. The brand behind the manual could NOT be identified - rtech.com.br is under construction and no HPE domain resolves. Do not name a brand for this product.",
+   "cutoutMM": "THE MOST USEFUL HARD NUMBER IN THE TAIWANESE MARKET. The template in the listing photos is labelled 'MASCARA DE RECORTE MODELO 01' and marked R30 and 110 - an oval fender cutout about 110 mm long with 30 mm corner radii - with the instructions 'Recorte para instalacao do Snorkel / Snorkel installation cutout' and 'Furo existente no para-lama (usar como referencia para alinhar) / Hole in the fender (use as reference for aligning)'. So the guard cut is an oval roughly 110 mm long, aligned off an EXISTING factory hole in the fender. That existing hole is the alignment datum every cut-in snorkel uses, which is why they all come out of the guard at about the same place.",
+   "fenderCut": true,
+   "fenderCutNote": "The kit ships a 1:1 開孔圖示 (full-size hole template), so the guard is cut.",
+   "templateSupplied": "yes - 1:1 printed template",
+   "bungSupplied": "「以上均含配件」 - fittings included; not itemised",
+   "weightKG": null,
+   "price": {
+    "TWD": 10000.0,
+    "TWD_shopee": 10600.0,
+    "TWD_fitting": 3500.0,
+    "verified": true,
+    "note": "機油倉庫 (Yahoo NT$10,000 / Shopee NT$10,600). Listing offers to refer a fitting shop at NT$3,500 labour. 「此商品無法超取」 - too big for convenience-store pickup."
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 10000,
+    "seller": "【機油倉庫】汽機車保養用品, 新北市新店區"
+   },
+   "descriptionVerbatim": "JIMNY JB74 專用涉水呼吸管 / 巴西式樣 / 材質:FRP / 顏色:黑色 / 產地:台灣 / 越野涉水必備!! / 以上均含配件，安裝說明書，1:1開孔圖示 / 可介紹配合店家安裝，安裝工資3500元 / 此商品無法超取",
+   "modelling": "INSUFFICIENT PUBLISHED DATA for a confident shape. What can be said: hand-laid FRP is thicker-walled and squarer-shouldered than a rotomoulded plastic snorkel, with visible parting lines and a gelcoat sheen rather than an orange-peel texture, and Brazilian-pattern snorkels of this era use a plain forward-facing box scoop rather than a grille. Model it as the Ironman silhouette with crisper edges and a glossier black if it has to be modelled at all, and flag it as a family placeholder rather than a specific product."
+  },
+  {
+   "id": "tw_tien0811",
+   "configuratorId": null,
+   "maker": "Unnamed - a Taichung shop, Shopee seller tien0811 (臺中市烏日區)",
+   "name": "JIMNY JB74專用呼吸管",
+   "part": null,
+   "url": "https://shopee.tw/product/15564603/6673859917",
+   "fitment": "JB74",
+   "side": "right",
+   "sideNote": "not stated; airbox rule",
+   "head": {
+    "type": "NOT PUBLISHED",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED"
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "NOT PUBLISHED",
+   "material": "NOT PUBLISHED",
+   "materialNote": "Very likely the same FRP family as tw_frp_brazilian - the price band and the colour options both point that way, since a rotomoulded plastic snorkel cannot be offered in colours.",
+   "finish": "multiple colours - the cheapest variation listed is 黃色 (yellow) at NT$12,000",
+   "fenderCut": "NOT PUBLISHED",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "price": {
+    "TWD_from": 12000.0,
+    "TWD_to": 18000.0,
+    "verified": true,
+    "note": "Price range across colour/spec variations. Verified through BigGo; the Shopee page itself is unreadable to non-browser clients."
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 12000,
+    "seller": "tien0811, 臺中市烏日區"
+   },
+   "note": "IMPORTANT: this URL is currently filed in parts.js as a `refs` entry on the BRAVO product. It is not Bravo. It is a different, Taiwanese product from a different seller at a different price. See corrections.",
+   "modelling": "NOT MODELLABLE from what is published - no photo description, no dimensions, no head type. Recorded so the mis-filed URL in parts.js can be traced."
+  },
+  {
+   "id": "tw_south_jimny",
+   "configuratorId": null,
+   "maker": "南國吉米 South_Jimny (屏東縣長治鄉)",
+   "name": "Jimny JB74 專用 涉水呼吸管",
+   "part": null,
+   "url": "https://shopee.tw/product/47473069/12114922737",
+   "fitment": "JB74",
+   "side": "right",
+   "sideNote": "not stated; airbox rule",
+   "head": {
+    "type": "NOT PUBLISHED",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED"
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "NOT PUBLISHED",
+   "material": "NOT PUBLISHED",
+   "finish": "NOT PUBLISHED",
+   "fenderCut": "NOT PUBLISHED",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "price": {
+    "TWD": 10500.0,
+    "verified": true,
+    "note": "via BigGo; Shopee description unreadable"
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 10500,
+    "seller": "南國吉米 South_Jimny"
+   },
+   "modelling": "NOT MODELLABLE - nothing published. Same price band as the FRP Brazilian-pattern unit and probably the same product."
+  },
+  {
+   "id": "tw_jimny74",
+   "configuratorId": null,
+   "maker": "JIMNY74風格選物 (臺中市西區)",
+   "name": "呼吸管 JIMNY JB74 免鑽孔 高位進氣管口 涉水喉",
+   "part": null,
+   "url": "https://shopee.tw/product/208543724/13473438460",
+   "fitment": "JB74",
+   "side": "right",
+   "head": {
+    "type": "高位進氣管口 - a raised intake mouth; no further detail published",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED"
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "NOT PUBLISHED",
+   "material": "NOT PUBLISHED",
+   "finish": "NOT PUBLISHED",
+   "fenderCut": false,
+   "fenderCutNote": "The listing title claims 免鑽孔 (no drilling). Unverified - the description is unreadable. If true this is a panel-replacement design like URNIETA or Mega Jimny, not an FRP cut-in one.",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "price": {
+    "TWD": 8350.0,
+    "verified": true
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 8350,
+    "seller": "JIMNY74風格選物"
+   },
+   "modelling": "NOT MODELLABLE - nothing published beyond the no-drill claim."
+  },
+  {
+   "id": "tw_yunlin_abs",
+   "configuratorId": null,
+   "maker": "雲林連合吉普 (Ruten seller p24680p)",
+   "name": "吉米 Jimny 呼吸管（ABS 塑鋼）",
+   "part": null,
+   "url": "https://www.ruten.com.tw/user/index00.php?s=p24680p",
+   "fitment": "Jimny (JB74 implied by the listing title)",
+   "side": "right",
+   "head": {
+    "type": "NOT PUBLISHED",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED"
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "NOT PUBLISHED",
+   "material": "ABS 塑鋼 - the listing title makes a point of it: 「材質ABS不是FRP的」, i.e. explicitly NOT fibreglass. The same seller's Vitara listing repeats the claim, so it is a deliberate selling point against the FRP units.",
+   "finish": "NOT PUBLISHED",
+   "fenderCut": "NOT PUBLISHED",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "price": {
+    "TWD": 5600.0,
+    "TWD_fitted": 6500.0,
+    "verified": true,
+    "note": "NT$5,600 collected in person, NT$6,500 fitted at the shop."
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 5600,
+    "seller": "雲林連合吉普"
+   },
+   "fitmentDoubt": "PROBABLY NOT A JB74 PART. The listing title never says JB74, and the product photo shows the old long-round-tube-plus-forward-mesh-head shape rather than the flat pillar-hugging JB74 moulding. Most likely a JB23/JB43 item. Confirm with the seller before carrying it as a JB74 option.",
+   "modelling": "NOT MODELLABLE - nothing published, and the fitment is in doubt."
+  },
+  {
+   "id": "generic_cn_tjm_pattern",
+   "configuratorId": null,
+   "maker": "Unbranded, Chinese-made. A copy of the TJM Airtec moulding - Taiwanese listings say so: 「涉水喉 jb74 jb64 tjm 版本改裝件 適用於2019-2024年 吉姆尼」.",
+   "name": "鈴木吉姆尼 涉水喉 / 呼吸管 JB64 JB74 Snorkel",
+   "part": null,
+   "url": "https://www.ruten.com.tw/item/show?22635469219177",
+   "fitment": "JB64 and JB74 2018+ (sold as one part for both, which is itself a warning sign)",
+   "side": "right",
+   "sideNote": "not stated by any seller",
+   "head": {
+    "type": "separate bolt-on forward-facing ram scoop, plain and unbadged; cyclone-head variants are offered as a price option on the multi-option SKUs",
+    "rotates": "the joint is a band clamp, so yes",
+    "removable": true
+   },
+   "section": {
+    "shape": "round",
+    "odMM": null,
+    "odNote": "NOT PUBLISHED by any seller."
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "Two-piece body: up out of the guard, a sweep up the A-pillar with the hose-clamp joint at the split, then a forward kick into the scoop above the roofline. Same three zones as the Ironman because it copies the same class of moulding.",
+   "material": "LLDPE as advertised - the listing artwork prints 'LLDEP材質 / LLDPE MATERIAL' (their typo)",
+   "finish": "textured black",
+   "fenderCut": true,
+   "templateSupplied": "yes - a paper cutting template, per the equivalent European listing for the same kit",
+   "bungSupplied": "hose, hose clamps, bolts, rivets, rubber grommets",
+   "price": {
+    "TWD_low": 2250.0,
+    "TWD_typical": 2600.0,
+    "TWD_high": 4069.0,
+    "verified": true,
+    "note": "Ruten 2026-09-22: cheapest JB64/JB74 generic NT$2,250; 'TJM 版本' pattern NT$2,250-2,420; typical mid listing NT$2,548-2,760; upper 台灣現貨 listings NT$3,118-3,339; multi-option SKUs including a cyclone head up to NT$4,069. Yahoo TW has one at NT$2,944. PChome has none."
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 2600,
+    "seller": "about 40 Ruten sellers plus Shopee and Yahoo; all the same item"
+   },
+   "modelling": "Two-piece textured-black LLDPE. Lower round tube out of the right guard top, sweeping up the A-pillar; a hose-clamp band at the joint; upper section kicks forward into a rectangular ram scoop above the roofline. Because these copy TJM rather than Ironman, the giveaway in a render is a PLAIN UNBADGED grille face where Ironman has its lattice logo."
+  },
+  {
+   "id": "jw_works_head",
+   "configuratorId": null,
+   "maker": "JW WORKS 聚維製所 (Taiwan)",
+   "name": "SUZUKI Jimny 呼吸管配件｜進氣罩",
+   "part": null,
+   "url": "https://shopee.tw/product/19770271/57103696058",
+   "isSnorkel": false,
+   "note": "NOT a snorkel. A Taiwanese-designed-and-made intake cover/hood that fits ONTO an existing snorkel head - the listing sells it on 流量改善 (flow), 防塵防雨 (dust and rain) and 客製化 (bespoke). Included because it is the only genuinely Taiwanese-DESIGNED snorkel part found, and because at NT$1,250 it is the kind of thing an owner bolts on and then describes as 'the Taiwanese one'.",
+   "fitment": "Jimny; snorkel head size NOT PUBLISHED",
+   "side": "right",
+   "head": {
+    "type": "intake cover / 進氣罩",
+    "rotates": "NOT PUBLISHED",
+    "removable": true
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "n/a",
+   "material": "台灣設計製造 - Taiwan designed and made; material NOT PUBLISHED",
+   "finish": "NOT PUBLISHED",
+   "fenderCut": "n/a",
+   "price": {
+    "TWD": 1250.0,
+    "verified": true
+   },
+   "tw": {
+    "available": true,
+    "priceTWD": 1250,
+    "seller": "JW WORKS聚維製所"
+   },
+   "modelling": "A small cap or cowl that sits over an existing snorkel head. No dimensions published - do not model."
+  },
+  {
+   "id": "safari_ss820hf",
+   "configuratorId": null,
+   "maker": "Safari 4x4 Engineering (ARB)",
+   "name": "Safari V-Spec Snorkel, Suzuki Jimny (without 2012 facelift bonnet scoop)",
+   "part": "SS820HF",
+   "url": "https://www.arb.com.au/product/ss820hf-safari-v-spec-snorkel-suzuki-jimny-without-2012-facelift-bonnet-scoop",
+   "fitsJB74": false,
+   "fitment": "JB43-era Jimny. ARB states it 'does not suit 2012 Facelift Suzuki Jimny models equipped with a bonnet scoop'. THIS IS NOT A JB74 PART - it is listed here only so nobody researches it again or mistakes it for one.",
+   "side": "NOT PUBLISHED",
+   "head": {
+    "type": "water-separating Air Ram head - forward-facing",
+    "rotates": "NOT PUBLISHED",
+    "removable": "NOT PUBLISHED"
+   },
+   "section": {
+    "shape": "NOT PUBLISHED",
+    "odMM": null
+   },
+   "heightAboveFenderMM": null,
+   "standoffMM": null,
+   "bends": "NOT PUBLISHED",
+   "material": "PE (polyethylene), 'manufactured in Australia from premium quality polyethylene'",
+   "finish": "NOT PUBLISHED",
+   "fenderCut": "NOT PUBLISHED",
+   "templateSupplied": "NOT PUBLISHED",
+   "bungSupplied": "NOT PUBLISHED",
+   "price": {
+    "AUD": 496.0,
+    "verified": true
+   },
+   "tw": {
+    "available": false,
+    "note": "No Taiwanese seller. Ruten does list Safari snorkels for OTHER vehicles at NT$39,330-87,400, which is what a genuine Safari costs here if one existed for the JB74."
+   },
+   "modelling": "n/a - wrong car."
+  },
+  {
+   "id": "guaishou_tw",
+   "configuratorId": null,
+   "maker": "NOT FOUND",
+   "name": "「怪獸」 JB74 snorkel - claimed Taiwanese brand",
+   "part": null,
+   "found": false,
+   "verdict": "NO SUCH PRODUCT COULD BE FOUND. There is no Taiwanese brand called 怪獸 making, selling or badging a JB74 snorkel, in any marketplace, company register or web source reachable from here.",
+   "searched": [
+    "Taiwanese company registry (商業司 via g0v): all 155 registered businesses whose name contains 怪獸. Ten are vehicle-related; NONE makes car parts. 怪獸工廠 (Taoyuan) and 怪獸輪業 (Taoyuan) are both JA02020 機車修理業 - scooter repair. 怪獸企業社 (Tainan) is registered for 汽車零件買賣 (auto parts trading) but has no web presence, no products and no listings anywhere. 怪獸車體鍍膜 (Kaohsiung) is a paint-coating shop.",
+    "Ruten API - 「怪獸 呼吸管」 returns 0 rows; 「怪獸 涉水」 returns 0 rows.",
+    "BigGo, which aggregates Shopee + Yahoo TW + Ruten + PChome + Rakuten TW + Coupang + iOPEN - 「怪獸呼吸管」 returns exactly ONE result in the whole Taiwanese market: 「怪獸工廠 機車速克達引擎排壓.呼吸管」, a NT$600 SCOOTER CRANKCASE BREATHER HOSE. 「怪獸 涉水」 returns nothing at all.",
+    "PChome API - 「怪獸 呼吸管」 returns only diving snorkels and audio cables.",
+    "YouTube, Traditional Chinese queries across 怪獸 + 呼吸管 / JIMNY / JB74 / 四驅 / 越野 / 改裝."
+   ],
+   "whatGuaishouActuallyIs": [
+    {
+     "name": "怪獸工廠",
+     "what": "A Taiwanese MOTORCYCLE SUSPENSION brand (Z2 PRO forks, ZN piggyback shocks, for scooters like the 勁戰 and DRG), Taoyuan. Its only product containing the word 呼吸管 is the NT$600 scooter breather hose above. Nothing to do with cars."
+    },
+    {
+     "name": "怪獸皮卡 (YouTube UC13l0CEqz72cazjBDAXgwgw)",
+     "what": "A Taiwanese PICKUP owners' group, not a shop - its own channel description says 「我們不是修配廠，只是匯集了一群車友」 ('we are not a repair shop, just a group of car friends'). It posts snorkel installs on the Ranger (浪九) and Hilux (海力士), and its own caption for those says the snorkel is 「來自澳洲，純手工打造」 - Australian, hand-made - with hashtags #澳洲呼吸管 #怪獸工廠. So: an enthusiast group that installs an IMPORTED AUSTRALIAN snorkel on pickups. Not a maker, and not a Jimny part."
+    },
+    {
+     "name": "JIMNY怪獸養成所 / Jimny Monster Park",
+     "what": "A Taiwanese JIMNY OFF-ROAD OUTING GROUP. Every video is a trail run - 巴庫拉斯, 萬大南, 十坑, 楓葉溪, 九棚. This is the most likely thing the owner means when they say 怪獸 in a Jimny context, but it is a club, not a brand, and it sells nothing."
+    }
+   ],
+   "mostLikelyExplanation": "The owner's snorkel is most likely a Taiwanese SHOP-MADE unit bought from a shop or a club contact, and 「怪獸」 is the shop's or the group's informal name rather than a product brand. Taiwan really does have shop-made JB74 snorkels at NT$8,350-18,000 - the FRP 巴西式樣 one (tw_frp_brazilian), the Taichung tien0811 one in colours (tw_tien0811), the 南國吉米 one (tw_south_jimny) and the 免鑽孔 one (tw_jimny74) - and none of them names its manufacturer. Any of those could be the car's snorkel. The only way to settle it is to ask the owner for a photo or the shop's name.",
+   "notMonsterSport": "Do NOT substitute MONSTER SPORT (Tajima, Japan). It is a different company, it is Japanese not Taiwanese, and no MONSTER SPORT JB74 snorkel was found - their JB74 catalogue is exhausts, suspension, aero and wheels. If the owner is thinking of MONSTER SPORT when they say 怪獸, the product still does not exist.",
+   "modelling": "Nothing to model. Do not substitute a similar-looking snorkel and label it 怪獸."
+  }
+ ],
+ "gaps": [
+  "The brand behind the NT$10,000 「巴西式樣」 snorkel. Its manual is Portuguese and headed '...TECH' with an 'HPE' footer, but rtech.com.br is under construction and no HPE domain resolves, so the maker is unidentified - and the Taiwanese listing's 產地:台灣 contradicts the Brazilian paperwork. Ask the seller before naming anyone.",
+  "The 公路總局 「涉水管檢驗實務認定標準」 itself. It demonstrably EXISTS - the 交通部 cites it in a written 2023-04-12 reply - but it has never been published: 交通部行政解釋查詢 returns 0 results for both 涉水管 and 呼吸管, it is not in 附件十五, and VSCC does not list it. There is no document number an owner could quote to an inspector.",
+  "The three Taiwanese 免鑽孔／免外觀切割 claims - the NT$2,380 and NT$8,350 Shopee listings and 希琦's Bravo copy - are all unverified, and the 希琦 one contradicts Bravo's own installation guide. Do not repeat any of them as fact.",
+  "Whether MRK's 「BravoSnorkel Jimny 專用呼吸管 JB072」 at NT$18,800 is the JB74 SSJN or Bravo's part for an older Jimny. The title does not say JB74.",
+  "Whether 雲林連合吉普's NT$5,600 ABS unit is a JB74 part at all - the title omits JB74 and the photo is an older-generation shape.",
+  "THE 怪獸 PRODUCT ITSELF. No Taiwanese brand by that name makes a JB74 snorkel - see the guaishou_tw entry for everything that was searched and what 怪獸 actually turns out to be in Taiwan. The gap can only be closed by the owner: a photo of the car, or the name of the shop that fitted it.",
+  "Shopee TW product DESCRIPTIONS. Shopee returns HTTP 403 to curl, to WebFetch and to its own PDP API for any non-browser client. Every Shopee price in this file came from BigGo's republished listing data; not one Shopee description could be read. That is why four Taiwanese products (tien0811, 南國吉米, JIMNY74風格選物, JW WORKS) have almost no specification. A browser session would close this.",
+  "The original Suzuki Brazil 'Brazilian' snorkel. suzukiveiculos.com.br returned HTTP 500, so the factory accessory that the Taiwanese FRP copies descend from has no part number, price or photo here.",
+  "TJM Airtec geometry and head type. tjm.com.au, tjm.co.nz and tjm4x4.com are all Cloudflare-blocked; every TJM figure here is from a European dealer, and the head type, side, diameter and bend count are all NOT PUBLISHED anywhere reachable.",
+  "Ironman's fitting instructions. Ironman links a generic fitting-instructions index with no per-part PDF exposed, so the guard cut, the template and the airbox grommet contents for ISNORKEL070 are inference rather than published fact.",
+  "Height above the fender line and stand-off from the A-pillar, for EVERY product. No maker publishes either figure. All of them here are photo-scaled estimates.",
+  "Bend radii and exact bend angles. Not published by anyone. The bend descriptions here are read from fitted photographs.",
+  "Mega Jimny publishes no dimensions at all beyond the 2 in pipework; the 95 x 255 mm faceplate is a +/-25% photo estimate under heavy perspective.",
+  "Donaldson cyclone BOWL diameters. Donaldson publishes the neck size (89 / 102 mm) but not the bowl OD; the 180 mm figure here is the generic equivalent at the same neck size.",
+  "TJM, Ironman and Turbo II cyclone pre-cleaner part numbers. Donaldson's are verified; the others were not reachable.",
+  "Four more snorkel makers surfaced but were not verified: MASTERFOREST (France, 'MONTAGE SNORKEL MF JIMNY 2018'), AVC 4X4 (Turkey), X-CAR (3-door and 5-door kits), and Legendex. None is sold in Taiwan and none was confirmed against a maker page.",
+  "Whether URNIETA's no-cut install uses only existing holes. The maker says no fender cut, but step 2 screws the body to the fender with supplied screws and clips, and the maker does not say whether those holes already exist."
+ ],
+ "corrections": [
+  {
+   "target": "parts.js SNORKELS id 'safari'",
+   "claim": "label 'Safari 圓管呼吸管', brand 'Ironman 4x4', part ISNORKEL070, note 'Ø89 LLDPE 圓管、前向進氣頭；需切葉子板'.",
+   "truth": "The LABEL is wrong and the note overstates what is published. There is no Safari snorkel for the JB74 and never has been - ARB's full 11,429-product sitemap carries exactly one Safari Suzuki snorkel, SS820HF for the JB43. The product at that URL and part number is an IRONMAN 4X4, so the label should say Ironman, not Safari. Separately, Ironman does NOT publish Ø89, does NOT publish LLDPE, and does NOT publish the fender cut on its product page - all three are reasonable inferences but none is a published fact, and the diameter is more likely 95-105 mm (ESTIMATED). Suggested label 「Ironman 4x4 圓管呼吸管」.",
+   "severity": "high - wrong maker name on a real product"
+  },
+  {
+   "target": "parts.js SNORKELS id 'bravo' - label and note",
+   "claim": "label 'SSJN 方管呼吸管' (square-tube); note '西班牙製、方形管身貼 A 柱、彎頭側向網狀進氣；免鑽孔（換掉葉子板角飾板）'.",
+   "truth": "Three separate errors. (1) NOT SQUARE: the top spigot is a true 89 mm circle and the body below it is an oval/D-section moulding - the maker's own guide calls part 2 'Snorkel head 89 mm / 3,5\"'. Suggested label 「SSJN 圓管呼吸管」. (2) NOT A SIDE-FACING MESH: it is a forward-facing ram elbow with a louvred chevron grille, clamped to the round spigot so it rotates 360 degrees. (3) NOT NO-DRILL: Bravo's own installation PDF has the step callouts 'Drill' and 'Cut' and a note to remove the bonnet, and the kit contains two M6 rivnuts. THE GUARD IS CUT. The 'no modification' wording comes from the Australian retailer's product title, not from Bravo. What IS correct: Spanish-made (BRAVO EMPORION SL, Girona) and EUR 399.",
+   "severity": "high - all three modelling-relevant claims are wrong"
+  },
+  {
+   "target": "parts.js SNORKELS id 'bravo' - url",
+   "claim": "https://bravosnorkel.com/en/suzuki/106-suzuki-jimny-2018-.html",
+   "truth": "Stale PrestaShop duplicate. It resolves but renders as a bare category tile titled 'copy of SUZUKI JIMNY (2018 - )'. The live product page is https://bravosnorkel.com/en/suzuki/174-suzuki-jimny-2018-.html",
+   "severity": "medium"
+  },
+  {
+   "target": "parts.js SNORKELS id 'bravo' - refs",
+   "claim": "refs: ['https://shopee.tw/JIMNY-JB74專用呼吸管-i.15564603.6673859917'] cited as the Taiwanese listing for the Bravo.",
+   "truth": "WRONG PRODUCT. Shop 15564603 / item 6673859917 is seller tien0811 of 臺中市烏日區 selling their own 「JIMNY JB74專用呼吸管」 at NT$12,000-18,000 with colour options including yellow. It is not a Bravo and it is not Spanish. The real Taiwanese Bravo listing is MRK 4X4's, at NT$18,800 under MRK's own code JB072 - Shopee 19212802/56303904060, Yahoo tw.bid.yahoo.com/item/101726145413, or Rakuten rakuten.com.tw/shop/myrack/product/85cfhrtgy/.",
+   "severity": "high - the price the configurator would quote for Taiwan is from a different product"
+  },
+  {
+   "target": "parts.js SNORKELS id 'urnieta' - note",
+   "claim": "'ABS 方管、矩形百葉進氣頭、側面開槽' (ABS square tube, rectangular louvred intake head with side slots).",
+   "truth": "Half right. ABS is correct. But the body is a TAPERED FLAT-SIDED moulding, about 80 mm at the collar widening to about 119 mm at the foot - not a constant square tube; the word 'square' in URNIETA's own copy refers to an optional HEAD shape ('square-head or round-head'), not the body. And the head shown fitted is a ROUND DRUM about 155 x 98 mm with a louvre band running the full 360 degrees and URNIETA embossed on it - a radial intake, not a rectangular head with side slots. What IS correct: two interchangeable heads (standard + cyclone), replaces the factory hood garnish, no fender cut, no drilling.",
+   "severity": "medium - the head shape is wrong, which is the most visible part"
+  },
+  {
+   "target": "parts.js SNORKELS id 'urnieta' - missing data",
+   "claim": "no dimensions carried.",
+   "truth": "URNIETA publishes a factory drawing, UN-JIMNY-FB-006, with two labelled dimensions: 1048 mm overall length and 675 mm overall height. Pixel measurement of the two gives 1.4181 and 1.4162 mm/px - 0.13% agreement - so everything else on that drawing is derivable with confidence. This is by far the best-documented snorkel in the file and the note should carry those numbers, plus weight 2.3 kg and the JB64 incompatibility.",
+   "severity": "low - missing, not wrong"
+  },
+  {
+   "target": "parts.js SNORKELS id 'precleaner' - brand",
+   "claim": "brand 'Safari + PC35'.",
+   "truth": "Wrong on both halves. PC35 is jimnybits' OWN RETAIL SKU, not a manufacturer part number, and the product page shows no brand at all - it is an unbranded generic. There is no evidence Safari makes or sells a PC35. If a branded cyclone head is wanted, the verified ones are Donaldson H001249A (Original, EUR 69), H002437A (TopSpin, self-emptying, 99% ISO 5011, EUR 199) and H002852A (TopSpin HD, stainless + aluminium, EUR 349), all for an 89 mm spigot.",
+   "severity": "high - invented brand attribution"
+  },
+  {
+   "target": "parts.js SNORKELS id 'precleaner' - fitment and price",
+   "claim": "'Ø180 透明旋風碗' with price null, and the URL slug implying it fits 3-inch snorkels.",
+   "truth": "Ø180 and the clear cyclone bowl are CORRECT - and 180 mm is correct specifically for an 89 mm neck. But the fitment is 3.5 INCH (89 mm), not 3 inch; the URL slug reads 'for-3-snorkels' only because the .5\" was stripped when the slug was generated, and the page itself says 3.5\". On a 3 in (76 mm) snorkel it is oversized and needs an adapter. And the price is not null: GBP 19.80, reduced from 23.76.",
+   "severity": "medium"
+  },
+  {
+   "target": "parts.js SNORKELS id 'sleek' - note",
+   "claim": "'2 吋不鏽鋼細管貼 A 柱、後向小進氣口；免鑽孔、幾乎看不見' (2-inch stainless slim tube hugging the A-pillar, small rearward-facing intake, no drilling, nearly invisible).",
+   "truth": "Two errors inside a mostly-right description. (1) THE INTAKE IS NOT REARWARD-FACING. It is a louvred faceplate set flush into the OUTBOARD face of a housing at the top of the A-pillar - a tall rounded rectangle, colour-matched to the car, four stainless dome screws, with 'MEGA JIMNY' pierced through it; air enters sideways through the slots and the lettering. (2) THERE IS NO VISIBLE TUBE. The 2-inch 304 stainless pipework is real but it is CONCEALED inside a black textured moulded plastic body and under the guard; what you see on the car is a trim moulding in the windscreen/A-pillar channel, not a slim tube. 'No drilling' and 'almost invisible' are both CORRECT and the maker is emphatic about it - 'absolutely NO drilling or holes... completely reversible' - so the earlier claim in docs/jb74-accessory-atlas.json that 'the fender panel still has to be cut' is refuted by the maker's own copy and should be removed. Current version is V4; JB64 is not compatible.",
+   "severity": "high - the modelled part has an intake in the wrong place and a tube that should not be visible"
+  },
+  {
+   "target": "docs/jb74-accessory-atlas.json, categories.snorkels, Mega Jimny entry",
+   "claim": "mounting: 'No-drill A-pillar mount - but the fender panel still has to be cut'.",
+   "truth": "Refuted by the maker. Mega Jimny: 'our snorkels require absolutely NO drilling or holes to be cut into the body for fitment'... 'No huge holes in your front guard/A-pillar here!'... 'completely reversible'. It is a full panel-replacement system and the A-pillar bracket is double-sided tape. Nothing is cut.",
+   "severity": "medium"
+  },
+  {
+   "target": "docs/jb74-accessory-atlas.json, categories.snorkels, Ironman entry",
+   "claim": "modelling note: 'Already in the configurator as the Safari/Ironman round ram head.'",
+   "truth": "There is no 'Safari/Ironman' - they are different companies and Safari has no JB74 product at all. Ironman ISNORKEL070 is its own thing.",
+   "severity": "low - naming"
+  },
+  {
+   "target": "docs/jb74-accessory-atlas.json, categories.snorkels, the unbranded Taiwanese entry",
+   "claim": "'Taiwan/China aftermarket (unbranded)', TWD 2,548, 'The only snorkel option at Taiwanese retail prices.'",
+   "truth": "Badly understates the Taiwanese market. It is not the only option and it is not Taiwanese - it is a Chinese dropship item traceable to 廣州杜克汽車配件有限公司 on 1688. Taiwan actually has five price bands: the Chinese generic at NT$2,250-4,100, small Taiwanese shops at NT$4,500-5,600, a 免鑽孔 unit at NT$8,350, a Brazilian-pattern FRP unit at NT$10,000-10,600 (plus NT$3,500 fitting) and NT$10,500-18,000 from other shops, and two genuine imports - URNIETA Salado NT$14,000 and Bravo SSJN NT$18,800 through MRK 4X4 and 希琦. Also worth carrying: the 27 listings at NT$625-780 are FAKE prices - the dropship feed republished the RMB 150 wholesale figure without converting it.",
+   "severity": "medium"
+  },
+  {
+   "target": "The brief's assumption that Safari makes an SS1130HF for this car",
+   "claim": "'Safari (SS1130HF etc.)' listed among the mainstream JB74 snorkels.",
+   "truth": "SS1130HF is a Jeep Cherokee KJ part (2.4L / 3.7L) in ARB's own catalogue. SS1130HP does not exist. Safari makes no JB74 snorkel.",
+   "severity": "high"
+  },
+  {
+   "target": "The brief's assumption that ARB, Rival 4x4, Dobinsons and APIO make JB74 snorkels",
+   "claim": "listed among 'the mainstream ones for this car'.",
+   "truth": "NONE of the four does. ARB has no ARB-branded snorkel for the JB74 and resells Torqit as SN02SS/SN02MB instead. Rival 4x4 makes no snorkels for any vehicle. Dobinsons makes snorkels but has no Suzuki entry at all. APIO returns no results for either Japanese spelling of 'snorkel' and has no air-intake category. The real JB74 field is Ironman, TJM, Torqit, Bravo, URNIETA, Mega Jimny, the Taiwanese FRP shops and the Chinese generics.",
+   "severity": "high"
+  }
+ ]
+}

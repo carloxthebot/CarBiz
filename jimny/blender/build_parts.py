@@ -1151,42 +1151,73 @@ def _pillar_path(side, off, top_y=1600):
 
 
 def snorkel_bravo(side=RIGHT):
-    """Bravo Snorkel SSJN: squared textured body hugging the pillar from a base
-    plate on the fender corner; 3.5in elbow head turned outward with a mesh
-    intake on its side face."""
+    """Bravo Snorkel SSJN (Girona, Spain).
+
+    Corrected 2026-09-22 from Bravo's own manual: the body is NOT square and
+    the head does NOT face sideways. The top is round, Bravo publish it as
+    89 mm, and the intake is a forward-facing elbow clamped on a band so the
+    owner can rotate it. The fender IS drilled and cut -- the "no
+    modification" line is a reseller's, not Bravo's."""
     root = group('snorkel_bravo')
     off = 44
     pts = fillet(_pillar_path(side, off, 1590), 90, steps=8)
-    sweep('body', [tuple(p) for p in pts], rounded_rect(96, 80, 18, 4), TEXBLACK, root)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(92, 74, 30, 5), TEXBLACK, root)
     box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
-    tube('neck', [(hx, 1585, hz), (hx, 1640, hz)], 89, TEXBLACK, root)
-    # elbow head: turns forward, flat cap, mesh intake facing the nose
-    head = tube('elbow', [(hx, 1630, hz), (hx, 1690, hz), (hx, 1700, hz + 60)], 89, TEXBLACK, root, bend=45)
-    box('cap', (hx, 1700, hz + 62), (100, 100, 30), TEXBLACK, root, bevel=8)
-    for k in range(5):
-        box(f'grille{k}', (hx, 1668 + k * 16, hz + 80), (76, 6, 4), RUBBER, root, bevel=0)
+    lib.cylinder('collar', (hx, 1578, hz), (0, 1, 0), 98, 26, TEXBLACK, root, n=24)
+    lib.cylinder('band', (hx, 1600, hz), (0, 1, 0), 96, 18, BLACK, root, n=24)
+    box('bandLug', (hx + side * 50, 1600, hz), (22, 24, 30), BLACK, root, bevel=3)
+    # forward-facing elbow: up out of the band, over, and out toward the nose
+    tube('elbow', [(hx, 1596, hz), (hx, 1664, hz), (hx, 1686, hz + 58), (hx, 1686, hz + 104)],
+         89, TEXBLACK, root, bend=46)
+    box('mouth', (hx, 1686, hz + 118), (94, 94, 14), TEXBLACK, root, bevel=8)
+    for k in range(6):                                      # grille bars across the mouth
+        box(f'grille{k}', (hx, 1652 + k * 14, hz + 124), (78, 6, 5), RUBBER, root, bevel=0)
     for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
 
 
 def snorkel_urnieta(side=RIGHT):
-    """URNIETA Salado: rectangular ABS body from the fender corner, round
-    collar, then a rectangular head with forward louvres and slotted sides."""
+    """URNIETA SALADO snorkel kit (0702021), drawing UN-JIMNY-FB-006: 1048
+    long x 675 tall, 2.3 kg, JB74 only.
+
+    Corrected 2026-09-22: the standard head is a round DRUM with louvres
+    right round it, not a rectangular box with a forward face -- the boxy
+    thing in the photos is the optional pre-cleaner. Two heads ship in the
+    kit and swap on the same collar."""
     root = group('snorkel_urnieta')
     off = 42
     pts = fillet(_pillar_path(side, off, 1570), 80, steps=8)
-    sweep('body', [tuple(p) for p in pts], rounded_rect(90, 70, 10, 3), TEXBLACK, root)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(88, 72, 22, 4), TEXBLACK, root)
     box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
-    lib.cylinder('collar', (hx, 1590, hz), (0, 1, 0), 96, 40, TEXBLACK, root)
-    box('head', (hx, 1670, hz), (140, 110, 120), TEXBLACK, root, bevel=10)
-    for k in range(5):
-        box(f'louvre{k}', (hx, 1632 + k * 19, hz + 62), (118, 6, 6), RUBBER, root, bevel=0)
-    for k in range(6):
-        box(f'slot{k}', (hx + side * 72, 1670, hz - 45 + k * 18), (4, 80, 6), RUBBER, root, bevel=0)
-    box('lid', (hx, 1728, hz), (146, 8, 126), TEXBLACK, root, bevel=3)
+    lib.cylinder('collar', (hx, 1590, hz), (0, 1, 0), 96, 40, TEXBLACK, root, n=24)
+    lib.cylinder('drum', (hx, 1666, hz), (0, 1, 0), 152, 118, TEXBLACK, root, n=28)
+    for k in range(5):                                      # louvres all the way round
+        lib.cylinder(f'louvre{k}', (hx, 1622 + k * 22, hz), (0, 1, 0), 162, 9, RUBBER, root, n=28)
+    lib.cylinder('lid', (hx, 1732, hz), (0, 1, 0), 158, 16, TEXBLACK, root, n=28)
+    lib.cylinder('knob', (hx, 1746, hz), (0, 1, 0), 44, 22, TEXBLACK, root, n=16)
+    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+        box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
+    return root
+
+
+def snorkel_ironman(side=RIGHT):
+    """Ironman 4x4 ISNORKEL070 -- what our 'safari' slot was always drawing.
+    Safari has never made a JB74 part. Forward-facing ram head with a hex
+    mesh face, on a band clamp so it rotates."""
+    root = group('snorkel_ironman')
+    off = 42
+    pts = fillet(_pillar_path(side, off, 1585), 95, steps=8)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(98, 82, 34, 5), TEXBLACK, root)
+    box('basePlate', (side * 712, 1000, 620), (62, 40, 176), TEXBLACK, root, bevel=6)
+    hx, hz = side * (612 + off), 405
+    lib.cylinder('band', (hx, 1596, hz), (0, 1, 0), 102, 20, BLACK, root, n=24)
+    tube('ram', [(hx, 1592, hz), (hx, 1660, hz), (hx, 1682, hz + 62), (hx, 1682, hz + 112)],
+         95, TEXBLACK, root, bend=48)
+    box('face', (hx, 1682, hz + 126), (104, 104, 16), TEXBLACK, root, bevel=10)
+    hex_mesh(root, BLACK, hx, 1682, hz + 132, 78, 78)
     for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
@@ -1216,17 +1247,22 @@ def snorkel_precleaner(side=RIGHT):
 
 
 def snorkel_sleek(side=RIGHT):
-    """Mega Jimny Supa-Sleek: 2in tube tight to the pillar from a flat
-    fender-corner cover, small rear-facing scoop at the top."""
+    """Mega Jimny Supa-Sleek V4.
+
+    Corrected 2026-09-22: the 2 in stainless tube is not visible at all --
+    it runs inside a black moulding against the pillar -- and the intake is
+    a louvred panel at the top of the A-pillar facing OUTWARD, not a scoop
+    facing back. From the far side of the car you barely see it, which is
+    the whole point of the product."""
     root = group('snorkel_sleek')
-    off = 30
+    off = 26
     pts = fillet(_pillar_path(side, off, 1585), 70, steps=8)
-    tube('body', [tuple(p) for p in pts], 51, TEXBLACK, root, bend=70)
-    box('cover', (side * 712, 1000, 620), (50, 34, 180), TEXBLACK, root, bevel=8)
+    sweep('cowl', [tuple(p) for p in pts], rounded_rect(72, 46, 16, 4), TEXBLACK, root)
+    box('cover', (side * 712, 1000, 620), (46, 32, 180), TEXBLACK, root, bevel=8)
     hx, hz = side * (612 + off), 405
-    box('scoop', (hx, 1605, hz - 30), (70, 60, 110), TEXBLACK, root, bevel=8,
-        rot=Matrix.Rotation(math.radians(-35 * side), 3, 'X'))
-    box('scoopMouth', (hx, 1620, hz - 85), (54, 40, 4), RUBBER, root, bevel=2)
+    box('vent', (hx + side * 10, 1600, hz), (30, 150, 96), TEXBLACK, root, bevel=8)
+    for k in range(5):                                      # outward-facing louvres
+        box(f'louvre{k}', (hx + side * 26, 1552 + k * 24, hz), (5, 14, 76), RUBBER, root, bevel=0)
     for (y, z, x) in ((1300, 555, 650),):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 16, 30), STEEL, root, bevel=2)
     return root
@@ -2832,6 +2868,7 @@ def build():
     decals()
     side_skirt()
     snorkel_bravo()
+    snorkel_ironman()
     snorkel_urnieta()
     snorkel_precleaner()
     snorkel_sleek()
