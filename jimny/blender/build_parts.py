@@ -1203,6 +1203,44 @@ def snorkel_urnieta(side=RIGHT):
     return root
 
 
+def snorkel_cowl(side=RIGHT):
+    """The low-profile A-pillar duct sold on Shopee as a JB64/74 涉水器, and
+    what the owner's car wears (their photos, 2026-09-22).
+
+    It is not a tube snorkel at all: a flat textured moulding replaces the
+    A-pillar trim, continues forward along the top of the fender to the
+    airbox, and takes its air through a rectangular louvred panel screwed
+    into the outer face near the TOP of the pillar. Nothing rises above the
+    roof gutter, which is most of why people buy it -- the car keeps its
+    registered height.
+
+    Sizes are read off the owner's photos against the JB74's 185 mm mirror
+    head and 1645 mm body width, so they are ESTIMATED to about +-10 mm."""
+    root = group('snorkel_cowl')
+    off = 30
+    # the pillar moulding: wide and shallow, hugging the trim line
+    pts = fillet(_pillar_path(side, off, 1576), 80, steps=8)
+    sweep('pillar', [tuple(p) for p in pts], rounded_rect(78, 46, 16, 4), TEXBLACK, root)
+    # forward along the fender top, beside the bonnet edge, to the airbox
+    duct = [(side * 700, 992, 648), (side * 690, 980, 840), (side * 676, 968, 1010)]
+    sweep('cowlDuct', [tuple(p) for p in fillet(duct, 70, steps=6)],
+          rounded_rect(58, 112, 18, 4), TEXBLACK, root)
+    box('ductEnd', (side * 672, 966, 1030), (118, 54, 26), TEXBLACK, root, bevel=8)
+    for z in (880, 960):                                     # the moulded ribs along the duct
+        box(f'rib{z}', (side * 640, 984, z), (8, 34, 52), TEXBLACK, root, bevel=2)
+    # the intake: a louvred panel screwed into the outer face near the top
+    vx, vy, vz = side * (612 + off + 22), 1496, 418   # right up under the gutter, as in the photos
+    box('ventFrame', (vx, vy, vz), (26, 196, 84), TEXBLACK, root, bevel=5)
+    box('ventWell', (vx + side * 7, vy, vz), (14, 172, 64), BLACK, root, bevel=2)
+    for k in range(9):                                       # horizontal louvre bars
+        box(f'louvre{k}', (vx + side * 12, vy - 74 + k * 18.5, vz), (5, 8, 60), RUBBER, root, bevel=0)
+    for dy, dz in ((-88, -32), (-88, 32), (88, -32), (88, 32)):
+        lib.cylinder(f'screw{dy}{dz}', (vx + side * 11, vy + dy, vz + dz), (side, 0, 0), 11, 6, STEEL, root, n=10)
+    for (y, z, x) in ((1240, 580, 652), (1480, 452, 624)):
+        box(f'clip{y}', (side * (x + off / 2), y, z), (off + 8, 16, 30), TEXBLACK, root, bevel=2)
+    return root
+
+
 def snorkel_ironman(side=RIGHT):
     """Ironman 4x4 ISNORKEL070 -- what our 'safari' slot was always drawing.
     Safari has never made a JB74 part. Forward-facing ram head with a hex
@@ -2869,6 +2907,7 @@ def build():
     side_skirt()
     snorkel_bravo()
     snorkel_ironman()
+    snorkel_cowl()
     snorkel_urnieta()
     snorkel_precleaner()
     snorkel_sleek()
