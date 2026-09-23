@@ -497,17 +497,6 @@ def hex_mesh(root, mat, cx, cy, z, w, h, cell=25, bar=2.4):
         sweep(f'hx{i}', [(cx + u0, cy + v0, z), (cx + u1, cy + v1, z)], sq, mat, root, smooth=False)
 
 
-def hex_panel(root, mat, place, w, h, cell=22, bar=2.8, prefix='hx'):
-    """Honeycomb on an arbitrary plane: `place(u, v) -> (x, y, z)` maps the
-    panel's own millimetres onto the car."""
-    sq = [(-bar / 2, -bar / 2), (bar / 2, -bar / 2), (bar / 2, bar / 2), (-bar / 2, bar / 2)]
-    for i, ((u0, v0), (u1, v1)) in enumerate(hex_edges(w, h, cell)):
-        sweep(f'{prefix}{i}', [place(u0, v0), place(u1, v1)], sq, mat, root, smooth=False)
-
-
-# SHOWA GARAGE ABS front grille (E00500): stock outline, round lamp bezels,
-# a rounded-rectangle frame ~440 x 120 in the centre with a recessed hex
-# honeycomb, matte black.
 def grille_showa():
     root = group('grille_showa_hex')
     grille_panel('panel', root, TEXBLACK, (440, 120, 858))
@@ -1216,94 +1205,6 @@ def snorkel_urnieta(side=RIGHT):
     return root
 
 
-def snorkel_cowl(side=RIGHT):
-    """The low-profile A-pillar duct sold in Taiwan as a JB64/74 涉水器
-    (NT$2,900 on Shopee), and what the owner's car wears. Fifth attempt,
-    2026-09-22, off the seller's own sharp side-on photos.
-
-    Probed off this model, right side (raycasts on a 20 mm grid):
-      A-pillar outer face  |x| 663 at y 1250 falling to 616 at y 1570
-      A-pillar band centre  z  480 at y 1250 falling to 310 at y 1570
-      cowl / bonnet top      y  1123-1140 over z 620-760 at |x| 640-660
-      fender shoulder rolls over between |x| 660 and 700
-
-    What the sharp photos settle, and what the earlier tries got wrong:
-      * the moulding sits FORWARD of the painted pillar, over the windscreen
-        garnish, so a band of body colour still shows behind it. The blade was
-        centred on the pillar before, which buried that band.
-      * it is FLAT -- about 25 mm proud, not 40-50 -- and close to constant
-        width down its run, rather than a wedge.
-      * the intake is a separate bolt-on PLATE lying on that face: a rounded
-        rectangle with a screw at each corner, three honeycomb columns wide,
-        running the top half. It is squared off at the bottom, not pointed,
-        and it sits hard against the painted pillar on the moulding's rear
-        edge -- with a smooth band of the moulding's own face still forward
-        of it.
-      * the raised strip beside all this in the photos is the window visor,
-        not part of the snorkel.
-
-    Nothing rises above the roof gutter, which is the whole point: the car
-    keeps its registered height."""
-    root = group('snorkel_cowl')
-    s = side
-    X = lambda v: s * v
-
-    # ---- the moulding: pillar blade, then the scuttle boot ----------------
-    # centre = probed pillar band, moved 26 mm forward onto the glass edge,
-    # and half the 26 mm thickness out from the probed face
-    # ONE continuous moulding, and only as wide as the A-pillar: it must not
-    # reach back over the door frame, which is what leaves room for a retro
-    # mirror clamped to the window surround.
-    #
-    # The section turns with the path. Running UP the pillar the sweep's u is
-    # car X (thickness) and v is fore-aft; running FORWARD along the fender u
-    # is still car X but is now the width ACROSS the car and v is height. The
-    # previous version handed both lofts the same numbers, so the piece on the
-    # fender came out as a tall thin fin instead of a wide flat shroud.
-    JOINT = (X(684), 1200, 535)
-    JOINT_SEC = rounded_rect(32, 112, 11, 5)
-    blade = [JOINT, (X(679), 1250, 480), (X(669), 1330, 430),
-             (X(659), 1410, 390), (X(648), 1490, 345), (X(630), 1568, 310)]
-    lib.loft('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
-             JOINT_SEC, rounded_rect(26, 100, 9, 5), TEXBLACK, root)
-
-    # the shroud: out of the joint, forward and down ONTO the fender, widening
-    # and flattening as it goes. Probed fender top, right side: y 1135 at
-    # z 640 falling to about 1096 at z 960, over |x| 600-670; outboard of
-    # |x| 680 the shoulder rolls away, so it stays inboard of that.
-    # It is a short wide FAN over the fender's rear corner, not a rail running
-    # off down the wing: in the photos it spreads inboard toward the bonnet
-    # shut line and stops about 200 mm forward of the pillar.
-    # It does NOT lie flat on the bonnet. It carries on DOWN, hugging the
-    # fender's outboard shoulder, and flares into a broad skirt over the
-    # corner where the pillar foot, the windscreen base and the wing meet.
-    # Probed shoulder, right side: |x| 680 runs y 1107 at z 560 down to 1032
-    # at z 760, and |x| 700 is already the fender's flank at y 995.
-    shroud = [JOINT, (X(680), 1156, 578), (X(676), 1122, 632), (X(672), 1098, 692)]
-    lib.loft('shroud', [tuple(p) for p in fillet(shroud, 55, steps=6)],
-             JOINT_SEC, rounded_rect(28, 104, 12, 5),
-             TEXBLACK, root, ease=lambda t: t ** 0.7)
-    # two ribs pressed into its outer face, and the screws along its foot
-    for k in (0, 1):
-        box(f'rib{k}', (X(682), 1108 - k * 26, 636 + k * 22), (9, 8, 78), TEXBLACK, root, bevel=3)
-    for (y, z) in ((1090, 640), (1070, 692)):
-        lib.cylinder(f'shroudScrew{z}', (X(676), y, z), (s, 0, 0), 11, 8, STEEL, root, n=10)
-    # ---- the intake, on the moulding's outboard face near the top ---------
-    ay, az = 0.888, -0.459
-    cy, cz = 1470, 356
-    def place(u, v, out=0):
-        return (X(666 - 0.15 * u + out), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
-    sweep('well', [place(-92, 0, -11), place(92, 0, -11)], rounded_rect(14, 64, 10, 4), BLACK, root)
-    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 180, 64, cell=19, bar=2.6)
-    ring = [place(104, -40), place(104, 40), place(-104, 40), place(-104, -40)]
-    sweep('plate', [tuple(p) for p in fillet(ring + ring[:2], 20, steps=3)],
-          rounded_rect(14, 18, 5, 3), TEXBLACK, root, closed=True, caps=False)
-    for u in (96, -96):
-        for v in (-31, 31):
-            lib.cylinder(f'ps{u}{v}', place(u, v, 6), (s, 0, 0), 10, 7, STEEL, root, n=10)
-    return root
-
-
 def snorkel_ironman(side=RIGHT):
     """Ironman 4x4 ISNORKEL070 -- what our 'safari' slot was always drawing.
     Safari has never made a JB74 part. Forward-facing ram head with a hex
@@ -1415,19 +1316,33 @@ def mirrors_urnieta():
 
 def mirrors_damd():
     """DAMD Truck Mirror, measured off the owner's photos: tall 150 x 250 head
-    with big radii hanging inside a U of 20 mm tube; the top arm leaves a
-    flat plate bracket at the door's top front corner, the vertical run passes
-    behind the head's outer third, the bottom arm returns to a hinge block on
-    a plate at the cowl beside the door hinge."""
+    with big radii hanging inside a U of 20 mm tube; the top arm clamps onto
+    the DOOR's window frame, the vertical run passes behind the head's outer
+    third, the bottom arm returns to a hinge block on a plate at the cowl
+    beside the door hinge.
+
+    The top bracket sits on the frame, not in mid-air beside it. Probed on
+    this model, right side: the painted band between the windscreen glass and
+    the door glass runs |x| 645-658 over z 410-510 at y 1300-1340, and the
+    door's half of it -- the bit a clamp may grip -- is the rear half, around
+    z 430-470. The old bracket was at |x| 703 over z 470-580, which is the
+    door SKIN's width carried up to window height, so it floated about 50 mm
+    outboard of the frame and lay across the windscreen."""
     root = group('mirrors_damd')
+    FRAME_X, FRAME_Z = 656, 448                    # door window frame, outer face
     for s in (-1, 1):
         xd = s * MIR_X
         xo = s * (MIR_X + 175)                     # vertical tube
-        loop = [(xd + s * 6, 1315, 505), (xo, 1315, 490), (xo, 1000, 490), (xd + s * 6, 1000, 505)]
+        loop = [(s * (FRAME_X + 16), 1315, FRAME_Z), (xo, 1315, 490), (xo, 1000, 490), (xd + s * 6, 1000, 505)]
         tube(f'arm{s}', loop, 20, BLACK, root, bend=55)
-        # top bracket: plate against the pillar with a clamp on the tube
-        box(f'topPlate{s}', (s * (MIR_X - 2), 1300, 525), (6, 70, 110), BLACK, root, bevel=1)
-        box(f'topClamp{s}', (s * (MIR_X + 22), 1315, 505), (44, 30, 30), BLACK, root, bevel=4)
+        # top bracket: a pad lying on the frame (its inner half buried in the
+        # paint, so it reads as clamped rather than floating), and the clamp
+        # that grips the tube where the tube meets it
+        box(f'topPlate{s}', (s * (FRAME_X + 3), 1312, FRAME_Z), (8, 88, 76), BLACK, root, bevel=3)
+        box(f'topClamp{s}', (s * (FRAME_X + 30), 1315, FRAME_Z), (44, 34, 34), BLACK, root, bevel=4)
+        for dy in (-13, 13):                       # the pinch bolts through the clamp
+            lib.cylinder(f'topBolt{s}{dy}', (s * (FRAME_X + 50), 1315 + dy, FRAME_Z), (s, 0, 0),
+                         9, 14, STEEL, root, n=8)
         # bottom: hinge block on a plate at the cowl
         box(f'botPlate{s}', (s * (MIR_X - 6), 985, 540), (70, 6, 110), BLACK, root, bevel=1)
         lib.cylinder(f'hinge{s}', (s * (MIR_X + 14), 1005, 505), (0, 1, 0), 34, 60, BLACK, root, n=16)
@@ -2970,7 +2885,6 @@ def build():
     side_skirt()
     snorkel_bravo()
     snorkel_ironman()
-    snorkel_cowl()
     snorkel_urnieta()
     snorkel_precleaner()
     snorkel_sleek()

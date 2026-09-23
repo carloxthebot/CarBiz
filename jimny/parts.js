@@ -402,10 +402,6 @@ export const SNORKELS = [
   { id: 'sleek', photo: true, url: 'https://megajimny.com/products/supa-sleek-snorkel-system',
     label: 'Supa-Sleek V4 隱藏式', price: 649, cur: 'AUD', brand: 'Mega Jimny',
     note: '2 吋不鏽鋼管完全藏在黑色飾板裡看不到，進氣是 A 柱頂端朝「外」的百葉面板，不是朝後的進氣口。免鑽孔' },
-  { id: 'tw_cowl', photo: true, url: 'https://shopee.tw/product/44745815/26689961635',
-    refs: ['https://shopee.tw/product/696418486/40455547919'],
-    label: 'A 柱隱藏式涉水器', price: 2900, cur: 'TWD', brand: '蝦皮賣家（陸製）', uncertain: true,
-    note: '不是管狀呼吸管：一整片飾板取代 A 柱飾條，往前下方收進風擋下方的凹槽再接到空濾。進氣是鎖在飾板上半段外側的長方形蜂巢面板（四角螺絲）。整組不高過雨槽，車高不變是它最大的賣點。車主實車配置；賣家未標製造商，尺寸依賣家實照推估' },
   { id: 'tw_frp', label: 'FRP 呼吸管（巴西式樣）', price: 10000, cur: 'TWD', brand: '台灣店家自售', uncertain: true,
     note: '台灣多家店自售、沒有一家標示製造商：機油倉庫 NT$10,000（另加工資 3,500）、南國吉米 10,500、台中烏日 12,000–18,000。葉子板開孔約 83–110mm、A 柱另鑽四個 8mm 固定孔' },
   { id: 'tw_nodrill', label: '免鑽孔呼吸管', price: 8350, cur: 'TWD', brand: '台灣店家自售', uncertain: true,
@@ -705,14 +701,6 @@ export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   }
   if (wheel.offset <= -20) {
     out.push({ level: 'info', msg: `offset ${wheel.offset} 會明顯外擴輪距，需確認輪拱覆蓋與法規` });
-  }
-  // Public-road note, from 公路總局 2023-03-17 via the ministry's 2023-04-12
-  // reply: a modular snorkel is inspectable and needs no registration change,
-  // and is not counted into the vehicle's height. What fails is the height on
-  // the registration document not matching the car.
-  if (cfg.snorkel !== 'none') {
-    out.push({ level: 'info',
-      msg: '呼吸管在台灣屬模組化套件，安裝牢固即可驗車、免辦變更登記，也不計入車高；真正會被開單的是實際車高與行照不符（容許約 2cm）' });
   }
   if (cfg.extinguisher === 'ladder' && cfg.ladder === 'none') {
     out.push({ level: 'error', msg: '滅火器掛在尾梯上，但目前沒有裝尾梯' });

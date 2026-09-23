@@ -11,7 +11,7 @@ await page.evaluate(() => { document.querySelectorAll('.panel,.hud,.views,.badge
 await page.setViewportSize({ width: 1000, height: 1000 });
 await page.waitForTimeout(400);
 console.log(await page.evaluate(() => {
-  const J = window.__jimny; J.S.snorkel = 'tw_cowl'; J.update();
+  const J = window.__jimny; J.S.snorkel = 'bravo'; J.update();
   let found = null;
   J.rig.traverse(o => { if (/snorkel/i.test(o.name)) found = o; });
   if (!found) return 'no snorkel node';
