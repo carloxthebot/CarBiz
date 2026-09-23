@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230553" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609231607" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -30,7 +30,11 @@
   --sheet:214px;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0}
+/* An in-app browser (LINE, Facebook) closes itself on a downward swipe, and
+   what it watches for is the overscroll bounce at the end of a scroll. Nothing
+   on this page may chain its scroll to the document, or a flick down inside
+   the sheet takes the whole browser with it. */
+html,body{height:100%;margin:0;overscroll-behavior:none}
 body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
   -webkit-font-smoothing:antialiased;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .app{display:grid;grid-template-columns:1fr 372px;height:100%}
@@ -132,7 +136,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 .steps button[aria-selected=true] b{color:var(--acc)}
 .steps button[aria-selected=true]::after{content:"";position:absolute;inset:auto 0 0 0;height:2px;background:var(--acc)}
 
-.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;touch-action:pan-y}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;touch-action:pan-y;overscroll-behavior:contain}
 .pane{display:none;padding:4px 20px 8px}
 .pane.on{display:block;animation:paneIn .3s cubic-bezier(.22,.78,.24,1) both}
 /* which way the step moved, so the content comes from the side you swiped */
@@ -325,7 +329,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .hud{max-width:64%;bottom:calc(var(--sheet) + 8px);font-size:9.5px;line-height:1.55;gap:2px}
   .hud .stats i{font-size:13px}
   .credit{max-width:34%;font-size:9.5px}
-  .panel{grid-area:1/1;align-self:end;z-index:3;height:92dvh;border-left:0;
+  .panel{grid-area:1/1;align-self:end;z-index:3;height:87dvh;border-left:0;overscroll-behavior:none;
     border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
     background:#0c1214f2;backdrop-filter:blur(14px);
     box-shadow:0 -18px 40px #00000066;
@@ -334,8 +338,14 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     transform:translateY(calc(100% - var(--sheet)));transition:transform .3s cubic-bezier(.32,.72,0,1)}
   body.sheet .panel{transform:translateY(0)}
   .grab{display:block;flex:none;width:100%;border:0;background:none;padding:10px 0 4px;cursor:grab;touch-action:none}
-  .head{touch-action:pan-x;cursor:pointer}
+  /* both axes are handled in JS here, so nothing is left for the browser --
+     a vertical gesture it never sees is one it cannot turn into a dismiss */
+  .head{touch-action:none;cursor:pointer}
   .grab span{display:block;width:38px;height:4px;border-radius:99px;background:var(--line2);margin:0 auto}
+  .grab::after{content:'';display:block;width:8px;height:8px;margin:6px auto 0;
+    border-right:1.6px solid var(--ink2);border-bottom:1.6px solid var(--ink2);
+    transform:rotate(-135deg);transition:transform .28s;opacity:.75}
+  body.sheet .grab::after{transform:rotate(45deg)}
   .head{padding-top:6px}
   .head h1{display:none}
   /* Once the sheet is open the numbers have done their job; they shrink to a
@@ -560,14 +570,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609230553';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230553';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230553';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230553';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609230553';
+import { rigJimny, applyConfig } from './rig.js?v=202609231607';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609231607';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609231607';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609231607';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609231607';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609230553';
+const BUILD = '202609231607';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -1275,6 +1285,22 @@ addEventListener('resize', setPeek);
   }
   // a tap on the handle alone still toggles, and the header's link still works
   document.querySelector('.head a').addEventListener('pointerdown', (e) => e.stopPropagation());
+}
+
+/* A tap on the car above an open sheet closes it. The sheet's own handle sits
+   near the top edge of the screen, which is exactly where LINE's and
+   Facebook's in-app browsers watch for a downward swipe to dismiss themselves
+   -- so there has to be a way out that is not a downward swipe at all. */
+{
+  let t0 = 0, px = 0, py = 0;
+  cv.addEventListener('pointerdown', (e) => { t0 = performance.now(); px = e.clientX; py = e.clientY; });
+  cv.addEventListener('pointerup', (e) => {
+    if (!phone() || !document.body.classList.contains('sheet')) return;
+    if (performance.now() - t0 > 400) return;                   // a drag, not a tap
+    if (Math.hypot(e.clientX - px, e.clientY - py) > 10) return;
+    document.body.classList.remove('sheet');
+    sheetSettled();
+  });
 }
 
 /** A tick of haptics as it snaps, and the car slides up out of the way. */
