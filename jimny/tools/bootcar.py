@@ -2,11 +2,15 @@
 
     python3 tools/bootcar.py
 
-Replaces the traced outline that used to come out of tools/silhouette.*. A
-trace of a render carries every wobble the renderer and the tracer put in, and
-a JB74 has none: it is straight lines, right angles and circles, which is the
-whole look of the car. So the profile is written out here as real millimetres
-off the published JB74 Sierra dimensions and converted once.
+A JB74 is straight lines, right angles and circles, so the profile is written
+out here rather than traced: a trace of a render carries every wobble the
+renderer and the tracer put in, and the car has none.
+
+Every landmark below is MEASURED off model/jimny-hq.glb, by raycasting the
+side of it on a 20 mm grid the way blender/probe.mjs does. Writing them from
+the published brochure figures instead is what produced the first version, and
+it came out with a 2155 mm roof on a car whose roof is 1680 -- a three-door
+Jimny drawn with five-door proportions.
 
 Frame: Z is millimetres rearward from the front bumper face, Y is millimetres
 above the ground, and the car faces RIGHT in the finished drawing.
@@ -14,23 +18,34 @@ above the ground, and the car faces RIGHT in the finished drawing.
 
 VB_W, VB_H = 300.0, 130.0
 
-# JB74 Sierra, published: 3550 long, 1730 tall over the roof rails, 2250
-# wheelbase, 640 front overhang. The published length is measured to the
-# TAILGATE SPARE, not to the body, so the body ends at 3300 and the spare is
-# what reaches 3550. Everything else is read off the model at those anchors.
-LEN, TALL = 3550.0, 1690.0
-BODY_REAR, ROOF_REAR = 3370.0, 3310.0
-AXLE_F, AXLE_R = 640.0, 2890.0
-TYRE_R = 350.0                       # 195/80R15 is 683 across; the demo car is bigger
-ARCH_R, ARCH_Y = 400.0, 375.0        # opening, centred just above the axle
-SILL = 470.0                         # rocker, and where the arches cut into it
+# Measured, near side of the model, Z shifted so the bumper face is 0:
+#   bumper face      Z 0,      y 380-690
+#   grille panel     Z 120,    y 700-1030
+#   bonnet           y 1055 at Z 200, rising to 1150 at Z 1030
+#   windscreen       (1090, 1160) up to the roof, about 35 deg off vertical
+#   roof             y 1615, Z 1480 to 3190
+#   tailgate         (3190, 1615) down to (3310, 620) -- nearly upright
+#   rear bumper      Z 3310-3360, y 410-620
+#   glass            sill y 1090, top y 1475
+#   door window      Z 1560-2210;   rear quarter Z 2430-3030
+#   axles            Z 620 and 2806 (wheelbase 2186)
+#   tailgate spare   y 590-1280, reaching Z 3520
+LEN, TALL = 3520.0, 1630.0
+AXLE_F, AXLE_R = 620.0, 2806.0
+TYRE_R = 347.0                       # the model's stock tyre is 693 across
+ARCH_R, ARCH_Y = 410.0, 370.0        # opening, centred just above the axle
+SILL = 420.0                         # rocker, and where the arches cut into it
 ARCH_DZ = (ARCH_R ** 2 - (SILL - ARCH_Y) ** 2) ** 0.5    # arch lip, along the sill
-BELT, HEAD = 1180.0, 1620.0          # window sill and the roof rail's inner edge
-# the tailgate spare: on the car's centreline, so in a side elevation it is a
-# circle laid over the tailgate whose back half is the only part clear of the
-# body. Sized and placed to clear the belt line above it and the rear arch
-# below it, which is where it sits on the real car.
-SPARE_Z, SPARE_Y, SPARE_R = 3260.0, 940.0, 290.0
+BELT, HEAD = 1090.0, 1490.0          # window sill and the top of the glass
+ROOF_REAR, TAIL_FOOT = 3190.0, 3310.0
+# The spare is on the tailgate with its axis pointing back down the car, so a
+# SIDE elevation sees it EDGE ON: a band as tall as the tyre and as wide as
+# the tyre is thick, its corners rounded by the tread shoulders. Drawn as a
+# wheel face -- which is the view from behind, not from the side -- it reads
+# as a wheel stuck on the flank.
+SPARE_Z0, SPARE_Z1 = 3210.0, LEN
+SPARE_Y0, SPARE_Y1 = 1280.0, 590.0
+SPARE_RAD = 60.0
 
 K = min((VB_W - 24) / LEN, (VB_H - 8) / TALL)
 NOSE = VB_W - (VB_W - LEN * K) / 2
@@ -55,38 +70,46 @@ def arch(z_centre):
     return 'L%s %s' % pt(z_centre + ARCH_DZ, SILL) + f'A{r} {r} 0 0 1 {x} {y}'
 
 
+def spare():
+    """The tailgate spare, edge on: a rounded band behind the tailgate."""
+    r = round(SPARE_RAD * K, 1)
+    a = f'A{r} {r} 0 0 1 '
+    (xr, yt), (xl, yb) = pt(SPARE_Z0, SPARE_Y0), pt(SPARE_Z1, SPARE_Y1)
+    return (f'M{round(xl + r, 1)} {yt}L{round(xr - r, 1)} {yt}'
+            + a + f'{xr} {round(yt + r, 1)}'
+            + f'L{xr} {round(yb - r, 1)}' + a + f'{round(xr - r, 1)} {yb}'
+            + f'L{round(xl + r, 1)} {yb}' + a + f'{xl} {round(yb - r, 1)}'
+            + f'L{xl} {round(yt + r, 1)}' + a + f'{round(xl + r, 1)} {yt}Z')
+
+
 body = (
-    # front bumper, up the grille panel and along the bonnet. It starts where
-    # the front arch ends, because on this car they meet: 640 of front
-    # overhang minus a 400 opening leaves the bumper the last 250 mm.
-    poly([(AXLE_F - ARCH_DZ, 400), (20, 410), (0, 500), (0, 690), (30, 720), (30, 1070),
-          (85, 1110), (700, 1140), (745, 1155),
+    # front bumper, up the grille panel and along the bonnet
+    poly([(AXLE_F - ARCH_DZ, 400), (30, 385), (0, 430), (0, 690), (120, 710), (120, 1030),
+          (200, 1055), (1030, 1150), (1090, 1165),
           # windscreen, roof, tailgate
-          (1155, TALL), (ROOF_REAR, TALL), (BODY_REAR, 1610), (BODY_REAR, 560),
-          # rear bumper, then forward along the bottom through both arches.
-          # Like the front, its lower edge ends exactly on the arch lip: the
-          # rear wheel on this car really is that close to the back.
-          (BODY_REAR + 20, 540), (BODY_REAR + 20, 410),
-          (AXLE_R + ARCH_DZ, 395)], close=False)
+          (1440, 1595), (1520, TALL - 15), (ROOF_REAR, TALL - 15),
+          (TAIL_FOOT, 620),
+          # rear bumper, then forward along the bottom through both arches
+          (3360, 600), (3360, 420), (AXLE_R + ARCH_DZ, 395)], close=False)
     + arch(AXLE_R) + arch(AXLE_F) + 'Z'
 )
 windows = [
-    # front door: the frame's leading edge follows the A-pillar, so it leans
-    # BACK going up -- about 10 degrees. Everything else is square, and the
-    # rear quarter is square all round.
-    poly([(1400, HEAD), (2180, HEAD), (2180, BELT), (1310, BELT)]),
-    poly([(2290, HEAD), (2950, HEAD), (2950, BELT), (2290, BELT)]),
+    # the door window's leading edge follows the A-pillar, so it leans back
+    # going up; everything else is square, and the rear quarter is square all
+    # round -- which is what the car actually looks like
+    poly([(1610, HEAD), (2210, HEAD), (2210, BELT), (1560, BELT)]),
+    poly([(2430, HEAD), (3030, HEAD), (3030, BELT), (2430, BELT)]),
 ]
 
-print('<!-- JB74 side elevation, drawn to the published dimensions by '
+print('<!-- JB74 side elevation, measured off model/jimny-hq.glb by '
       'tools/bootcar.py -->')
 print(f'<path class="body" pathLength="1" d="{body}"/>')
 for d in windows:
     print(f'<path class="win" pathLength="1" d="{d}"/>')
-for z, y, r in ((AXLE_R, TYRE_R, TYRE_R), (AXLE_F, TYRE_R, TYRE_R),
-                (SPARE_Z, SPARE_Y, SPARE_R)):
-    cx, cy = pt(z, y)
+print(f'<path class="w" pathLength="1" d="{spare()}"/>')
+for z in (AXLE_R, AXLE_F):
+    cx, cy = pt(z, TYRE_R)
     print(f'<circle class="w" pathLength="1" cx="{cx}" cy="{cy}" '
-          f'r="{round(r * K, 1)}"/>')
+          f'r="{round(TYRE_R * K, 1)}"/>')
     print(f'<circle class="h" pathLength="1" cx="{cx}" cy="{cy}" '
-          f'r="{round(r * 0.47 * K, 1)}"/>')
+          f'r="{round(TYRE_R * 0.47 * K, 1)}"/>')
