@@ -1251,48 +1251,56 @@ def snorkel_cowl(side=RIGHT):
     # ---- the moulding: pillar blade, then the scuttle boot ----------------
     # centre = probed pillar band, moved 26 mm forward onto the glass edge,
     # and half the 26 mm thickness out from the probed face
-    # ONE continuous moulding: down the pillar, round the corner, then forward
-    # and down into the scuttle. Two lofts that SHARE their section at the
-    # joint, so the seam disappears -- as separate pieces it read as a blade
-    # with a wedge parked beside it, not connected to anything.
-    JOINT = (X(681), 1196, 543)
-    JOINT_SEC = rounded_rect(32, 138, 11, 5)
-    blade = [JOINT, (X(676), 1250, 506), (X(667), 1330, 456),
-             (X(657), 1410, 416), (X(647), 1490, 371), (X(630), 1568, 335)]
-    # u runs along car X (thickness, +u inboard), v across the pillar (+v aft)
+    # ONE continuous moulding, and only as wide as the A-pillar: it must not
+    # reach back over the door frame, which is what leaves room for a retro
+    # mirror clamped to the window surround.
+    #
+    # The section turns with the path. Running UP the pillar the sweep's u is
+    # car X (thickness) and v is fore-aft; running FORWARD along the fender u
+    # is still car X but is now the width ACROSS the car and v is height. The
+    # previous version handed both lofts the same numbers, so the piece on the
+    # fender came out as a tall thin fin instead of a wide flat shroud.
+    JOINT = (X(684), 1200, 535)
+    JOINT_SEC = rounded_rect(32, 112, 11, 5)
+    blade = [JOINT, (X(679), 1250, 480), (X(669), 1330, 430),
+             (X(659), 1410, 390), (X(648), 1490, 345), (X(630), 1568, 310)]
     lib.loft('blade', [tuple(p) for p in fillet(blade, 90, steps=4)],
-             JOINT_SEC, rounded_rect(24, 124, 9, 5), TEXBLACK, root)
+             JOINT_SEC, rounded_rect(26, 100, 9, 5), TEXBLACK, root)
 
-    # the foot: out of the joint, forward and down, ending ON the cowl (probed
-    # at y 1123-1140 over z 620-760) instead of stopping in mid air above it
-    boot = [JOINT, (X(674), 1170, 592), (X(662), 1150, 650), (X(649), 1138, 712)]
-    lib.loft('boot', [tuple(p) for p in fillet(boot, 48, steps=5)],
-             JOINT_SEC, rounded_rect(46, 76, 22, 5),
-             TEXBLACK, root, ease=lambda t: t ** 0.8)
-    box('flange', (X(640), 1116, 686), (36, 10, 112), TEXBLACK, root, bevel=4)
-    for z in (640, 726):
-        lib.cylinder(f'footScrew{z}', (X(644 - (z - 640) * 0.06), 1118, z), (0, 1, 0), 12, 9, STEEL, root, n=10)
-
-    # ---- the intake plate, bolted to the moulding's outboard face ---------
-    # u runs up the pillar from the plate's centre, v across it (+v forward);
-    # `out` steps away from the face. |x| tracks the face, which pulls inboard
-    # as it rises.
+    # the shroud: out of the joint, forward and down ONTO the fender, widening
+    # and flattening as it goes. Probed fender top, right side: y 1135 at
+    # z 640 falling to about 1096 at z 960, over |x| 600-670; outboard of
+    # |x| 680 the shoulder rolls away, so it stays inboard of that.
+    # It is a short wide FAN over the fender's rear corner, not a rail running
+    # off down the wing: in the photos it spreads inboard toward the bonnet
+    # shut line and stops about 200 mm forward of the pillar.
+    # It does NOT lie flat on the bonnet. It carries on DOWN, hugging the
+    # fender's outboard shoulder, and flares into a broad skirt over the
+    # corner where the pillar foot, the windscreen base and the wing meet.
+    # Probed shoulder, right side: |x| 680 runs y 1107 at z 560 down to 1032
+    # at z 760, and |x| 700 is already the fender's flank at y 995.
+    shroud = [JOINT, (X(680), 1156, 578), (X(676), 1122, 632), (X(672), 1098, 692)]
+    lib.loft('shroud', [tuple(p) for p in fillet(shroud, 55, steps=6)],
+             JOINT_SEC, rounded_rect(28, 104, 12, 5),
+             TEXBLACK, root, ease=lambda t: t ** 0.7)
+    # two ribs pressed into its outer face, and the screws along its foot
+    for k in (0, 1):
+        box(f'rib{k}', (X(682), 1108 - k * 26, 636 + k * 22), (9, 8, 78), TEXBLACK, root, bevel=3)
+    for (y, z) in ((1090, 640), (1070, 692)):
+        lib.cylinder(f'shroudScrew{z}', (X(676), y, z), (s, 0, 0), 11, 8, STEEL, root, n=10)
+    # ---- the intake, on the moulding's outboard face near the top ---------
     ay, az = 0.888, -0.459
-    # On the owner's own car the mesh is nearly as wide as the moulding, its
-    # cells are coarse (about four and a half across), and it stops roughly
-    # 60% of the way down with plain moulding below. Centred on the face, not
-    # pushed to its rear edge.
-    cy, cz = 1470, 380
+    cy, cz = 1470, 356
     def place(u, v, out=0):
-        return (X(661 - 0.15 * u + out), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
-    # the well behind the mesh, so the holes read as holes
-    sweep('well', [place(-80, 0, -12), place(80, 0, -12)], rounded_rect(14, 82, 12, 4), BLACK, root)
-    # coarse cells: about three and a half across and seven down on the car
-    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 152, 82, cell=24, bar=3.0)
-    # a wide bezel around it, deep enough for the mesh to sit down inside
-    ring = [place(92, -54), place(92, 54), place(-92, 54), place(-92, -54)]
-    sweep('plate', [tuple(p) for p in fillet(ring + ring[:2], 24, steps=3)],
-          rounded_rect(16, 20, 5, 3), TEXBLACK, root, closed=True, caps=False)
+        return (X(666 - 0.15 * u + out), cy + ay * u + 0.459 * v, cz + az * u + 0.888 * v)
+    sweep('well', [place(-92, 0, -11), place(92, 0, -11)], rounded_rect(14, 64, 10, 4), BLACK, root)
+    hex_panel(root, TEXBLACK, lambda u, v: place(u, v), 180, 64, cell=19, bar=2.6)
+    ring = [place(104, -40), place(104, 40), place(-104, 40), place(-104, -40)]
+    sweep('plate', [tuple(p) for p in fillet(ring + ring[:2], 20, steps=3)],
+          rounded_rect(14, 18, 5, 3), TEXBLACK, root, closed=True, caps=False)
+    for u in (96, -96):
+        for v in (-31, 31):
+            lib.cylinder(f'ps{u}{v}', place(u, v, 6), (s, 0, 0), 10, 7, STEEL, root, n=10)
     return root
 
 

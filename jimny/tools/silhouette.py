@@ -107,12 +107,37 @@ def rdp(pts, eps):
     return rdp(pts[:at + 1], eps)[:-1] + rdp(pts[at:], eps)
 
 
+def hull(pts):
+    """Convex hull, Andrew's monotone chain. A window is a convex opening, so
+    hulling it throws away every wobble the tracer picked up along its edge."""
+    p = sorted(set(pts))
+    if len(p) < 3:
+        return p
+    def half(seq):
+        out = []
+        for q in seq:
+            while len(out) > 1:
+                (ax, ay), (bx, by) = out[-2], out[-1]
+                if (bx - ax) * (q[1] - ay) - (by - ay) * (q[0] - ax) > 0:
+                    break
+                out.pop()
+            out.append(q)
+        return out
+    return half(p)[:-1] + half(reversed(p))[:-1]
+
+
 def main():
+    # The body and the wheels come from our own clean render -- a jpeg's
+    # compression noise along the backdrop edge derails a boundary walk. Only
+    # the window openings come from the reference, because those are the bit
+    # the owner blacked out to say what shape they should be, and they are
+    # mapped across by lining the two body bounding boxes up.
+    wheels = None
     body = mask(f'{SRC}/sil_body.png')
     glass = mask(f'{SRC}/sil_glass.png')
     if not body:
-        sys.exit('no body mask -- run tools/silhouette.mjs first')
-    car = blobs(denoise(body))[0]
+        sys.exit('no body mask -- run tools/silhouette.mjs first, or set REF')
+    car = blobs(denoise(denoise(body)))[0]
     xs = [p[0] for p in car]
     ys = [p[1] for p in car]
     x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
@@ -134,12 +159,17 @@ def main():
     for i, g in enumerate(blobs(denoise(glass))):
         if len(g) < 900:                            # skip slivers: wiper, mirror glass
             continue
-        # the side windows are square openings with rounded corners; traced at
-        # a fine tolerance they come out wobbly, which does not read as glass
-        d_g, n = path(g, 5.5)
+        # the side windows are square openings: hull them and simplify hard,
+        # or the tracer's wobble makes them read as puddles rather than glass
+        h = hull(g)
+        cut = max(range(len(h)), key=lambda i: h[i][1])   # start at the lowest corner
+        h = h[cut:] + h[:cut]
+        v = [to_vb(q) for q in rdp(h, 3.0)]
+        d_g = f'M{v[0][0]} {v[0][1]}' + ''.join(f'L{x} {y}' for x, y in v[1:]) + 'Z'
+        n = len(v)
         print(f'<path class="win" pathLength="1" d="{d_g}"/>   <!-- window {i}, {n} pts -->')
     # road wheels only: the tailgate spare reads as a bubble in a side outline
-    ws = json.load(open(f'{SRC}/sil_wheels.json'))
+    ws = wheels if wheels is not None else json.load(open(f'{SRC}/sil_wheels.json'))
     ground = max(w['y'] for w in ws)
     for w in ws:
         if w['y'] < ground - 8:
