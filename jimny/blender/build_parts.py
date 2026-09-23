@@ -1147,7 +1147,18 @@ def flares():
 PILLAR = [(660 + 40, 1160, 630), (640 + 40, 1400, 500), (612 + 40, 1580, 410)]   # x, y, z along the pillar (right side = -x)
 
 
-def _pillar_path(side, off, top_y=1600):
+# Every snorkel here was drawn too tall AND with too big a head. The model's
+# roof crowns at y 1620 and NONE of these clears it on the real car (a bare
+# roof, no rack) -- which is also the one thing that fails a Taiwanese
+# inspection, because the height on the 行照 has to match. Measured off
+# URNIETA's own side photo with the duct's fore-aft width as the ruler: the
+# head is about 0.7 duct-widths tall and 1.8 long, and its crown sits roughly
+# 60 mm BELOW the roof. Every head here is sized and placed to that.
+ROOF_Y = 1620
+TUBE_TOP = 1470
+
+
+def _pillar_path(side, off, top_y=1470):
     return [(side * 700, 990, 640), (side * (700 + off - 40), 1080, 640),
             (side * (660 + off), 1160, 630), (side * (640 + off), 1400, 500), (side * (612 + off), top_y, 405)]
 
@@ -1162,20 +1173,20 @@ def snorkel_bravo(side=RIGHT):
     modification" line is a reseller's, not Bravo's."""
     root = group('snorkel_bravo')
     off = 44
-    pts = fillet(_pillar_path(side, off, 1590), 90, steps=8)
+    pts = fillet(_pillar_path(side, off, TUBE_TOP), 90, steps=8)
     sweep('body', [tuple(p) for p in pts], rounded_rect(92, 74, 30, 5), TEXBLACK, root)
     box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
-    lib.cylinder('collar', (hx, 1578, hz), (0, 1, 0), 98, 26, TEXBLACK, root, n=24)
-    lib.cylinder('band', (hx, 1600, hz), (0, 1, 0), 96, 18, BLACK, root, n=24)
-    box('bandLug', (hx + side * 50, 1600, hz), (22, 24, 30), BLACK, root, bevel=3)
+    lib.cylinder('collar', (hx, 1458, hz), (0, 1, 0), 98, 26, TEXBLACK, root, n=24)
+    lib.cylinder('band', (hx, 1478, hz), (0, 1, 0), 96, 18, BLACK, root, n=24)
+    box('bandLug', (hx + side * 50, 1478, hz), (22, 24, 30), BLACK, root, bevel=3)
     # forward-facing elbow: up out of the band, over, and out toward the nose
-    tube('elbow', [(hx, 1596, hz), (hx, 1664, hz), (hx, 1686, hz + 58), (hx, 1686, hz + 104)],
-         89, TEXBLACK, root, bend=46)
-    box('mouth', (hx, 1686, hz + 118), (94, 94, 14), TEXBLACK, root, bevel=8)
+    tube('elbow', [(hx, 1474, hz), (hx, 1510, hz), (hx, 1521, hz + 54), (hx, 1521, hz + 98)],
+         84, TEXBLACK, root, bend=38)
+    box('mouth', (hx, 1521, hz + 112), (88, 88, 14), TEXBLACK, root, bevel=8)
     for k in range(6):                                      # grille bars across the mouth
-        box(f'grille{k}', (hx, 1652 + k * 14, hz + 124), (78, 6, 5), RUBBER, root, bevel=0)
-    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+        box(f'grille{k}', (hx, 1488 + k * 13, hz + 118), (72, 6, 5), RUBBER, root, bevel=0)
+    for (y, z, x) in ((1260, 575, 655), (1380, 512, 646)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
 
@@ -1195,29 +1206,31 @@ def snorkel_urnieta(side=RIGHT, head='drum'):
     """
     root = group('snorkel_urnieta' + ('_ram' if head == 'ram' else ''))
     off = 42
-    pts = fillet(_pillar_path(side, off, 1570), 80, steps=8)
-    sweep('body', [tuple(p) for p in pts], rounded_rect(88, 72, 22, 4), TEXBLACK, root)
+    pts = fillet(_pillar_path(side, off, 1452), 80, steps=8)
+    # the duct is a flattened moulding hugging the pillar, 104 fore-aft -- that
+    # width is the ruler everything above it is measured against
+    sweep('body', [tuple(p) for p in pts], rounded_rect(88, 104, 26, 4), TEXBLACK, root)
     box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
-    lib.cylinder('collar', (hx, 1590, hz), (0, 1, 0), 96, 40, TEXBLACK, root, n=24)
+    lib.cylinder('collar', (hx, 1466, hz), (0, 1, 0), 96, 34, TEXBLACK, root, n=24)
     if head == 'ram':
-        # a short neck off the collar, then the box reaching forward over the
-        # windscreen pillar; the mouth is barred rather than meshed
-        box('neck', (hx, 1626, hz + 10), (116, 52, 116), TEXBLACK, root, bevel=10)
-        box('head', (hx, 1712, hz + 92), (146, 168, 244), TEXBLACK, root, bevel=26)
-        box('mouth', (hx, 1706, hz + 216), (126, 146, 14), BLACK, root, bevel=8)
-        for k in range(4):                                  # bars across the mouth
-            box(f'bar{k}', (hx, 1650 + k * 38, hz + 222), (112, 13, 7), TEXBLACK, root, bevel=2)
-        box('badge', (side * (612 + off + 74), 1712, hz + 92),
-            (5, 34, 92), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=2)
-        lib.cylinder('bandScrew', (hx, 1592, hz + 54), (0, 0, 1), 16, 26, STEEL, root, n=10)
+        # a short stepped neck off the collar, then a slim box reaching forward
+        # over the windscreen pillar; the mouth is barred rather than meshed
+        box('neck', (hx, 1496, hz + 4), (104, 38, 100), TEXBLACK, root, bevel=8)
+        box('head', (hx, 1524, hz + 70), (128, 76, 196), TEXBLACK, root, bevel=18)
+        box('mouth', (hx, 1524, hz + 168), (112, 62, 12), BLACK, root, bevel=6)
+        for k in range(3):                                  # bars across the mouth
+            box(f'bar{k}', (hx, 1506 + k * 18, hz + 174), (98, 9, 6), TEXBLACK, root, bevel=2)
+        box('badge', (side * (612 + off + 66), 1524, hz + 70),
+            (5, 26, 74), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=2)
+        lib.cylinder('bandScrew', (hx, 1468, hz + 48), (0, 0, 1), 14, 24, STEEL, root, n=10)
     else:
-        lib.cylinder('drum', (hx, 1666, hz), (0, 1, 0), 152, 118, TEXBLACK, root, n=28)
+        lib.cylinder('drum', (hx, 1500, hz), (0, 1, 0), 136, 72, TEXBLACK, root, n=28)
         for k in range(5):                                  # louvres all the way round
-            lib.cylinder(f'louvre{k}', (hx, 1622 + k * 22, hz), (0, 1, 0), 162, 9, RUBBER, root, n=28)
-        lib.cylinder('lid', (hx, 1732, hz), (0, 1, 0), 158, 16, TEXBLACK, root, n=28)
-        lib.cylinder('knob', (hx, 1746, hz), (0, 1, 0), 44, 22, TEXBLACK, root, n=16)
-    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+            lib.cylinder(f'louvre{k}', (hx, 1472 + k * 14, hz), (0, 1, 0), 144, 7, RUBBER, root, n=28)
+        lib.cylinder('lid', (hx, 1542, hz), (0, 1, 0), 142, 10, TEXBLACK, root, n=28)
+        lib.cylinder('knob', (hx, 1552, hz), (0, 1, 0), 34, 10, TEXBLACK, root, n=16)
+    for (y, z, x) in ((1260, 575, 655), (1370, 520, 648)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
 
@@ -1228,16 +1241,16 @@ def snorkel_ironman(side=RIGHT):
     mesh face, on a band clamp so it rotates."""
     root = group('snorkel_ironman')
     off = 42
-    pts = fillet(_pillar_path(side, off, 1585), 95, steps=8)
-    sweep('body', [tuple(p) for p in pts], rounded_rect(98, 82, 34, 5), TEXBLACK, root)
+    pts = fillet(_pillar_path(side, off, 1470), 95, steps=8)
+    sweep('body', [tuple(p) for p in pts], rounded_rect(98, 96, 34, 5), TEXBLACK, root)
     box('basePlate', (side * 712, 1000, 620), (62, 40, 176), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
-    lib.cylinder('band', (hx, 1596, hz), (0, 1, 0), 102, 20, BLACK, root, n=24)
-    tube('ram', [(hx, 1592, hz), (hx, 1660, hz), (hx, 1682, hz + 62), (hx, 1682, hz + 112)],
-         95, TEXBLACK, root, bend=48)
-    box('face', (hx, 1682, hz + 126), (104, 104, 16), TEXBLACK, root, bevel=10)
-    hex_mesh(root, BLACK, hx, 1682, hz + 132, 78, 78)
-    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+    lib.cylinder('band', (hx, 1480, hz), (0, 1, 0), 102, 20, BLACK, root, n=24)
+    tube('ram', [(hx, 1476, hz), (hx, 1516, hz), (hx, 1532, hz + 58), (hx, 1532, hz + 106)],
+         90, TEXBLACK, root, bend=42)
+    box('face', (hx, 1532, hz + 120), (96, 96, 16), TEXBLACK, root, bevel=10)
+    hex_mesh(root, BLACK, hx, 1532, hz + 126, 72, 72)
+    for (y, z, x) in ((1260, 575, 655), (1380, 512, 646)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
 
@@ -1248,19 +1261,19 @@ def snorkel_precleaner(side=RIGHT):
     off = 40
     wing_y = top_y(side * 700, 660)
     path = [(side * 705, wing_y - 60, 660), (side * 705, wing_y + 80, 660), (side * (660 + off), 1160, 630),
-            (side * (640 + off), 1400, 500), (side * (612 + off), 1560, 410), (side * (612 + off), 1600, 405)]
+            (side * (640 + off), 1320, 510), (side * (612 + off), 1355, 415), (side * (612 + off), 1380, 405)]
     pts = fillet(path, 110, steps=10)
     sweep('body', [tuple(p) for p in pts], rounded_rect(95, 75, 30, 5), TEXBLACK, root)
     box('wingSeal', (side * 705, wing_y + 6, 660), (140, 10, 140), RUBBER, root, bevel=4)
     hx, hz = side * (612 + off), 405
-    lib.cylinder('stem', (hx, 1625, hz), (0, 1, 0), 89, 50, TEXBLACK, root)
+    lib.cylinder('stem', (hx, 1402, hz), (0, 1, 0), 89, 48, TEXBLACK, root)
     # smoked polycarbonate, not the white it used to be
-    lib.cylinder('bowl', (hx, 1690, hz), (0, 1, 0), 180, 80, material('ClearBowl', 0x9aa3a9, rough=0.28, metal=0.0), root, n=32)
-    lib.cylinder('bowlBase', (hx, 1652, hz), (0, 1, 0), 150, 12, TEXBLACK, root, n=32)
-    lib.cylinder('bowlTop', (hx, 1734, hz), (0, 1, 0), 184, 10, TEXBLACK, root, n=32)
-    lib.cylinder('lid', (hx, 1760, hz), (0, 1, 0), 150, 42, TEXBLACK, root, n=32)
-    sphere('knob', (hx, 1786, hz), 40, TEXBLACK, root)
-    for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
+    lib.cylinder('bowl', (hx, 1462, hz), (0, 1, 0), 160, 72, material('ClearBowl', 0x9aa3a9, rough=0.28, metal=0.0), root, n=32)
+    lib.cylinder('bowlBase', (hx, 1432, hz), (0, 1, 0), 134, 12, TEXBLACK, root, n=32)
+    lib.cylinder('bowlTop', (hx, 1502, hz), (0, 1, 0), 164, 10, TEXBLACK, root, n=32)
+    lib.cylinder('lid', (hx, 1522, hz), (0, 1, 0), 134, 32, TEXBLACK, root, n=32)
+    sphere('knob', (hx, 1542, hz), 28, TEXBLACK, root)
+    for (y, z, x) in ((1260, 575, 655), (1300, 548, 652)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
 
@@ -1275,13 +1288,13 @@ def snorkel_sleek(side=RIGHT):
     the whole point of the product."""
     root = group('snorkel_sleek')
     off = 26
-    pts = fillet(_pillar_path(side, off, 1585), 70, steps=8)
+    pts = fillet(_pillar_path(side, off, 1500), 70, steps=8)
     sweep('cowl', [tuple(p) for p in pts], rounded_rect(72, 46, 16, 4), TEXBLACK, root)
     box('cover', (side * 712, 1000, 620), (46, 32, 180), TEXBLACK, root, bevel=8)
     hx, hz = side * (612 + off), 405
-    box('vent', (hx + side * 10, 1600, hz), (30, 150, 96), TEXBLACK, root, bevel=8)
+    box('vent', (hx + side * 10, 1480, hz), (30, 140, 92), TEXBLACK, root, bevel=8)
     for k in range(5):                                      # outward-facing louvres
-        box(f'louvre{k}', (hx + side * 26, 1552 + k * 24, hz), (5, 14, 76), RUBBER, root, bevel=0)
+        box(f'louvre{k}', (hx + side * 26, 1428 + k * 22, hz), (5, 13, 72), RUBBER, root, bevel=0)
     for (y, z, x) in ((1300, 555, 650),):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 16, 30), STEEL, root, bevel=2)
     return root

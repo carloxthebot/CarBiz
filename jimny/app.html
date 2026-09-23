@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230452" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230553" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -292,12 +292,16 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .flag.warn{border-color:var(--warn);color:#f3ddb4}
 .flag.info{border-color:var(--line2);color:var(--ink2)}
 .flag b{font:600 10.5px/1.7 var(--mono);letter-spacing:.1em;display:block}
-.acts{padding:10px 20px calc(14px + env(safe-area-inset-bottom));display:flex;gap:7px;
-  flex:none;border-top:1px solid var(--line);margin-top:10px}
-.acts button{padding:12px 11px;border-radius:3px;font:600 13.5px var(--body);cursor:pointer;
-  border:1px solid;white-space:nowrap}
-.ghost{background:none;border-color:var(--line2);color:var(--ink2)}
-.solid{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);flex:1}
+/* links, not buttons: three filled rectangles down here were louder than the
+   parts they sit under and took the room those parts needed */
+.acts{padding:9px 20px calc(12px + env(safe-area-inset-bottom));display:flex;gap:18px;
+  align-items:center;flex:none;border-top:1px solid var(--line);margin-top:10px}
+.acts button{background:none;border:0;padding:4px 0;cursor:pointer;white-space:nowrap;
+  font:500 13px var(--body);color:var(--ink2);
+  text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line2)}
+.acts button:hover{color:var(--ink);text-decoration-color:var(--ink2)}
+.acts .solid{margin-left:auto;color:var(--acc);font-weight:600;text-decoration-color:var(--acc)}
+.acts .solid:hover{color:var(--acc);text-decoration-color:var(--acc)}
 #out{margin:0 20px 20px;background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:13px;
   font:12.5px/1.7 var(--mono);color:var(--ink2);white-space:pre-wrap;display:none}
 #out.on{display:block}
@@ -344,8 +348,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   body.sheet .hero .h-r i{font-size:11px}
   body.sheet .hero .h-r em{font-size:10.5px}
   body.sheet .steps button{padding:8px 6px 7px}
-  .acts{gap:6px;margin-top:8px;padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
-  .acts button{padding:11px 9px;font-size:12.5px;border-radius:2px}
+  .acts{gap:15px;margin-top:6px;padding:8px 16px calc(9px + env(safe-area-inset-bottom))}
+  .acts button{font-size:12.5px}
   .flags{padding:8px 16px 0}
   .flagbar{padding:8px 11px;font-size:12px}
   #out{margin:0 16px 14px;font-size:12px}
@@ -530,9 +534,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 
     <div class="flags" id="flags"></div>
     <div class="acts">
-      <button class="ghost" id="btnDemo">範例車</button>
-      <button class="ghost" id="btnReset">還原</button>
-      <button class="solid" id="btnExport">匯出這台配置</button>
+      <button type="button" id="btnDemo">載入範例車</button>
+      <button type="button" id="btnReset">全部還原</button>
+      <button type="button" class="solid" id="btnExport">匯出這台配置 →</button>
     </div>
     <pre id="out"></pre>
   </div>
@@ -556,14 +560,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609230452';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230452';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230452';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230452';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609230452';
+import { rigJimny, applyConfig } from './rig.js?v=202609230553';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230553';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230553';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230553';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609230553';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609230452';
+const BUILD = '202609230553';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
