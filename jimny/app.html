@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609231607" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609231818" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -102,7 +102,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 .credit a{color:#7b8d93}
 
 /* ── panel ────────────────────────────────────────────────────────────── */
-.panel{background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.panel{position:relative;background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.sheetx{display:none}
 .head{padding:18px 20px 15px;border-bottom:1px solid var(--line);flex:none}
 .head .kicker{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
   font:500 11px/1 var(--mono);letter-spacing:.16em;color:var(--ink2);text-transform:uppercase}
@@ -345,7 +346,17 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   .grab::after{content:'';display:block;width:8px;height:8px;margin:6px auto 0;
     border-right:1.6px solid var(--ink2);border-bottom:1.6px solid var(--ink2);
     transform:rotate(-135deg);transition:transform .28s;opacity:.75}
-  body.sheet .grab::after{transform:rotate(45deg)}
+  body.sheet .grab::after{opacity:0}
+  /* Closing is a BUTTON, never a downward swipe: a swipe down is the gesture
+     LINE's and Facebook's in-app browsers use to shut themselves, and losing
+     the whole browser is a much worse outcome than one extra tap. */
+  .sheetx{position:absolute;top:7px;right:10px;z-index:4;width:36px;height:36px;
+    place-items:center;border:0;border-radius:99px;cursor:pointer;
+    background:#1a262a99;color:var(--ink2);font:400 16px/1 var(--body);
+    -webkit-tap-highlight-color:transparent}
+  body.sheet .sheetx{display:grid}
+  body.sheet .head .kicker{padding-right:40px}
+  body.sheet .sheetx:active{background:#22323799;color:var(--ink)}
   .head{padding-top:6px}
   .head h1{display:none}
   /* Once the sheet is open the numbers have done their job; they shrink to a
@@ -428,7 +439,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   </div>
 
   <div class="panel">
-    <button class="grab" id="grab" aria-label="展開或收起設定面板"><span></span></button>
+    <button class="grab" id="grab" aria-label="展開設定面板"><span></span></button>
+    <button class="sheetx" id="sheetx" type="button" aria-label="關閉設定面板">✕</button>
     <div class="head">
       <div class="kicker"><span>改裝配置器</span><a href="parts.html">零件目錄與價格 →</a></div>
       <h1>Jimny JB74</h1>
@@ -570,14 +582,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609231607';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609231607';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609231607';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609231607';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609231607';
+import { rigJimny, applyConfig } from './rig.js?v=202609231818';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609231818';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609231818';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609231818';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609231818';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609231607';
+const BUILD = '202609231818';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -1261,6 +1273,9 @@ addEventListener('resize', setPeek);
     moved = e.clientY - y0;
     // an open sheet scrolled to the top still has to let the list scroll up
     if (wasOpen && moved < 0 && from === $('body')) { stop(); return; }
+    // and dragging DOWN never closes it -- that gesture belongs to the host
+    // app, which uses it to dismiss the whole in-app browser. The X does it.
+    if (wasOpen && moved > 0) { moved = 0; return; }
     const base = wasOpen ? 0 : height - peek;
     const dy = Math.max(0, Math.min(height - peek, base + moved));
     if (Math.abs(moved) > 6 && e.cancelable) e.preventDefault();
@@ -1273,8 +1288,8 @@ addEventListener('resize', setPeek);
     const d = moved, tap = from === $('grab') || from === document.querySelector('.head');
     const was = document.body.classList.contains('sheet');
     stop();
-    if (Math.abs(d) > 40) document.body.classList.toggle('sheet', d < 0);
-    else if (tap && Math.abs(d) < 8) document.body.classList.toggle('sheet');
+    if (d < -40) document.body.classList.add('sheet');
+    else if (tap && Math.abs(d) < 8 && !was) document.body.classList.add('sheet');
     if (document.body.classList.contains('sheet') !== was) sheetSettled();
   };
   for (const el of [$('grab'), document.querySelector('.head'), $('body')]) {
@@ -1287,21 +1302,13 @@ addEventListener('resize', setPeek);
   document.querySelector('.head a').addEventListener('pointerdown', (e) => e.stopPropagation());
 }
 
-/* A tap on the car above an open sheet closes it. The sheet's own handle sits
-   near the top edge of the screen, which is exactly where LINE's and
-   Facebook's in-app browsers watch for a downward swipe to dismiss themselves
-   -- so there has to be a way out that is not a downward swipe at all. */
-{
-  let t0 = 0, px = 0, py = 0;
-  cv.addEventListener('pointerdown', (e) => { t0 = performance.now(); px = e.clientX; py = e.clientY; });
-  cv.addEventListener('pointerup', (e) => {
-    if (!phone() || !document.body.classList.contains('sheet')) return;
-    if (performance.now() - t0 > 400) return;                   // a drag, not a tap
-    if (Math.hypot(e.clientX - px, e.clientY - py) > 10) return;
-    document.body.classList.remove('sheet');
-    sheetSettled();
-  });
-}
+/* Up opens it, the X closes it. Nothing here closes on a downward swipe. */
+$('sheetx').addEventListener('click', () => {
+  if (!document.body.classList.contains('sheet')) return;
+  document.body.classList.remove('sheet');
+  sheetSettled();
+});
+$('sheetx').addEventListener('pointerdown', (e) => e.stopPropagation());
 
 /** A tick of haptics as it snaps, and the car slides up out of the way. */
 function sheetSettled() {
