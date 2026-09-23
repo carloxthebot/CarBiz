@@ -1180,26 +1180,43 @@ def snorkel_bravo(side=RIGHT):
     return root
 
 
-def snorkel_urnieta(side=RIGHT):
+def snorkel_urnieta(side=RIGHT, head='drum'):
     """URNIETA SALADO snorkel kit (0702021), drawing UN-JIMNY-FB-006: 1048
     long x 675 tall, 2.3 kg, JB74 only.
 
-    Corrected 2026-09-22: the standard head is a round DRUM with louvres
-    right round it, not a rectangular box with a forward face -- the boxy
-    thing in the photos is the optional pre-cleaner. Two heads ship in the
-    kit and swap on the same collar."""
-    root = group('snorkel_urnieta')
+    The kit ships TWO heads on one collar -- URNIETA call them Standard and
+    Pre-Cleaner -- so the kit is drawn twice, once per head:
+
+      'drum'  a round drum with louvres right round it
+      'ram'   a square box cantilevered forward off the collar, its barred
+              mouth facing the nose, UNT badge on the outboard face. This is
+              what the Taiwanese sellers' photos show; URNIETA's own page
+              names the two heads without describing either shape.
+    """
+    root = group('snorkel_urnieta' + ('_ram' if head == 'ram' else ''))
     off = 42
     pts = fillet(_pillar_path(side, off, 1570), 80, steps=8)
     sweep('body', [tuple(p) for p in pts], rounded_rect(88, 72, 22, 4), TEXBLACK, root)
     box('basePlate', (side * 712, 1000, 620), (60, 40, 170), TEXBLACK, root, bevel=6)
     hx, hz = side * (612 + off), 405
     lib.cylinder('collar', (hx, 1590, hz), (0, 1, 0), 96, 40, TEXBLACK, root, n=24)
-    lib.cylinder('drum', (hx, 1666, hz), (0, 1, 0), 152, 118, TEXBLACK, root, n=28)
-    for k in range(5):                                      # louvres all the way round
-        lib.cylinder(f'louvre{k}', (hx, 1622 + k * 22, hz), (0, 1, 0), 162, 9, RUBBER, root, n=28)
-    lib.cylinder('lid', (hx, 1732, hz), (0, 1, 0), 158, 16, TEXBLACK, root, n=28)
-    lib.cylinder('knob', (hx, 1746, hz), (0, 1, 0), 44, 22, TEXBLACK, root, n=16)
+    if head == 'ram':
+        # a short neck off the collar, then the box reaching forward over the
+        # windscreen pillar; the mouth is barred rather than meshed
+        box('neck', (hx, 1626, hz + 10), (116, 52, 116), TEXBLACK, root, bevel=10)
+        box('head', (hx, 1712, hz + 92), (146, 168, 244), TEXBLACK, root, bevel=26)
+        box('mouth', (hx, 1706, hz + 216), (126, 146, 14), BLACK, root, bevel=8)
+        for k in range(4):                                  # bars across the mouth
+            box(f'bar{k}', (hx, 1650 + k * 38, hz + 222), (112, 13, 7), TEXBLACK, root, bevel=2)
+        box('badge', (side * (612 + off + 74), 1712, hz + 92),
+            (5, 34, 92), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=2)
+        lib.cylinder('bandScrew', (hx, 1592, hz + 54), (0, 0, 1), 16, 26, STEEL, root, n=10)
+    else:
+        lib.cylinder('drum', (hx, 1666, hz), (0, 1, 0), 152, 118, TEXBLACK, root, n=28)
+        for k in range(5):                                  # louvres all the way round
+            lib.cylinder(f'louvre{k}', (hx, 1622 + k * 22, hz), (0, 1, 0), 162, 9, RUBBER, root, n=28)
+        lib.cylinder('lid', (hx, 1732, hz), (0, 1, 0), 158, 16, TEXBLACK, root, n=28)
+        lib.cylinder('knob', (hx, 1746, hz), (0, 1, 0), 44, 22, TEXBLACK, root, n=16)
     for (y, z, x) in ((1260, 575, 655), (1500, 445, 625)):
         box(f'bracket{y}', (side * (x + off / 2), y, z), (off + 10, 18, 36), STEEL, root, bevel=2)
     return root
@@ -2886,6 +2903,7 @@ def build():
     snorkel_bravo()
     snorkel_ironman()
     snorkel_urnieta()
+    snorkel_urnieta(head='ram')
     snorkel_precleaner()
     snorkel_sleek()
     mirrors_urnieta()

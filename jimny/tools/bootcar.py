@@ -1,59 +1,51 @@
-"""Draw the loading screen's Jimny outline, and print the SVG for app.html.
+"""Draw the loading screen's Jimny face, and print the SVG for app.html.
 
     python3 tools/bootcar.py
 
-A JB74 is straight lines, right angles and circles, so the profile is written
-out here rather than traced: a trace of a render carries every wobble the
-renderer and the tracer put in, and the car has none.
+It draws the FRONT, not the side. Two goes at a side elevation both read as
+the wrong car -- a profile is nearly all proportion, and proportion is the bit
+that goes wrong. The face is the opposite: a JB74 is recognised by the grille
+and the two round lamps, which are a rectangle, five slots and two circles,
+and none of it depends on getting a length right.
 
-Every landmark below is MEASURED off model/jimny-hq.glb, by raycasting the
-side of it on a 20 mm grid the way blender/probe.mjs does. Writing them from
-the published brochure figures instead is what produced the first version, and
-it came out with a 2155 mm roof on a car whose roof is 1680 -- a three-door
-Jimny drawn with five-door proportions.
+Every landmark is MEASURED off model/jimny-hq.glb, by raycasting its nose on a
+20 mm grid and sorting the hits by material: LampLens for the lamps, the black
+trim for the grille panel, body paint for everything around it.
 
-Frame: Z is millimetres rearward from the front bumper face, Y is millimetres
-above the ground, and the car faces RIGHT in the finished drawing.
+Frame: X is millimetres across the car (+ to the right as drawn), Y is
+millimetres above the ground.
 """
 
 VB_W, VB_H = 300.0, 130.0
 
-# Measured, near side of the model, Z shifted so the bumper face is 0:
-#   bumper face      Z 0,      y 380-690
-#   grille panel     Z 120,    y 700-1030
-#   bonnet           y 1055 at Z 200, rising to 1150 at Z 1030
-#   windscreen       (1090, 1160) up to the roof, about 35 deg off vertical
-#   roof             y 1615, Z 1480 to 3190
-#   tailgate         (3190, 1615) down to (3310, 620) -- nearly upright
-#   rear bumper      Z 3310-3360, y 410-620
-#   glass            sill y 1090, top y 1475
-#   door window      Z 1560-2210;   rear quarter Z 2430-3030
-#   axles            Z 620 and 2806 (wheelbase 2186)
-#   tailgate spare   y 590-1280, reaching Z 3520
-LEN, TALL = 3520.0, 1630.0
-AXLE_F, AXLE_R = 620.0, 2806.0
-TYRE_R = 347.0                       # the model's stock tyre is 693 across
-ARCH_R, ARCH_Y = 410.0, 370.0        # opening, centred just above the axle
-SILL = 420.0                         # rocker, and where the arches cut into it
-ARCH_DZ = (ARCH_R ** 2 - (SILL - ARCH_Y) ** 2) ** 0.5    # arch lip, along the sill
-BELT, HEAD = 1090.0, 1490.0          # window sill and the top of the glass
-ROOF_REAR, TAIL_FOOT = 3190.0, 3310.0
-# The spare is on the tailgate with its axis pointing back down the car, so a
-# SIDE elevation sees it EDGE ON: a band as tall as the tyre and as wide as
-# the tyre is thick, its corners rounded by the tread shoulders. Drawn as a
-# wheel face -- which is the view from behind, not from the side -- it reads
-# as a wheel stuck on the flank.
-SPARE_Z0, SPARE_Z1 = 3210.0, LEN
-SPARE_Y0, SPARE_Y1 = 1280.0, 590.0
-SPARE_RAD = 60.0
+# Measured off a head-on render of the model, with the camera's own
+# projection used to turn pixels back into millimetres:
+#   face             |x| 675 at y 1035 (bonnet shut line), 711 across the bumper
+#   grille panel     |x| 648, y 771-983
+#   head lamps       r 100 at (+-453, 877)
+#   indicators       55 x 66 at (+-596, 917), just outboard of the lamps
+#   five slots       88 wide on a 60 rib, y 789-961, filling x +-340
+#   paint band       y 722-771, between the grille and the bumper
+#   bumper           y 413-722; its recess |x| 380, y 519-652
+#   fog lamps        r 49 at (+-590, 585)
+FACE_X, FACE_HIP = 675.0, 711.0
+FACE_TOP, FACE_BOT = 1035.0, 410.0
+GRILLE_X, GRILLE_TOP, GRILLE_BOT = 648.0, 983.0, 771.0
+LAMP_X, LAMP_Y, LAMP_R = 453.0, 877.0, 100.0
+IND_X0, IND_X1, IND_TOP, IND_BOT = 568.0, 624.0, 950.0, 884.0
+FOG_X, FOG_Y, FOG_R = 590.0, 585.0, 49.0
+BUMPER_TOP, BAND_TOP = 722.0, 771.0
+RECESS_X, RECESS_TOP, RECESS_BOT = 380.0, 652.0, 519.0
+SLOT_W, SLOT_GAP, SLOTS = 88.0, 60.0, 5
+SLOT_TOP, SLOT_BOT = 961.0, 789.0
 
-K = min((VB_W - 24) / LEN, (VB_H - 8) / TALL)
-NOSE = VB_W - (VB_W - LEN * K) / 2
-GROUND = VB_H - (VB_H - TALL * K) / 2
+K = min((VB_W - 24) / (2 * FACE_HIP), (VB_H - 8) / (FACE_TOP - FACE_BOT))
+CX = VB_W / 2
+GROUND = VB_H - (VB_H - (FACE_TOP - FACE_BOT) * K) / 2 + FACE_BOT * K
 
 
-def pt(z, y):
-    return round(NOSE - z * K, 1), round(GROUND - y * K, 1)
+def pt(x, y):
+    return round(CX + x * K, 1), round(GROUND - y * K, 1)
 
 
 def poly(pts, close=True):
@@ -61,55 +53,38 @@ def poly(pts, close=True):
     return d + ('Z' if close else '')
 
 
-def arch(z_centre):
-    """The wheel opening, from its rear lip up over the top to its front lip.
-    Drawn travelling forward along the sill, so on screen it runs left to
-    right over the top: clockwise, sweep-flag 1, and under a half turn."""
-    r = round(ARCH_R * K, 1)
-    x, y = pt(z_centre - ARCH_DZ, SILL)
-    return 'L%s %s' % pt(z_centre + ARCH_DZ, SILL) + f'A{r} {r} 0 0 1 {x} {y}'
+def rect(x0, x1, y0, y1):
+    return poly([(x0, y1), (x1, y1), (x1, y0), (x0, y0)])
 
 
-def spare():
-    """The tailgate spare, edge on: a rounded band behind the tailgate."""
-    r = round(SPARE_RAD * K, 1)
-    a = f'A{r} {r} 0 0 1 '
-    (xr, yt), (xl, yb) = pt(SPARE_Z0, SPARE_Y0), pt(SPARE_Z1, SPARE_Y1)
-    return (f'M{round(xl + r, 1)} {yt}L{round(xr - r, 1)} {yt}'
-            + a + f'{xr} {round(yt + r, 1)}'
-            + f'L{xr} {round(yb - r, 1)}' + a + f'{round(xr - r, 1)} {yb}'
-            + f'L{round(xl + r, 1)} {yb}' + a + f'{xl} {round(yb - r, 1)}'
-            + f'L{xl} {round(yt + r, 1)}' + a + f'{round(xl + r, 1)} {yt}Z')
+face = poly([(-FACE_X, FACE_TOP), (FACE_X, FACE_TOP), (FACE_HIP, 940),
+             (FACE_HIP, 500), (FACE_X - 15, FACE_BOT), (-FACE_X + 15, FACE_BOT),
+             (-FACE_HIP, 500), (-FACE_HIP, 940)])
 
+slot_span = SLOTS * SLOT_W + (SLOTS - 1) * SLOT_GAP
+slots = [rect(x, x + SLOT_W, SLOT_BOT, SLOT_TOP)
+         for x in (-slot_span / 2 + i * (SLOT_W + SLOT_GAP) for i in range(SLOTS))]
 
-body = (
-    # front bumper, up the grille panel and along the bonnet
-    poly([(AXLE_F - ARCH_DZ, 400), (30, 385), (0, 430), (0, 690), (120, 710), (120, 1030),
-          (200, 1055), (1030, 1150), (1090, 1165),
-          # windscreen, roof, tailgate
-          (1440, 1595), (1520, TALL - 15), (ROOF_REAR, TALL - 15),
-          (TAIL_FOOT, 620),
-          # rear bumper, then forward along the bottom through both arches
-          (3360, 600), (3360, 420), (AXLE_R + ARCH_DZ, 395)], close=False)
-    + arch(AXLE_R) + arch(AXLE_F) + 'Z'
-)
-windows = [
-    # the door window's leading edge follows the A-pillar, so it leans back
-    # going up; everything else is square, and the rear quarter is square all
-    # round -- which is what the car actually looks like
-    poly([(1610, HEAD), (2210, HEAD), (2210, BELT), (1560, BELT)]),
-    poly([(2430, HEAD), (3030, HEAD), (3030, BELT), (2430, BELT)]),
-]
-
-print('<!-- JB74 side elevation, measured off model/jimny-hq.glb by '
-      'tools/bootcar.py -->')
-print(f'<path class="body" pathLength="1" d="{body}"/>')
-for d in windows:
+print('<!-- JB74 face, measured off model/jimny-hq.glb by tools/bootcar.py -->')
+print(f'<path class="body" pathLength="1" d="{face}"/>')
+print(f'<path class="body" pathLength="1" d="{rect(-GRILLE_X, GRILLE_X, GRILLE_BOT, GRILLE_TOP)}"/>')
+# the painted band that separates the grille from the bumper
+print(f'<path class="win" pathLength="1" d="'
+      f'{poly([(-FACE_HIP, BAND_TOP), (FACE_HIP, BAND_TOP)], close=False)}"/>')
+print(f'<path class="win" pathLength="1" d="'
+      f'{poly([(-FACE_HIP, BUMPER_TOP), (FACE_HIP, BUMPER_TOP)], close=False)}"/>')
+for d in slots:
     print(f'<path class="win" pathLength="1" d="{d}"/>')
-print(f'<path class="w" pathLength="1" d="{spare()}"/>')
-for z in (AXLE_R, AXLE_F):
-    cx, cy = pt(z, TYRE_R)
-    print(f'<circle class="w" pathLength="1" cx="{cx}" cy="{cy}" '
-          f'r="{round(TYRE_R * K, 1)}"/>')
-    print(f'<circle class="h" pathLength="1" cx="{cx}" cy="{cy}" '
-          f'r="{round(TYRE_R * 0.47 * K, 1)}"/>')
+for s in (-1, 1):
+    print(f'<path class="win" pathLength="1" '
+          f'd="{rect(s * IND_X0, s * IND_X1, IND_BOT, IND_TOP)}"/>')
+for s in (-1, 1):
+    cx, cy = pt(s * LAMP_X, LAMP_Y)
+    print(f'<circle class="w" pathLength="1" cx="{cx}" cy="{cy}" r="{round(LAMP_R * K, 1)}"/>')
+    print(f'<circle class="h" pathLength="1" cx="{cx}" cy="{cy}" r="{round(LAMP_R * 0.52 * K, 1)}"/>')
+for s in (-1, 1):
+    cx, cy = pt(s * FOG_X, FOG_Y)
+    print(f'<circle class="h" pathLength="1" cx="{cx}" cy="{cy}" r="{round(FOG_R * K, 1)}"/>')
+# the bumper's own recess, which is what fills the lower half on the real car
+print(f'<path class="win" pathLength="1" d="'
+      f'{rect(-RECESS_X, RECESS_X, RECESS_BOT, RECESS_TOP)}"/>')

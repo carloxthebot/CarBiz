@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230426" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230447" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -270,18 +270,34 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .side-row .pick button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:600}
 .sides.off{opacity:.45;pointer-events:none}
 
-.flags{padding:10px 20px 0;display:grid;gap:6px;flex:none}
+/* The advisories and the buttons are pinned below the list, so every pixel
+   they take is a pixel of parts the reader cannot see. Three stacked
+   full-width buttons plus two open advisory cards were about a third of a
+   phone screen -- so the advisories collapse to one line that says how many
+   there are, and the buttons sit on a single row. */
+.flags{padding:9px 20px 0;display:grid;gap:6px;flex:none}
 .flags:empty{padding:0}
+.flagbar{display:flex;align-items:center;gap:9px;width:100%;padding:9px 12px;border-radius:3px;
+  background:var(--sur);border:1px solid var(--line);border-left:2px solid var(--line2);
+  color:var(--ink2);font:500 12.5px var(--body);cursor:pointer;text-align:left}
+.flagbar.warn{border-left-color:var(--warn)}
+.flagbar.error{border-left-color:var(--bad)}
+.flagbar i{font-style:normal;font:600 10.5px/1 var(--mono);letter-spacing:.1em}
+.flagbar i.bad{color:#ffc9bc} .flagbar i.wrn{color:#f3ddb4}
+.flagbar em{margin-left:auto;font-style:normal;font-size:10px;color:var(--ink2);transition:transform .16s}
+.flags.open .flagbar em{transform:rotate(180deg)}
+.flags:not(.open) .flag{display:none}
 .flag{padding:10px 12px;border-radius:3px;font-size:13px;line-height:1.55;border-left:2px solid;background:var(--sur)}
 .flag.error{border-color:var(--bad);color:#ffc9bc}
 .flag.warn{border-color:var(--warn);color:#f3ddb4}
 .flag.info{border-color:var(--line2);color:var(--ink2)}
 .flag b{font:600 10.5px/1.7 var(--mono);letter-spacing:.1em;display:block}
-.acts{padding:14px 20px calc(18px + env(safe-area-inset-bottom));display:grid;
-  grid-template-columns:1fr 1fr;gap:7px;flex:none;border-top:1px solid var(--line);margin-top:12px}
-.acts button{padding:13px;border-radius:3px;font:600 14px var(--body);cursor:pointer;border:1px solid}
-.ghost{background:none;border-color:var(--line2);color:var(--ink)}
-.solid{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);grid-column:1/-1}
+.acts{padding:10px 20px calc(14px + env(safe-area-inset-bottom));display:flex;gap:7px;
+  flex:none;border-top:1px solid var(--line);margin-top:10px}
+.acts button{padding:12px 11px;border-radius:3px;font:600 13.5px var(--body);cursor:pointer;
+  border:1px solid;white-space:nowrap}
+.ghost{background:none;border-color:var(--line2);color:var(--ink2)}
+.solid{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);flex:1}
 #out{margin:0 20px 20px;background:var(--sur);border:1px solid var(--line);border-radius:3px;padding:13px;
   font:12.5px/1.7 var(--mono);color:var(--ink2);white-space:pre-wrap;display:none}
 #out.on{display:block}
@@ -328,13 +344,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   body.sheet .hero .h-r i{font-size:11px}
   body.sheet .hero .h-r em{font-size:10.5px}
   body.sheet .steps button{padding:8px 6px 7px}
-  /* three stacked full-width buttons ate a third of the sheet on a phone;
-     one compact row leaves that space to the parts */
-  .acts{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;
-    padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
-  .acts button{padding:11px 4px;font-size:13px;border-radius:2px}
-  .acts .solid{grid-column:auto}
+  .acts{gap:6px;margin-top:8px;padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
+  .acts button{padding:11px 9px;font-size:12.5px;border-radius:2px}
   .flags{padding:8px 16px 0}
+  .flagbar{padding:8px 11px;font-size:12px}
   #out{margin:0 16px 14px;font-size:12px}
   .wgrid{grid-template-columns:repeat(3,1fr)}
 }
@@ -367,15 +380,25 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 <body>
 <div id="boot">
       <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
-        <!-- JB74 side elevation, measured off model/jimny-hq.glb by tools/bootcar.py -->
-        <path class="body" pathLength="1" d="M265.8 96.1L279.5 97.2L281.7 93.8L281.7 74.4L272.7 72.9L272.7 48.9L266.8 47.0L204.6 39.9L200.1 38.8L174.0 6.6L168.0 5.1L43.0 5.1L34.0 79.6L30.2 81.1L30.2 94.6L41.3 96.4L41.3 94.6A30.7 30.7 0 0 1 102.2 94.6L204.9 94.6A30.7 30.7 0 0 1 265.8 94.6Z"/>
-        <path class="win" pathLength="1" d="M161.2 14.5L116.3 14.5L116.3 44.4L165.0 44.4Z"/>
-        <path class="win" pathLength="1" d="M99.9 14.5L54.9 14.5L54.9 44.4L99.9 44.4Z"/>
-        <path class="w" pathLength="1" d="M22.8 30.2L37.0 30.2A4.5 4.5 0 0 1 41.5 34.7L41.5 77.3A4.5 4.5 0 0 1 37.0 81.8L22.8 81.8A4.5 4.5 0 0 1 18.3 77.3L18.3 34.7A4.5 4.5 0 0 1 22.8 30.2Z"/>
-        <circle class="w" pathLength="1" cx="71.7" cy="100.0" r="26.0"/>
-        <circle class="h" pathLength="1" cx="71.7" cy="100.0" r="12.2"/>
-        <circle class="w" pathLength="1" cx="235.3" cy="100.0" r="26.0"/>
-        <circle class="h" pathLength="1" cx="235.3" cy="100.0" r="12.2"/>
+        <!-- JB74 face, measured off model/jimny-hq.glb by tools/bootcar.py -->
+        <path class="body" pathLength="1" d="M19.0 4.3L281.0 4.3L288.0 22.8L288.0 108.2L278.1 125.7L21.9 125.7L12.0 108.2L12.0 22.8Z"/>
+        <path class="body" pathLength="1" d="M24.2 14.4L275.8 14.4L275.8 55.6L24.2 55.6Z"/>
+        <path class="win" pathLength="1" d="M12.0 55.6L288.0 55.6"/>
+        <path class="win" pathLength="1" d="M12.0 65.1L288.0 65.1"/>
+        <path class="win" pathLength="1" d="M84.0 18.7L101.1 18.7L101.1 52.1L84.0 52.1Z"/>
+        <path class="win" pathLength="1" d="M112.7 18.7L129.8 18.7L129.8 52.1L112.7 52.1Z"/>
+        <path class="win" pathLength="1" d="M141.5 18.7L158.5 18.7L158.5 52.1L141.5 52.1Z"/>
+        <path class="win" pathLength="1" d="M170.2 18.7L187.3 18.7L187.3 52.1L170.2 52.1Z"/>
+        <path class="win" pathLength="1" d="M198.9 18.7L216.0 18.7L216.0 52.1L198.9 52.1Z"/>
+        <path class="win" pathLength="1" d="M39.8 20.8L28.9 20.8L28.9 33.7L39.8 33.7Z"/>
+        <path class="win" pathLength="1" d="M260.2 20.8L271.1 20.8L271.1 33.7L260.2 33.7Z"/>
+        <circle class="w" pathLength="1" cx="62.1" cy="35.0" r="19.4"/>
+        <circle class="h" pathLength="1" cx="62.1" cy="35.0" r="10.1"/>
+        <circle class="w" pathLength="1" cx="237.9" cy="35.0" r="19.4"/>
+        <circle class="h" pathLength="1" cx="237.9" cy="35.0" r="10.1"/>
+        <circle class="h" pathLength="1" cx="35.5" cy="91.7" r="9.5"/>
+        <circle class="h" pathLength="1" cx="264.5" cy="91.7" r="9.5"/>
+        <path class="win" pathLength="1" d="M76.2 78.7L223.8 78.7L223.8 104.5L76.2 104.5Z"/>
       </svg>
     <span id="bootmsg">載入 3D 模型…</span>
     <div id="bootbar" aria-hidden="true"><i></i></div>
@@ -513,8 +536,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 
     <div class="flags" id="flags"></div>
     <div class="acts">
-      <button class="ghost" id="btnDemo">載入範例車</button>
-      <button class="ghost" id="btnReset">全部還原</button>
+      <button class="ghost" id="btnDemo">範例車</button>
+      <button class="ghost" id="btnReset">還原</button>
       <button class="solid" id="btnExport">匯出這台配置</button>
     </div>
     <pre id="out"></pre>
@@ -539,14 +562,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609230426';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230426';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230426';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230426';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609230426';
+import { rigJimny, applyConfig } from './rig.js?v=202609230447';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230447';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230447';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230447';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609230447';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609230426';
+const BUILD = '202609230447';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -673,8 +696,8 @@ const RIMS = [0xc8ccd0, 0x373b41, 0x8a6a3c, 0xd8d9d6, 0xb8410f];   // matte blac
 const DEMO = { color: 'ZJ3', lift: 'td60', wheel: 'maxx', tyre: 't225r16', tread: 'toyo_mt', owl: true, rimColor: 0x373b41,
   grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', roofLights: 'none', awning: 'yakima_270s', awningSide: 'left',
   exhaust: 'hks_legal', extinguisher: 'ladder',
-  windowGuards: true, guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true, ladder: 'tube', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
-  mirrors: 'damd', pillarPods: true, snorkel: 'bravo' };
+  windowGuards: true, guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true, ladder: 'jst', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
+  mirrors: 'damd', pillarPods: true, snorkel: 'urnieta' };
 const find = (l, id) => l.find(x => x.id === id) || l[0];
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -889,10 +912,36 @@ function update() {
   $('hCol').textContent = col.name;
   $('hVer').textContent = accessoriesIn ? `版本 ${BUILD}` : `版本 ${BUILD} · 配件載入中…`;
   prevS = { ...S };
-  const fl = validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh });
-  $('flags').innerHTML = fl.map(f =>
-    `<div class="flag ${f.level}"><b>${{error:'不相容',warn:'注意',info:'提醒'}[f.level]}</b>${esc(f.msg)}</div>`).join('');
+  renderFlags(validate(S, { tyre: ty, lift, bodyLift: bl, wheel: wh }));
 }
+
+/**
+ * The advisories live under the parts list, where they push it off screen, so
+ * they collapse to a single line that says how many there are and of what
+ * kind. Whether they are open is remembered between redraws -- an advisory the
+ * reader opened must not shut itself the next time they change a wheel.
+ */
+let flagsOpen = false;
+const LEVELS = { error: '不相容', warn: '注意', info: '提醒' };
+function renderFlags(fl) {
+  const box = $('flags');
+  if (!fl.length) { box.className = 'flags'; box.innerHTML = ''; return; }
+  const n = (lv) => fl.filter(f => f.level === lv).length;
+  const worst = n('error') ? 'error' : n('warn') ? 'warn' : 'info';
+  const parts = [['error', 'bad'], ['warn', 'wrn'], ['info', '']]
+    .filter(([lv]) => n(lv))
+    .map(([lv, cls]) => `<i class="${cls}">${n(lv)} ${LEVELS[lv]}</i>`).join('<span>·</span>');
+  box.className = 'flags' + (flagsOpen ? ' open' : '');
+  box.innerHTML = `<button type="button" class="flagbar ${worst}" aria-expanded="${flagsOpen}">`
+    + `${parts}<em>\u25be</em></button>`
+    + fl.map(f => `<div class="flag ${f.level}"><b>${LEVELS[f.level]}</b>${esc(f.msg)}</div>`).join('');
+}
+$('flags').addEventListener('click', (e) => {
+  if (!e.target.closest('.flagbar')) return;
+  flagsOpen = !flagsOpen;
+  $('flags').classList.toggle('open', flagsOpen);
+  $('flags').querySelector('.flagbar').setAttribute('aria-expanded', String(flagsOpen));
+});
 
 /**
  * White letters are a per-SIZE thing, not a per-model one: Open Country M/T
