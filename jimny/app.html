@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609221850" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230034" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -79,6 +79,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
    animation inside an opacity:0 subtree, so hiding it until 組裝中 is exactly
    what made it freeze when the main thread got busy. */
 #bootbar{width:min(280px,58vw);height:3px;border-radius:3px;background:#1a2427}
+#bootbar[hidden]{display:none}
+#bootmsg .err{display:inline-block;margin-top:6px;font-size:11.5px;color:#8b6a52;letter-spacing:.04em}
+#bootretry{font:600 13px var(--body);color:var(--acc-ink);background:var(--acc);border:0;
+  padding:10px 18px;border-radius:4px;cursor:pointer;letter-spacing:.06em}
+#bootretry[hidden]{display:none}
 /* the bar travels exactly its own track, so nothing has to clip it -- a
    rounded overflow:hidden parent takes the animation off the compositor,
    and then it stops dead the moment the main thread is busy, which is the
@@ -370,6 +375,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       </svg>
     <span id="bootmsg">載入 3D 模型…</span>
     <div id="bootbar" aria-hidden="true"><i></i></div>
+    <button id="bootretry" type="button" hidden>重新載入</button>
   </div>
 <div class="app">
   <div class="stage">
@@ -529,14 +535,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609221850';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609221850';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609221850';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609221850';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609221850';
+import { rigJimny, applyConfig } from './rig.js?v=202609230034';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230034';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230034';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230034';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609230034';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609221850';
+const BUILD = '202609230034';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -685,11 +691,16 @@ loader.setDRACOLoader(draco);
 // do not, so they stream in behind and the scene is rebuilt when they land.
 const firstFrame = Promise.all([loadParts(loader, `model/rims.glb?v=${BUILD}`, THREE),
                                 loadTreadMasks(TYRE_MODELS, `model/tread/`)]);
-let accessoriesIn = false;
-const accessoriesReady = loadParts(loader, `model/parts.glb?v=${BUILD}`, THREE).then(() => {
-  accessoriesIn = true;
-  if (rig) update();                       // whatever is selected now gets built
-});
+let accessoriesIn = false, accessoriesReady = null;
+/** Only once the car is on screen. Pulling the body (7.3 MB) and the
+    accessories (7.6 MB) at the same time costs the body the bandwidth it
+    needs and stacks two draco decodes in memory, which is how a phone in an
+    in-app browser ends up reporting a bare "Load failed". */
+const loadAccessories = () => accessoriesReady ??=
+  loadParts(loader, `model/parts.glb?v=${BUILD}`, THREE).then(() => {
+    accessoriesIn = true;
+    if (rig) update();                     // whatever is selected now gets built
+  });
 // Assembling the car blocks the main thread for a second or two: rigging the
 // glTF, building the wheels and compiling every material are all synchronous.
 // Yield between those stages so the boot screen at least repaints, and let the
@@ -701,7 +712,10 @@ const drawCar = (k) => {
   for (const el of $('bootcar').querySelectorAll('path,circle'))
     el.style.strokeDashoffset = String(1 - k);
 };
-loader.load('model/jimny-hq.glb', async (g) => {
+/** The body, with a couple of retries: a phone that drops the connection
+    part way through should not be left staring at a dead screen. */
+function loadBody(tries = 0) {
+  loader.load(tries ? `model/jimny-hq.glb?retry=${tries}` : 'model/jimny-hq.glb', async (g) => {
   await firstFrame;
   // the model is in; whatever the progress events did or did not report, the
   // car is now complete on screen
@@ -752,13 +766,27 @@ loader.load('model/jimny-hq.glb', async (g) => {
   }
   $('boot').classList.add('gone');
   setTimeout(() => { $('boot').style.display = 'none'; }, 480);
+  loadAccessories();
   if (preset) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
-}, (p) => { if (!p.total) return;
-  const k = p.loaded / p.total;
-  drawCar(k);
-  $('bootmsg').textContent = k < 1 ? `載入 3D 模型… ${Math.round(k * 100)}%` : '組裝中…';
-  if (k >= 1) $('boot').classList.add('assembling'); },
-(e) => { $('bootmsg').textContent = '模型載入失敗：' + (e?.message || e); });
+  }, (p) => { if (!p.total) return;
+    const k = p.loaded / p.total;
+    drawCar(k);
+    $('bootmsg').textContent = k < 1 ? `載入 3D 模型… ${Math.round(k * 100)}%` : '組裝中…';
+    if (k >= 1) $('boot').classList.add('assembling');
+  }, (e) => {
+    if (tries < 2) {
+      $('bootmsg').textContent = '連線不穩，重新下載…';
+      drawCar(0);
+      setTimeout(() => loadBody(tries + 1), 800 * (tries + 1));
+      return;
+    }
+    $('bootmsg').innerHTML = `模型載入失敗<br><span class="err">${esc(String(e?.message || e))}</span>`;
+    $('bootbar').hidden = true;
+    $('bootretry').hidden = false;
+  });
+}
+loadBody();
+$('bootretry').onclick = () => location.reload();
 
 /* ═══ scene update ═══════════════════════════════════════════════════════ */
 let prevS = null, prevGeom = null, prevPaint = null;
