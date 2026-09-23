@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230309" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609230356" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -368,13 +368,15 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 <div id="boot">
       <svg viewBox="0 0 300 130" id="bootcar" aria-hidden="true">
         <!-- JB74 side elevation, drawn to the published dimensions by tools/bootcar.py -->
-        <path class="body" pathLength="1" d="M255.3 97.1L272.0 96.4L273.4 89.9L273.4 76.2L271.3 74.0L271.3 48.8L267.3 45.9L222.9 43.7L219.7 42.6L190.1 4.0L33.8 4.0L26.6 9.8L26.6 85.6L28.4 87.0L28.4 96.0L34.5 97.5L36.8 92.1A28.9 28.9 0 0 1 92.9 92.1L199.2 92.1A28.9 28.9 0 0 1 255.3 92.1Z"/>
-        <path class="win" pathLength="1" d="M172.4 9.1L116.1 9.1L116.1 45.1L178.9 45.1Z"/>
-        <path class="win" pathLength="1" d="M108.1 9.1L43.9 9.1L43.9 45.1L108.1 45.1Z"/>
-        <circle class="w" pathLength="1" cx="64.8" cy="100.7" r="25.3"/>
-        <circle class="h" pathLength="1" cx="64.8" cy="100.7" r="11.9"/>
-        <circle class="w" pathLength="1" cx="227.2" cy="100.7" r="25.3"/>
-        <circle class="h" pathLength="1" cx="227.2" cy="100.7" r="11.9"/>
+        <path class="body" pathLength="1" d="M260.0 97.1L276.7 96.4L278.1 89.9L278.1 76.2L276.0 74.0L276.0 48.8L272.0 45.9L227.6 43.7L224.4 42.6L194.8 4.0L39.2 4.0L34.9 9.8L34.9 85.6L33.4 87.0L33.4 96.4L41.5 97.5L41.5 92.1A28.9 28.9 0 0 1 97.6 92.1L203.9 92.1A28.9 28.9 0 0 1 260.0 92.1Z"/>
+        <path class="win" pathLength="1" d="M177.1 9.1L120.8 9.1L120.8 40.8L183.6 40.8Z"/>
+        <path class="win" pathLength="1" d="M112.8 9.1L65.2 9.1L65.2 40.8L112.8 40.8Z"/>
+        <circle class="w" pathLength="1" cx="69.5" cy="100.7" r="25.3"/>
+        <circle class="h" pathLength="1" cx="69.5" cy="100.7" r="11.9"/>
+        <circle class="w" pathLength="1" cx="231.9" cy="100.7" r="25.3"/>
+        <circle class="h" pathLength="1" cx="231.9" cy="100.7" r="11.9"/>
+        <circle class="w" pathLength="1" cx="42.8" cy="58.1" r="20.9"/>
+        <circle class="h" pathLength="1" cx="42.8" cy="58.1" r="9.8"/>
       </svg>
     <span id="bootmsg">載入 3D 模型…</span>
     <div id="bootbar" aria-hidden="true"><i></i></div>
@@ -538,14 +540,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609230309';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230309';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230309';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230309';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609230309';
+import { rigJimny, applyConfig } from './rig.js?v=202609230356';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609230356';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609230356';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609230356';
+import { priceLabel, FX_NOTE } from './fx.js?v=202609230356';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609230309';
+const BUILD = '202609230356';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
