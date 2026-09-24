@@ -599,30 +599,6 @@ def number_plate(root, y, z):
     box('plate', (0, y, z), (330, 165, 2), PLATE, root, bevel=1)
 
 
-# SHOWA GARAGE Iron Bumper (E00900): one Ø60 steel tube at stock-bumper
-# height, ends bent ~45° back to domed caps ahead of the arches, plate hung
-# below centre, Ø90 fogs on stays, 3 mm aluminium skid plate, textured black.
-def bumper_showa():
-    root = group('frontBumper_showa_iron')
-    y = 600
-    path = [(-750, y, 1560), (-600, y, 1740), (600, y, 1740), (750, y, 1560)]
-    tube('bar', path, 60, TEXBLACK, root, bend=130)
-    for s in (-1, 1):
-        sphere(f'cap{s}', (s * 750, y, 1560), 60, TEXBLACK, root)
-        box(f'stay{s}', (s * 430, y - 40, 1700), (24, 80, 20), TEXBLACK, root, bevel=2)
-        fog_lamp(root, s * 430, y - 90, 1712, TEXBLACK)
-        box(f'plateArm{s}', (s * 120, y - 60, 1735), (16, 120, 12), TEXBLACK, root, bevel=1)
-    number_plate(root, 500, 1745)
-    from mathutils import Matrix
-    box('skid', (0, 380, 1620), (700, 4, 260), ALU, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
-    valance(root)
-    return root
-
-
-# KLC Heritage Traditional Bumper: straight Ø60 stainless tube ~1300 wide
-# with flat caps, a shorter Ø50 tube below carrying the plate, box brackets
-# with Ø90 fogs, flat black skid plate. Sold in ivory / black / polished —
-# drawn in body colour.
 def bumper_klc():
     """KLC Heritage Traditional Bumper 74 in ivory (the black one is
     bumper_tube_heritage): the colour is the product, not the car's paint."""
@@ -2849,7 +2825,6 @@ def build():
     grille_outclass()
     grille_klc()
     grille_owner()
-    bumper_showa()
     bumper_klc()
     bumper_outclass()
     for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock', 'moon', 'daytona', 'slot5', 'watanabe', 'eightpin',
@@ -2952,7 +2927,6 @@ def build():
     side_step('tjm', 'slider', tube_d=51, pads=[(110, 200, -350), (110, 200, 0), (110, 200, 350)])
     side_step('outclass', 'tube', tube_d=45, pads=[(150, 900, 0)], drop=30)
     side_step('apio_guard', 'armour', standoff=45)
-    side_step('jaos', 'tube', tube_d=76, pads=[(110, 300, 60)])
     side_step('taniguchi_bar', 'tube', tube_d=42, pads=[(145, 550, 80)])
     side_step('taniguchi_short', 'short', tube_d=32, pads=[(145, 550, 0)])
     side_step('showa', 'tube', tube_d=48)
