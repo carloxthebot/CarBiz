@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241257" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241324" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -621,14 +621,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609241257';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, STYLES } from './parts.js?v=202609241257';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241257';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241257';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241257';
+import { rigJimny, applyConfig } from './rig.js?v=202609241324';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, STYLES } from './parts.js?v=202609241324';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241324';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241324';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241324';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609241257';
+const BUILD = '202609241324';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -744,7 +744,7 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   kit: 'none', hood: 'stock', spareCoverKit: 'none', gullwing: false, frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: 'none', spareBag: false, spareCover: false,
-  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none' };
+  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none' };
 // things that hang off a quarter-window guard and therefore pick a side
 const SIDED = ['guardCan', 'guardAxe', 'guardBoard'];
 const SIDE_DEF = { guardCan: 'right', guardAxe: 'right', guardBoard: 'left' };
@@ -939,6 +939,7 @@ function update() {
   if (S.spareCoverKit !== 'none') add(buildAccessory('spareCover', S.spareCoverKit, paint), 'spareCoverKit');
   if (S.gullwing) add(buildAccessory('gullwing', undefined, paint), 'gullwing');
   if (S.stripe !== 'none') add(buildAccessory('stripe', S.stripe, paint), 'stripe');
+  if (S.cage !== 'none') add(buildAccessory('cage', S.cage, paint), 'cage');
   if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint), 'rearBumper');
   // 'safari' is a legacy id kept so old links still work; the part is Ironman's
   if (S.snorkel !== 'none')
@@ -1274,7 +1275,7 @@ const ALL_LISTS = { lift: LIFTS, wheel: WHEELS, tyre: TYRES, frontBumper: FRONT_
   rearBumper: REAR_BUMPERS, grille: GRILLES, snorkel: SNORKELS, mirrors: MIRRORS,
   roofRack: ROOF_RACKS, awning: AWNINGS, sideStep: SIDE_STEPS, ladder: LADDERS,
   lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS,
-  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES,
+  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES, cage: CAGES,
   spareCoverKit: SPARE_COVERS };
 let styleAt = null;
 

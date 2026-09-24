@@ -1067,6 +1067,39 @@ def stripe_toy4():
                                  (8.3, 0x1d2124)], 18)
 
 
+# ================================================================ ROLL CAGE
+def cage_wildgoose():
+    """RV4 Wild Goose アウターロールケージ JM-2424, 203,500 tax incl, 25 kg.
+    Main tube 38.1 x 2.3, centre crossbar 25.4 x 2.3. It mounts at the bonnet
+    fixing points at the front -- which is why the side cowl and fender have
+    to be cut -- and at eight points on the roof drip rail at the back.
+
+    It is the one part in the catalogue that redraws the car's outline rather
+    than hanging off it: the roof stops being a plain box and becomes a box
+    inside a frame. Sized off the model: the roof crowns at y 1620 with the
+    gutter at |x| 645 and runs z +170 to -1540, so the rails sit just outside
+    and above that, at |x| 700 and y 1700."""
+    root = group('cage_wildgoose')
+    for s in (-1, 1):
+        # one continuous rail: bonnet mount, up the A-pillar, over the roof,
+        # down to the rear drip rail
+        tube(f'rail{s}', [(s * 655, 1150, 700), (s * 690, 1420, 560), (s * 700, 1690, 330),
+                          (s * 700, 1704, 60), (s * 700, 1704, -1480), (s * 686, 1600, -1616)],
+             38, BLACK, root, bend=170)
+        # the feet: one plate at the bonnet, four along the drip rail
+        box(f'foot{s}', (s * 650, 1140, 700), (56, 12, 90), BLACK, root, bevel=3)
+        for z in (-260, -740, -1180, -1560):
+            box(f'drip{s}{abs(z)}', (s * 672, 1660, z), (34, 74, 52), BLACK, root, bevel=4)
+            box(f'dripPad{s}{abs(z)}', (s * 656, 1622, z), (16, 12, 78), BLACK, root, bevel=2)
+    # crossbars: the front hoop follows the rails over the windscreen header,
+    # the rest lie flat across the roof
+    tube('hoop', [(-700, 1690, 330), (-660, 1712, 250), (660, 1712, 250), (700, 1690, 330)],
+         38, BLACK, root, bend=120)
+    for z in (-420, -960, -1440):
+        lib.cylinder(f'x{abs(z)}', (0, 1704, z), (1, 0, 0), 25, 1400, BLACK, root, n=16)
+    return root
+
+
 def decals():
     """Owner's door lettering: MODEL:3BA-JB74W with two lines of small print,
     and the WLM mark on each guard. Thin white text standing 1 mm proud."""
@@ -2998,6 +3031,7 @@ def build():
     rack_platform('urnieta_salado_half', 1366, 1100, slat_dir='across', slats=5, rail=(52, 48), legs=4, deflector=True)
     flares()
     decals()
+    cage_wildgoose()
     stripe_retro3()
     stripe_toolgear()
     stripe_jaos()

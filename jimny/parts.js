@@ -669,19 +669,6 @@ export const OTHERS = [
 export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   const out = [];
   const totalLift = (lift?.lift ?? 0) + (bodyLift?.body ?? 0);
-  // Checked first-hand against the official PDF of 道安規則 附件十五 (第23條's
-  // own attachment, law.moj.gov.tw FileId 0000403808), 三、底盤:
-  //   「懸吊系統之避震器 ｜ 變更後不得超過原核定車身高度。」
-  // That is the whole rule. A shock change is registrable, but only downward:
-  // there is no registration path for raising the car, and no tolerance is
-  // written anywhere in the attachment -- the only percentage in all of it is
-  // a 2% body-LENGTH allowance for a cab-over truck's nose trim. The ~2 cm
-  // owners report at inspection is what inspectors wave through, not a rule,
-  // and saying so is the difference between a catalogue and a rumour.
-  if (totalLift > 0) {
-    out.push({ level: 'warn',
-      msg: `舉升 ${totalLift}mm：道安規則附件十五對避震器只寫「變更後不得超過原核定車身高度」，升高沒有登記管道、法規也沒有寫任何容許值。車友回報驗車現場約有 2cm 的裁量空間，那是實務不是規定` });
-  }
   if (tyre.needLift > totalLift) {
     out.push({ level: 'error',
       msg: `${tyre.label} 需要約 ${tyre.needLift}mm 舉升，目前只有 ${totalLift}mm` });
@@ -782,6 +769,18 @@ export const SPARE_COVERS = [
 ];
 
 /**
+ * Outer roll cages. The one thing in here that redraws the car's outline
+ * instead of hanging off it -- the roof stops being a plain box and becomes a
+ * box inside a frame -- which is why it earns a family of its own.
+ */
+export const CAGES = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'wildgoose', photo: true, url: 'https://www.rv4wildgoose.com/parts/jimny-64-74/protection_64/jm-2424.html',
+    label: '外掛式防滾籠 JM-2424', price: 203500, cur: 'JPY', brand: 'RV4 Wild Goose', part: 'JM-2424',
+    note: '主管 38.1×2.3t、中央橫樑 25.4×2.3t，25kg。前端鎖引擎蓋固定點——所以側 cowl 與葉子板都要切——後端鎖車頂雨槽 8 點。廠方寫明「車検対応品として、構造変更無しで使用出来ます」。注意：雙色車與有雨槽飾條的車不適用' },
+];
+
+/**
  * Side stripes. What actually makes one built JB74 look unlike another is the
  * stripe down its flank, not the bumper -- which is why five styles built out
  * of bumpers and wheels all read the same from ten metres away.
@@ -827,14 +826,14 @@ export const STYLES = [
   // all read the same from ten metres away.
   { id: 'jp_retro', label: '日系復古', sw: ['#d8c9a4', '#b4703a', '#1d2224'],
     desc: '米色車身配深棕、鏽橘、米白的三色腰線，黑鋼輪包白字全地形胎，KLC 不鏽鋼雙管前後保桿。車高只到 1.8 米出頭，是街上開的樣子。',
-    set: { color: 'ZVG', lift: 'td60', wheel: 'oemsteel', tyre: 't215r16', tread: 'toyo_at3', owl: true,
+    set: { color: 'ZVG', lift: 'td60', wheel: 'mrk_retro', tyre: 't215r16', tread: 'toyo_at3', owl: true,
       rimColor: 0x1b1d1f, stripe: 'retro3', grille: 'hbar_suzuki', frontBumper: 'tube_heritage',
       rearBumper: 'klc_heritage_rear', mirrors: 'damd', sideStep: 'jst', ladder: 'jst',
       exhaust: 'hks_legal', sideSkirt: true } },
 
   { id: 'au_offroad', label: '澳洲越野', sw: ['#3f4a3c', '#1d2224', '#8a6b45'],
-    desc: '最高最寬的一台：75mm 舉升、31 吋胎配爆龜、絞盤前桿與呼吸管，車頂載架上一排探照燈與 270 度車邊帳。',
-    set: { color: 'ZVL', lift: 'br75', wheel: 'beadlock', tyre: 't31', tread: 'bfg_km3',
+    desc: '最高最寬的一台：2 吋懸吊＋2 吋車身舉升、31 吋胎配爆龜、絞盤前桿與呼吸管，車頂載架上一排探照燈與 270 度車邊帳。',
+    set: { color: 'ZVL', lift: 'combo100', wheel: 'wildboar', tyre: 't31', tread: 'bfg_km3',
       rimColor: 0x2a2d30, frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb',
       awning: 'arb_touring_25', awningSide: 'left', sideStep: 'ironman', ladder: 'tube',
       lightBar: 'ipf', roofLights: 'kc_pro6', windowGuards: true, guardCan: 'right',
@@ -853,9 +852,16 @@ export const STYLES = [
       guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true,
       extinguisher: 'left', spareBag: true } },
 
+  { id: 'exo_cage', label: '外掛籠硬派', sw: ['#d8c9a4', '#1d2224', '#6b6f62'],
+    desc: '車頂被一圈黑鋼管整個包住，A 柱前面還跨一道橫樑過擋風玻璃。跟澳洲越野一樣兇，但那台車頂載滿東西、這台只有籠子——遠看剪影完全不同。',
+    set: { color: 'ZVG', lift: 'sg50bl', wheel: 'yaochi_h598', tyre: 't31', tread: 'cp_stt',
+      rimColor: 0x24262a, cage: 'wildgoose', frontBumper: 'wmd_winch',
+      rearBumper: 'taniguchi_rear_pipe', sideStep: 'taniguchi_bar', windowGuards: true,
+      guardCan: 'right', shovel: true, flares: true } },
+
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
     desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
-    set: { color: 'ZVG', twoTone: true, lift: 'td60', bodyLift: 'bl25', wheel: 'wildboar_d',
+    set: { color: 'ZVG', twoTone: true, lift: 'td60', wheel: 'wildboar_d',
       tyre: 't225r16', tread: 'toyo_at3', rimColor: 0x8a8d90, stripe: 'toy4',
       roofRack: 'pioneer', awning: 'yakima_270s', awningSide: 'left', sideStep: 'jst',
       ladder: 'jst', spareCover: true, extinguisher: 'ladder', flares: true } },

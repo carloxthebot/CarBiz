@@ -78,7 +78,7 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
 <script type="module">
 import { COLORS, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
   ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS, HOODS, SPARE_COVERS,
-  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES } from './parts.js';
+  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES } from './parts.js';
 import { priceLabel, FX_NOTE } from './fx.js';
 
 // key = the configurator's state key, so "套用" can deep-link into app.html
@@ -98,6 +98,7 @@ const CATS = [
   ['後保桿', 'rearBumper', REAR_BUMPERS, ''],
   ['水箱護罩', 'grille', GRILLES, ''],
   ['車身腰線貼', 'stripe', STRIPES, '裁切貼不是烤漆；主色沒變就不必辦變更登記'],
+  ['外掛防滾籠', 'cage', CAGES, '整台車的外輪廓會變，雙色車與有雨槽飾條的車裝不上'],
   ['車頂架', 'roofRack', ROOF_RACKS, ''],
   ['車邊帳', 'awning', AWNINGS, '台灣左駕：左側＝駕駛側；一般裝副駕（右）側或依露營習慣'],
   ['側踏／岩石滑桿', 'sideStep', SIDE_STEPS, ''],
