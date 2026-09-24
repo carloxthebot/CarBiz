@@ -951,6 +951,40 @@ def ladder_tube():
     return root
 
 
+# ============================================================== SIDE STRIPES
+# The thing that actually makes one built Jimny look unlike another is its
+# side stripe, and the car has a flat painted flank between the arches to put
+# one on: probed at y 750 the surface runs |x| 700-708 from z -600 to +700,
+# and outboard of that the arch flares stand proud at 720-790, so a stripe set
+# at |x| 710 disappears behind them exactly the way it does on the real car.
+STRIPE_Y = 752                   # centre of the band stack, on the lower door crease
+STRIPE_X = 710
+STRIPE_Z0, STRIPE_Z1 = -1020, 850  # it runs out under both arches
+
+
+def stripe_bands(name, bands, y=STRIPE_Y, z0=STRIPE_Z0, z1=STRIPE_Z1):
+    """A stack of contiguous horizontal bands down each flank. `bands` is a
+    list of (height mm, hex) read top to bottom."""
+    root = group('stripe_' + name)
+    total = sum(h for h, _ in bands)
+    top = y + total / 2
+    for s in (-1, 1):
+        cut = top
+        for i, (h, col) in enumerate(bands):
+            mat = material(f'Stripe{name}{i}', col, rough=0.5, metal=0.05)
+            box(f'b{s}{i}', (s * STRIPE_X, cut - h / 2, (z0 + z1) / 2),
+                (6, h, z1 - z0), mat, root, bevel=0)
+            cut -= h
+    return root
+
+
+def stripe_retro3():
+    """The stripe on nearly every sand-coloured JB74 on Japanese Instagram:
+    a dark brown hairline over a wide rust band over a cream one, contiguous,
+    running the flank at the height of the lower door crease."""
+    return stripe_bands('retro3', [(10, 0x6b4423), (46, 0xb4703a), (18, 0xe0cba8)])
+
+
 def decals():
     """Owner's door lettering: MODEL:3BA-JB74W with two lines of small print,
     and the WLM mark on each guard. Thin white text standing 1 mm proud."""
@@ -2882,6 +2916,7 @@ def build():
     rack_platform('urnieta_salado_half', 1366, 1100, slat_dir='across', slats=5, rail=(52, 48), legs=4, deflector=True)
     flares()
     decals()
+    stripe_retro3()
     side_skirt()
     snorkel_bravo()
     snorkel_ironman()

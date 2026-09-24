@@ -769,6 +769,23 @@ export const SPARE_COVERS = [
 ];
 
 /**
+ * Side stripes. What actually makes one built JB74 look unlike another is the
+ * stripe down its flank, not the bumper -- which is why five styles built out
+ * of bumpers and wheels all read the same from ten metres away.
+ *
+ * These are cut-vinyl sets, not paint, so in Taiwan they need no 變更登記 as
+ * long as the car's main colour is unchanged (道路交通安全規則第 23 條 lists
+ * 顏色 among the registrable items, but no rule anywhere sets an area
+ * threshold -- the widely repeated "over 1/3" comes from a 2016 television
+ * interview with a wrap shop, not from any regulation).
+ */
+export const STRIPES = [
+  { id: 'none', label: '不貼', price: 0 },
+  { id: 'retro3', photo: true, label: '復古三色腰線', price: 755, cur: 'TWD', brand: '露天賣家（裁切貼）',
+    note: '深棕細線＋寬鏽橘＋米色下緣，三條相連，沿門檻上方的折線跑滿側面。日本沙色 JB74 最常見的那一組。台灣露天 NT$350–755 依長度與材質；自己貼得起來，工錢另計' },
+];
+
+/**
  * Styles: a starting point, not a package.
  *
  * 230 parts across eleven families is a wall to anyone opening this for the
@@ -783,11 +800,12 @@ export const SPARE_COVERS = [
  * decisions rather than a dump of state.
  */
 export const STYLES = [
-  { id: 'jp_retro', label: '日系復古', sw: ['#1d2224', '#c9c2ae', '#8c8f86'],
-    desc: 'KLC 不鏽鋼雙管前後保桿配 SJ 世代的水箱罩，卡車式復古後照鏡，鐵灰框包白字越野胎。街上開的樣子，不是準備上山的樣子。',
-    set: { color: 'ZJ3', lift: 'td60', wheel: 'maxx', tyre: 't225r16', tread: 'toyo_mt', owl: true,
-      rimColor: 0x373b41, grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear',
-      mirrors: 'damd', sideStep: 'jst', ladder: 'jst', exhaust: 'hks_legal', flares: true, sideSkirt: true } },
+  { id: 'jp_retro', label: '日系復古', sw: ['#d8c9a4', '#b4703a', '#1d2224'],
+    desc: '米色車身配深棕、鏽橘、米白的三色腰線，黑鋼輪包白字越野胎，KLC 不鏽鋼雙管前後保桿。日本沙色 JB74 最常見的那一套。',
+    set: { color: 'ZVG', lift: 'td60', wheel: 'oemsteel', tyre: 't215r16', tread: 'toyo_at3', owl: true,
+      rimColor: 0x1b1d1f, stripe: 'retro3', grille: 'hbar_suzuki', frontBumper: 'tube_heritage',
+      rearBumper: 'klc_heritage_rear', mirrors: 'damd', sideStep: 'jst', ladder: 'jst',
+      roofRack: 'platform', exhaust: 'hks_legal', flares: true, sideSkirt: true } },
 
   { id: 'au_offroad', label: '澳洲越野', sw: ['#3f4a3c', '#1d2224', '#8a6b45'],
     desc: '呼吸管、絞盤前桿、車頂架配 270 度車邊帳、鐵窗與滅火器。澳洲人怎麼弄一台上路好幾天的車，這組就是那個答案。',
