@@ -990,41 +990,45 @@ def stripe_bands(name, bands, p_top, z0=STRIPE_Z0, z1=STRIPE_Z1):
     return root
 
 
-def stripe_camo(name, p_top, p_h, z0=STRIPE_Z0, z1=STRIPE_Z1):
-    """Suzuki's own カモフラージュ side decal. Two things the reference is
-    specific about, and both are easy to get wrong: the TOP edge is a ruled
-    horizontal cut just under the door's upper crease -- no serration at all,
-    it was cut with a straightedge -- and only the BOTTOM dissolves, into
-    scattered fragments. The patches themselves are broadleaf camouflage, so
-    they overlap at irregular sizes rather than tiling a grid; a regular grid
-    reads as pixel art, which is a different pattern entirely."""
-    root = group('stripe_' + name)
-    cols = [0x2b3a1b, 0x535c3c, 0xa69e70, 0x3a2f22]
-    mats = [material(f'Camo{i}', c, rough=0.72, metal=0.0) for i, c in enumerate(cols)]
-    rng = 7
-    def rnd():                        # a fixed shuffle: the pattern must not
-        nonlocal rng                  # move between builds
-        rng = (rng * 1103515245 + 12345) & 0x7fffffff
-        return rng / 0x7fffffff
-    top, bot = py(p_top), py(p_top + p_h)
-    band = top - bot
+def star_prism(name, yc, zc, R, mat, root, x0=707, x1=712):
+    """A five-point star lying on the flank. Built as a pentagon plus five
+    point triangles rather than one ten-vertex outline, because that outline
+    is concave and an n-gon face made from it triangulates through itself."""
+    r = R * 0.381966
+    pt = lambda rad, t: (yc + rad * math.cos(t), zc + rad * math.sin(t))
+    outer = [pt(R, k * 2 * math.pi / 5) for k in range(5)]
+    inner = [pt(r, math.pi / 5 + k * 2 * math.pi / 5) for k in range(5)]
+    prism(f'{name}Core', inner, x0, x1, mat, root)
+    for k in range(5):
+        prism(f'{name}P{k}', [inner[k - 1], outer[k], inner[k]], x0, x1, mat, root)
+
+
+def stripe_stencil():
+    """Military-truck markings: a white star on the door and stencilled
+    lettering, instead of a camouflage field.
+
+    A camouflage decal has to argue with the paint underneath it and loses --
+    on a green car it turns into a smudge at any distance, and the pattern is
+    the one thing about it people recognise. White stencil marks do the
+    opposite: they are the highest-contrast thing on the car and they read at
+    a glance, which is how the look works on the real vehicles. The markings
+    are generic -- a plain star and a serial -- rather than any actual armed
+    force's insignia, which is also what the sticker sets you can buy carry.
+
+    Probed: the door skin is painted from y 620 to 1020 across z -680 to
+    +760, sitting at |x| 700-710, so a 400 mm star at (830, 250) clears the
+    belt line, the flares and the door handle."""
+    root = group('stripe_stencil')
+    white = material('StencilWhite', 0xe7e4da, rough=0.8, metal=0.0)
+    FONT = '/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf'
     for s in (-1, 1):
-        # the field: overlapping patches, none of them aligned to each other
-        for i in range(54):
-            w = band * (0.5 + rnd() * 1.5)
-            h = band * (0.22 + rnd() * 0.42)
-            zc = z0 + rnd() * (z1 - z0)
-            yc = bot + h / 2 + rnd() * (band - h)
-            box(f'p{s}{i}', (s * STRIPE_X, yc, zc), (6, h, w), mats[int(rnd() * 4)], root, bevel=0)
-        # the straightedge top: one ruled strip laid over whatever crossed it
-        box(f'top{s}', (s * (STRIPE_X + 0.4), top - band * 0.11, (z0 + z1) / 2),
-            (6, band * 0.22, z1 - z0), mats[0], root, bevel=0)
-        # and the dissolve: fragments below the field, thinning as they fall
-        for i in range(26):
-            f = rnd()
-            w = band * (0.16 + rnd() * 0.3)
-            box(f'd{s}{i}', (s * STRIPE_X, bot - f * band * 0.34, z0 + rnd() * (z1 - z0)),
-                (6, band * 0.1 * (1 - f * 0.6), w), mats[int(rnd() * 4)], root, bevel=0)
+        star_prism(f'star{s}', 830, 250, 200, white, root, x0=s * 707 if s > 0 else s * 712,
+                   x1=s * 712 if s > 0 else s * 707)
+        for i, (line, size, y, z) in enumerate((('JB-74-1970', 58, 690, -430),
+                                                ('4x4', 74, 690, 640))):
+            ob = text(f'mark{s}{i}', line, (s * 709, y, z), size, 3, white, root, font=FONT)
+            ob.rotation_euler = (0, 0, math.radians(90 * s))
+            ob.location = P(s * 709, y, z)
     return root
 
 
@@ -2998,7 +3002,7 @@ def build():
     stripe_toolgear()
     stripe_jaos()
     stripe_toy4()
-    stripe_camo('camo', 23, 43)
+    stripe_stencil()
     side_skirt()
     snorkel_bravo()
     snorkel_ironman()
