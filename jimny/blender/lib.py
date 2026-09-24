@@ -333,6 +333,21 @@ def prism(name, poly, x0, x1, mat, parent=None, smooth=False):
     return new_object(name, bm, mat, parent, smooth=smooth)
 
 
+def slab(name, poly, z0, z1, mat, parent=None, smooth=False):
+    """Polygon given as (x, y) car-frame points, extruded from z0 to z1 --
+    prism() turned a quarter: a panel facing fore-and-aft."""
+    bm = bmesh.new()
+    a = [bm.verts.new(P(x, y, z0)) for (x, y) in poly]
+    b = [bm.verts.new(P(x, y, z1)) for (x, y) in poly]
+    bm.faces.new(a)
+    bm.faces.new(list(reversed(b)))
+    k = len(poly)
+    for i in range(k):
+        bm.faces.new((a[i], b[i], b[(i + 1) % k], a[(i + 1) % k]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return new_object(name, bm, mat, parent, smooth=smooth)
+
+
 def export(path, draco=False, only=None):
     """Write a GLB. `only` is a list of top-level group objects to export on
     their own -- the page needs the wheels before it can show anything and

@@ -1,0 +1,1206 @@
+{
+ "sourcedAt": "2026-09-24",
+ "method": "Each item of docs/jb74-jp-gapfill.json re-checked against the maker page before editing parts.js. action = what was done to the catalogue; evidence = quote from the maker page.",
+ "items": [
+  {
+   "id": "klc_nostalgic",
+   "list": "FRONT_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "id 已不在 parts.js（前次移除），符合預期——KLC 官網明載此桿是 JB64W 專用，JB74 沒有對應版本，不應存在於 JB74 清單。",
+   "evidence": "適合車種欄僅寫「JB64Wジムニー」，並註明 JB64 5 型不可裝",
+   "sources": []
+  },
+  {
+   "id": "klc_nostalgic_rear",
+   "list": "REAR_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "id 已不在 parts.js（前次移除），符合預期——KLC 官網明載 4 型以後不可裝、且僅適合 JB64W，JB74 無對應版本。",
+   "evidence": "「4型以降装着不可」，適合車種僅列 JB64W",
+   "sources": []
+  },
+  {
+   "id": "klc_short",
+   "list": "FRONT_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "重新核對 KLC 官網，塗裝済／未塗裝價格、材質、適用車型與現有條目一致，前次修正正確。",
+   "evidence": "塗装済（シボブラック）¥102,300／素材（未塗装）¥69,300、共に税込",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/frontshortbumper74/"
+   ]
+  },
+  {
+   "id": "klc_trad",
+   "list": "FRONT_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "重新核對 KLC 官網象牙白頁面，¥99,000／¥110,000（含霧燈架）稅込與現有條目一致，前次修正正確。",
+   "evidence": "無し ¥99,000（税込）／霧灯ステー付 ¥110,000（税込）",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_iv/"
+   ]
+  },
+  {
+   "id": "tube_heritage",
+   "list": "FRONT_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "重新核對 KLC 官網黑色版頁面，¥99,000／¥110,000 稅込與現有條目一致，材質、適用車型也吻合。",
+   "evidence": "無し ¥99,000（税込）／霧灯ステー付 ¥110,000（税込）、オールステンレス製",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_bk/"
+   ]
+  },
+  {
+   "id": "klc_heritage_rear",
+   "list": "REAR_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "重新核對 KLC 官網，¥88,000 稅込、不鏽鋼、沿用原廠尾燈、需移備胎、シエラ5型／ノマド2型不可裝，皆與現有條目一致。",
+   "evidence": "「純正テールやナンバー灯をそのまま使えるので装着がカンタン」；スペアタイヤの移動が必要",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/traditionalbumperrear_2_bk/"
+   ]
+  },
+  {
+   "id": "outclass_t2",
+   "list": "FRONT_BUMPERS",
+   "action": "edit",
+   "set": {
+    "part": "JB64JB74JC74-A-FB2UBTETU",
+    "note": "OUTCLASS 官網確認 ¥128,000 稅別／¥140,800 稅込（希望小售價 ¥180,000），品番 JB64JB74JC74-A-FB2UBTETU【260/160サイズ】，鋼製，適用 JB64／JB74／JC74。含絞盤床與四顆 LED（霧燈 ×2、工作燈 ×2），導索器、D 環與絞盤本體另購；官網目前顯示 Raptor 塗層選項「受付中止」，出廠僅提供未烤漆素材。原廠頭燈清洗器無法安裝，重量官網未標示。"
+   },
+   "why": "價格與材質正確，但目錄漏了品番，且「可選 Raptor 塗層」已過時——官網現在寫受付中止（暫停接單）。",
+   "evidence": "ラプター塗装は現在受付中止しております",
+   "sources": [
+    "https://outclass.ocnk.net/product/1095"
+   ]
+  },
+  {
+   "id": "outclass_rear_abs",
+   "list": "REAR_BUMPERS",
+   "action": "edit",
+   "set": {
+    "ownLamps": false,
+    "part": "JB64JB74JC74-A-RB2ABS",
+    "note": "OUTCLASS 官網確認 ¥41,600 稅別／¥45,760 稅込（希望小售價 ¥83,200），品番 JB64JB74JC74-A-RB2ABS【200サイズ】，ABS 製，適用 JB64／JB74／JC74。標準品未塗裝且不含尾燈，尾燈（國產小型尾燈或 LED 燻黑版）、Raptor 黑塗裝、倒車雷達鑽孔皆為加價選配。"
+   },
+   "why": "確認 gapfill 的修正成立：官網標準品明寫不含尾燈，尾燈是另外選配，目錄原本的 ownLamps: true 是錯的。",
+   "evidence": "テールランプは別売りオプション（国産小型タイプ／LEDスモークタイプの2種類より選択）",
+   "sources": [
+    "https://outclass.ocnk.net/product/1094"
+   ]
+  },
+  {
+   "id": "taniguchi_square",
+   "list": "FRONT_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "TANIGUCHI 官網確認鋼製粉體烤漆黑 ¥58,300 稅込、不鏽鋼 SUS304 #400 研磨版 ¥107,800 稅込（安裝支架仍為鋼製），適用 JB64・74／JC74，本體約 3kg。「2mm 方管」查無依據——2mm 是同廠後保桿角形版的規格，前保桿頁面只公布材質、塗裝與重量，官網未公布品番與角管尺寸壁厚。"
+   },
+   "why": "確認 gapfill 抓到的問題：前保桿頁面沒有 2mm 方管的說法，那是後保桿角形版的規格，混用了；價格正確但要補上正確依據與重量。",
+   "evidence": "重量約3kg；頁面未列出角管壁厚數字（2mm是另一頁「リア角バンパー」的規格）",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/"
+   ]
+  },
+  {
+   "id": "taniguchi_double",
+   "list": "FRONT_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "TANIGUCHI 官網確認 ¥77,000 稅込，鋼製粉體烤漆黑，管徑 48.6mm、壁厚 2.3mm，本體約 9kg，適用 JB64（XG 除外）／JB74／JC74。官網未公布品番。"
+   },
+   "why": "「Ø48 圓管」不夠精確，官網數字是 48.6mm 直徑、2.3mm 壁厚；補上重量與正確適用範圍（JB64 排除 XG 級）。",
+   "evidence": "パイプ径48.6mm t=2.3mm、重量約9kg",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/"
+   ]
+  },
+  {
+   "id": "taniguchi_rear_pipe",
+   "list": "REAR_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "TANIGUCHI 官網確認鋼管版（オフロードリアバンパー）¥63,800 稅込、管徑 48.6mm、壁厚 2.3mm，適用 JB64・74／JC74；角形版（リア角バンパー）鋼製同為 ¥63,800（純屬巧合非筆誤）、本體約 4kg、板厚 2mm，另有不鏽鋼 SUS304 #400 研磨版 ¥121,000 稅込；拖車鉤版 ¥128,700 稅込、管徑 48.6mm、壁厚 3.5mm，本體約 15kg 加安裝托架約 5kg，僅適用 JB64・74（不含 JC74）。三款官網皆未公布品番。"
+   },
+   "why": "目錄漏了角形不鏽鋼版 ¥121,000 這個第三個價格；鋼管版與角形鋼製版同價是巧合，不是筆誤，予以澄清。",
+   "evidence": "リア角バンパー：スチール ¥63,800（税込）／ステンレスSUS304 #400研磨 ¥121,000（税込）",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_rear/"
+   ]
+  },
+  {
+   "id": "apio_tactical_rear",
+   "list": "REAR_BUMPERS",
+   "action": "edit",
+   "set": {
+    "ownLamps": true,
+    "note": "APIO 官網確認 ¥140,800 稅込、品番 3032-71 未塗裝，烤漆版（消光黑）加 ¥33,000 稅込，ジムニーシエラ JB74 專用件（非 JB64 共用），ABS 真空成形。內容含本體、左右寬版延伸片、尾煞車燈殼、方向燈殼、倒車燈殼與反光片；燈殼為專用外殼取代原廠尾燈總成，燈泡／插座／線組沿用原廠零件（倒車燈需接長線組）。1660×280×460mm 為出貨外箱尺寸，並非本體實際寸法，本體寸法與重量官網未公布；部分倒車雷達車型需鑽孔。"
+   },
+   "why": "兩個修正都成立：1660×280×460 確認是外箱尺寸不是本體；且此桿是 JB74 專用非共用件。另外補上 ownLamps：官網明寫燈殼取代原廠尾燈總成，應設為 true。",
+   "evidence": "専用の小型ランプケースを使用…ランプバルブ,ソケット,ハーネスはそれぞれ純正品を使用します（原廠尾燈總成被取代，非沿用）",
+   "sources": [
+    "https://apio.jp/parts/3032-71.html"
+   ]
+  },
+  {
+   "id": "jaos_cowl",
+   "list": "FRONT_BUMPERS",
+   "action": "edit",
+   "set": {
+    "uncertain": true,
+    "note": "JAOS 日本官網確認 ¥66,000 稅込／¥60,000 稅抜，品番 B040518，聚氨酯未塗裝黑本體配鋁網，單品 5.05kg。適合年式 2018 年 7 月〜2025 年 11 月、全等級皆可裝；全長 +10mm、下緣 −80mm，寬度在全寬內。官網目前顯示售完，預計 2026 年 11 月上中旬出貨。目錄中的 NT$18,700 是台灣售價，本次查證只找到 JAOS 日本官網資料，MRK 等台灣代理站上未查到這支前下巴的對應頁面，NT$ 數字暫無法對應到第一手來源，先標 uncertain。"
+   },
+   "why": "JAOS 官網日本數字全部核實無誤，但目錄現有的 NT$18,700／url 卻指向日本官網頁面，查了 MRK 網站找不到這個品項，台灣價格來源不明，需要標記待查。",
+   "evidence": "価格 ¥66,000（税込）／¥60,000（税抜）；現在庫切れ、2026年11月上旬～中旬より順次発送予定",
+   "sources": [
+    "https://www.jaos.co.jp/product/B040518/2866",
+    "https://www.mrk.com.tw/tag.html?ID=JAOS+JIMNY+JB74"
+   ]
+  },
+  {
+   "id": "jaos_rear_cowl",
+   "list": "REAR_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "JAOS 台灣代理 MRK 定價 NT$26,500（未塗裝），日本官方 ¥92,400 稅込／¥84,000 稅抜，品番 B042518，聚氨酯未塗裝本體、不鏽鋼支架，單品 4.65kg。適合 JB74 系 1〜3 型（2018.07〜2024.04），4 型以後官網未列入適合表。四顆圓形 LED 尾燈通過 ECE 認證、可過原廠車檢；套件內附倒車攝影機支架（僅支架，不含攝影機本體）。"
+   },
+   "why": "適用年式要收窄到 1〜3 型（4 型不在官網適合表內）。另外要更正上一份 gapfill 的說法——它說官網沒提到倒車攝影機架，但重新查證官網內容物清單裡明確列出「バックカメラブラケット」，目錄原句沒錯，gapfill 這處判斷有誤。",
+   "evidence": "適用：ジムニーシエラ JB74系（2018.07〜2024.04）；セット内容に「バックカメラブラケット」明記（カメラ本体は含まず）",
+   "sources": [
+    "https://www.jaos.co.jp/product/B042518/2867",
+    "https://www.mrk.com.tw/product_ii.html?ID=1176"
+   ]
+  },
+  {
+   "id": "wildgoose_crawler_rear",
+   "list": "REAR_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "RV4 Wild Goose 官網確認品番 JM-1103，¥60,000 稅抜／¥66,000 稅込，重量 9.3kg。鋼製，管徑 76.3mm、壁厚 1.6mm，黑色半消光塗裝，尺寸 W1330×H200×D225mm；尾燈座板厚 4.5mm、鏡片內縮 10mm 防撞設計，拖車環 Ø50mm（附 Ø20mm 鎖點）。官網明寫本體不含尾燈，尾燈是另購的「コンビネーションランプ」需自行選配安裝，原廠尾燈不與本桿共用。適用 ジムニー JB64 與 ジムニーシエラ JB74（JB74 因原廠寬體輪拱，兩側略短）。裝車需移動車牌與備胎。"
+   },
+   "why": "尺寸、管徑、拖環都正確，補上官網有但目錄沒寫的壁厚 1.6mm、重量 9.3kg，並補上一個目錄沒提到的重點：尾燈不含、需另購安裝，原廠尾燈無法沿用。ownLamps 目前未設定（等同 false），與「尾燈另購、不隨附」的現況相符，不需更動。",
+   "evidence": "パイプ径76.3mm、厚さ1.6mm、重量9.3kg；装着にはナンバープレート、スペアタイヤの移動、別売りコンビネーションランプが必要",
+   "sources": [
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/rear_bumper_64/jm-1103.html"
+   ]
+  },
+  {
+   "id": "wildgoose_box_rear",
+   "list": "REAR_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "RV4 Wild Goose 官網確認品番 JM-1101，¥87,000 稅抜／¥95,700 稅込，重量 13.2kg。鋼製，本體斷面 W1410×H100×D100mm，含支架整體尺寸為 W1410×H200×D220mm；本體板厚 3.2mm、安裝托架 9.0mm、補強板 3.2mm，陽離子電著加黑色半消光塗裝。主打 ジムニー JB64，ジムニーシエラ JB74 亦可裝（因原廠寬體輪拱兩側略短）。官網明寫本體不含尾燈，需另購「コンビネーションランプ」自行安裝；裝車需移動車牌與備胎。"
+   },
+   "why": "目錄把整體尺寸和本體斷面尺寸混在一起；補上支架與補強板厚度、以及尾燈另購、需移車牌備胎的安裝限制。ownLamps 目前未設定（等同 false），與尾燈另購不隨附相符，不需更動。",
+   "evidence": "本体：3.2mm厚／取付ブラケット：9.0mm厚／補強プレート：3.2mm厚；ナンバープレート、スペアタイヤの移動必要",
+   "sources": [
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/rear_bumper_64/jm-1101.html"
+   ]
+  },
+  {
+   "id": "showa_iron_rear",
+   "list": "REAR_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "重新核對 SHOWA GARAGE 頁面，品番 E00930、¥62,150 稅込、管徑 60mm、適用 JB64/JB74 1〜4 型與 JC74 1 型，與現有條目一致，前次修正正確。",
+   "evidence": "品番 E00930、¥62,150（税込）、パイプ径60mm、適合：JB64 1〜4型・JB74 1〜4型・JC74 1型（MT/AT）",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000000843/"
+   ]
+  },
+  {
+   "id": "showa_iron",
+   "list": "FRONT_BUMPERS",
+   "action": "no_change",
+   "set": {},
+   "why": "id 已不在 parts.js（前次移除），符合預期——原本的 E00900／¥128,700 是 JB64 專用件，JB74 正確品番應是 E00990／E00991，這筆已被前次工作處理掉。",
+   "evidence": "アイアンバンパー フロント JB64、¥90,750（税込）——與 JB74 的 E00990／E00991 是不同商品",
+   "sources": []
+  },
+  {
+   "id": "toc_extreme",
+   "list": "FRONT_BUMPERS",
+   "action": "edit",
+   "set": {
+    "note": "TOC BODYWORKS 官方店確認「エクストリームバンパー74 フロント」¥54,780 稅込，適用 JB74 シエラ 與 JC74 ノマド，FRP 黑膠衣（ゲルコート）處理，出貨即需自行烤漆（官網另提供代烤漆加價選項）。官網明寫「LEDライトバー、スキッドプレートは含まれません」，且沒有內建 LED 燈條凹槽的說明。另有含 TOC スキッドプレート74 的兩件組 ¥82,280 與前後加護板的三件組 ¥137,060。目前為預購品，預計 2026 年 10 月 10 日起陸續出貨。"
+   },
+   "why": "價格與材質正確，但「LED 燈條槽」查無依據——官網明講不含 LED 燈條，也沒提到本體有燈條凹槽設計，應該拿掉這句話避免誤導；同時補上最新的預購出貨日。",
+   "evidence": "バンパーのみの販売です。こちらの商品はLEDライトバー、スキッドプレートは含まれません／2026年10月10日から順次発送",
+   "sources": [
+    "https://tocbw.thebase.in/items/82110724"
+   ]
+  },
+  {
+   "id": "hbar_suzuki",
+   "list": "GRILLES",
+   "action": "no_change",
+   "set": {},
+   "why": "KLC 官網三種版本價格與適用車種都跟目錄一致，維持原樣。",
+   "evidence": "ABS Painted: ¥93,500 / ABS Unpainted: ¥60,500 / FRP Unpainted: ¥55,000 (tax included); all three fit JB64W / JB74W / JC74W",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillenostalgic/"
+   ]
+  },
+  {
+   "id": "klc_sj",
+   "list": "GRILLES",
+   "action": "no_change",
+   "set": {},
+   "why": "官網 FRP／ABS 三版本稅込價與目錄註記的 ¥93,500（ABS 烤漆）一致，台幣價是台灣代購標價、已在 note 揭露，維持原樣。",
+   "evidence": "FACE GRILLE SJ: ABS Painted ¥93,500 / ABS Raw ¥60,500 / FRP Raw ¥55,000 (tax included); fits JB64W / JB74W / JC74W",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillesj.html"
+   ]
+  },
+  {
+   "id": "klc_ja",
+   "list": "GRILLES",
+   "action": "no_change",
+   "set": {},
+   "why": "官網價格與適用車種跟目錄一致，維持原樣。",
+   "evidence": "FACE GRILLE JA: ABS Painted ¥93,500 / ABS Unpainted ¥60,500 / FRP Unpainted ¥55,000; fits JB64W / JB74W / JC74W",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrilleja/"
+   ]
+  },
+  {
+   "id": "klc_nanaketsu",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "note": "七個縱向長孔營造立體感（KLC 原文「縦穴7つ穴で立体感を出す」，並非圓角方孔）、圓形大燈以方形圓角框收邊；ABS 素材 ¥60,500／FRP 素材 ¥55,000（皆稅込）"
+   },
+   "why": "目錄把孔洞形狀寫成「7 個圓角方孔」，但廠方原文明講是縱向長孔，跟大燈周圍的方框收邊是兩件事，混在一起講錯了。",
+   "evidence": "縦長7つ穴で立体感を出す／丸いヘッドライトの周囲を角アールの四角で落とし込み",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillnanaketsu/"
+   ]
+  },
+  {
+   "id": "klc_forty",
+   "list": "GRILLES",
+   "action": "no_change",
+   "set": {},
+   "why": "官網價格、造型描述跟目錄一致，維持原樣。",
+   "evidence": "FACE GRILLE FORTY: ABS Painted ¥93,500 / ABS Unpainted ¥60,500 / FRP Unpainted ¥55,000; ribs around headlight with mesh and Suzuki emblem, emblem sold separately",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillforty/"
+   ]
+  },
+  {
+   "id": "apio_sj",
+   "list": "GRILLES",
+   "action": "no_change",
+   "set": {},
+   "why": "APIO 官網價格、品番、材質、重量、適用車種都跟目錄一致，維持原樣。",
+   "evidence": "¥58,300（消費税10%込）、品番 3033-58G、スチール（鉄製）、約2.8kg、適用 JB64／JB74／JC74",
+   "sources": [
+    "https://apio.jp/parts/3033-58g.html"
+   ]
+  },
+  {
+   "id": "apio_marker",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "part": "3033-59B（半光黑）／3033-59L（淺古銅）"
+   },
+   "why": "價格與材質正確，但品番只寫「3033-59」不完整；APIO 依顏色分成兩個訂貨品番，下單要指定。",
+   "evidence": "Part Numbers: 3033-59B（セミグロスブラック）／ 3033-59L（ライトブロンズ）— ¥75,900 tax included, steel, ~2.8kg",
+   "sources": [
+    "https://apio.jp/parts/3033-59.html"
+   ]
+  },
+  {
+   "id": "showa_hex",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "note": "ABS 素材黑，需自行烤漆（官網原文：ABS樹脂は対候性が良くないため紫外線による劣化が早いので塗装してお使いください）；同系列烤漆款分 E00501（槍灰）／E00502（珍珠白）／E00504（藍配白線 ZJ3），烤漆款稅込 ¥37,400，並非目錄原載的 ¥31,900；中央蜂巢網開口"
+   },
+   "why": "目錄寫烤漆版 E00502 賣 ¥31,900，但那頁其實沒提到 E00502，實際烤漆款是另一個獨立商品頁、三色分屬 E00501／E00502／E00504、現價 ¥37,400。",
+   "evidence": "E00500 page: 定価16,500円（税込）, no mention of E00502 anywhere; painted-line page (shopdetail/000000000011): Part Number e00501 (also e00502 white pearl, e00504), Price 37,400円",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000000205/",
+    "https://www.showa-garage.shop/shopdetail/000000000011/"
+   ]
+  },
+  {
+   "id": "outclass_g",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "part": "JB6474-A-FG-ASA",
+    "note": "ASA 樹脂紋理黑；4 道橫柵＋中央直柱，後方細網。¥52,500 稅抜／¥57,750 稅込；廠徽另購、不附安裝說明書，缺貨時約需 3 週"
+   },
+   "why": "價格跟廠方一致，但目錄漏掉品番，順手補上並把稅抜／稅込都寫清楚。",
+   "evidence": "Tax excluded: 52,500 JPY / Tax included: 57,750 JPY; Part Number: JB6474-A-FG-ASA【180サイズ】; エンブレムは別売り",
+   "sources": [
+    "https://outclass.ocnk.net/product/1071"
+   ]
+  },
+  {
+   "id": "taniguchi_washer",
+   "list": "GRILLES",
+   "action": "no_change",
+   "set": {},
+   "why": "官網價格、材質、造型跟目錄一致，維持原樣。",
+   "evidence": "FRPウォッシャーグリル ¥44,000（税込）、FRP黒ゲルコート仕上げ、適用 JB64・74／JC74、有／無洗燈孔兩款同價",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/"
+   ]
+  },
+  {
+   "id": "roots",
+   "list": "KITS",
+   "action": "no_change",
+   "set": {},
+   "why": "DAMD 官網外觀三件組、單買價、含輪圈套組全都跟目錄一致，維持原樣。",
+   "evidence": "Unpainted 3-piece kit: ¥213,400 tax included; painting +¥99,000; grille ¥52,800 / front bumper ¥63,800 / rear bumper+extension ¥96,800; Cantabile 5-wheel set ¥363,000, WILD BOAR SR set ¥451,000 (all unpainted, tax included)",
+   "sources": [
+    "http://www.damd.co.jp/products/suzuki/jimny_sierra_theroots"
+   ]
+  },
+  {
+   "id": "suzuki_cover",
+   "list": "OTHERS",
+   "action": "edit",
+   "set": {
+    "label": "原廠硬式備胎蓋（Jimny SIERRA 字樣）",
+    "price": 52800,
+    "cur": "JPY",
+    "part": null,
+    "uncertain": false,
+    "url": "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+    "note": "正面／側面樹脂硬質面板、背面易拆合成皮，鈴木原廠建議售價 ¥52,800（稅込），安裝參考工時 0.2h，須先拆原廠備胎半罩。另有犀牛髮絲紋款 ¥33,880（稅込），本目錄未建模。鈴木官方用品頁不公布品番；原目錄的 9923B-77R21-003 在零件目錄查無此號，且 77R 是 JB64 車系碼（JB74 是 78R），已移除"
+   },
+   "why": "品番是編造的（77R 屬 JB64、根本掛不上 JB74），但鈴木原廠確實有賣這款硬殼蓋，官網雖不公布品番卻有公布價格，改用官網價格取代不存在的品番。",
+   "evidence": "Jimny SIERRAロゴ ハードタイプ ¥52,800（正面、側面＝樹脂成型ハードパネル／裏面＝ビニールレザー、取付工賃0.2h）；サイ（ヘアライン調）ハードタイプ ¥33,880",
+   "sources": [
+    "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html"
+   ]
+  },
+  {
+   "id": "damd",
+   "list": "MIRRORS",
+   "action": "edit",
+   "set": {
+    "price": 75900,
+    "cur": "JPY",
+    "url": "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g",
+    "note": "DAMD 日本官網建議售價：消光黑 ¥69,000 稅抜／¥75,900 稅込、鍍鉻 ¥74,000 稅抜／¥81,400 稅込；U 型管臂＋直式卡車鏡殼，含加熱但喪失電動收折與電動角度調整（官網原文：自動收折、收折開關、角度調整開關均無法使用）。僅適用 JB64／JB74，不可裝 JC74（NOMADE）"
+   },
+   "why": "目錄原本只記台灣代購價 NT$19,800、現在該代購頁也已改成無標價的「接單引進」，改用 DAMD 日本官網自己公布的稅込價格，並補上鍍鉻款價格與 JC74 不相容的提醒。",
+   "evidence": "Tax-excluded: ¥69,000 / Tax-included: ¥75,900 (matte black); chrome: Tax-excluded ¥74,000 / Tax-included ¥81,400; \"cannot be installed on JIMNY NOMADE (JC)\"; \"does not support automatic mirror retraction... mirror folding switches, or mirror angle adjustment\"",
+   "sources": [
+    "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g",
+    "https://www.damd.co.jp/news/20377/",
+    "https://www.pp-performance.net/products/damd-jimny-sierra-truck-mirror",
+    "https://easycars.jp/product/damd-truck-side-mirror-for-jimny-jb64-jb74/"
+   ]
+  },
+  {
+   "id": "snorkel",
+   "list": "SIMPLE",
+   "action": "edit",
+   "set": {
+    "brands": "Safari / Ironman 4x4 / ARB / Rival",
+    "note": "日系六大改裝廠（APIO、TANIGUCHI、JAOS、RV4 Wild Goose、MONSTER SPORT、SHOWA GARAGE）目前都沒有 JB74 用呼吸管，原本列的 APIO 是誤植；日本市場的涉水對策改走差速器／變速箱通氣管延長與碳罐移位（RV4 Wild Goose 前後差速器呼吸管組 JM-5016 ¥9,350 稅込、A/T 呼吸管 JM-5019 ¥3,300 稅込、碳罐移位套件 JM-5221 ¥19,800 稅込）。呼吸管本身仍以澳洲／南非等海外品牌為主，注意左右側別，部分需切葉子板"
+   },
+   "why": "SIMPLE.snorkel 的品牌清單把 APIO 也列進去，但 APIO 全站搜尋「シュノーケル」「スノーケル」都是 0 件，JAOS 的 JB74 商品頁 79 項裡也沒有，這一項是誤植，應該拿掉。",
+   "evidence": "APIO search: 「シュノーケル」と一致する結果は見つかりませんでした；JAOS JB74 type-search page has no intake/snorkel category; RV4 Wild Goose JM-5016 fits ジムニーSJ30～JB64/JB74, ¥9,350 (10%税込)",
+   "sources": [
+    "https://apio.jp/?s=%E3%82%B7%E3%83%A5%E3%83%8E%E3%83%BC%E3%82%B1%E3%83%AB",
+    "https://www.jaos.co.jp/product/type_search/7810-b",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/",
+    "https://www.rv4wildgoose.com/parts/jimny-older/soup_up_older/jm-5016.html"
+   ]
+  },
+  {
+   "id": "kpro_folksy",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "price": 42493,
+    "url": "http://www.k-products.shop/shopdetail/000000001706/",
+    "note": "K-PRODUCTS 官方商店確認適合車種 JB64／JB74／JC74；FRP 材質、含網目件，品番 190604-1，官網標價 ¥42,493（稅別／稅込未標示），目前顯示 SOLD OUT。目錄原列 ¥30,000 是 4x4espoir 轉引的 JB64 舊稅別價，改用廠方頁面為準"
+   },
+   "why": "JB64 專用的疑慮可以排除（廠方自己寫適合 JB64／JB74／JC74），但價格是舊的：廠方現在賣 ¥42,493、不是目錄寫的 ¥30,000，那個數字是別家轉引的舊價。",
+   "evidence": "Compatible Vehicles: JB64, JB74, and JC74; Price: ¥42,493; Part Number: 190604-1; Stock Status: SOLD OUT",
+   "sources": [
+    "http://www.k-products.shop/shopdetail/000000001706/",
+    "https://www.4x4espoir.com/jb64-frontgrill/"
+   ]
+  },
+  {
+   "id": "prostaff_minig",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "note": "目前唯一可查到的資料來源（4x4espoir 轉載頁）寫適合車種是「新型ジムニーJB64W用」；另一篇同廠 miniG 保桿介紹（64swamp.com）也寫「こちらはJB64用」，兩份資料都指向 JB64 專用，沒有任何一份提到 JB74。プロスタッフ官網（4x4prostaff.com／www.4x4prostaff.com）本次查核仍連不上，無法直接核實。¥38,000（稅別）是 4x4espoir 轉引的舊價、非廠方現行價；JB74 適用性應標示為未確認，而不是目前隱含的「適用」"
+   },
+   "why": "按交辦事項找過廠方官網（連不上）跟其他管道，找不到任何 JB74 適用的第一方證據，反而兩份不同來源都明講是 JB64 專用；只能誠實標成未確認，不能繼續讓它掛在 JB74 目錄裡沒有警語。",
+   "evidence": "4x4espoir: 「新型ジムニーJB64W用」／￥38,000（税別）；64swamp.com (miniG bumper): 「こちらはJB64用なのですが...」",
+   "sources": [
+    "https://www.4x4espoir.com/jb64-frontgrill/",
+    "https://64swamp.com/bumper-complete/"
+   ]
+  },
+  {
+   "id": "sixsense_explosion",
+   "list": "GRILLES",
+   "action": "edit",
+   "set": {
+    "price": 110000,
+    "part": "jimex108-nocl",
+    "uncertain": false,
+    "url": "https://sixth-sense.shop-pro.jp/?pid=184181806",
+    "note": "シックスセンス 官方商店頁確認同時適用 JB64W 與 JB74W シエラ；材質 FRP 未塗裝需自行烤漆，開口部 240mm，品番 jimex108-nocl，價格 ¥110,000（官網明寫稅別）。目錄原價 ¥80,000 是 4x4espoir 轉引的舊稅別價，已用廠方現價更新；可選 SUZUKI 標準標誌或原廠標誌裝法，另有前格柵蓋加 LED 百葉套件 ¥16,500 選配"
+   },
+   "why": "JB64 專用的疑慮可以排除（廠方頁面同時掛 JB64W 與 JB74W シエラ 兩條分類），但價格是舊的：廠方現價 ¥110,000（稅別），目錄的 ¥80,000 是別家轉引的舊價。",
+   "evidence": "Compatible Vehicles: fits \"JB64\" (Jimny) and \"JB74\" (Jimny Sierra); Price: 110,000円(税別); Part Number: jimex108-nocl; Material: FRP, 240mm opening",
+   "sources": [
+    "https://sixth-sense.shop-pro.jp/?pid=184181806",
+    "https://www.4x4espoir.com/jb64-frontgrill/"
+   ]
+  },
+  {
+   "id": "cusco50",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "price": 167200,
+    "cur": "JPY",
+    "uncertain": false,
+    "note": "CUSCO 官網定價 ¥167,200 稅込（¥152,000 稅抜），JB74W 品番 60N-6JS-U20（JB64W 為另一品番 60M-6JS-U20，規格相同）。車高調整範圍 +50〜+75mm，前後 14 段減衰力可調。內容含避震器、彈簧、螺牙墊片、大容量緩衝塊各 4 件、延長煞車油管、ABS 線束與自由輪轂油管移位套件。升高 2 吋以上前傳動軸易與原廠橫樑干涉，建議另購下移支架；LED 頭燈自動水平車型需另購調整桿。"
+   },
+   "why": "CUSCO 官網已公開定價與品番，原本標示「日本售價未查證」可以拿掉。",
+   "evidence": "車高調整範囲 +50～+75mm／Price: ¥167,200（税込）／¥152,000（税抜）／Part Code: 60N-6JS-U20",
+   "sources": [
+    "https://www.cusco.co.jp/products/jimny.html"
+   ]
+  },
+  {
+   "id": "es70",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "price": 217030,
+    "cur": "JPY",
+    "part": "74745-31B",
+    "uncertain": false,
+    "note": "4x4 Engineering 官方報價：JB74 70mm 基本款 74745-31B ¥197,300 稅抜（¥217,030 稅込），內容為前後彈簧、Harmoflex 14 段可調避震器、後避震墊片、橫樑下移支架、煞車油管、傳動軸墊片。要橫拉桿需升級 74745-32B（¥303,380 稅込），要轉向阻尼器＋橫拉桿的全配為 74745-32LSB（¥330,110 稅込）。原本標示的 ¥315,000 對不上官方任何一組報價，且套件內容也不屬於基本款。"
+   },
+   "why": "官網基本款 74745-31B 為 ¥217,030 稅込，原目錄的 ¥315,000 查無依據，套件內容也寫錯等級。",
+   "evidence": "Base Grade (74745-31B) Price: 197,300 yen (217,030 yen with tax)",
+   "sources": [
+    "https://www.4x4es.co.jp/en/matching/suzuki-jimny-sierra/",
+    "https://www.4x4es.co.jp/products/suspension/kit/"
+   ]
+  },
+  {
+   "id": "sg75",
+   "list": "LIFTS",
+   "action": "no_change",
+   "why": "官網現行定價與品番與目錄一致（S00373／¥234,300 稅込，B ¥246,400、BA ¥389,400），此項先前已修正完成，車型也確認為 JB74 而非 JC74。",
+   "evidence": "SG ダンパー75 X-SHOCK 標準：Part Number S00373，Price ¥234,300（税込）；B Kit ¥246,400；BA Kit ¥389,400",
+   "sources": [
+    "https://www.showa-garage.shop/shopbrand/I84527/",
+    "https://www.showa-garage.shop/shopdetail/000000000561/"
+   ]
+  },
+  {
+   "id": "tg60",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "price": 220220,
+    "note": "オフロードサービスタニグチ官網（2025.2.1 改價後）：SOLVE ACE60 サスペンションキット JB74 用 ¥220,220 稅込，升高約 60mm。內容含彈簧、專用避震器、延長煞車油管、キャスタードリーム、橫拉桿、後橫拉桿補正支架、偏置防傾桿墊片。原廠第三橫樑無法沿用，官方標示「裝著推奨」需另購 SOLVE クロスメンバー ¥29,700；1〜4 型原廠 LED 頭燈車另需調整式水平調整桿。"
+   },
+   "why": "官網已於 2025.2.1 改價，目錄的 ¥216,040／橫樑 ¥27,500 都已過時，現行為 ¥220,220／¥29,700。",
+   "evidence": "SOLVE ACE60サスペンションキット（JB74用）Price: ¥220,220（tax included）／SOLVEクロスメンバー Price: ¥29,700（tax included）",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_suspension/"
+   ]
+  },
+  {
+   "id": "es30",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "price": 139700,
+    "part": "74743-31C",
+    "note": "4x4 Engineering 官方報價：JB74 30mm 基本款 74743-31C ¥127,000 稅抜（¥139,700 稅込），內容只有前後彈簧與 14 段可調避震器，不含橫拉桿或轉向阻尼器。同系列另有 74743-31LC（LED 頭燈水平支架版，¥142,560 稅込）、74743-32C（加橫拉桿，¥199,100 稅込）等規格。"
+   },
+   "why": "現行品番多了 C 字尾（74743-31C），價格也已調整為 ¥139,700 稅込，不是舊品番 74743-31／¥123,000。",
+   "evidence": "74743-31C — ¥127,000 (¥139,700 tax included)",
+   "sources": [
+    "https://www.4x4es.co.jp/products/suspension/kit/"
+   ]
+  },
+  {
+   "id": "apio20",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "price": 141900,
+    "note": "アピオ官網現行定價 ¥141,900 稅込，品番 1028-1AA，JB74 專用，升高約 20mm。內容為 JB74 專用 20mm 彈簧、14 段減衰力可調避震器、LED 頭燈水平調整板與螺帽。官方註明為車檢對應品（免結構變更），安裝不需延長煞車油管。"
+   },
+   "why": "APIO 官網現行定價已調至 ¥141,900，不是目錄寫的 ¥126,500；品番 1028-1AA 本來就正確。",
+   "evidence": "Price (Tax Included): ¥141,900／Part Number: 1028-1AA",
+   "sources": [
+    "https://apio.jp/parts/1028-1aa.html"
+   ]
+  },
+  {
+   "id": "apio40",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "note": "アピオ官網定價 ¥276,100 稅込，品番 1034-1AE，JB74 專用，升高約 40mm，車檢對應（免結構變更）。內容為 A2000Ti 含鈦彈簧一台份、長行程 14 段可調避震器、前後調整式強化橫拉桿、後緩衝塊墊片、Caster 偏心襯套、延長煞車油管、LED 頭燈水平調整板。官網全文未提及駕駛座方向限制，原本「⚠ 僅支援右駕」查無依據，已拿掉。"
+   },
+   "why": "APIO 官網全文沒有任何左右駕限制的敘述，「⚠ 僅支援右駕」查無依據，價格與品番本來就正確。",
+   "evidence": "Vehicle Fitment: Suzuki Jimny Sierra JB74 only. No drive-side restrictions are mentioned in the documentation.",
+   "sources": [
+    "https://apio.jp/parts/1034-1ae.html"
+   ]
+  },
+  {
+   "id": "ms20",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "label": "20mm 懸吊組",
+    "url": "https://www.monster-sport.com/product/parts/sus/jb74w_hisusset/",
+    "part": "510500-5600M",
+    "price": 99000,
+    "note": "MONSTER SPORT 現行實際在售的 JB74W 專用品為「ハイトアップサスペンションセット」，品番 510500-5600M，¥99,000 稅込（¥90,000 稅抜），前後各升高約 20mm、14 段可調，彈簧常數前 2.3／後 2.5 kgf/mm，官方註明 JB74W 專用、不適用 JB64W。原目錄寫的 type-2（品番 510502-5600ML，¥94,600 稅込）官網仍標示「開発中」、為預定售價，尚未正式開賣，故換成現行實際在賣的品項。"
+   },
+   "why": "原目錄的 type-2 官網仍是開發中、未上市的預售品，現行實際在賣的是另一個品番、¥99,000 稅込的版本，須整筆換掉才是真的能買到的產品。",
+   "evidence": "type-2 (510502-5600ML): 開発中 / 2025年発売予定 / 予価 ¥94,600 —— vs 510500-5600M: Availability: Currently available for sale, ¥99,000 (tax included)",
+   "sources": [
+    "https://www.monster-sport.com/product/parts/sus/jb64w_hisusset_2/",
+    "https://www.monster-sport.com/product/parts/sus/jb74w_hisusset/"
+   ]
+  },
+  {
+   "id": "sg50",
+   "list": "LIFTS",
+   "action": "no_change",
+   "why": "售價 ¥323,400／BA ¥480,700 與目錄一致；但三次以不同方式讀取官網同一分類頁，卻各自回傳「カスタムサスペンション50」「SGローダウンサスペンション50」「SGロードスター50」三種不同品名，判斷是頁面擷取雜訊而非可靠一次資訊，故不採用 gapfill 提議的改名（「SG ラウンドサスペンション50」也未在任何一次讀取中出現），維持目錄原標示。",
+   "evidence": "同一 shopbrand/I84526 分類頁重複讀取三次，JB64／JB74 共用款價格皆為 ¥323,400（BA ¥480,700），但每次回傳的日文品名用字不同。",
+   "sources": [
+    "https://www.showa-garage.shop/shopbrand/I84526"
+   ]
+  },
+  {
+   "id": "sg25",
+   "list": "LIFTS",
+   "action": "no_change",
+   "why": "官網定價 ¥40,700 與品番 S00350（銀簧）／S00354（黑簧）均與目錄一致，官方定價未變動。",
+   "evidence": "S00350 is a 1-inch (25mm) lift-up kit with silver coil springs... priced at 40,700 yen (tax included)... compatible with JB74",
+   "sources": [
+    "https://www.showa-garage.shop/shopbrand/I84525/"
+   ]
+  },
+  {
+   "id": "klc30",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "uncertain": true,
+    "note": "KLC Heritage 商品頁：リフトアップサスペンション轟 ¥38,500 稅込，官方僅列「JB64W／JB74W シエラ／JC74W ノマド」共用適用，未單獨標示 JB74 的升高量；頁面上出現的「約 30mm」其實是 JB64 的數字。純彈簧套件，沿用原廠避震、在原廠行程內升高，官方稱免延長煞車油管、裝著狀態可通過車檢。JB74 實際升高量官網未公布，此處沿用 JB64 的數字估算。"
+   },
+   "why": "KLC 官網對 JB74 的升高量沒有單獨公布，目錄寫的 30mm 其實是 JB64 的數字，先標示未確定。",
+   "evidence": "Lift Amount for JB74W: The product description does not specify a particular lift measurement exclusively for the JB74W model... mentions \"30mm UP\" in general marketing language but does not isolate a JB74W-specific figure.",
+   "sources": [
+    "https://heritage-jimny.com/?pid=148177912",
+    "https://www.klc-div.com/anotherworld/aw_todoroki.html"
+   ]
+  },
+  {
+   "id": "jaos40",
+   "list": "LIFTS",
+   "action": "edit",
+   "set": {
+    "note": "JAOS 官網定價 ¥184,800 稅込（¥168,000 稅抜），品番 A734518Z，適用 2018.07- JB74 系全等級，官方標示前後升高量為 35〜40mm（並非固定 40mm），產品淨重 24.54kg。內容含鈦合金彈簧、搭載 Harmoflex 的阻尼器、長煞車油管、前後橫拉桿、Assist Kit（前 Caster 襯套與定位治具）與 LED 頭燈車用水平調整長支架；長煞車油管確認是套件內容物之一，不是另購件。"
+   },
+   "why": "官方標示的升高量其實是 35〜40mm 區間，不是固定 40mm；另外查證後煞車油管確實含在套件內，並非另購件，先前懷疑的方向反而不成立。",
+   "evidence": "Lift Amount: 35-40mm front and rear (adjustable range)／Kit Contents (構成部品) explicitly lists ロングブレーキホース as part of the A734518Z set.",
+   "sources": [
+    "https://www.jaos.co.jp/product/A734518Z/3218/"
+   ]
+  },
+  {
+   "id": "fujitsubo_ak",
+   "list": "EXHAUSTS",
+   "action": "no_change",
+   "why": "價格、品番、φ70／21°斜切、離地320mm 都與官網一致；官網雖然三車共用品番，但目錄本身沒有寫成 JB74 專屬，不算誤植。",
+   "evidence": "Part Number: 750-81927; ¥72,380（tax included）; φ70スラッシュ（21゜）; ground clearance 320mm on JB64W test vehicle",
+   "sources": [
+    "https://www.fujitsubo.co.jp/products/detail/3091"
+   ]
+  },
+  {
+   "id": "monster_sp_x",
+   "list": "EXHAUSTS",
+   "action": "no_change",
+   "why": "價格、品番、φ76.3、3.6kg 都與官網一致；目錄沒有把共用品番寫成 JB74 專屬，不需修改。",
+   "evidence": "241590-5600M; ¥68,200(税込)/¥62,000(税抜); テール径φ76.3; SUS304; 約3.6kg",
+   "sources": [
+    "https://www.monster-sport.com/product/parts/muff/jb64w_type_sp_x/"
+   ]
+  },
+  {
+   "id": "jaos_zs",
+   "list": "EXHAUSTS",
+   "action": "edit",
+   "set": {
+    "note": "φ101 正圓管口（全表最大單出）＋BATTLEZ 壓字，需局部修保桿。適用 JB74 2018.07〜2025.11，2025.11 後的 5 型不可裝。台灣 MyRack 約 NT$22,000，是台灣最買得到的真系統"
+   },
+   "why": "JAOS 官網明列適用年式只到 2025.11、5 型不可裝，目錄原本沒寫年式範圍，容易賣給 5 型車主。",
+   "evidence": "Applicable Models: Jimny JB74 (2018.07-2025.11, all trim levels)... incompatible with 2025.11+ models (5th generation)",
+   "sources": [
+    "https://www.jaos.co.jp/product/B702518B/2601/"
+   ]
+  },
+  {
+   "id": "kakimoto_kr_lr",
+   "list": "EXHAUSTS",
+   "action": "edit",
+   "set": {
+    "url": "https://www.kakimotoracing.co.jp/products/list_carmodel.cgi?rid=266&serieskey=exhaust_class_kr"
+   },
+   "why": "品番、價格、適用年式都正確，但目錄網址寫的是 kakimoto.co.jp，柿本改官方網域其實是 kakimotoracing.co.jp。",
+   "evidence": "官方網站標題：「柿本改 KAKIMOTORACING | 自動車マフラー等のパーツメーカー」，網域 https://www.kakimotoracing.co.jp/；S71355S ¥170,500(税込)/¥155,000(税抜)，JB74W 2018/7–2025/11 5MT/4AT 4WD",
+   "sources": [
+    "https://www.kakimotoracing.co.jp/products/list_carmodel.cgi?rid=266&serieskey=exhaust_class_kr"
+   ]
+  },
+  {
+   "id": "apio_yoshimura_ti",
+   "list": "EXHAUSTS",
+   "action": "edit",
+   "set": {
+    "url": "https://apio.jp/parts/2004-7.html",
+    "note": "重點是消音筒本身：手工燒藍鈦合金消音筒，辨識度全表最高。APIO 官網規格為主管約 φ50.8mm（部分 φ42.7mm）、出口外徑約 φ68mm、重約 4.2kg；目錄原寫的「550×115mm」尺寸官網查無依據，已拿掉。適用 JB74 1〜4 型純正保桿車（MT／AT），5 型不適用。同規格鈦灰色 2004-7TX 便宜約 ¥14,300（¥348,700）"
+   },
+   "why": "「550×115mm 鈦砲管」這個尺寸 APIO 官網沒有公布，是沒有依據的數字；官網只給主管徑、出口徑、重量，而且只列 1〜4 型適用。",
+   "evidence": "材質：チタン製；メインパイプ径：およそ50.8mm（一部42.7mm）；出口外径：およそ68mm；製品重量：およそ4.2kg；スズキジムニーシエラJB74（MT/AT対応）covers JB74 types 1-4",
+   "sources": [
+    "https://apio.jp/parts/2004-7.html"
+   ]
+  },
+  {
+   "id": "taniguchi_compe_r",
+   "list": "EXHAUSTS",
+   "action": "edit",
+   "set": {
+    "uncertain": true,
+    "note": "TANIGUCHI 官網價格公告確認稅込 ¥102,300（2026/2/2 起出貨分適用），但商品頁本身是 JS 動態載入、抓不到規格內文——「管口從右後角側向穿出、離地約 560mm」與「原廠保桿要開孔」這兩點在官網一手頁面上都查不到依據，暫標未證實，上架前建議先向店家索取規格表。"
+   },
+   "why": "目錄把通路／二手頁面的細節寫成官網已確認，但 TANIGUCHI 商品頁是 JS 動態頁面，實際抓不到規格內容，一手資料目前只有價格公告一項站得住腳。",
+   "evidence": "「コンペマフラーR JB64･74　96,800 → 102,300」（2026.2.2 出荷分〜）；商品頁除導覽列與麵包屑外抓不到規格表內容（JS 動態載入）",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/news/%E8%A3%BD%E5%93%81%E4%BE%A1%E6%A0%BC%E6%94%B9%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B-6/",
+    "https://www.ors-taniguchi.co.jp/parts/%E3%82%B3%E3%83%B3%E3%83%9A%E3%83%9E%E3%83%95%E3%83%A9%E3%83%BCr/"
+   ]
+  },
+  {
+   "id": "hks_legal",
+   "list": "EXHAUSTS",
+   "action": "no_change",
+   "why": "價格（含台灣售價與註記的日本 ¥49,500）、品番、φ74.7、4.0kg 都與官網一致，目錄沒有把共用品番寫成 JB74 專屬。",
+   "evidence": "31013-AS017; ¥49,500(税込)/¥45,000(税抜); φ74.7; S304; 4.0kg; 近接排気騒音83dB（原廠81dB）",
+   "sources": [
+    "https://www.hks-power.co.jp/product_db/muffler/db/21217"
+   ]
+  },
+  {
+   "id": "hks_legal_ti",
+   "list": "EXHAUSTS",
+   "action": "no_change",
+   "why": "「與 K-1 同一支、尾管換鈦燒色」的敘述、品番、日本價格都與官網一致，沒有寫成整支鈦合金。",
+   "evidence": "31013-AS020; ¥71,500(税込)/¥65,000(税抜); チタンテールシングル出しレイアウト；主要材質 S304",
+   "sources": [
+    "https://www.hks-power.co.jp/product_db/muffler/db/28665"
+   ]
+  },
+  {
+   "id": "hks_trailmaster",
+   "list": "EXHAUSTS",
+   "action": "edit",
+   "set": {
+    "uncertain": true,
+    "note": "側出雙管 φ75×2，後保桿完全不動；官網只寫「サイド出しデュアルマフラー」，沒有明載左右哪一側，也沒有明載尾管是鈦燒色，不應寫死。本體 S304 不鏽鋼、9.0kg，裝著時地上高 210mm，近接排氣音 88dB（原廠 81dB，全表最大聲）。JB74W 品番 32018-AS006，JB64W 是不同品番 31021-AS004，訂購時務必核對車型以免買錯。"
+   },
+   "why": "「左側出」與「燒藍鈦色」HKS 官網都沒有寫，官網只說是側出雙管、材質 S304 不鏽鋼，寫死方向與材質顏色會誤導。",
+   "evidence": "Exit Side: 「サイド出しデュアルマフラー」...does not specify whether this is the left or right side; Material listed as 「S304」; page does not explicitly specify tail pipe finish/color",
+   "sources": [
+    "https://www.hks-power.co.jp/product_db/muffler/db/21550"
+   ]
+  },
+  {
+   "id": "ipf",
+   "list": "LIGHT_BARS",
+   "action": "edit",
+   "set": {
+    "part": "642JM2",
+    "price": 118800,
+    "cur": "JPY",
+    "uncertain": false,
+    "url": "https://www.ipf.co.jp/ipfEc/products/detail/122",
+    "note": "IPF 642JM2 是含燈條的整組套件：642SD 40 吋雙排燈條本體＋繼電器線組＋開關＋A 柱專用托架，適用 JB64／JB74（2018.07 以後，兩車共用同一料號）。官網 ¥118,800 稅込（¥108,000 稅抜）是整組總價；642SD 單體另售 ¥95,480 稅込（¥86,800 稅抜），若把兩者價格相加會重複計算燈條本體，本欄只計整組總價一次。642SD 規格：20,000 流明、273,000cd、210W、6000K、IP68、重 2,900g，白光。"
+   },
+   "why": "原本「642SD + 642JM2」寫成要分開買兩樣，把燈條價錢重複計算了約 ¥95,000；IPF 官網明載 642JM2 套件已經含 642SD 本體，改成只計一次整組總價，並補上實際價格。",
+   "evidence": "「ライトバー本体( 600Sシリーズ 40インチ ダブルロー 642SD)・リレーハーネス・スイッチ・取付ブラケット/ボルトナット」¥118,800(税込)/¥108,000(税抜)；600S系列頁面 642SD 40\": ￥86,800（税抜）",
+   "sources": [
+    "https://www.ipf.co.jp/ipfEc/products/detail/122",
+    "https://www.ipf.co.jp/ipfEc/products/detail/100"
+   ]
+  },
+  {
+   "id": "round",
+   "list": "ROOF_LIGHTS",
+   "action": "edit",
+   "set": {
+    "brand": "IPF",
+    "part": "S-9682（透明燈罩）／S-9681（金色燈罩）",
+    "price": 16940,
+    "cur": "JPY",
+    "url": "https://www.ipf.co.jp/ipfEc/products/detail/116",
+    "uncertain": true,
+    "note": "目錄原寫「一般 7 吋圓燈一對」查無對應的日本一手商品：IPF 唯一成對出貨的圓燈是 968 系列，φ166×D75mm（約 6.5 吋）鹵素燈（H3 12V 55W），不是 7 吋也不是 LED。整組含燈體×2、燈罩×2、繼電器、線組、開關，S-9682（透明）¥16,940 稅込、S-9681（金）¥18,150 稅込。若要 LED，IPF 900XLS φ200mm（約 7.9 吋）、2,200 流明、30W，¥29,700 稅込，但官網註明單顆出貨，一對要買兩顆。"
+   },
+   "why": "「7 吋圓燈一對」在日本一手來源找不到對應商品，改標成查得到的真實 IPF 968 鹵素對燈規格與價格，並保留 uncertain 提醒這只是最接近的代表商品，不是唯一答案。",
+   "evidence": "「ランプ本体×2/ランプカバー×2/リレー/ハーネス/ピコスイッチ」；φ166×D75mm；「定格／H3-12v55w」；S-9682 ¥16,940／S-9681 ¥18,150；900XLS「ランプ1個入り」φ200mm、2,200ルーメン、¥29,700",
+   "sources": [
+    "https://www.ipf.co.jp/ipfEc/products/detail/116",
+    "https://www.ipf.co.jp/ipfEc/products/detail/111"
+   ]
+  },
+  {
+   "id": "jaos",
+   "list": "ROOF_RACKS",
+   "action": "no_change",
+   "why": "此條目上一輪已經修過：uncertain 已設 true，note 已寫出 JAOS 自己商品頁（寫 JC74 系）與車種檢索頁（掛在 JB74 下）互相矛盾、尺寸、重量、載重換算都到位，這次重新核對官網兩個頁面內容一致，不需再改。",
+   "evidence": "商品頁標題／麵包屑：「ジムニー JC74系」；車種檢索頁 7810-b：「JAOS フラットラック 1250×1400 type-B ジムニー JB74系」；¥140,800(税込)/¥128,000(税抜)；16.4kg；使用荷重50kg",
+   "sources": [
+    "https://www.jaos.co.jp/product/B411611NS/3848",
+    "https://www.jaos.co.jp/product/type_search/7810-b"
+   ]
+  },
+  {
+   "id": "apio",
+   "list": "ROOF_RACKS",
+   "action": "edit",
+   "set": {
+    "note": "1420×1270、前軌前傾兼導流、船用鋁粉體配不鏽鋼零件。本體自重 21.3kg，APIO 官網明寫「積載可能重量：記載無し」不公布耐荷重；在 JB74 屋頂 30kg 動態載重上限下，扣掉自重後行駛中可用載重不到 9kg。"
+   },
+   "why": "目錄漏了兩個影響選購的事實：本體自重 21.3kg，以及 APIO 官網根本不公布耐荷重。",
+   "evidence": "「積載可能重量：記載無し」；Weight: 21.3kg",
+   "sources": [
+    "https://apio.jp/parts/3630-50.html"
+   ]
+  },
+  {
+   "id": "showa_foot",
+   "list": "ROOF_RACKS",
+   "action": "edit",
+   "set": {
+    "note": "收納 1500×1250×40mm，展開 1520×1270×60mm，可在屋頂上直接收折、高度可調約 3cm。含腳座重 27kg，官方耐荷重 50kg，但已吃掉 JB74 屋頂 30kg 動態載重的九成，行駛中幾乎無法再加載，適合靜止露營時使用。固定支架 E20034 另購。"
+   },
+   "why": "目錄漏了最關鍵的數字：含腳座重達 27kg，已經逼近 JB74 屋頂 30kg 動態上限，會改變買家的判斷；也補上收納／展開兩組尺寸。",
+   "evidence": "重量：27kg（含腳座）；耐荷重 50kg；收納 1500×1250×40mm、展開 1520×1270×60mm",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000001017/I59728/"
+   ]
+  },
+  {
+   "id": "basket",
+   "list": "ROOF_RACKS",
+   "action": "edit",
+   "set": {
+    "label": "A-x Half Rack M 籃式車頂架",
+    "note": "官方正式名稱是「ハーフサイズ M型」（半頂），不是 Full size——SHOWA GARAGE 另有一款「フルサイズ M型」（E20009）¥57,200 稅込是不同商品，容易搞混。1400×1250mm、折疊高度約 130mm，布料配框架的半硬式構造（不是剛性金屬貨架），可分成兩半、單邊約 7kg，總重 11.4kg，官方耐荷重 30kg，恰好等於 JB74 屋頂動態上限，扣掉自重後行駛中可載約 18kg。"
+   },
+   "why": "官網商品名稱是「ハーフサイズ M型」不是目錄寫的「Full Rack M」，品名寫反了，容易跟 SHOWA GARAGE 另一款「フルサイズ M型」搞混；也補上材質、重量與耐荷重換算。",
+   "evidence": "官方名稱含「ハーフサイズ M型」；140cm×125cm；重量 11.4kg（單框架約7kg）；布料配框架的半硬式結構；耐荷重 30kg",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000000111/I59728/"
+   ]
+  },
+  {
+   "id": "ipf",
+   "list": "ROOF_RACKS",
+   "action": "edit",
+   "set": {
+    "note": "1400×1250×38.8mm（不含腳座高度）、12.5kg，防鏽鋁合金。日本官網 ¥85,800 稅込只是貨架本體，腳座必須另購：ドリップモール用レッグ 低腳 EXR-01L2 ¥50,600、高腳 EXR-02L2 ¥30,800，裝車日本總價實為 ¥116,600〜¥136,400；IPF 官網也沒有公布耐荷重。以下 NT$32,000 為 MRK 台灣售價。"
+   },
+   "why": "`ipf_roofrack` 這個 id 在 parts.js 裡不存在，實際對應的是 ROOF_RACKS 裡的 `ipf` 條目。日本官網 ¥85,800 只是貨架本體，腳座是必買的另購品，直接拿 ¥85,800 換算會低估實際裝車成本；官網也沒有公布耐荷重。",
+   "evidence": "「※お取付けには別売の『取付用レッグ』が必要となります。」；EXR-01L2 ¥50,600、EXR-02L2 ¥30,800；耐荷重未見於商品頁",
+   "sources": [
+    "https://www.ipf.co.jp/ipfEc/products/detail/159",
+    "https://www.ipf.co.jp/ipfEc/products/list?category_id=31&name="
+   ]
+  },
+  {
+   "id": "wood",
+   "list": "ROOF_RACKS",
+   "action": "edit",
+   "set": {
+    "note": "1350×600×160mm、13.5kg。黑色鋼製鐵線籃，木料是紐西蘭輻射松乙醯化處理的高耐久「Accoya」，做成包覆前緣的弧形擋板與兩側木塊，不是木地板。裝在車頂前段的橫桿上。日本仍在售 ¥56,000／¥61,600 稅込；＋TERZO 基座組 TB-HRKJB ¥74,000 稅抜（¥81,400 稅込），內含 JB64／JB74 專用 PIAA TERZO 腳座 4 個與主橫桿 2 根，另加約 5kg。"
+   },
+   "why": "目錄寫的 TERZO 基座組「¥74,000」沒標稅別，容易被當成含稅價；DAMD 官網那其實是稅抜價，稅込要 ¥81,400。",
+   "evidence": "TB-HRKJB（Half Size）：¥74,000／¥81,400（tax included）；both kits include 「JB64/JB74専用 PIAA社製TERZOﾌｯﾄ(4個)とﾒｲﾝﾊﾞｰ(2本)」",
+   "sources": [
+    "http://www.damd.co.jp/products/suzuki/jimny_sierra_theroots"
+   ]
+  },
+  {
+   "id": "wood_full",
+   "list": "ROOF_RACKS",
+   "action": "edit",
+   "set": {
+    "note": "1350×1000×160mm、16kg，與半長款同款式。日本 ¥59,000／¥64,900 稅込；＋TERZO 基座組 TB-RRKJB ¥77,000 稅抜（¥84,700 稅込），內含 JB64／JB74 專用 PIAA TERZO 腳座 4 個與主橫桿 2 根，另加約 5kg。台灣蝦皮「藤井74」NT$19,800"
+   },
+   "why": "同樣的稅別問題：目錄寫的 TERZO 基座組「¥77,000」沒標稅別，官網其實是稅抜價，稅込要 ¥84,700。",
+   "evidence": "TB-RRKJB（Full Size）：¥77,000／¥84,700（tax included）",
+   "sources": [
+    "http://www.damd.co.jp/products/suzuki/jimny_sierra_theroots"
+   ]
+  },
+  {
+   "id": "jaos",
+   "list": "SIDE_STEPS",
+   "action": "no_change",
+   "set": {},
+   "why": "上次已把 JAOS 側踏從 JB74 清單移除，這次重新查證 JAOS 官網車型搜尋頁（JB74 共 79 項商品）與側踏分類頁，JB74 底下仍無任何側踏，JAOS 目前唯一的 Jimny 側踏就是 JC74 專用，維持移除是對的，parts.js 的 SIDE_STEPS 陣列現在確實沒有 jaos 這筆",
+   "evidence": "JAOS 側踏分類頁列出「Jimny JC74 - JAOS サイドステップ ブラック」，而 JB74 車型頁 79 項商品清單中沒有任何 side step",
+   "sources": [
+    "https://www.jaos.co.jp/product/type_search/7810-b",
+    "https://www.jaos.co.jp/product/item_search/side-step"
+   ]
+  },
+  {
+   "id": "apio_guard",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "note": "APIO 官網確認商品名為「JB74 H.Dサイドシルガード」，適合車種明寫ジムニーシエラ JB74，¥132,000 稅込、品番 3102-69。本體為 3.0mm 厚 A5052 杜拉鋁單層板、取付支架為鋼製，左右一組約 8kg（含包裝約 10kg）；1,350×185×210mm 是外箱尺寸，官網未公布本體實際寸法。官網明寫「ナローフェンダー装着車両用」且「純正オーバーフェンダー併用不可」——原廠標準寬體輪拱的 JB74 無法直接裝這件，必須先換裝窄型葉子板。"
+   },
+   "why": "現有 note 把外箱尺寸當成產品尺寸、材質誤寫成雙層 3mm，且「窄體限定」講得太模糊，官網其實明寫不能跟原廠外擴輪拱併用，這點必須講清楚",
+   "evidence": "「※ナローフェンダー装着車両用 ※純正オーバーフェンダー併用不可」",
+   "sources": [
+    "https://apio.jp/parts/3102-69.html"
+   ]
+  },
+  {
+   "id": "taniguchi_bar",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "price": 104500,
+    "note": "報價原為單邊右用價，改標左右合計：右用 ¥53,900、左用 ¥50,600，皆稅込，左右都裝合計 ¥104,500 稅込（2025 年 10 月起表面改為シボ加工）。此為 JB74 シエラ 專用鋼管桿式側踏，管徑 42.7mm、壁厚 2.3mm、全長 1200mm、黑色粉體烤漆，踏面即為鋼管本體、並無另外的網狀踏板，高度可兩段調整（側裙下緣下方約 9cm／約 6cm），不超出原廠輪拱、車檢合格。"
+   },
+   "why": "目錄把單邊價當一組價，且把另一款「550×145 網狀踏板」規格誤植到這支純鋼管桿上；官網確認左右合計要 ¥104,500，桿式本體沒有踏板",
+   "evidence": "Right side: ¥53,900 / Left side: ¥50,600 / Combined: ¥104,500；商品名為「シエラ用サイドステップ バータイプ」",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_side/",
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_side/page/2/"
+   ]
+  },
+  {
+   "id": "taniguchi_short",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "price": 77000,
+    "note": "報價原為單邊右用價，改標左右合計：鋼製右 ¥41,250／左 ¥35,750，左右合計 ¥77,000 稅込；不鏽鋼版右 ¥59,400／左 ¥56,100，左右合計 ¥115,500 稅込（不鏽鋼版 2026.5.1 調價）。JB74 シエラ 專用、免鑽孔螺栓固定，踏面高度可兩段調整（側裙下緣下方約 9cm／約 6cm），不超出原廠輪拱、車檢合格。550×145 網狀踏板這組尺寸官網只標在 JB64 鋼製版頁面，JB74 頁面未公布踏板尺寸與管徑，全車系不公開品番。"
+   },
+   "why": "同一頁另一款產品也是單邊價當一組價；另外目錄沿用的 550×145 踏板尺寸其實只出現在 JB64 版頁面，JB74 頁面沒有公布這個數字，需標明未確認",
+   "evidence": "Steel: Right ¥41,250 / Left ¥35,750 / Combined ¥77,000；Stainless: Right ¥59,400 / Left ¥56,100 / Combined ¥115,500",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_side/",
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_side/page/2/"
+   ]
+  },
+  {
+   "id": "showa",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "label": "長版側踏＋側裙飾板套組（JB74）",
+    "price": 127050,
+    "part": "E00173 + E00207",
+    "note": "官網查無「Type2」這個型號名，E00173 正式商品名是「サイドステップ ロングタイプ 左右セット」，¥69,300 稅込、左右一組，鋼製皺紋黑烤漆，JB64／JB74 一至五型皆適用。JB74 因原廠側裙擋板無法直接拆除，官網明寫必須另購 E00207「AESサイドガーニッシュ JB74用」（左右一組 ¥57,750 稅込，JB74 專用，不可裝 JC74）取代原廠側裙，兩者合計 JB74 全套實際要價 ¥127,050 稅込。三型以後車款因地板隔音材干涉支架需修剪。"
+   },
+   "why": "目錄的「Type2」是誤植的型號名，而且只列了側踏本體的價格；官網明講 JB74 要裝這支側踏必須另外買側裙飾板才能拆掉原廠擋板，兩者合計才是 JB74 買家實際要付的錢，目前少列了一半",
+   "evidence": "「サイドステップ ロングタイプ 左右セット ジムニー JB64 ジムニーシエラ JB74」¥69,300（稅込）；「AESサイドガーニッシュ ジムニーシエラ JB74用」¥57,750（稅込），JB74 專用不適用 JC74",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000000648/",
+    "https://www.showa-garage.shop/shopdetail/000000000926/",
+    "https://store.shopping.yahoo.co.jp/showa-garage/e00173.html",
+    "https://store.shopping.yahoo.co.jp/showa-garage/e00207.html"
+   ]
+  },
+  {
+   "id": "wildgoose_fold",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "note": "RV4 Wild Goose 官網確認單邊 ¥35,200 稅込（¥32,000 稅抜），左右分別為品番 JM-2262L／JM-2262R，左右都裝合計 ¥70,400 稅込；JB74W 專用，JB64 是另一品番 JM-2162，不通用。踏板鋼板 4.2mm、支架 6.0mm，單邊 5kg，可手動上翻收折；官方註明三型以後車款依安裝狀況可能產生接觸異音，需對策。"
+   },
+   "why": "目錄原本「單邊價」這個註記本身是對的，只是沒標稅込、也沒給左右合計和品番，補齊即可，不用改價",
+   "evidence": "Price: ¥35,200 (tax included) / ¥32,000 (tax excluded); Part Numbers: JM-2262L (Left) and JM-2262R (Right)",
+   "sources": [
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/exterior_64/jm-2262l-jm-2262r.html"
+   ]
+  },
+  {
+   "id": "wildgoose_guard",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "note": "RV4 Wild Goose 官網確認 ¥110,000 稅込（¥100,000 稅抜）為左右一組（一台份），不是單邊。材質為鍍鋅鋼板（ボンデ鋼板，鍍鋅＋鉻酸鹽雙層被膜）2.3mm 厚、聚氨酯烤漆黑，長 1292mm、外凸 55mm，JB74 專用品番 JM-2409；JB64 對應品是另一件「サイドシルガード3.2」JM-2408（¥44,000 稅込，非同款護甲踏板）。14.5kg 官網未註明是單邊還是一組。"
+   },
+   "why": "目錄沒標明 ¥110,000 是稅込也是左右一組（不是單邊），容易被誤讀成單邊價；補上材質厚度與 JB64 對應品番",
+   "evidence": "Configuration: 左右セット；Price: ¥110,000 (10% tax included)；JM-2408（JB64）「サイドシルガード3.2」¥44,000",
+   "sources": [
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/protection_64/jm-2409.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/protection_64/"
+   ]
+  },
+  {
+   "id": "customwagon",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "note": "Custom Wagon 官網原文為「調整幅は約50センチあります」，即出幅可調約 50cm，不是目錄原本寫的 50mm——官網白紙黑字，以此為準更正十倍之差。¥57,200 稅込（店售價，非廠商建議售價），鋼管加緞面黑塗裝，JB74W 專用（AT／MT 共用），與 JB64 版支架不同不可混用，2022 年 7 月以後（三型）車輛需切除新增隔音材才能安裝。官網未公布品番、管徑、尺寸與重量。"
+   },
+   "why": "官網直接寫「約50センチ」，證實目錄原本的 50mm 是打錯一個單位，差了十倍，其餘規格官網本來就沒公布，維持未知即可",
+   "evidence": "調整幅は約50センチあります。",
+   "sources": [
+    "https://www.custom-wagon.com/c/557/jim661"
+   ]
+  },
+  {
+   "id": "spieler",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "uncertain": true,
+    "note": "SPIELER 官網查無「75×75 方管」這個規格，商品頁只寫「角パイプ」＋「アルミ天板（バーリング加工滑り止め）」，75×75 只出現在網址代碼 jb64jb74sidestep7575，未經官方文字證實，應標為未確認。¥88,000 稅込（¥80,000 稅抜），JB64 與 JB74 共用本體、支架不同，利用既有車體固定孔免鑽孔，出幅可調、對應車檢。目前 JB64／JB74 兩款官網皆顯示售罄。"
+   },
+   "why": "目錄把網址代碼裡的「7575」當成官方管徑規格寫死，官網本文其實從未提到這個數字，且商品目前是售罄狀態，都該讓買家知道",
+   "evidence": "No 75x75mm specification appears in the provided content; both variants: 「JB64バリエーションは売り切れているか販売できません」「JB74バリエーションは売り切れているか販売できません」",
+   "sources": [
+    "https://spieler.jp/products/jb64jb74sidestep7575"
+   ]
+  },
+  {
+   "id": "outclass",
+   "list": "SIDE_STEPS",
+   "action": "edit",
+   "set": {
+    "note": "OUTCLASS 官網 [220サイズ] 版 ¥80,000 稅別／¥88,000 稅込，鋼製左右一組，可選粉體消光黑或 Raptor 黑塗裝，對應車檢；重量欄官網直接寫「未計測」，品番與管徑皆未公布，說明書不附。同廠另售電動款「オートサイドステップ [240サイズ]」¥119,000 稅別／¥130,900 稅込，購買時勿混淆兩者。"
+   },
+   "why": "補上稅別／稅込兩個數字並提醒同廠有一款貴上約四萬多的電動版容易買錯",
+   "evidence": "税別: 80,000円 / 税込: 88,000円（220サイズ）；オートサイドステップ [240サイズ] 119,000円（稅別）/ 130,900円（稅込）",
+   "sources": [
+    "https://outclass.ocnk.net/product/1124",
+    "https://outclass.ocnk.net/product/1428"
+   ]
+  },
+  {
+   "id": "wildboar",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "price": 47300,
+    "cur": "JPY",
+    "part": "7200-15R（レイドブラック）／7200-15G（ガンブラック）",
+    "uncertain": false,
+    "note": "APIO 官網現役商品，15 吋仍在售，¥47,300／本（稅込），鋁合金鑄造一體式、JWL／JWL-T 規格，約 7.35kg，附專用同色輪圈蓋。適合 JB74／JB43／JB33／JB32／JB31。APIO 未公布中心孔徑，JB74 需要 108.1mm，下單前請向 APIO 確認。"
+   },
+   "why": "價格不是查無來源：APIO 官網明列 ¥47,300／本稅込；尺寸 15×6.0J −5 目錄本來就對，只是價格被標成 null／uncertain，應解除。",
+   "evidence": "定　価：（税込10%）￥47,300／新型ジムニーJB74装着可能です！",
+   "sources": [
+    "https://apio.jp/parts/7200-15.html"
+   ]
+  },
+  {
+   "id": "wildboar16",
+   "list": "WHEELS",
+   "action": "remove",
+   "set": {},
+   "why": "目錄現有的 16×5.5J +20 是 APIO 官網明寫的 JB64（軽自動車）専用規格，JB74 不適用；修正成 JB74 正確規格（16×6.0J −5、品番 7200-47B／47W、¥48,400／本）後，會與目錄裡另一筆 wildboar_sr 的規格、品番、價格完全重複，建議直接移除本筆，保留 wildboar_sr 即可，避免同一顆輪圈出現兩筆。",
+   "evidence": "7200-17.html：「適　合：スズキジムニー軽自動車ジムニーシリーズ…新型ジムニーJB64適合」（16×5.5J INSET+20）；7200-28.html：「ジムニーシエラ JB74 / ジムニーノマド JC74」（16×6.0J INSET−5，品番7200-47B／47W）",
+   "sources": [
+    "https://apio.jp/parts/7200-17.html",
+    "https://apio.jp/parts/7200-28.html"
+   ]
+  },
+  {
+   "id": "wildboar_sr",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "note": "復古壓鋼圈造型：外圈平帶＋內凹中央盤，四道細長弧槽在 1:30／4:30／7:30／10:30，槽緣有滾邊。APIO 官網 16×6.0J −5 這個規格頁只列 Iron Black（7200-47B）與 Cotton White（7200-47W）兩色，查無目錄原寫的 Iron Grey。適合 JB74 シエラ／JC74 ノマド，約 8kg，附專用輪圈蓋。"
+   },
+   "why": "尺寸／價格／料號都對，只有顏色多寫了一個官網查無對應品番的 Iron Grey，需拿掉。",
+   "evidence": "品　番：7200-47B（アイアンブラック）／7200-47W（コットンホワイト）",
+   "sources": [
+    "https://apio.jp/parts/7200-28.html"
+   ]
+  },
+  {
+   "id": "wildboar_d",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "note": "碟面內凹，單圈 16 個錐形沉孔（蓮根紋），輪唇有對比色飾帶。APIO 官網同一顆輪圈依塗裝分兩種 offset：グロスブラック／スモーククリア是 16×6.0J ±0（7200-62B）；セミグロスブラック／ウッドカッパー（2026-04-20 新色）才是 16×6.0J −5（7200-62F）——本目錄採用的是後者這個新色版本。無中心蓋、螺帽外露，PCD139.7、5孔，約8.62kg，¥48,400／本稅込。APIO 未公布中心孔徑。"
+   },
+   "why": "gapfill 說『WILDBOAR D 沒有 16×6.0J −5 這個規格』查證後是錯的——官網確實有 −5，只是限定新色（木紋銅／セミグロスブラック）；目錄原本的 −5、¥48,400 沒有錯，只是沒說明只對應哪個色號，容易誤裝成 ±0 那組。",
+   "evidence": "7200-62B / 16inch 6.0J　(INSET:±0)　［グロスブラック/スモーククリア］ vs 7200-62F / 16inch 6.0J  (INSET:−5)　［セミグロスブラック/ウッドカッパー，26.04.20 新品］",
+   "sources": [
+    "https://apio.jp/parts/7200-60.html"
+   ]
+  },
+  {
+   "id": "xtremej",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "rim": 16,
+    "width": 5.5,
+    "offset": -5,
+    "price": 59400,
+    "cur": "JPY",
+    "uncertain": false,
+    "note": "MLJ 官方尺寸表確認：16×5.5J INSET+22（PCD5/139.7，*3）是 JB23／JB64ジムニー 專用；JB74 シエラ 對應的是同尺寸 16×5.5J INSET−5（*4）。單顆稅込價 サテンブラック ¥59,400、グロスブラックマシーン／スモーククリア與マットブロンズ／ブラックリム皆 ¥62,700。MLJ 未公布中心孔徑；官網對這個 −5 規格沒有特別註記需要爆龜或寬体（offset 比原廠 +5 多凸出約 10mm，實裝前建議自行量測輪拱間隙）。同廠 XJ07 另有 16×6.0J −5（¥62,700〜¥67,100）可選，凹度更深。",
+    "part": "XTREME-J XJ04"
+   },
+   "why": "目錄原本的 16×5.5J +22 是 MLJ 官網標明的 JB23／JB64（軽）規格，JB74 シエラ 要選同尺寸的 INSET−5；JB74 那一列的輪寬（brief 標示為 stillUnknown）經查是 5.5J，不是 6.0J，因此本項不落在『6.0J 負 offset』的爆龜判斷條件內。",
+   "evidence": "サイズ表原始碼：*3｜16ｘ5.5Ｊ｜22｜5/139.7 → 適合車種「JB23/JB64ジムニー」；*4｜(同尺寸)｜-5｜5/139.7 → 適合車種「JB74ジムニーシエラ」",
+   "sources": [
+    "https://www.mljinc.co.jp/product/xtreme-j/xj04/"
+   ]
+  },
+  {
+   "id": "xj07",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "note": "8 個梯形 D 窗；官方標示 16×6.0J −5（*9，適合車種「JB74ジムニーシエラ」）為 ULTRA DEEP CONCAVE（全系列最深）。無鉚釘、無假 beadlock，孔徑 108.5mm，PCD5/139.7。目錄價 ¥67,100 稅込是マットブロンズ／ブラックリム這個色的價格；基本色サテンブラック是 ¥62,700 稅込／本，這個尺寸不提供グロスブラックマシンインディゴ。"
+   },
+   "why": "尺寸、孔徑、適用車種本身都對，只是原本沒說明 ¥67,100 對應哪個顏色，容易被誤讀成統一單價，依 gapfill 建議補上顏色對應。",
+   "evidence": "*9｜16ｘ6.0Ｊ｜5/139.7｜-5｜CB108.5｜ULTRA DEEP CONCAVE｜サテンブラック定価57,000(税込62,700)／マットブロンズブラックリム定価61,000(税込67,100)；適合車種 *9＝JB74ジムニーシエラ",
+   "sources": [
+    "https://www.mljinc.co.jp/product/xtreme-j/xj07/"
+   ]
+  },
+  {
+   "id": "te37xt",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "label": "TE37XT for J 鍛造輪框",
+    "rim": 16,
+    "width": 5.5,
+    "offset": 0,
+    "price": 83600,
+    "cur": "JPY",
+    "part": "VOLK RACING TE37XT for J（06456550015BC 標準黑）",
+    "note": "RAYS 官網商品名為「VOLK RACING TE37XT for J」，沒有「M-SPEC」字樣。JB74 シエラ 對應 16×5.5J ±0 或 16×6.0J −5；JB64／一般ジムニー 用的是 16×5.5J +20，本目錄採前者（±0）。鍛造一體式，中心孔 112φ、PCD139.7、5孔。單顆稅込價：16×5.5J（±0 與 +20 同價）標準色 BC 布拉斯特黑 ¥83,600、BR 古銅色 ¥88,000；16×6.0J −5 為 BC ¥84,700、BR ¥89,100。RAYS 未公布重量。"
+   },
+   "why": "兩處都要修正：目錄原本的 16×5.5J +20 是 JIMNY（JB64）用，JB74 シエラ 要選同寬度的 ±0；且 RAYS 官網頁面上完全沒有「M-SPEC」這個字樣，標籤要拿掉。",
+   "evidence": "16x5.5J｜+20｜112φ｜139.7｜¥83,600｜JIMNY／06456552015BC；16x5.5J｜0｜112φ｜139.7｜¥83,600｜JIMNY SIERRA／06456550015BC；「ジムニー用にはフラットコーン、シエラ用にはディープコーンタイプ」",
+   "sources": [
+    "https://www.rayswheels.co.jp/products/brand/detail/132"
+   ]
+  },
+  {
+   "id": "bradley",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "offset": 0,
+    "price": 53900,
+    "cur": "JPY",
+    "note": "4x4 Engineering 官網確認 BRADLEY V 中心孔 110mm、PCD5/139.7。JB74 シエラ／JC74 用 16×5.5J ±0（本目錄採用，¥49,000 稅抜／¥53,900 稅込 每顆）；另有 16×6.0J −6（¥51,000 稅抜／¥56,100 稅込）。16×5.5J +22 是 JB23／JB64 專用，不適用 JB74 シエラ。官網未列材質與重量。"
+   },
+   "why": "價格與車種都錯：官網沒有 ¥37,400 這個價，16×5.5J 正確稅込價是 ¥53,900；而且 +22 是 JB23／JB64 用，JB74 シエラ 要選 ±0（原註記「另有 +0 Jimny spec」正好講反）。",
+   "evidence": "16×5.5J｜5/139.7｜±0｜110｜¥49,000/¥53,900｜「ジムニーシエラ（JB74）ジムニーノマド (JC74)」；16×5.5J｜+22｜110｜「ジムニー（JB23）ジムニー（JB64）」",
+   "sources": [
+    "https://www.4x4es.co.jp/products/wheel/bradley-v/"
+   ]
+  },
+  {
+   "id": "showa_eight",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "part": "w00235",
+    "uncertain": false,
+    "note": "SHOWA GARAGE 官方商店確認品番 w00235、16×6.0J ±0，商品頁明寫「37,400円（税込）/本」（單顆，非四顆一組），適合車種「ジムニーシエラ JB74／JB43」（含 JC74）。JB64／JB23 用的是另一顆 w00230（16×5.5J +20、¥36,300 稅込）。查詢當下マットブラック色顯示售罄，下單前請先確認庫存。"
+   },
+   "why": "原本「1本或1台分不確定」的疑問已解決：商品頁自己寫「37,400円（税込）/本」，價格、尺寸、車種都對，只是缺品番，現已補上。",
+   "evidence": "IGNITION EIGHT 16×6.0J±0 1本 ジムニーシエラ・ジムニーノマド JB74/JC74/JB43など用／商品コード:w00235／価格:37,400円（税込）",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000000808/I1582/page1/recommend/",
+    "https://showa-garage.shop/shopbrand/I1582"
+   ]
+  },
+  {
+   "id": "daytona_ss",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "offset": 0,
+    "uncertain": true,
+    "note": "MLJ 官方尺寸表 PCD5-139.7 這一列（*9）同時有 15×6.0J INSET±0（¥28,600 稅込）與 16×6.0J（INSET 欄留白、官網未公布數值，¥29,700 稅込），適合車種寫「JB74ジムニーシエラ」；目錄沿用 16×6.0J、¥29,700 稅込／本，offset 暫以 ±0 標示但官網並未證實，下單前需向 MLJ 確認。另一列 16×5.5J INSET+20（黑／全白 ¥29,700 稅込）的適合車種其實是「JA/JBジムニー」（JB64 等軽自動車），不適用 JB74 シエラ——目錄原句「白色版只有16×5.5J+20」數字沒錯，但那個尺寸根本不裝 JB74，白色目前查無適用 JB74 的規格。「街價約¥13,360」查無出處，已刪除。"
+   },
+   "why": "真正的錯不是價格，是「白色版16×5.5J+20」這句話會讓人誤以為JB74也能裝，其實官網寫明那個尺寸是JA/JB（JB64）専用；JB74 真正對應的16×6.0J那一列，INSET 官網本來就沒填數字，需標成 uncertain。",
+   "evidence": "*8｜16ｘ5.5｜5-139.7｜20｜BLACK/ALL WHITE｜¥27,000(税込29,700)｜適合車種「JA/JBジムニー」；*9｜15ｘ6.0／16ｘ6.0｜5-139.7｜0／(空欄)｜¥26,000(税込28,600)／¥27,000(税込29,700)｜適合車種「JB74ジムニーシエラ」",
+   "sources": [
+    "https://www.mljinc.co.jp/product/daytona_ss/daytona_ss/"
+   ]
+  },
+  {
+   "id": "watanabe_f8",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "price": 49500,
+    "cur": "JPY",
+    "uncertain": false,
+    "note": "RS Watanabe 官網 Jimny 專頁確認 F8（Eight Spoke）16×5.5J ±0、PCD5×139.7 為 Jimny Sierra（JB74）規格；16×5.5J +22 才是 JB64／JA Jimny 規格，5 孔沒有 6 孔的混淆疑慮。官網價格 ¥45,000／本是「業者様用・税別」（未稅），換算稅込約 ¥49,500／本；標準黑，其餘色（銀／金／鎂／紅／藍／黃／白等）加價 ¥3,000 稅別（約 ¥3,300 稅込）。中心孔徑與重量官網未公布，台灣無代理。"
+   },
+   "why": "官網明寫價格是「業者様用・税別で表示」，目錄原本把 ¥45,000 當稅込用是錯的，換算稅込應為 ¥49,500；尺寸 ±0 本身對，且該頁沒有 6 孔 139.7 的規格（先前 gapfill 疑慮的六孔版本查無出現於 F8 專頁）。",
+   "evidence": "「※価格表示は、業者様用に税別で表示です。」／Jimny Sierra (JB74)｜F8 16 5.5 ±0｜¥45,000｜税別；Jimny (JB64/JA)｜F8 16 5.5 +22｜¥45,000｜税別",
+   "sources": [
+    "https://www.rs-watanabe.co.jp/jimny/",
+    "https://www.rs-watanabe.co.jp/wheel/"
+   ]
+  },
+  {
+   "id": "super_moon",
+   "list": "WHEELS",
+   "action": "edit",
+   "set": {
+    "note": "完全無孔的光滑碟盤，最極端的 moon disc 語彙，材質為鋼製（steel）。官網（shop.beyond-jpn.com）明寫「単品販売」「税込」，黑／白 ¥19,800、鍍鉻 ¥23,100 皆為單顆稅込價，16×6.0J −5、PCD5×139.7，適合「ジムニーシエラJB74W／JC74ノマド」。官網另有規格相同、價格相同的 JB64W 版本，本目錄採用的是 JB74W。中心孔徑、重量官網未公布。"
+   },
+   "why": "尺寸、offset、價格、稅別本來就對；目錄網址（shop.beyond-jpn.com）其實就是正確的第一手廠商頁，gapfill 是查錯了 beyond-japan.com／.co.jp 兩個不相干網域才誤判『查無來源』，這裡補上材質是鋼製並確認單顆稅込。",
+   "evidence": "「単品販売となります。必要な本数分のご購入をお願いいたします」／「税込。」／「ジムニーシエラJB74W　/ JC74ノマド」／材質「スチール」",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/bewl74-smbl",
+    "https://shop.beyond-jpn.com/collections/%E3%83%9B%E3%82%A4%E3%83%BC%E3%83%AB"
+   ]
+  }
+ ]
+}

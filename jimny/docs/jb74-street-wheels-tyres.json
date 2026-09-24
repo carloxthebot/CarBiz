@@ -1,0 +1,154 @@
+{
+  "sourcedAt": "2026-09-24",
+  "task": "Replace the `street18` placeholder in WHEELS (18x7.0J -20, null price, no real product) with a real 17/18\" JB74 wheel, and add a real road-pattern tyre to TYRE_MODELS (currently 12 entries, all A/T, R/T or M/T).",
+  "chassis": "JB74 Jimny Sierra only. 5x139.7, hub bore 108.1mm, stock 195/80R15 (693mm).",
+
+  "wheels": {
+    "recommended": "rays_alap07x_p8",
+    "recommendedWhy": "It is, as far as this search could establish, the ONLY 5x139.7 wheel a Japanese maker sells for the JB74 above 16\" -- every other big-name line checked (WedsSport/WEDS ADVENTURE, MLJ XTREME-J, 4x4 Engineering Bradley V, Fuel Off-Road, Method Race Wheels -- see `checkedAndRejected` below) tops out at 16\" in the Jimny's actual bolt pattern. The +8 inset variant also has a documented real build at 225/60R18 that keeps stock ride height, which matches the '低趴' brief (big rim, no lift) better than guessing at an untested inset.",
+
+    "candidates": [
+      {
+        "id": "rays_alap07x_p8",
+        "maker": "RAYS (RAYS ENGINEERING / VOLK RACING division)",
+        "model": "A・LAP-07X",
+        "size": "18x7.0J",
+        "offset": "+8",
+        "pcd": "5-139.7",
+        "pcdConfirmed": true,
+        "hubBore_mm": 108.8,
+        "hubBoreNote": "108.8mm bore on a 108.1mm JB74 hub -- same clearance-fit situation the catalogue already accepts for DEAN and other RAYS-bore wheels (see parts.js comment above the WHEELS array); no adapter needed.",
+        "construction": "forged 1-piece",
+        "price": { "amount": 97900, "currency": "JPY", "taxIncluded": true, "note": "BD（黑／輪緣DC）色；BR（青銅陽極處理）色 ¥100,100" },
+        "partNumber": "10098700815BD (Black/RimDC) / 10098700815BR (Bronze anodized)",
+        "colours": ["Black / Rim DC (BD)", "Bronze anodized (BR)"],
+        "spokeStyleWords": "seven-spoke rough mesh, forged, deep concave face; disc centre machined with RAYS / A-LAP / FORGED / MADE IN JAPAN lettering",
+        "needsOverFenders": true,
+        "needsOverFendersNote": "官方未直接標註是否需要爆龜，但 7.0J 比原廠 5.5J 寬 1.5 吋，依本目錄既有慣例（15x7.0J ±0 的耀麒 H598 也標 needsFlares），估計胎肩會頂出原廠葉子板邊緣，建議搭配爆龜或至少確認實車。",
+        "recommendedTyreSizes": ["215/55R18 (t215r18, 694mm)", "225/60R18 (real fitted example below, 727mm)"],
+        "realWorldFitment": "48rider/craft-web/jimnyplus 系列文章記錄一台 JB74 シエラ 裝 18x7.0J +8 配 TOYO OPEN COUNTRY R/T 225/60R18，維持原廠車高、未動懸吊。輪框重 14.5kg，含胎總重 22.7kg。",
+        "compatibleChassisPerMaker": "JB64W / JB23W / JB74W (跨代通用，鍛造件同款不分年式)",
+        "sources": [
+          "https://www.rayswheels.co.jp/products/brand/detail/144",
+          "https://4wdsuv.auto-g.jp/letsgo4wd/article/20250627/",
+          "https://jimnyplus.net/specialcontents/2262/",
+          "https://www.craft-web.co.jp/blogs/urban/375690/"
+        ]
+      },
+      {
+        "id": "rays_alap07x_m2",
+        "maker": "RAYS",
+        "model": "A・LAP-07X",
+        "size": "18x7.0J",
+        "offset": "-2",
+        "pcd": "5-139.7",
+        "pcdConfirmed": true,
+        "hubBore_mm": 108.8,
+        "construction": "forged 1-piece",
+        "price": { "amount": 97900, "currency": "JPY", "taxIncluded": true, "note": "BD ¥97,900／BR ¥100,100，同一顆模具不同 inset" },
+        "partNumber": "10098706215BD (Black/RimDC) / 10098706215BR (Bronze anodized)",
+        "colours": ["Black / Rim DC (BD)", "Bronze anodized (BR)"],
+        "spokeStyleWords": "same seven-spoke rough mesh forged face as the +8, pushed 10mm further out for a deeper, more flush/poke look",
+        "needsOverFenders": true,
+        "needsOverFendersNote": "比 +8 版本再往外推 10mm，爆龜需求更明確；沒有找到這顆 inset 的實車紀錄（找到的實車文章都是 +8）。",
+        "note": "同一顆輪框的深爪版本，給想要比 +8 更貼近葉子板、視覺衝擊更大的人；沒有已知的實車搭配紀錄，是本目錄兩個候選中比較沒把握的一顆。",
+        "sources": [
+          "https://www.rayswheels.co.jp/products/brand/detail/144",
+          "https://jimnyplus.net/specialcontents/2262/"
+        ]
+      }
+    ],
+
+    "checkedAndRejected": [
+      {
+        "maker": "WedsSport / WEDS ADVENTURE (Weds Co., Ltd.)",
+        "modelsChecked": ["SA-01R", "SA-99R", "TC105X Forged", "MUD VANCE 06"],
+        "finding": "官方裝著マッチング網站（search.weds.co.jp）每一款打開 17吋或18吋分類頁面，實際適合表都只列出 16x6.0J -5（215/70-16）與 15x6.0J 0（195/80-15）兩列——網址上的「17インチ」「18インチ」只是導覽用的尺寸分類，不代表該款真的有出到那個尺寸。JB74 目前 Weds 全系列最大只到 16 吋。",
+        "sources": [
+          "https://search.weds.co.jp/brand/wedssport/sa01r/suzuki/jimuniishiera-jb74/?size=17inch",
+          "https://search.weds.co.jp/brand/wedssport/tc105xforged/suzuki/jimuniishiera-jb74/?size=17inch",
+          "https://search.weds.co.jp/maker/suzuki/jimuniishiera-jb74/adventure-mudvance06/?size=17inch"
+        ]
+      },
+      {
+        "maker": "MLJ",
+        "modelsChecked": ["XTREME-J XJ04"],
+        "finding": "官方規格表確實有 17/18/20 吋，但那些尺寸全是 5-114.3 或 6-139.7，不是 JB74 的 5-139.7；XJ04 唯一對到 Jimny 孔距的只有 16x5.5J +22（JB23/JB64）與 16x6.5J（JB74 シエラ 專用，但也是 16 吋）。",
+        "sources": ["https://www.mljinc.co.jp/product/xtreme-j/xj04/"]
+      },
+      {
+        "maker": "4x4 Engineering (Bradley V)",
+        "finding": "17/18 吋版本存在，但螺栓是 6H-139.7（給皮卡／SUV），Jimny 專用尺寸只做到 16x5.5J +22。跟目錄裡已收錄的 `bradley` 是同一個結論。",
+        "sources": ["https://www.4x4es.co.jp/2023/04/28/%E3%82%B8%E3%83%A0%E3%83%8B%E3%83%BC%E3%82%B7%E3%82%A8%E3%83%A9%E5%B0%82%E7%94%A8%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E3%83%96%E3%83%A9%E3%83%83%E3%83%89%E3%83%AC%E3%83%BCv%E3%81%8C%E7%99%BB%E5%A0%B4/"]
+      },
+      {
+        "maker": "Fuel Off-Road (D694 Covert)",
+        "finding": "英國 Wheelbase 賣場列出的 JB74 專用款只有 15 吋；查到的 17x9 D694 都是 5x127／6x139.7／8x170，是給 Jeep／皮卡的孔距，不是 Jimny 的 5x139.7。",
+        "sources": ["https://www.wheelbasealloys.com/alloy-wheels/fuel-off-road/d694-covert/matt-black/15-inch/suzuki/jimny/4th-gen"]
+      },
+      {
+        "maker": "Method Race Wheels (301 The Standard)",
+        "finding": "17x9 -12 確實有 5x139.7 這個孔距的 SKU 存在，但那是給 Jeep/Ford/Ram 系列的「多孔位」設計（同一片鑄模開 5x4.5/5x5/5x5.5/6x5.5/8x6.5/8x170 全部孔），Method 官網沒有 JB74 專屬適合表；-12 inset 配 9.0J 對 JB74 poke 量非常大，沒有列為候選。",
+        "sources": ["https://www.bbwheelsonline.com/method-race-wheels-the-standard-wheels-rims-matte-black-17x9-5x5-5-5x139-7-12mm-offset-MR30179055512N/"]
+      }
+    ]
+  },
+
+  "tyreModels": {
+    "note": "沒有找到單一款公路胎涵蓋 195/80R15、215/70R16、225/60R18 全部三個尺寸——收兩款，各自對到目錄裡最相關的尺寸。procedural drawing: wheels.js 目前的 PATTERNS 只有 at/rt/mt 三種，設 pattern:'ht' 時程式碼會自動退回 'at' 的花紋（wheels.js:394 `PATTERNS[spec.pattern] ? spec.pattern : 'at'`），先能正常顯示；下面每一款都附上真正的胎紋幾何描述，供之後補寫專屬的 'ht' pattern 函式使用。",
+
+    "candidates": [
+      {
+        "id": "bridgestone_dueler_ht684ii",
+        "brand": "BRIDGESTONE",
+        "model": "DUELER H/T684Ⅱ",
+        "isOEM": true,
+        "oemNote": "這就是 JB74 シエラ 的原廠配胎——普利司通官方新車装着タイヤ一覧明列：スズキ｜ジムニーシエラ｜F/R｜195/80R15 96S｜H/T684Ⅱ｜品番 PSR16069。",
+        "price": { "amount": 24310, "currency": "JPY", "taxIncluded": true, "amountExTax": 22100, "note": "官方新車配胎補件價，單條" },
+        "sizesConfirmed": [
+          { "size": "195/80R15 96S", "market": "日規／JB74 原廠配胎", "dia_mm": 693, "source": "https://tire.bridgestone.co.jp/dueler/equipment/" },
+          { "size": "215/70R16 99S (P215/70R16)", "market": "北美規（Dueler H/T 684 II 是同一花紋家族的國際款，尺寸表比日規寬很多）", "dia_mm": 707, "note": "北美官網查不到 Jimny 適用聲明，是「同花紋家族＋等徑」的巧合式相容，不是原廠背書；標記為次要來源。" }
+        ],
+        "owl": false,
+        "owlNote": "沒查到白字／白線版本",
+        "treadPatternForProcedural": "官方文案「螺旋をイメージさせるトレッドパターン」＋美規賣場描述：4 條主要連續縱向溝把胎面分成幾條肋（外側兩條為連續肩部肋，中央兩條肋上有淺刀槽但不斷開，屬於低空隙率的公路胎），溝為寬而直的縱溝（非之字形），肩部有側向切槽增加排水但塊體本身仍相連，日規文案提到內外側花紋不同（可能為方向性／內外不對稱設計，年式或市場版本可能不同）。",
+        "sources": [
+          "https://tire.bridgestone.co.jp/dueler/equipment/",
+          "https://www.performanceplustire.com/Tires/Bridgestone_Dueler_H-T_684_II_215-70R16_99S",
+          "https://www.tiremart.com/bridgestone-dueler-h-t-684-ii-215-70r16-99s-dc-as-a-s-all-season-tire/"
+        ]
+      },
+      {
+        "id": "toyo_open_country_ht2",
+        "brand": "TOYO TIRES",
+        "model": "OPEN COUNTRY H/T Ⅱ",
+        "isOEM": false,
+        "sizesConfirmed": [
+          { "size": "225/60R18 98H", "owl": true, "dia_mm": 727, "note": "跟本目錄新收的 t225r18（配 RAYS A・LAP-07X 18x7.0J +8 的實車尺寸）正好對上" },
+          { "size": "225/55R18 98H", "owl": true, "dia_mm": 705 },
+          { "size": "235/60R18 103H", "owl": true, "dia_mm": 737 }
+        ],
+        "sizesNotAvailable": ["195/80R15（官方表沒有）", "215/70R16（官方表沒有）"],
+        "owl": true,
+        "owlSizes": ["t225r18"],
+        "treadPatternForProcedural": "官方文案：採「ショルダーリブ化」（肩部做成連續肋、不做成獨立塊狀）＋「ショルダーグルーブストレート化」（肩部與中央之間的縱溝改直線，不用之字形）；SUV 尺寸的肩部方形、輕自動車／小型 SUV 尺寸的肩部做圓角；另外主溝內有「凹凸加寬溝」設計，磨耗到一定深度後溝寬會局部變寬以維持排水面積。整體塊體比一般 OPEN COUNTRY 系列大、扁平，空隙率低，屬於典型公路胎外觀。",
+        "sources": [
+          "https://www.toyotires.jp/product/opht2/",
+          "https://www.clg-sv.com/hikaku/cate/suv/ty_open-ht2/"
+        ]
+      }
+    ]
+  },
+
+  "newTyreSizeNeeded": {
+    "id": "t225r18",
+    "label": "225/60R18",
+    "dia": 727,
+    "width": 225,
+    "rim": 18,
+    "needLift": 0,
+    "needBody": 0,
+    "legal": true,
+    "note": "+4.9%，實車紀錄（RAYS A・LAP-07X 18x7.0J +8 配 TOYO OPEN COUNTRY R/T）維持原廠車高、未動懸吊。"
+  }
+}

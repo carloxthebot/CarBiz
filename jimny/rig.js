@@ -293,7 +293,7 @@ export function rigJimny(THREE, gltfScene) {
   // plus the fog lamps set into it. Grille: the satin surround panel, its
   // slats and inserts, the signal bezels and the badge. Headlamp units stay.
   const stockBumper = [], stockGrille = [], stockRear = [], stockMirrors = [], stockFlares = [], stockRearLamps = [],
-    stockQuarter = [];
+    stockQuarter = [], stockHeadlamps = [];
   raw.traverse((o) => {
     if (!o.isMesh || Array.isArray(o.material)) return;
     const b = new THREE.Box3().setFromObject(o);
@@ -311,6 +311,10 @@ export function rigJimny(THREE, gltfScene) {
     // the pane has to go or the open window hangs in front of its own glass
     if (Math.abs(c.x) > 600 && c.y > 1050 && c.y < 1550 && c.z < -600 && c.z > -1400 && /Glass|Vidro/.test(n)) { stockQuarter.push(o); return; }
     if (c.z < 1500) return;
+    // headlamp units (lens, bowl, ring, reflector): round, centred about
+    // x +-550, y 855. Only a face kit takes these away.
+    if (c.z > 1540 && Math.abs(c.x) > 400 && Math.abs(c.x) < 700 && c.y > 740 && c.y < 990 &&
+      (b.max.x - b.min.x) < 0.3 && !/BodyPaint/.test(n)) { stockHeadlamps.push(o); return; }
     // (TrimBlackFlat is the same finish on meshes without UVs)
     if (c.y < 720 && c.z > 1550 && (/^TrimBlack/.test(n) || (c.y < 650 && /Chrome|LampLens|Carro_Ref/.test(n))))
       stockBumper.push(o);
@@ -327,7 +331,7 @@ export function rigJimny(THREE, gltfScene) {
   };
 
   root.userData = {
-    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors, stockFlares, stockRearLamps, stockQuarter,
+    BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors, stockFlares, stockRearLamps, stockQuarter, stockHeadlamps,
     paintMat, roofMat, roofMeshes, painted, dims,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
@@ -347,6 +351,7 @@ export function applyConfig(THREE, rig, cfg) {
   for (const m of U.stockFlares) m.visible = !cfg.hideFlares;
   for (const m of U.stockRearLamps) m.visible = !cfg.hideRearLamps;
   for (const m of U.stockQuarter) m.visible = !cfg.hideQuarterGlass;
+  for (const m of U.stockHeadlamps) m.visible = !cfg.hideHeadlamps;
   if (U.roofMat) {
     const twoTone = !!cfg.twoTone;
     U.roofMat.color.setHex(twoTone ? (cfg.roofColor ?? 0x1e2326) : (cfg.bodyColor ?? 0x6a6866));

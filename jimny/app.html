@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241411" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241521" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -409,7 +409,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 /* Hovering an option pops its details: what it costs in both currencies, the
    part number, what it actually is, and a link to the maker's own page. It
    stays up while the pointer is inside it, so the link is reachable. */
-#card[hidden]{display:none}
+#card[hidden],#rackMove[hidden]{display:none}
+#rackMove{margin-top:10px}
+#rackNudge button:disabled{opacity:.35;cursor:default}
 #card{position:fixed;z-index:40;width:min(330px,calc(100vw - 24px));
   background:#101a1ef2;backdrop-filter:blur(16px);border:1px solid var(--line2);
   border-radius:6px;box-shadow:0 18px 44px #00000080;padding:13px 14px;display:grid;gap:7px;
@@ -428,6 +430,17 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 #card img{width:100%;aspect-ratio:16/10;object-fit:contain;border-radius:4px;
   background:radial-gradient(60% 60% at 50% 45%,#233037,#131b1e)}
 @media(hover:none){#card{width:min(330px,calc(100vw - 24px))}}
+/* The part pickers open this list instead of the native one wherever there
+   is a mouse: a native <select> menu belongs to the OS and reports nothing
+   while the pointer moves over it, so the card could only ever show the part
+   already chosen. Here pointing at a row shows that row's card beside it. */
+.pmenu{position:fixed;z-index:39;overflow:auto;overscroll-behavior:contain;
+  background:#101a1ef7;backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:6px;
+  box-shadow:0 18px 44px #00000080;padding:4px;animation:cardIn .12s ease both}
+.pmenu button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--ink);
+  font:400 13.5px/1.35 var(--body);padding:7px 10px 7px 26px;border-radius:3px;cursor:pointer;position:relative}
+.pmenu button:hover,.pmenu button.hi{background:#ffffff14}
+.pmenu button[aria-selected=true]::before{content:'✓';position:absolute;left:9px;color:var(--acc)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -550,8 +563,12 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
         </div>
         <div class="grp">
           <p class="lbl">寬體葉子板</p><select id="selFender" aria-label="寬體葉子板"></select><p class="hint" id="hFender"></p>
+          <p class="lbl" style="margin-top:16px">車頂尾翼</p><select id="selSpoiler" aria-label="車頂尾翼"></select><p class="hint" id="hSpoiler"></p>
           <p class="lbl" style="margin-top:16px">外掛防滾籠</p><select id="selCage" aria-label="外掛防滾籠"></select><p class="hint" id="hCage"></p>
           <p class="lbl" style="margin-top:16px">車身拉花</p><select id="selStripe" aria-label="車身拉花"></select><p class="hint" id="hStripe"></p>
+        </div>
+        <div class="grp">
+          <p class="lbl">換臉套件</p><select id="selFace" aria-label="換臉套件"></select><p class="hint" id="hFace"></p>
         </div>
         <div class="grp">
           <p class="lbl">前保桿</p><select id="selBumper" aria-label="前保桿"></select><p class="hint" id="hBumper"></p>
@@ -569,6 +586,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <div class="pane" data-p="4">
         <div class="grp">
           <p class="lbl">車頂架</p><select id="selRack" aria-label="車頂架"></select><p class="hint" id="hRack"></p>
+          <div class="sides" id="rackMove"><div class="side-row"><span class="nm">前後位置<i id="rackPos">置中</i></span>
+            <span class="pick" id="rackNudge"><button data-d="1" aria-label="車頂架往車頭移">往車頭</button><button data-d="-1" aria-label="車頂架往車尾移">往車尾</button></span></div></div>
           <p class="lbl" style="margin-top:16px">車邊帳</p><select id="selAwning" aria-label="車邊帳"></select><p class="hint" id="hAwning"></p>
           <button class="tg solo" id="tgAwnSide" aria-pressed="false">
             <span class="nm">車邊帳安裝側<i>台灣左駕，一般裝副駕（右）側</i></span><span class="st">左側</span></button>
@@ -626,14 +645,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609241411';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, STYLES } from './parts.js?v=202609241411';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241411';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241411';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241411';
+import { rigJimny, applyConfig } from './rig.js?v=202609241521';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, STYLES } from './parts.js?v=202609241521';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241521';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241521';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241521';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609241411';
+const BUILD = '202609241521';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -749,7 +768,10 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   kit: 'none', hood: 'stock', spareCoverKit: 'none', gullwing: false, frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: 'none', spareBag: false, spareCover: false,
-  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none' };
+  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none', face: 'none', spoiler: 'none', rackShift: 0 };
+// 50 mm a press, 200 mm either way: the gutter feet clamp anywhere along the
+// drip rail, but past that the rack's end legs run off the roof panel
+const RACK_STEP = 50, RACK_MAX = 200;
 // things that hang off a quarter-window guard and therefore pick a side
 const SIDED = ['guardCan', 'guardAxe', 'guardBoard'];
 const SIDE_DEF = { guardCan: 'right', guardAxe: 'right', guardBoard: 'left' };
@@ -767,7 +789,7 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 /* ── prices: NT$ up front, the maker's own currency underneath ─────────── */
-function money(o) { const p = priceLabel(o); return p.main === '原廠' ? '' : ' — ' + p.main; }
+function money(o) { const p = priceLabel(o); return p.main === '原廠' ? '' : ' — ' + p.main + (p.sub ? `（${p.sub}）` : ''); }
 function priceCell(o) {
   const p = priceLabel(o);
   return `<span class="pr">${p.main}${p.sub ? `<em>${p.sub}</em>` : ''}</span>`;
@@ -905,7 +927,8 @@ function update() {
     tyreDia: ty.dia, tyreWidth: ty.width, rimDia: wh.rim, wheelStyle: wh.style,
     tread: { ...find(TYRE_MODELS, S.tread), owl: S.owl }, rimColor: S.rimColor,
     spacer: Math.max(0, -wh.offset) * 0.7,
-    hideBumper: S.frontBumper !== 'stock', hideGrille: S.grille !== 'stock', hideRear: S.rearBumper !== 'stock',
+    hideBumper: S.frontBumper !== 'stock' || S.face !== 'none', hideGrille: S.grille !== 'stock' || S.face !== 'none',
+    hideHeadlamps: S.face !== 'none', hideRear: S.rearBumper !== 'stock',
     hideMirrors: S.mirrors !== 'stock', hideFlares: false, hideRearLamps: !!find(REAR_BUMPERS, S.rearBumper).ownLamps,
     hideQuarterGlass: S.gullwing,
     buildWheel: (o) => buildWheel(THREE, { ...o, rimNode: getPart('rim_' + o.style) }),
@@ -946,6 +969,8 @@ function update() {
   if (S.stripe !== 'none') add(buildAccessory('stripe', S.stripe, paint), 'stripe');
   if (S.cage !== 'none') add(buildAccessory('cage', S.cage, paint), 'cage');
   if (S.fender !== 'none') add(buildAccessory('fender', S.fender, paint), 'fender');
+  if (S.face !== 'none') add(buildAccessory('face', S.face, paint), 'face');
+  if (S.spoiler !== 'none') add(buildAccessory('spoiler', S.spoiler, paint), 'spoiler');
   if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint), 'rearBumper');
   // 'safari' is a legacy id kept so old links still work; the part is Ironman's
   if (S.snorkel !== 'none')
@@ -955,8 +980,17 @@ function update() {
   if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint), 'roofRack');
   if (S.awning !== 'none') add(buildAccessory('awning', `${S.awning}_${S.awningSide}`, paint), 'awning');
   if (S.sideStep !== 'none') add(buildAccessory('sideStep', S.sideStep, paint), 'sideStep');
-  if (S.frontBumper !== 'stock') add(buildAccessory('frontBumper', S.frontBumper, paint), 'frontBumper');
-  if (S.grille !== 'stock') add(buildAccessory('grille', S.grille, paint), 'grille');
+  if (S.frontBumper !== 'stock' && S.face === 'none') add(buildAccessory('frontBumper', S.frontBumper, paint), 'frontBumper');
+  if (S.grille !== 'stock' && S.face === 'none') add(buildAccessory('grille', S.grille, paint), 'grille');
+
+  // The rack slides fore and aft on its gutter feet, and everything that
+  // rides on it (shovel, awning, the lamps on its front rail) goes with it.
+  const rz = S.roofRack !== 'none' ? S.rackShift / 1000 : 0;
+  for (const k of ['roofRack', 'shovel', 'awning', 'roofLights']) if (BUILT[k]) BUILT[k].position.z += rz;
+  $('rackMove').hidden = S.roofRack === 'none';
+  $('rackPos').textContent = !S.rackShift ? '置中' : `往車${S.rackShift > 0 ? '頭' : '尾'} ${Math.abs(S.rackShift)}mm`;
+  $('rackNudge').querySelectorAll('button').forEach(b =>
+    b.disabled = Math.abs(S.rackShift + (+b.dataset.d) * RACK_STEP) > RACK_MAX);
 
   // ride height, tyre size and paint all ease into their new values
   if (prevS && prevGeom) {
@@ -976,7 +1010,7 @@ function update() {
   countTo($('hClearN'), 210 + total + Math.round((ty.dia - 693) / 2));
   $('sum0').textContent = total ? total + 'mm 舉升' : '原廠';
   $('sum1').textContent = ty.label;
-  const n1 = (S.kit !== 'none') + (S.fender !== 'none') + (S.cage !== 'none') + (S.stripe !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
+  const n1 = (S.kit !== 'none') + (S.face !== 'none') + (S.spoiler !== 'none') + (S.fender !== 'none') + (S.cage !== 'none') + (S.stripe !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
   $('sum2').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
   const n2 = ['windowGuards','spareBag','spareCover','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
@@ -1192,6 +1226,8 @@ function aimFor(k) {
   switch (k) {
     case 'frontBumper': case 'grille': case 'grilleLight': return [0.55, 0.16, 7.8];
     case 'hood': return [0.5, 0.52, 8.4];
+    case 'spoiler': return [2.4, 0.4, 8.6];
+    case 'face': return [0.35, 0.12, 7.2];
     case 'fender': return [0.85, 0.12, 8.6];
     case 'cage': return [0.95, 0.5, 9.4];
     case 'stripe': return [LEFT_AZ, 0.14, 8.8];
@@ -1284,7 +1320,7 @@ const ALL_LISTS = { lift: LIFTS, wheel: WHEELS, tyre: TYRES, frontBumper: FRONT_
   rearBumper: REAR_BUMPERS, grille: GRILLES, snorkel: SNORKELS, mirrors: MIRRORS,
   roofRack: ROOF_RACKS, awning: AWNINGS, sideStep: SIDE_STEPS, ladder: LADDERS,
   lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS,
-  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES, cage: CAGES, fender: FENDERS,
+  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES, cage: CAGES, fender: FENDERS, face: FACES, spoiler: SPOILERS,
   spareCoverKit: SPARE_COVERS };
 let styleAt = null;
 
@@ -1618,7 +1654,8 @@ $('tyreLadder').onclick = e => { const b = e.target.closest('[data-t]'); if (!b)
   renderLadder(); update(); };
 
 /* tread swatch: the muddier the pattern, the fewer and blockier the lugs */
-const TREAD_SPEC = { at: { rows: 9, gapx: .16, jag: .20, void: .36 },
+const TREAD_SPEC = { ht: { rows: 14, gapx: .10, jag: .02, void: .10 },
+                     at: { rows: 9, gapx: .16, jag: .20, void: .36 },
                      rt: { rows: 7, gapx: .24, jag: .34, void: .44 },
                      mt: { rows: 5, gapx: .34, jag: .46, void: .54 } };
 function swatch(cv2, pat) {
@@ -1639,7 +1676,7 @@ function swatch(cv2, pat) {
   }
   x.fillStyle = 'rgba(0,0,0,.45)'; x.fillRect(W / 2 - 1.5, 0, 3, H);
 }
-const PATS = [['at', 'A/T', '全地形'], ['rt', 'R/T', '混合地形'], ['mt', 'M/T', '泥地']];
+const PATS = [['ht', 'H/T', '公路'], ['at', 'A/T', '全地形'], ['rt', 'R/T', '混合地形'], ['mt', 'M/T', '泥地']];
 function renderTabs() {
   const cur = find(TYRE_MODELS, S.tread).pattern;
   $('patTabs').innerHTML = PATS.map(([id, n, d]) =>
@@ -1699,21 +1736,21 @@ function buildUI() {
     ['selStep', SIDE_STEPS, S.sideStep], ['selLadder', LADDERS, S.ladder],
     ['selExhaust', EXHAUSTS, S.exhaust], ['selLightBar', LIGHT_BARS, S.lightBar],
     ['selRoofLights', ROOF_LIGHTS, S.roofLights], ['selGrilleLight', GRILLE_LIGHTS, S.grilleLight],
-    ['selFender', FENDERS, S.fender], ['selCage', CAGES, S.cage], ['selStripe', STRIPES, S.stripe]]) opt(id, L, cur);
+    ['selFace', FACES, S.face], ['selSpoiler', SPOILERS, S.spoiler], ['selFender', FENDERS, S.fender], ['selCage', CAGES, S.cage], ['selStripe', STRIPES, S.stripe]]) opt(id, L, cur);
   $('extPick').innerHTML = EXTINGUISHERS.map(e =>
     `<button data-v="${e.id}" aria-pressed="${S.extinguisher === e.id}">${esc(e.label.replace('掛', ''))}</button>`).join('');
 
   renderLiftSeg(); renderLiftCards();
   renderWChips(); renderWheels(); renderLadder(); renderTabs();
 
-  $('selColor').innerHTML = [['台灣在售', c => c.tw], ['日規專屬', c => !c.tw]].map(([g, f]) => {
+  $('selColor').innerHTML = [['台灣在售', c => c.tw], ['日規專屬', c => !c.tw && !c.wrap], ['改色膜（非原廠色）', c => c.wrap]].map(([g, f]) => {
     const list = COLORS.filter(f); if (!list.length) return '';
     return `<optgroup label="${g}">` + list.map(c =>
       `<option value="${c.code}"${c.code === S.color ? ' selected' : ''}>${esc(c.name)}　${c.code}</option>`).join('') + '</optgroup>';
   }).join('');
   // a ring marks the Japan-only colours so the Taiwan range reads as a set
   $('colSw').innerHTML = COLORS.map(c =>
-    `<button class="sw${c.tw ? '' : ' jp'}" data-c="${c.code}" title="${esc(c.name)}${c.tw ? '' : '（日規）'}"
+    `<button class="sw${c.tw || c.wrap ? '' : ' jp'}" data-c="${c.code}" title="${esc(c.name)}${c.tw ? '' : c.wrap ? '（改色膜）' : '（日規）'}"
       aria-pressed="${c.code === S.color}" style="background:#${c.hex.toString(16).padStart(6, '0')}"></button>`).join('');
   $('rimSw').innerHTML = RIMS.map(h =>
     `<button class="sw" data-r="${h}" aria-pressed="${h === S.rimColor}"
@@ -1745,13 +1782,13 @@ function hints() {
     ['hStep', SIDE_STEPS, S.sideStep], ['hLadder', LADDERS, S.ladder],
     ['hExhaust', EXHAUSTS, S.exhaust], ['hLightBar', LIGHT_BARS, S.lightBar],
     ['hRoofLights', ROOF_LIGHTS, S.roofLights], ['hGrilleLight', GRILLE_LIGHTS, S.grilleLight],
-    ['hFender', FENDERS, S.fender], ['hCage', CAGES, S.cage], ['hStripe', STRIPES, S.stripe]]) $(id).textContent = n(find(L, cur));
+    ['hFace', FACES, S.face], ['hSpoiler', SPOILERS, S.spoiler], ['hFender', FENDERS, S.fender], ['hCage', CAGES, S.cage], ['hStripe', STRIPES, S.stripe]]) $(id).textContent = n(find(L, cur));
   $('extNote').textContent = n(find(EXTINGUISHERS, S.extinguisher)) || '市面沒有 JB74 尾梯專用架';
   const c = COLORS.find(x => x.code === S.color) || COLORS[0];
-  $('colName').textContent = c.code + (c.tw ? '' : ' · 日規');
+  $('colName').textContent = c.code + (c.tw ? '' : c.wrap ? ' · 改色膜' : ' · 日規');
   $('colPick').textContent = c.name + (S.twoTone && c.twoTone ? `　雙色 ${c.twoTone}` : '');
   $('colNote').textContent = [c.tw === '雙色' ? '台灣只有雙色版，請開啟下方雙色車頂。' : '',
-    c.tw ? '' : '台灣未導入。', c.note].filter(Boolean).join(' ');
+    c.tw || c.wrap ? '' : '台灣未導入。', c.note].filter(Boolean).join(' ');
   $('twoNote').textContent = c.twoTone ? `黑頂 ZJ3　台灣組合代碼 ${c.twoTone}` : '此色無原廠雙色組合';
 }
 
@@ -1828,12 +1865,12 @@ for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], 
   ['selHood', 'hood'], ['selSpareKit', 'spareCoverKit'], ['selMirror', 'mirrors'], ['selRack', 'roofRack'],
   ['selAwning', 'awning'], ['selStep', 'sideStep'], ['selLadder', 'ladder'], ['selSnorkel', 'snorkel'],
   ['selExhaust', 'exhaust'], ['selLightBar', 'lightBar'], ['selRoofLights', 'roofLights'],
-  ['selGrilleLight', 'grilleLight'], ['selFender', 'fender'], ['selCage', 'cage'], ['selStripe', 'stripe']]) {
+  ['selGrilleLight', 'grilleLight'], ['selFace', 'face'], ['selSpoiler', 'spoiler'], ['selFender', 'fender'], ['selCage', 'cage'], ['selStripe', 'stripe']]) {
   const el = $(id); if (!el) continue;
   const list = { frontBumper: FRONT_BUMPERS, grille: GRILLES, rearBumper: REAR_BUMPERS, hood: HOODS,
     spareCoverKit: SPARE_COVERS, mirrors: MIRRORS, roofRack: ROOF_RACKS, awning: AWNINGS,
     sideStep: SIDE_STEPS, ladder: LADDERS, snorkel: SNORKELS, exhaust: EXHAUSTS,
-    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS, fender: FENDERS, cage: CAGES, stripe: STRIPES }[key];
+    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS, face: FACES, spoiler: SPOILERS, fender: FENDERS, cage: CAGES, stripe: STRIPES }[key];
   el.addEventListener('pointerenter', () => {
     highlight(BUILT[key] ?? null, 0);
     if (list && matchMedia('(hover: hover)').matches) {
@@ -1841,7 +1878,62 @@ for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], 
       showCard(it, el, shotFor(key, it));
     }
   });
-  el.addEventListener('pointerleave', () => { highlight(null); hideCard(); });
+  el.addEventListener('pointerleave', () => { if (!menuEl) { highlight(null); hideCard(); } });
+  if (list) el.addEventListener('mousedown', (e) => {
+    if (!matchMedia('(hover: hover)').matches || e.button !== 0) return;
+    e.preventDefault();
+    if (menuEl?.dataset.for === id) { closeMenu(); return; }
+    openMenu(el, key, list);
+  });
+}
+
+/** The pointer-driven picker (see .pmenu). Keyboard and touch keep the
+ *  native <select>; choosing here sets its value and fires the same change
+ *  event, so nothing downstream knows the difference. */
+let menuEl = null;
+function closeMenu() {
+  if (!menuEl) return;
+  menuEl.remove(); menuEl = null;
+  hideCard(); highlight(null);
+  removeEventListener('pointerdown', menuOutside, true);
+  removeEventListener('keydown', menuKey, true);
+}
+function menuOutside(e) { if (menuEl && !menuEl.contains(e.target) && !cardEl.contains(e.target)) closeMenu(); }
+function menuKey(e) { if (e.key === 'Escape') { e.preventDefault(); closeMenu(); } }
+function openMenu(sel, key, list) {
+  closeMenu();
+  const m = document.createElement('div');
+  m.className = 'pmenu'; m.dataset.for = sel.id; m.setAttribute('role', 'listbox');
+  m.innerHTML = [...sel.options].map(o =>
+    `<button type="button" role="option" data-v="${esc(o.value)}" aria-selected="${o.value === sel.value}">${esc(o.textContent)}</button>`).join('');
+  document.body.appendChild(m);
+  menuEl = m;
+  // under the select, or above it when the window runs out, never off screen
+  const r = sel.getBoundingClientRect(), gap = 4;
+  const below = innerHeight - r.bottom - 12, above = r.top - 12;
+  const h = Math.min(m.scrollHeight, Math.max(below, above), innerHeight * 0.7);
+  // wide enough that a brand, a name and a price fit on one line; it grows
+  // leftwards, over the car, since the panel sits against the right edge
+  const w = Math.min(Math.max(r.width, 420), innerWidth - 24);
+  m.style.width = w + 'px';
+  m.style.left = Math.max(12, Math.min(r.left, r.right - w)) + 'px';
+  m.style.maxHeight = h + 'px';
+  m.style.top = (below >= h || below >= above ? r.bottom + gap : r.top - gap - h) + 'px';
+  m.querySelector('[aria-selected=true]')?.scrollIntoView({ block: 'nearest' });
+  m.addEventListener('pointerover', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const it = list.find(x => String(x.id) === b.dataset.v);
+    if (it) showCard(it, b, shotFor(key, it)); else hideCard();
+  });
+  m.addEventListener('pointerleave', () => hideCard());
+  m.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    sel.value = b.dataset.v;
+    closeMenu();
+    sel.dispatchEvent(new Event('change'));
+  });
+  addEventListener('pointerdown', menuOutside, true);
+  addEventListener('keydown', menuKey, true);
 }
 
 /* Each card shows the part fitted to THIS car -- a render of our own model,
@@ -1853,7 +1945,8 @@ const SHOT_LIST = {
   roofRack: () => ROOF_RACKS, awning: () => AWNINGS, sideStep: () => SIDE_STEPS,
   ladder: () => LADDERS, snorkel: () => SNORKELS, exhaust: () => EXHAUSTS,
   lightBar: () => LIGHT_BARS, roofLights: () => ROOF_LIGHTS, grilleLight: () => GRILLE_LIGHTS,
-  extinguisher: () => EXTINGUISHERS,
+  extinguisher: () => EXTINGUISHERS, face: () => FACES, fender: () => FENDERS, spoiler: () => SPOILERS,
+  cage: () => CAGES, stripe: () => STRIPES,
 };
 const shotFor = (key, item) =>
   !item || item.id === 'none' || item.id === 'stock' ? null
@@ -1910,7 +2003,8 @@ cardsOn('wheelGrid', 'w', () => WHEELS, (w) => `model/wheels/${w.style}.webp?v=$
 cardsOn('tyreLadder', 't', () => TYRES);
 cardsOn('treadList', 'tr', () => TYRE_MODELS);
 cardsOn('selKit', 'k', () => KITS);
-addEventListener('scroll', () => hideCard(true), true);
+addEventListener('scroll', (e) => { hideCard(true); if (menuEl && e.target !== menuEl) closeMenu(); }, true);
+addEventListener('resize', () => closeMenu());
 
 /* wiring that does not belong to one picker */
 const on = (id, f) => $(id).onchange = e => { f(e.target.value); hints(); update(); };
@@ -1920,7 +2014,10 @@ on('selRack', v => S.roofRack = v); on('selAwning', v => S.awning = v);
 on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
 on('selExhaust', v => S.exhaust = v); on('selLightBar', v => S.lightBar = v);
 on('selRoofLights', v => S.roofLights = v); on('selGrilleLight', v => S.grilleLight = v);
-on('selFender', v => S.fender = v); on('selCage', v => S.cage = v); on('selStripe', v => S.stripe = v);
+on('selFace', v => { S.face = v; if (v !== 'none') { S.frontBumper = 'stock'; S.grille = 'stock'; S.grilleLight = 'none'; S.kit = 'none'; buildUI(); } });
+on('selFender', v => S.fender = v); on('selSpoiler', v => S.spoiler = v); on('selCage', v => S.cage = v); on('selStripe', v => S.stripe = v);
+$('rackNudge').onclick = e => { const b = e.target.closest('[data-d]'); if (!b || b.disabled) return;
+  S.rackShift = Math.max(-RACK_MAX, Math.min(RACK_MAX, S.rackShift + (+b.dataset.d) * RACK_STEP)); update(); };
 $('selKit').onchange = e => {
   S.kit = e.target.value;
   const k = find(KITS, S.kit);
@@ -1977,6 +2074,8 @@ $('btnExport').onclick = () => {
     S.frontBumper !== 'stock' && '前保桿 ' + find(FRONT_BUMPERS, S.frontBumper).label,
     S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
     S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label,
+    S.face !== 'none' && '換臉套件 ' + find(FACES, S.face).label,
+    S.spoiler !== 'none' && '車頂尾翼 ' + find(SPOILERS, S.spoiler).label,
     S.fender !== 'none' && '寬體葉子板 ' + find(FENDERS, S.fender).label,
     S.cage !== 'none' && '外掛防滾籠 ' + find(CAGES, S.cage).label,
     S.stripe !== 'none' && '車身拉花 ' + find(STRIPES, S.stripe).label,

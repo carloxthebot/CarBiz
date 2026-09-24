@@ -78,14 +78,14 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
 <script type="module">
 import { COLORS, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
   ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS, HOODS, SPARE_COVERS,
-  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES } from './parts.js';
+  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FACES, FENDERS, SPOILERS } from './parts.js';
 import { priceLabel, FX_NOTE } from './fx.js';
 
 // key = the configurator's state key, so "套用" can deep-link into app.html
 const CATS = [
   ['車身顏色', 'color', COLORS.map(c => ({ ...c, id: c.code, label: `${c.name}　${c.code}`,
-    cur: c.tw ? 'TWD' : 'JPY', price: null, noPrice: true,
-    brand: c.tw === true ? '台灣在售' : c.tw === '雙色' ? '台灣僅雙色（黃黑／藍黑）' : '日規專屬，台灣未導入' })),
+    cur: c.tw || c.wrap ? 'TWD' : 'JPY', price: null, noPrice: true,
+    brand: c.tw === true ? '台灣在售' : c.tw === '雙色' ? '台灣僅雙色（黃黑／藍黑）' : c.wrap ? '改色膜，非原廠色' : '日規專屬，台灣未導入' })),
     '台灣官方從未公布車色代碼，此處代碼為日規對應款；色值取自台灣官網與型錄取樣（docs/jb74-colors-tw.json）'],
   ['懸吊舉升', 'lift', LIFTS, '依吋數分組；超過 50mm 需橫樑下降座，3 吋以上需 Caster 修正'],
   ['輪框', 'wheel', WHEELS, '5×139.7、中心孔 108'],
@@ -94,6 +94,9 @@ const CATS = [
   ['全車套件', 'kit', KITS.filter(k => k.id !== 'none'), 'DAMD 的整套外觀件：選一款就同時換掉水箱罩與前後保桿。台灣無總代理，授權經銷商為台中 Fujii74、新北 JP Racing、台南 JT Garage'],
   ['引擎蓋', 'hood', HOODS, ''],
   ['備胎蓋', 'spareCoverKit', SPARE_COVERS, ''],
+  ['換臉套件', 'face', FACES, '水箱罩、頭燈與前保桿整組換掉；選了就不再另選前保桿與水箱護罩'],
+  ['寬體葉子板', 'fender', FENDERS, '比 Sierra 原廠爆龜再往外擴；歐美品牌查到的都只適用舊款窄體 JB23／JB43'],
+  ['車頂尾翼', 'spoiler', SPOILERS, ''],
   ['前保桿', 'frontBumper', FRONT_BUMPERS, ''],
   ['後保桿', 'rearBumper', REAR_BUMPERS, ''],
   ['水箱護罩', 'grille', GRILLES, ''],

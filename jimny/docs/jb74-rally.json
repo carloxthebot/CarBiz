@@ -1,0 +1,143 @@
+{
+  "sourcedAt": "2026-09-24",
+  "archetype": "euro_rally（歐系拉力寬體，見 docs/jb74-archetypes.json）",
+  "method": "先讀 docs/jb74-archetypes.json 的 euro_rally 段落（已知：DAMD little Δ 是唯一收錄的示範品，原廠八色沒紅、STRIPES 只有腰線、沒有公路胎）與 docs/jb74-complete-kits.json／jb74-chrome-damd.json 裡跟 DAMD little Δ／little 5. 相關的單品價格（避免重複記帳，本檔對這兩者只引用 id、不重抄價格）。四個子題分別用 WebSearch／WebFetch：(1) 紅色——查 Suzuki 官方色卡（日本／英國／澳洲／印度 Maruti），確認 JB74 本身有沒有紅，再查 3M／Avery 改色膜色號與台灣包膜行情；(2) 四圓燈——沿用 little Δ，額外查是否有更專門的『四燈排一列』商品；(3) 縱向雙直線——大量搜尋日系與歐美改裝貼紙商，找『ボンネット→ルーフ→テールゲート』縱向雙線產品；(4) 車頂尾翼——查 ROWEN、AIMGAIN/MUDRON、DAMD 三家的官方售價與料號。",
+  "items": {
+    "C1_redPaint": {
+      "question": "Suzuki JB74 本身在任何市場是否有原廠紅，若無則找真實改色膜色號與台灣包膜報價",
+      "factoryRedCheck": {
+        "japan": { "hasRed": false, "note": "官方配件色卡與現行八色（Superior White／Bluish Black Pearl／Medium Grey／Kinetic Yellow／Chiffon Ivory Metallic／Brisk Blue Metallic／Jungle Green 等雙色搭配）確認沒有紅，與 jb74-archetypes.json 原本結論一致。", "sources": ["https://www.suzuki.co.jp/car/jimny_sierra/detail/pdf/detail.pdf"] },
+        "uk_3door": { "hasRed": false, "note": "英國 Suzuki 官網 3 門 Jimny 色卡（透過 CarsGuide／Carwow／carpaintcode 等二手引用比對）與日規幾乎相同的八色組合，沒有紅色選項；未能直接開到 suzuki.co.uk 官方頁（該路徑回 404），以三個獨立轉述來源交叉確認。", "confidence": "uncertain — 未讀到 Suzuki UK 官網原始頁面，是轉述來源交叉比對", "sources": ["https://www.carwow.co.uk/suzuki/jimny/colours", "https://www.carsguide.com.au/suzuki/jimny/colours", "https://carpaintcode.vernicispray.co.uk/1-en-421-suzuki-jimny.jsp"] },
+        "australia_3door_JB74": { "hasRed": false, "note": "Suzuki Australia 官網（suzuki.com.au）列出 3 門 Jimny／Jimny Lite 兩個配置的色卡，均無紅色：Jimny Lite 只有 Superior White／Jungle Green；Jimny（3門）是 Superior White、Chiffon Ivory Metallic+Bluish Black Pearl、Kinetic Yellow+Bluish Black Pearl、Brisk Blue Metallic+Bluish Black Pearl、Jungle Green、Medium Grey、Bluish Black Pearl，全部沒有紅。", "sources": ["https://www.suzuki.com.au/vehicles/4x4/jimny/"] },
+        "australia_5door_JC74_XL": { "hasRed": true, "colourName": "Sizzling Red Metallic + Bluish Black Pearl（雙色，車頂黑）", "note": "**關鍵發現**：Suzuki Australia 官網把 5 門版叫「Jimny XL」，車身代號是 JC74（不是 JB74），由 Maruti 印度廠代工，跟日本原廠直產的 3 門 JB74 是不同底盤代號。Jimny XL 的色卡裡有 Sizzling Red Metallic（＋黑車頂雙色），但這台不是 JB74。", "sources": ["https://www.suzuki.com.au/vehicles/4x4/jimny/", "https://www.tjm.com.au/your-4-x-4/suzuki/jimny/JC74%2001/24-On%20XL%205%20Door"] },
+        "india_JC74": { "hasRed": true, "colourName": "Sizzling Red（單色版與＋Bluish Black Roof 雙色版兩種）", "paintCode": "各引用來源寫法不一（E5R／WAA 皆有出現，未能交叉確認到 Maruti Suzuki 官方色卡 PDF 上的正式代碼，故不逕列為確定值）", "note": "印度 Maruti Suzuki 只賣 5 門版（同樣是 JC74 底盤，非 JB74），全車系 7 色中有 Sizzling Red（純色）與 Sizzling Red+Bluish Black Roof（雙色）兩種。跟澳洲一樣，這是 JC74 的顏色，不是題目要的 JB74。", "confidence": "uncertain（顏色存在已由多個經銷商比價網站交叉確認，但官方 PDF 色卡與正式塗裝代碼未直接讀到）", "sources": ["https://www.carwale.com/maruti-suzuki-cars/jimny/colours/sizzling-red-74283/", "https://www.autocarindia.com/cars/maruti-suzuki/jimny/colours/sizzling-red"] },
+        "verdict": "查了日本、英國、澳洲、印度四個市場：**JB74（3門 Jimny／Jimny Sierra）在任何一個市場都沒有原廠紅**。唯一存在的原廠紅『Sizzling Red』只出現在同平台但不同底盤代號的 5 門版（澳洲叫 Jimny XL、印度叫 Jimny，兩者車身代號都是 JC74，等同台灣配置器語境裡的『Nomade』），JB74 本身完全沒有紅色公版鈑件色號可抄。這印證了 archetypes.json 原本『原廠八色沒有紅』的結論，並進一步排除了『其他市場也許有』的可能性——有，但不是 JB74。"
+      },
+      "wrapFilm": {
+        "disclaimer": "以下是烤漆／改色貼膜方案，不是原廠塗裝代碼，配置器 UI 顯示這個顏色時必須註明『非原廠色，需改色貼膜或烤漆』，比照 archetypes.json 對 euro_rally 的既有寫法。",
+        "candidates": [
+          {
+            "brand": "3M",
+            "series": "Wrap Film Series 2080",
+            "colourName": "Gloss Hot Rod Red",
+            "code": "G13",
+            "finish": "亮面",
+            "note": "3M 原廠色卡兩款紅之一，飽和度高的經典賽車紅，跟 little Δ 官方示範車的正紅最接近。",
+            "sources": ["https://metrorestyling.com/products/3m-2080-gloss-hot-rod-red-vinyl-wrap-g13", "https://accentdistributing.com/products/3m-wrap-film-2080-gloss-hot-rod-red-g13"]
+          },
+          {
+            "brand": "3M",
+            "series": "Wrap Film Series 2080",
+            "colourName": "Gloss Dragon Fire Red",
+            "code": "G363",
+            "finish": "亮面（金屬／糖果感）",
+            "note": "比 G13 更深、帶金屬光澤的次選，偏暗紅，不如 G13 正紅。",
+            "sources": ["https://metrorestyling.com/products/3m-2080-gloss-dragon-fire-red-vinyl-wrap-g363", "https://accentdistributing.com/products/3m-wrap-film-2080-dragon-fire-red-g363"]
+          },
+          {
+            "brand": "Avery Dennison",
+            "series": "SW900 Supreme Wrapping Film",
+            "colourName": "Gloss Red Diamond",
+            "code": "SW900-426-D",
+            "finish": "亮面（Diamond 系列，帶細緻金屬閃粉）",
+            "note": "Avery 陣營對應 3M G13 的正紅選項，比 3M 版本多一點金屬感顆粒。",
+            "sources": ["https://metrorestyling.com/products/avery-gloss-red-diamond-vinyl-wrap-sw900-426-d", "https://graphics.averydennison.com/ap-en/home/graphics-products/vehicle-wrapping-films/swf900-supreme-wrapping-film/range.html"]
+          }
+        ],
+        "recommendedHex": {
+          "hex": "#C81B22",
+          "basis": "以 3M 2080-G13 Gloss Hot Rod Red 與 Avery SW900-426-D Gloss Red Diamond 兩款產品圖／色票的日光下平視色調估算，取兩者中間偏 3M 一側的正紅；這是『日光下漫反射色（albedo）』的估計值，不是任一廠商官方發布的 sRGB 數值——3M／Avery 官網色卡頁面本身不提供 sRGB 色碼，是從產品攝影與色票掃描比對出的估計，配置器若要精確匹配建議另外對著實體色卡拍照校色。",
+          "confidence": "uncertain — 估計值，非官方色碼"
+        },
+        "taiwanWrapPrice": {
+          "found": "Jimny 專屬包膜報價未找到（露天／蝦皮／各包膜行官網搜尋多輪皆未命中 Jimny 專屬 SKU 或心得文附價格），改用台灣包膜行公開的『SUV 車型級距』報價代替，Jimny 屬於這個級距最小的一種休旅車身型。",
+          "shop": "大大力良品鍍膜（darryking.com）",
+          "tierUsed": "休旅車（SUV）等級",
+          "priceNT": { "houseBrandFilm": 65999, "3mFilm": 115000 },
+          "note": "此報價是『休旅車』通用級距價，不是店家特別為 Jimny 開的報價，Jimny 車身比一般 SUV 小，實際報價可能更低；下單前務必請店家依 Jimny 實際車身面積重新估價。全車包膜（含拆裝隔熱紙、飾板等細節）通常還會依前擋、後視鏡等追加項目另計，此數字僅供估算落地成本的量級參考。",
+          "sources": ["https://darryking.com/%E5%A4%A7%E5%A4%A7%E5%8A%9B%E8%89%AF%E5%93%81%E9%8D%8D%E8%86%9C/car-wrapping-services/"]
+        }
+      }
+    },
+    "C2_fourRoundLamps": {
+      "question": "一款把 4 顆圓燈排成一列橫跨 JB74 前臉的真實商品",
+      "pick": {
+        "maker": "DAMD",
+        "product": "little Δ（デルタ）フロントグリル（圓四燈＋圓形小燈＋方形方向燈一體式總成，可單買）",
+        "priceJPY": 173800,
+        "taxNote": "税込（税抜 ¥158,000）",
+        "note": "已在 docs/jb74-chrome-damd.json 的 damd_littledelta_grille 條目詳列，這裡不重複價格明細，只引用作為 euro_rally 的四圓燈方案。頭燈直徑：多次搜尋官網、新聞稿與規格 PDF 皆未公布圓燈實際口徑（mm），DAMD 只描述『圓形 LED 燈泡』，因此此規格誠實標記未知，不要用其他車款頭燈口徑推算充數。",
+        "refId": "damd_littledelta_grille（見 jb74-chrome-damd.json）",
+        "lampDiameterMM": null,
+        "confidence": "confirmed（商品與價格），uncertain（口徑規格未公布）",
+        "sources": ["http://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta"]
+      },
+      "alternativeConsidered": {
+        "maker": "DAMD",
+        "product": "ARMATA（アルマータ）",
+        "why_rejected": "官網確認 ARMATA 只出給 Jimny Nomade（JC74，五門），頁面路徑是 jimny_nomade_armata，不是 JB74 車系；雖然它同樣借用 little Δ 的圓四燈語彙，但不能作為 JB74 商品收錄。",
+        "sources": ["https://www.damd.co.jp/products/suzuki/jimny_nomade_armata"]
+      }
+    },
+    "C3_longitudinalTwinStripes": {
+      "question": "從引擎蓋經車頂到尾門的縱向雙直線（賽道／拉力風格）貼紙，要是有人在賣的商品",
+      "verdict": "**找不到任何第一方製造商把『引擎蓋→車頂→尾門通到底的縱向雙直線』做成 Jimny 專用固定商品在賣**，花了完整搜尋額度、換了日文（ボンネット/ルーフ/テールゲート/ダブルライン/ラリーストライプ/センターライン各種組合）與英文（rally stripes bonnet roof tailgate）關鍵字，日系（DAMD、Beyond、STKGANGMADE、ジムニーパーク）與英美改裝貼紙商（Zen Graphics、Street Race Graphics、SupDec）查到的『Jimny 專用』商品全部是：(a) 腰線型側貼、(b) 引擎蓋上單獨一塊圖案／文字貼、(c) 車側 3 色賽道條，沒有一款是明確標示『貫穿引擎蓋到尾門』的縱向雙線。這與 docs/jb74-archetypes.json 和 jb74-stripes.json 原本的結論一致（26 款腰線貼紙裡沒有縱向款）。",
+      "closestRealProducts": [
+        {
+          "type": "通用（非 Jimny 專用）貼紙捲料",
+          "brand": "天玉堂（Amazon.co.jp 上架品牌）",
+          "product": "ボンネット・ルーフ・リヤゲート用 汎用 DIY ストライプステッカー",
+          "note": "商品說明明確寫可以裝在引擎蓋、車頂、尾門三個位置，但是單色單條、以『捲料剪裁』方式賣，不是固定寬度與間距的『雙線組』——要做成雙直線的視覺，需要買兩條、自己抓左右間距，沒有官方公布的間距規格。",
+          "sources": ["https://www.amazon.co.jp/dp/B0DJJYMP6S"]
+        },
+        {
+          "type": "通用（非 Jimny 專用）貼紙捲料，附明確尺寸",
+          "product": "汎用ボンネット・ルーフ・リアゲートデカール 黒 長さ3ｍ 幅15cm 淵あり",
+          "widthCM": 15,
+          "lengthM": 3,
+          "note": "同樣是單條捲料，這款至少公布了寬度（15cm）與長度（3m），可以裁成兩條自訂間距貼出雙線效果，但廠商沒有把它包裝成『雙線組』來賣、也沒有建議間距。",
+          "sources": ["https://www.amazon.co.jp/%E3%83%9C%E3%83%B3%E3%83%8D%E3%83%83%E3%83%88%EF%BC%86%E3%83%AB%E3%83%BC%E3%83%95%EF%BC%86%E3%83%AA%E3%82%A2%E3%82%B2%E3%83%BC%E3%83%88-%E3%82%B9%E3%83%86%E3%83%83%E3%82%AB%E3%83%BC-%E5%B9%85%EF%BC%91%EF%BC%95%EF%BD%83%EF%BD%8D%E6%B7%B5%E3%81%82%E3%82%8A%E3%82%BF%E3%82%A4%E3%83%97-%E3%83%9F%E3%83%8B%E3%82%AF%E3%83%BC%E3%83%91%E3%83%BC-%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E4%BB%95%E6%A7%98%E3%81%AB/dp/B07VYTJV1S"]
+        },
+        {
+          "type": "官方示範照片（非販售商品）",
+          "product": "DAMD little Δ／little 5. 官方主視覺照片上的白色雙中線",
+          "note": "docs/jb74-archetypes.json 的 euro_rally 段落記錄過『白色雙中線』來自 DAMD little Δ 官方示範車照片，這次重新確認 damd.co.jp 的商品頁面本身**沒有把這條雙中線列為可購買的貼紙 SKU**——那是拍攝展示車時额外貼的，不隨保桿／水箱罩套件出貨，官網訂購頁沒有這個選項。",
+          "sources": ["http://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta"]
+        }
+      ],
+      "recommendation": "誠實做法：配置器如果要有這個造型，目前只能對應到『裁自通用捲料、DIY 決定寬度與間距』這個現實，不能標一個具體的『XX 廠牌 Jimny 專用雙直線組』商品名——市場上真的沒有。可以用天玉堂／同類 15cm 捲料兩條做視覺參考，寬度抓 10–15cm、間距抓車頭中線兩側各 5–8cm（車廠示範照片的目測比例，非任何廠商公布的規格，需標 uncertain）。"
+    },
+    "C4_roofSpoiler": {
+      "question": "JB74 的車頂尾翼：廠牌、價格、料號",
+      "pick": {
+        "maker": "ROWEN JAPAN",
+        "product": "ルーフスポイラー エレクトロニクス TYPE3（Roof Spoiler Electronics Type 3，內建連動式 LED 高位煞車燈）",
+        "partNo": "1K002R30",
+        "priceJPY": 117700,
+        "taxNote": "税込，FRP 素地（未塗裝）；單色烤漆加 ¥46,200、雙色烤漆加 ¥66,000",
+        "fitment": "JB74W ジムニーシエラ（2018.7〜2024.3，即小改款前的 1〜4型；官網未列 2024.3 後的 5 型是否需要不同料號，需另外確認）；官網另註記『LED 是連動式，車檢過不了，要拆線才能驗車』——這是配置器 UI 標尾翼時該附的一句提醒",
+        "note": "取代已停產的舊料號 1K002R20（FRP+ABS，無 LED 版）。ROWEN 是有正式料號、含稅價格公開透明的第一方原廠，比 DAMD little Δ／little 5. 隨車身套件賣的尾翼（見下方 alternativesConsidered）更適合單獨列成『尾翼』這個配置器選項。",
+        "confidence": "confirmed",
+        "sources": ["https://www.rowen.co.jp/bodykit/details.php?id=115"]
+      },
+      "alternativesConsidered": [
+        {
+          "maker": "DAMD",
+          "product": "little Δ／little 5. 專用 FRP リアウイング（隨保桿套件賣，也可單買）",
+          "priceJPY": 63800,
+          "taxNote": "税込（税抜 ¥58,000）",
+          "note": "已在 jb74-chrome-damd.json 的 damd_littledelta_rear_wing／damd_little5_rear_wing 條目詳列。比 ROWEN 便宜約一半，但造型是隨 little Δ／little 5. 整組換臉設計的尾翼，跟其他前臉方案（例如維持原廠臉、只加尾翼）搭配是否協調未經確認；ROWEN 是通用於任何前臉的獨立商品，較適合配置器『尾翼』單選項。",
+          "sources": ["http://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta"]
+        },
+        {
+          "maker": "AIMGAIN / MUDRON",
+          "product": "MUDRON SPORT リアルーフスポイラー（單品，與 MUDRON GT 共用）",
+          "priceJPY": 60000,
+          "taxNote": "税抜（官網未列税込價，MUDRON／AIMGAIN 系列價格一貫用税抜標示，需自行加稅估算）",
+          "note": "三個候選裡最便宜，但沒有公開料號，且是 MUDRON GT／SPORT 系列專用造型（貼合該系列的保桿與水箱罩線條），單獨搭別家前臉的視覺協調度未經驗證。",
+          "sources": ["https://aimgain.net/products/aero/jimny_74mudron_sp/index.html"]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,242 @@
+{
+ "sourcedAt": "2026-09-24",
+ "subject": "歐系拉力造型三件的建模幾何：DAMD little Δ（水箱罩、前保桿、後尾翼、示範車中央條紋、後保桿）、OZ Racing Rally Racing 16×6J（DAMD 的 JB74 專用尺寸）、ROWEN エレクトロニクス ルーフスポイラー Type3（1K002R30）。",
+ "method": "全部是從原廠官網照片目測估算（照片只下載到暫存區看，沒有放進 repo），**不是原廠尺寸**。比例尺：(1) 正面近正視圖 main_image.jpg 以車牌 330×165mm 定比例（保桿面約 6.65 mm/px，水箱罩面往後約 120mm，取 6.9 mm/px）；(2) 側視 side.jpg 以 215/65R16 輪胎外徑約 686mm 與軸距 2,250mm 互校（約 3.43 mm/px）；(3) 後視 rear.jpg 以輪拱外緣全寬 1,645mm 與車牌寬互校（約 2.65 mm/px）；(4) ROWEN 後視以輪拱全寬與車牌互校（約 3.12 mm/px），側視以軸距（約 3.32 mm/px）。誤差：大件外形 ±8%，燈具／孔位等小件 ±12–15%，深度（z 方向）±25%（側面照片少）。**DAMD 示範車裝了 Rainbow Auto 2 吋降低彈簧（官網 DATA 欄），照片離地高度比原廠低約 50mm**；以下 y 值已加回 50mm，換算成原廠車高。座標：+Y 往上（地面 0），+Z 往前，X 為左右（0＝車中心線）。",
+ "photosViewed": [
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/main_image.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/01.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/02.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/03.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/04.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/05.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/06.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/07.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/side.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/rear.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/kime_2.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/023A2696.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/023A2699.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/023A2712.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/023A2721.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/DSC0449.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/delta_white.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/delta_grey.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/Rally-Racing4x4_1660_JB74_RW.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/Rally-Racing4x4_1660_JB74_MB.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/images/Rally-Racing4x4_1660_JB74_MG.jpg",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/manual/RW.pdf",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/manual/RW_parts_list.pdf",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/manual/jb74_fb_partslist_0219.pdf",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/manual/5_delta_rb_partslist_20260406.pdf",
+  "https://www.damd.co.jp/public/html/products/suzuki/jimny_sierra_littledelta/manual/jb74_rb5_delta_20260406.pdf",
+  "https://www.rowen.co.jp/imgdata/202212020226591.jpg",
+  "https://www.rowen.co.jp/imgdata/202106110652091.jpg",
+  "https://www.rowen.co.jp/imgdata/202106110651211.jpg",
+  "https://www.rowen.co.jp/imgdata/202106110651301.jpg",
+  "https://www.rowen.co.jp/imgdata/202106110654561.jpg",
+  "https://www.rowen.co.jp/imgdata/202106110655051.jpg"
+ ],
+ "officialFacts": {
+  "kitContents": "官網【キット内容】：フロントグリル／DAMDトライアングルエンブレム、丸目4灯ヘッドランプ／LEDバルブ／丸目ポジションランプ、角形ウィンカー、フロントバンパー、コイト社製角形フォグランプ、オーバーフェンダー、サイドシルガーニッシュ、リアバンパー、DB社製角型テールランプ、リアウィング。リアウィングのみ FRP，其餘 ABS。",
+  "stripesNotIncluded": "官網原文「センターマークデカールはデモカーイメージとなります。キットには付属しておりません。」——示範車的中央條紋**不在套件內**，只是示範車貼的。",
+  "wheel": "OZ Racing Rally Racing 16inch×6J inset −5，PCD 5-139.7，每顆 8.584kg，JB74 專用尺寸（JB64 尺寸要向 OZ Japan 買）；色：レーシングホワイト／ダークグラファイト／マットブラック／マットブロンズ。單顆 ¥49,000（税込 ¥53,900），5 顆 ¥245,000（税込 ¥269,500）。",
+  "wing": "FRP，金屬製ステー，角度「フリーカント」可調（安裝說明書：鬆開 4 顆 M6 螺栓即可改角度）。未塗裝 ¥58,000（税込 ¥63,800）。",
+  "rowen": "1K002R30 エレクトロニクス ルーフスポイラー Type3，FRP 素地 ¥117,700（税込），單色塗裝費 ¥46,200、雙色 ¥66,000；內建 LED 高位煞車燈可流水（シーケンシャル）點亮；需在車上鑽孔；**車検非対応**（驗車時要用附的遙控關電並把燈面貼起來）。前代 1K002R20（FRP+ABS，LED 選配）已於 2024 年 1 月底停產。"
+ },
+ "damd_little_delta": {
+  "grille": {
+   "outline": "水箱罩是一整片橫長方形：外圈是車身色的殼（上緣接引擎蓋、兩端接葉子板），中間嵌一片**黑色**（消光黑）面板，四顆圓燈與中央鍍鉻框都裝在這片黑面板上。黑面板四角小圓角（估 R15）。",
+   "sizeMm": {
+    "blackPanelWidth": "約 1,340",
+    "blackPanelHeight": "約 180",
+    "bodyColourShellBandAbove": "約 30–40（黑面板上方的車身色帶）",
+    "bodyColourBandBelow": "約 50–60（黑面板下方，含方向燈的黑條）"
+   },
+   "positionMm": {
+    "centreY": "約 850（黑面板中心，與原廠頭燈中心同高）",
+    "faceZ": "黑面板約 z 1,640（沿用原廠水箱罩面）；鍍鉻框凸出約 15–20，前緣約 z 1,660"
+   },
+   "headlampsRoundFour": {
+    "summary": "四顆圓燈排成一列，**內側一對明顯比較小**（直徑約外側的 0.7–0.8 倍）。四顆燈中心同高。每顆燈外圍有一圈黑色燈座環（約 12–15mm 寬），燈座環之間以黑面板上的凹凸造型分隔。",
+    "outer": {
+     "diameterMm": "約 140–150（推定 5¾ 吋 146mm 級圓燈）",
+     "centreX": "±約 575",
+     "centreY": "約 855"
+    },
+    "inner": {
+     "diameterMm": "約 100–110",
+     "centreX": "±約 430",
+     "centreY": "約 855"
+    },
+    "whichIsWhich": "官網寫「丸目4灯ヘッドランプ」與「丸目ポジションランプ」，但沒有寫哪一對是哪一種；照片中外側大燈是透明格紋鏡片、內側小燈內部是小型反射罩——推定外側＝頭燈、內側＝位置燈兼遠光，**未證實**。",
+    "note": "原廠 JB74 圓燈約 Ø180、中心 x ±550；little Δ 外側燈比原廠小一圈、往外移約 25mm。"
+   },
+   "chromeFrame": {
+    "shape": "「スパルタンなメッキパーツ」就是中央一個鍍鉻大框（Lancia Delta Integrale 式盾形框），**不是橫桿**。外形是橫長方形，中間一根直立中柱把框分成左右兩個開口；中柱上端往兩側張開成 V 字（Y 字形），所以兩個開口的內上角是順著 V 的弧形斜切，其餘三個角是小圓角。",
+    "sizeMm": {
+     "outerWidth": "約 730",
+     "outerHeight": "約 160",
+     "topBar": "約 30 高",
+     "sideAndBottomBars": "約 20",
+     "centrePostWidthAtBottom": "約 25",
+     "vFlareWidthAtTop": "約 80"
+    },
+    "positionMm": {
+     "centreX": 0,
+     "centreY": "約 840（比燈中心低約 15）",
+     "z": "約 1,660（凸出黑面板約 15–20）"
+    },
+    "openings": "兩個開口各約 330 寬 × 105 高，內沿有一圈約 8mm 寬的**紅色內框**（紅、白、灰各色樣車都有，推定為標準配色，不是示範車專屬）。",
+    "mesh": "開口內是黑色菱形擴張網（ラス網），菱形約 10mm（長對角）× 5–6mm（短對角），網面退在鍍鉻框後方約 20–30mm；網後可看到散熱器。"
+   },
+   "triangleBadge": {
+    "shape": "倒三角（尖端朝下），上緣兩角圓，鍍鉻外框、深綠底、中間銀色標誌——位置與 Lancia 盾徽相同。",
+    "sizeMm": "約 55 寬 × 55 高",
+    "positionMm": "x 0，中心約 y 885：壓在鍍鉻框上橫桿與中柱 V 字交會處，上緣約與上橫桿下緣齊，z 約 1,670。",
+    "caveat": "官網文字說徽章「センターにセット」，色樣渲染圖（delta_white／delta_grey 等）上都有；但**紅色示範車實拍照（023A2696、kime_2、06）上沒有這個徽章**，中柱是素的。"
+   },
+   "squareIndicators": {
+    "what": "官網的「角形ウィンカー」：長方形透明鏡片 LED 燈條（白色外觀、內部多顆 LED），每側一支。",
+    "sizeMm": "約 145 寬 × 25 高",
+    "positionMm": "水平範圍 x ±430 至 ±575（從內側小燈中心下方延伸到外側大燈中心下方），中心 y 約 740，嵌在水箱罩下緣一條黑色橫條裡；黑條從 x ±430 往外延伸到水箱罩端部（約 ±670），高約 30mm。中央段（兩條黑條之間）是車身色。"
+   },
+   "sideMarker": "原廠葉子板上的琥珀色側方向燈保留不動。"
+  },
+  "frontBumper": {
+   "overall": "ABS（little 5. 與 little Δ 共用），整支車身色。寬：正面面寬約 1,480，兩端往後包進輪拱前緣，連包角約 1,580；高約 370（y 約 340–710，原廠車高換算）；正面約 z 1,740（比原廠 1,760 略退，±30）。",
+   "profileTopToBottom": [
+    {
+     "band": "上橫樑",
+     "yMm": "約 710–650",
+     "depth": "最前面，z 約 1,740；上表面平、前上緣圓角約 R20，兩端直角轉折往後包",
+     "detail": "車身色實心"
+    },
+    {
+     "band": "上格柵帶",
+     "yMm": "約 650–595",
+     "depth": "往內退約 25",
+     "detail": "一排 5 個橫長方形孔，每孔約 118 寬 × 40 高，孔間隔條約 15，整排 x ±360；孔內黑色（可看到後方散熱器）"
+    },
+    {
+     "band": "中間橫肋",
+     "yMm": "約 595–575",
+     "depth": "回到 z 約 1,740",
+     "detail": "貫穿全寬的車身色橫條，是保桿第二道水平稜線"
+    },
+    {
+     "band": "下凹帶（車牌／霧燈）",
+     "yMm": "約 575–400",
+     "depth": "往內退約 25–30",
+     "detail": "正中車牌（330×165，中心 y 約 450）；車牌兩側各一個黑色網狀進氣口，x ±165 至 ±345，高約 75；再往外是霧燈"
+    },
+    {
+     "band": "下唇",
+     "yMm": "約 400–340",
+     "depth": "下緣略往前凸成一道小唇（約 10–15），底面往後收",
+     "detail": "車身色，沒有另外的金屬護板或灰色下擾流"
+    }
+   ],
+   "fogLamps": {
+    "what": "コイト社製角形フォグランプ（官網明寫），黃色鏡片、鍍鉻外框（官網提醒電鍍部分會生鏽）",
+    "sizeMm": "約 155 寬 × 90–95 高（±12%）",
+    "positionMm": "中心 x ±460，y 約 460，面約 z 1,735（嵌在下凹帶，外框略凸出）"
+   },
+   "cornerSlots": "保桿兩端轉角包邊處各有一道直立黑色細縫（約 15 寬 × 230 高），x 約 ±690，貼近輪拱前緣。",
+   "colourLogic": "官網原文「ボディ色やグレーなどのカラーリングチョイス」：可塗車身色或灰色等。照片上所有樣車（紅、白、灰、各色樣）保桿都是**單一車身色**，沒有雙色塗裝；黑色只出現在孔、網、細縫。"
+  },
+  "rearWing": {
+   "material": "FRP 單件，金屬（鋼板黑色塗裝）支架，角度可調（フリーカント）。",
+   "spanMm": "約 1,230（±8%），兩端比車頂兩側各內縮約 30",
+   "chordMm": "約 250（±15%）",
+   "thicknessMm": "翼片約 25–30",
+   "angle": "前緣低、後緣高，攻角約 30°（照片狀態，±8°；可調）",
+   "positionMm": {
+    "leadingEdge": "y 約 1,640（車頂上方約 20），z 約 −1,325",
+    "trailingEdgeTop": "y 約 1,775（車頂上方約 155），z 約 −1,540（與車頂後緣齊，不超出車尾）"
+   },
+   "endPlates": "兩端翼片往下彎成小型端板：約 110 長（前後）× 120 高 × 15 厚，下緣約 y 1,650，前緣斜切；端板內側的翼面上各有一個凹陷的口袋造型（約 150 寬），從後方看像兩個凹槽耳朵。",
+   "stays": "每側一組黑色鋼板支架，位置 x 約 ±565：(1) 底板（ウイングマウントブラケット）平貼在車頂側緣、沿雨槽前後長約 180–200，下有橡膠墊，板上鏤空一個 DAMD「D」字；(2) 直立支架（ウイングブラケット）一端鎖在翼片底面、一端以長孔鎖在底板上（改角度就是沿長孔轉）；(3) 後端用ウイングマウントリアブラケット夾住車頂雨槽末端（說明書：距雨槽端約 12mm），側面用サイドブラケット固定。不需要在車頂鑽孔（說明書只貼透明保護膠帶）。",
+   "shape": "整體簡潔的平板翼，無中央支柱，翼片中央不加厚；後緣上表面有一道極小的上翹。"
+  },
+  "stripes": {
+   "notInKit": true,
+   "pattern": "**不是兩條白線，是一條三色帶**：米白＋墨綠＋米白三條緊貼、中間沒有間隙（義大利風）。寬度：米白約 25、墨綠約 35、米白約 25，總寬約 85（±15%）。墨綠是很暗的橄欖綠，接近黑。",
+   "position": "沿車中心線 x 0（總寬 x −43 至 +43）。",
+   "run": "從水箱罩上方的車身色帶開始 → 整個引擎蓋 → （擋風玻璃中斷）→ 車頂全長 → 尾翼翼面（前後兩面都貼到）。**尾門上沒有**條紋，前保桿、水箱罩黑面板上也沒有。"
+  },
+  "rearBumper": {
+   "overall": "ABS，車身色主體＋兩側下緣灰色（深灰樹脂色）下擾流。上緣約 y 690，車身色下緣約 y 470（中段），灰色下擾流 y 約 470–400，x ±305 至 ±745。",
+   "blocks": "兩側各一塊凸出的外塊（x ±320 至 ±810），外塊正面有 5–6 道水平細溝紋；中段（x ±320 以內）退後，掛車牌。",
+   "tailLamps": "DB 社製角型テールランプ，每側一顆橫長方形，約 225 寬 × 72 高，中心 x ±580、y 約 535；鏡片由外到內三格：琥珀（方向燈）→ 紅（尾燈／煞車，內有圓形反射罩）→ 透明（倒車燈），鍍鉻細邊框，嵌在溝紋區正中。"
+  }
+ },
+ "oz_rally_racing_16x6": {
+  "officialSpec": "16×6J inset −5，PCD 5-139.7，8.584kg，DAMD 在 little Δ 頁販售的 JB74 專用尺寸。",
+  "layout": "一體式鑄旋壓（フローフォーミング）單片輪框。正面是一片平的圓盤，外圈一整圈 **20 個窗孔**（每 18° 一個，照片取樣計數確認），窗孔之間的 20 根短輻條其實是圓盤本身，不是獨立輻條。",
+  "dimensionsMm": {
+   "faceOuterDiameter": "約 450（含外緣唇）",
+   "outerLip": "外緣一圈平的凸起唇環，半徑約 195–225（寬約 30），比圓盤面高約 5–8",
+   "windows": "半徑約 150–190（徑向長約 40）；窗孔寬約 28（外側略寬）、窗間輻條約 25；形狀是圓角梯形／近方形（圓角約 R5），孔壁很深、朝輪心方向傾斜",
+   "flatFace": "窗孔內側到安裝面之間是平的環面（半徑約 110–150），O·Z RACING 字樣貼在這圈",
+   "hubPad": "中央往內退一階的安裝面，直徑約 220，退深約 30–50（估）；5 個螺帽孔 PCD 139.7",
+   "centreBore": "約 Ø110（照片中直接看到車軸輪轂，推定配 JB74 輪轂 108mm）"
+  },
+  "centreCap": "官網所有照片（商品圖三色、實車、備胎）**都沒有中心蓋**，中央是開放的輪轂孔。",
+  "decals": "「O·Z RACING」兩組，對向排列在平環面上沿圓弧書寫（約 1–5 點鐘、7–11 點鐘），字高約 25–30；「O·Z」大、「RACING」小。",
+  "colours": [
+   {
+    "name": "レーシングホワイト",
+    "rim": "亮白",
+    "decal": "紅"
+   },
+   {
+    "name": "ダークグラファイト",
+    "rim": "深灰（霧面）",
+    "decal": "銀灰"
+   },
+   {
+    "name": "マットブラック",
+    "rim": "霧黑",
+    "decal": "白"
+   },
+   {
+    "name": "マットブロンズ",
+    "rim": "霧面古銅",
+    "decal": "官網沒有照片，未知",
+    "uncertain": true
+   }
+  ],
+  "demoFitment": "DAMD 示範車用白色款＋BRIDGESTONE ALENZA 001 215/65R16。"
+ },
+ "rowen_roof_spoiler_type3": {
+  "partNo": "1K002R30",
+  "shape": "車頂後緣的短鴨尾（ducktail）型擾流，不是架高的尾翼：整片蓋住車頂後端，前緣從車頂面平順長出，往後上揚到尖端，再以一個朝後下方約 45° 的斜面收到尾門上緣。兩端是車身色的包角，順著車頂後角往下包。",
+  "sizeMm": {
+   "span": "整體約 1,250（等於車頂寬，兩端包角）；中段黑色上唇與燈面約 920–935 寬",
+   "lengthZ": "約 200（前緣到尖端）",
+   "heightAboveRoof": "尖端約高出車頂 40–45",
+   "rearFaceHeight": "尖端到下緣約 95（斜面）"
+  },
+  "positionMm": {
+   "frontEdge": "z 約 −1,375，y 約 1,620（與車頂面齊）",
+   "tip": "z 約 −1,580（超出車頂後緣約 40），y 約 1,665",
+   "rearFaceBottom": "z 約 −1,485，y 約 1,565（壓在尾門上緣）"
+  },
+  "led": "朝後的斜面中段是一片黑色煙燻鏡片（約 905 寬 × 40 高），鏡片下緣內有一條細紅色 LED 燈條（約 840 長 × 4–5 高），兩端微微往下彎；這就是內建高位煞車燈，可流水點亮。原廠尾門上的高位煞車燈仍然保留在下方。",
+  "details": "上表面有 3–4 個小型導流鰭（小隆起），平均分布在中段。",
+  "finish": "FRP 素地；照片常見配色：車身色主體＋黑色上唇與燈面（等於「塗分け」雙色）。灰色車照片（2022）是同樣配置。",
+  "caveat": "ROWEN 頁面的大部分照片是 2021 年拍的，當時賣的是前代 1K002R20（2024 年 1 月停產）；1K002R30 專屬的商品圖只有 202212020226591.jpg 一張，外形看起來相同，但無法證實兩代完全同模。"
+ },
+ "modellingOrder": [
+  "1) 水箱罩車身色殼＋黑面板（1,340×180，中心 y 850，z 1,640）",
+  "2) 四個圓孔＋燈：外側 Ø145 @ x ±575、內側 Ø105 @ x ±430，全部 y 855，各加 12mm 黑色燈座環",
+  "3) 鍍鉻 Y 形框（730×160，中柱＋上端 V），兩開口加紅內框與黑菱形網",
+  "4) 三角徽章（55mm，x 0 y 885）、兩條方向燈 LED 條（145×25 @ x ±500 y 740）",
+  "5) 前保桿：上橫樑 → 5 孔帶 → 橫肋 → 下凹帶（車牌、兩個網口、霧燈 155×92 @ x ±460 y 460）→ 下唇；轉角細縫",
+  "6) 後尾翼：翼片 1,230×250×28，攻角 30°，後緣 z −1,540 y 1,775；兩端小端板；x ±565 的黑色支架與車頂底板",
+  "7) 條紋：米白 25＋墨綠 35＋米白 25，沿 x 0 貼引擎蓋、車頂、尾翼",
+  "8) 後保桿：外塊溝紋＋DB 角型尾燈 225×72 @ x ±580 y 535；灰色下擾流",
+  "9) OZ 輪框：20 窗孔圓盤 → 外唇 → 退一階安裝面 → 開放輪轂孔；兩組 O·Z RACING 字樣",
+  "10) ROWEN 鴨尾（與 DAMD 尾翼二選一）：車頂後緣 200 長、高出 45，後斜面黑燈片＋紅 LED 細條"
+ ]
+}

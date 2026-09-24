@@ -161,7 +161,7 @@ const band = (v, a, b, e) => smooth(Math.max(a - v, v - b), e);           // 1 i
 // X-AT). A constant pitch is the clearest tell that a tread is CG, so the
 // lateral grooves are walked through this ratio instead. M/T patterns
 // deliberately vary least, hence the flatter sequence.
-const PITCH_MIX = { at: [0.82, 1.0, 1.18], rt: [0.86, 1.0, 1.14], mt: [0.94, 1.0, 1.06] };
+const PITCH_MIX = { ht: [0.88, 1.0, 1.12], at: [0.82, 1.0, 1.18], rt: [0.86, 1.0, 1.14], mt: [0.94, 1.0, 1.06] };
 const pitchAt = (u, P, mix) => {
   // map u onto a cycle of len(mix) blocks whose lengths follow `mix`
   const span = P * mix.reduce((a, b) => a + b, 0);
@@ -193,6 +193,30 @@ const PATTERNS = {
       sipe(u, v) {
         const av = Math.abs(v), sg = v < 0 ? -1 : 1;
         return Math.min(lateral(u, av, P / 3, sg > 0 ? 7 : 15, 1.2, sg * 0.3, av, 0.5), band(av, 0, half - 2, e));
+      },
+    };
+  },
+  // highway (Dueler H/T 684 II, Open Country H/T II): four straight
+  // circumferential grooves, five continuous ribs, and only short notches and
+  // shoulder slots across them -- no blocks, which is what makes it quiet.
+  ht(tw, circ, shArc) {
+    const n = Math.round(circ / 26), P = circ / n, e = 1.0, half = tw / 2;
+    const g1 = tw * 0.13, g2 = tw * 0.33;
+    return {
+      P, depth: 8.5, sideScale: 0.25,
+      g(u, v) {
+        const av = Math.abs(v), sg = v < 0 ? -1 : 1;
+        let g = Math.max(circG(u, av, g1, 9, 0, P, e), circG(u, av, g2, 10, 0, P, e));
+        // notches reaching in from the groove edge, half-way across the rib
+        g = Math.max(g, Math.min(lateral(u, av, P, sg > 0 ? 0 : P / 2, 4, sg * 0.4, g2, e), band(av, g2 - tw * 0.09, g2, e)));
+        // shoulder slots that stop short of the outer groove
+        g = Math.max(g, Math.min(lateral(u, av, P, sg > 0 ? P * 0.3 : P * 0.8, 5, sg * 0.12, half, e),
+          band(av, g2 + tw * 0.05, 1e9, e)));
+        return g;
+      },
+      sipe(u, v) {
+        const av = Math.abs(v);
+        return Math.min(lateral(u, av, P / 2, 3, 0.9, 0.2, av, 0.5), band(av, 0, g1 - 5, e));
       },
     };
   },

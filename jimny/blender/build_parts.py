@@ -18,7 +18,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import lib  # noqa: E402
-from lib import P, box, tube, sweep, group, material, rounded_rect, circle, fillet, annulus, sphere, text, cut, lathe, prism  # noqa: E402
+from lib import P, box, tube, sweep, group, material, rounded_rect, circle, fillet, annulus, sphere, text, cut, lathe, prism, slab  # noqa: E402
 from mathutils import Matrix  # noqa: E402
 import bmesh  # noqa: E402
 import bpy  # noqa: E402
@@ -666,7 +666,7 @@ def rim(style):
     prof = [(R, -W / 2), (R + 14, -W / 2), (R + 14, -W / 2 + 8), (R + 2, -W / 2 + 12), (R + 2, W / 2 - 14),
             (R + 16, W / 2 - 8), (R + 16, W / 2), (R + 4, W / 2), (R - 4, W / 2 - 6), (R - 4, -W / 2 + 6), (R - 8, -W / 2 + 2)]
     lathe('barrel', prof, RIM_DARK, root)
-    dish = W / 2 - (24 if style in ('steel', 'daytona', 'moon', 'slot5', 'renkon', 'arc4') else 38)   # face plane, inset from the outer lip
+    dish = W / 2 - (24 if style in ('steel', 'daytona', 'moon', 'slot5', 'renkon', 'arc4', 'oz20') else 38)   # face plane, inset from the outer lip
     face_r = R - 6
     # the face: a disc with the windows cut out, spokes are what remains
     face = lathe('face', [(0, dish - 6), (0, dish + 6), (face_r, dish + 10), (face_r, dish - 12)], RIM_FACE, root, n=96)
@@ -709,6 +709,16 @@ def rim(style):
                     bevel=22, rot=Matrix.Rotation(-a, 3, 'X'))
             c.modifiers['bevel'].segments = 4
             cutters.append(c)
+    elif style == 'oz20':
+        # OZ Racing Rally Racing (DAMD's 16x6J -5): twenty small rounded
+        # trapezoid windows round the outer face, one every 18 degrees, about
+        # 28 mm wide with 25 mm of disc between them; the rest is flat disc
+        for k in range(20):
+            a = 2 * math.pi * k / 20
+            c = box(f'win{k}', (dish, 0.84 * R * math.sin(a), 0.84 * R * math.cos(a)), (60, 30, 44), RIM_FACE, None,
+                    bevel=9, rot=Matrix.Rotation(-a, 3, 'X'))
+            c.modifiers['bevel'].segments = 3
+            cutters.append(c)
     elif style == 'turbine':
         # DEAN California: 24 narrow radial stadium slots, half solid half void
         for k in range(24):
@@ -724,7 +734,7 @@ def rim(style):
             c.modifiers['bevel'].segments = 5
             cutters.append(c)
     else:
-        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'eight': (8, 0.22), 'ten': (10, 0.17),
+        n, spoke = {'stock': (5, 0.36), 'six': (6, 0.24), 'seven': (7, 0.30), 'eight': (8, 0.22), 'ten': (10, 0.17),
                     'watanabe': (8, 0.26), 'eightpin': (8, 0.26), 'beadlock': (8, 0.26)}[style]
         for k in range(n):
             a0 = 2 * math.pi * k / n
@@ -1285,8 +1295,7 @@ def widebody(pid, W, shape='box', mat=None, lip=None):
     mat = mat or PAINT
     if shape == 'blister':
         # (r from the axle, x outward of the stock arch surface)
-        prof = [(392, -36), (392, W - 6), (402, W), (440, W + 2), (500, W * 0.78), (560, W * 0.42), (610, W * 0.12),
-                (640, -4), (630, -30)]
+        prof = [(392, -36), (392, W - 6), (402, W), (440, W + 2), (488, W * 0.72), (526, W * 0.32), (552, -2), (544, -30)]
     else:
         prof = [(392, -36), (392, W - 2), (404, W + 2), (505, W + 3), (522, W - 4), (548, 6), (552, -4), (545, -30)]
     for s in (-1, 1):
@@ -1321,6 +1330,276 @@ def widebody(pid, W, shape='box', mat=None, lip=None):
                         bm.faces.new((r0[j], r0[(j + 1) % 4], r1[(j + 1) % 4], r1[j]))
                 bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
                 lib.new_object(f'lip{kind}{s}', bm, lip, root, smooth=True)
+    return root
+
+
+# =================================================================== FACE SWAP
+# The stock face, sampled off the model (blender/car.json, front raycast):
+# the round headlamps centre at about x +-550, y 855; the grille panel and
+# lamp surrounds sit at z 1615-1666 between y 750 and 960; the bonnet's
+# leading edge is at y 1000, z 1600-1635; the stock bumper's face is at
+# z 1740-1770 between y 400 and 650. A face kit hides all three (bumper,
+# grille, headlamps -- see rig.js stockHeadlamps) and replaces them.
+BRON_SILVER = material('BronSilver', 0xb4b8bb, rough=0.32, metal=0.65)
+# clear outer lens: the chrome bowl and projectors have to read through it
+LAMP_GLASS = material('LampGlass', 0xd8e0e6, rough=0.04, metal=0.0, alpha=0.25)
+
+
+def _rrect(w, h, r, n=6):
+    """Rounded rectangle as (x, y) points, centred on 0."""
+    pts = []
+    for cx, cy, a0 in ((w / 2 - r, h / 2 - r, 0), (-w / 2 + r, h / 2 - r, 90), (-w / 2 + r, -h / 2 + r, 180), (w / 2 - r, -h / 2 + r, 270)):
+        for i in range(n + 1):
+            a = math.radians(a0 + 90 * i / n)
+            pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+    return pts
+
+
+def face_bron55():
+    """GARAGE ILL BRON55 (JB74W 1-4, LED-headlamp cars), the two-tone painted
+    finish shown on the maker's demonstration car: grille frame and bumper
+    beam in the body colour, centre module and lower edge silver.
+
+    GARAGE ILL publish no drawings, so every size here is read off their own
+    photographs against a 330 mm Japanese number plate and the 1645 mm arch
+    width (docs/jb74-face-swap.json, +-10 %): grille 1330 x 220 with R40
+    corners, lamps about 175 across at 1090 centres, set INTO the grille; a
+    190 x 18 light bar through each lamp's centre; BRON55 lettering about
+    600 wide on a black band at lamp-centre height; three rows of staggered
+    48 x 20 capsule holes above the band and three below. Bumper about 1600
+    wide and 375 tall starting 50 below the grille: a 65 mm body-colour beam
+    with square ends, a 940 mm silver trapezoid module with two tow-hook
+    recesses and a honeycomb intake, a silver lower edge with one crease and
+    four notches, and a 300 x 85 black pocket at each outer end."""
+    root = group('face_bron55')
+    yc, zf = 860, 1672                      # grille centre height, grille face
+    W, H, LX, LR = 1330, 220, 545, 88       # grille size, lamp centre x, lamp radius
+
+    # grille frame: a ring round the honeycomb, with two round lamp openings
+    frame = slab('frame', [(x, y + yc) for (x, y) in _rrect(W, H, 40)], zf - 62, zf, PAINT, root, smooth=False)
+    cutters = [box('frameHole', (0, yc, zf - 20), (2 * (LX - LR) - 20, H - 44, 120), PAINT, None, bevel=0)]
+    for s in (-1, 1):
+        cutters.append(lib.cylinder(f'lampHole{s}', (s * LX, yc, zf), (0, 0, 1), 2 * LR + 8, 140, PAINT, None, n=40))
+    cut(frame, cutters)
+    # side returns carrying the amber corner markers, back to the fender
+    for s in (-1, 1):
+        box(f'return{s}', (s * (W / 2 - 14), yc, zf - 90), (28, H - 40, 120), PAINT, root, bevel=6)
+        box(f'marker{s}', (s * (W / 2 + 1), yc, zf - 70), (4, 50, 12), AMBER, root, bevel=1)
+    box('backing', (0, yc, zf - 70), (W - 60, H - 30, 10), RUBBER, root, bevel=0)
+
+    # honeycomb plate: 3 staggered rows above the letter band, 3 below
+    pw = 2 * (LX - LR) - 40
+    plate = box('mesh', (0, yc, zf - 18), (pw, H - 44, 10), TEXBLACK, root, bevel=0)
+    holes = []
+    for row, y in enumerate((yc + 37, yc + 63, yc + 89, yc - 37, yc - 63, yc - 89)):
+        off = 30 if row % 2 else 0
+        for k in range(-7, 8):
+            x = k * 60 + off
+            if abs(x) + 30 > pw / 2 - 8:
+                continue
+            c = box(f'h{row}{k}', (x, y, zf - 18), (48, 20, 40), TEXBLACK, None, bevel=9.5)
+            c.modifiers['bevel'].segments = 3
+            holes.append(c)
+    cut(plate, holes)
+
+    # letter band at lamp-centre height, with three slits either side of the name
+    box('band', (0, yc, zf - 8), (pw + 20, 40, 12), TEXBLACK, root, bevel=2)
+    for s in (-1, 1):
+        for k in range(3):
+            box(f'slit{s}{k}', (s * (330 + k * 14), yc, zf - 1), (5, 28, 2), RUBBER, root, bevel=0)
+    t = text('name', 'BRON55', (0, yc - 2, zf - 2), 44, 5, UNT_TEXT, root)
+    t.scale = (2.35, 1.0, 1.0)             # super-extended face: ~600 mm for six characters
+
+    # the lamps: chrome base, lens with a white halo ring, the bar through the centre
+    for s in (-1, 1):
+        x = s * LX
+        lib.cylinder(f'bowl{s}', (x, yc, zf - 40), (0, 0, 1), 2 * LR, 50, CHROME_TRIM, root, n=40)
+        annulus(f'halo{s}', (x, yc, zf - 12), LR - 16, LR - 6, 6, LENS, root)
+        lib.cylinder(f'proj{s}a', (x, yc + 30, zf - 12), (0, 0, 1), 52, 8, CHROME, root, n=24)
+        lib.cylinder(f'proj{s}b', (x, yc - 30, zf - 12), (0, 0, 1), 52, 8, CHROME, root, n=24)
+        lib.cylinder(f'lens{s}', (x, yc, zf - 6), (0, 0, 1), 2 * LR - 4, 4, LAMP_GLASS, root, n=40)
+        box(f'drl{s}', (x - s * 38, yc, zf + 2), (190, 18, 8), LENS, root, bevel=3)
+
+    # ---- bumper
+    top, bot = yc - H / 2 - 50, yc - H / 2 - 50 - 375       # 700 .. 325
+    zb = 1790                                                 # beam face
+    box('beam', (0, top - 32, zb - 70), (1600, 65, 140), PAINT, root, bevel=5)
+    for s in (-1, 1):                                         # square ends wrapping back to the arch
+        box(f'beamEnd{s}', (s * 776, top - 32, zb - 190), (48, 65, 250), PAINT, root, bevel=5)
+    box('body', (0, (top - 65 + bot) / 2 + 20, zb - 120), (1560, top - 65 - bot - 40, 150), PAINT, root, bevel=5)
+    # silver trapezoid module, proud of the beam
+    mod = [(-470, top - 66), (470, top - 66), (420, bot + 86), (-420, bot + 86)]
+    slab('module', mod, zb - 60, zb + 22, BRON_SILVER, root)
+    for s in (-1, 1):
+        box(f'hookPocket{s}', (s * 335, bot + 215, zb + 20), (90, 140, 10), TEXBLACK, root, bevel=4)
+        tube(f'hook{s}', [(s * 335, bot + 245, zb + 24), (s * 335, bot + 245, zb + 60), (s * 335, bot + 190, zb + 60),
+                          (s * 335, bot + 190, zb + 24)], 16, CHROME_TRIM, root, bend=20)
+    box('intake', (0, bot + 230, zb + 22), (370, 95, 6), TEXBLACK, root, bevel=3)
+    for k in range(-5, 6):                                    # the honeycomb, as a lattice of bars
+        box(f'hc{k}', (k * 32, bot + 230, zb + 26), (4, 90, 4), BLACK, root, bevel=0)
+    # silver lower edge with one crease and four notches
+    box('lower', (0, bot + 43, zb - 40), (1480, 86, 120), BRON_SILVER, root, bevel=5)
+    box('crease', (0, bot + 58, zb + 20), (1440, 3, 4), BLACK, root, bevel=0)
+    for k in (-3, -1, 1, 3):
+        box(f'notch{k}', (k * 150, bot + 18, zb + 20), (60, 22, 6), TEXBLACK, root, bevel=2)
+    for s in (-1, 1):                                         # empty fog pockets at the outer ends
+        box(f'pocket{s}', (s * 640, top - 130, zb - 44), (300, 85, 8), TEXBLACK, root, bevel=4)
+    return root
+
+
+# ================================================================ EURO RALLY
+# DAMD little delta and the roof spoilers. Every size is read off the makers'
+# own photographs (docs/jb74-rally-geometry.json: +-8 % for large shapes,
+# +-15 % for small ones, +-25 % fore-aft); the DAMD demo car sits on 2-inch
+# lowering springs, so its heights were put back to stock ride height.
+DELTA_RED = material('DeltaRedEdge', 0xa3161a, rough=0.35)
+KOITO_YELLOW = material('KoitoYellow', 0xe8b41c, rough=0.1)
+STRIPE_CREAM = material('StripeCream', 0xe9e2cc, rough=0.5)
+STRIPE_GREEN = material('StripeGreen', 0x1f3a2c, rough=0.5)
+TAIL_RED = material('TailRed', 0xc0161a, rough=0.18)
+
+
+def face_damd_delta():
+    """DAMD little delta front: the four-round-lamp grille (173,800 yen) and
+    the little 5./delta front bumper (92,400 yen) together. Four lamps in one
+    row at lamp-centre height 855: an outer pair about 145 across at x +-575
+    and a clearly smaller inner pair about 105 at x +-430. Between them a
+    Lancia-style chrome frame about 730 x 160 -- a centre post opening into a
+    V at the top -- over two openings with a red inner edge and black diamond
+    mesh; the black grille panel behind is about 1340 x 180. Square clear LED
+    indicator bars, 145 x 25, sit under the lamps at y 740. The bumper is all
+    body colour, about 1480 across the face and 370 tall (y 340-710) at
+    z 1740: top beam, a row of five slots, a rib, a recessed band carrying
+    the plate and two square yellow Koito fogs (155 x 92 at x +-460, y 460),
+    then a small lip."""
+    root = group('face_damd_delta')
+    yc, zf = 855, 1668
+    box('panel', (0, yc, zf - 20), (1340, 180, 40), TEXBLACK, root, bevel=8)
+    box('panelBack', (0, yc, zf - 60), (1300, 170, 30), RUBBER, root, bevel=0)
+    for s in (-1, 1):
+        for x, d in ((575, 145), (430, 105)):
+            X = s * x
+            lib.cylinder(f'bezel{s}{x}', (X, yc, zf + 2), (0, 0, 1), d + 18, 12, CHROME_TRIM, root, n=40)
+            lib.cylinder(f'bowl{s}{x}', (X, yc, zf + 4), (0, 0, 1), d, 10, CHROME, root, n=40)
+            lib.cylinder(f'bulb{s}{x}', (X, yc, zf + 10), (0, 0, 1), d * 0.3, 8, LENS, root, n=20)
+            lib.cylinder(f'lens{s}{x}', (X, yc, zf + 12), (0, 0, 1), d - 4, 4, LAMP_GLASS, root, n=40)
+        box(f'indicator{s}', (s * 502, 740, zf - 6), (145, 25, 10), LENS, root, bevel=3)
+    # the chrome frame and the two openings it holds
+    frame = slab('frame', [(x, y + yc) for (x, y) in _rrect(730, 160, 20)], zf - 4, zf + 10, CHROME_TRIM, root)
+    cut(frame, [box('frameHole', (0, yc, zf), (702, 132, 40), CHROME_TRIM, None, bevel=10)])
+    for s in (-1, 1):
+        box(f'opening{s}', (s * 180, yc, zf - 2), (336, 132, 6), DELTA_RED, root, bevel=4)
+        box(f'mesh{s}', (s * 180, yc, zf + 1), (320, 118, 3), BLACK, root, bevel=2)
+        for k in range(-9, 10):                                 # diamond mesh, as crossed bars
+            for sgn in (-1, 1):
+                box(f'dia{s}{k}{sgn}', (s * 180 + k * 17, yc, zf + 3), (3, 130, 3), BLACK, root, bevel=0,
+                    rot=Matrix.Rotation(math.radians(38 * sgn), 3, 'Y'))
+    # Lancia post: a vertical bar opening into a V at the top
+    tube('post', [(0, yc - 70, zf + 8), (0, yc + 30, zf + 8)], 16, CHROME_TRIM, root)
+    for s in (-1, 1):
+        tube(f'vee{s}', [(0, yc + 30, zf + 8), (s * 60, yc + 72, zf + 8)], 14, CHROME_TRIM, root)
+
+    # ---- bumper, all body colour
+    zb = 1740
+    box('beam', (0, 680, zb - 60), (1480, 60, 120), PAINT, root, bevel=8)
+    for s in (-1, 1):
+        box(f'end{s}', (s * 760, 530, zb - 200), (50, 350, 260), PAINT, root, bevel=8)
+    box('body', (0, 520, zb - 90), (1480, 300, 120), PAINT, root, bevel=8)
+    for k in range(-2, 3):                                      # the row of five slots
+        box(f'slot{k}', (k * 150, 615, zb - 28), (110, 26, 8), TEXBLACK, root, bevel=5)
+    box('rib', (0, 570, zb - 24), (1440, 16, 10), PAINT, root, bevel=3)
+    box('band', (0, 470, zb - 34), (1400, 130, 6), TEXBLACK, root, bevel=4)
+    box('plate', (0, 470, zb - 28), (330, 110, 3), PLATE, root, bevel=1)
+    for s in (-1, 1):
+        box(f'fogBody{s}', (s * 460, 460, zb - 26), (163, 100, 14), BLACK, root, bevel=4)
+        box(f'fog{s}', (s * 460, 460, zb - 18), (147, 84, 4), KOITO_YELLOW, root, bevel=3)
+        box(f'fogRim{s}', (s * 460, 460, zb - 20), (155, 92, 3), CHROME, root, bevel=2)
+    box('lip', (0, 355, zb - 50), (1380, 30, 110), PAINT, root, bevel=6)
+    return root
+
+
+def rear_damd_delta():
+    """little 5./delta rear bumper (74,800 yen): body colour, with raised
+    ribbed outer blocks carrying DB's square tail lamps (about 225 x 72 at
+    x +-580, y 535); grey lower edges both sides."""
+    root = group('rearBumper_damd_delta_rear')
+    grey = material('DeltaGrey', 0x6b6e70, rough=0.6)
+    red = material('TailRed', 0xc0161a, rough=0.18)
+    zc = -1650
+    box('beam', (0, 540, zc), (1440, 190, 130), PAINT, root, bevel=8)
+    box('lower', (0, 420, zc + 10), (1400, 60, 110), grey, root, bevel=6)
+    for s in (-1, 1):
+        box(f'block{s}', (s * 580, 535, zc - 30), (300, 150, 110), PAINT, root, bevel=10)
+        for k in range(3):                                      # the ribs round the lamp
+            box(f'rib{s}{k}', (s * 580, 590 - k * 55, zc - 88), (290, 10, 8), PAINT, root, bevel=2)
+        box(f'lampCase{s}', (s * 580, 535, zc - 88), (235, 82, 14), BLACK, root, bevel=4)
+        box(f'lampRed{s}', (s * (580 + 40), 535, zc - 96), (145, 70, 4), red, root, bevel=3)
+        box(f'lampAmb{s}', (s * (580 - 75), 535, zc - 96), (70, 70, 4), AMBER, root, bevel=3)
+        box(f'side{s}', (s * 715, 510, zc + 60), (30, 200, 180), PAINT, root, bevel=6)
+    box('plate', (RIGHT * 60, 540, zc - 70), (330, 165, 3), PLATE, root, bevel=1)
+    return root
+
+
+def spoiler_damd_wing():
+    """DAMD little delta FRP rear wing (63,800 yen): span about 1230, chord
+    about 250 at about 30 degrees, leading edge about 20 above the roof and
+    the trailing edge flush with the roof's rear end (z -1540) about 155 up;
+    small end plates, black steel stays at x +-565 clamped to the gutters."""
+    root = group('spoiler_damd_wing')
+    ang = math.radians(30)
+    zt, yt = -1540, 1623 + 155
+    zl, yl = zt + 250 * math.cos(ang), yt - 250 * math.sin(ang)
+    zm, ym = (zt + zl) / 2, (yt + yl) / 2
+    box('blade', (0, ym, zm), (1230, 14, 250), PAINT, root, bevel=5, rot=Matrix.Rotation(-ang, 3, 'X'))
+    for s in (-1, 1):
+        box(f'plate{s}', (s * 612, ym + 10, zm), (6, 90, 280), PAINT, root, bevel=2)
+        tube(f'stay{s}', [(s * 565, 1600, zm + 70), (s * 565, ym - 10, zm)], 22, BLACK, root)
+        box(f'clamp{s}', (s * 600, 1590, zm + 70), (70, 30, 50), BLACK, root, bevel=3)
+    return root
+
+
+def spoiler_rowen():
+    """ROWEN Roof Spoiler Electronics TYPE3 (1K002R30): a short ducktail on the
+    roof's rear edge, not a raised wing -- about 1250 wide, 200 long, rising
+    about 45 above the roof, with a black lens about 905 wide on its rear
+    slope carrying a thin red stop-lamp strip."""
+    root = group('spoiler_rowen')
+    prof = [(1618, -1330), (1630, -1330), (1668, -1470), (1664, -1560), (1600, -1560), (1606, -1450)]
+    prism('duck', prof, -625, 625, PAINT, root, smooth=False)
+    box('lens', (0, 1640, -1562), (905, 34, 6), GLASS, root, bevel=3)
+    box('stop', (0, 1640, -1566), (880, 6, 3), TAIL_RED, root, bevel=0)
+    return root
+
+
+def _centre_y(z):
+    """Height of the body's centreline (x 0), from the raycast grid."""
+    pts = sorted([p for p in CAR['top'] if p[0] == 0 and p[3].startswith('Body')], key=lambda p: p[2])
+    for a, b in zip(pts, pts[1:]):
+        if a[2] <= z <= b[2]:
+            t = (z - a[2]) / (b[2] - a[2])
+            return a[1] + (b[1] - a[1]) * t
+    return pts[0][1] if z < pts[0][2] else pts[-1][1]
+
+
+def stripe_damd_center():
+    """The band down the centre of DAMD's red demo car: cream 25 + dark
+    green 35 + cream 25, 85 mm with no gaps, over the bonnet and the roof (it
+    skips the glass and the tailgate). DAMD say it is on the demo car only
+    and is not part of the kit, so it is a cut-vinyl job."""
+    root = group('stripe_damd_center')
+    runs = [(1590, 790), (390, -1430)]                 # bonnet, roof (glass in between)
+    for i, (z0, z1) in enumerate(runs):
+        n = max(2, int(abs(z0 - z1) / 40))
+        for x0, x1, mat in ((-42.5, -17.5, STRIPE_CREAM), (-17.5, 17.5, STRIPE_GREEN), (17.5, 42.5, STRIPE_CREAM)):
+            bm = bmesh.new()
+            vs = []
+            for k in range(n + 1):
+                z = z0 + (z1 - z0) * k / n
+                y = _centre_y(z) + 2.0
+                vs.append((bm.verts.new(P(x0, y, z)), bm.verts.new(P(x1, y, z))))
+            for (a, b), (c, d) in zip(vs, vs[1:]):
+                bm.faces.new((a, b, d, c))
+            lib.new_object(f'band{i}{int(x0)}', bm, mat, root, smooth=True)
     return root
 
 
@@ -3031,7 +3310,7 @@ def build():
     bumper_klc()
     bumper_outclass()
     for st in ('stock', 'steel', 'six', 'eight', 'ten', 'beadlock', 'moon', 'daytona', 'slot5', 'watanabe', 'eightpin',
-               'renkon', 'arc4', 'dwindow', 'turbine'):
+               'renkon', 'arc4', 'dwindow', 'turbine', 'seven', 'oz20'):
         rim(st)
     roof_rack_arb()
     roof_lights()
@@ -3089,6 +3368,12 @@ def build():
     widebody('lb_gmini', 35, 'box', lip=RUBBER)
     widebody('aero_over', 35, 'box')
     widebody('damd_delta', 40, 'blister')
+    face_bron55()
+    face_damd_delta()
+    rear_damd_delta()
+    spoiler_damd_wing()
+    spoiler_rowen()
+    stripe_damd_center()
     decals()
     cage_wildgoose()
     stripe_retro3()

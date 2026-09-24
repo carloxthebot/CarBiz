@@ -17,7 +17,7 @@ const OUT = path.join(ROOT, 'model', 'wheels');
 
 // Every `style` any WHEELS entry in parts.js can ask for.
 const STYLES = ['stock', 'steel', 'eight', 'six', 'ten', 'slot5', 'eightpin', 'daytona',
-  'moon', 'watanabe', 'renkon', 'arc4', 'dwindow', 'turbine', 'beadlock'];
+  'moon', 'watanabe', 'renkon', 'arc4', 'dwindow', 'turbine', 'beadlock', 'seven'];
 
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript',
   '.glb': 'model/gltf-binary', '.png': 'image/png', '.webp': 'image/webp', '.json': 'application/json', '.hdr': 'image/vnd.radiance' };

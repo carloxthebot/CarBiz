@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609241411** · 239 catalogue entries · 7 styles
+Current build: **202609241521** · 247 catalogue entries · 9 styles
 
 ---
 
@@ -90,27 +90,38 @@ snorkel's skirt come out as a tall thin fin.
 
 ## 2. What is live
 
-**Seven styles**, each a preset applied from the first step. They are pushed
-apart on silhouette — height, roof load, arch width, wheel size — not on which
-bumper they wear, because five cars differing by bumper alone read the same
+**Nine styles**, each a preset applied from the first step. They are pushed
+apart on silhouette — height, roof load, arch width, face, wheel size — not on
+which bumper they wear, because cars differing by bumper alone read the same
 from ten metres.
 
-| style | height | what makes it read differently |
-|---|---|---|
-| 都會寬體低趴 `street_low` | 1690 | the only one below stock; 18" rims, 55-series |
-| 都會輕改 `city` | 1755 | bare roof, low black pinstripe |
-| 日系復古 `jp_retro` | 1805 | sand body, three-band retro stripe, steel look |
-| 軍風 `military` | 1910 | white star and stencils, loaded window guards |
-| 露營 `camp` | 1915 | two-tone roof, body lift, four orange bands |
-| 外掛籠硬派 `exo_cage` | 1965 | roll cage over the roof, nothing else up there |
-| 澳洲越野 `au_offroad` | 2125 | tallest, 31s, lit roof rack, snorkel |
+| style | what makes it read differently |
+|---|---|
+| 都會寬體低趴 `street_low` | the only one below stock; RAYS 18" forged, 225/60R18 H/T, WALD +30 mm fenders |
+| 都會輕改 `city` | bare roof, low black pinstripe |
+| 日系復古 `jp_retro` | sand body, three-band retro stripe, steel look |
+| 美式方頭換臉 `bronco_face` | GARAGE ILL BRON55 face: round lamps, lettered grille, two-tone bumper |
+| 歐系拉力寬體 `euro_rally` | DAMD little Δ four-lamp face, blister fenders, wing, OZ wheels, red wrap, centre stripe |
+| 軍風 `military` | white star and stencils, loaded window guards |
+| 露營 `camp` | two-tone roof, body lift, four orange bands |
+| 外掛籠硬派 `exo_cage` | roll cage over the roof, nothing else up there |
+| 澳洲越野 `au_offroad` | tallest, 31s, lit roof rack, snorkel |
 
-Also live: the style step itself (first visit lands on it, then remembered in
-`localStorage`; the tab keeps score — "澳洲越野・改 3"); style cards carrying a
-real render; five side-stripe sets and the military stencil markings; the RV4
-Wild Goose outer roll cage; the boot screen drawn as the JB74 grille; the sheet
-that opens by dragging up and closes only via the ✕ (a downward swipe is how
-LINE's and Facebook's in-app browsers dismiss themselves).
+New families this session (all pickable in 外觀, all in `parts.html`):
+`FACES` (face kits — hide the stock bumper, grille AND headlamps; rig.js
+`stockHeadlamps` / `cfg.hideHeadlamps`), `FENDERS` (wide-body over-fenders laid
+over the Sierra arches, `widebody()` in build_parts.py follows `ARCH_HALF_W`),
+`SPOILERS` (DAMD wing, ROWEN ducktail). Stripes and the cage finally have their
+own pickers. `TYRE_MODELS` has an H/T (road) tab with its own procedural tread
+(`PATTERNS.ht` in wheels.js). `COLORS` has one wrap film (3M 2080-G13 red),
+flagged `wrap: true` and shown in its own 改色膜 group — never as a Suzuki code.
+
+UI added at the owner's request: on a mouse device the part pickers open a
+custom list (`.pmenu`) so the hover card follows the row under the pointer
+(a native `<select>` menu reports nothing while open); touch keeps the native
+select. Prices now lead with the shop's own currency, NT$ in brackets
+(`priceLabel` in fx.js). The roof rack has 往車頭／往車尾 buttons, 50 mm a
+press, ±200 mm (`S.rackShift`; shovel, awning and roof lights ride along).
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put
@@ -119,46 +130,24 @@ legality back in front of the buyer. (The research is still in
 one clause verified first-hand from the official PDF is 附件十五 三、底盤:
 「懸吊系統之避震器｜變更後不得超過原核定車身高度」.)
 
+**皮卡工作車 `work_truck` is dropped** — the owner said 「先不要做，這個改太大切車身」.
+Do not build it.
+
 ---
 
-## 3. What to build next — the owner said 都做
+## 3. What is still open
 
-Three archetypes remain from `docs/jb74-archetypes.json`. Each entry there
-carries `silhouette`, `signature`, `parts` (ids verified to exist) and
-`missing`.
-
-### 3a. 美式方頭換臉 `bronco_face`
-The only one that is unrecognisable as a Jimny from the front. Needs a face
-set: round headlamp assemblies, a wide grille with raised lettering, a
-body-coloured deep bumper, a silver skid plate. GARAGE ILL's BRON55 is the
-reference product — ¥264,000 halogen / ¥297,000 LED, 税抜, supplied unpainted.
-Also needs a "painted in the body colour" option for bumpers, which the
-accessory pipeline does not have yet (`buildAccessory` already swaps any
-material named `BodyPaint`, so the hook exists).
-
-### 3b. 皮卡工作車 `work_truck`
-The only one that changes the body itself: everything behind the B-pillar
-removed and replaced with a steel bed with drop sides, plus a cab-back hoop.
-Biggest modelling job here, and it needs the page to hide a large part of the
-body — `rig.js` already has that mechanism (`stockQuarter` / `cfg.hideQuarterGlass`
-is the pattern to copy).
-
-### 3c. 歐系拉力寬體 `euro_rally`
-Four round headlamps in a row, blistered wide fenders, a roof spoiler, twin
-white stripes running front-to-back over the bonnet and roof, red paint. Note
-three catalogue gaps it exposes: `COLORS` has no red, `STRIPES` are all
-belt-line and none run longitudinally, and `TYRE_MODELS` has no road pattern at
-all — twelve entries and every one is A/T, R/T or M/T.
-
-### Also outstanding
-- **True wide-body fenders.** `flares` today is a rivet trim on the stock arch
-  and does not widen the car. 都會寬體低趴 and 歐系拉力寬體 both want real
-  blistered over-fenders.
-- **`street18` is a class entry, not a product** — 18×7.0J −20 with a null
-  price. First job with a search budget: find a real 17–18" wheel sold for the
-  JB74 and replace it.
+- **Geometry is from photographs.** BRON55, little Δ, the wing, the ducktail
+  and the OZ wheel are drawn from `docs/jb74-face-swap.json` and
+  `docs/jb74-rally-geometry.json` (±8–25 %). If a maker drawing turns up,
+  redraw against it.
+- **Widths nobody publishes.** KUHL, LB and DAMD over-fenders have no per-side
+  figure; the entries say so and model 30/35/40 mm. AERO OVER's +35 version has
+  no separate price.
 - **The KLC lowering spring's JB74 figure.** KLC publish ~40 mm for the JB64
-  only; the entry says so and estimates. Worth confirming with KLC.
+  only; the entry says so and estimates.
+- **Bumper "painted in the body colour" as a choice** is still not a toggle;
+  parts that ship painted use `BodyPaint` and follow the car.
 
 ---
 
@@ -166,58 +155,27 @@ all — twelve entries and every one is A/T, R/T or M/T.
 
 | file | what is in it |
 |---|---|
-| `docs/jb74-jp-gapfill.json` | **88 entries, and the big one.** Corrections to the catalogue from the Japanese makers' own pages: wrong chassis, dead part numbers, stale prices, narrower model-year ranges. **Roughly 60 of these are still unapplied** — see below. |
-| `docs/jb74-complete-kits.json` | 53 Japanese complete kits (DAMD, AIMGAIN, LIBERTY WALK, KUHL, WALD…) with first-party prices |
-| `docs/jb74-archetypes.json` | 6 accepted archetypes, 11 rejected with reasons, plus the Taiwan regulation dossier |
-| `docs/jb74-stripes.json` | 26 stripe treatments with modelling geometry; the `modellingNotes` block (three vertical slots, six rear terminations) is the useful part |
-| `docs/jb74-graphics.json` | 10 graphic styles with Taiwanese marketplace prices and the 變更登記 answer |
-| `docs/jb74-chrome-damd.json` | **landed after all: 133 items.** 86 chrome (9 of them negative findings — see below), 47 DAMD. 46 have real part numbers, 119 have prices, none inferred. |
-| `docs/jb74-snorkels.json`, `jb74-wheel-atlas.json`, `jb74-fitment.json`, `jb74-accessory-atlas.json` | earlier dossiers |
-
-### The unapplied corrections backlog
-
-`docs/jb74-jp-gapfill.json` lists ~70 corrections. Applied so far: the KLC
-bumpers, SHOWA GARAGE's front and rear, the JAOS side step, SG 75, the JAOS
-roof rack. **The rest are still sitting there**, including entries that would
-sell a JB74 owner something that does not fit:
-
-- `wildboar16` / `xtremej` / `bradley` / `te37xt` — all four carry JB64 offsets;
-  JB74 needs a different row of each maker's size table
-- `apio_guard` — is a JB74 part, but cannot be fitted alongside the factory
-  over-fenders, which a standard JB74 has
-- `prostaff_minig` — sourced only to a JB64 listing
-- ~20 stale or wrong prices (`apio20` ¥126,500 → ¥141,900; `taniguchi_bar` and
-  `taniguchi_short` quote one side only; `ipf` double-counts about ¥95,000)
-- ~6 entries whose model-year range is narrower than the catalogue implies
-
-Work through them the same way: open the maker's page, confirm, then edit.
-Do not batch-apply from the JSON without checking — that file is one agent's
-reading, and two of its claims turned out to need correcting when checked
-(SHOWA's E00990 is a bracket set, not the bumper; KLC's Traditional pair is
-fine and only the Nostalgic pair is JB64-only).
+| `docs/jb74-gapfill-verified.json` | **the 88 gapfill corrections, each re-checked on the maker page** (63 edit, 24 no change, 1 remove), with the quote and URL. All applied to parts.js on 2026-09-24. Where the gapfill itself was wrong it says so (JAOS brake hoses ARE in the kit; the SHOWA 50 rename was scraper noise). |
+| `docs/jb74-jp-gapfill.json` | the original, unverified reading — superseded by the file above |
+| `docs/jb74-street-wheels-tyres.json` | 17/18" JB74 wheels (only RAYS A・LAP-07X is real; WedsSport, MLJ, 4x4 Eng., Fuel, Method all stop at 16" on 5×139.7) and road tyres |
+| `docs/jb74-face-swap.json` | BRON55 (prices are 税込, not 税抜 as older docs said), CH:AMP, 70YO.70, with BRON55 modelling geometry |
+| `docs/jb74-widebody.json` | wide-body fenders; every western brand found fits only the old JB23/JB43 |
+| `docs/jb74-rally.json`, `docs/jb74-rally-geometry.json` | red (no JB74 red in any market), four-lamp front, stripes (no product exists), spoilers; plus geometry for little Δ, the wing, OZ, ROWEN |
+| `docs/jb74-complete-kits.json` | 53 Japanese complete kits with first-party prices |
+| `docs/jb74-archetypes.json` | the archetypes, 11 rejected with reasons, and the Taiwan regulation dossier |
+| `docs/jb74-chrome-damd.json` | 133 items: 86 chrome (9 negative findings), 47 DAMD |
+| `docs/jb74-stripes.json`, `jb74-graphics.json`, `jb74-snorkels.json`, `jb74-wheel-atlas.json`, `jb74-fitment.json`, `jb74-accessory-atlas.json` | earlier dossiers |
 
 ---
 
-## 5. Spend the search budget on these
+## 5. Spend the next search budget on these
 
-Chrome and DAMD (item 6) are already answered — start at 1.
-
-1. A real 17–18" wheel for the JB74, to replace the `street18` class entry.
-2. GARAGE ILL BRON55 and any other JB74 face-swap kit — part numbers, prices,
-   and above all photographs clear enough to model the grille and lamps from.
-3. Blistered wide-body over-fenders for the JB74: who makes them, how much
-   width per side, and whether they bolt on or need the arch cut.
-4. A road-pattern tyre for `TYRE_MODELS` — the list has no highway tread.
-5. Red, and any colour outside Suzuki's eight, for the rally style. This means
-   respray or wrap, so the entry has to be honest that it is not a factory code.
-6. ~~Chrome and DAMD~~ — **done**, see `docs/jb74-chrome-damd.json`. What is
-   left there is modelling, not research. Four leads in it came back EMPTY and
-   are recorded as negative findings, so do not go looking again: there is no
-   chrome bezel that turns the square lamp opening round (round lamps mean a
-   whole new face), no chrome wiper arms, no chrome arch trim, no chrome pillar
-   trim. It also corrects two things written elsewhere: Beyond's "Sunny Face"
-   chrome grille does not exist, and MLJ's DAYTONA SS has no chrome version in
-   either 5H-139.7 size, which is what a JB74 needs.
+1. Maker drawings or clean side photos for BRON55 and little Δ, to firm up
+   the geometry.
+2. A second real 17–18" JB74 wheel, so `street_low` is not a one-product style.
+3. A JB74-size road tyre beyond the OE Dueler H/T 684 II (195/80R15) and
+   Open Country H/T II (225/60R18 only).
+4. Chrome modelling from `docs/jb74-chrome-damd.json` — research is done.
 
 ---
 
@@ -230,7 +188,10 @@ Chrome and DAMD (item 6) are already answered — start at 1.
   tread has no OWL for is silently dropped, and the style then reports a
   phantom "改 1" the instant it is applied. Check `TYRE_MODELS[].owlSizes`.
 - **Tyre and wheel rim sizes must match** or `validate()` errors. Wheels are
-  15" or 16" (plus the new 18"); tyre sizes carry their own `rim`.
+  15", 16" or 18"; tyre sizes carry their own `rim`.
+- **Another session can sweep your work into its commit.** On 2026-09-24 a
+  parallel session ran `git add -A jimny` and deployed half-finished edits.
+  Stage files by name, and check `git log origin/main` before pushing.
 - **`.sw` is already taken** by the colour swatch buttons (a 32 px circle).
   The style cards use `.tone` for their chips because of it.
 - **The page hides stock parts by name**, matched in `rig.js` by bounding box

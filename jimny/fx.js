@@ -30,12 +30,14 @@ export const native = (price, cur) =>
   price == null ? '' : (SYMBOL[cur] ?? '') + price.toLocaleString('en-US');
 
 /**
- * One label for a catalogue row: NT$ first, original second.
+ * One label for a catalogue row: the price the shop actually quotes first,
+ * the rough NT$ equivalent second ("¥97,900", "~NT$20,600") -- a Japanese
+ * part is bought in yen, and a converted headline hid that.
  * `stock` items priced 0 read as 原廠, unpriced ones as 洽詢.
  */
 export function priceLabel(item) {
   if (item.price === 0) return { main: '原廠', sub: '' };
   const n = toTWD(item.price, item.cur);
   if (n == null) return { main: '洽詢', sub: '' };
-  return { main: twd(n), sub: item.cur === 'TWD' ? '' : native(item.price, item.cur) };
+  return item.cur === 'TWD' || !item.cur ? { main: twd(n), sub: '' } : { main: native(item.price, item.cur), sub: '~' + twd(n) };
 }
