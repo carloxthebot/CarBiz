@@ -2449,50 +2449,6 @@ def grille_generic(pid, h_slats=0, v_slots=0, hex_cells=False, wire=True, label=
 
 
 # ============================================================ KLC NOSTALGIC
-def bumper_klc_nostalgic():
-    """KLC Heritage Nostalgic front: smooth pressed-steel box bar wrapped
-    round the corners, painted, over a black lower valance with two round
-    fogs, horizontal slots and the number plate."""
-    root = group('frontBumper_klc_nostalgic')
-    y, zf = 640, 1745
-    W, H, D = 1470, 150, 120
-    path = [(-W / 2, y, zf - D / 2 - 160), (-W / 2 + 140, y, zf - D / 2), (W / 2 - 140, y, zf - D / 2), (W / 2, y, zf - D / 2 - 160)]
-    sweep('bar', [tuple(p) for p in fillet(path, 60, steps=4)], rounded_rect(D, H, 34, 5), PAINT, root)
-    box('valance', (0, 470, zf - 90), (1020, 170, 110), TEXBLACK, root, bevel=14)
-    for k in range(3):
-        box(f'slot{k}', (0, 440 + k * 30, zf - 33), (330, 12, 6), RUBBER, root, bevel=0)
-    for s in (-1, 1):
-        fog_lamp(root, s * 400, 470, zf - 34, TEXBLACK, dia=90)
-    box('plate', (0, 480, zf - 28), (330, 165, 3), PLATE, root, bevel=1)
-    box('bay', (0, 560, 1400), (1050, 300, 20), RUBBER, root, bevel=4)
-    return root
-
-
-def rear_bumper_klc_nostalgic():
-    """KLC Heritage Nostalgic rear: painted box bar with wrapped ends, a black
-    rubber strip along the top, rectangular three-colour lamps set into the
-    ends, the number plate hung under the middle. Stock lamps are hidden by
-    the bumper it replaces, so this one carries its own."""
-    root = group('rearBumper_klc_nostalgic_rear')
-    y, z = 470, -1650
-    W, H, D = 1520, 180, 130
-    path = [(-W / 2, y, z + 200), (-W / 2 + 150, y, z), (W / 2 - 150, y, z), (W / 2, y, z + 200)]
-    sweep('bar', [tuple(p) for p in fillet(path, 60, steps=4)], rounded_rect(D, H, 30, 5), PAINT, root)
-    box('rubber', (0, y + H / 2 - 4, z - 4), (W - 320, 10, D - 20), RUBBER, root, bevel=3)
-    red = material('TailRed', 0xc0161a, rough=0.2)
-    amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
-    for s in (-1, 1):
-        cx = s * 520
-        box(f'lampHsg{s}', (cx, y + 5, z - D / 2 - 2), (270, 110, 8), BLACK, root, bevel=2)
-        for (dx, w, m) in ((-95 * s, 70, amber), (0 * s, 100, red), (95 * s, 70, LENS)):
-            box(f'lamp{s}{dx}', (cx + dx, y + 5, z - D / 2 - 8), (w - 6, 96, 6), m, root, bevel=1)
-        box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
-        box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), TEXBLACK, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
-    box('plate', (0, y - 20, z - D / 2 - 8), (330, 165, 3), PLATE, root, bevel=1)
-    box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
-    return root
-
-
 def side_skirt():
     """SHOWA GARAGE AES sill cover: matte panel under the doors between the
     arches, a soft crease along its top, wrapping under the sill."""
@@ -3015,8 +2971,6 @@ def build():
     front_bar('jaos_cowl', 'abs', W=1470, H=280, D=180, y=540, skid=False, corners=False, hump=True, bash=True, badge='JAOS', mesh_off=0)
     front_bar('taniguchi_square', 'box', W=1400, y=600, skid=False)
     front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
-    bumper_klc_nostalgic()
-    rear_bumper_klc_nostalgic()
     front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False, slot=True, badge='KLC')
     front_bar('toc_extreme', 'plate', W=1470, H=260, D=180, y=530, fogs=True, corners=False, bolts=True, skid=False)
     # DAMD full body kits (damd.co.jp, 2026-09): panel sets that keep the
