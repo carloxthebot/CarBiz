@@ -1,0 +1,1360 @@
+{
+  "sourcedAt": "2026-09-24",
+  "method": "幾何尺寸是從實際打開過的側面正投影照片量出來的，不是抄文案。每張圖用兩個基準換算：腰線（側窗玻璃下緣）到車門下緣＝約 650mm，以及軸距 2250mm（兩顆輪心都看得到時交叉驗算）。mm 值誤差抓 ±10%，比例值（佔車側高度幾成）比 mm 可靠，建模請以比例為主。色碼是用 PIL 在指定像素上取的，已在註記裡寫明取樣點。 這份檔案經過兩輪：第一輪 14 筆是我自己抓圖量的；第二輪併入兩路平行調查（日本專門店、みんカラ 實車）的結果，補到 26 筆。凡是我沒有親手開過圖的，條目裡有 verification 欄寫明是轉述；兩路講法衝突的地方我拿本機留存的原圖重驗過，結論與理由記在 notes.disagreements，其中有兩筆是我第一輪寫錯、已改（APIO 的端點是斜切梯形不是切平；原廠迷彩只有下緣溶散、上緣是直切邊）。",
+  "notes": {
+    "instagram": "Instagram 這一輪完全打不開，所以這份檔案裡沒有任何一筆是從 IG 貼文來的。實測：#ジムニーシエラ 的 hashtag 頁只回 Instagram 的殼與 base64 圖，讀不到貼文；透過 r.jina.ai 代理抓 /explore/tags/jb74/ 直接回 403。沒有登入態就是拿不到。所有圖像描述都來自我實際下載並打開過的檔案（原廠型錄圖、APIO 官方說明書 PDF、店家商品圖），沒有任何一句是憑印象寫的。",
+    "websearch": "本輪 WebSearch 額度一開始就已用盡（600/600），搜尋全部改用 WebFetch 直連＋ r.jina.ai 代理 html.duckduckgo.com。",
+    "sixthStyle": "有，而且很明確：建議加第六個 style「原廠復刻」（SUZUKI BLACK REVIVAL STYLE）。理由是現有五個 style 沒有一個裝得下原廠自己那兩張最有辨識度的側貼。原廠リバイバルA／B 都是深色車身＋高位圖案，而你的 jp_retro 已經改成米色車身＋低位拱到拱的三色腰線，兩者在視覺上剛好相反；military 又是消光戰術風配模板字，也不是它。這一組在日本是 SUZUKI 自己包好的套裝，整套零件都有料號：軍綠 Jungle Green ZZC ＋ 15 吋黑鋼圈 ＋ サイドデカール リバイバルA（99230-78R00-001）＋ 平台式車頂架 ＋ 黑色廠徽 ＋ 擋泥板 ＋ 鹵素霧燈，日本售價 ¥261,800／工時 6.4h。對配置器來說它有個別人沒有的好處：整組可以只用原廠料號組出來，不必解釋副廠件。",
+    "styleCoverage": "26 筆裡 24 筆歸到現有五個 style，2 筆標 new（澳規 Heritage、GOOSFAM）——這兩組的共同點是『在車門後緣把整組折上去』，現有五個 style 沒有一個是這個調性。",
+    "corrections": [
+      {
+        "target": "parts.js STRIPES → retro3「復古三色腰線」的 note",
+        "was": "「深棕細線＋寬鏽橘＋米色下緣，三條相連，沿門檻上方的折線跑滿側面」",
+        "shouldBe": "三件事要改。(1) 條數：不是『三條相連』，是五條——米白細線 / 粗帶 / 米白細線 / 粗帶 / 米白細線，而且兩條粗帶等寬（各約 67mm），米白只是細邊（約 6mm）不是『下緣』。(2) 高度：不是『門檻上方的折線』。那條線太低了。APIO 官方說明書寫的是對齊車門中段的『ボディープレスライン』，整疊下緣壓在那條線上（實測在腰線往下 64% 處），整疊中心落在 52%，也就是車側的正中間、門把下方一截。貼太高會撞到前葉子板側標與油箱蓋（官方明文警告）。而車門下半有兩條折線，緊貼門檻的那一條在 91%，太低了，不是這組對齊的那條。(3) 範圍：不是『跑滿側面』，是拱到拱——前輪拱膠條後緣到後輪拱膠條前緣，單邊約 1,300mm，官方自己形容為「ボディー中央部分だけの短いデザイン」。兩端垂直切平，不上尾門、不繞拱、不 kick up。"
+      }
+    ],
+    "gaps": [
+      "Instagram 全數不可用，而且兩路調查也都沒有開過 IG——這份檔案裡沒有任何一筆來自 IG。",
+      "**全日本沒有一家店公布「專車切型側貼」的 mm。** 唯一有官方 mm 的是兩條通用長條（MONSTER 1900×160、JAOS 2200×75）與 DAMD 的實體飾條。其餘所有 mm 都是我們從正投影圖量的，請當成 ±10% 的估計。",
+      "大澤商会 compass 那一筆是轉述、沒有複驗（樂天圖檔網址抓回來是別的商品）。",
+      "GOOSFAM 有比例沒有絕對尺寸；MONSTER SPORT 沒有任何 JB64/JB74 的裝車照。",
+      "OUTCLASS ヴィンテージ 全網只有一張 600px 圖，車門那段過曝，橘紅分界未定。",
+      "查過但確認「根本沒有側貼產品」的：AIM GAIN（只有 FRP 空力件）、SHINKE（床組／內裝品牌）、KLC Heritage、SHOWA GARAGE。",
+      "抓不到的通路：Rakuten 商品頁對 curl 只回 42–43 bytes（要走 r.jina.ai 或 Yahoo CDN）、damd.stores.jp 回 403、Autobacs 是 SPA 殼、goosfam.stores.jp 與 crazycolorz 的清單頁是 JS 渲染。",
+      "buyee 上一筆 SJ410仕様 グラフィックデカール（n1088694570）回 0 bytes，沒驗到——真正的 SJ410 復刻圖樣還是空白。"
+    ],
+    "disagreements": [
+      {
+        "topic": "原廠リバイバルB 的後端位置",
+        "claim": "另一路調查說後端在後四分之一板約 55–65% 處就收掉，「距離車身後角還很遠」。",
+        "verdict": "不採用。我把原廠高解析側視圖放大到像素層級重量過：紅細線一路跑到 x=1505，而車身後角在 x≈1535，只差約 55mm，等於幾乎到底。不過他們說的『端點是斜切不是切平』是對的，已採納。"
+      },
+      {
+        "topic": "原廠リバイバルB 的帶高",
+        "claim": "另一路說「腰線下 20–24%、帶高約 12%」，我原本寫「中心 17–18%、帶高 7%」。",
+        "verdict": "兩邊其實一致，差在量的東西不同：主帶單獨是 7.1%，主帶＋間隙＋下細線的『整組』是 11.7%，正好對上他們的 12%。JSON 裡兩個數字都寫了。"
+      },
+      {
+        "topic": "原廠リバイバルB 的字樣位置",
+        "claim": "另一路說「Jimny REAL OFFROADER」在車門前半。",
+        "verdict": "不採用。原廠圖上字塊落在 x≈900–1030，而前車門的後緣門縫在 x≈1040，所以是在車門『後』半。"
+      },
+      {
+        "topic": "Toy Factory 101TentCar 的橘色帶數",
+        "claim": "一路最初讀成一條 33px 的寬橘帶。",
+        "verdict": "兩路各自重做像素取樣後都收斂到『四條帶＋車身色間隙』，採四條。"
+      },
+      {
+        "topic": "APIO 的端點造型",
+        "claim": "另一路說兩端是斜切梯形、上緣比下緣長。",
+        "verdict": "**採納，而且是我原本寫錯**。我自己重掃藍色整車側視圖確認：前端離垂直線 26 度、後端 31 度，都往上外撇，上緣約 1,480mm、下緣約 1,330mm。"
+      },
+      {
+        "topic": "原廠カモフラージュ 的邊緣",
+        "claim": "另一路說上緣是直的、只有下緣溶散；我原本寫上下緣都是撕裂狀。",
+        "verdict": "**採納，我原本寫錯**。放大原圖後上緣明顯是一條水平直切邊。"
+      }
+    ]
+  },
+  "treatments": [
+    {
+      "id": "suzuki_revival_b",
+      "label": "原廠復刻 B（紅色雙線腰帶）",
+      "aka": [
+        "サイドデカール リバイバルB",
+        "Revival B side decal",
+        "BLACK HERITAGE / BLACK REVIVAL STYLE 的側貼"
+      ],
+      "geometry": {
+        "where": "前葉子板前緣起 → 橫貫前車門 → 過門把下方 → 後四分之一板 → 收在後車身尾緣（不上尾門）。左右各一組，單邊全長約 2,650mm。",
+        "height": "高位。以腰線＝0%、車門下緣＝100%（實測 350px ≒ 667mm）為基準：主紅帶上緣 14.0%、下緣 20.9%，下面細線下緣 25.7%——所以『整組』高度約 11.7%，『主帶單獨』最厚處 7.1%。門把不是被壓住，而是剛好從整組下方鑽過去。（另一路調查回報「約 12% 高」，那是整組的數字，跟我的一致；若只看主帶則是 7%。）",
+        "bands": [
+          {
+            "width": "主帶：前葉子板鼻端約 12mm，一路楔形加寬到前門後段約 50mm（佔車側高度 7%）",
+            "colour": "橘紅 #E62519（取樣原廠型錄棚拍 img_jimny_heritage_modal_13.png x=650,y=406）；實車外拍的量測回報是 #C41A00 / #BE1D01，石墨色塊 #4C5155——同一張貼紙，差在光線，建模取中間值即可"
+          },
+          {
+            "width": "間隙（露車身色）約 8mm",
+            "colour": "車身色"
+          },
+          {
+            "width": "下細線約 10mm，全程等寬",
+            "colour": "同橘紅 #DA231A"
+          },
+          {
+            "width": "石墨色塊：從門把前的交叉點起往後，最厚處約 110mm；過了 kick-up 之後在後四分之一板退成一條細線，跟紅細線平行跑到尾端",
+            "colour": "石墨黑 #23292C（取樣 x=1100,y=400）"
+          }
+        ],
+        "ends": "前端：兩條在前葉子板前緣收攏、切平，往後像楔子一樣張開。中段有一個容易漏掉的招牌動作——在門把正前方兩條交叉（lightning-Z）：交叉『之前』是紅帶寬、壓在上面；交叉『之後』換成石墨色塊寬、壓在上面，紅色退成下面一條細線。過了車門縫後整組以約 37–40 度往上折（我第一版寫 20–25 度是低估了），折完走平。後端是一道『斜切』（上緣比下緣更往後），不是垂直切平；終點在後四分之一板約 x=1505，距離車身後角約 55mm——幾乎到底，但沒有真的切齊車身後緣。",
+        "extras": "「Jimny」粗體斜體銀字＋下方小紅字「REAL OFFROADER」，貼在前車門後下角，字高約佔車側高度 11%，位置在腰線下約 47%（門把下緣再往下一個門把的高度）。JB74 版同一造型，只是切型配合較寬的輪弧。"
+      },
+      "bodyColours": [
+        "Jungle Green ZZC（原廠型錄示範色）",
+        "黑 ZJ3",
+        "白 ZVR"
+      ],
+      "wheels": "原廠 15 吋黑鋼圈（JB74）／16 吋黑鋼圈（JB64）——這是原廠 BLACK REVIVAL / BLACK HERITAGE STYLE 套裝的固定搭配",
+      "examples": [
+        {
+          "where": "suzuki",
+          "url": "https://www.suzuki.co.jp/accessory_car/jimny-accessory.html",
+          "what": "BLACK HERITAGE STYLE 套裝示範車（軍綠 ZZC＋16 吋黑鋼圈），高解析側視圖就是這一組貼紙"
+        },
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/marucorp/9923078r00002-jb74w.html",
+          "what": "JB74W 用リバイバルB 左右組，零件號 99230-78R00-002"
+        }
+      ],
+      "official": "SUZUKI 原廠用品。JB74W：99230-78R00-002；JB64W：99230-77R00-002。本體 ¥21,780、標準工時 0.7h。原廠註明「旧型のデザインをモチーフにしたデカール」，致敬 JA11。 JB64W 另一組號是 99230-77R00-002。要小心前綴：78R00 是シエラ JB74 的，77R00 是 JB64 的，只有カモフラージュ 兩車共用 77R00-004。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.suzuki.co.jp/accessory_car/jimny-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/img/jimny/heritage/modal/13.webp",
+        "https://www.suzuki.co.jp/accessory_car/img/jimny/anchor/heritage_car.webp",
+        "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+        "https://item.rakuten.co.jp/ap-murase/9923078r00001-jb74w/"
+      ]
+    },
+    {
+      "id": "suzuki_revival_a",
+      "label": "原廠復刻 A（九〇年代潑墨閃電）",
+      "aka": [
+        "サイドデカール リバイバルA",
+        "Revival A side decal",
+        "JA11 モチーフ"
+      ],
+      "geometry": {
+        "where": "只在前車門與後四分之一板，不碰前葉子板。主圖塊在前車門，尾巴細線跨過車門縫延伸到後四分之一板上緣。單邊總長約 1,650–1,700mm。",
+        "height": "中低位。鋸齒主圖塊整團落在門把「下方」，圖塊中心約在腰線往下 36% 車側高度；圖塊本身高約 145mm（佔車側高度 22%）。細尾線則一路爬升，到後四分之一板尾端已升到腰線下 3% 左右（幾乎貼著腰線）。",
+        "bands": [
+          {
+            "width": "底層米白楔形，最寬約 35mm，往後收尖",
+            "colour": "米白 #F2EFE6（目測，含反光）"
+          },
+          {
+            "width": "洋紅鋸齒群，整團高約 90–145mm",
+            "colour": "由前往後漸層：粉 #BD6887 → 桃紅 #BE2053 → 正紅 #BD1348 → 暗酒紅 #89092D → 近黑 #390512（取樣 img_sierra_revival_modal_13.png x=420..660,y=380..470）"
+          },
+          {
+            "width": "黑色鋸齒群接在洋紅之後，高約 85mm",
+            "colour": "黑 #1A1A1A"
+          },
+          {
+            "width": "尾部黑＋白雙細線，各約 4–6mm",
+            "colour": "黑 + 銀白"
+          }
+        ],
+        "ends": "前端是一片下緣切平、前緣斜切的米白楔形（像筆刷起筆）。後端完全收成一個針尖，尖端落在後四分之一板靠近 C 柱／後輪拱上方，腰線正下方。全程不碰輪拱、不上尾門。",
+        "extras": "銀色鏤空字「Jimny SIERRA」（JB64 版為「Jimny」），貼在黑色鋸齒群的正下方、前車門後段，字塊高約佔車側高度 10%，上緣大約與門把下緣齊平。"
+      },
+      "bodyColours": [
+        "Jungle Green ZZC（原廠型錄示範色）",
+        "藍色（舊型錄示範）",
+        "深色車身對比最好"
+      ],
+      "wheels": "原廠 15 吋黑鋼圈（BLACK REVIVAL STYLE 套裝）",
+      "examples": [
+        {
+          "where": "suzuki",
+          "url": "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+          "what": "JB74 現行型錄唯一在售的サイドデカール，¥21,780／0.6h，BLACK REVIVAL STYLE 套裝內含"
+        },
+        {
+          "where": "suzuki",
+          "url": "https://www.suzuki.co.jp/accessory_car/img/sierra/revival/modal/13_2.webp",
+          "what": "原廠並排放的 JA11 原型照，證明這個圖案是復刻不是新畫"
+        }
+      ],
+      "official": "SUZUKI 原廠用品。JB74W：99230-78R00-001。本體 ¥21,780、工時 0.6h。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/img/sierra/revival/modal/13.webp",
+        "https://www.suzuki.co.jp/accessory_car/img/sierra/revival/modal/13_2.webp",
+        "https://www.suzuki.co.jp/accessory_car/img/sierra/anchor/revival_car.webp",
+        "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html"
+      ]
+    },
+    {
+      "id": "suzuki_tool_gear",
+      "label": "原廠工具箱風（低位黑帶＋REAL OFFROADER）",
+      "aka": [
+        "サイドデカール ツールギア",
+        "Tool Gear side decal"
+      ],
+      "geometry": {
+        "where": "三塊分開的東西，而且『車門上半刻意留白』：(1) 低位主帶，從前輪拱後方橫貫前車門到後四分之一板前緣，貼著門檻上緣；(2) 引擎蓋／前葉子板肩線上一條前細後粗的短黑條（尾端帶一小塊紅）；(3) 後四分之一板肩線上一條對稱的短帶。(2)(3) 是一對，中間整片車門是空的。",
+        "height": "低位，是這批裡最低的一組。主帶中心約在腰線往下 77% 車側高度，也就是「車門下折線的下方、門檻飾板正上方」。帶高約 210mm，佔車側高度 32%——上緣切齊車門下折線，下緣切齊門檻。",
+        "bands": [
+          {
+            "width": "主帶約 210mm，等高不漸變",
+            "colour": "黑 #0B1315"
+          },
+          {
+            "width": "主帶下緣銀白細邊約 8mm",
+            "colour": "銀白"
+          },
+          {
+            "width": "紅色蜂巢網點：是一塊『後高前低』的楔形，填滿主帶後約 40%，往前逐漸溶散消失，不是均勻的一段",
+            "colour": "紅 #9C3A39 → #6E121D"
+          },
+          {
+            "width": "引擎蓋側條：前細後粗，最粗約 25mm",
+            "colour": "黑，尾端接一小塊紅"
+          }
+        ],
+        "ends": "主帶前端垂直切平（就在前輪拱葉子板膠條後方），後端在後四分之一板以一道短斜切收在後輪拱前緣。不繞拱、不上尾門。",
+        "extras": "主帶前端一隻紅色犀牛剪影（サイマーク），接著整排鏤空灰白斜體大字「REAL OFFROADER」佔滿主帶約六成長度，字高約為帶高的三分之二。引擎蓋側條中段另有一組極小的同字樣。"
+      },
+      "bodyColours": [
+        "白 ZVR（原廠示範色，對比最強）",
+        "銀 Z2S"
+      ],
+      "wheels": "原廠 15 吋黑鋼圈或深色鋁圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/marucorp/9923078r00003-jb74w.html",
+          "what": "JB74W 用ツールギア，零件號 99230-78R00-003"
+        },
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+          "what": "四款原廠側貼並排圖，白車那台就是ツールギア"
+        }
+      ],
+      "official": "SUZUKI 原廠用品。JB74W：99230-78R00-003，約 ¥27,455。現行型錄已下架（現行只留リバイバルA），但零件仍在流通。 JB64W 版為 99230-77R00-003。",
+      "style": "au_offroad",
+      "confidence": "confirmed",
+      "sources": [
+        "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+        "https://store.shopping.yahoo.co.jp/marucorp/9923078r00003-jb74w.html",
+        "https://www.garageidea.net/view/item/000000006586",
+        "https://alternativeauto.jp/products/y08-sz0001-00008"
+      ]
+    },
+    {
+      "id": "suzuki_camo_side",
+      "label": "原廠迷彩側貼",
+      "aka": [
+        "サイドデカール カモフラージュ",
+        "Camouflage side decal"
+      ],
+      "geometry": {
+        "where": "前葉子板 → 前車門 → 後四分之一板，一整條連續的迷彩帶，左右各一組。不上引擎蓋、不上車頂、不上尾門。",
+        "height": "中位，橫跨門把。以腰線＝0%、車門下緣＝100%：上緣 23%、下緣 66%，帶高約佔車側高度 43%。門把整個包在迷彩field 裡面。",
+        "bands": [
+          {
+            "width": "單層迷彩，無分色帶",
+            "colour": "闊葉林迷彩四色：橄欖 #2B3A1B / 中綠 #535C3C / 卡其 #A69E70 / 深棕"
+          }
+        ],
+        "ends": "**我第一版寫「上下緣都是撕裂狀」是錯的，已放大原圖確認並修正。** 上緣是一條『直的、水平的』切邊，貼齊車門上折線下方走，完全沒有鋸齒——是用尺切出來的。只有下緣是刻意溶散的：迷彩塊往下逐漸散開成碎點，溶散帶約佔車側高度 15%，在車門後半最深。前後端則是碎塊漸收，不是切平。建模時上緣用直線、下緣才用 alpha 遮罩。",
+        "extras": "原廠文案寫「柄の中にサイが隠れています」——迷彩圖案裡藏了一隻犀牛剪影。備胎半罩另有同花色的對應貼。"
+      },
+      "bodyColours": [
+        "Jungle Green ZZC（原廠示範色）",
+        "米色 ZVG",
+        "灰 ZVL"
+      ],
+      "wheels": "黑鋼圈或消光深色鋁圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+          "what": "四款並排圖中最下面那台軍綠車，可看見撕裂狀上下緣"
+        },
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/okamoto-p/99230-77r00-004-js.html",
+          "what": "JB74W 適用，零件號 99230-77R00-004"
+        }
+      ],
+      "official": "SUZUKI 原廠用品。99230-77R00-004（JB64／JB74 共用號），約 ¥35,247。",
+      "style": "military",
+      "confidence": "confirmed",
+      "sources": [
+        "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+        "https://store.shopping.yahoo.co.jp/okamoto-p/99230-77r00-004-js.html",
+        "https://item.rakuten.co.jp/ap-murase/9923077r00004-jb74w/",
+        "https://alternativeauto.jp/products/y08-sz0001-00015"
+      ]
+    },
+    {
+      "id": "apio_life_is_jimny",
+      "label": "APIO 雙粗帶腰線（LIFE IS JIMNY）",
+      "aka": [
+        "APIO サイドデカール \"LIFE IS JIMNY\"",
+        "4135-1L ライトブラウンxブラウン",
+        "4135-1Y イエローxオレンジ"
+      ],
+      "geometry": {
+        "where": "只走車身中段：前葉子板後半 ＋ 整片前車門 ＋ 後四分之一板前半，兩端收在前後輪拱。因為兩端是斜切梯形，長度要分開講：上緣約 1,480mm、下緣約 1,330mm。左右各一片，無尾門片。官方自己說是「ボディー中央部分だけの短いデザイン」。",
+        "height": "APIO 自己的貼付說明書給了精確規則：「デカールの下をボディーのプレスラインに合わせると綺麗です」——整疊的『下緣』對齊車身壓線，不是中心對齊。上限也寫死了：「プレスラインより大幅に上に貼ってしまうとサイドマーカーやフューエルリッドと干渉してしまう」，再往上就會撞到前葉子板側標與油箱蓋，所以這組的高度其實是被車身硬點鎖住的。量到的實際座標（以腰線＝0%、車門下緣＝100%）：整疊上緣 40%、下緣 64%、中心 52%；門把中心在 23%，所以整疊完全在門把下方、兩者之間還留約一個門把高度的空白。整疊總高約 158mm，佔車側高度 24%。注意車門下半其實有『兩條』折線：一條在 64%（APIO 對齊的就是這條），另一條在 91%、緊貼門檻飾板上方——後者太低，不是這一組的位置。JB64 與 JB74 貼付位置相同（官方明講）。",
+        "bands": [
+          {
+            "width": "上緣米白細線 約 6mm",
+            "colour": "米白 #EDEEF2"
+          },
+          {
+            "width": "上粗帶 約 70mm（三張圖量到 67–74mm；佔車側高度 11%）",
+            "colour": "焦糖鏽棕 #A76221（4135-1L）／亮黃 #FEE31A（4135-1Y）"
+          },
+          {
+            "width": "中央米白細線 約 6mm",
+            "colour": "米白 #F9F9FF"
+          },
+          {
+            "width": "下粗帶 約 70mm，與上粗帶等寬",
+            "colour": "深咖啡 #6A4A33（4135-1L）／橘 #FF9330（4135-1Y）"
+          },
+          {
+            "width": "下緣米白細線 約 5mm",
+            "colour": "米白"
+          }
+        ],
+        "ends": "**我第一版寫「兩端垂直切平」是錯的，已修正。** 兩端都是斜切：前端相對垂直線傾斜約 26 度、後端約 31 度，而且都是『上寬下窄』往外撇，所以整片其實是一個梯形，上緣比下緣長。斜切角分別平行於前後輪拱膠條的邊緣，這正是 APIO 說的「フェンダーアーチ部分を直線で繋ぐデザイン」——連的是拱的『邊』，不是拱的切線。實測（藍色整車側視圖，2.727 mm/px）：上緣長約 1,480mm、下緣約 1,330mm，每個斜切端的水平投影約 78mm。斜切是一刀穿過兩條粗帶的直線，不是階梯；米白外框是繞整個梯形一圈的封閉線。中段全程水平，不上揚、不繞拱、不 kick up。",
+        "extras": "白色小字「LIFE IS JIMNY」與「APIO Apio Incorporated」都在『前車門』上、都壓在下粗帶裡：前者緊貼車門前緣門縫，後者靠近車門後緣門縫。LIFE 與 IS 的字母 I 不是直豎，是麥穗圖案。另外兩個好用的定位點：圖案最前端的尖角正好落在前葉子板側標燈正下方；左側車身後段，圖案從油箱蓋下緣擦過（APIO 說明書的「後方」特寫看得到）。"
+      },
+      "bodyColours": [
+        "米色 Chiffon Ivory Metallic ZVG（4135-1L 最常見、也是你說的那台沙色）",
+        "深藍",
+        "Brisk Blue（4135-1Y 示範車）",
+        "白 ZVR"
+      ],
+      "wheels": "復古五輻鋼圈或鍍鉻鋼圈居多（示範車配 BFGoodrich Trail-Terrain T/A），台灣這個看法多半直接配黑鋼圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://apio.jp/parts/4135-1-2.html",
+          "what": "JB64 & JB74 用，¥34,100，兩色；官方註明車檢對應、轉印式"
+        },
+        {
+          "where": "shop",
+          "url": "https://apio.jp/parts/wp-content/uploads/sites/6/2025/08/17533-4135-1l_1.jpg",
+          "what": "米色 JB74 側面特寫——就是你描述的那台沙色車，粗棕帶＋米白細線"
+        },
+        {
+          "where": "shop",
+          "url": "https://apio.jp/parts/wp-content/uploads/sites/6/2025/08/17535-4135-1y_2.jpg",
+          "what": "藍色 JB74 完整側視，可量出拱到拱的長度與端點切法"
+        },
+        {
+          "where": "shop",
+          "url": "https://apio.jp/parts/4135-2-2.html",
+          "what": "五門 Nomade JC74 版 4135-2L，同一設計加長"
+        },
+        {
+          "where": "shop",
+          "url": "https://apio.jp/parts/wp-content/uploads/sites/6/2025/08/17536-4135-1.pdf",
+          "what": "APIO 官方貼付位置說明書（一頁）：全體＋前方＋後方三張定位照，寫明下緣對齊壓線、JB64/JB74 同位置"
+        }
+      ],
+      "official": "副廠（APIO ジムニー専門店）。材質 Avery Dennison 高階 PVC，轉印式，車檢對應。兩個限制要記：不能貼在已做鍍膜的車，也不能跟社外加寬輪弧併用（原廠輪弧才對得上）。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://apio.jp/parts/4135-1-2.html",
+        "https://apio.jp/parts/4135-2-2.html",
+        "https://apio.jp/parts/wp-content/uploads/sites/6/2025/08/17533-4135-1l_1.jpg",
+        "https://apio.jp/parts/wp-content/uploads/sites/6/2025/08/17535-4135-1y_2.jpg",
+        "https://apio.jp/parts/wp-content/uploads/sites/6/2026/02/4135-2l_6.jpg",
+        "https://apio.jp/parts/wp-content/uploads/sites/6/2025/08/17536-4135-1.pdf",
+        "https://item.rakuten.co.jp/sanoauto/gf6474sd0003/"
+      ]
+    },
+    {
+      "id": "au_heritage_ribbon",
+      "label": "澳規 Heritage 緞帶折線（原廠限量車）",
+      "aka": [
+        "Jimny Heritage limited edition decal",
+        "retro red and orange dual-tone body decal"
+      ],
+      "geometry": {
+        "where": "前葉子板後半 → 前車門 → 在車門後緣折上去 → 後四分之一板 → 收在後車身尾緣；另含車尾片。",
+        "height": "前段低、後段高，是這批裡唯一「中途換高度」的。前段（葉子板＋車門）中心約在腰線往下 62% 車側高度，走在車門下折線的正上方，明顯低於門把。後段（後四分之一板）升到腰線往下 20% 左右，幾乎貼著腰線。",
+        "bands": [
+          {
+            "width": "四條並排細緞帶，前段每條約 10–15mm，整組高約 55mm",
+            "colour": "由上到下：橘 → 橘紅 → 正紅 → 洋紅（#E07A2F / #C0562A / #C81E52 一路過去；低解析度圖只能讀到色相順序，色碼為近似）"
+          },
+          {
+            "width": "後段：上兩條維持細線，下方洋紅/紅轉成一塊往後收尖的楔形，最寬約 90mm",
+            "colour": "同上"
+          }
+        ],
+        "ends": "前端在前葉子板收細成尖。中段轉折是重點：在前車門後緣整組以約 40 度往上折，折角做成同心圓角（外側那條半徑大、內側小，像一疊緞帶一起彎），折完再走平。後端在後車身尾緣切平。",
+        "extras": "後四分之一板上緣、腰線正下方、備胎前方，印一枚「Jimny HERITAGE」多色漸層復古標（藍綠黃橘粉），旁邊帶犀牛圖。整車另配紅色擋泥板印白字 SUZUKI。"
+      },
+      "bodyColours": [
+        "Bluish Black Pearl",
+        "Jungle Green",
+        "White",
+        "Medium Gray（四色都可選）"
+      ],
+      "wheels": "15 吋深灰鋁圈（Heritage 專屬塗裝），不是鋼圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://tougenation.com.au/products/HERITAGE-EDITION-BODY-DECAL-KIT-SUZUKI-JIMNY-JB64-JB74-p718587133",
+          "what": "澳洲副廠復刻這組貼紙（含側片與尾片），側視圖看得到折角與楔形"
+        },
+        {
+          "where": "shop",
+          "url": "https://www.carscoops.com/2023/03/suzuki-jimny-heritage-limited-edition-debuts-in-australia-sending-nostalgic-vibes/",
+          "what": "官方發表照：軍綠車、紅擋泥板、灰鋁圈"
+        },
+        {
+          "where": "shop",
+          "url": "https://creative311.com/?p=151180",
+          "what": "日文報導確認基底是 JB74 Sierra GLX、限 300 台、A$33,490"
+        }
+      ],
+      "official": "SUZUKI 原廠限量特仕車（澳洲 2023、限 300 台、JB74 GLX）。日本本土 JB74 從來沒出過帶拉花的特仕車——日規的條紋全部是型錄用品，不是特仕車。",
+      "style": "new",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.carscoops.com/2023/03/suzuki-jimny-heritage-limited-edition-debuts-in-australia-sending-nostalgic-vibes/",
+        "https://creative311.com/?p=151180",
+        "https://tougenation.com.au/products/HERITAGE-EDITION-BODY-DECAL-KIT-SUZUKI-JIMNY-JB64-JB74-p718587133",
+        "https://www.chasingcars.com.au/news/future-cars/suzuki-jimny-2023-heritage-edition-unveiled-for-australia-limited-to-just-300-units/"
+      ]
+    },
+    {
+      "id": "lower_black_panel_retro_lines",
+      "label": "下半消光黑＋七〇年代三色細線",
+      "aka": [
+        "ロアサイドストライプ",
+        "Black Trail Retro Stripe",
+        "lower side stripe"
+      ],
+      "geometry": {
+        "where": "前輪拱後緣 → 前車門 → 後四分之一板 → 收在後輪拱前緣。一整塊，沿門檻走。",
+        "height": "最低的一組。黑塊上緣切齊車門下折線、下緣切齊車門下緣，高約 290mm（佔車側高度約 45%）。三色細線壓在黑塊的中下段，大約在黑塊自身高度的一半往下一點。",
+        "bands": [
+          {
+            "width": "消光黑底塊 約 290mm",
+            "colour": "消光黑 #0D0C0A"
+          },
+          {
+            "width": "黃線 約 14mm",
+            "colour": "金黃 #FFC749"
+          },
+          {
+            "width": "橘線 約 6mm（最細，當黃與紅的過渡）",
+            "colour": "橘 #F3843D"
+          },
+          {
+            "width": "紅線 約 16mm",
+            "colour": "正紅 #E3051A"
+          }
+        ],
+        "ends": "兩端垂直切平，抵住前後輪拱膠條，跟 APIO 那組同樣是拱到拱。三條細線彼此相鄰、沒有間隙，整組像一條 36mm 的漸層帶壓在黑塊上。",
+        "extras": "無字。這個看法的重點在「下半部整片壓暗」，細線只是提味。"
+      },
+      "bodyColours": [
+        "白 ZVR（示範色，對比最強）",
+        "米色 ZVG",
+        "銀 Z2S"
+      ],
+      "wheels": "黑色復古五輻鋁圈或黑鋼圈配 M/T 胎（示範車 GRIPMAX MUD RAGE R/T）",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://shop.crazycolorz-carwrap.com/products/jimny-nomade-jc74w-black-trail-retro-stripe",
+          "what": "Crazy Colorz 預裁款，官方文案「マットブラック調のベースに、細幅レトロラインを組み合わせた印刷一体型」"
+        },
+        {
+          "where": "shop",
+          "url": "https://crazycolorz-carwrap.com/jimny-decal-protection-film-guide/",
+          "what": "同店的車型對應指南，明說這系列以 JC74W 為主、JB64/JB74 多半不通用"
+        }
+      ],
+      "official": "副廠。注意：這款預裁品是五門 Nomade JC74W 專用，JB74 三門要找別家或客製——但同樣的造型在 JB74 上很常見（原廠ツールギア就是同一個區位的做法）。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://shop.crazycolorz-carwrap.com/products/jimny-nomade-jc74w-black-trail-retro-stripe",
+        "https://crazycolorz-carwrap.com/jimny-decal-protection-film-guide/",
+        "https://shop.crazycolorz-carwrap.com/cdn/shop/files/bra-ret0-2.jpg"
+      ]
+    },
+    {
+      "id": "damd_door_panel_plate",
+      "label": "車門圖框＋英國旗（DAMD little D.）",
+      "aka": [
+        "little D. AOLデカール",
+        "Adventure of a lifetime decal"
+      ],
+      "geometry": {
+        "where": "只貼前車門，一門一組，不跨板件。",
+        "height": "中位。整組落在車門上折線與下折線之間那一片平面裡，上緣約在腰線往下 35%、下緣約 65% 車側高度——上緣與門把上緣齊平，下緣在門把下方約一個門把的高度。",
+        "bands": [
+          {
+            "width": "不是帶狀，是兩個獨立圖塊",
+            "colour": "消光黑（唯一顏色）"
+          }
+        ],
+        "ends": "無端點可言。前塊是一個圓角矩形外框，內部左半印三行模板字「ADVENTURE / OF / A LIFETIME」、右半是一格方框裡的狗插畫；後塊是一面邊緣撕裂狀的英國國旗，旗子後緣正好收在門把正下方。兩塊之間留一個約旗寬四分之一的空隙。",
+        "extras": "整組約佔前車門長度的八成。撕裂邊是手繪毛邊，不是規則鋸齒。"
+      },
+      "bodyColours": [
+        "白／銀（示範車）",
+        "米色 ZVG"
+      ],
+      "wheels": "DAMD little D. 完成車多配白字越野胎＋復古鋼圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.damd.co.jp/products/suzuki/jimny_little-d",
+          "what": "官方說明：デモカーに採用されていた「Adventure of a lifetime」デカールを商品化、左右 1 セット、マットブラックのみ"
+        },
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/sh-store/damd-49294.html",
+          "what": "JB74W 適用品，¥28,000／¥30,800"
+        }
+      ],
+      "official": "副廠（DAMD）。",
+      "style": "city",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.damd.co.jp/products/suzuki/jimny_little-d",
+        "https://www.damd.co.jp/public/html/products/suzuki/jimny_little-d/images/little-D_Sticker2.jpg",
+        "https://store.shopping.yahoo.co.jp/sh-store/damd-49294.html",
+        "https://custom-cars.jp/parts/202503570"
+      ]
+    },
+    {
+      "id": "suzuki_spare_tyre_decal",
+      "label": "原廠備胎半罩貼（六款）",
+      "aka": [
+        "スペアタイヤハーフカバーデカール"
+      ],
+      "geometry": {
+        "where": "後備胎的黑色半罩（上半片）正面，左右置中。不在車側。",
+        "height": "圖案整個落在半罩的上半部，貼在罩體那道水平模線的上方，圖案中心大約在半罩可見高度的三分之一處。",
+        "bands": [
+          {
+            "width": "依款式不同，單色或多色印刷，寬度約佔半罩直徑的 55–65%",
+            "colour": "白、銀、洋紅漸層、紅、迷彩"
+          }
+        ],
+        "ends": "不適用（是圖不是帶）。",
+        "extras": "六款：①リバイバルA（洋紅潑墨＋Jimny SIERRA，與車側 A 款成套）②リバイバルB（條紋＋Jimny 標）③ツールギア（蜂巢＋犀牛）④カモフラージュ（迷彩＋犀牛）⑤片假名「ジムニー」（白色七〇年代斜體，初代標）⑥「四駆」。原廠自己建議「サイドデカールとコーデ」，也就是車側貼哪一款、備胎就貼同款。"
+      },
+      "bodyColours": [
+        "全色系通用"
+      ],
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "suzuki",
+          "url": "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+          "what": "六款並列，①②各 ¥7,260／0.2h，③④各 ¥8,470／0.3h，⑤⑥各 ¥3,080／0.2h"
+        }
+      ],
+      "official": "SUZUKI 原廠用品。六款都在現行型錄。註：任何デカール都要在鍍膜（ボディコート）前施工，鍍膜後貼會剝離。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/jimny-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/img/sierra/other/modal/31_1.webp",
+        "https://www.suzuki.co.jp/accessory_car/img/sierra/other/modal/31_5.webp"
+      ]
+    },
+    {
+      "id": "retro_sunset_ramp",
+      "label": "七〇年代四色漸層帶（日落斜坡）",
+      "aka": [
+        "retro sunset stripe",
+        "70s four-line stripe",
+        "BYRON BAY / LITTLE COVE 型"
+      ],
+      "geometry": {
+        "where": "前葉子板 → 前車門（五門版再跨後門）→ 後四分之一板。常見兩種收法：收在後輪拱前，或一路拉到後車身尾緣。",
+        "height": "兩種高度都常見，建模時當成兩個變體：(a) 高位——整疊中心在腰線往下約 24% 車側高度，緊貼腰線下方、門把上方（BYRON BAY 型）；(b) 中位——中心約在腰線往下 44%，剛好在門把下緣（LITTLE COVE 型）。整疊總高約佔車側高度 19–20%。",
+        "bands": [
+          {
+            "width": "第 1 條（最上）約佔整疊 24%",
+            "colour": "黑 #000000（或深棕 #3A2A1E）"
+          },
+          {
+            "width": "第 2 條約 28%",
+            "colour": "正紅 #C42027 / #EF2E23"
+          },
+          {
+            "width": "第 3 條約 22%",
+            "colour": "橘 #DA5F26 / #F38C20"
+          },
+          {
+            "width": "第 4 條（最下）約 26%",
+            "colour": "金黃 #FFD600 / #FCB816"
+          }
+        ],
+        "ends": "四條等寬、彼此相鄰、中間完全沒有縫，整疊像一塊被切成四層的色塊——這是它跟 APIO 那種「粗帶＋細白線」最大的差別。後端多半在後車身尾緣切平。前端有兩種：(1) 45 度大人字（chevron）——四條在前葉子板上散開成箭頭、尖端朝後，是最搶眼的一種；(2) 簡單的斜切黑楔形，之後就走平。",
+        "extras": "多數沒有字。部分款式在前車門下方加一行小字（例如「FOUR WHEEL DRIVE」）。"
+      },
+      "bodyColours": [
+        "米色 ZVG（最經典，就是你說的沙色那台）",
+        "白 ZVR",
+        "黑 ZJ3"
+      ],
+      "wheels": "黑鋼圈（米色車幾乎一律如此），或原廠深灰鋁圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://bodymoldsigns.com/collections/suzuki-jimny-stripes",
+          "what": "澳洲 Bodymold Signs 的 Jimny 專用套組目錄，13 款裡有 5 款是這個家族"
+        },
+        {
+          "where": "shop",
+          "url": "https://bodymoldsigns.com/cdn/shop/files/BLACK-RED-ORANGE-YELLOW.jpg",
+          "what": "LITTLE COVE：米色車＋黑鋼輪，黑/紅/橘/黃四條，中位，量到 14:17:13:16 px"
+        },
+        {
+          "where": "shop",
+          "url": "https://bodymoldsigns.com/cdn/shop/files/BB_-_Yellow_Orange_Red_Black_f7abb04a-8a37-4881-995d-922336235d09.png",
+          "what": "BYRON BAY：白車，同樣四條但走高位，前葉子板做成 45 度大人字"
+        }
+      ],
+      "official": "副廠。注意：Bodymold 的圖是店家自己的向量示意圖不是實車照，但那正是裁切檔的形狀，量尺寸反而比實車照準。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://bodymoldsigns.com/collections/suzuki-jimny-stripes",
+        "https://bodymoldsigns.com/pages/jimny-vehicle-striping",
+        "https://bodymoldsigns.com/cdn/shop/files/BLACK-RED-ORANGE-YELLOW.jpg",
+        "https://bodymoldsigns.com/cdn/shop/files/BB_-_Yellow_Orange_Red_Black_f7abb04a-8a37-4881-995d-922336235d09.png"
+      ]
+    },
+    {
+      "id": "dash_fade_tail",
+      "label": "尾端虛線化的粗帶",
+      "aka": [
+        "dashed fade stripe",
+        "ADVENTURE kit"
+      ],
+      "geometry": {
+        "where": "前葉子板 → 前車門 → 後四分之一板，收在後輪拱前或車身尾緣。",
+        "height": "高位。帶中心約在腰線往下 30% 車側高度；帶高約佔車側高度 18%（主帶 + 下緣深色副帶）。過門把時從門把下方擦過。",
+        "bands": [
+          {
+            "width": "主帶約佔整組 30%",
+            "colour": "橘 #E47339"
+          },
+          {
+            "width": "下副帶約 70%，比主帶粗",
+            "colour": "深橘紅 #D4472C"
+          }
+        ],
+        "ends": "前端在前葉子板斜切收尖。後端是重點：從後車門／後四分之一板開始，整條帶子被切成一排等長的短方塊（虛線），方塊之間的空隙由前往後愈來愈大，像訊號漸弱一樣淡出。建模上就是同一條帶子後段加一個週期漸增的遮罩。",
+        "extras": "無字。"
+      },
+      "bodyColours": [
+        "黑 ZJ3（示範色，對比最強）",
+        "白 ZVR"
+      ],
+      "wheels": "原廠深灰鋁圈或黑鋼圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://bodymoldsigns.com/cdn/shop/files/oranges-on-black.jpg",
+          "what": "ADVENTURE 套組，黑車橘帶，可看清楚虛線淡出的節奏"
+        }
+      ],
+      "official": "副廠。",
+      "style": "city",
+      "confidence": "confirmed",
+      "sources": [
+        "https://bodymoldsigns.com/collections/suzuki-jimny-stripes",
+        "https://bodymoldsigns.com/cdn/shop/files/oranges-on-black.jpg"
+      ]
+    },
+    {
+      "id": "nested_chevron_blocks",
+      "label": "階梯人字色塊",
+      "aka": [
+        "nested chevron",
+        "stepped arrow stripe",
+        "LITTLE SCOUT 型"
+      ],
+      "geometry": {
+        "where": "前葉子板一組、每一片車門前緣各一組，後四分之一板收尾。不是一條連續的帶，而是「連續的細線＋在每個板件接縫處爆開成箭頭」。",
+        "height": "高位。細線段走在腰線往下約 22% 車側高度（緊貼腰線下方）；爆開的人字塊往下延伸到約 45%。",
+        "bands": [
+          {
+            "width": "三條，上細下粗，比例約 1 : 1.2 : 1.5",
+            "colour": "由上到下：米沙 #D8BE8A、鏽橘 #B3591F、深咖啡 #5A3A22"
+          }
+        ],
+        "ends": "每一組人字的收法是：三條線往前走到板件前緣時，各自往下折 45 度、長度依序遞減（最上那條折最長、最下那條最短），形成一個朝左下的階梯箭頭，末端全部水平切平。整體在後四分之一板以水平切平收掉。",
+        "extras": "無字。這一組的辨識度全在「階梯」上，建模時三條線要各自有不同的折點 x 座標。"
+      },
+      "bodyColours": [
+        "黑 ZJ3（示範色）",
+        "米色 ZVG"
+      ],
+      "wheels": "深灰復古鋼圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://bodymoldsigns.com/cdn/shop/files/brown-copper-gold-on-black.jpg",
+          "what": "LITTLE SCOUT，黑車配米沙/鏽橘/深咖啡三色階梯人字"
+        }
+      ],
+      "official": "副廠。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://bodymoldsigns.com/collections/suzuki-jimny-stripes",
+        "https://bodymoldsigns.com/cdn/shop/files/brown-copper-gold-on-black.jpg"
+      ]
+    },
+    {
+      "id": "low_triple_sill",
+      "label": "門檻三細線",
+      "aka": [
+        "sill stripe",
+        "TRIPLE SILL / SUNSET SILL"
+      ],
+      "geometry": {
+        "where": "前輪拱後緣 → 前車門 → 後四分之一板 → 收在後輪拱前緣。拱到拱，跟 APIO 同樣的走法但更低更細。",
+        "height": "最低的一組之一。整疊中心約在腰線往下 78–82% 車側高度，也就是車門下折線與門檻之間那條窄帶。整疊總高只佔車側高度約 8–10%。",
+        "bands": [
+          {
+            "width": "三條等寬相鄰",
+            "colour": "同色系由淺到深往下排，例如淺藍 #7FB8E8 / 中藍 #394EA1 / 深藍 #1B2A5E；暖色版則是黃/橘/紅"
+          }
+        ],
+        "ends": "兩端垂直切平抵住輪拱膠條，全程水平，不折不繞。",
+        "extras": "無字。這是最低調、也最好做的一種：一條矩形分成三層即可。"
+      },
+      "bodyColours": [
+        "白 ZVR",
+        "米色 ZVG",
+        "銀 Z2S"
+      ],
+      "wheels": "黑鋼圈",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://bodymoldsigns.com/cdn/shop/files/blues_5340ff26-20a2-4e1d-b8d3-4b8f2f83d968.jpg",
+          "what": "TRIPLE SILL，白色三門 JB74 配黑鋼圈，藍色三層"
+        }
+      ],
+      "official": "副廠。",
+      "style": "city",
+      "confidence": "confirmed",
+      "sources": [
+        "https://bodymoldsigns.com/collections/suzuki-jimny-stripes",
+        "https://bodymoldsigns.com/cdn/shop/files/blues_5340ff26-20a2-4e1d-b8d3-4b8f2f83d968.jpg"
+      ]
+    },
+    {
+      "id": "hood_side_stripe",
+      "label": "引擎蓋側緣條",
+      "aka": [
+        "フードサイドストライプ",
+        "hood side stripe",
+        "bonnet side stripe"
+      ],
+      "geometry": {
+        "where": "不在車側，在引擎蓋的『側立面』——引擎蓋上平面與前葉子板之間那道陡斜的窄面。從風擋下緣（カウル）往前拉到頭燈後方。左右各一條。",
+        "height": "整條就貼滿那道側立面，上緣貼齊引擎蓋折邊、下緣貼齊葉子板接縫，所以高度由車身硬點決定，不需要自己抓。",
+        "bands": [
+          {
+            "width": "主體是一條前細後粗的長楔形，最粗處（風擋端）約為側立面全高",
+            "colour": "黑或消光黑 #111111"
+          },
+          {
+            "width": "尾端色帶：3 條短斜線，每條約佔主體長度的 2–3%",
+            "colour": "RETRO＝紅 #D0342C / 橘 #E8862A / 黃 #F2C230；BLUE RETRO＝三層藍；YELLOW RETRO ACCENT＝只有一條黃線；BLACK＝純黑無色帶"
+          }
+        ],
+        "ends": "後端（靠風擋）以一道朝前傾斜的斜切收掉，色帶就排在這個斜切面上、跟切角同傾斜度。前端一路收成細尖，停在頭燈後方一點點，不碰頭燈。",
+        "extras": "沒有字。原廠ツールギア側貼裡也含一條同位置的引擎蓋側條（黑底、尾端一小塊紅、中段有極小的 REAL OFFROADER 字），可見這個位置是公認的一格。"
+      },
+      "bodyColours": [
+        "白 ZVR（對比最強、示範色）",
+        "米色 ZVG",
+        "銀 Z2S"
+      ],
+      "wheels": "不限；示範車配黑色復古鋼圈＋M/T 胎",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://shop.crazycolorz-carwrap.com/products/jimny-hood-side-stripe",
+          "what": "JB64W / JB74W / JC74W 共用預裁品，四種配色各分亮面與消光；官方文案「ジムニー系のフードサイド部分に、小さくアクセントを加えるプレカットタイプ」"
+        },
+        {
+          "where": "shop",
+          "url": "https://shop.crazycolorz-carwrap.com/cdn/shop/files/hood-side5.jpg",
+          "what": "四種配色並排比較圖，看得到尾端斜切與色帶的傾斜角"
+        }
+      ],
+      "official": "副廠（Crazy Colorz）。同位置的原廠版本包含在ツールギア側貼（99230-78R00-003）裡。",
+      "style": "city",
+      "confidence": "confirmed",
+      "sources": [
+        "https://shop.crazycolorz-carwrap.com/products/jimny-hood-side-stripe",
+        "https://shop.crazycolorz-carwrap.com/cdn/shop/files/hoodside.jpg",
+        "https://shop.crazycolorz-carwrap.com/cdn/shop/files/hood-side5.jpg",
+        "https://crazycolorz-carwrap.com/jimny-decal-protection-film-guide/"
+      ]
+    },
+    {
+      "id": "outclass_vintage",
+      "label": "OUTCLASS ヴィンテージ側貼（暖色漸層帶）",
+      "aka": [
+        "ヴィンテージサイドデカール",
+        "OUTCLASS vintage side decal"
+      ],
+      "geometry": {
+        "where": "前葉子板 → 前車門 → 後四分之一板，一路走到車身後角（尾門門縫）才切掉。左右各一組。",
+        "height": "**這一組不是等高的帶子，是會「長高」的階梯帶** ——第一版我沒看出來，重新用像素掃描確認：前葉子板到車門前半只有約 19px 高；到車門中段（大約在後照鏡正下方）『上緣』一次跳高，用約 50 度的斜邊（轉角帶圓角）往上長到約 35px，上緣頂到車門上折線、貼著玻璃下緣；門把就落在這段長高區的上半部裡。下緣則是一條幾乎連續的水平線，直到後四分之一板才以約 55 度往上收，讓後段退回約 15px 高。換算成比例約：前段 46%→72%、門段 11%→68%、後段 11%→40%（±3%）。",
+        "bands": [
+          {
+            "width": "上緣一道極細的米白 sliver",
+            "colour": "米白 #F4B79A"
+          },
+          {
+            "width": "橘與紅兩段，在後四分之一板上高度大致相等；往車頭方向整體洗淡成粉橘",
+            "colour": "橘 #F79D5A → 紅 #EA6868（是噴槍式漸層，不是硬邊分色）"
+          }
+        ],
+        "ends": "前端在前葉子板上以一小段斜邊收掉（run-out 很短）。後端是垂直切平，切在車身後角、尾門門縫上。中間兩次轉折（車門中段的上升、後四分之一板的下緣上收）都帶圓角，不是尖角。",
+        "extras": "OUTCLASS 標。官方說這是 JB64/JB74 上市那年十月登上《ケイマガジン》創刊號封面的展示車用的設計。"
+      },
+      "bodyColours": [
+        "深橄欖綠（官方展示車）"
+      ],
+      "wheels": "鍍鉻蓋鋼圈配 TOYO M/T，紅色側踏；車身為 Jungle Green",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://outclass.ocnk.net/product/1338",
+          "what": "ヴィンテージサイドデカール ¥39,000（税別），可選 JB64/JB74、JC74、DA17；官方寫明「施工にあたり専門的な知識が必要」、基本上要送店施工"
+        }
+      ],
+      "official": "副廠（ジムニー専門店 アウトクラス）。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "sources": [
+        "https://outclass.ocnk.net/product-list/229",
+        "https://outclass.ocnk.net/product/1338"
+      ],
+      "gapNote": "形狀已確認；但全網只有一張 600px 商品圖，車門那一段在照片裡過曝，所以『門段的橘紅分界在哪』仍然未定。"
+    },
+    {
+      "id": "jaos_pinstripe",
+      "label": "JAOS 低位雙線（主帶＋細線）",
+      "aka": [
+        "JAOS サイドデカール B646012 / B646011"
+      ],
+      "geometry": {
+        "where": "前葉子板後段 → 整片前車門 → 後四分之一板，在後輪拱膠條前緣垂直切平。全程筆直水平，不漸變、不斜切、不 kick-up。",
+        "height": "很低。腰線＝0%、車門下緣＝100% 的話，整組落在 78%→89%——在車門下折線『下方』，比其他任何一組都低，只比門檻飾板高一點。",
+        "bands": [
+          {
+            "width": "主帶 佔整組 80%（依官方 2200×75mm 推算約 78mm）",
+            "colour": "銀 #B7B7B9 或黑 #393333 兩色"
+          },
+          {
+            "width": "透明間隙 佔 6%（約 6mm，露車身色）",
+            "colour": "車身色"
+          },
+          {
+            "width": "下細線 佔 14%（約 14mm）",
+            "colour": "同主帶色"
+          }
+        ],
+        "ends": "兩端垂直切平。官方是長條供應、由施工者照車身折線自行修邊（cut-to-fit）。",
+        "extras": "JAOS 橢圓 J 標＋字樣以『鏤空白』方式挖在主帶上，尺寸約 416×64mm（約主帶高度的 82%），距離其中一端約 330mm。左右兩片是鏡像，所以兩邊的標都落在『車尾方向』。官方註明「ロゴ部分は透明のPVC材」。"
+      },
+      "wheels": "白色 JB74 配 JAOS 輪弧、BATTLEZ 鋁圈、TOYO M/T（官方示範車）",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.jaos.co.jp/product/B646012/3201",
+          "what": "官方規格 W2200×H75mm、PVC、左右一組、cut-to-fit"
+        }
+      ],
+      "official": "副廠（JAOS）。",
+      "style": "city",
+      "confidence": "confirmed",
+      "verification": "由『日本專門店』那一路調查量測官方平面圖稿＋兩張實裝棚拍；我本人未開圖。尺寸標示有歧義：2200mm 換算下來主帶就有 78mm，所以官方寫的 75mm 應該是指『主帶』而不是整組（整組約 98mm）。",
+      "sources": [
+        "https://www.jaos.co.jp/product/B646012/3201"
+      ],
+      "bodyColours": []
+    },
+    {
+      "id": "monster_lettering",
+      "label": "MONSTER SPORT 鏤空字樣帶",
+      "aka": [
+        "モンスタースポーツ サイドデカール 768500-5200M"
+      ],
+      "geometry": {
+        "where": "通用品（汎用品），非專車切型。官方明寫「ホイールアーチやドアの形状に合わせてカットしてください」——由施工者自己裁。",
+        "height": "官方沒給。JB23 示範車上落在車側高度 66%→82%，但那不是 JB74，實際高度由施工者決定。",
+        "bands": [
+          {
+            "width": "紅帶 佔整組約 80%（若 160mm 是整體外框，紅帶約 83mm）",
+            "colour": "紅 #C62513 / #BA2221"
+          },
+          {
+            "width": "車身色間隙 約 0.75 份",
+            "colour": "車身色"
+          },
+          {
+            "width": "下細線 約 1.2 份",
+            "colour": "炭灰 #3C3B37"
+          }
+        ],
+        "ends": "自行裁切，無固定端點造型。",
+        "extras": "**字是鏤空的不是印的**，官方原文：「赤い帯部分にかかる文字は切り抜き加工されているため、地の色（車体色）が出ます」。兩組字：前段小寫斜體方體 monster 標（約帶高 60%），後段一個大的斜體毛筆字 Tuning——筆畫壓到紅帶的部分鏤空、超出紅帶上方的部分則以紅色實體畫出來，g 的尾巴掉到帶子下面。建模時這是唯一一組『字跨出帶子外』的。"
+      },
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.monster-sport.com/product/parts/accessory/sticker/",
+          "what": "1900×160mm、左右一組、受注生産約 10 天"
+        }
+      ],
+      "official": "副廠（MONSTER SPORT）。",
+      "style": "city",
+      "confidence": "uncertain",
+      "verification": "尺寸與鏤空工法是官方白紙黑字，可信。但 **MONSTER 自己沒有任何 JB64/JB74 的裝車照**——官網圖是 JB23 與 Hustler，他們自家 JB64 完成車也沒裝這片。所以 JB74 上的實際位置與比例未經驗證。",
+      "sources": [
+        "https://www.monster-sport.com/product/parts/accessory/sticker/"
+      ],
+      "bodyColours": []
+    },
+    {
+      "id": "outclass_porsche",
+      "label": "OUTCLASS 保時捷式斷字帶",
+      "aka": [
+        "ポルシェ風サイドデカール",
+        "OUTCLASS ロゴ入りサイドデカール"
+      ],
+      "geometry": {
+        "where": "前葉子板尖端 → 前車門 → 後四分之一板，前後都在輪拱處垂直切平。全程水平，不 kick-up。",
+        "height": "低位，跟 JAOS 幾乎同一條線：車側高度 77%→86%。",
+        "bands": [
+          {
+            "width": "上細線 1 份",
+            "colour": "黑 #080808"
+          },
+          {
+            "width": "間隙 0.8 份",
+            "colour": "車身色"
+          },
+          {
+            "width": "主帶 5.2 份（佔整組 59%）",
+            "colour": "黑 #080808"
+          },
+          {
+            "width": "間隙 0.8 份",
+            "colour": "車身色"
+          },
+          {
+            "width": "下細線 1 份",
+            "colour": "黑 #080808"
+          }
+        ],
+        "ends": "兩端垂直切平。",
+        "extras": "**這組的重點是「斷字」——保時捷 Carrera 側身字的做法**：主帶在中間『斷開』，OUTCLASS 字樣填進那個缺口、左右兩端緊貼帶子切口；而上下兩條細線『不斷』，從字的上下穿過去。字的 cap height 等於主帶高度，剛好齊平。字體是單一線寬的幾何延伸體（Eurostile 那一路，方形圓角字腔），筆畫粗細約字高的 21%，整個字塊長約帶高的 17 倍，中心落在車門約 45% 處。官方：「カラーは基本、ブラックですが希望がある場合はお申し出ください」。"
+      },
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://outclass.ocnk.net/product/1337",
+          "what": "¥20,000（税別），黑色為主、可指定其他色"
+        }
+      ],
+      "official": "副廠（アウトクラス）。",
+      "style": "city",
+      "confidence": "confirmed",
+      "verification": "由『日本專門店』那一路量測官方商品圖；我本人只開了同店的ヴィンテージ那張。",
+      "sources": [
+        "https://outclass.ocnk.net/product/1337",
+        "https://outclass.ocnk.net/product-list/229"
+      ],
+      "bodyColours": []
+    },
+    {
+      "id": "toyfactory_101tent",
+      "label": "Toy Factory 101TentCar 四帶（前端繞葉子板轉角）",
+      "aka": [
+        "トイファクトリー 101TentCar サイドストライプ"
+      ],
+      "geometry": {
+        "where": "前葉子板（含前端立面）→ 前車門 → 後四分之一板。JB64W／JB74W 專用切型，左右一組，依板件分張供應，施工約 5 小時。",
+        "height": "中位，整組橫跨門把：上緣 18%、下緣 44% 車側高度，整組佔 26%。**整組往車尾抬升約 2.3–2.5 度**（在四個 x 位置量過），不是水平。",
+        "bands": [
+          {
+            "width": "細橘線 1 份",
+            "colour": "淺橘 #F49873"
+          },
+          {
+            "width": "間隙 0.75",
+            "colour": "車身色"
+          },
+          {
+            "width": "漸層帶 3.5 份",
+            "colour": "鮭橘往下漸層到橘：#FF9557 → #FF8225 → #FF7602（8px 的真漸層，不是實色）"
+          },
+          {
+            "width": "間隙 1",
+            "colour": "車身色"
+          },
+          {
+            "width": "實色橘 3.5 份",
+            "colour": "#FE7000"
+          },
+          {
+            "width": "間隙 1",
+            "colour": "車身色"
+          },
+          {
+            "width": "寬深色帶 5 份",
+            "colour": "灰車上讀作近黑 #1D2124、象牙車上讀作深藍 #2B3954——兩台官方示範車不一致，先照車身色挑"
+          }
+        ],
+        "ends": "**前端是招牌動作**：四條帶子在前葉子板前角一起轉約 90 度往下，轉角是『同心圓角』——最外側的細線半徑最大、愈內側愈緊——然後沿前葉子板的『前立面』往下走，在與輪拱頂齊平處垂直切平；深色帶在輪拱內角被裁成三角楔。側標燈就落在實色橘與深色帶之間的車身色縫裡。**後端是兩件分開的東西**：(1) 深色帶的下緣沿後輪拱往上掃、在拱頂收成鈍尖；(2) 後四分之一板右上角另有一塊獨立的『旗標』色塊，上緣水平、前緣是內凹的 S 形（三條橘帶正好方正地頂上去）、下方垂一個大的外凸圓弧，收在尾門門縫。",
+        "extras": "**整組完全沒有任何文字。** 門把凹槽把中間兩條帶子切開，寬深色帶從門把正下方通過，鑰匙孔打穿下面那條中帶。"
+      },
+      "wheels": "象牙色 JB74 配灰色五輻；石板灰 JB74 配拋光鋼圈風格輪圈加鍍鉻中蓋，Yokohama Geolandar M/T",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.toy-factory-shop.jp/view/item/000000000037",
+          "what": "JB64W＋JB74W，只有オレンジ×ブラック一種配色"
+        }
+      ],
+      "official": "副廠（トイファクトリー）。",
+      "style": "camp",
+      "confidence": "confirmed",
+      "verification": "兩路調查一開始對『橘色是幾條』講法不同，各自重新做像素取樣後都收斂到『四條帶＋車身色間隙』，所以這筆採四條。",
+      "sources": [
+        "https://www.toy-factory-shop.jp/view/item/000000000037"
+      ],
+      "bodyColours": []
+    },
+    {
+      "id": "goosfam_kickup",
+      "label": "GOOSFAM 45 度上折＋楔形（唯一繞輪拱的一組）",
+      "aka": [
+        "GOOSFAM オリジナルサイドデカール"
+      ],
+      "geometry": {
+        "where": "前葉子板（切型順著輪弧）→ 前車門（完全水平）→ 在車門後緣門縫整組以約 45–60 度往上折到後四分之一板 → 折完攤平成兩條細帶，沿後四分之一板上緣、腰線正下方往後跑，在車身後角往下轉，收在尾門門縫。",
+        "height": "車門段：上緣約在門把下方 0.3 個門把高度處，下緣剛好在原廠下側飾條上方。後段抬到腰線正下方。",
+        "bands": [
+          {
+            "width": "主帶 佔 55–57%",
+            "colour": "紫色版：紫羅蘭 #654374；藍色版：深海軍藍"
+          },
+          {
+            "width": "米白帶 19%",
+            "colour": "銀灰 #A5A3A3（紫版）／米白（藍版）"
+          },
+          {
+            "width": "細強調線 4%",
+            "colour": "卡其沙 #AAA388（紫版）／鏽橘（藍版）"
+          },
+          {
+            "width": "米白帶 19–21%",
+            "colour": "同上"
+          }
+        ],
+        "ends": "上折之後最前面那一段膨成一塊『深藍綠楔形』並包白邊；**然後有一條白色細線平行繞著後輪拱眉線跑一圈**——這是整份調查裡唯一一組真的去描輪拱的設計，其他全部都是在拱前切掉。前端在前葉子板順著輪弧切。",
+        "extras": "白色 GOOSFAM 字樣在後四分之一板上、兩條細帶的上方、靠近腰線。"
+      },
+      "bodyColours": [
+        "白珍珠（紫色版）",
+        "Medium Gray ZVL（藍色版）",
+        "黑（官方展示車）"
+      ],
+      "wheels": "黑色與鍍鉻蓋 16 吋鋼圈，TOYO Open Country R/T",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://item.rakuten.co.jp/sanoauto/gf6474sd0003/",
+          "what": "經銷商頁，看得到紫／藍兩種配色圖表"
+        },
+        {
+          "where": "shop",
+          "url": "https://goosfam.stores.jp/items/68de96a396bb959d11d2f86c",
+          "what": "原廠店：紫 ¥39,000／藍 ¥39,000／橘 ¥46,000，適用 Jimny・Sierra・Nomade"
+        }
+      ],
+      "official": "副廠（GOOSFAM）。",
+      "style": "new",
+      "confidence": "confirmed",
+      "verification": "架構與比例由『日本專門店』那一路從經銷商圖量出；我本人只讀到原廠店的文字（原廠店是 JS 頁、圖檔 URL 擋下載）。**沒有官方 mm**，比例可信、絕對尺寸不可信。",
+      "sources": [
+        "https://item.rakuten.co.jp/sanoauto/gf6474sd0003/",
+        "https://goosfam.stores.jp/items/68de96a396bb959d11d2f86c"
+      ]
+    },
+    {
+      "id": "craphts_side_panel",
+      "label": "Craphts 大面積側板（不是條紋，是整片）",
+      "aka": [
+        "Craphts SIDE L / SIDE HALF / BASIC / RETRO / WOOD / CAMO"
+      ],
+      "geometry": {
+        "where": "前葉子板＋前車門＋後四分之一板連成一整片，x 範圍在 2400px 參考圖上是 344→2099。",
+        "height": "上緣在腰線下 11–15%、下緣 66%——**下緣正好壓在車門下折線上**。整片高度佔車側 55%。SIDE HALF 版本下緣改到 45%。",
+        "bands": [
+          {
+            "width": "上帶 3.5 份",
+            "colour": "三種配色：#E95412 / #AA9173 / #D65C2D"
+          },
+          {
+            "width": "白細線 1 份",
+            "colour": "#F1F4EE"
+          },
+          {
+            "width": "強調細線 1 份（與白線『完全等寬』）",
+            "colour": "#136EB6 / #7FBBB7 / #C69E6C"
+          },
+          {
+            "width": "主色塊 20 份",
+            "colour": "#18415A / #589094 / #3A312D"
+          }
+        ],
+        "ends": "**這是唯一一組會「繞拱」與「包車身轉角」的量產切型**：下緣以等寬間距沿前後輪拱往上掃，兩端則以大圓角繞過車身前後轉角往下收。門把、鑰匙孔、油箱蓋、側標燈全部挖空。",
+        "extras": "「Craphts / For JIMNY」手寫字壓在主色塊上、前車門、門把稍後方。RETRO 配色是整份菜單裡最七〇年代的：琥珀 #F39800 由前往後漸變到深紅 #C40C24，而且兩色之間的過渡是用『約五條平行、往前傾斜 45 度的排線』做的，不是漸層。"
+      },
+      "bodyColours": [
+        "不限"
+      ],
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://craphts.team-inkjet.co.jp/jimny/",
+          "what": "線上配置器；它的圖層是 2400px 透明 PNG/WEBP 向量稿，所以幾何是精確值而不是照片估算"
+        }
+      ],
+      "official": "副廠（Craphts 橫濱）。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "verification": "由『日本專門店』那一路直接讀配置器的圖層檔量測。若要重用那些檔案有個對齊陷阱：Large_*／herf_*／lower_* 是 2400×1142，與車身層 1:1；m_*／line_*／moc_* 是 2400×1042，要往下位移 50px。",
+      "sources": [
+        "https://craphts.team-inkjet.co.jp/jimny/"
+      ]
+    },
+    {
+      "id": "damd_side_moulding",
+      "label": "DAMD little G. 側飾條（是實體飾條，不是貼紙）",
+      "aka": [
+        "little G. サイドモール",
+        "DAMD TRADITIONAL 的那條「腰線」"
+      ],
+      "geometry": {
+        "where": "前葉子板、前車門、（右側）油箱蓋、後四分之一板，一車七段橡膠＋七片不鏽鋼飾板。",
+        "height": "以橡膠條『下緣』為基準，對齊「ドアノブのライン」：前端在前葉子板上折線下方 85mm、後端在車身後角下方 95mm、側標橢圓上方 45mm、油箱蓋上緣下方 50mm。換算下緣約在腰線下 152mm＝車側高度 22–23%。官方自己註明「高さは目安です」。",
+        "bands": [
+          {
+            "width": "整條高約 27–30mm",
+            "colour": "橡膠 #181713"
+          },
+          {
+            "width": "中央嵌入的不鏽鋼片高約 16–18mm，上下各留約 5mm 橡膠",
+            "colour": "不鏽鋼 #F1EAE0"
+          }
+        ],
+        "ends": "每段都是方頭加端蓋（一車 14 個端蓋），不斜切、不繞拱。**每個板件門縫處固定留 19mm 空隙**（官方：「19mm以下にならないよう注意」）；右側油箱蓋那段前留 19mm、後留 35mm。各段長度（橡膠/鋼片）：右側 860/857 葉子板、860/857 車門、145/142 油箱蓋、665/662 後四分之一板；左側 860/857、860/857、910/907。鋼片一律比橡膠短 3mm，嵌在中央凹槽裡、左右各留約 1mm 餘隙。",
+        "extras": "**建模重點：這東西是凸出車身的 3D 擠出件，不是貼膜**——把它當貼紙做會少掉陰影而整台車看起來就不對。另外車門那一段『在門把前面就結束』並收端蓋，門把到車門後緣之間是空的。TRADITIONAL 展示車只裝橡膠不裝鋼片，整條消光黑、看得到中央凹槽。"
+      },
+      "bodyColours": [
+        "不限"
+      ],
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+          "what": "官方安裝說明書有全部 mm（jb64_74_littleg_sidemolding_0407.pdf）"
+        }
+      ],
+      "official": "副廠（DAMD）。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "verification": "**這一筆推翻了前一份 jb74-graphics.json 的假設**：DAMD 對 JB74 根本沒有做多色側貼，little G. 全系列（STANDARD／ADVANCE／AVENTURA／TRADITIONAL）看起來像腰線的東西都是這條實體飾條。另外 little B.、little DELTA、Nomade ARMATA 完全沒有側面圖樣（little DELTA 的紅白車是乾淨的，沒有 Martini 條紋）；damd.co.jp 上的 classico 是 Hustler 的套件，不是 Jimny 的。",
+      "sources": [
+        "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+        "https://www.damd.co.jp/products/suzuki/jimny_little-d"
+      ]
+    },
+    {
+      "id": "damd_camel",
+      "label": "DAMD TRADITIONAL 駱駝圖（單門插畫）",
+      "aka": [
+        "little G. TRADITIONAL ラクダデカール"
+      ],
+      "geometry": {
+        "where": "只在前車門，而且在側飾條『下方』，水平置中。",
+        "height": "駝峰頂約在車側高度 35%，字的基線約 77%。",
+        "bands": [
+          {
+            "width": "整塊約 307×271mm；駱駝高約 200mm；字塊約 274×65mm",
+            "colour": "黑 #000000 與銅金屬色 #803515 兩種"
+          }
+        ],
+        "ends": "不適用（是圖不是帶）。",
+        "extras": "單峰駱駝、只有外框線不填色、面朝車頭，站在一條細地平線上；下方「TRADITIONAL」粗體窄身板狀字壓在一條實心黑基線上，整個往上斜幾度。"
+      },
+      "bodyColours": [
+        "米色系"
+      ],
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+          "what": "TRADITIONAL 的實際圖樣"
+        }
+      ],
+      "official": "副廠（DAMD）。",
+      "style": "jp_retro",
+      "confidence": "confirmed",
+      "verification": "由『日本專門店』那一路量測官方圖；我本人未開圖。",
+      "sources": [
+        "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/"
+      ]
+    },
+    {
+      "id": "mattlami_wood_lower",
+      "label": "マットラミ 木紋下側板",
+      "aka": [
+        "マットラミ JB74 ウッド調サイドデカール"
+      ],
+      "geometry": {
+        "where": "一邊三片，全部在車門下折線『以下』：車門上一片長條主板，前葉子板與後四分之一板各一片窄四邊形。",
+        "height": "只佔車側高度最下面約 20%。",
+        "bands": [
+          {
+            "width": "單一印刷面",
+            "colour": "橫向木紋，以板中心左右對稱書頁式拼接：#80502C / #714D37 / #7A5F4C"
+          }
+        ],
+        "ends": "主板兩端是大圓角的『船形』；前後兩片窄板的外緣則平行於輪拱膠條斜切。整片外圍內縮一點描一條米白細框，沿上下緣與兩個斜端連續繞一圈。",
+        "extras": "無字。姊妹款 dewcarjimny8-2 是同樣幾何的黑灰迷彩版。"
+      },
+      "bodyColours": [
+        "白",
+        "米色 ZVG"
+      ],
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://store.shopping.yahoo.co.jp/mcmanaic/dewcarjimny8-1.html",
+          "what": "JB74 專用木紋套件"
+        }
+      ],
+      "official": "副廠（マットラミ／マニアックコレクション）。",
+      "style": "camp",
+      "confidence": "confirmed",
+      "verification": "**修正前一份 jb74-graphics.json**：那份寫「把整片車側腰線以下貼成木紋」，實際上木紋只佔最下面約 20%，不是腰線以下全部。無官方 mm。",
+      "sources": [
+        "https://store.shopping.yahoo.co.jp/mcmanaic/dewcarjimny8-1.html"
+      ]
+    },
+    {
+      "id": "taniguchi_lower_wedge",
+      "label": "店家細楔形（門檻折線上的漸尖長條）",
+      "aka": [
+        "ORS TANIGUCHI ボディストライプテープ",
+        "HB1st ドアサイドステッカー"
+      ],
+      "geometry": {
+        "where": "沿車門下方的壓線走，單邊全長約 1,170mm（TANIGUCHI 官方數字）。",
+        "height": "低位，車側高度約 65–80%。",
+        "bands": [
+          {
+            "width": "一條，一端最寬、往另一端漸收成尖",
+            "colour": "黑，店名以鏤空白字挖在寬端裡、透出車身色"
+          }
+        ],
+        "ends": "一端方頭、另一端拉長收尖。TANIGUCHI 版寬端朝車頭、尖端朝車尾。",
+        "extras": "寬端內鏤空「OFF ROAD SERVICE / TANIGUCHI」兩行字。這是實車上最常見、也最便宜的一種（¥7,480 左右一對），因為它只要對準一條折線就貼得好。"
+      },
+      "bodyColours": [
+        "不限，深色車身要改用白/銀"
+      ],
+      "wheels": "不限",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://www.k-products.shop/shopdetail/000000001636/",
+          "what": "TANIGUCHI ボディストライプテープ，JB64/JB74，全長 117cm、2 本セット"
+        }
+      ],
+      "official": "副廠（ORS TANIGUCHI／HB1st）。",
+      "style": "city",
+      "confidence": "uncertain",
+      "verification": "形狀我親眼看過商品照（黑色漸尖長條、寬端鏤空店名），**但那張照片是舊世代 Jimny 不是 JB74**，所以 JB74 上的確切高度沒有實圖佐證；65–80% 這個數字是另一路調查給的。",
+      "sources": [
+        "https://www.k-products.shop/shopdetail/000000001636/",
+        "https://item.rakuten.co.jp/k-products/t-270/"
+      ]
+    },
+    {
+      "id": "osawa_compass",
+      "label": "大澤商会 compass 組合貼（人字群＋車尾名牌帶）",
+      "aka": [
+        "compass サイドデカールセット"
+      ],
+      "geometry": {
+        "where": "三個子元件：(a) 跨在前葉子板／車門門縫上的 45 度平行四邊形人字群（6–8 條）；(b) 一條細深棕帶，往前接到葉子板、往後沿車門在門把高度跑；(c) 後四分之一板的名牌帶。",
+        "height": "人字群縱向約佔車側高度 30–60%；名牌帶在腰線下方。",
+        "bands": [
+          {
+            "width": "人字條交替排列",
+            "colour": "深棕 #563830 / 橘 / 黑"
+          }
+        ],
+        "ends": "名牌帶的前端散開成 5–6 道漸尖斜線（傾斜 30–40 度），橫跨油箱蓋。",
+        "extras": "名牌帶上有大的白色斜體「Jimny」，下方一行「SUZUKI」。"
+      },
+      "bodyColours": [
+        "Chiffon Ivory #D5CCAF"
+      ],
+      "wheels": "象牙色 16 吋鋼圈配 TOYO M/T",
+      "examples": [
+        {
+          "where": "shop",
+          "url": "https://item.rakuten.co.jp/oskkyoto/compass1749460295/",
+          "what": "¥45,800–55,800，3M 割膜，JB64/JB74/Nomade"
+        }
+      ],
+      "official": "副廠（大澤商会）。",
+      "style": "jp_retro",
+      "confidence": "uncertain",
+      "verification": "**轉述，我沒有親眼看到圖。** 我照樂天頁面列出的 cabinet 圖檔網址去抓，回來的是同店的矽膠鑰匙套照片，不是這組貼紙。上面的描述來自『みんカラ』那一路的調查，未經我複驗——要建模前請先自己開一次圖。",
+      "sources": [
+        "https://item.rakuten.co.jp/oskkyoto/compass1749460295/"
+      ]
+    }
+  ],
+  "modellingNotes": {
+    "threeSlots": "把所有 26 筆疊在一起看，垂直位置幾乎只落在三個帶狀區，中間第三區很少單獨被用：(1) 緊貼腰線下方——腰線下 10–25%，帶高 10–15%（原廠リバイバルB、Byron Bay 型、Craphts SIDE LINE）；(2) 橫跨門把——約 20–66%，整組把門把包在裡面（原廠カモフラージュ、Toy Factory、OUTCLASS ヴィンテージ 的門段）；(3) 壓在車門下方的壓線上——65–90%（APIO、JAOS、OUTCLASS ポルシェ風、TANIGUCHI、原廠ツールギア）。配置器要讓五個 style 一眼分得開，最省力的做法就是讓它們各自佔不同的 slot。",
+    "rearTerminusIsTheDifferentiator": "前端大家都差不多（切平或斜切），**真正決定「這是哪一款」的是車尾那一端**，只有六種收法：斜切、溶散淡出、往上折成高位色塊、45 度上折後再描輪拱、名牌色塊、針尖漸收。建模時把這六種做成可切換的尾端零件，比重做整條帶子划算。",
+    "fuelLidAndArches": "兩個硬點務必處理：**後四分之一板的油箱蓋一定要切穿，圖案要在蓋子上接續下去**，不然開蓋就穿幫；**前葉子板的側標燈**是高度上限，APIO 說明書直接拿它當警告。另外「繞輪拱」極少見——26 筆裡只有 GOOSFAM（用白細線描眉線）與 Craphts（下緣等距掃過拱）兩組，其餘全部都在拱前切掉。預設不要做繞拱。",
+    "notAllFilm": "DAMD little G. 那條看起來像腰線的東西是**實體橡膠＋不鏽鋼飾條**，凸出車身、會投影。把它做成貼圖會讓整台車看起來扁掉。這是唯一一筆不能用貼圖解決的。"
+  }
+}

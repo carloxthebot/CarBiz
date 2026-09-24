@@ -783,6 +783,14 @@ export const STRIPES = [
   { id: 'none', label: '不貼', price: 0 },
   { id: 'retro3', photo: true, label: '復古三色腰線', price: 755, cur: 'TWD', brand: '露天賣家（裁切貼）',
     note: '深棕細線＋寬鏽橘＋米色下緣，三條相連，沿門檻上方的折線跑滿側面。日本沙色 JB74 最常見的那一組。台灣露天 NT$350–755 依長度與材質；自己貼得起來，工錢另計' },
+  { id: 'camo', photo: true, label: '原廠迷彩側貼', price: 8470, cur: 'JPY', brand: 'SUZUKI', uncertain: true,
+    note: '闊葉林四色迷彩橫跨門把，佔車側高度 43%。上緣是尺切的水平直邊、只有下緣刻意溶散成碎點——原廠文案還寫「柄の中にサイが隠れています」，圖案裡藏了一隻犀牛。品項歸屬有矛盾：通路當側貼賣 ¥35,247，原廠現行目錄列成備胎罩貼 ¥8,470，下單前要跟經銷商對品番' },
+  { id: 'toolgear', photo: true, label: '原廠工具箱風低位黑帶', price: null, cur: 'JPY', brand: 'SUZUKI', uncertain: true,
+    note: '一條約 210mm 的深黑帶壓在車門下折線與門檻之間，下緣一道銀白細邊，車門上半刻意整片留白。原廠示範色是白車，對比最強。官網未單獨標價' },
+  { id: 'jaos', photo: true, url: 'https://www.jaos.co.jp/', label: 'JAOS 低位雙線', price: null, cur: 'JPY', brand: 'JAOS', uncertain: true,
+    note: '2200×75mm 長條供應、由施工者照車身折線自行修邊。主帶 78mm＋6mm 露車身色＋14mm 細線，位置低到只比門檻飾板高一點。銀或黑兩色，JAOS 橢圓標以鏤空透明 PVC 挖在主帶上' },
+  { id: 'toy4', photo: true, label: '四色橘帶（Toy Factory 式樣）', price: null, cur: 'JPY', brand: 'Toy Factory', uncertain: true,
+    note: '淺橘細線＋鮭橘漸層帶＋實色橘＋寬近黑，四條橫跨門把，整組往車尾抬 2.3 度。原版前端四條會一起轉 90 度繞過前葉子板立面，轉角是同心圓角；這裡只畫車側那一段' },
 ];
 
 /**
@@ -800,35 +808,43 @@ export const STRIPES = [
  * decisions rather than a dump of state.
  */
 export const STYLES = [
+  // Each style is pushed apart on the axes that change the SILHOUETTE -- ride
+  // height, what is on the roof, how wide the arches are, how big the wheels
+  // are -- and only then on the stripe. Five cars that differ by bumper alone
+  // all read the same from ten metres away.
   { id: 'jp_retro', label: '日系復古', sw: ['#d8c9a4', '#b4703a', '#1d2224'],
-    desc: '米色車身配深棕、鏽橘、米白的三色腰線，黑鋼輪包白字越野胎，KLC 不鏽鋼雙管前後保桿。日本沙色 JB74 最常見的那一套。',
+    desc: '米色車身配深棕、鏽橘、米白的三色腰線，黑鋼輪包白字全地形胎，KLC 不鏽鋼雙管前後保桿。車高只到 1.8 米出頭，是街上開的樣子。',
     set: { color: 'ZVG', lift: 'td60', wheel: 'oemsteel', tyre: 't215r16', tread: 'toyo_at3', owl: true,
       rimColor: 0x1b1d1f, stripe: 'retro3', grille: 'hbar_suzuki', frontBumper: 'tube_heritage',
       rearBumper: 'klc_heritage_rear', mirrors: 'damd', sideStep: 'jst', ladder: 'jst',
-      roofRack: 'platform', exhaust: 'hks_legal', flares: true, sideSkirt: true } },
+      exhaust: 'hks_legal', sideSkirt: true } },
 
   { id: 'au_offroad', label: '澳洲越野', sw: ['#3f4a3c', '#1d2224', '#8a6b45'],
-    desc: '呼吸管、絞盤前桿、車頂架配 270 度車邊帳、鐵窗與滅火器。澳洲人怎麼弄一台上路好幾天的車，這組就是那個答案。',
-    set: { color: 'ZVL', lift: 'td60', wheel: 'wildboar', tyre: 't31', tread: 'bfg_km3',
-      frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb', awning: 'arb_touring_25', awningSide: 'left',
-      sideStep: 'ironman', ladder: 'tube', lightBar: 'ipf', windowGuards: true, guardCan: 'right',
-      guardAxe: 'right', shovel: true, extinguisher: 'ladder', flares: true } },
+    desc: '最高最寬的一台：75mm 舉升、31 吋胎配爆龜、絞盤前桿與呼吸管，車頂載架上一排探照燈與 270 度車邊帳。',
+    set: { color: 'ZVL', lift: 'br75', wheel: 'beadlock', tyre: 't31', tread: 'bfg_km3',
+      rimColor: 0x2a2d30, frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb',
+      awning: 'arb_touring_25', awningSide: 'left', sideStep: 'ironman', ladder: 'tube',
+      lightBar: 'ipf', roofLights: 'kc_pro6', windowGuards: true, guardCan: 'right',
+      shovel: true, extinguisher: 'ladder', flares: true } },
 
   { id: 'city', label: '都會輕改', sw: ['#d8d8d4', '#2e4a63', '#1d2224'],
-    desc: '只動輪框、胎和 1 吋舉升，加一道側裙。車高留在行照容許範圍內，驗車不用解釋，停車場高度也進得去。',
+    desc: '五台裡最矮最乾淨的：只動輪框、胎和 20mm 舉升，加一道側裙與一條低腰銀線。車頂空的，機械車位進得去，驗車不用解釋。',
     set: { color: 'ZVR', lift: 'apio20', wheel: 'dean_cross', tyre: 't215r16', tread: 'toyo_at3',
-      rimColor: 0x1d2224, sideSkirt: true, mirrors: 'stock' } },
+      rimColor: 0x1d2224, stripe: 'jaos', sideSkirt: true } },
 
   { id: 'military', label: '軍風', sw: ['#4a513a', '#2a2c26', '#9a9478'],
-    desc: '原廠軍綠配方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶與斧頭。配色與零件都走消光，沒有一顆亮件。',
-    set: { color: 'ZZC', lift: 'td40', wheel: 'oemsteel', tyre: 't225r16', tread: 'bfg_km3',
-      rimColor: 0x3c4138, frontBumper: 'taniguchi_square', rearBumper: 'taniguchi_rear_pipe',
-      roofRack: 'platform', windowGuards: true, guardCan: 'right', guardAxe: 'right', guardBoard: 'left',
-      shovel: true, extinguisher: 'left', decals: true, flares: true } },
+    desc: '原廠軍綠配原廠迷彩側貼，方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶、斧頭與鏟子。整台沒有一顆亮件。',
+    set: { color: 'ZZC', lift: 'td40', wheel: 'wildboar16', tyre: 't225r16', tread: 'bfg_km3',
+      rimColor: 0x3c4138, stripe: 'camo', frontBumper: 'taniguchi_square',
+      rearBumper: 'taniguchi_rear_pipe', roofRack: 'platform', windowGuards: true,
+      guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true,
+      extinguisher: 'left', spareBag: true } },
 
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
-    desc: '車頂架、車邊帳、側踏與尾梯這一整套上下車與遮蔭的東西，胎走安靜的全地形而不是越野胎，長途開起來不吵。',
-    set: { color: 'ZVG', twoTone: true, lift: 'td60', wheel: 'dean_cross', tyre: 't225r16', tread: 'toyo_at3',
-      roofRack: 'pioneer', awning: 'yakima_270s', awningSide: 'left', sideStep: 'jst', ladder: 'jst',
-      spareBag: true, extinguisher: 'ladder', flares: true } },
+    desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
+    set: { color: 'ZVG', twoTone: true, lift: 'td60', bodyLift: 'bl25', wheel: 'wildboar_d',
+      tyre: 't225r16', tread: 'toyo_at3', rimColor: 0x8a8d90, stripe: 'toy4',
+      roofRack: 'pioneer', awning: 'yakima_270s', awningSide: 'left', sideStep: 'jst',
+      ladder: 'jst', spareCover: true, extinguisher: 'ladder', flares: true } },
 ];
+

@@ -957,32 +957,110 @@ def ladder_tube():
 # one on: probed at y 750 the surface runs |x| 700-708 from z -600 to +700,
 # and outboard of that the arch flares stand proud at 720-790, so a stripe set
 # at |x| 710 disappears behind them exactly the way it does on the real car.
-STRIPE_Y = 752                   # centre of the band stack, on the lower door crease
+# Every stripe on this car is quoted against the flank rather than the
+# ground, because that is how the reference measures them: the belt line is
+# 0%, the bottom of the door is 100%, and they are 667 mm apart. Probed at
+# y 750 the flank runs |x| 700-708 from z -600 to +700, with the arch flares
+# standing proud at 720-790 outboard of it, so a band set at |x| 710 runs out
+# under both arches the way the real one does.
+#
+# Across 26 documented treatments the vertical position falls into only three
+# slots -- tucked under the belt (10-25%), across the door handle (20-66%),
+# and down on the lower door crease (65-90%) -- so the cheapest way to make
+# five styles read apart at a glance is to put each in a different one.
+BELT_Y, FLANK = 1090, 667
 STRIPE_X = 710
-STRIPE_Z0, STRIPE_Z1 = -1020, 850  # it runs out under both arches
+STRIPE_Z0, STRIPE_Z1 = -1020, 850   # it runs out under both arches
+py = lambda pct: BELT_Y - FLANK * pct / 100
 
 
-def stripe_bands(name, bands, y=STRIPE_Y, z0=STRIPE_Z0, z1=STRIPE_Z1):
-    """A stack of contiguous horizontal bands down each flank. `bands` is a
-    list of (height mm, hex) read top to bottom."""
+def stripe_bands(name, bands, p_top, z0=STRIPE_Z0, z1=STRIPE_Z1):
+    """A stack of horizontal bands down each flank. `bands` is a list of
+    (height as a percentage of the flank, hex or None for a gap that shows
+    body colour), read top to bottom, starting `p_top` below the belt."""
     root = group('stripe_' + name)
-    total = sum(h for h, _ in bands)
-    top = y + total / 2
     for s in (-1, 1):
-        cut = top
+        cut = p_top
         for i, (h, col) in enumerate(bands):
-            mat = material(f'Stripe{name}{i}', col, rough=0.5, metal=0.05)
-            box(f'b{s}{i}', (s * STRIPE_X, cut - h / 2, (z0 + z1) / 2),
-                (6, h, z1 - z0), mat, root, bevel=0)
-            cut -= h
+            if col is not None:
+                mat = material(f'Stripe{name}{i}', col, rough=0.5, metal=0.05)
+                box(f'b{s}{i}', (s * STRIPE_X, (py(cut) + py(cut + h)) / 2, (z0 + z1) / 2),
+                    (6, py(cut) - py(cut + h), z1 - z0), mat, root, bevel=0)
+            cut += h
+    return root
+
+
+def stripe_camo(name, p_top, p_h, z0=STRIPE_Z0, z1=STRIPE_Z1):
+    """Suzuki's own カモフラージュ side decal. Two things the reference is
+    specific about, and both are easy to get wrong: the TOP edge is a ruled
+    horizontal cut just under the door's upper crease -- no serration at all,
+    it was cut with a straightedge -- and only the BOTTOM dissolves, into
+    scattered fragments. The patches themselves are broadleaf camouflage, so
+    they overlap at irregular sizes rather than tiling a grid; a regular grid
+    reads as pixel art, which is a different pattern entirely."""
+    root = group('stripe_' + name)
+    cols = [0x2b3a1b, 0x535c3c, 0xa69e70, 0x3a2f22]
+    mats = [material(f'Camo{i}', c, rough=0.72, metal=0.0) for i, c in enumerate(cols)]
+    rng = 7
+    def rnd():                        # a fixed shuffle: the pattern must not
+        nonlocal rng                  # move between builds
+        rng = (rng * 1103515245 + 12345) & 0x7fffffff
+        return rng / 0x7fffffff
+    top, bot = py(p_top), py(p_top + p_h)
+    band = top - bot
+    for s in (-1, 1):
+        # the field: overlapping patches, none of them aligned to each other
+        for i in range(54):
+            w = band * (0.5 + rnd() * 1.5)
+            h = band * (0.22 + rnd() * 0.42)
+            zc = z0 + rnd() * (z1 - z0)
+            yc = bot + h / 2 + rnd() * (band - h)
+            box(f'p{s}{i}', (s * STRIPE_X, yc, zc), (6, h, w), mats[int(rnd() * 4)], root, bevel=0)
+        # the straightedge top: one ruled strip laid over whatever crossed it
+        box(f'top{s}', (s * (STRIPE_X + 0.4), top - band * 0.11, (z0 + z1) / 2),
+            (6, band * 0.22, z1 - z0), mats[0], root, bevel=0)
+        # and the dissolve: fragments below the field, thinning as they fall
+        for i in range(26):
+            f = rnd()
+            w = band * (0.16 + rnd() * 0.3)
+            box(f'd{s}{i}', (s * STRIPE_X, bot - f * band * 0.34, z0 + rnd() * (z1 - z0)),
+                (6, band * 0.1 * (1 - f * 0.6), w), mats[int(rnd() * 4)], root, bevel=0)
     return root
 
 
 def stripe_retro3():
-    """The stripe on nearly every sand-coloured JB74 on Japanese Instagram:
+    """The stripe on nearly every sand-coloured JB74 in the Japanese feeds:
     a dark brown hairline over a wide rust band over a cream one, contiguous,
-    running the flank at the height of the lower door crease."""
-    return stripe_bands('retro3', [(10, 0x6b4423), (46, 0xb4703a), (18, 0xe0cba8)])
+    sitting on the lower door crease."""
+    return stripe_bands('retro3', [(1.5, 0x6b4423), (6.9, 0xb4703a), (2.7, 0xe0cba8)], 45.2)
+
+
+def stripe_toolgear():
+    """Suzuki's own ツールギア look: one deep black band pinned between the
+    door's lower crease and the sill trim, with a silver hairline under it.
+    The lowest and heaviest of the documented treatments, and the only one
+    that deliberately leaves the whole upper door empty."""
+    return stripe_bands('toolgear', [(30.8, 0x0b1315), (1.2, 0xc8ccd0)], 61)
+
+
+def stripe_jaos():
+    """JAOS's low twin line: a 78 mm band and a 14 mm hairline under it, with
+    a 6 mm gap of body colour between, sitting lower than anything else --
+    78% to 89% of the flank, below the door crease and barely above the sill.
+    Drawn in the black of the two finishes JAOS offer, because the silver one
+    disappears on the white car this style puts it on."""
+    return stripe_bands('jaos', [(8.8, 0x393333), (0.9, None), (1.5, 0x393333)], 78)
+
+
+def stripe_toy4():
+    """Toy Factory's four-band set: a pale orange hairline, a graduated
+    salmon-to-orange band, a solid orange band and a broad near-black one,
+    crossing the door handle. The real set turns the front fender's corner on
+    concentric radii; this draws the flank run, which is what reads from the
+    side."""
+    return stripe_bands('toy4', [(1.7, 0xf49873), (1.2, None), (5.8, 0xff8225),
+                                 (1.7, None), (5.8, 0xfe7000), (1.7, None),
+                                 (8.3, 0x1d2124)], 18)
 
 
 def decals():
@@ -2917,6 +2995,10 @@ def build():
     flares()
     decals()
     stripe_retro3()
+    stripe_toolgear()
+    stripe_jaos()
+    stripe_toy4()
+    stripe_camo('camo', 23, 43)
     side_skirt()
     snorkel_bravo()
     snorkel_ironman()
