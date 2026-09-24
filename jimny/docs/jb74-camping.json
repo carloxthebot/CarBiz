@@ -1,0 +1,214 @@
+{
+  "sourcedAt": "2026-09-25",
+  "vehicle": "Suzuki Jimny Sierra JB74W（三門）。JB64W 為輕自動車版、JC74W 為五門 Nomade，逐項註明適用車系。",
+  "scope": "配置器「露營」區：車頂帳（展開）、車邊帳展開幾何與側牆／帳房、車尾／車側帳、JB74 露營示範車。只收原廠或官方商店第一手數字；未公布即寫「官網未公布」。",
+  "roofLoad": {
+    "verdict": "Suzuki 公布的是 30kg（含貨架自重），沒有公布靜態（停車）載重。市面上所有車頂帳本體都超過 30kg，最輕的 Jimny 對應帳 TiNY HydEouT Classic 也是 34kg（未含撐桿與橫桿）。配置器裝車頂帳時應顯示超過原廠載重的警告。",
+    "suzukiJP": {
+      "quote": "ベースキャリア ACEZ（78901-78R01）：最大積載量30kg（ベースキャリア・アタッチメントの製品重量を含む）",
+      "detail": "基座 6.3kg，¥32,890 稅込（含工資）；ルーフラックアタッチメント ACF0（99177-77R01）8.2kg、¥47,740 稅込、額定 15.5kg。型錄另寫「ベースキャリアには専用アタッチメント以外のものは装着しないでください」。JB74／JC74 共用型錄，2025 年 1 月版，價格含 10% 消費稅。",
+      "source": "https://www.suzuki.co.jp/accessory_car/jimny_nomade_jimny_sierra/jimny_nomade_jimny_sierra.pdf"
+    },
+    "suzukiEU": {
+      "quote": "Please observe the max. roof load of 30kg. (including own weight of multi roof rack and other carrier modules)",
+      "detail": "Multi Roof Rack 78901-78R10-000，6.3kg，70×144.4×18.3cm。此 PDF 由 Suzuki 保加利亞代理商托管，非 suzuki.com 網域。",
+      "source": "https://www.suzuki.bg/data/content/u/5/upload/JIMNY_accessories.pdf"
+    },
+    "suzukiGenuineFlatRack": {
+      "note": "原廠フラットルーフラック ¥121,000 稅込，1,509×1,430×177mm、20kg，裝上後車頂高約 +91mm；未公布耐荷重。20kg 自重已用掉 30kg 的三分之二。",
+      "source": "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html"
+    },
+    "staticVsDynamic": "Suzuki 未公布靜態載重。帳篷廠公布的「static」是帳篷本身可承受的睡人重量，不是車頂的額定值：Thule 帳篷 660 lb（299kg）、iKamper Skycamp Mini 約 900 lb（408kg）。iKamper 另要求車頂動態額定至少 165 lb（75kg，Mini）／79kg（BDV Duo），是 JB74 的 2.5 倍以上，官方條件上即不適用。",
+    "notFirstParty": "RV4 Wild Goose JM-2263 頁面寫「走行時の最大積載量の目安は50kg」，是改裝廠的說法，高於 Suzuki 的 30kg，不採用。Thule 日本（阿部商會）的 30kg 是 Thule 腳座＋橫桿本身的額定值，不是車輛數字。"
+  },
+
+  "recommendedTents": [
+    {
+      "id": "kamado_canotier_j3",
+      "maker": "カマド（Kamado，靜岡縣御殿場市）",
+      "model": "キャノティエ J3（Canotier J3）",
+      "part": "官網未公布",
+      "chassis": "JB64W／JB74W（官網），JC74 未提及",
+      "price": { "value": 880000, "cur": "JPY", "tax": "稅込", "incl": "含安裝工資", "note": "2022 年頁面為 ¥770,000 稅込、45kg；較新頁面為 ¥880,000 稅込、48kg。天線移位 ¥26,400 稅込另計。" },
+      "weightKg": 48,
+      "closed": "官網未公布（收合高度未公布）",
+      "open": { "L": 2100, "W": 1120, "H": 970, "unit": "mm" },
+      "type": "硬頂、氣壓棒（ガスダンパー）撐開；後段可再往後展開，讓身高 180cm 的人能躺平",
+      "sleeps": "官網未公布",
+      "mount": "依 3D 掃描直接固定在車頂，不需貨架；必須在カマド御殿場店安裝",
+      "ladder": "伸縮式ハシゴ附；位置官網未公布",
+      "fabric": "Neoprene（潛水衣材質）",
+      "jimnyInstall": "有：Jimny 專用產品，裝著狀態可過車檢（取り付けたまま車検もOK）",
+      "vs30kg": "48kg，超過 30kg 上限 18kg；但不需貨架，是四款裡唯一沒有額外貨架自重的",
+      "sources": ["https://www.k-m-d.co.jp/news/detail.html?p=4280", "https://www.k-m-d.co.jp/news/detail.html?p=4099", "https://prtimes.jp/main/html/rd/p/000000001.000025346.html"],
+      "uncertain": true,
+      "uncertainWhy": "展開方式只寫氣壓棒，鉸鏈端、後段延伸長度、門窗位置皆未公布"
+    },
+    {
+      "id": "fullfunz_tiny_hydeout",
+      "maker": "FULLFUNZ（日本公司銷售、中國製造）",
+      "model": "TiNY HydEouT Classic act3（通用版）；另有 Jimny 版（Makuake 募資）",
+      "part": "官網未公布",
+      "chassis": "Jimny 版：JB64W／JB74W；Classic act3 未指名車型",
+      "price": { "value": 250800, "cur": "JPY", "tax": "稅込", "note": "Classic act3 標準款。Jimny 版在 Makuake 早鳥價 ¥144,760〜¥174,130 稅込（含梯、撐桿、橫桿、床墊，兩人 1.5 小時可裝），目前官網商店未上架。" },
+      "weightKg": 34,
+      "weightNote": "34kg 不含撐桿與橫桿；Jimny 版重量官網未公布（35kg 只見於媒體，非第一手）",
+      "closed": { "L": 1960, "W": 1200, "H": 135, "unit": "mm" },
+      "open": { "tentL": 1800, "tentW": 1100, "tentH": 1000, "awningL": 1880, "awningW": 2300, "unit": "mm", "note": "帳篷本體 180×110×100cm，附遮陽篷 188×230cm" },
+      "type": "官網未明寫開啟型式",
+      "sleeps": "官網未公布",
+      "mount": "裝在橫桿上",
+      "jimnyInstall": "Jimny 版有專門頁（Makuake），但非現售品",
+      "vs30kg": "34kg＋橫桿，本體就超過 30kg；四款中最輕",
+      "sources": ["https://www.fullfunz.com/product-page/7月末-納期-tiny-hydeout-classic-act3-標準モデル", "https://www.makuake.com/project/tiny_hydeout/"],
+      "uncertain": true,
+      "uncertainWhy": "Jimny 版重量、尺寸未公布；Classic act3 開啟方式未公布"
+    },
+    {
+      "id": "frontrunner_tent031",
+      "maker": "Front Runner（Dometic 集團）",
+      "model": "Roof Top Tent",
+      "part": "TENT031",
+      "chassis": "通用；同廠 Slimline II 有 JB74 專用品番（KRSJ002T〜KRSJ008T），但 Dometic 的 Jimny 頁未列此帳",
+      "price": { "value": 1199, "cur": "USD", "tax": "美國官網，未註明含稅", "source": "dometic.com en-us" },
+      "weightKg": 43,
+      "closed": { "H": 330, "unit": "mm", "note": "收合長寬官網未公布" },
+      "open": { "L": 2400, "W": 1300, "unit": "mm", "note": "展開高度官網未公布" },
+      "type": "軟頂對折外翻（fold-out）；門捲起收",
+      "sleeps": "2+",
+      "mount": "附滑軌與萬用壓板，可前後向或左右向裝在 Front Runner 貨架上；另售快拆座",
+      "ladder": "滑套式鋁梯，耐重 180kg；裝設高度超過 2m 需加長梯；位置官網未公布",
+      "windows": "天窗通風口（可拉鍊開關）、側窗遮光片（向上拉鍊）",
+      "fabric": "帳身 260g 聚棉 ripstop、外帳 400D 牛津布、收納罩 650g PVC 尼龍；6cm 高密度泡棉床墊",
+      "jimnyInstall": "沒有 Jimny 裝車記錄；優勢是貨架與帳篷同一廠",
+      "vs30kg": "43kg＋Slimline II 全長 31kg＝74kg，是上限的 2.5 倍",
+      "sources": ["https://www.dometic.com/en-us/product/front-runner-roof-top-tent", "https://www.dometic.com/es-es/vehicles/suzuki-jimny"]
+    },
+    {
+      "id": "autohome_columbus_s",
+      "maker": "Autohome（義大利）",
+      "model": "Columbus Variant Small",
+      "part": "CVC/01",
+      "chassis": "通用",
+      "price": { "value": 3619, "cur": "EUR", "tax": "官方商店折扣價，未註明含稅" },
+      "weightKg": 44,
+      "closed": { "L": 2100, "W": 1300, "unit": "mm", "note": "收合高度官網未公布" },
+      "open": { "L": 2100, "W": 1300, "H": 1500, "unit": "mm", "note": "頂殼垂直上升，佔地等於收合尺寸；內高約 150cm 為系列文案，非此尺寸專屬" },
+      "type": "硬殼垂直升起：2 支氣壓彈簧＋搖把",
+      "doors": "側門 2、前門 1，皆附紗網",
+      "sleeps": "官網未公布",
+      "mount": "橫桿",
+      "jimnyInstall": "無",
+      "vs30kg": "44kg，超過 14kg，另加橫桿",
+      "sources": ["https://shop.autohome-official.com/en/columbus-range/7-columbus-variant.html"]
+    }
+  ],
+  "tentPickReason": "四款各代表一種外形：Canotier J3 是唯一 Jimny 專用、免貨架、可過車檢的硬頂；TiNY HydEouT 最輕且有 Jimny 版；Front Runner 最便宜且能與 JB74 專用貨架同廠搭配（對折外翻、懸出最多）；Columbus 垂直升起、完全不懸出。全部超過 30kg。",
+
+  "otherTentsChecked": [
+    { "maker": "Thule", "model": "Foothill 2", "part": "901042", "price": "USD 2,099.95", "weightKg": 55, "closed": "84×25×11 in（213×64×28cm，只佔半邊車頂）", "open": "84×49×37 in（213×124×94cm）", "note": "伸縮內撐桿向上展開，可裝在車頂任一側；雙天窗＋全景側窗；帳篷靜態 660 lb", "source": "https://www.thule.com/en-us/rooftop-tents-and-accessories/rooftop-tents/thule-foothill-2-_-901042" },
+    { "maker": "Thule", "model": "Approach S", "part": "901031", "price": "USD 2,299.95", "weightKg": 50, "closed": "43×48×11 in", "open": "84×48×35 in", "source": "https://www.thule.com/en-us/rooftop-tents-and-accessories/rooftop-tents/thule-approach-s-_-901031" },
+    { "maker": "Yakima", "model": "SkyRise HD Small", "part": "8007436", "price": "官網缺貨未標價", "weightKg": 46, "closed": "48×42×16.5 in", "open": "48×84 in、高 42 in", "source": "https://yakima.com/products/skyrise-hd-2-sm-tan" },
+    { "maker": "ARB", "model": "Flinders", "part": "803300（梯 804403 另附）", "price": "AUD 1,784", "weightKg": 54, "closed": "1400×1200×200-300mm", "open": "2400×1400×1200mm（中央高）", "note": "對折外翻，25mm 鋁桿自動展開；5 面拉鍊窗＋天窗；側窗與入口有遮雨簷", "source": "https://www.arb.com.au/flinder-rooftop-tent" },
+    { "maker": "ARB", "model": "Simpson III（含前廳）", "part": "803103", "price": "AUD 1,943", "weightKg": 67, "closed": "1400×1200×300mm", "open": "1400×2400×1300mm", "source": "https://www.arb.com.au/simpson-rooftop-tent" },
+    { "maker": "ARB", "model": "Esperance V2", "part": "802200V2", "price": "AUD 3,674", "weightKg": 58, "closed": "1520×1220×330mm（頁面有一個錯置的 1200，需再確認）", "open": "內部 2000×1430×1130mm", "source": "https://www.arb.com.au/esperance2" },
+    { "maker": "iKamper", "model": "Skycamp 3.0 Mini", "price": "USD 2,800（特價，定價 3,995）", "weightKg": 57, "closed": "146×139×34cm", "open": "床 210×130cm、高 122cm；梯 225cm", "note": "官方要求車頂動態額定 75kg，JB74 不符", "source": "https://ikamper.com/products/skycamp-3-0-mini" },
+    { "maker": "iKamper", "model": "BDV Duo", "price": "USD 2,995", "weightKg": 79, "closed": "228×142×17cm", "open": "床 213×137cm、楔形高 150cm", "note": "BDV Solo 已停產（頁面轉址到 Duo）", "source": "https://www.ikamper.com/products/bdv-duo" },
+    { "maker": "Roofnest", "model": "Falcon 3 EVO Air", "price": "USD 3,415.50", "weightKg": 59, "closed": "83×50×8 in", "open": "內部 80×47 in、高 58 in，蚌殼式", "note": "Sparrow 已停產", "source": "https://roofnest.com/products/falcon-3-evo-air" },
+    { "maker": "Autohome", "model": "Airlander Small（Maggiolina 系列）", "weightKg": 59, "closed": "130×210cm、高 30cm", "open": "高 92cm，搖把蚌殼式", "note": "Autohome 自家頁面一處寫 66kg、Small 尺寸 130×210 與 130×230 互相矛盾", "source": "https://www.autohome-official.com/en/products/comparing-all-roof-top-tents/" },
+    { "maker": "James Baroud", "model": "Evasion S／Discovery Evolution M／Space S", "price": "官網不標價", "weightKg": "61／60／63", "note": "最輕款也在 60kg 以上", "source": "https://jamesbaroud.com/rooftop-tents/evasion/" },
+    { "maker": "Dometic", "model": "TRT120E", "part": "9120002023", "weightKg": 58.92, "note": "官網收合尺寸 1320×1150×2180 不合理，疑為展開值", "source": "https://www.dometic.com/en/product/dometic-trt120e-ocean-9120002023" },
+    { "maker": "GIWORKS（岡山）", "model": "GI-F 軟頂", "price": "¥253,000 稅込", "weightKg": 55, "closed": "110×130×24cm", "note": "帳篷頁未提 Jimny；另售 Jimny 專用基座（JB64／JB74／JC74）Mini ¥26,400、Medium ¥52,800 稅抜，官網寫可用於車頂帳", "source": "https://www.giwork-s.com/products/gif" }
+  ],
+  "negativeFindings": [
+    "APIO、SHOWA GARAGE、DAMD、JAOS、TANIGUCHI 官網都沒有車頂帳產品。",
+    "Suzuki 日本沒有原廠車頂帳，也沒有原廠後門帳。",
+    "台灣：找不到有 Jimny 裝車記錄的台灣品牌車頂帳；最接近的是野道家 JROAD JB74 車頂平台＋後門爬梯 NT$5,990（重量、耐荷重未公布）https://www.daoyen27.com/products/jb7401",
+    "Thule Tepui Foothill 舊頁面已 404，現行款為 Thule Foothill 2。",
+    "沒有任何一家車頂帳廠商有 JB74 裝車照片或文件。"
+  ],
+
+  "awningsDeployed": [
+    { "catalogueId": "arb_touring_2", "part": "814406", "alongCar": 2000, "projection": 2500, "legHeight": "1900-2100", "legs": "Ø25 鋁腳，數量官網未公布（外緣兩角各一支是通用做法，未證實）", "price": "AUD 419", "weightKg": 12.9, "source": "https://www.arb.com.au/product/814406-arb-touring-awning-2000mm-x-2500mm-with-led-light" },
+    { "catalogueId": "arb_touring_25", "part": "814407", "alongCar": 2500, "projection": 2500, "legHeight": "1900-2100", "price": "AUD 440", "weightKg": 14.3, "source": "https://www.arb.com.au/product/814407-arb-touring-awning-with-light-2500mm-x-2500mm" },
+    { "catalogueId": "arb_alu", "part": "814412", "alongCar": 2500, "projection": 2500, "legHeight": "1900-2100", "price": "AUD 734", "weightKg": 17.8, "source": "https://www.arb.com.au/product/814412-arb-awning-2500mm-x-2500mm-black-aluminium-housing-and-light",
+      "manualNote": "舊款鋁殼 814102 說明書：至少 2 點（建議 3 點）固定，未固定端懸出 ≤700mm，須打營釘與拉繩，未公布抗風值" },
+    { "catalogueId": "yakima_s", "part": "KT8007508", "alongCar": 2000, "projection": 2500, "legs": "台灣頁寫「免工具、免立柱」", "weightKg": 10, "note": "台灣頁 10kg，目錄寫 12kg，需更正", "wall": "KT8007531 Ripple 側牆 NT$13,500", "source": "https://www.yakima.com.tw/products/slimshady-%E8%BB%8A%E9%82%8A%E5%B8%B3-2-2-5m" },
+    { "catalogueId": "yakima_l", "part": "KTHB0019", "alongCar": "3000（台灣頁）／2440（美國同條碼 8007446 為 8×8 ft）", "projection": "2500／2440", "weightKg": "12（台灣）／15.4（美國 33.9 lb）", "conflict": "台灣與美國同條碼尺寸、重量不一致；目錄的 18kg 兩邊都對不上", "source": "https://www.yakima.com.tw/products/overnout_l ; https://yakima.com/products/slimshady-8" },
+    { "catalogueId": "yakima_270", "part": "8007462（左／美規駕駛側）／8007463（右）", "pivot": "後端（鉸鏈在後橫桿端），帳面繞過車尾展開", "sweep": "270°，半徑官網未公布", "legs": "2 支，球頭可移到任一角；中央頂撐臂附 3 條帶", "guys": "8 拉繩、8 營釘，營釘距邊 30cm、45°", "maxOverhang": "支架到末端最多 1270mm", "coverage": "9m²（台灣）／80 ft²=7.4m²（美國）互相矛盾", "freestanding": "頁面寫可自撐；說明書寫有風就要立腳加拉繩，未公布風速", "weightKg": 21.1, "packed": "224×15×17cm", "wall": "8007464 單片側牆 NT$5,200，可拉鍊接在四個外緣任一邊，最多 4 片", "source": "https://www.yakima.com.tw/products/overnout-270 ; https://yakima.com/products/overnout-270" },
+    { "catalogueId": "yakima_270s", "part": "8007538（左）／8007539（右）", "pivot": "後端", "coverage": "5m²", "legs": "三支撐桿＋拉繩", "packed": "194×22×17cm", "weightKg": 19.0, "note": "官網寫「安裝後不會超出車體或車尾」；說明書未公開", "wall": "A25AA0600002 扇形牆 4 片（2 片可掀起當門簷）NT$13,500", "source": "https://www.yakima.com.tw/products/overnout-270-扇形車邊帳-1-8m" },
+    { "catalogueId": "yakima_180", "part": "8007516", "alongCar": 6147, "alongCarNote": "242 in，含兩端斜角", "projection": 1905, "legs": "2 支＋拉繩，可自撐", "coverage": "94 ft²（8.7m²）", "maxOverhang": "1270mm", "weightKg": 20.9, "wall": "8007517 牆組（3 面）USD 379／NT$14,000", "source": "https://yakima.com/products/overnout-180" },
+    { "catalogueId": "rhino_compact", "part": "33120（左）／33121（右）", "pivot": "後端鉸鏈鑄件，繞左側＋車尾", "radius": 1900, "alongCar": 2000, "arms": "4 支鉸接支臂，每支附下垂立腳（共 4 腳）", "coverage": "6m²", "wind": "有風或雨時須立腳；最高行駛 110km/h", "weightKg": 18.2, "packed": "2030×200×170", "wall": "31133 Compact 錐形拉鍊側片 AUD 189，最多 4 片可全圍（片尺寸未公布）", "source": "https://www.rhinorack.com/en-au/products/sport-awnings/awnings/awnings/batwing-compact-awning-left-_33120 ; https://assets.rhinorack.com/Instructions/Accessories/33120%28LH%29_33121%28RH%29.pdf" },
+    { "catalogueId": "rhino_270", "part": "33118（左）／33119（右）", "pivot": "後端", "radius": 2500, "alongCar": 2500, "arms": "4 支支臂、4 支下垂立腳", "coverage": "10m²（網頁）／約 11m²（說明書圖）", "guys": "8 拉繩、10 營釘；說明書只寫避免在強風時架設", "weightKg": 20.5, "packed": "2530×200×170，本體截面 95×200", "wall": "31132 錐形拉鍊側片，最多 4 片", "poles": "33102 加長立腳 4 支 2250–3280mm（標準腳長度未公布）", "source": "https://assets.rhinorack.com/Instructions/Accessories/33118.pdf" },
+    { "catalogueId": "darche_270", "part": "T050801743（左）", "pivot": "後端旋軸，左側支臂整片往車尾甩", "rafters": 6, "legs": "6 支旋鎖腳（3 支在支臂上、3 支袋裝）；裝牆時每支支臂都要立腳", "headHeight": 2100, "vehicleHeight": "1600-2100", "coverage": "11.5m²", "maxOverhang": "兩端未固定 ≤500mm", "guys": "13 拉繩、13 營釘", "freestanding": "有單人自撐模式", "sweepRadius": "官網未公布", "walls": "T050801743A／B（各 AUD 549）、C（349）；帶窗版 H／H2／H3；右開碼 E／F／G", "source": "https://darche.com.au/products/eclipse-270-g2-left-us-eu-d ; https://cdn.shopify.com/s/files/1/0607/6651/9489/files/T050801743_ECLIPSE_270_IM_WEB.pdf" },
+    { "catalogueId": "darche_slim", "part": "T050801793", "alongCar": 2500, "projection": 2500, "headHeight": 2500, "legs": "2 支，收在雙槽支臂內，旋鎖", "arms": "2 支支臂略超過 90° 外甩", "guys": "必須拉繩", "price": "AUD 579", "walls": "前牆 T050801756 AUD 199、側牆 T050801758 AUD 179；Slimline Annex 2.5M T050801752 AUD 899（PVC 地布、3 個出入口，頁面標高 2300／2000）", "source": "https://darche.com.au/products/eclipse-slimline-2-5m-x-2-5m" },
+    { "catalogueId": "ikamper", "part": "MB011-002（副駕側）／MB011-005（駕駛側）", "open": "沿車 4990 × 外伸 3900 × 高 1140–2230mm", "coverage": "11.2m²", "pivot": "後端，繞車尾", "brackets": "兩個支架間距固定 900mm，兩端各懸出 490–900mm", "wind": "自撐最高 16km/h；立腳加拉繩最高 40km/h", "weightKg": "30＋L 型支架 4.5", "walls": "BC031-005 全套 USD 1,425（12.4kg）；前 BC031-001 USD 465、後 BC031-002 USD 770、車側 BC031-003 USD 310；頂高 192cm", "note": "目錄寫的 MB011-002 是副駕側（美規右側），不是通用品番", "source": "https://ikamper.com/products/exoshell-270-awning ; https://ikamper.com/products/exoshell-270-side-wall" }
+  ],
+  "arbRooms": [
+    { "part": "813108", "name": "Deluxe Awning Room with Floor 2500×2500", "fits": "2500 與 2000 車邊帳皆可", "price": "AUD 431（美國 813108A USD 307）", "weightKg": 8, "height": "最高 6'9\"（約 2057mm，美國頁）", "detail": "含地布與獨立內頂，每面牆都有實布／紗網兩用門，另有紗窗；2 拉繩、6 營釘", "source": "https://www.arb.com.au/product/813108-arb-deluxe-awning-room-with-floor-2500mm-x-2500mm" },
+    { "part": "813208A", "name": "Awning Room with Floor 2.0M（美國官方商店）", "fits": "只適用 2.0M 車邊帳", "price": "USD 297", "height": "最高 6'9\"", "note": "arb.com.au 上未查到", "source": "https://store.arbusa.com/awning-room-with-floor-2-0-813208a/" },
+    { "part": "813400", "name": "Side Wind Break", "price": "AUD 118", "size": "官網未公布", "source": "https://www.arb.com.au/product/813400-arb-awning-side-wind-break-suits-arb-awnings" },
+    { "part": "813102", "name": "Front Wind Break 2500", "price": "AUD 119", "detail": "魔鬼氈接在車邊帳滑槽", "source": "https://www.arb.com.au/product/813102-arb-awning-front-wind-break-2500mm" }
+  ],
+  "arbRoomCorrection": "委託單裡的 813109／813209 不是 Deluxe Room：非官方英國經銷商列為 Deluxe Awning Alcove 2.5m／2.0m，arb.com.au 查無，不採用。",
+  "catalogueCorrections": [
+    "yakima_s 目錄寫 12kg，台灣官網為 10kg。",
+    "yakima_l 目錄寫軟袋 2600 長、18kg；台灣官網為 300×250cm、12kg，美國同條碼為 8×8 ft、33.9 lb，兩者皆非 18kg。",
+    "arb_touring_2／arb_touring_25／arb_alu 目錄 price 為 null，ARB 澳洲官網價為 AUD 419／440／734。",
+    "rhino_compact 官網重量 18.2kg（含支架），目錄寫 18kg，可保留。",
+    "ikamper MB011-002 為副駕側（passenger side），駕駛側為 MB011-005。"
+  ],
+
+  "sideAndRearTents": [
+    { "id": "suzuki_car_tarp", "maker": "Suzuki 原廠（ogawa 製）", "model": "70 カータープ", "part": "ACAZ（99243-77R02）", "chassis": "JB74 JL／JC 等級（型錄 JL・JC・FC）", "price": "¥45,100 稅込", "size": "約 250×250cm、高 220cm", "packed": "58×12×12cm、約 2.5kg", "attach": "附 2 個吸盤掛勾吸在車頂板上，另 2 營釘、2 砂袋；鋁桿、聚酯布；使用時須熄火；布料不遮光", "geometry": "一邊以吸盤貼在車頂側緣，另一邊以兩支鋁桿撐至 2200mm，250×250 方形單片天幕", "source": "https://www.suzuki.co.jp/accessory_car/jimny_nomade_jimny_sierra/jimny_nomade_jimny_sierra.pdf" },
+    { "id": "lxmode_jim817", "maker": "LX-MODE（custom-wagon 自有品牌）", "model": "カーリビング ポップアップテント", "part": "jim817", "chassis": "JB74W JL／JC", "price": "¥60,500 稅込", "size": "2000×2000mm、高 2250mm（中央 2450mm）", "packed": "Φ900×100mm、約 8kg", "attach": "立在車尾地面並「連結」車身；如何接 JB74 側開後門官網未公布", "source": "https://www.custom-wagon.com/c/557/jim817" },
+    { "id": "craftworks_side", "maker": "CRAFTWORKS（Fun Standard）", "model": "ルーフキャリア用サイドテント", "chassis": "JB64W／JB74W／JC74W（2018.7〜）", "price": "¥148,000〜（參考販売価格，稅込）", "attach": "以支架鎖在 CRAFTWORKS 自家車頂架側緣", "detail": "牛津布＋鋁骨、耐水 5,000mm、UV50+、白／琥珀 LED、USB；4 腳、4 營釘、4 拉繩，約 5 分鐘架好", "size": "官網未公布", "source": "https://prtimes.jp/main/html/rd/p/000000888.000079792.html" },
+    { "id": "showa_ax_awning", "maker": "SHOWA GARAGE", "model": "A-x オーニング 2000×2500", "part": "e20120", "chassis": "A-x 車頂架用（JB64／JB74／JC74）", "price": "¥36,300 稅込", "size": "2.0×2.5m、約 8kg、420D 牛津布、可調鋁腳", "uncertain": true, "note": "只從搜尋結果讀到官方 Yahoo 店資料，頁面未實際開啟", "source": "https://store.shopping.yahoo.co.jp/showa-garage/e20120.html" },
+    { "id": "migratrail_stingray", "maker": "MIGRATRAIL（APIO 另售印字版）", "model": "STINGRAY TARP", "part": "D4926 / MT23-0010", "price": "¥16,500 稅込", "size": "寬 6m 以上、1.7kg；1〜2 支營柱（最高 280cm）", "attach": "用車用掛勾勾在 Jimny 雨槽", "source": "https://migratrail.jp/product/camp/camp-tarp-tent/stingray-tarp/" },
+    { "id": "fullfunz_flat", "maker": "FULLFUNZ", "model": "TiNY HydEouT the FLAT for Jimny JB64/74", "price": "¥143,000（官方商店）／¥132,000 稅込（新聞稿），兩處不一致", "size": "165×125×5cm、19kg；附遮陽篷 160×230cm；裝在橫桿上", "note": "是平台＋遮陽篷，不是帳篷", "source": "https://www.fullfunz.com/product-page/tiny-hydeout-the-flat-for-jimny-jb64-74" }
+  ],
+
+  "demoBuilds": [
+    { "name": "APIO ミリキャン 2018", "chassis": "JB74（確認）", "kit": ["FRONT RUNNER 車頂架（品番未寫）", "Suzuki 原廠床墊 B9YB（99000-99071-T04）¥32,000", "Suzuki 原廠遮陽簾 前 BAPY（9914D-77R00）¥22,000、後 BAPZ（9914D-77R10）¥25,000", "NANGA UDD BAG 380 睡袋"], "note": "車內睡，沒有帳篷；價格未註明稅込或稅抜", "source": "https://apio.jp/jimnylife/milicam-2018.html" },
+    { "name": "DAMD little D＋X-cabin300 SOLO BD 露營拖車", "chassis": "JB74", "kit": ["X-cabin300 SOLO BD 拖車 ¥7,200,000 稅込、730kg、4,580×2,120×2,200mm"], "note": "未列車頂架或帳篷", "source": "https://www.damd.co.jp/journal/042/" },
+    { "name": "カマド キャノティエ示範車", "chassis": "JB64／JB74", "kit": ["キャノティエ J3"], "note": "有示範車，未公布其他改裝清單", "source": "https://www.k-m-d.co.jp/news/detail.html?p=4280" },
+    { "name": "Suzuki 東京改裝車展（TAS）", "note": "2019 JIMNY SURVIVE／SIERRA PICKUP STYLE 沒有露營配備；2026 是 JC74 Nomade 魔物獵人主題、以「簡易露營」為題但未公布配備，且非 JB74", "source": "https://www.suzuki.co.jp/tas_oam2019/ ; https://www.suzuki.co.jp/tas_oam2026/" }
+  ],
+  "demoBuildsNote": "找不到任何一台 JB74 同時裝車頂帳＋車邊帳、又有完整第一手配備清單的廠商示範車。Jimny Park、Goonies One 的頁面連不上，未納入。",
+
+  "modellingNotes": {
+    "frame": "沿用配置器座標：mm、+Y 上、+Z 前、+X＝車左。車寬 1645、車頂約 1730（未含貨架）。以下「官方」為第一手數字，「假設」為建模用、未經證實，UI 不應當成規格顯示。",
+    "kamado_canotier_j3": {
+      "official": "展開 2100L×1120W×970H；硬頂、氣壓棒；後段向後延伸",
+      "assumption": "收合殼約貼齊車頂前後長 1500、寬 1120、厚約 200（車頂直裝無貨架）；展開時頂殼以前緣為鉸鏈，後緣抬起，側面成前低後高的楔形布牆；後段延伸 600 懸出後門上方，由兩支斜撐支撐；伸縮梯靠在車尾或側邊，約 70–75° 傾角；布料為深色 Neoprene",
+      "flag": "開啟方向與懸出量皆為推估"
+    },
+    "fullfunz_tiny_hydeout": {
+      "official": "收合 1960×1200×135；帳身 1800×1100×1000H；附遮陽篷 1880×2300",
+      "assumption": "扁平硬殼（135 厚）躺在橫桿上；帳身 1800 沿車長、1100 寬，高 1000 的方盒形帳；遮陽篷 1880 沿車長、從車側外伸 2300，以兩支立腳撐外緣",
+      "flag": "開啟型式官網未寫，建議畫成垂直升起的平頂盒，與遮陽篷分開控制"
+    },
+    "frontrunner_tent031": {
+      "official": "收合高 330；展開 2400L×1300W；滑套鋁梯；天窗＋側窗；門向上捲",
+      "assumption": "收合長寬取 1200×1300（展開長的一半）置於 Slimline II 上；展開時地板以車側縱向邊為鉸鏈向外翻出 1200，外半段由鋁梯斜撐到地面（梯同時是支撐，約 70°）；帳身為兩道彎曲鋁桿撐起的 A 形／圓頂，中央高約 1200；外翻端為主門（捲起），兩側各一扇窗，屋頂天窗，外翻端門上有外帳延伸成的小簷",
+      "flag": "Front Runner 未公布翻出方向與展開高度；對折外翻帳的梯子一般裝在外翻端，繪製時可選左或右"
+    },
+    "autohome_columbus_s": {
+      "official": "2100×1300；2 支氣壓彈簧＋搖把；側門 2、前門 1",
+      "assumption": "收合為前低後高的圓角硬殼（2100×1300、約 300 厚）；展開時頂殼水平上升，布牆垂直，頂殼下緣離底殼約 1100–1200；兩長側各一扇門、前端一扇門；梯子靠在任一側門下",
+      "flag": "收合高度與展開高度未公布，1500 內高為系列文案"
+    },
+    "awning_rectangular": {
+      "pattern": "ARB Touring／alu、Yakima OverNOut S、Darche Slimline",
+      "geometry": "收納袋沿車頂架側緣；布面從袋口水平外伸（ARB 2500、Darche 2500），外緣兩角各一支立腳。ARB 立腳高 1900–2100（官方），Darche 頭頂淨高 2500；布面略向外下傾以排水。兩支支臂從袋端鉸鏈外甩（Darche 略超過 90°）。立腳外側各一條拉繩斜拉到地面營釘。",
+      "legCountNote": "ARB 未公布立腳數量；兩支外角腳是矩形車邊帳的通用做法，建模可採用但不寫進規格"
+    },
+    "awning_270": {
+      "pattern": "Yakima OverNOut 270、Rhino Batwing、Darche Eclipse 270、iKamper ExoShell 270",
+      "geometry": "樞軸固定在車頂架「後」角（四款皆為後端）。布面從車側縱向起，以後角為圓心繞過車尾，扇形 270°（側面 90°＋車尾 90°＋外角 90°的四分之一圓外延）。支臂從樞軸放射出去：Rhino 4 支（半徑 Compact 1900、270 為 2500）、Darche 6 支、Yakima 270 有中央頂撐臂＋2 支可移位立腳（1.8m 版 3 支）。外緣呈多段弧，每支支臂末端下垂一支立腳（Rhino 4 支、Darche 6 支）。布面在支臂間下凹。iKamper 是硬殼：展開沿車 4990、外伸 3900、高 1140–2230。",
+      "handedness": "左開＝布面在車左（+X）、繞過車尾；右開鏡像。台灣靠右行駛、左駕，下車的路肩側是右側，車邊帳常裝右側（-X）；Yakima 的「左＝駕駛側」是美規說法，在台灣同樣是駕駛側（左）",
+      "clearance": "JB74 車長約 3550，Rhino 270（沿車 2500）、iKamper（沿車 4990）的扇形會超出車尾很多；Yakima 1.8m 版官方寫不會超出車體或車尾"
+    },
+    "rooms": "ARB Deluxe Room 813108 掛在 2500×2500 車邊帳下方，形成 2500×2500、高約 2057 的方盒：外側牆與兩端牆各一扇實布／紗網兩用門，內頂獨立，地布一體。Yakima 270 單片牆 8007464 可拉鍊接在任一外緣。Darche 270 牆三片分 A／B／C。"
+  }
+}

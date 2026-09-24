@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241615" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241719" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -409,9 +409,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 /* Hovering an option pops its details: what it costs in both currencies, the
    part number, what it actually is, and a link to the maker's own page. It
    stays up while the pointer is inside it, so the link is reachable. */
-#card[hidden],#rackMove[hidden]{display:none}
+#card[hidden],#rackMove[hidden],#arbAcc[hidden]{display:none}
 #rackMove{margin-top:10px}
 #rackNudge button:disabled{opacity:.35;cursor:default}
+.tg:disabled{opacity:.4;cursor:default}
 #card{position:fixed;z-index:40;width:min(330px,calc(100vw - 24px));
   background:#101a1ef2;backdrop-filter:blur(16px);border:1px solid var(--line2);
   border-radius:6px;box-shadow:0 18px 44px #00000080;padding:13px 14px;display:grid;gap:7px;
@@ -498,6 +499,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <button role="tab" data-s="2" aria-selected="false"><b>胎框</b><i id="sum1">原廠</i></button>
       <button role="tab" data-s="3" aria-selected="false"><b>外觀</b><i id="sum2">原廠</i></button>
       <button role="tab" data-s="4" aria-selected="false"><b>裝備</b><i id="sum3">無</i></button>
+      <button role="tab" data-s="5" aria-selected="false"><b>露營</b><i id="sum4">無</i></button>
     </div>
 
     <div class="body" id="body">
@@ -586,6 +588,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       <div class="pane" data-p="4">
         <div class="grp">
           <p class="lbl">車頂架</p><select id="selRack" aria-label="車頂架"></select><p class="hint" id="hRack"></p>
+          <div id="arbAcc"><p class="lbl" style="margin-top:14px">ARB 車頂架配件 <em>卡進貨架燕尾槽</em></p>
+            <div class="toggles" id="arbToggles"></div></div>
           <div class="sides" id="rackMove"><div class="side-row"><span class="nm">前後位置<i id="rackPos">置中</i></span>
             <span class="pick" id="rackNudge"><button data-d="1" aria-label="車頂架往車頭移">往車頭</button><button data-d="-1" aria-label="車頂架往車尾移">往車尾</button></span></div></div>
           <p class="lbl" style="margin-top:16px">車邊帳</p><select id="selAwning" aria-label="車邊帳"></select><p class="hint" id="hAwning"></p>
@@ -613,6 +617,29 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
         <div class="grp">
           <p class="lbl">加裝配件</p>
           <div class="toggles" id="toggles"></div>
+        </div>
+      </div>
+      <!-- 5 ── 露營 -->
+      <div class="pane" data-p="5">
+        <div class="grp">
+          <p class="lbl">露營範例 <em>一次套好、全部展開</em></p>
+          <div class="sides"><div class="side-row"><span class="nm">看展開後的樣子<i>之後每一項都還能改</i></span>
+            <span class="pick" id="campDemos"><button data-demo="rack">車頂帳＋車邊帳</button><button data-demo="norack">免車頂架</button><button data-demo="rear">車尾帳</button></span></div></div>
+        </div>
+        <div class="grp">
+          <p class="lbl">車頂帳</p><select id="selTent" aria-label="車頂帳"></select><p class="hint" id="hTent"></p>
+          <button class="tg solo" id="tgTentOpen" aria-pressed="false">
+            <span class="nm">帳篷展開<i>關掉就是行車時收合在車頂的樣子</i></span><span class="st">收合</span></button>
+        </div>
+        <div class="grp">
+          <p class="lbl">車邊帳 <em>在「裝備」選款式與安裝側</em></p><p class="hint" id="campAwn"></p>
+          <button class="tg solo" id="tgAwnOpen" aria-pressed="false">
+            <span class="nm">車邊帳展開<i>布面、支臂與立腳照廠方尺寸</i></span><span class="st">收合</span></button>
+          <button class="tg solo" id="tgRoom" aria-pressed="false">
+            <span class="nm">ARB Deluxe 帳房 813108<i>掛在 ARB 2500×2500 車邊帳下 · AUD 431</i></span><span class="st">未裝</span></button>
+        </div>
+        <div class="grp">
+          <p class="lbl">車尾／車側帳</p><select id="selCampExtra" aria-label="車尾車側帳"></select><p class="hint" id="hCampExtra"></p>
         </div>
       </div>
     </div>
@@ -645,14 +672,15 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609241615';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, STYLES } from './parts.js?v=202609241615';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241615';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241615';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241615';
+import { rigJimny, applyConfig } from './rig.js?v=202609241719';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, STYLES } from './parts.js?v=202609241719';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241719';
+import { openAwning, roofTent, campExtra } from './camp.js?v=202609241719';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241719';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241719';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609241615';
+const BUILD = '202609241719';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -768,7 +796,8 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   kit: 'none', hood: 'stock', spareCoverKit: 'none', gullwing: false, frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: 'none', spareBag: false, spareCover: false,
-  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none', face: 'none', spoiler: 'none', rackShift: 0 };
+  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none', face: 'none', spoiler: 'none', rackShift: 0, tent: 'none', tentOpen: false, awningOpen: false, awningRoom: false, campExtra: 'none',
+  ...Object.fromEntries(ARB_RACK_ACC.map(a => [a.key, false])) };
 // 50 mm a press, 200 mm either way: the gutter feet clamp anywhere along the
 // drip rail, but past that the rack's end legs run off the roof panel
 const RACK_STEP = 50, RACK_MAX = 200;
@@ -780,7 +809,7 @@ const RIMS = [0xc8ccd0, 0x373b41, 0x8a6a3c, 0xd8d9d6, 0xb8410f];   // matte blac
 // the owner's own car (from their photos): black JB74 on a 3" lift, 31"
 // Open Country M/T white letters on matte-black MAXX wheels
 const DEMO = { color: 'ZJ3', lift: 'td60', wheel: 'maxx', tyre: 't225r16', tread: 'toyo_mt', owl: true, rimColor: 0x373b41,
-  grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', roofLights: 'none', awning: 'yakima_270s', awningSide: 'left',
+  grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear', roofRack: 'arb', arbDeflector: true, roofLights: 'none', awning: 'yakima_270s', awningSide: 'left',
   exhaust: 'hks_legal', extinguisher: 'ladder',
   windowGuards: true, guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true, ladder: 'jst', sideStep: 'jst', flares: true, decals: false, sideSkirt: true,
   mirrors: 'damd', pillarPods: true, snorkel: 'urnieta' };
@@ -917,7 +946,7 @@ function update() {
   const wh = find(WHEELS, S.wheel), ty = find(TYRES, S.tyre);
   const col = COLORS.find(c => c.code === S.color) || COLORS[3];
   const total = lift.lift + bl.body;
-  syncOwl();
+  syncOwl(); syncCamp();
   // Which choices moved this time. Everything animated below keys off this,
   // so a redraw that changes nothing stays perfectly still.
   const chg = new Set();
@@ -983,10 +1012,26 @@ function update() {
   if (S.frontBumper !== 'stock' && S.face === 'none') add(buildAccessory('frontBumper', S.frontBumper, paint), 'frontBumper');
   if (S.grille !== 'stock' && S.face === 'none') add(buildAccessory('grille', S.grille, paint), 'grille');
 
+  // The camping area: open tents and awnings are built from their catalogue
+  // sizes (camp.js), down to wherever the ground is at this ride height.
+  {
+    const groundY = -(total + (ty.dia - rig.userData.baseTyreDia * 1000) / 2);
+    const tent = find(TENTS, S.tent), aw = find(AWNINGS, S.awning), ex = find(CAMP_EXTRAS, S.campExtra);
+    const tentSide = S.awning !== 'none' && S.awningSide === 'right' ? 'left' : 'right';
+    if (tent.id !== 'none') add(roofTent(THREE, tent, S.tentOpen, tentSide, groundY, tent.noRack ? 1622 : 1700), 'tent');
+    if (S.awningOpen && aw.open) add(openAwning(THREE, aw, S.awningSide, groundY, S.awningRoom && aw.room), 'awningOpen');
+    if (ex.id !== 'none') add(campExtra(THREE, ex, ex.shape === 'tarp' ? tentSide : S.awningSide, groundY), 'campExtra');
+    const n = (tent.id !== 'none') + (ex.id !== 'none') + (S.awningOpen && !!aw.open);
+    $('sum4').textContent = n ? `${n} 項` : '無';
+  }
+  // ARB's clip-on accessories: only on the ARB rack, and they ride with it
+  if (S.roofRack === 'arb') for (const a of ARB_RACK_ACC)
+    if (S[a.key]) add(buildAccessory('arbAcc', a.part, paint), a.key);
   // The rack slides fore and aft on its gutter feet, and everything that
   // rides on it (shovel, awning, the lamps on its front rail) goes with it.
   const rz = S.roofRack !== 'none' ? S.rackShift / 1000 : 0;
-  for (const k of ['roofRack', 'shovel', 'awning', 'roofLights']) if (BUILT[k]) BUILT[k].position.z += rz;
+  for (const k of ['roofRack', 'shovel', 'awning', 'roofLights', 'awningOpen', ...(find(TENTS, S.tent).noRack ? [] : ['tent']), ...ARB_RACK_ACC.map(a => a.key)]) if (BUILT[k]) BUILT[k].position.z += rz;
+  $('arbAcc').hidden = S.roofRack !== 'arb';
   $('rackMove').hidden = S.roofRack === 'none';
   $('rackPos').textContent = !S.rackShift ? '置中' : `往車${S.rackShift > 0 ? '頭' : '尾'} ${Math.abs(S.rackShift)}mm`;
   $('rackNudge').querySelectorAll('button').forEach(b =>
@@ -1227,6 +1272,9 @@ function aimFor(k) {
     case 'frontBumper': case 'grille': case 'grilleLight': return [0.55, 0.16, 7.8];
     case 'hood': return [0.5, 0.52, 8.4];
     case 'spoiler': return [2.4, 0.4, 8.6];
+    case 'tent': case 'tentOpen': return [S.tentOpen ? 1.9 : 0.95, 0.42, S.tentOpen ? 12.5 : 9.6];
+    case 'awningOpen': case 'awningRoom': return [sideAz(S.awningSide) * 1.25, 0.34, 13];
+    case 'campExtra': return S.campExtra === 'lxmode_jim817' ? [2.6, 0.22, 12] : [sideAz(S.awningSide === 'left' ? 'right' : 'left'), 0.3, 12];
     case 'face': return [0.35, 0.12, 7.2];
     case 'fender': return [0.85, 0.12, 8.6];
     case 'cage': return [0.95, 0.5, 9.4];
@@ -1335,6 +1383,8 @@ const QTY = { wheel: 4 };
 function styleCost(st) {
   let sum = 0, open = 0;
   for (const [k, v] of Object.entries(st.set)) {
+    const acc = ARB_RACK_ACC.find(a => a.key === k);
+    if (acc && v) { sum += toTWD(acc.price, acc.cur) ?? 0; continue; }
     const list = ALL_LISTS[k];
     if (list) {
       const it = list.find(x => x.id === v);
@@ -1706,7 +1756,7 @@ function syncToggles() {
   const aw = $('tgAwnSide');
   aw.setAttribute('aria-pressed', S.awningSide === 'right');
   aw.querySelector('.st').textContent = S.awningSide === 'left' ? '左側' : '右側';
-  t.querySelectorAll('[data-k]').forEach(b => {
+  document.querySelectorAll('#toggles [data-k], #arbToggles [data-k]').forEach(b => {
     b.setAttribute('aria-pressed', !!S[b.dataset.k]);
     b.querySelector('.st').textContent = S[b.dataset.k] ? '已裝' : '未裝';
   });
@@ -1736,7 +1786,7 @@ function buildUI() {
     ['selStep', SIDE_STEPS, S.sideStep], ['selLadder', LADDERS, S.ladder],
     ['selExhaust', EXHAUSTS, S.exhaust], ['selLightBar', LIGHT_BARS, S.lightBar],
     ['selRoofLights', ROOF_LIGHTS, S.roofLights], ['selGrilleLight', GRILLE_LIGHTS, S.grilleLight],
-    ['selFace', FACES, S.face], ['selSpoiler', SPOILERS, S.spoiler], ['selFender', FENDERS, S.fender], ['selCage', CAGES, S.cage], ['selStripe', STRIPES, S.stripe]]) opt(id, L, cur);
+    ['selFace', FACES, S.face], ['selSpoiler', SPOILERS, S.spoiler], ['selTent', TENTS, S.tent], ['selCampExtra', CAMP_EXTRAS, S.campExtra], ['selFender', FENDERS, S.fender], ['selCage', CAGES, S.cage], ['selStripe', STRIPES, S.stripe]]) opt(id, L, cur);
   $('extPick').innerHTML = EXTINGUISHERS.map(e =>
     `<button data-v="${e.id}" aria-pressed="${S.extinguisher === e.id}">${esc(e.label.replace('掛', ''))}</button>`).join('');
 
@@ -1765,11 +1815,13 @@ function buildUI() {
     ['flares','輪弧鉚釘'],['sideSkirt','側裙飾板（SHOWA）'],
     ['decals','車門貼字'],['spareBag','備胎書包'],
     ['spareCover','備胎硬殼蓋'],['gullwing','鷗翼窗（URNIETA 1970）']];
+  $('arbToggles').innerHTML = ARB_RACK_ACC.map(a =>
+    `<button class="tg" data-k="${a.key}" aria-pressed="false"><span class="nm">${esc(a.label)}<i>${esc(priceLabel(a).main)}${priceLabel(a).sub ? `（${priceLabel(a).sub}）` : ''}</i></span><span class="st">未裝</span></button>`).join('');
   $('toggles').innerHTML = TG.map(([k, l]) =>
     `<button class="tg" data-k="${k}" aria-pressed="false"><span class="nm">${l}</span><span class="st">未裝</span></button>`).join('');
   $('views').innerHTML = VIEWS.map((v, i) =>
     `<button data-v="${i}" aria-pressed="${i === 0}">${v[0]}</button>`).join('');
-  hints(); syncToggles();
+  hints(); syncToggles(); syncCamp();
 }
 
 function hints() {
@@ -1782,7 +1834,7 @@ function hints() {
     ['hStep', SIDE_STEPS, S.sideStep], ['hLadder', LADDERS, S.ladder],
     ['hExhaust', EXHAUSTS, S.exhaust], ['hLightBar', LIGHT_BARS, S.lightBar],
     ['hRoofLights', ROOF_LIGHTS, S.roofLights], ['hGrilleLight', GRILLE_LIGHTS, S.grilleLight],
-    ['hFace', FACES, S.face], ['hSpoiler', SPOILERS, S.spoiler], ['hFender', FENDERS, S.fender], ['hCage', CAGES, S.cage], ['hStripe', STRIPES, S.stripe]]) $(id).textContent = n(find(L, cur));
+    ['hFace', FACES, S.face], ['hSpoiler', SPOILERS, S.spoiler], ['hTent', TENTS, S.tent], ['hCampExtra', CAMP_EXTRAS, S.campExtra], ['hFender', FENDERS, S.fender], ['hCage', CAGES, S.cage], ['hStripe', STRIPES, S.stripe]]) $(id).textContent = n(find(L, cur));
   $('extNote').textContent = n(find(EXTINGUISHERS, S.extinguisher)) || '市面沒有 JB74 尾梯專用架';
   const c = COLORS.find(x => x.code === S.color) || COLORS[0];
   $('colName').textContent = c.code + (c.tw ? '' : c.wrap ? ' · 改色膜' : ' · 日規');
@@ -1865,12 +1917,12 @@ for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], 
   ['selHood', 'hood'], ['selSpareKit', 'spareCoverKit'], ['selMirror', 'mirrors'], ['selRack', 'roofRack'],
   ['selAwning', 'awning'], ['selStep', 'sideStep'], ['selLadder', 'ladder'], ['selSnorkel', 'snorkel'],
   ['selExhaust', 'exhaust'], ['selLightBar', 'lightBar'], ['selRoofLights', 'roofLights'],
-  ['selGrilleLight', 'grilleLight'], ['selFace', 'face'], ['selSpoiler', 'spoiler'], ['selFender', 'fender'], ['selCage', 'cage'], ['selStripe', 'stripe']]) {
+  ['selGrilleLight', 'grilleLight'], ['selFace', 'face'], ['selSpoiler', 'spoiler'], ['selTent', 'tent'], ['selCampExtra', 'campExtra'], ['selFender', 'fender'], ['selCage', 'cage'], ['selStripe', 'stripe']]) {
   const el = $(id); if (!el) continue;
   const list = { frontBumper: FRONT_BUMPERS, grille: GRILLES, rearBumper: REAR_BUMPERS, hood: HOODS,
     spareCoverKit: SPARE_COVERS, mirrors: MIRRORS, roofRack: ROOF_RACKS, awning: AWNINGS,
     sideStep: SIDE_STEPS, ladder: LADDERS, snorkel: SNORKELS, exhaust: EXHAUSTS,
-    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS, face: FACES, spoiler: SPOILERS, fender: FENDERS, cage: CAGES, stripe: STRIPES }[key];
+    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS, face: FACES, spoiler: SPOILERS, tent: TENTS, campExtra: CAMP_EXTRAS, fender: FENDERS, cage: CAGES, stripe: STRIPES }[key];
   el.addEventListener('pointerenter', () => {
     highlight(BUILT[key] ?? null, 0);
     if (list && matchMedia('(hover: hover)').matches) {
@@ -1946,7 +1998,7 @@ const SHOT_LIST = {
   ladder: () => LADDERS, snorkel: () => SNORKELS, exhaust: () => EXHAUSTS,
   lightBar: () => LIGHT_BARS, roofLights: () => ROOF_LIGHTS, grilleLight: () => GRILLE_LIGHTS,
   extinguisher: () => EXTINGUISHERS, face: () => FACES, fender: () => FENDERS, spoiler: () => SPOILERS,
-  cage: () => CAGES, stripe: () => STRIPES,
+  cage: () => CAGES, stripe: () => STRIPES, tent: () => TENTS, campExtra: () => CAMP_EXTRAS,
 };
 const shotFor = (key, item) =>
   !item || item.id === 'none' || item.id === 'stock' ? null
@@ -2015,7 +2067,7 @@ on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
 on('selExhaust', v => S.exhaust = v); on('selLightBar', v => S.lightBar = v);
 on('selRoofLights', v => S.roofLights = v); on('selGrilleLight', v => S.grilleLight = v);
 on('selFace', v => { S.face = v; if (v !== 'none') { S.frontBumper = 'stock'; S.grille = 'stock'; S.grilleLight = 'none'; S.kit = 'none'; buildUI(); } });
-on('selFender', v => S.fender = v); on('selSpoiler', v => S.spoiler = v); on('selCage', v => S.cage = v); on('selStripe', v => S.stripe = v);
+on('selFender', v => S.fender = v); on('selTent', v => { S.tent = v; syncCamp(); }); on('selCampExtra', v => S.campExtra = v); on('selSpoiler', v => S.spoiler = v); on('selCage', v => S.cage = v); on('selStripe', v => S.stripe = v);
 $('rackNudge').onclick = e => { const b = e.target.closest('[data-d]'); if (!b || b.disabled) return;
   S.rackShift = Math.max(-RACK_MAX, Math.min(RACK_MAX, S.rackShift + (+b.dataset.d) * RACK_STEP)); update(); };
 $('selKit').onchange = e => {
@@ -2052,6 +2104,51 @@ document.querySelectorAll('.sides').forEach(el => el.onclick = e => {
     for (const o of SIDED) if (o !== k && S[o] === S[k] && o !== 'guardAxe' && k !== 'guardAxe') S[o] = 'none';
   syncToggles(); hints(); update();
 });
+/** The camping toggles depend on what else is fitted: an awning to open, and
+ *  an ARB 2500 awning for the room that hangs under it. */
+function syncCamp() {
+  const aw = find(AWNINGS, S.awning);
+  if (!aw.open) S.awningOpen = false;
+  if (!aw.room || !S.awningOpen) S.awningRoom = false;
+  const set = (id, on, txt) => { const b = $(id); b.setAttribute('aria-pressed', on); b.querySelector('.st').textContent = txt; };
+  set('tgTentOpen', S.tentOpen, S.tentOpen ? '展開' : '收合');
+  $('tgTentOpen').disabled = S.tent === 'none';
+  set('tgAwnOpen', S.awningOpen, S.awningOpen ? '展開' : '收合');
+  $('tgAwnOpen').disabled = !aw.open;
+  set('tgRoom', S.awningRoom, S.awningRoom ? '已裝' : '未裝');
+  $('tgRoom').disabled = !(aw.room && S.awningOpen);
+  $('campAwn').textContent = aw.id === 'none' ? '還沒選車邊帳。' :
+    `${aw.brand ?? ''} ${aw.label}（${S.awningSide === 'left' ? '左' : '右'}側）` +
+    (aw.open?.kind === 'fan' ? `：以車尾端為軸展開 ${aw.open.sweep ?? 270}°，半徑約 ${aw.open.radius}mm` :
+     aw.open ? `：外伸 ${aw.open.projection}mm、沿車 ${aw.open.along}mm` : '');
+}
+// Three camping set-ups, all opened out. They use only parts in the
+// catalogue: a Front Runner fold-out on an ARB rack with the ARB 2500 awning
+// and its room; Kamado's roof-mounted J3 with Suzuki's own car tarp, no
+// rack at all; and LX-MODE's tailgate tent under a Rhino 270 batwing.
+const CAMP_DEMOS = {
+  rack: { roofRack: 'arb', arbDeflector: true, tent: 'fr_tent031', tentOpen: true, awning: 'arb_touring_25', awningSide: 'right',
+    awningOpen: true, awningRoom: true, campExtra: 'none' },
+  norack: { roofRack: 'none', awning: 'none', awningOpen: false, awningRoom: false, tent: 'kamado_j3', tentOpen: true, campExtra: 'suzuki_tarp' },
+  rear: { roofRack: 'arb', tent: 'none', tentOpen: false, awning: 'rhino_270', awningSide: 'left', awningOpen: true, awningRoom: false,
+    campExtra: 'lxmode_jim817' },
+};
+$('campDemos').onclick = e => { const b = e.target.closest('[data-demo]'); if (!b) return;
+  Object.assign(S, CAMP_DEMOS[b.dataset.demo]); buildUI(); update(); aimAt(['awningOpen']); };
+$('tgTentOpen').onclick = () => { if (S.tent === 'none') return; S.tentOpen = !S.tentOpen; syncCamp(); update(); };
+$('tgAwnOpen').onclick = () => { S.awningOpen = !S.awningOpen; syncCamp(); update(); };
+$('tgRoom').onclick = () => { S.awningRoom = !S.awningRoom; syncCamp(); update(); };
+$('arbToggles').onclick = e => {
+  const b = e.target.closest('[data-k]'); if (!b) return;
+  S[b.dataset.k] = !S[b.dataset.k]; syncToggles(); update();
+};
+$('arbToggles').addEventListener('pointerover', (e) => {
+  if (!matchMedia('(hover: hover)').matches) return;
+  const b = e.target.closest('[data-k]'); if (!b) return;
+  const a = ARB_RACK_ACC.find(x => x.key === b.dataset.k);
+  if (a) showCard({ ...a, id: a.key, part: a.pn }, b, null);
+});
+$('arbToggles').addEventListener('pointerleave', () => hideCard());
 $('toggles').onclick = e => {
   const b = e.target.closest('[data-k]'); if (!b) return;
   const k = b.dataset.k; S[k] = !S[k];
@@ -2094,6 +2191,10 @@ $('btnExport').onclick = () => {
     S.extinguisher !== 'none' && '滅火器 ' + find(EXTINGUISHERS, S.extinguisher).label,
     S.pillarPods && 'A 柱小圓燈', S.windowGuards && '鐵窗',
     ...SIDED.map(k => S[k] !== 'none' && `${S[k] === 'left' ? '左' : '右'}鐵窗${{ guardCan: '油桶', guardAxe: '斧頭', guardBoard: '脫困板' }[k]}`),
+    ...(S.roofRack === 'arb' ? ARB_RACK_ACC.filter(a => S[a.key]).map(a => 'ARB ' + a.label) : []),
+    S.tent !== 'none' && '車頂帳 ' + find(TENTS, S.tent).label,
+    S.campExtra !== 'none' && '車尾／車側帳 ' + find(CAMP_EXTRAS, S.campExtra).label,
+    S.awningRoom && 'ARB Deluxe 帳房 813108',
     S.shovel && '車頂鏟子', S.flares && '輪弧鉚釘',
     S.sideSkirt && '側裙飾板', S.decals && '車門貼字',
     S.spareBag && '備胎書包', S.spareCover && '備胎硬殼蓋',

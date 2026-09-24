@@ -1,0 +1,172 @@
+{
+  "sourcedAt": "2026-09-25",
+  "topic": "窄胎／JB74 skinny tall-tyre (JB74 Sierra, 5x139.7, stock 195/80R15 dia 693mm)",
+  "warning": "JB64 (kei Jimny) stock is 175/80R16 (dia 686mm), NOT the same car as JB74 Sierra (stock 195/80R15, dia 693mm). Most Japanese blog hits for '185/85R16 ジムニー' are JB64 owners, not JB74 Sierra owners — every fitment claim below is tagged with which chassis it actually came from.",
+
+  "sizes": [
+    {
+      "size": "175/80R16",
+      "proposedId": "t175r16",
+      "dia_mm": 686,
+      "width_mm": 175,
+      "rim_in": 16,
+      "deltaVsStock_pct": -1.0,
+      "rimWidthRange_in": "4.5-6.0 (std 5.0)",
+      "source": "https://www.y-yokohama.com/product/tire/geolandar_mtg003_size/ (GEOLANDAR M/T G003 official size chart: 175/80R16 91S, dia 686mm, section 177mm, rim 4.5-6J)",
+      "note": "This is JB64's own OE size, not a real upsize for JB74 (JB74 stock 693mm is already 7mm bigger). Included because it is the genuine '踏面最瘦' option shops sell for the skinny look and it needs nothing: no lift, no trim.",
+      "needLift": 0, "needBody": 0, "legal": true, "uncertain": false
+    },
+    {
+      "size": "185/85R16",
+      "proposedId": "t185r16",
+      "dia_mm": 720,
+      "width_mm": 185,
+      "rim_in": 16,
+      "deltaVsStock_pct": 3.9,
+      "rimWidthRange_in": "4.5-6.0 (std 5.0)",
+      "source_dia_rim": [
+        "https://www.y-yokohama.com/product/tire/geolandar_mtg003_size/ (G003: dia 720mm, section 184mm, rim 4.5-6J)",
+        "https://www.toyotires.jp/product/oprt/ (OPEN COUNTRY R/T LT table: dia 720mm, section 184mm, rim 4.5-6J, load 105/103N, WHITE LETTERS = yes)"
+      ],
+      "fitmentSource": "https://craft-web.co.jp/blogs/urban_hamamatsu/%E3%82%B8%E3%83%A0%E3%83%8B%E3%83%BC%E3%82%B7%E3%82%A8%E3%83%A9%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E2%98%85%E3%83%8A%E3%83%AD%E3%83%BC%E3%82%BF%E3%82%A4%E3%83%A4 -- shop URBAN OFF CRAFT 浜松店, explicitly JB74 Sierra: DEAN CROSS COUNTRY 16in wheel + TOYO OPEN COUNTRY R/T 185/85R16 (white letter) at STOCK ride height, no lift; shop adds a 4x4Engineering steering damper because a narrower tyre reduces on-road stability ('細長いタイヤが良く似合うんです', damper called 必須アイテム).",
+      "secondaryFitmentNote": "carvan.co.jp (長岡店, explicitly titled 'JB74に185/85R16という選択肢') covers this size for JB74 approvingly but does not state a lift figure either way -- https://carvan.co.jp/shopblog_nagaoka/2985/",
+      "needLift": 0, "needBody": 0, "legal": true, "uncertain": false,
+      "note": "官方外徑僅比原廠大 3.9%，JB74 專門店（craft-web 浜松店）實車配置為原廠車高、免舉升；但窄胎胎肩窄，該店加裝方向機穩定桿因應直進穩定性下降，這點寫進 note 比較誠實。"
+    },
+    {
+      "size": "195R16C",
+      "proposedId": "t195r16c",
+      "dia_mm": 716,
+      "width_mm": 198,
+      "rim_in": 16,
+      "deltaVsStock_pct": 3.3,
+      "rimWidthRange_in": "5.0-6.0 (std 5.5)",
+      "source_dia_rim": "https://www.y-yokohama.com/product/tire/geolandar_xat_size/ (GEOLANDAR X-AT G016 size chart: 195R16C 104/102Q, dia 716mm, section 198mm, rim 5-6J std 5.5J)",
+      "fitmentSource": "https://www.aihiro.com/blog/2021/02/jimny_sierra_dunlop_grandtrek-mt2/ -- shop アイヒロ (Kawagoe, Saitama), Hot Stuff Mud Cross JB-01 wheel + DUNLOP GRANDTREK MT2 195R16C 104/102Q, upgraded from a 205/70R15 stock size. NOTE: 205/70R15 is the JB43/JB33 Jimny Wide's OE size, not JB74's 195/80R15 -- this build is very likely an older Jimny Sierra (JB43), not JB74. Flagging honestly rather than silently presenting it as a JB74 build.",
+      "needLift": 0, "needBody": 0, "legal": true, "uncertain": true,
+      "note": "外徑只比原廠大 3.3%，理論上免舉升，但目前查到的實車配置（アイヒロ）疑似是 JB43 而非 JB74，未找到 JB74 專門店對這個尺寸的車高聲明，needLift 標 uncertain。胎寬 198mm 比 185/85R16 粗，注意輪拱內側可能比 185/85R16 更早磨到。"
+    },
+    {
+      "size": "205R16C",
+      "proposedId": "t205r16c",
+      "dia_mm": 736,
+      "width_mm": 208,
+      "rim_in": 16,
+      "deltaVsStock_pct": 6.2,
+      "rimWidthRange_in": "5.5-6.5 (std 6.0)",
+      "source_dia_rim": "https://www.y-yokohama.com/product/tire/geolandar_mtg003_size/ (G003: 205R16C 110/108Q, two SKUs E4735/E5696, dia 736mm, section 208mm, rim 5.5-6.5J)",
+      "needLift": 20, "needBody": 0, "legal": true, "uncertain": true,
+      "note": "**「205/80R16」這個 P-metric 標示官網查無此規格**，各家 16 吋窄胎目錄裡實際存在的是 LT 商規的 205R16C（Yokohama G003），外徑 736mm。needLift 20mm 是用目錄既有的 225/75R15(+3.7%→20mm) 與 235/75R15(+6.9%→40mm) 兩點內插估的，沒有找到 JB74 專門店對這個尺寸的舉升聲明，務必標 uncertain。**注意**：目錄裡已有一筆 id 't205r16'（label '205R16'，dia 741mm）是另一顆胎的數字，跟這裡新查到的 205R16C（736mm）不同源、别搞混，新條目建議用 't205r16c' 這個 id。"
+    },
+    {
+      "size": "6.50R16",
+      "proposedId": "t650r16",
+      "dia_mm": 767,
+      "width_mm": 182,
+      "rim_in": 16,
+      "deltaVsStock_pct": 10.7,
+      "rimWidthRange_in": "4.5-6.0 (std 5.0)",
+      "source_dia_rim": "https://www.y-yokohama.com/product/tire/geolandar_mtg003_size/ (G003: 6.50R16LT 97/93Q, product code E4729, dia 767mm, section 182mm, rim 4.5-6J)",
+      "needLift": 40, "needBody": 0, "legal": true, "uncertain": true,
+      "note": "傳統吋制窄胎，比例上比同外徑的公制胎更瘦（182mm 寬換來 767mm 高），是日本 JB74 rally-look 圈子講的『バイアス風』外觀來源，但 G003 這個尺寸是子午線（radial）構造，非真正 bias-ply。needLift 用目錄 t30(30x9.5, +10%→50mm) 內插估 40mm，沒有找到 JB74 專門店的實車舉升數字，標 uncertain。"
+    },
+    {
+      "size": "7.00R16",
+      "proposedId": "t700r16",
+      "dia_mm": 784,
+      "width_mm": 194,
+      "rim_in": 16,
+      "deltaVsStock_pct": 13.1,
+      "rimWidthRange_in": "5.0-6.5 (std 5.5)",
+      "source_dia_rim": "https://www.y-yokohama.com/product/tire/geolandar_mtg003_size/ (G003: 7.00R16LT 103/101Q, product code E5427, dia 784mm, section 194mm, rim 5-6.5J)",
+      "needLift": 50, "needBody": 0, "legal": true, "uncertain": true,
+      "note": "同上，比例更瘦更高，外徑逼近目錄 31x10.5R15(+13.5%→50mm 懸吊+25mm 車身)一列，但 7.00R16 胎寬只有 194mm（31x10.5 有 267mm 寬），所以只估 50mm 懸吊、車身舉升先不列，沒有 JB74 實車佐證，標 uncertain。"
+    }
+  ],
+
+  "modelsCheckedPerSize": {
+    "note": "Maker's own page had to actually list the size for a 'yes'. Bridgestone/Dunlop official pages render their size tables as JS/SVG and could not always be scraped cleanly -- flagged below.",
+    "YOKOHAMA GEOLANDAR M/T G003": {
+      "url": "https://www.y-yokohama.com/product/tire/geolandar_mtg003_size/",
+      "sizesConfirmed": ["175/80R16", "185/85R16", "195R16C", "205R16C", "6.50R16", "7.00R16"],
+      "whiteLetters": "Yokohama's own product page states G003 is raised-BLACK-letter in every size, every market -- no WL variant exists at all. This matches the existing TYRE_MODELS 'yk_g003' note; do not add owlSizes for G003."
+    },
+    "YOKOHAMA GEOLANDAR A/T G015": {
+      "url": "https://www.y-yokohama.com/product/tire/geolandar_atg015_size/",
+      "sizesConfirmed": ["185/85R16"],
+      "whiteLetters": "CONTRADICTION worth flagging: Yokohama's own comparison-chart page marks 185/85R16 as no-WL (RBL only), but named retailers sell a distinct WL SKU: Yahoo Shopping ('GEOLANDAR ホワイトレター A/T G015 185/85R16'), CARTUNE ('片側ホワイトレター'), TIREHOOD ('185/85R16 105/103N WL'). The WL variant looks like a separate, newer SKU the size-chart comparison table hasn't folded in. Existing catalogue entry 'yk_g015' already has owl:false but its own note text says '185/85R16（單面白字）' -- that's an internal inconsistency, worth fixing to owl:true, owlSizes:['t185r16']."
+    },
+    "YOKOHAMA GEOLANDAR X-AT G016": {
+      "url": "https://www.y-yokohama.com/product/tire/geolandar_xat_size/",
+      "sizesConfirmed": ["185/85R16", "195R16C"],
+      "whiteLetters": "Same contradiction as G015: maker comparison chart shows no WL mark for 185/85R16, but retail SKUs are explicitly sold as white-letter, including one Maluzen listing tied directly to 'ジムニーシエラ JB74W 3BA-JB74W' fitment (https://www.maluzen.com/shopping/tire/detail?pid=TV58451&cc=8807...). Existing catalogue entry 'yk_xat' already has owl:true, owlSizes:['t195'] and its note already claims 185/85R16 WL too -- just missing from the owlSizes array. Recommend owlSizes:['t195','t185r16']."
+    },
+    "TOYO OPEN COUNTRY R/T": {
+      "url": "https://www.toyotires.jp/product/oprt/",
+      "sizesConfirmed": ["185/85R16"],
+      "whiteLetters": "Confirmed WL=yes directly on Toyo's own LT-category table for 185/85R16 (105/103N). Existing catalogue entry 'toyo_rt' has owl:false, but its OWN note text already says '白字...在185/85R16' -- this is an existing internal contradiction. Recommend owl:true, owlSizes:['t185r16']."
+    },
+    "TOYO OPEN COUNTRY M/T": {
+      "url": "https://www.toyotires.jp/product/opmt/",
+      "sizesConfirmed": [],
+      "note": "No narrow sizes at all -- confirmed the whole line is LT225/75R16 and up, plus 30/31/33x flotation sizes. Matches existing catalogue note. No change needed."
+    },
+    "BRIDGESTONE DUELER M/T674": {
+      "url": "https://tire.bridgestone.co.jp/dueler/mt674/size.html",
+      "sizesConfirmed": ["185/85R16 (via retail, not the official page)"],
+      "note": "NOT currently in TYRE_MODELS at all. Bridgestone's own size-chart page is JS-rendered and only two 16in LT sizes came through the scrape (LT225/75R16, LT265/75R16); 185/85R16LT 105/103L is a real Bridgestone SKU per kakaku.com and tire-hood.com listings, but I could not pull rim-width/WL data straight off Bridgestone's own page -- treat as uncertain until someone re-checks the live table. White letters: not found for this model in any source (looks RBL only)."
+    },
+    "DUNLOP GRANDTREK MT2": {
+      "url": "https://tyre.dunlop.co.jp/item/item-detail/grandtrek-mt2",
+      "sizesConfirmed": ["195R16C (via retail + shop-build page, Dunlop's own page renders sizes as an image/SVG table so it could not be scraped)"],
+      "note": "NOT currently in TYRE_MODELS. Real build exists (aihiro.com, see t195r16c fitmentSource) but chassis is uncertain (looks JB43, not JB74). Dunlop calls this their 'ナロー' (narrow) sub-line explicitly, separate from a wide MT2 line -- worth a dedicated TYRE_MODELS entry once someone can read the actual size table."
+    },
+    "DUNLOP GRANDTREK AT5": {
+      "url": "https://tyre.dunlop.co.jp/item/item-detail/grandtrek-at5",
+      "sizesConfirmed": ["175/80R16 (listed among AT5's 32 sizes per search index, not independently verified with dia/rim)"],
+      "note": "NOT currently in TYRE_MODELS. Also carries 195/80R15 (JB74's exact OE size) in the same 32-size lineup. Numeric dia/rim for 175/80R16 not independently confirmed -- treat as uncertain."
+    },
+    "MAXXIS MT-753 / Bighorn": {
+      "sizesConfirmed": [],
+      "note": "No narrow (185/85R16-class) size found anywhere in the Maxxis Bighorn/Bravo lineup on Maxxis's own JP/INT sites. Smallest Bighorn-family 16in size located was 235/85R16 (still much wider than the JB74 skinny-tyre target). 'MT-753' as a model number could not be verified to exist at all -- likely a misremembered code (Maxxis's actual narrow LT line is the Bravo MA-751/AT-771 series, neither of which lists a sub-200mm 16in size either). Negative finding: do not add Maxxis to the narrow-tyre model list."
+    }
+  },
+
+  "wheelPairing": {
+    "targetRimRange_185_85R16": "4.5-6.0J, std 5.0J (Yokohama + Toyo both agree)",
+    "candidates": [
+      { "wheelId": "bradley", "spec": "Bradley V 16x5.5J offset 0", "fit": "in range, offset ~0 keeps the tyre flush like stock -- best match for the classic-narrow look", "sourceInCatalog": true },
+      { "wheelId": "watanabe_f8", "spec": "RS Watanabe F8 16x5.5J offset 0", "fit": "in range, maker's own page explicitly lists this as the Sierra (not Jimny/JB64) spec, offset 0 -- equally good match, and its retro 8-spoke face is the aesthetic pairing shops actually use with skinny tyres", "sourceInCatalog": true },
+      { "wheelId": "te37xt", "spec": "RAYS TE37XT for J 16x5.5J offset 0 (also has 16x6.0J -5)", "fit": "the 5.5J/0 spec is an equally good width/offset match; the 6.0J/-5 alt is too wide+poked for a narrow tyre and better saved for wider rubber", "sourceInCatalog": true },
+      { "wheelId": "xtremej", "spec": "XTREME-J XJ04 16x5.5J offset -5", "fit": "still within the 4.5-6.0J rim range, but the -5 offset pushes the tyre ~5mm further out than the 0-offset options above -- fine, just slightly less flush for the 'tucked skinny' look", "sourceInCatalog": true },
+      { "wheelId": "dean_cross", "spec": "DEAN Cross Country 16x6.0J offset -5, catalogue flags needsFlares:true", "fit": "this is the wheel the real JB74 demo build (craft-web Hamamatsu) actually used with 185/85R16 at STOCK ride height -- worth noting the catalogue's blanket needsFlares:true on this wheel may be more conservative than needed once the tyre itself is a narrow 185/85R16 rather than something wider; the real build ran it with no fender work at all.", "sourceInCatalog": true }
+    ],
+    "recommendation": "bradley or watanabe_f8 (both 16x5.5J ±0, both maker-documented JB74/Sierra spec) are the cleanest rim-width/offset match for 185/85R16 and need no flares. dean_cross is the aesthetically 'correct' retro-narrow pairing per the one real demo build found, despite the catalogue's needsFlares flag on that wheel."
+  },
+
+  "demoBuilds": [
+    {
+      "source": "URBAN OFF CRAFT 浜松店 (craft-web.co.jp, named shop)",
+      "url": "https://craft-web.co.jp/blogs/urban_hamamatsu/%E3%82%B8%E3%83%A0%E3%83%8B%E3%83%BC%E3%82%B7%E3%82%A8%E3%83%A9%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E2%98%85%E3%83%8A%E3%83%AD%E3%83%BC%E3%82%BF%E3%82%A4%E3%83%A4",
+      "chassis": "Jimny Sierra JB74 (explicitly stated)",
+      "wheel": "DEAN CROSS COUNTRY, 16in",
+      "tyre": "TOYO OPEN COUNTRY R/T 185/85R16, white letter",
+      "rideHeight": "stock, no lift",
+      "otherSpec": "shop added a 4x4Engineering steering damper because the narrow tyre reduces straight-line stability -- called it an essential item, not optional",
+      "verified": true
+    },
+    {
+      "source": "アイヒロ / aihiro.com (named shop, Kawagoe, Saitama)",
+      "url": "https://www.aihiro.com/blog/2021/02/jimny_sierra_dunlop_grandtrek-mt2/",
+      "chassis": "titled 'ジムニーシエラ' but upgraded FROM 205/70R15, which is the JB43/JB33 Jimny Wide's OE size, not JB74's 195/80R15 -- likely NOT a JB74, flagged uncertain rather than presented as one",
+      "wheel": "Hot Stuff Mud Cross JB-01 (Jimny-specific 5-spoke design), gunmetal",
+      "tyre": "DUNLOP GRANDTREK MT2 195R16C 104/102Q (narrow line)",
+      "rideHeight": "not stated",
+      "verified": "chassis unconfirmed -- included as the only real shop build found running the narrow 195R16C, with the caveat spelled out"
+    },
+    {
+      "source": "third build",
+      "note": "Could not find a third build that is BOTH explicitly JB74 AND running a size narrower than 195/80R15's own width (185/85R16 class or skinnier) within the research budget. Adjacent JB74 shop posts found (craft-web Chiryu x2, craft-web Nakagawa) all ran 215/70R16 or 225/70R16 -- wider than our narrow-tyre target -- so excluded rather than stretched to fit."
+    }
+  ]
+}

@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609241615** · 247 catalogue entries · 7 styles
+Current build: **202609241719** · 247 catalogue entries · 8 styles
 
 ---
 
@@ -90,7 +90,7 @@ snorkel's skirt come out as a tall thin fin.
 
 ## 2. What is live
 
-**Seven styles**, each a preset applied from the first step. They are pushed
+**Eight styles**, each a preset applied from the first step. They are pushed
 apart on silhouette — height, roof load, arch width, face, wheel size — not on
 which bumper they wear, because cars differing by bumper alone read the same
 from ten metres.
@@ -100,7 +100,8 @@ from ten metres.
 | 都會寬體低趴 `street_low` | the only one below stock; RAYS 18" forged, 225/60R18 H/T, WALD +30 mm fenders |
 | 都會輕改 `city` | bare roof, low black pinstripe |
 | 日系復古 `jp_retro` | sand body, three-band retro stripe, steel look |
-| 軍風 `military` | white star and stencils, loaded window guards |
+| 窄胎高瘦 `narrow` | stock height, 185/85R16 white-letter R/T on white DEAN faces — a real Hamamatsu shop build |
+| 軍風 `military` | white stencils (no star — owner removed it 2026-09-25), loaded window guards |
 | 露營 `camp` | two-tone roof, body lift, four orange bands |
 | 外掛籠硬派 `exo_cage` | roll cage over the roof, nothing else up there |
 | 澳洲越野 `au_offroad` | tallest, 31s, lit roof rack, snorkel |
@@ -120,6 +121,26 @@ custom list (`.pmenu`) so the hover card follows the row under the pointer
 select. Prices now lead with the shop's own currency, NT$ in brackets
 (`priceLabel` in fx.js). The roof rack has 往車頭／往車尾 buttons, 50 mm a
 press, ±200 mm (`S.rackShift`; shovel, awning and roof lights ride along).
+
+Added 2026-09-25:
+- **露營 tab.** `TENTS` (Kamado Canotier J3 roof-mounted, Front Runner
+  TENT031 fold-out, Autohome Columbus pop-up), open/closed; every AWNINGS entry
+  carries `open` geometry (rect projection or 270° fan radius) so the chosen
+  awning unrolls; ARB Deluxe Room 813108 under ARB 2500 awnings; `CAMP_EXTRAS`
+  (LX-MODE tailgate tent, Suzuki car tarp ACAZ). Open states are built
+  parametrically in `camp.js` (three.js), not Blender. Three example buttons
+  apply a whole open set-up. Every roof tent exceeds the 30 kg roof rating
+  (Suzuki catalogue, rack included) and `validate()` says so as a warning.
+- **ARB BASE Rack accessories** (`ARB_RACK_ACC`, `arbAcc_*` in parts.glb):
+  deflector (moved off the rack mesh), front 3/4 rail, side rails, jerry cans,
+  gas bottle, MAXTRAX mount, Hi-Lift holder; shown only with the ARB rack,
+  slide with `rackShift`. Prices are for the holders; what they hold is extra.
+- **Narrow tyres**: 175/80R16, 185/85R16, 195R16C, 205R16C, 6.50R16, 7.00R16
+  (docs/jb74-narrow-tyres.json).
+- **Official demo cars**: 27 JB74 demo cars from the Japanese makers,
+  rendered on parts.html from docs/jb74-demo-cars.json, each matched against
+  the catalogue with a link that applies the parts we have. Instagram,
+  Threads and X all refuse fetching.
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put
@@ -165,6 +186,10 @@ Do not build it.
 | `docs/jb74-face-swap.json` | BRON55 (prices are 税込, not 税抜 as older docs said), CH:AMP, 70YO.70, with BRON55 modelling geometry |
 | `docs/jb74-widebody.json` | wide-body fenders; every western brand found fits only the old JB23/JB43 |
 | `docs/jb74-rally.json`, `docs/jb74-rally-geometry.json` | red (no JB74 red in any market), four-lamp front, stripes (no product exists), spoilers; plus geometry for little Δ, the wing, OZ, ROWEN |
+| `docs/jb74-demo-cars.json` | 27 official JB74 demo cars, parts matched to catalogue ids |
+| `docs/jb74-camping.json` | roof tents, awning deployed geometry, rooms, tailgate/side tents; 30 kg roof rating sources |
+| `docs/jb74-arb-rack-accessories.json` | 26 BASE Rack accessories with part numbers and prices |
+| `docs/jb74-narrow-tyres.json` | narrow sizes, which makers list them, real skinny-tyre builds |
 | `docs/jb74-complete-kits.json` | 53 Japanese complete kits with first-party prices |
 | `docs/jb74-archetypes.json` | the archetypes, 11 rejected with reasons, and the Taiwan regulation dossier |
 | `docs/jb74-chrome-damd.json` | 133 items: 86 chrome (9 negative findings), 47 DAMD |

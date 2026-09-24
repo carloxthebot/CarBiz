@@ -20,7 +20,7 @@ fs.mkdirSync(OUT, { recursive: true });
 // family -> the parts.js array it reads. Matches SPOT_LIST in app.html.
 const FAMILIES = ['frontBumper', 'grille', 'rearBumper', 'hood', 'spareCoverKit', 'mirrors',
   'roofRack', 'awning', 'sideStep', 'ladder', 'snorkel', 'exhaust',
-  'lightBar', 'roofLights', 'grilleLight', 'extinguisher', 'face', 'fender', 'spoiler', 'cage', 'stripe'];
+  'lightBar', 'roofLights', 'grilleLight', 'extinguisher', 'face', 'fender', 'spoiler', 'cage', 'stripe', 'tent', 'campExtra'];
 const want = process.argv.slice(2);
 const families = want.length ? FAMILIES.filter(f => want.includes(f)) : FAMILIES;
 

@@ -829,7 +829,6 @@ def roof_rack_arb():
             leg = [(s * (GUTTER_X + 18), yg - 25, z), (s * (GUTTER_X + 18), yg + 40, z), (s * (W / 2 - 22), deck, z)]
             sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
             box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
-    box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
     lbl = text('arbLabel', 'BASE RACK', (0, deck + 22, z0 - 24), 22, 1, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
     lbl.rotation_euler = (0, 0, math.pi)                    # faces the rear, so it reads from behind
     return root
@@ -1014,8 +1013,9 @@ def star_prism(name, yc, zc, R, mat, root, x0=707, x1=712):
 
 
 def stripe_stencil():
-    """Military-truck markings: a white star on the door and stencilled
-    lettering, instead of a camouflage field.
+    """Military-truck markings: stencilled white lettering, instead of a
+    camouflage field. (It carried a white door star until the owner asked
+    for it to go.)
 
     A camouflage decal has to argue with the paint underneath it and loses --
     on a green car it turns into a smudge at any distance, and the pattern is
@@ -1031,9 +1031,8 @@ def stripe_stencil():
     root = group('stripe_stencil')
     white = material('StencilWhite', 0xe7e4da, rough=0.8, metal=0.0)
     FONT = '/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf'
+    # no star: the owner asked for it off (2026-09-25); the stencils stay
     for s in (-1, 1):
-        star_prism(f'star{s}', 830, 250, 200, white, root, x0=s * 707 if s > 0 else s * 712,
-                   x1=s * 712 if s > 0 else s * 707)
         for i, (line, size, y, z) in enumerate((('JB-74-1970', 58, 690, -430),
                                                 ('4x4', 74, 690, 640))):
             ob = text(f'mark{s}{i}', line, (s * 709, y, z), size, 3, white, root, font=FONT)
@@ -1600,6 +1599,151 @@ def stripe_damd_center():
             for (a, b), (c, d) in zip(vs, vs[1:]):
                 bm.faces.new((a, b, d, c))
             lib.new_object(f'band{i}{int(x0)}', bm, mat, root, smooth=True)
+    return root
+
+
+# ============================================================ ARB BASE RACK KIT
+# Accessories that clip into the BASE Rack's dovetail rails
+# (docs/jb74-arb-rack-accessories.json). ARB publish part numbers and prices
+# but almost no dimensions, so the shapes follow their product photographs
+# and the common sizes of what they hold: a NATO 20 L jerry can is
+# 470 x 350 x 165, a MAXTRAX board 1160 x 330 x 60, a 48-inch Hi-Lift about
+# 1220 long. Everything sits on the tray top of roofRack_arb.
+MAXTRAX_ORANGE = material('MaxtraxOrange', 0xd96a1c, rough=0.7)
+JACK_RED = material('HiLiftRed', 0xa8201a, rough=0.45, metal=0.3)
+CAN_GREEN = material('JerryCanGreen', 0x3e4a33, rough=0.5, metal=0.3)
+
+
+def _arb_frame():
+    z0, z1 = RACK_ZC - ARB_L / 2, RACK_ZC + ARB_L / 2
+    return ARB_W, z0, z1, RACK_TOP
+
+
+def arb_deflector():
+    """BASE Rack Deflector 17950020: one press-formed aluminium sheet the full
+    tray width, curling up at the front edge, clipped under the front rail."""
+    root = group('arbAcc_deflector')
+    W, z0, z1, top = _arb_frame()
+    box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
+    for s in (-1, 1):
+        box(f'bracket{s}', (s * (W / 2 - 40), top - 45, z1 + 20), (6, 60, 90), BLACK, root, bevel=1)
+    return root
+
+
+def _rail_corner(name, at, root):
+    box(name, at, (44, 44, 44), BLACK, root, bevel=10)
+
+
+def arb_rail_front():
+    """Front 3/4 guard rail 1780040: a low tube fence -- 25 mm tube about
+    130 mm above the tray, cast corners -- round the front three quarters,
+    open at the back."""
+    root = group('arbAcc_railFront')
+    W, z0, z1, top = _arb_frame()
+    y = top + 130
+    zb = z1 - 0.75 * ARB_L
+    x = W / 2 - 25
+    tube('rail', [(-x, y, zb), (-x, y, z1 - 25), (x, y, z1 - 25), (x, y, zb)], 25, BLACK, root, bend=60)
+    for s in (-1, 1):
+        for z in (zb, zb + (z1 - zb) / 2, z1 - 25):
+            tube(f'post{s}{int(z)}', [(s * x, top, z), (s * x, y, z)], 25, BLACK, root)
+            box(f'foot{s}{int(z)}', (s * x, top + 6, z), (40, 12, 60), BLACK, root, bevel=3)
+    for x2 in (-W / 4, W / 4):
+        tube(f'fpost{int(x2)}', [(x2, top, z1 - 25), (x2, y, z1 - 25)], 25, BLACK, root)
+    return root
+
+
+def arb_rail_side():
+    """Side (trade) rail 1780110, one each side: a single straight 25 mm tube
+    the full length, on cast feet in the side dovetail."""
+    root = group('arbAcc_railSide')
+    W, z0, z1, top = _arb_frame()
+    y = top + 130
+    for s in (-1, 1):
+        x = s * (W / 2 - 12)
+        lib.cylinder(f'rail{s}', (x, y, (z0 + z1) / 2), (0, 0, 1), 25, ARB_L - 60, BLACK, root, n=14)
+        for k in range(4):
+            z = z0 + 40 + k * (ARB_L - 80) / 3
+            tube(f'post{s}{k}', [(x, top, z), (x, y, z)], 25, BLACK, root)
+            box(f'foot{s}{k}', (x, top + 6, z), (40, 12, 60), BLACK, root, bevel=3)
+    return root
+
+
+def _jerry_can(name, centre, root, mat):
+    """A NATO 20 L can lying on its side: 470 long (along x), 350 wide, 165 thick."""
+    cx, cy, cz = centre
+    b = box(name, (cx, cy, cz), (470, 165, 350), mat, root, bevel=18)
+    for k in (-1, 1):                                        # the pressed X in each face
+        box(f'{name}rib{k}', (cx, cy + 84, cz), (400, 4, 20), mat, root, bevel=2,
+            rot=Matrix.Rotation(math.radians(38 * k), 3, 'Z'))       # lies in the top face
+    for dz in (-100, 0, 100):                                # three handles along the top edge
+        box(f'{name}h{dz}', (cx - 250, cy, cz + dz), (30, 40, 60), mat, root, bevel=6)
+    lib.cylinder(f'{name}spout', (cx - 250, cy, cz + 150), (1, 0, 0), 40, 40, mat, root, n=12)
+    return b
+
+
+def arb_jerry():
+    """Double horizontal jerry can holder 1780350: a base plate across the
+    rear of the tray, two cans lying side by side, a ratchet strap over each."""
+    root = group('arbAcc_jerry')
+    W, z0, z1, top = _arb_frame()
+    zc = z0 + 220
+    box('plate', (0, top + 4, zc), (1000, 8, 380), BLACK, root, bevel=2)
+    for i, x in enumerate((-250, 250)):
+        _jerry_can(f'can{i}', (x, top + 8 + 83, zc), root, CAN_GREEN)
+        box(f'strap{i}', (x, top + 8 + 168, zc), (40, 4, 360), WEBBING, root, bevel=1)
+        for s in (-1, 1):
+            box(f'strapSide{i}{s}', (x, top + 90, zc + s * 178), (40, 170, 4), WEBBING, root, bevel=1)
+    return root
+
+
+def arb_gas():
+    """Gas bottle holder 1780250: a 9 kg-class bottle (about 300 across and
+    550 long) lying across the front of the tray between stainless clamps."""
+    root = group('arbAcc_gas')
+    W, z0, z1, top = _arb_frame()
+    zc = z1 - 260
+    box('plate', (0, top + 4, zc), (640, 8, 280), BLACK, root, bevel=2)
+    lib.cylinder('bottle', (0, top + 160, zc), (1, 0, 0), 300, 520, material('GasGrey', 0xbfc3c6, rough=0.4, metal=0.3), root, n=28, bevel=40)
+    lib.cylinder('valve', (290, top + 160, zc), (1, 0, 0), 60, 60, STEEL, root, n=12)
+    for s in (-1, 1):
+        box(f'clamp{s}', (s * 240, top + 90, zc), (20, 150, 300), STEEL, root, bevel=4)
+    box('strap', (0, top + 312, zc), (40, 4, 300), WEBBING, root, bevel=1)
+    return root
+
+
+def arb_boards():
+    """Recovery board mount 1780310: two MAXTRAX (1160 x 330 x 60) stacked flat
+    along the left side of the tray, held by four dovetail pins."""
+    root = group('arbAcc_boards')
+    W, z0, z1, top = _arb_frame()
+    x, zc = W / 2 - 200, RACK_ZC + 150
+    for i in range(2):
+        y = top + 8 + 30 + i * 62
+        b = box(f'board{i}', (x, y, zc), (330, 58, 1160), MAXTRAX_ORANGE, root, bevel=12)
+        for k in range(-5, 6):                               # the moulded cleats
+            box(f'cleat{i}{k}', (x, y + 30, zc + k * 95), (280, 6, 26), MAXTRAX_ORANGE, root, bevel=2)
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            box(f'pin{sx}{sz}', (x + sx * 150, top + 70, zc + sz * 520), (30, 150, 30), BLACK, root, bevel=4)
+    return root
+
+
+def arb_jack():
+    """Premium Hi-Lift jack holder 1780280: a 48-inch farm jack lying fore and
+    aft on the right half of the tray, clamped at the top and the foot."""
+    root = group('arbAcc_jack')
+    W, z0, z1, top = _arb_frame()
+    x, zc, y = RIGHT * 430, RACK_ZC + 120, top + 50
+    box('bar', (x, y, zc), (50, 30, 1220), JACK_RED, root, bevel=3)
+    for k in range(30):                                      # the climbing holes
+        box(f'hole{k}', (x, y + 16, zc - 560 + k * 38), (18, 3, 12), BLACK, root, bevel=0)
+    box('mech', (x, y + 10, zc + 250), (120, 80, 200), JACK_RED, root, bevel=8)
+    lib.cylinder('handle', (x - 20, y + 45, zc + 60), (0, 0, 1), 28, 900, BLACK, root, n=12)
+    box('foot', (x, y - 5, zc - 620), (150, 40, 90), BLACK, root, bevel=6)
+    box('top', (x, y, zc + 620), (80, 40, 40), BLACK, root, bevel=6)
+    for z in (zc - 450, zc + 450):
+        box(f'clamp{z}', (x, y - 10, z), (110, 70, 60), BLACK, root, bevel=6)
     return root
 
 
@@ -3313,6 +3457,13 @@ def build():
                'renkon', 'arc4', 'dwindow', 'turbine', 'seven', 'oz20'):
         rim(st)
     roof_rack_arb()
+    arb_deflector()
+    arb_rail_front()
+    arb_rail_side()
+    arb_jerry()
+    arb_gas()
+    arb_boards()
+    arb_jack()
     roof_lights()
     bumper_tube_heritage()
     rear_bumper_tube()

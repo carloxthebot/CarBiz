@@ -208,6 +208,19 @@ export const TYRES = [
     legal: true, note: '+2%，可能需輕微修內輪弧' },
   { id: 't225r16', label: '225/75R16', dia: 744, width: 225, rim: 16, needLift: 40, needBody: 0,
     legal: true, note: '+7.4%，需 40–60mm 舉升與修內襯；車主實車配置（MAXX 16×7）' },
+  // ---- narrow and tall: the Japanese skinny-tyre look (docs/jb74-narrow-tyres.json)
+  { id: 't175r16', label: '175/80R16', dia: 686, width: 175, rim: 16, needLift: 0, needBody: 0,
+    legal: true, note: '−1%，JB64 的原廠尺寸，比 JB74 原廠還瘦，免修改；GEOLANDAR M/T G003 官網有列（黑字）' },
+  { id: 't185r16', label: '185/85R16', dia: 720, width: 185, rim: 16, needLift: 0, needBody: 0,
+    legal: true, note: '+3.9%，日系窄高胎的經典尺寸。TOYO OPEN COUNTRY R/T（白字）、YOKOHAMA GEOLANDAR A/T G015／X-AT G016（部分白字）、M/T G003（黑字）官網都有；建議 4.5–6.0J（標準 5.0J）。浜松 URBAN OFF CRAFT 的 JB74 實車是原廠車高免舉升，但因窄胎直進穩定性變差另加了方向機穩定桿' },
+  { id: 't195r16c', label: '195R16C', dia: 716, width: 198, rim: 16, needLift: 0, needBody: 0,
+    legal: true, uncertain: true, note: '+3.3%，X-AT G016（白字）與 M/T G003（黑字）官網有列，建議 5.0–6.0J。查到的實車疑似是 JB43 不是 JB74，免舉升這點未確認' },
+  { id: 't205r16c', label: '205R16C', dia: 736, width: 208, rim: 16, needLift: 20, needBody: 0,
+    legal: true, uncertain: true, note: '+6.2%，LT 商用規格（M/T G003 官網，黑字），建議 5.5–6.5J；「205/80R16」官網查無。舉升量是照相鄰尺寸估的，沒有 JB74 實車聲明' },
+  { id: 't650r16', label: '6.50R16', dia: 767, width: 182, rim: 16, needLift: 40, needBody: 0,
+    legal: true, uncertain: true, note: '+10.7%，吋制窄高胎，只有 M/T G003 官網有列（黑字、子午線胎），建議 4.5–6.0J；舉升量是估的' },
+  { id: 't700r16', label: '7.00R16', dia: 784, width: 194, rim: 16, needLift: 50, needBody: 0,
+    legal: true, uncertain: true, note: '+13.1%，只有 M/T G003 官網有列（黑字），建議 5.0–6.5J；胎寬比 31×10.5 窄很多，舉升量是估的' },
   { id: 't225', label: '225/75R15', dia: 719, width: 225, rim: 15, needLift: 20, needBody: 0,
     legal: true, uncertain: true, note: '+3.7%，約需 20mm 舉升' },
   { id: 't235', label: '235/75R15', dia: 741, width: 235, rim: 15, needLift: 40, needBody: 0,
@@ -246,14 +259,14 @@ export const TYRE_MODELS = [
     label: 'Open Country A/T III 全地形胎', note: '白字：日規 215/70R16、美規 235/75R15、30×9.5、31×10.5' },
   { id: 'bfg_ko2', pattern: 'at', brand: 'BFGoodrich', model: 'ALL-TERRAIN T/A KO2', owl: true, owlSizes: 'some',
     label: 'All-Terrain T/A KO2 全地形胎', note: '多數尺寸有白字（RWL）' },
-  { id: 'yk_g015', pattern: 'at', brand: 'YOKOHAMA', model: 'GEOLANDAR A/T G015', owl: false,
+  { id: 'yk_g015', pattern: 'at', brand: 'YOKOHAMA', model: 'GEOLANDAR A/T G015', owl: true, owlSizes: ['t185r16'],
     label: 'GEOLANDAR A/T G015 全地形胎', note: '**日規目錄沒有 195/80R15 也沒有 215/70R16**，實際可用的是 185/85R16（單面白字）；台灣不賣，已被 A/T4 G018 取代。部分尺寸白字' },
   { id: 'fk_at3w', pattern: 'at', brand: 'FALKEN', model: 'WILDPEAK A/T3W', owl: false,
     label: 'WILDPEAK A/T3W 全地形胎', note: '僅黑字' },
-  { id: 'toyo_rt', photo: true, pattern: 'rt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY R/T', owl: false,
+  { id: 'toyo_rt', photo: true, pattern: 'rt', brand: 'TOYO TIRES', model: 'OPEN COUNTRY R/T', owl: true, owlSizes: ['t185r16'],
     mask: { file: 'toyo_rt.png', repeatMM: 156 },
     label: 'Open Country R/T 複合越野胎', note: '白字**不在 JB74 主力尺寸**：官方表列 195/80R15 與 215/70R16 皆無 WL，白字在 185/85R16、LT225/70R16、235/70R16（零售 SKU 命名與官方表有衝突，待實車確認）。日規單面白字' },
-  { id: 'yk_xat', pattern: 'rt', brand: 'YOKOHAMA', model: 'GEOLANDAR X-AT G016', owl: true, owlSizes: ['t195'],
+  { id: 'yk_xat', pattern: 'rt', brand: 'YOKOHAMA', model: 'GEOLANDAR X-AT G016', owl: true, owlSizes: ['t195', 't185r16', 't195r16c'],
     label: 'GEOLANDAR X-AT G016 複合越野胎', note: '白字的 JB74 尺寸是 **195/80R15（雙面白字）與 185/85R16**；LT215/70R16 是黑字。注意 195/80R15 是 **G016A**，兩面側壁設計與行銷照的 G016 不同。白字：195R16C、215/70R16' },
   { id: 'nt_ridge', unavailable: true, pattern: 'rt', brand: 'NITTO', model: 'RIDGE GRAPPLER', owl: false,
     label: 'Ridge Grappler 複合越野胎', note: '**JB74 裝不上**：最小 265/70R16、最小輪圈 7.0J，原廠 5.5J 不合規。全 Grappler 系列也都沒有白字。留著僅供參考。僅黑字；JB74 常用尺寸較少' },
@@ -465,9 +478,9 @@ export const ROOF_RACKS = [
     note: '1890×1366mm 平板式：7 根橫向 50mm 滑槽條（中段 220mm 間距）、中央縱向脊樑、外圍矮圓管框、前方鋁沖壓導風板。原廠雨槽每側一根長軌、每側 3 個腳座。尺寸取自原廠圖 UN-JIMNY-FB-012；離車頂高度原廠未公布' },
   { id: 'urnieta_salado_half', url: 'https://urnieta.com/product/salado-roof-rack-for-jimny-jb74-jc74/', label: 'SALADO 半頂行李架', price: 25200, cur: 'TWD', brand: 'URNIETA', part: '0702034', uncertain: true,
     note: '同款的短版，每側 2 個腳座。原廠沒有公布半頂的長度，模型長度為依照片推估' },
-  { id: 'wood', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'trip basket 復古車頂架（半長）', price: 56000, cur: 'JPY', brand: 'DAMD', part: 'TB-HR1',
+  { id: 'wood', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'trip basket 復古車頂架（半長）', price: 61600, cur: 'JPY', brand: 'DAMD', part: 'TB-HR1',
     refs: ['https://www.sunvigor.com.hk/onlineshop/tw/damd/2605-suzukijimny-jimnysierre-damd-roofrack-tripbacket-djbtbdrr1.html'],
-    note: '1350×600×160mm、13.5kg。黑色鋼製鐵線籃，木料是紐西蘭輻射松乙醯化處理的高耐久「Accoya」，做成包覆前緣的弧形擋板與兩側木塊，不是木地板。裝在車頂前段的橫桿上。日本仍在售 ¥56,000／¥61,600 稅込；＋TERZO 基座組 TB-HRKJB ¥74,000 稅抜（¥81,400 稅込），內含 JB64／JB74 專用 PIAA TERZO 腳座 4 個與主橫桿 2 根，另加約 5kg。' },
+    note: '1350×600×160mm、13.5kg。黑色鋼製鐵線籃，木料是紐西蘭輻射松乙醯化處理的高耐久「Accoya」，做成包覆前緣的弧形擋板與兩側木塊，不是木地板。裝在車頂前段的橫桿上。日本仍在售 ¥56,000 稅抜／¥61,600 稅込；＋TERZO 基座組 TB-HRKJB ¥74,000 稅抜（¥81,400 稅込），內含 JB64／JB74 專用 PIAA TERZO 腳座 4 個與主橫桿 2 根，另加約 5kg。' },
   { id: 'wood_full', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/', label: 'trip basket 復古車頂架（全長）', price: 19800, cur: 'TWD', brand: 'DAMD', part: 'TB-RR1',
     refs: ['https://www.damd.co.jp/products/suzuki/jimny_theroots/'],
     note: '1350×1000×160mm、16kg，與半長款同款式。日本 ¥59,000／¥64,900 稅込；＋TERZO 基座組 TB-RRKJB ¥77,000 稅抜（¥84,700 稅込），內含 JB64／JB74 專用 PIAA TERZO 腳座 4 個與主橫桿 2 根，另加約 5kg。台灣蝦皮「藤井74」NT$19,800' },
@@ -498,38 +511,90 @@ export const ROOF_RACKS = [
     part: 'E20008', note: '官方正式名稱是「ハーフサイズ M型」（半頂），不是 Full size——SHOWA GARAGE 另有一款「フルサイズ M型」（E20009）¥57,200 稅込是不同商品，容易搞混。1400×1250mm、折疊高度約 130mm，布料配框架的半硬式構造（不是剛性金屬貨架），可分成兩半、單邊約 7kg，總重 11.4kg，官方耐荷重 30kg，恰好等於 JB74 屋頂動態上限，扣掉自重後行駛中可載約 18kg。' },
 ];
 
+/**
+ * The camping area. Roof tents carry their OPEN size, which is what camp.js
+ * draws; `shape` picks the mechanism. JB74's roof is rated 30 kg including
+ * the rack (Suzuki's own catalogue), and every roof tent on the market is
+ * heavier than that -- docs/jb74-camping.json -- so validate() says so.
+ */
+export const TENTS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'kamado_j3', shape: 'wedge', noRack: true, weight: 48, open: { L: 2100, W: 1120, H: 970 },
+    url: 'https://www.k-m-d.co.jp/news/detail.html?p=4280', label: 'Canotier J3 Jimny 專用硬頂帳', price: 880000, cur: 'JPY', brand: 'カマド（Kamado）',
+    note: '唯一 Jimny 專用的車頂帳，照 3D 掃描直接鎖在車頂，不需要車頂架，裝著可以過日本車檢。¥880,000 稅込含安裝（只在御殿場店施工），48kg。展開 2100×1120×970mm，氣壓棒撐開、後段再往後延伸讓 180cm 的人躺平。開啟方向與延伸量官網沒寫，這裡照前端鉸鏈畫' , uncertain: true },
+  { id: 'fr_tent031', shape: 'foldout', weight: 43, open: { L: 2400, W: 1300 },
+    url: 'https://www.dometic.com/', label: 'Roof Top Tent 對折外翻帳', price: 1199, cur: 'USD', brand: 'Front Runner', part: 'TENT031',
+    note: 'US$1,199，43kg，收合高 330mm，展開 2400×1300mm，往車側翻出、鋁梯兼支撐，2 人以上。裝在車頂架上；同廠 Slimline II 有 JB74 專用品番。翻出方向與展開高度官網未公布', uncertain: true },
+  { id: 'autohome_columbus', shape: 'popup', weight: 44, open: { L: 2100, W: 1300 },
+    url: 'https://www.autohome-official.com/en/products/comparing-all-roof-top-tents/', label: 'Columbus Small 升降硬殼帳', price: null, cur: 'EUR', brand: 'Autohome', part: 'CVC/01',
+    note: '44kg，2100×1300mm，兩支氣壓彈簧加搖把讓頂殼垂直升起，完全不懸出車外；兩側各一門、前端一門。官網未公布價格與收合／展開高度', uncertain: true },
+];
+
+/** Tents and tarps that are not on the roof: off the tailgate or the side. */
+export const CAMP_EXTRAS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'lxmode_jim817', shape: 'tailgate', url: 'https://www.custom-wagon.com/c/557/jim817', label: 'カーリビング 車尾彈開帳', price: 60500, cur: 'JPY', brand: 'LX-MODE', part: 'jim817',
+    note: '¥60,500 稅込，JB74W 專用。立在車尾地面、跟車身連在一起，2000×2000mm、高 2250（中央 2450）mm，收納 Φ900×100mm、約 8kg。怎麼接 JB74 的側開尾門官網沒寫' },
+  { id: 'suzuki_tarp', shape: 'tarp', url: 'https://www.suzuki.co.jp/accessory_car/jimny_nomade_jimny_sierra/jimny_nomade_jimny_sierra.pdf', label: '原廠 70 カータープ 車側天幕', price: 45100, cur: 'JPY', brand: 'SUZUKI（ogawa 製）', part: 'ACAZ（99243-77R02）',
+    note: '¥45,100 稅込，約 250×250cm、高 220cm，2.5kg。一邊用兩個吸盤掛勾吸在車頂邊，另一邊兩支鋁桿撐起；不需要車頂架，使用時要熄火' },
+];
+
+/**
+ * ARB BASE Rack accessories -- they clip into the dovetail rails of the `arb`
+ * rack only, so the page offers them only while that rack is fitted.
+ * `key` is the state flag, `part` the model node (arbAcc_<part>). ARB
+ * publish prices but next to no weights (docs/jb74-arb-rack-accessories.json);
+ * what they HOLD is not included -- cans, bottle, boards and jack are extra.
+ */
+export const ARB_RACK_ACC = [
+  { key: 'arbDeflector', part: 'deflector', label: '導風板 Deflector', price: 120, cur: 'USD', brand: 'ARB', pn: '17950020',
+    url: 'https://www.arbusa.com/', note: '一片壓型鋁板，跟貨架同寬，前緣上翹，卡在前橫樑下方，減風切聲。美國官網未稅價' },
+  { key: 'arbRailFront', part: 'railFront', label: '前 3/4 護欄', price: 376, cur: 'USD', brand: 'ARB', pn: '1780040',
+    url: 'https://www.arbusa.com/', note: '約 25mm 圓管、鑄鋁轉角，包住貨架前面四分之三、後段開口，高約 130mm（照片估）。美國官網未稅價' },
+  { key: 'arbRailSide', part: 'railSide', label: '側護欄（左右一對）', price: 584, cur: 'USD', brand: 'ARB', pn: '1780110 ×2',
+    url: 'https://www.arbusa.com/', note: '單根直管沿貨架長邊，一支 US$292，這裡算左右兩支。ARB 沒有 Jimny 寬度的整圈護欄，要整圈就是前 3/4 加側護欄' },
+  { key: 'arbJerry', part: 'jerry', label: '雙油桶架（橫放）', price: 208, cur: 'AUD', brand: 'ARB', pn: '1780350',
+    url: 'https://www.arb.com.au/', note: '兩個 20L 標準油桶並排橫躺在貨架後段，各一條棘輪帶。價格只含架子（澳洲官網含 GST），油桶另購；兩桶加滿約 40kg，已經超過 JB74 車頂 30kg 動態載重' },
+  { key: 'arbGas', part: 'gas', label: '瓦斯桶架', price: 126, cur: 'AUD', brand: 'ARB', pn: '1780250',
+    url: 'https://www.arb.com.au/', note: '瓦斯桶橫躺在貨架前段，不鏽鋼扣夾兩端加一條綁帶。價格只含架子，桶另購' },
+  { key: 'arbBoards', part: 'boards', label: '脫困板固定座＋兩片 MAXTRAX', price: 54, cur: 'USD', brand: 'ARB', pn: '1780310',
+    url: 'https://www.arbusa.com/', note: '四支燕尾快拆柱壓住兩片疊放的脫困板，放貨架左側。價格只含固定座，MAXTRAX 另購（1160×330×60mm）' },
+  { key: 'arbJack', part: 'jack', label: 'Hi-Lift 千斤頂架', price: 155, cur: 'USD', brand: 'ARB', pn: '1780280',
+    url: 'https://www.arbusa.com/', note: '高階款兩點夾具，可上鎖；48 吋農用千斤頂前後向躺在貨架右半。價格只含架子，千斤頂另購' },
+];
+
 export const AWNINGS = [
   { id: 'none', label: '不裝', price: 0 },
   // ---- 台灣有售
-  { id: 'yakima_s', photo: true, url: 'https://www.yakima.com.tw/products/slimshady-%E8%BB%8A%E9%82%8A%E5%B8%B3-2-2-5m', photo: true, label: 'OverNOut S 車邊帳 2×2.5m', price: 8500, cur: 'TWD', brand: 'Yakima', part: 'KT8007508',
-    note: '軟袋 2100 長、12kg；Yakima 台灣售價' },
-  { id: 'yakima_l', photo: true, url: 'https://www.yakima.com.tw/products/overnout_l', label: 'OverNOut L 車邊帳 2.5×2.5m', price: 11700, cur: 'TWD', brand: 'Yakima', part: 'KTHB0019',
-    note: '軟袋 2600 長、18kg' },
-  { id: 'yakima_270', photo: true, url: 'https://www.yakima.com.tw/products/overnout-270', label: 'OverNOut 270 蝙蝠車邊帳', price: 21600, cur: 'TWD', brand: 'Yakima', part: '8007462/3',
+  { id: 'yakima_s', bagL: 2100, open: { kind: 'rect', along: 2000, projection: 2500 }, photo: true, url: 'https://www.yakima.com.tw/products/slimshady-%E8%BB%8A%E9%82%8A%E5%B8%B3-2-2-5m', photo: true, label: 'OverNOut S 車邊帳 2×2.5m', price: 8500, cur: 'TWD', brand: 'Yakima', part: 'KT8007508',
+    note: '軟袋 2100 長、10kg（Yakima 台灣官網）；Yakima 台灣售價' },
+  { id: 'yakima_l', bagL: 2600, open: { kind: 'rect', along: 2500, projection: 2500 }, photo: true, url: 'https://www.yakima.com.tw/products/overnout_l', label: 'OverNOut L 車邊帳 2.5×2.5m', price: 11700, cur: 'TWD', brand: 'Yakima', part: 'KTHB0019',
+    note: '台灣官網寫 300×250cm、12kg，美國同條碼 8007446 是 8×8 ft、15.4kg，兩邊對不上；這裡照品名 2.5×2.5m 畫' },
+  { id: 'yakima_270', bagL: 2286, open: { kind: 'fan', radius: 2286, arms: 4, freeArms: 2 }, photo: true, url: 'https://www.yakima.com.tw/products/overnout-270', label: 'OverNOut 270 蝙蝠車邊帳', price: 21600, cur: 'TWD', brand: 'Yakima', part: '8007462/3',
     note: '2286×216×254、後端旋轉、四支臂自撐；左＝駕駛側' },
-  { id: 'yakima_270s', photo: true, url: 'https://www.yakima.com.tw/products/overnout-270', photo: true, label: 'OverNOut 270 蝙蝠車邊帳 1.8m', price: 19800, cur: 'TWD', brand: 'Yakima', part: '8007538/9',
+  { id: 'yakima_270s', bagL: 1850, open: { kind: 'fan', radius: 1850, arms: 4, freeArms: 1 }, photo: true, url: 'https://www.yakima.com.tw/products/overnout-270', photo: true, label: 'OverNOut 270 蝙蝠車邊帳 1.8m', price: 19800, cur: 'TWD', brand: 'Yakima', part: '8007538/9',
     note: '短版 270°，收納約 1850×216×254；架在車頂架側緣上方（車主實車配置）' },
-  { id: 'yakima_180', photo: true, url: 'https://www.yakima.com.tw/products/overnout-180-%E5%81%B4%E9%82%8A%E5%B8%B3', label: 'OverNOut 180 車邊帳', price: 21600, cur: 'TWD', brand: 'Yakima', part: '8007516',
+  { id: 'yakima_180', bagL: 2260, open: { kind: 'fan', radius: 1905, sweep: 180, arms: 3, freeArms: 1 }, photo: true, url: 'https://www.yakima.com.tw/products/overnout-180-%E5%81%B4%E9%82%8A%E5%B8%B3', label: 'OverNOut 180 車邊帳', price: 21600, cur: 'TWD', brand: 'Yakima', part: '8007516',
     note: '2260×229×178、8.7m²、三支臂' },
-  { id: 'rhino_compact', photo: true, url: 'https://www.ruten.com.tw/item/22445161058255/', label: 'Batwing Compact 蝙蝠車邊帳', price: 33920, cur: 'TWD', brand: 'Rhino-Rack',
+  { id: 'rhino_compact', bagL: 2000, open: { kind: 'fan', radius: 1900, arms: 4 }, photo: true, url: 'https://www.ruten.com.tw/item/22445161058255/', label: 'Batwing Compact 蝙蝠車邊帳', price: 33920, cur: 'TWD', brand: 'Rhino-Rack',
     part: '33120/33121', note: '2000 長、6m²、18kg；黑四驅售價' },
-  { id: 'rhino_270', url: 'https://www.rhinorack.com/en-au/products/sport-awnings/awnings/awnings/batwing-compact-awning-left-_33120', label: 'Batwing 270 蝙蝠車邊帳', price: 38160, cur: 'TWD', brand: 'Rhino-Rack', part: '33118/33119',
+  { id: 'rhino_270', bagL: 2500, open: { kind: 'fan', radius: 2500, arms: 4 }, url: 'https://www.rhinorack.com/en-au/products/sport-awnings/awnings/awnings/batwing-compact-awning-left-_33120', label: 'Batwing 270 蝙蝠車邊帳', price: 38160, cur: 'TWD', brand: 'Rhino-Rack', part: '33118/33119',
     note: '2500 長、10m²、20.5kg' },
-  { id: 'allblack_270', photo: true, url: 'https://www.ruten.com.tw/item/22245661385396/', label: 'ALL BLACK 270° 車邊帳 gen3', price: 18000, cur: 'TWD', brand: '黑四驅（台灣）',
+  { id: 'allblack_270', bagL: 2100, open: { kind: 'fan', radius: 2100, arms: 4, freeArms: 2 }, photo: true, url: 'https://www.ruten.com.tw/item/22245661385396/', label: 'ALL BLACK 270° 車邊帳 gen3', price: 18000, cur: 'TWD', brand: '黑四驅（台灣）',
     note: '2m／2.5m 兩種、左開／右開；含 LED 燈條' },
   // ---- 進口
-  { id: 'arb_touring_2', photo: true, url: 'https://www.arb.com.au/product/814406-arb-touring-awning-2000mm-x-2500mm-with-led-light', label: 'Touring 車邊帳 2000×2500 LED', price: null, cur: 'AUD', brand: 'ARB', part: '814406', uncertain: true,
-    note: 'PVC 軟袋約 2200 長，12.9kg；經銷商報價' },
-  { id: 'arb_touring_25', photo: true, url: 'https://www.arb.com.au/product/814407-arb-touring-awning-with-light-2500mm-x-2500mm', label: 'Touring 車邊帳 2500×2500 LED', price: null, cur: 'AUD', brand: 'ARB', part: '814407', uncertain: true,
+  { id: 'arb_touring_2', bagL: 2200, open: { kind: 'rect', along: 2000, projection: 2500 }, photo: true, url: 'https://www.arb.com.au/product/814406-arb-touring-awning-2000mm-x-2500mm-with-led-light', label: 'Touring 車邊帳 2000×2500 LED', price: 419, cur: 'AUD', brand: 'ARB', part: '814406',
+    note: 'PVC 軟袋約 2200 長，12.9kg；澳洲官網 AUD 419（含 GST）' },
+  { id: 'arb_touring_25', bagL: 2700, open: { kind: 'rect', along: 2500, projection: 2500 }, room: true, photo: true, url: 'https://www.arb.com.au/product/814407-arb-touring-awning-with-light-2500mm-x-2500mm', label: 'Touring 車邊帳 2500×2500 LED', price: 440, cur: 'AUD', brand: 'ARB', part: '814407',
     note: '約 2700 長，14.3kg' },
-  { id: 'arb_alu', photo: true, url: 'https://www.arb.com.au/product/814412-arb-awning-2500mm-x-2500mm-black-aluminium-housing-and-light', label: '鋁殼車邊帳 2500×2500', price: null, cur: 'AUD', brand: 'ARB', part: '814412', uncertain: true,
+  { id: 'arb_alu', bagL: 2650, open: { kind: 'rect', along: 2500, projection: 2500 }, room: true, photo: true, url: 'https://www.arb.com.au/product/814412-arb-awning-2500mm-x-2500mm-black-aluminium-housing-and-light', label: '鋁殼車邊帳 2500×2500', price: 734, cur: 'AUD', brand: 'ARB', part: '814412',
     note: '矩形鋁殼、外側掀蓋，17.8kg' },
-  { id: 'darche_270', photo: true, url: 'https://darche.com.au/products/eclipse-270-g2-right-us-eu-p', label: 'Eclipse 270 G2 車邊帳', price: 1499, cur: 'AUD', brand: 'Darche', part: 'T050801743',
+  { id: 'darche_270', bagL: 2550, open: { kind: 'fan', radius: 2550, arms: 6 }, photo: true, url: 'https://darche.com.au/products/eclipse-270-g2-right-us-eu-p', label: 'Eclipse 270 G2 車邊帳', price: 1499, cur: 'AUD', brand: 'Darche', part: 'T050801743',
     note: '11.5m²、1000D PVC，後端鋁合金旋軸' },
-  { id: 'darche_slim', photo: true, url: 'https://darche.com.au/products/eclipse-slimline-2-5m-x-2-5m', label: 'Eclipse Slimline 車邊帳', price: 579, cur: 'AUD', brand: 'Darche', part: 'T050801793',
+  { id: 'darche_slim', bagL: 2550, open: { kind: 'rect', along: 2500, projection: 2500 }, photo: true, url: 'https://darche.com.au/products/eclipse-slimline-2-5m-x-2-5m', label: 'Eclipse Slimline 車邊帳', price: 579, cur: 'AUD', brand: 'Darche', part: 'T050801793',
     note: '820D 軟袋，14kg' },
-  { id: 'ikamper', photo: true, url: 'https://ikamper.com/products/exoshell-270-awning', label: 'ExoShell 270 硬殼車邊帳', price: 1950, cur: 'USD', brand: 'iKamper', part: 'MB011-002',
-    note: '2630×180×184 硬殼鋁盒、11.2m²，30kg' },
+  { id: 'ikamper', bagL: 2630, open: { kind: 'fan', radius: 2630, arms: 4, freeArms: 4 }, photo: true, url: 'https://ikamper.com/products/exoshell-270-awning', label: 'ExoShell 270 硬殼車邊帳', price: 1950, cur: 'USD', brand: 'iKamper', part: 'MB011-005（駕駛側）／MB011-002（副駕側）',
+    note: '2630×180×184 硬殼鋁盒、11.2m²，30kg；展開沿車 4990、外伸 3900' },
 ];
 
 export const SIDE_STEPS = [
@@ -768,6 +833,14 @@ export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   if (cfg.face && cfg.face !== 'none' && (cfg.frontBumper !== 'stock' || cfg.grille !== 'stock' || cfg.grilleLight !== 'none')) {
     out.push({ level: 'error', msg: '換臉套件已經包含水箱罩、頭燈與前保桿，前保桿、水箱護罩與車頭燈條請維持原廠' });
   }
+  const tent = TENTS.find(t => t.id === cfg.tent);
+  if (tent && tent.id !== 'none') {
+    if (tent.noRack && cfg.roofRack !== 'none')
+      out.push({ level: 'error', msg: `${tent.label}直接鎖在車頂、不用車頂架，兩者不能同時裝` });
+    if (!tent.noRack && cfg.roofRack === 'none')
+      out.push({ level: 'error', msg: `${tent.label}要裝在車頂架上，目前沒有車頂架` });
+    out.push({ level: 'warn', msg: `JB74 車頂載重 30kg（Suzuki 型錄，含車頂架自重）；這頂帳篷本身 ${tent.weight}kg，${tent.noRack ? '' : '還沒算車頂架，'}已經超過` });
+  }
   if (cfg.exhaust === 'taniguchi_compe_r' && cfg.rearBumper !== 'stock') {
     out.push({ level: 'warn', msg: 'TANIGUCHI Compe R 的管口要從後保桿右角穿出；社外後保桿沒有任何一家公布相容性，需實車確認' });
   }
@@ -852,7 +925,7 @@ export const FENDERS = [
     note: '官網「片側約30mmワイド」。ABS 10 件組 ¥234,300、FRP 8 件組 ¥222,200，皆稅込、素地未塗裝。蓋在原廠爆龜外側；FRP 版官網明寫裝 Jimny 需要加工，ABS 版沒寫。兩版都要配 WALD 自家的前後保桿下擾流才裝得上。方正厚實的 G-Class 式樣' },
   { id: 'kuhl_blocker', url: 'https://kuhl-japan.com/ec/aeroparts/20425', label: 'BLOCKER SIERRA 寬體葉子板', widen: 30,
     price: 220000, cur: 'JPY', brand: 'KUHL RACING', uncertain: true,
-    note: '¥220,000 稅込，FRP 素地，另有單件烤漆加價。蓋在原廠爆龜外側。加寬幾 mm 官網沒有公布，模型先照 WALD 的 30mm 畫；是否要切鈑金官網也沒寫' },
+    note: '¥220,000（官網零件頁沒標稅込或稅抜），FRP 素地，另有單件烤漆加價。蓋在原廠爆龜外側。加寬幾 mm 官網沒有公布，模型先照 WALD 的 30mm 畫；是否要切鈑金官網也沒寫' },
   { id: 'lb_gmini', url: 'https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/', label: 'G mini 寬體葉子板', widen: 35,
     price: 154000, cur: 'JPY', brand: 'LIBERTY WALK', uncertain: true,
     note: '¥154,000 稅込（官網註明是概算價，正式以業務報價為準），FRP 素地。G mini 前保桿＋水箱罩＋寬體三件式的其中一件，JB64／JB74 車身件通用。加寬量官網未公布，模型照 35mm 估' },
@@ -904,7 +977,7 @@ export const STRIPES = [
   { id: 'retro3', photo: true, label: '復古三色腰線', price: 755, cur: 'TWD', brand: '露天賣家（裁切貼）',
     note: '深棕細線＋寬鏽橘＋米色下緣，三條相連，沿門檻上方的折線跑滿側面。日本沙色 JB74 最常見的那一組。台灣露天 NT$350–755 依長度與材質；自己貼得起來，工錢另計' },
   { id: 'stencil', photo: true, label: '軍卡白色模板字', price: 629, cur: 'TWD', brand: '露天賣家（裁切貼）',
-    note: '白色五角星貼在車門正中，後四分之一板一組模板體序號、前葉子板一個 4x4。用白字不用迷彩：迷彩貼在綠車上遠看會糊成一片，白字是全車對比最強的東西，一眼就認得出來。星與字都是通用樣式，不是任何國家軍方的制式徽記。台灣露天 NT$462–629' },
+    note: '後四分之一板一組模板體序號、前葉子板一個 4x4，車門不貼星。用白字不用迷彩：迷彩貼在綠車上遠看會糊成一片，白字是全車對比最強的東西，一眼就認得出來。字是通用樣式，不是任何國家軍方的制式徽記。台灣露天 NT$462–629' },
   { id: 'toolgear', photo: true, label: '原廠工具箱風低位黑帶', price: null, cur: 'JPY', brand: 'SUZUKI', uncertain: true,
     note: '一條約 210mm 的深黑帶壓在車門下折線與門檻之間，下緣一道銀白細邊，車門上半刻意整片留白。原廠示範色是白車，對比最強。官網未單獨標價' },
   { id: 'jaos', photo: true, url: 'https://www.jaos.co.jp/', label: 'JAOS 低位雙線', price: null, cur: 'JPY', brand: 'JAOS', uncertain: true,
@@ -944,7 +1017,7 @@ export const STYLES = [
   { id: 'au_offroad', label: '澳洲越野', sw: ['#3f4a3c', '#1d2224', '#8a6b45'],
     desc: '最高最寬的一台：2 吋懸吊＋2 吋車身舉升、31 吋胎配爆龜、絞盤前桿與呼吸管，車頂載架上一排探照燈與 270 度車邊帳。',
     set: { color: 'ZVL', lift: 'combo100', wheel: 'wildboar', tyre: 't31', tread: 'bfg_km3',
-      rimColor: 0x2a2d30, frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb',
+      rimColor: 0x2a2d30, frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb', arbDeflector: true, arbBoards: true,
       awning: 'arb_touring_25', awningSide: 'left', sideStep: 'ironman', ladder: 'tube',
       lightBar: 'ipf', roofLights: 'kc_pro6', windowGuards: true, guardCan: 'right',
       shovel: true, extinguisher: 'ladder', flares: true } },
@@ -955,7 +1028,7 @@ export const STYLES = [
       rimColor: 0x1d2224, stripe: 'jaos', sideSkirt: true } },
 
   { id: 'military', label: '軍風', sw: ['#4a513a', '#e7e4da', '#2a2c26'],
-    desc: '原廠軍綠配白色軍卡模板字——車門一顆大白星、後板一組序號。方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶、斧頭與鏟子。',
+    desc: '原廠軍綠配白色軍卡模板字——後板一組序號、前葉子板一個 4x4。方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶、斧頭與鏟子。',
     set: { color: 'ZZC', lift: 'td40', wheel: 'wildboar_sr', tyre: 't225r16', tread: 'bfg_km3',
       rimColor: 0x3c4138, stripe: 'stencil', frontBumper: 'taniguchi_square',
       rearBumper: 'taniguchi_rear_pipe', roofRack: 'platform', windowGuards: true,
@@ -974,6 +1047,11 @@ export const STYLES = [
     set: { color: 'ZJ3', lift: 'klc_turtles', wheel: 'street18', tyre: 't225r55', tread: 'toyo_ht2', fender: 'wald_bison',
       rimColor: 0x17191c, stripe: 'jaos', grille: 'outclass_g', frontBumper: 'jaos_cowl',
       rearBumper: 'jaos_rear_cowl', exhaust: 'kakimoto_kr_lr', sideSkirt: true } },
+
+  { id: 'narrow', label: '窄胎高瘦', sw: ['#0f74a8', '#d8d9d6', '#1d2224'],
+    desc: '原廠高度只換 185/85R16 窄高胎：胎比原廠瘦、又高一點，白字配白色鋼圈臉，整台車看起來更輕更高。照浜松 URBAN OFF CRAFT 的 JB74 實車配置。',
+    set: { color: 'ZWY', twoTone: true, wheel: 'dean_cross', tyre: 't185r16', tread: 'toyo_rt', owl: true,
+      rimColor: 0xd8d9d6 } },
 
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
     desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',

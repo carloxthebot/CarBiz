@@ -1,0 +1,2759 @@
+{
+ "title": "JB74 官方示範車（デモカー）可直接組裝的配置",
+ "sourcedAt": "2026-09-25",
+ "method": "逐家讀廠商官網的デモカー／コンプリートカー／ギャラリー頁；官網沒有規格時才用東京改裝車展（TAS）官方參展頁或媒體報導，並在 note 標明來源等級。照片未下載，所有內容都來自頁面文字。每台車的 sources 只列實際讀過的網址。",
+ "counts": {
+  "demoCars": 27,
+  "makersWithoutJB74DemoCar": 7
+ },
+ "demoCars": [
+  {
+   "maker": "SHOWA GARAGE",
+   "name": "ShowaGarage JB74 JIMNY デモカー（2020 年發表）",
+   "chassis": "JB74",
+   "url": "https://motorz.jp/feature/111908/",
+   "sources": [
+    "https://motorz.jp/feature/111908/",
+    "https://www.showa-garage.com/",
+    "https://www.showa-garage.com/completecar/",
+    "https://www.showa-garage.com/catalog/index.php"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "SG アジャストコイル 75 X-SHOCK（KYB 共同開發 14 段可調避震）",
+    "mm": 75,
+    "id": "sg75",
+    "price": null
+   },
+   "wheel": {
+    "brand": "RAYS",
+    "model": "gram LIGHTS 57DR-X",
+    "size": "16x5.5J +0",
+    "colour": "ハイパーブロンズ（ShowaGarage 專屬色）",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": null,
+    "model": null,
+    "size": null,
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "SHOWA GARAGE JB74 專用樹脂前保桿",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "SHOWA GARAGE JB74 專用樹脂後保桿",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "roofRack",
+     "product": "SHOWA GARAGE A-X Roof Rack L 尺寸 6 腳",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "exhaust",
+     "product": "Links マフラー（與 5ZIGEN 共同開發）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "lights",
+     "product": "煙燻方向燈、黑底霧燈（白／黃雙色）、原創 LED 尾燈",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "約 3 吋升高、車頂滿載 6 腳 A-X 架、古銅色 16 吋圈，整體比原廠高一截",
+   "note": "官網（showa-garage.com）沒有 JB74 示範車頁，完成車型錄 PDF 連結 404，零件型錄 PDF 超過 10MB 無法讀；本筆全部來自第三方媒體 Motorz（2020-12-04），升高 75mm 由懸吊品名推得，車色、輪胎、價格皆未公布。A-X 架 L 尺寸與目錄的 showa_foot（1512）是否同款不確定。"
+  },
+  {
+   "maker": "SHOWA GARAGE",
+   "name": "ShowaGarage JB74 黑白雙色示範車（2023 年報導）",
+   "chassis": "JB74",
+   "url": "https://4wdsuv.auto-g.jp/letsgo4wd/article/%E3%80%90%E3%82%B7%E3%83%A7%E3%82%A6%E3%83%AF%E3%82%AC%E3%83%AC%E3%83%BC%E3%82%B8%E3%80%91%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%82%82%E6%80%A7%E8%83%BD%E3%82%82%E4%BD%BF%E3%81%84%E3%82%84%E3%81%99/",
+   "sources": [
+    "https://4wdsuv.auto-g.jp/letsgo4wd/article/%E3%80%90%E3%82%B7%E3%83%A7%E3%82%A6%E3%83%AF%E3%82%AC%E3%83%AC%E3%83%BC%E3%82%B8%E3%80%91%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%82%82%E6%80%A7%E8%83%BD%E3%82%82%E4%BD%BF%E3%81%84%E3%82%84%E3%81%99/"
+   ],
+   "color": {
+    "maker": "黑白雙色（文中僅寫 black & white，未給色名）",
+    "code": null,
+    "twoTone": true
+   },
+   "lift": {
+    "product": "SG アジャストコイル（KYB 車高別專用避震）",
+    "mm": 50,
+    "id": "sg50",
+    "price": null
+   },
+   "wheel": {
+    "brand": "SHOWA GARAGE",
+    "model": "X-Line",
+    "size": null,
+    "colour": null,
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": null,
+    "model": null,
+    "size": "235 寬（全尺寸未寫）",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "hood",
+     "product": "SHOWA GARAGE 碳纖維引擎蓋（減重 4.8kg）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "SHOWA GARAGE Sierra 專用 ABS 前保桿",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "exhaust",
+     "product": "Links マフラー",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "SHOWA GARAGE FRP 尾翼",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "黑白雙色車身＋碳纖維引擎蓋，約 2 吋升高配大胎，偏街道運動而非載物",
+   "note": "第三方媒體 LET'S GO 4WD（2023-01-10）報導，官網無對應頁。雙色是指原廠雙色頂還是改色不明，所以 code 留空；sg50 對應為推測（文中只寫 50mm アジャストコイル，目錄 sg50 是 Ennepetal 版）。輪框尺寸、胎款、價格皆未公布。"
+  },
+  {
+   "maker": "KLC Heritage",
+   "name": "フェーズ（Phase）GENUINE CLASSIC",
+   "chassis": "JB74",
+   "url": "https://www.klc-div.com/heritage/concept/phase.html",
+   "sources": [
+    "https://www.klc-div.com/heritage/",
+    "https://www.klc-div.com/heritage/concept/phase.html"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "LIFT-UP SUSPENSION TODOROKI リフトアップサスペンション轟",
+    "mm": null,
+    "id": "klc30",
+    "price": 38500
+   },
+   "wheel": {
+    "brand": null,
+    "model": null,
+    "size": null,
+    "colour": null,
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": null,
+    "model": null,
+    "size": null,
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "TRADITIONAL BUMPER 74 FRONT BK",
+     "id": "tube_heritage",
+     "price": 99000,
+     "priceNote": "稅込；附霧燈支架版 ¥110,000",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "TRADITIONAL BUMPER 74 REAR BK",
+     "id": "klc_heritage_rear",
+     "price": 88000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "FACE GRILLE NANAKETSU",
+     "id": "klc_nanaketsu",
+     "price": 93500,
+     "priceNote": "稅込；材質／塗裝不同 ¥55,000–¥93,500",
+     "partNo": ""
+    },
+    {
+     "slot": "sideStep",
+     "product": "KLC Heritage SIDE STEP",
+     "id": "missing",
+     "price": 88000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "LATERAL ROD",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "SPARE TIRE MOVING BRACKET 備胎移位架",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "FUEL COVER 油箱蓋",
+     "id": "missing",
+     "price": 5500,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "NOSTALGIE SEAT COVER PLANE（內裝）",
+     "id": "missing",
+     "price": 38500,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "黑色雙管前後保桿＋七孔水箱罩，輕度升高，老式鐵管 4WD 味",
+   "note": "官網概念頁，列出零件與稅込價；車色、升高 mm、輪框與輪胎規格頁面都沒寫，只能看照片（未查看）。"
+  },
+  {
+   "maker": "KLC Heritage",
+   "name": "unlimited",
+   "chassis": "JB74",
+   "url": "https://www.klc-div.com/heritage/concept/unlimited.html",
+   "sources": [
+    "https://www.klc-div.com/heritage/concept/unlimited.html"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "LIFT-UP SUSPENSION TODOROKI リフトアップサスペンション轟",
+    "mm": null,
+    "id": "klc30",
+    "price": 38500
+   },
+   "wheel": {
+    "brand": null,
+    "model": null,
+    "size": null,
+    "colour": null,
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": null,
+    "model": null,
+    "size": null,
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "FRONT SHORT BUMPER 74",
+     "id": "klc_short",
+     "price": 102300,
+     "priceNote": "稅込，ABS 塗裝；未塗裝 ¥69,300",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "FACE GRILLE SJ",
+     "id": "klc_sj",
+     "price": 93500,
+     "priceNote": "稅込，ABS 塗裝；ABS 未塗裝 ¥60,500、FRP 未塗裝 ¥55,000",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "OVER FENDER GARNISH",
+     "id": "missing",
+     "price": 77000,
+     "priceNote": "稅込，ABS 未塗裝",
+     "partNo": ""
+    },
+    {
+     "slot": "sideStep",
+     "product": "SIDE STEP GARNISH",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "稅込，ABS 未塗裝",
+     "partNo": ""
+    },
+    {
+     "slot": "exhaust",
+     "product": "GOD SPEED EXHAUST SYSTEM",
+     "id": "missing",
+     "price": 143000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "SHORT ANTENNA",
+     "id": "missing",
+     "price": 3300,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "短版前保桿露出大胎，SJ 橫條水箱罩＋葉子板飾條，輕升高街道越野",
+   "note": "官網概念頁。與目錄衝突：klc_sj 目錄寫 ¥16,000，官網 FACE GRILLE SJ 為 ¥55,000–¥93,500 稅込，需要修正。車色、升高 mm、輪框輪胎頁面未寫。"
+  },
+  {
+   "maker": "APIO",
+   "name": "JB74-TS4 新車コンプリート",
+   "chassis": "JB74",
+   "url": "https://apio.jp/newcompletecar/",
+   "sources": [
+    "https://www.apio.jp/",
+    "https://apio.jp/newcompletecar/",
+    "https://apio.jp/completecar/sierra-ts.html",
+    "https://apio.jp/completecar/ts4.html",
+    "https://apio.jp/parts/1034-1ae.html",
+    "https://apio.jp/parts/1300-64.html",
+    "https://apio.jp/parts/2004-03s.html",
+    "https://apio.jp/parts/7200-18.html",
+    "https://apio.jp/parts/3033-6.html",
+    "https://apio.jp/parts/3032-61.html",
+    "https://apio.jp/parts/3032-71.html",
+    "https://apio.jp/parts/3060-25.html",
+    "https://apio.jp/parts/3070-36r.html",
+    "https://apio.jp/parts/3070-37.html",
+    "https://apio.jp/parts/3013-s.html"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "7440Ti サスペンションキット（品番 1034-1AE）",
+    "mm": 40,
+    "id": "apio40",
+    "price": 276100
+   },
+   "wheel": {
+    "brand": "APIO",
+    "model": "WILDBOAR SR 15inch",
+    "size": "15x6.0J -5",
+    "colour": "アイアンブラック／アイアングレー／コットンホワイト 三色可選",
+    "id": "wildboar_sr",
+    "price": 47300
+   },
+   "tyre": {
+    "brand": null,
+    "model": null,
+    "size": null,
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "タクティカルフロントバンパー（シエラ JB74，1〜4 型）",
+     "id": "missing",
+     "price": 121000,
+     "priceNote": "稅込，未塗裝；塗裝 +¥35,200",
+     "partNo": "3032-61"
+    },
+    {
+     "slot": "rearBumper",
+     "product": "タクティカルリアバンパー（シエラ JB74）",
+     "id": "apio_tactical_rear",
+     "price": 140800,
+     "priceNote": "稅込，未塗裝；塗裝（消光黑）+¥33,000",
+     "partNo": "3032-71"
+    },
+    {
+     "slot": "grille",
+     "product": "ABS タクティカルフロントグリル",
+     "id": "missing",
+     "price": 52800,
+     "priceNote": "稅込",
+     "partNo": "3033-6"
+    },
+    {
+     "slot": "exhaust",
+     "product": "静香御前マフラー・センターパイプ付き（SIERRA JB74 1〜4 型）",
+     "id": "missing",
+     "price": 137500,
+     "priceNote": "稅込",
+     "partNo": "2004-03S"
+    },
+    {
+     "slot": "other",
+     "product": "ROADWIN ステアリングダンパー",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "稅込",
+     "partNo": "1300-64"
+    },
+    {
+     "slot": "other",
+     "product": "ナンバープレート移動キット（リニューアル ver.，已停售）",
+     "id": "missing",
+     "price": 19360,
+     "priceNote": "稅込",
+     "partNo": "3060-25"
+    },
+    {
+     "slot": "other",
+     "product": "タクティカルバンパー用 前牽引鉤 右 9mm（黃）",
+     "id": "missing",
+     "price": 26400,
+     "priceNote": "稅込，單邊",
+     "partNo": "3070-36R"
+    },
+    {
+     "slot": "other",
+     "product": "タクティカルバンパー用 後牽引鉤 9mm（黃）",
+     "id": "missing",
+     "price": 14300,
+     "priceNote": "稅込",
+     "partNo": "3070-37"
+    },
+    {
+     "slot": "spareCover",
+     "product": "アピオ スペアタイヤカバー",
+     "id": "missing",
+     "price": 8580,
+     "priceNote": "稅込",
+     "partNo": "3013-S"
+    }
+   ],
+   "silhouette": "方正戰術保桿前後包、黃色牽引鉤、15 吋鐵圈風輪框＋40mm 升高，車頂淨空",
+   "note": "官網完成車頁的「標準裝備」連結清單，零件對應到 TS4 列是依頁面連結推得，套裝總價與輪胎尺寸在圖片裡讀不到。示範車照片的車色未寫。目錄 wildboar_sr 為 ¥48,400，官網 15 吋版（7200-18）為 ¥47,300 稅込單顆，可能是 16 吋版價格，需確認。前牽引鉤只列右側，左側（3070-32L／33L）可能另計。"
+  },
+  {
+   "maker": "JAOS",
+   "name": "JIMNY JB74 2025（JAOS デモカー）",
+   "chassis": "JB74",
+   "url": "https://www.jaos.co.jp/gallery/photo-jimny_sierra_jb74/",
+   "sources": [
+    "https://www.jaos.co.jp/",
+    "https://www.jaos.co.jp/gallery/",
+    "https://www.jaos.co.jp/gallery/photo-jimny_sierra_jb74/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "BATTLEZ リフトアップセット VFS コンプリート（＋BATTLEZ ステアリングダンパー）",
+    "mm": null,
+    "id": "jaos40",
+    "price": null
+   },
+   "wheel": {
+    "brand": "JAOS",
+    "model": "EXCEL JX3",
+    "size": "16x6.0J ±0 5H139.7",
+    "colour": "マットガンメタリック",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "TOYO TIRES",
+    "model": "OPEN COUNTRY M/T",
+    "size": "225/75R16",
+    "owl": null,
+    "sizeId": "t225r16",
+    "modelId": "toyo_mt"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "JAOS フロントスポーツカウル（マットブラック）＋スキッドプレート",
+     "id": "jaos_cowl",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "JAOS フロントグリル（マットブラック）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "JAOS リヤスポーツカウル（4 型用／マットブラック）",
+     "id": "jaos_rear_cowl",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "roofRack",
+     "product": "JAOS フラットラック 1250×1400 type-B（ウォールバー 3 本）",
+     "id": "jaos",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "exhaust",
+     "product": "BATTLEZ マフラー ZS TC",
+     "id": "jaos_zs",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "JAOS オーバーフェンダープロテクター",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "JAOS ボンネットプロテクター",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "sideStep",
+     "product": "JAOS サイドアンダーガーニッシュ",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "マッドガードⅢ、ドアハンドルプロテクター、タンク／トランスファー／キャニスターガード、アーム／ダンパープロテクター、ホイールセンタープレート、BATTLEZ エアクリーナー",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "消光黑前後運動下擾流＋全頂平台架圍欄、槍灰 16 吋圈配 M/T 胎，中度升高",
+   "note": "官網圖庫頁，只列品名不列價格與品號，所以價格留空。升高 mm、車色、等級頁面都沒寫（媒體報導 VFS 為 40mm，屬第三方）。排氣為「ZS TC」，與目錄 jaos_zs 是否同一版本需確認。同頁另有 2021、2018 年版，零件大致相同。"
+  },
+  {
+   "maker": "TANIGUCHI / ORS",
+   "name": "JB74 展示車（シエラ用 FRP 前後保桿）",
+   "chassis": "JB74",
+   "url": "http://orstaniguchi.blog.fc2.com/blog-entry-385.html",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/democar",
+    "https://www.ors-taniguchi.co.jp/?s=JB74",
+    "http://orstaniguchi.blog.fc2.com/blog-entry-385.html",
+    "http://orstaniguchi.blog.fc2.com/blog-entry-367.html",
+    "http://orstaniguchi.blog.fc2.com/blog-entry-368.html",
+    "http://orstaniguchi.blog.fc2.com/blog-entry-412.html",
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb64%E3%83%BB74/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "官網未公布",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "",
+    "model": "",
+    "size": "",
+    "colour": "",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "",
+    "model": "",
+    "size": "",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "シエラ用 FRP フロントバンパー（白ゲルコート、未塗装、ウォッシャ穴あり／無し）",
+     "id": "missing",
+     "price": 49500,
+     "priceNote": "稅込（2021 年發售文）",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "シエラ用 FRP リアバンパー（白ゲルコート、未塗装、要ナンバー移動）",
+     "id": "missing",
+     "price": 44000,
+     "priceNote": "稅込（2021 年發售文）",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度附近、原廠圈；前後換成直線條 FRP 短保桿，接原廠爆龜，輪廓比原廠方正",
+   "note": "官網「デモカー紹介」只有 JA11／JB23，沒有 JB74 專頁；唯一文字證據是官方部落格 2022 年ジムニー祭り預告「シエラ用 FRP バンパーを装着した JB74」展示，沒有列車色、懸吊、輪圈、輪胎。YouTube「クールな前後バンパーを纏う JB74 シエラ デモカー」是 4x4MAGAZINE 頻道拍的，非原廠頁，未採用。FRP 前後保桿目錄都沒有對應 id（taniguchi_square 是鋼製角形前保桿，不同件）。"
+  },
+  {
+   "maker": "TANIGUCHI / ORS",
+   "name": "2019 冬季特賣店頭展示 JB74W（SOLVE ACE40 預購）",
+   "chassis": "JB74",
+   "url": "http://orstaniguchi.blog.fc2.com/blog-entry-321.html",
+   "sources": [
+    "http://orstaniguchi.blog.fc2.com/blog-entry-321.html",
+    "http://orstaniguchi.blog.fc2.com/?q=JB74"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "SOLVE ACE40 サスキット（文中為「店頭先行予約受付中」，是否已裝在展示車上未寫明）",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "RAYS",
+    "model": "A・LAP-J",
+    "size": "16x6.0J +5",
+    "colour": "",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "TOYO TIRES",
+    "model": "OPEN COUNTRY M/T",
+    "size": "225/75R16",
+    "owl": null,
+    "sizeId": "t225r16",
+    "modelId": "toyo_mt"
+   },
+   "parts": [],
+   "silhouette": "225/75R16 泥地胎撐出的高胎壁，16 吋鍛造圈；其他外觀文字未提",
+   "note": "部落格照片說明寫「装着タイヤ：TOYO オープンカントリー M/T 225/75R16　ホイール：RAYS A・LAP-J 16x6J+5」，緊接在 JB74W 用 SOLVE ACE40 的句子後，推定是同一台 JB74W，但文中沒明講，列為不確定。RAYS A・LAP-J 目錄無 id（street18 是 A・LAP-07X，不同款）。另：官方部落格 2020 年 SOLVE ACE60 JB74 用定價 209,440 円（稅込），目錄 tg60 為 ¥220,220，可能是後來調價，請另行查證。"
+  },
+  {
+   "maker": "RV4 Wild Goose",
+   "name": "JB74 クロスカントリーエディション（新車コンプリートカー，2 インチアップ仕様）",
+   "chassis": "JB74",
+   "url": "https://www.rv4wildgoose.com/compcar_jb64/compcar_jb74_cc.html",
+   "sources": [
+    "https://www.rv4wildgoose.com/compcar_jb64/compcar_jb74_cc.html",
+    "https://www.rv4wildgoose.com/compcar_jb64/compcar_jb64_index.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/frontbumper_64/jm-0101.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/frontbumper_64/jm-0102-2.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/rear_bumper_64/jm-1101.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/exterior_64/jm-2117.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/muffler_64/jm-5101.html",
+    "https://www.rv4wildgoose.com/parts/jimny-64-74/suspension_64/hms-kit72.html"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "RV4 Wild Goose HMS ハイモビリティーサスペンション 2インチアップコンプリートキット",
+    "mm": null,
+    "id": "missing",
+    "price": 283250
+   },
+   "wheel": {
+    "brand": "RV4 Wild Goose",
+    "model": "XC-GEAR",
+    "size": "16 吋（寬度／偏距未公布）",
+    "colour": "マットブラック或マットブロンズ（兩色可選，照片車用哪色未寫）",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "YOKOHAMA",
+    "model": "GEOLANDAR M/T",
+    "size": "225/75R16",
+    "owl": null,
+    "sizeId": "t225r16",
+    "modelId": "yk_g003"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "クロカンウインチバンパー（WARN 絞盤可裝，單獨不過車檢）",
+     "id": "missing",
+     "price": 107800,
+     "priceNote": "稅込（產品頁）",
+     "partNo": "JM-0101"
+    },
+    {
+     "slot": "other",
+     "product": "サイドバンパー左右セット（JB74/JC74 クロカンウインチバンパー用，過車檢用）",
+     "id": "missing",
+     "price": 37400,
+     "priceNote": "稅込（產品頁）",
+     "partNo": "JM-0102-2"
+    },
+    {
+     "slot": "rearBumper",
+     "product": "クロカンリアバンパー（角タイプ，3.2mm 鋼板）",
+     "id": "wildgoose_box_rear",
+     "price": 95700,
+     "priceNote": "稅込（產品頁）",
+     "partNo": "JM-1101"
+    },
+    {
+     "slot": "other",
+     "product": "リアコーナーガーニッシュ（左右）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "整車頁舊價 ¥5,000 稅別，未見現行產品頁",
+     "partNo": ""
+    },
+    {
+     "slot": "lights",
+     "product": "コンビネーションランプ（小型後燈）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "整車頁舊價 ¥3,000 稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "スペアタイヤ移動ブラケット（上移 90mm、右移 100mm）",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "稅込（產品頁）",
+     "partNo": "JM-2117"
+    },
+    {
+     "slot": "other",
+     "product": "LED フラットナンバー移動キット",
+     "id": "missing",
+     "price": null,
+     "priceNote": "整車頁舊價 ¥6,500 稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "exhaust",
+     "product": "ハイモビリティーマフラー（JB64/JB74 1～4 型，中置尾管）",
+     "id": "missing",
+     "price": 66000,
+     "priceNote": "稅込（產品頁）",
+     "partNo": "JM-5101"
+    }
+   ],
+   "silhouette": "2 吋升高＋225/75R16 泥地胎；前方是大型絞盤鋼保桿、後方角形鋼保桿，備胎外移，整車比原廠高且前臉厚重",
+   "note": "這是 Wild Goose 的新車整車方案頁（目前頁面寫「販売を一時停止」），不是名為「デモカー」的單台車；照片車色未在文字寫出（可選色含黃／象牙／藍黑頂雙色等）。同頁另有車高不變版本，配 GEOLANDAR M/T 215/70R16。整車頁內各件價格是舊的稅別價（例如 HMS 2 吋 ¥212,000、後保桿 ¥55,000），上表以現行產品頁稅込價為準。輪胎只寫「ジオランダー MT」，沒寫 G003，modelId 為推定。2 吋約 50mm，官網沒寫 mm。JB74 クローラーエディション頁（compcar_jb74_cr）連結存在但回 404，未能讀取。"
+  },
+  {
+   "maker": "DAMD",
+   "name": "JIMNY SIERRA “little B.”",
+   "chassis": "JB74",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "DATA 欄「サスペンション −」（未改）",
+    "mm": 0,
+    "id": "stock",
+    "price": null
+   },
+   "wheel": {
+    "brand": "DEAN",
+    "model": "CROSS COUNTRY",
+    "size": "16x6.0J -5",
+    "colour": "",
+    "id": "dean_cross",
+    "price": null
+   },
+   "tyre": {
+    "brand": "TOYO TIRES",
+    "model": "OPEN COUNTRY R/T",
+    "size": "215/65R16C 109/107Q",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "toyo_rt"
+   },
+   "parts": [
+    {
+     "slot": "grille",
+     "product": "APIO ヴィンテージアイアングリル（コットンホワイト為 little B. 限定色；向 APIO 購買）",
+     "id": "apio_marker",
+     "price": null,
+     "priceNote": "DAMD 頁未列價",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "DAMD アメリカンエンブレム",
+     "id": "missing",
+     "price": 7480,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "ボンネットフードカバー（未塗裝）",
+     "id": "missing",
+     "price": 52800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "フロントバンパー（未塗裝）",
+     "id": "missing",
+     "price": 63800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "リアバンパー＋エクステンション（未塗裝）",
+     "id": "missing",
+     "price": 96800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット（ボディのみ，APIO アイアングリル）",
+     "id": "missing",
+     "price": 275000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット＋DEAN CROSS COUNTRY 5 本",
+     "id": "missing",
+     "price": 448000,
+     "priceNote": "稅抜（稅込欄空白）",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度；美式鐵網水箱罩＋引擎蓋罩＋粗紋霧黑前後保桿，16 吋五槽鋼圈臉，臉部像老美式皮卡",
+   "note": "車色：DATA 欄列的是可選塗裝色（ZVR／ZZC／ZJ3／ZVL／ZVG），不是示範車本身顏色，官網文字未寫。前保桿、後保桿＋延伸片價格與 ROOTS 同（¥63,800／¥96,800），可能共用件，未確認。grille 對到 apio_marker 是推定（DAMD 寫「APIO ヴィンテージアイアングリル」）。215/65R16C 目錄無此尺寸。"
+  },
+  {
+   "maker": "DAMD",
+   "name": "JIMNY SIERRA “little D.”",
+   "chassis": "JB74",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/manual/jb74_jimny-roots_rb_%20web.pdf"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "DATA 欄「サスペンション KYB」（升高量未寫）",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "APIO",
+    "model": "WILDBOAR SR",
+    "size": "15x6.0J -5",
+    "colour": "",
+    "id": "wildboar_sr",
+    "price": null
+   },
+   "tyre": {
+    "brand": "BFGoodrich",
+    "model": "MUD TERRAIN T/A",
+    "size": "215/75R15",
+    "owl": null,
+    "sizeId": "t215r15",
+    "modelId": "bfg_km3"
+   },
+   "parts": [
+    {
+     "slot": "grille",
+     "product": "little D. フロントグリル（マットブラック）",
+     "id": "damd_little_d",
+     "price": 52800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "little D. フロントバンパー（未塗裝；塗裝費另 ¥35,200）",
+     "id": "damd_little_d",
+     "price": 63800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "little D. リアバンパー（未塗裝；塗裝費另 ¥24,200）",
+     "id": "damd_little_d_rear",
+     "price": 81400,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "ボンネットフードカバー（未塗裝；塗裝費另 ¥37,400）",
+     "id": "missing",
+     "price": 52800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "マッドフラップ",
+     "id": "missing",
+     "price": 42900,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spareCover",
+     "product": "背胎朝後支架（示範車使用，套件不附）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "未列價",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット（ボディのみ，不含輪圈）",
+     "id": "little_d",
+     "price": 305800,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度附近；圓燈格柵＋短版霧黑前保桿，Defender 風方正臉，15 吋圈配泥地胎",
+   "note": "DATA 欄寫輪圈 APIO WILD BOAR SR 15inch×6J、輪胎 BF Goodrich MUD TERRAIN T/A 215/75R/15、懸吊 KYB；車色只列可選色，示範車顏色未寫。BFG 胎沒寫代數，bfg_km3 為推定。頁面另列選配：トラックミラー マットブラック ¥75,900（稅込，=目錄 mirrors.damd）、trip basket 車頂架；是否裝在示範車上文字未寫。目錄衝突：roofRack.wood「trip basket 半長 ¥56000」是 TB-HR1 的稅抜價（稅込 ¥61,600）；wood_full「全長 ¥19800」其實是 trip basket ウッドパネル的稅抜價（稅込 ¥21,780），全長架 TB-RR1 單體為 ¥64,900 稅込、含基座 TB-RRKJB ¥84,700 稅込。"
+  },
+  {
+   "maker": "DAMD",
+   "name": "JIMNY SIERRA “little G. TRADITIONAL”",
+   "chassis": "JB74",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "DATA 欄「サスペンション −」（未改）",
+    "mm": 0,
+    "id": "stock",
+    "price": null
+   },
+   "wheel": {
+    "brand": "DAMD",
+    "model": "Cantabile",
+    "size": "15x6.0J -5",
+    "colour": "",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "BRIDGESTONE",
+    "model": "DUELER M/T 674",
+    "size": "LT215/75R15 100/97Q",
+    "owl": null,
+    "sizeId": "t215r15",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "grille",
+     "product": "little G. TRADITIONAL フロントグリル",
+     "id": "damd_little_g_trad",
+     "price": 75900,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "little G. TRADITIONAL フロントバンパー（含 KOITO 角形霧燈）",
+     "id": "damd_little_g_trad",
+     "price": 96800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "little G. TRADITIONAL リアバンパー（含角形尾燈）",
+     "id": "damd_little_g_trad_rear",
+     "price": 85800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "little G. オーバーフェンダー＆アルミステップ type-2",
+     "id": "missing",
+     "price": 162800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "little G. サイドモール",
+     "id": "missing",
+     "price": 30800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "little G. TRADITIONAL マッドフラップ",
+     "id": "missing",
+     "price": 42900,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "ボンネットカバー＋ボンネットウィンカー（套件內含，單價未對到）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット（ボディのみ）",
+     "id": "little_g_trad",
+     "price": 547800,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度；G-Class 風格柵、引擎蓋方向燈、加寬葉子板＋鋁踏板，15 吋復古圈",
+   "note": "little G. 系列另有 STANDARD（little G Wheel 16×6J、BRIDGESTONE ALENZA 001 215/65R16）、ADVANCE、AVENTURA（BFG KO2 LT225/70R16 白字、1 吋升高、Spirit Racing 避震，前保桿有切）；此處只列目錄已有的 TRADITIONAL。車色未寫。頁面另列選配：トラックミラー マットブラック ¥75,900（稅込，=目錄 mirrors.damd）、trip basket 車頂架；是否裝在示範車上文字未寫。"
+  },
+  {
+   "maker": "DAMD",
+   "name": "JIMNY SIERRA “JIMNY the ROOTS.”",
+   "chassis": "JB74",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "DATA 欄「サスペンション −」（未改）",
+    "mm": 0,
+    "id": "stock",
+    "price": null
+   },
+   "wheel": {
+    "brand": "APIO",
+    "model": "WILDBOAR SR",
+    "size": "15x6.0J -5",
+    "colour": "",
+    "id": "wildboar_sr",
+    "price": null
+   },
+   "tyre": {
+    "brand": "BRIDGESTONE",
+    "model": "DUELER M/T 674",
+    "size": "LT215/75R15 100/97Q",
+    "owl": null,
+    "sizeId": "t215r15",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "grille",
+     "product": "the ROOTS. フロントグリル",
+     "id": "damd_roots",
+     "price": 52800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "the ROOTS. フロントバンパー（未塗裝；塗裝費另 ¥35,200）",
+     "id": "damd_roots",
+     "price": 63800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "the ROOTS. リアバンパー＋エクステンション（未塗裝；塗裝費另 ¥46,200）",
+     "id": "damd_roots_rear",
+     "price": 96800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット（ボディのみ）",
+     "id": "roots",
+     "price": 213400,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット＋APIO WILDBOAR SR 5 本",
+     "id": "missing",
+     "price": 451000,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度；LJ10 風橫條格柵＋粗紋雙色短保桿，15 吋圈配 M/T 胎",
+   "note": "車色未寫（DATA 列的是格柵／保桿可選塗裝）。頁面註明「デモカーは実際の製品と異なる箇所もございます」。頁面另列選配：トラックミラー マットブラック ¥75,900（稅込，=目錄 mirrors.damd）、trip basket 車頂架；是否裝在示範車上文字未寫。"
+  },
+  {
+   "maker": "DAMD",
+   "name": "JIMNY SIERRA “little 5.”",
+   "chassis": "JB74",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "Rainbow Auto JB74 専用スポーツダウンサスセット（2 インチダウン）",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "OZ Racing",
+    "model": "Rally Racing 4×4",
+    "size": "16x6.0J -5",
+    "colour": "可選 レーシングホワイト／ダークグラファイト／マットブラック／マットブロンズ（示範車色未寫）",
+    "id": "oz_rally",
+    "price": 53900
+   },
+   "tyre": {
+    "brand": "BRIDGESTONE",
+    "model": "ALENZA 001",
+    "size": "215/65R16",
+    "owl": false,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "grille",
+     "product": "little 5. フロントグリル（未塗裝）",
+     "id": "missing",
+     "price": 129800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "little 5./Δ. フロントバンパー（未塗裝）",
+     "id": "missing",
+     "price": 92400,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "little 5./Δ. オーバーフェンダー",
+     "id": "damd_delta",
+     "price": 140800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "little 5./Δ. リアバンパー（DB 角形尾燈）",
+     "id": "damd_delta_rear",
+     "price": 74800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "little 5./Δ. リアウィング",
+     "id": "damd_wing",
+     "price": 63800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "サイドシルガーニッシュ（套件內含，單價未對到）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット（ボディのみ）",
+     "id": "missing",
+     "price": 495000,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "降低 2 吋、角形雙燈格柵、鼓包加寬葉子板＋尾翼，16 吋拉力圈配公路胎——整車比原廠低、寬，像 80 年代法系小鋼炮",
+   "note": "DATA 欄：OZ Racing Rally Racing 4×4 16inch×6J -5、BRIDGESTONE ALENZA 001 215/65R16、Rainbow Auto 2 吋降低。輪圈 ¥53,900 為單顆稅込。車色未寫（列的是可選色）。little 5. 前保桿、葉子板、後保桿、尾翼與 little Δ. 共用；目錄 face／fender／spoiler 的 damd_delta 價格與官網相符。降低彈簧在 LIFTS 無對應 id；2 吋約 -50mm，官網沒寫 mm。"
+  },
+  {
+   "maker": "DAMD",
+   "name": "JIMNY SIERRA “little Δ.”",
+   "chassis": "JB74",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+   ],
+   "color": {
+    "maker": null,
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "Rainbow Auto JB74 専用スポーツダウンサスセット（2 インチダウン）",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "OZ Racing",
+    "model": "Rally Racing 4×4",
+    "size": "16x6.0J -5",
+    "colour": "可選 レーシングホワイト／ダークグラファイト／マットブラック／マットブロンズ（示範車色未寫）",
+    "id": "oz_rally",
+    "price": 53900
+   },
+   "tyre": {
+    "brand": "BRIDGESTONE",
+    "model": "ALENZA 001",
+    "size": "215/65R16",
+    "owl": false,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "face",
+     "product": "little Δ. 四圓燈臉（フロントグリル ¥173,800＋フロントバンパー ¥92,400）",
+     "id": "damd_delta",
+     "price": 266200,
+     "priceNote": "稅込（兩件相加）",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "little Δ. フロントグリル（未塗裝）",
+     "id": "missing",
+     "price": 173800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "little 5./Δ. フロントバンパー（未塗裝）",
+     "id": "missing",
+     "price": 92400,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "little 5./Δ. オーバーフェンダー",
+     "id": "damd_delta",
+     "price": 140800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "little 5./Δ. リアバンパー（DB 角形尾燈）",
+     "id": "damd_delta_rear",
+     "price": 74800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "little 5./Δ. リアウィング",
+     "id": "damd_wing",
+     "price": 63800,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "サイドシルガーニッシュ（套件內含，單價未對到）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "コンプリートキット（ボディのみ）",
+     "id": "missing",
+     "price": 539000,
+     "priceNote": "稅込",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "降低 2 吋、圓形四燈格柵、鼓包加寬葉子板＋尾翼，16 吋拉力圈配公路胎——整車比原廠低、寬，像 80 年代法系小鋼炮",
+   "note": "DATA 欄：OZ Racing Rally Racing 4×4 16inch×6J -5、BRIDGESTONE ALENZA 001 215/65R16、Rainbow Auto 2 吋降低。輪圈 ¥53,900 為單顆稅込。車色未寫（列的是可選色）。little Δ. 前保桿、葉子板、後保桿、尾翼與 little 5. 共用；目錄 face／fender／spoiler 的 damd_delta 價格與官網相符。降低彈簧在 LIFTS 無對應 id；2 吋約 -50mm，官網沒寫 mm。"
+  },
+  {
+   "maker": "Beyond Japan",
+   "name": "CODE22",
+   "chassis": "JB74",
+   "url": "https://www.tokyoautosalon.jp/cars/detail/6497",
+   "sources": [
+    "https://www.tokyoautosalon.jp/cars/detail/6497",
+    "https://beyond-jpn.com/jp/code22",
+    "https://beyond-jpn.com/en/code22/",
+    "https://shop.beyond-jpn.com/products/befb74-bl",
+    "https://shop.beyond-jpn.com/products/berb-bl",
+    "https://shop.beyond-jpn.com/products/bess74",
+    "https://shop.beyond-jpn.com/products/befgsd-frp",
+    "https://shop.beyond-jpn.com/products/bewl74-smch"
+   ],
+   "color": {
+    "maker": "シフォンアイボリー",
+    "code": "ZVG",
+    "twoTone": false
+   },
+   "lift": {
+    "product": "Heritage リフトアップサスペンション轟",
+    "mm": null,
+    "id": "klc30",
+    "price": null
+   },
+   "wheel": {
+    "brand": "BEYOND JAPAN",
+    "model": "スーパームーン",
+    "size": "16x6.0J -5",
+    "colour": "未寫明（商店 JB74W 版為クローム）",
+    "id": "super_moon",
+    "price": 23100
+   },
+   "tyre": {
+    "brand": "YOKOHAMA",
+    "model": "GEOLANDAR X-AT",
+    "size": "235/70R16",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "yk_xat"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "リベルテ フロントバンパー 74専用 スペックⅡ（ステンレス・ブラック、フォグステー＋スキッドプレート付）",
+     "id": "missing",
+     "price": 121000,
+     "priceNote": "稅込定價；特價 ¥96,800 稅込；JB74W 5型以降不適合，需車體加工",
+     "partNo": "befb74-bl"
+    },
+    {
+     "slot": "grille",
+     "product": "ソルジャーフェイスグリル（FRP製・未塗装）",
+     "id": "missing",
+     "price": 99000,
+     "priceNote": "稅込定價；特價 ¥79,200 稅込",
+     "partNo": "befgsd-frp"
+    },
+    {
+     "slot": "sideStep",
+     "product": "リベルテ サイドステップ JB74W専用（ブラック・スチール）",
+     "id": "missing",
+     "price": 66000,
+     "priceNote": "稅込定價；特價 ¥52,800 稅込；頁面未寫是否左右一組（附同梱ブラケット），受注生産",
+     "partNo": "bess74"
+    },
+    {
+     "slot": "rearBumper",
+     "product": "リベルテ 64/74 リアバンパー（ブラック・ステンレス）",
+     "id": "beyond_rear",
+     "price": 83600,
+     "priceNote": "稅込定價；特價 ¥75,240 稅込；4型ソナー不可",
+     "partNo": "berb-bl"
+    },
+    {
+     "slot": "other",
+     "product": "ショートアンテナ",
+     "id": "missing",
+     "price": null,
+     "priceNote": "未查價",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "象牙白車身配黑色粗管前後保桿與黑側踏，16 吋月亮盤＋235/70R16 偏胖的 X-AT，小幅升高、車頂空，臉是 FRP ソルジャー格柵。",
+   "note": "規格取自東京車展線上頁（展出者 BEYOND JAPAN / fusion FROM SPIEGEL 自填）；Beyond 官網 CODE22 頁只有概念文字與商品圖，未列規格。輪框顏色、升高 mm 數、胎是否白字皆未寫。235/70R16 目錄沒有，前保桿 74 スペックⅡ、ソルジャー格柵、JB74 側踏目錄也沒有。目錄 beyond_liberte／beyond_rear 目前掛 MRK 台幣價，官方商店後保桿（黑）是 ¥83,600 稅込（特價 ¥75,240），兩者不同，需決定用哪個來源。Super Moon ¥23,100 是單顆特價（定價 ¥38,500），稅込。"
+  },
+  {
+   "maker": "Beyond Japan",
+   "name": "CODE01",
+   "chassis": "JB74",
+   "url": "https://www.tokyoautosalon.jp/cars/detail/4779",
+   "sources": [
+    "https://www.tokyoautosalon.jp/cars/detail/4779",
+    "https://beyond-jpn.com/jp/code01",
+    "https://beyond-jpn.com/jp/",
+    "https://shop.beyond-jpn.com/search?q=%E3%83%AA%E3%83%99%E3%83%AB%E3%83%86&type=product",
+    "https://shop.beyond-jpn.com/products/befgsu11t1-zzb"
+   ],
+   "color": {
+    "maker": "シフォン＆オレンジ",
+    "code": null,
+    "twoTone": true
+   },
+   "lift": {
+    "product": "beyond オリジナルリフトアップサス1.5",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "コーリン",
+    "model": "オールドカントリー",
+    "size": "16x6.0J -5",
+    "colour": "未寫明",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "BFGoodrich",
+    "model": "未寫明",
+    "size": "215/70R16",
+    "owl": null,
+    "sizeId": "t215r16",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "リベルテ 64/74 フロントバンパー（色與規格未寫明）",
+     "id": "beyond_liberte",
+     "price": null,
+     "priceNote": "官方商店依色與是否附フォグ／スキッド有多種價，¥69,300～¥107,800 稅込（定價）；無法確定示範車裝哪一版",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "リベルテ リアバンパー（色未寫明）",
+     "id": "beyond_rear",
+     "price": null,
+     "priceNote": "官方商店 黑／象牙 ¥83,600、鏡面 ¥86,900，皆稅込定價",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "フェイスグリル Su11（ABS製，CODE01塗り＝車身色塗裝版）",
+     "id": "missing",
+     "price": 140800,
+     "priceNote": "稅込，塗裝済版",
+     "partNo": "befgsu11t1-zzb"
+    }
+   ],
+   "silhouette": "美式老派雙色（象牙＋橘）車身，Su11 圓燈格柵換臉＋管狀前後保桿，16 吋 -5 復古鋼圈感輪框配 215/70R16，約 1.5 吋小升高、車頂空。",
+   "note": "規格取自東京車展線上頁（展出者 BEYOND JAPAN / fusion FROM SPIEGEL 自填），Beyond 官網 CODE01 頁只有概念文字。雙色是改裝烤漆的象牙＋橘，不是原廠黑頂雙色，故 code 留 null；哪一塊是橘色頁面未寫。BFG 胎款、輪框顏色、升高 mm 數、前後保桿是哪個顏色版本都未寫。Su11 格柵與 Beyond 1.5 吋懸吊目錄沒有；1.5 吋懸吊在官方商店也搜不到價格。"
+  },
+  {
+   "maker": "GARAGE ILL",
+   "name": "BRON55（ブロンゴーゴー）ジムニーシエラ",
+   "chassis": "JB74",
+   "url": "https://www.garage-ill.co.jp/bron55/",
+   "sources": [
+    "https://www.garage-ill.co.jp/bron55/",
+    "https://www.garage-ill.co.jp/news/14072/",
+    "https://www.garage-ill.co.jp/news/",
+    "https://www.garage-ill.co.jp/news/27084/",
+    "https://www.garage-ill.co.jp/news/26914/",
+    "https://shop.jetgogo.jp/categories/4736293",
+    "https://carview.yahoo.co.jp/news/detail/3314918b470a9897509d99be8a4fd3136ff3dd5c/"
+   ],
+   "color": {
+    "maker": "未寫明（套件烤漆完成品為ダークグレーメタリック／シルバー雙色）",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "未寫明",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "",
+    "model": "",
+    "size": "",
+    "colour": "",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "",
+    "model": "",
+    "size": "",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "face",
+     "product": "BRON55 お得なセット JB74W シエラ 純正LED車用（グリル＆ヘッドライト＋バンパー）2トーン塗装済（ダークグレーメタリック／シルバー）",
+     "id": "bron55",
+     "price": 389400,
+     "priceNote": "稅込（JET★GOGO 官方 BASE 商店）；鹵素燈車 ¥356,400 稅込；未塗裝 LED ¥297,000／鹵素 ¥264,000",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "BRON55 バンパー（FRP）",
+     "id": "missing",
+     "price": 100100,
+     "priceNote": "未塗裝；塗裝済 ¥152,900；稅込（JET★GOGO 商店）",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "Bronco 式方正換臉：大面方格柵、頭燈外移、FRP 鐵感前保桿；車高與輪胎官網未公布。",
+   "note": "GARAGE ILL 官網只有套件商品頁與新聞（大阪オートメッセ 2026 展出 BRON55、CH:AMP、70YO.70 三台シエラ），都沒寫示範車的車色、輪框、胎、升高；官網價格頁未標稅込／稅抜，JET★GOGO 官方商店標稅込。適用 JB74W 1–4 型（2018/7～2025/10）。carview 轉載的くるまのニュース提到還有強悍感的後保桿，但官網沒有後保桿商品與價格。搜尋摘要提到搭 NITRO POWER H12 SHOTGUN，但無一手來源佐證，未採用。"
+  },
+  {
+   "maker": "WALD",
+   "name": "SPORTS LINE BLACK BISON EDITION（JIMNY SIERRA JB74W）",
+   "chassis": "JB74",
+   "url": "https://wald.co.jp/carrange/jimnysierra_bb/",
+   "sources": [
+    "https://wald.co.jp/carrange/jimnysierra_bb/",
+    "https://wald.co.jp/wheels/",
+    "https://wald.co.jp/information/",
+    "https://wald.co.jp/wheels/v11csuv/",
+    "https://motor-fan.jp/stylewagon/article/10695/"
+   ],
+   "color": {
+    "maker": "未寫明",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "未寫明（WALD 自家 リフトアップサス JB74 有 25-30mm ¥32,780／50-55mm ¥35,200）",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "WALD",
+    "model": "VORSALINO Ⅰ（V11C SUV）15 吋",
+    "size": "15x6.5J -15（+30mm 墊片）",
+    "colour": "未寫明（15 吋有 BLACK POLISH／GROSS BLACK，後者已停產）",
+    "id": "missing",
+    "price": 53900
+   },
+   "tyre": {
+    "brand": "未寫明",
+    "model": "未寫明",
+    "size": "31x10.5R15",
+    "owl": null,
+    "sizeId": "t31",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "フロントバンパースポイラー（ABS，含 4 燈 LED）",
+     "id": "missing",
+     "price": 178200,
+     "priceNote": "稅込（ABS）",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "リアバンパースポイラー（ABS）",
+     "id": "missing",
+     "price": 161700,
+     "priceNote": "稅込（ABS）",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "ジャパメリカーナグリル（含頭燈蓋）",
+     "id": "missing",
+     "price": 114400,
+     "priceNote": "稅込；頁面另有 ¥110,000 一列，推測為 ABS／FRP 兩版，哪個對哪個未確認",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "オーバーフェンダー（ABS）",
+     "id": "wald_bison",
+     "price": 234300,
+     "priceNote": "稅込（ABS）",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "ボンネットスクープカバー",
+     "id": "missing",
+     "price": 123200,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "フロントルーフスポイラー（LED）",
+     "id": "missing",
+     "price": 135300,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "リアルーフウイング",
+     "id": "missing",
+     "price": 97900,
+     "priceNote": "稅込；示範車是否裝官網未明寫",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "G-Class 式厚重寬體：每邊外擴約 30mm 的方正爆龜、帶 4 燈 LED 的大前保桿、引擎蓋進氣罩與車頂前擾流燈，15 吋 -15 輪框加 30mm 墊片配 31 吋胖胎，輪胎明顯凸出車身。",
+   "note": "官網示範車欄只寫「15 Inch (Demo Car) F/R 6.5Jx15 ET-15(+30mmSpacer) 31x10.5R15」；車色、胎款、懸吊都沒寫。輪框名稱來自 WALD 輪框頁（VORSALINO Ⅰ 15×6.5，註明是 BLACK BISON 專用尺寸），¥53,900 稅込為單顆。ABS 4 件組（F、R、JG、OF）¥674,300 稅込。Motor-Fan 報導的 BLACK BISON 完成車（N's Stage 販售，JAOS BATTLEZ 懸吊、Open Country R/T）是經銷商車，不是 WALD 官網示範車，只作參考不採用。官網零件列表有 LEDSL10P、LEDHMLB1030 等品番，但未能對應到各件。VORSALINO 目錄沒有，需新增輪框 id。"
+  },
+  {
+   "maker": "KUHL RACING",
+   "name": "BLOCKER FULL BUILD JIMNY SIERRA 74W",
+   "chassis": "JB74",
+   "url": "https://kuhl-japan.com/complete/83241/",
+   "sources": [
+    "https://kuhl-japan.com/complete/83241/",
+    "https://kuhl-japan.com/complete/83235/",
+    "https://kuhl-japan.com/kuhlfam/82755/",
+    "https://kuhl-japan.com/kuhlfam/82687/",
+    "https://kuhl-japan.com/fukuokablog/83442/",
+    "https://kuhl-japan.com/kuhlblocker.html"
+   ],
+   "color": {
+    "maker": "ホワイト（完成車頁：JL 5MT ホワイト；部落格稱パールホワイト）",
+    "code": "ZVR",
+    "twoTone": false
+   },
+   "lift": {
+    "product": "官網未載",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "VERZ WHEELS",
+    "model": "CROSS X6",
+    "size": "16 吋（寬度／偏距未載）",
+    "colour": "未載",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "DUNLOP",
+    "model": "GRANDTREK AT5",
+    "size": "16 吋（規格未載）",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "fender",
+     "product": "BLOCKER ワイドフェンダーキット",
+     "id": "kuhl_blocker",
+     "price": 220000,
+     "priceNote": "官網頁面未標稅別；搜尋摘要稱稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "BLOCKER フロントバンパー",
+     "id": "missing",
+     "price": 77000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "BLOCKER フロントグリル TYPEⅡ",
+     "id": "missing",
+     "price": 55000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "BLOCKER リアバンパー",
+     "id": "missing",
+     "price": 77000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "BLOCKER リアディフューザー TYPEⅡ",
+     "id": "missing",
+     "price": 48400,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "BLOCKER リアウイング",
+     "id": "missing",
+     "price": 55000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "sideStep",
+     "product": "BLOCKER サイドステップ",
+     "id": "missing",
+     "price": 66000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "mirrors",
+     "product": "BLOCKER ドアミラーカバー",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "BLOCKER フロントバンパーダクトカバー",
+     "id": "missing",
+     "price": 27500,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "BLOCKER フューエルリッドカバー",
+     "id": "missing",
+     "price": 16500,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "BLOCKER リアバンパーカバー左右",
+     "id": "missing",
+     "price": 27500,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "BLOCKER リアサイドディフューザー左右",
+     "id": "missing",
+     "price": 33000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "BLOCKER ボンネットカバー（FULL 是否含未明）",
+     "id": "missing",
+     "price": 88000,
+     "priceNote": "未標稅別",
+     "partNo": ""
+    },
+    {
+     "slot": "exhaust",
+     "product": "KUHL オリジナル車検対応マフラー（4 本出し）",
+     "id": "missing",
+     "price": 110000,
+     "priceNote": "完成車加價 110,000 円，稅別未標",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度、16 吋越野胎，寬體葉子板＋方塊感前後保桿與尾翼，臉部縱向收窄的水箱罩",
+   "note": "完成車價 ¥3,790,000 稅込（完成車頁）與 ¥3,390,000 稅込（價格發表文）不一致，選配合計 ¥2,167,418 兩處一致。懸吊未載，看起來未升高但無法確認。顏色代碼 ZVR 由「パールホワイト」推定。另有 MIDDLE／LITE 兩款白色同配置等級。"
+  },
+  {
+   "maker": "AIMGAIN（MUDRON）",
+   "name": "MUDRON GT JIMNY SIERRA",
+   "chassis": "JB74",
+   "url": "https://www.tokyoautosalon.jp/cars/detail/3892",
+   "sources": [
+    "https://www.tokyoautosalon.jp/cars/detail/3892",
+    "https://www.aimgain.net/products/aero/jimny_74mudron_gt/index.html",
+    "https://www.aimgain.net/products/aero/jimny_74mudron_gtx/wheel.html"
+   ],
+   "color": {
+    "maker": "ブルーイッシュブラックパール",
+    "code": "ZJ3",
+    "twoTone": false
+   },
+   "lift": {
+    "product": "BOLD WORLD エアサスペンション（降低方向，mm 未載）",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "AIMGAIN",
+    "model": "G2M",
+    "size": "F 20x10.0J -7 / R 20x10.0J -13",
+    "colour": "未載",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "GOODYEAR",
+    "model": "EAGLE F1",
+    "size": "255/35R20",
+    "owl": false,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "other",
+     "product": "MUDRON GT コンプリートキット（ワイドフェンダー）7 點",
+     "id": "missing",
+     "price": 800000,
+     "priceNote": "稅抜（aimgain.net）",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "ワイドフェンダー＋サイドステップ＋バンパーエクステンション",
+     "id": "missing",
+     "price": 290000,
+     "priceNote": "稅抜",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "MUDRON GT フロントバンパー（LED フォグバー）",
+     "id": "missing",
+     "price": 140000,
+     "priceNote": "稅抜",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "MUDRON GT リアバンパー",
+     "id": "missing",
+     "price": 85000,
+     "priceNote": "稅抜",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "MUDRON GT フロントグリル",
+     "id": "missing",
+     "price": 59000,
+     "priceNote": "稅抜",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "GT ボンネット FRP",
+     "id": "missing",
+     "price": 130000,
+     "priceNote": "稅抜（Carbon ¥190,000）",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "リアルーフスポイラー",
+     "id": "missing",
+     "price": 60000,
+     "priceNote": "稅抜",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "氣壓避震放低、20 吋大圈薄胎，寬體葉子板，G-Class 風格公路車，比原廠矮且寬",
+   "note": "規格來自東京改裝車展官網的廠商登錄頁，參考售價 4,800,000 円～（稅別未載）。零件價來自 aimgain.net，均為稅抜；零售通路標套件 ¥825,000 稅込，與官網 ¥800,000 稅抜換算不符。此車為放低車，非升高。"
+  },
+  {
+   "maker": "AIMGAIN（MUDRON）",
+   "name": "MUDRON アドヴェンチャー ジムニーシエラ",
+   "chassis": "JB74",
+   "url": "https://www.tokyoautosalon.jp/cars/detail/3895",
+   "sources": [
+    "https://www.tokyoautosalon.jp/cars/detail/3895",
+    "https://www.aimgain.net/products/aero/jimny_74mudron/index.html",
+    "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-adventure-classic/"
+   ],
+   "color": {
+    "maker": "ジャングルグリーン",
+    "code": "ZZC",
+    "twoTone": false
+   },
+   "lift": {
+    "product": "BOLD WORLD 2 インチアップ KIT",
+    "mm": 50,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "CRIMSON DEAN",
+    "model": "COLORADO",
+    "size": "15x6.0J -5",
+    "colour": "未載",
+    "id": "dean_colorado",
+    "price": null
+   },
+   "tyre": {
+    "brand": "TOYO",
+    "model": "OPEN COUNTRY M/T",
+    "size": "30x9.50R15LT",
+    "owl": null,
+    "sizeId": "t30",
+    "modelId": "toyo_mt"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "MUDRON ADVENTURE フロントバンパー＋エクステンション",
+     "id": "missing",
+     "price": 95000,
+     "priceNote": "稅抜（DEFENDER／CLASSIC 同價）",
+     "partNo": ""
+    },
+    {
+     "slot": "rearBumper",
+     "product": "MUDRON ADVENTURE リアバンパー＋エクステンション",
+     "id": "missing",
+     "price": null,
+     "priceNote": "TYPE I ¥108,000／TYPE II ¥98,000 稅抜，車上為哪型未載",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "MUDRON ADVENTURE グリル（Defender ¥69,000／Classic ¥45,000 稅抜，車上為哪款未載）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "MUDRON ボンネットカバー",
+     "id": "missing",
+     "price": 90000,
+     "priceNote": "稅抜",
+     "partNo": ""
+    },
+    {
+     "slot": "roofRack",
+     "product": "TEPUI ルーフテント",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "Rhino-Rack サイドオーニング",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "2 吋升高＋30 吋 M/T 胎、15 吋鋼圈風輪框，車頂帳篷＋側帳，遠征露營造型",
+   "note": "規格來自東京改裝車展官網廠商登錄頁（標示非賣品）。登錄頁只寫「MUDRON ADVENTURE」，未說是 DEFENDER 或 CLASSIC，故水箱罩與後保桿價格無法鎖定。2 吋換算 50mm 為概估。"
+  },
+  {
+   "maker": "Liberty Walk",
+   "name": "LB★nation G-Mini Type1 sierra",
+   "chassis": "JB74",
+   "url": "https://libertywalk.co.jp/stock/lb-nation-g-mini-type1-sierra/",
+   "sources": [
+    "https://libertywalk.co.jp/stock/lb-nation-g-mini-type1-sierra/",
+    "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/",
+    "https://libertywalk.co.jp/stock/lb-nation-suzuki-g-mini-works-type-1/"
+   ],
+   "color": {
+    "maker": "ホワイト",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "未載",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "LB",
+    "model": "LB オリジナル",
+    "size": "16 吋（寬度／偏距未載）",
+    "colour": "未載",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "YOKOHAMA",
+    "model": "GEOLANDAR（系列未載）",
+    "size": "235/70R16 106H",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "other",
+     "product": "G mini WORKS TYPE 1 Premium（Carbon Bonnet）コンプリートキット",
+     "id": "missing",
+     "price": 643500,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "Wide Fender FRP",
+     "id": "lb_gmini",
+     "price": 154000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "Front Bumper w/LED FRP",
+     "id": "missing",
+     "price": 93500,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "Front Grill FRP",
+     "id": "missing",
+     "price": 55000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "Rear Wing FRP",
+     "id": "missing",
+     "price": 55000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "Roof Spoiler FRP",
+     "id": "missing",
+     "price": 88000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "hood",
+     "product": "Bonnet Hood CFRP",
+     "id": "missing",
+     "price": 198000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "lights",
+     "product": "G63 風 LB LED 尾燈（套件價 ¥83,400 稅込）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度、寬體葉子板、G63 早期臉＋碳纖引擎蓋與車頂擾流，16 吋公路胎",
+   "note": "這是已售出的庫存完成車（2020 年、1460cc，故判定 JB74），非常設展示車。白色未寫全名，代碼留空。另一台同名庫存頁寫 660cc，實為 JB64，已排除。零件價取自套件頁，稅込。"
+  },
+  {
+   "maker": "Liberty Walk",
+   "name": "LB-nation G-Mini Type2 sierra",
+   "chassis": "JB74",
+   "url": "https://libertywalk.co.jp/stock/lb-nation-g-mini-type2-sierra-2/",
+   "sources": [
+    "https://libertywalk.co.jp/stock/lb-nation-g-mini-type2-sierra-2/",
+    "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/"
+   ],
+   "color": {
+    "maker": "原廠色（色名未載）",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "未載",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "LB",
+    "model": "LB Wheel",
+    "size": "16 吋",
+    "colour": "未載",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "未載",
+    "model": "未載",
+    "size": "235/60R16",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "other",
+     "product": "G MINI WORKS TYPE 2 Premium（Carbon Bonnet）コンプリートキット",
+     "id": "missing",
+     "price": 665500,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "Wide Fender FRP",
+     "id": "lb_gmini",
+     "price": 154000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "frontBumper",
+     "product": "Front Bumper Type 2（LED）FRP",
+     "id": "missing",
+     "price": 104500,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "grille",
+     "product": "Front Grill Type 2 FRP",
+     "id": "missing",
+     "price": 66000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "spoiler",
+     "product": "Rear Wing FRP",
+     "id": "missing",
+     "price": 55000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "Front Roof Spoiler FRP",
+     "id": "missing",
+     "price": 88000,
+     "priceNote": "稅込",
+     "partNo": ""
+    },
+    {
+     "slot": "lights",
+     "product": "G63 風 LED 頭燈／尾燈／方向燈",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "原廠高度、寬體葉子板、G63 後期臉，16 吋扁平 60 系胎",
+   "note": "已售出庫存完成車（2022 年、1500cc 級，判定 JB74），非常設展示車。車色與懸吊未載。Type 2 葉子板與 Type 1 同價 ¥154,000 稅込。"
+  },
+  {
+   "maker": "ROWEN",
+   "name": "ROWEN JAPAN PREMIUM JIMNY SIERRA (JB74)",
+   "chassis": "JB74",
+   "url": "https://www.rowen.co.jp/bodykit/details.php?id=115",
+   "sources": [
+    "https://www.rowen.co.jp/bodykit/details.php?id=115",
+    "https://www.rowen.co.jp/bodykit/details.php?id=177",
+    "https://4wdsuv.auto-g.jp/letsgo4wd/article/%E3%80%8Crowen%E3%80%8D%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%BB%E6%9C%AC%E6%A0%BC%E6%B4%BE%E3%81%AE%E6%9E%A0%E7%B5%84%E3%81%BF%E3%82%92%E8%B6%85%E8%B6%8A%E3%81%99%E3%82%8B%E9%81%8E/"
+   ],
+   "color": {
+    "maker": "未載",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "未載",
+    "mm": null,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "WORK",
+    "model": "CRAG GALVATRE",
+    "size": "16x5.5J（偏距未載）",
+    "colour": "完成車專用兩色（紅／藍點綴）",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "BFGoodrich",
+    "model": "All-Terrain T/A KO2",
+    "size": "LT215/70R16",
+    "owl": null,
+    "sizeId": "t215r16",
+    "modelId": "bfg_ko2"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "Front Bumper（LED 付）",
+     "id": "missing",
+     "price": 172700,
+     "priceNote": "稅込",
+     "partNo": "1K002A00"
+    },
+    {
+     "slot": "grille",
+     "product": "Front Grille",
+     "id": "missing",
+     "price": 95700,
+     "priceNote": "稅込",
+     "partNo": "1K002C00"
+    },
+    {
+     "slot": "hood",
+     "product": "Hood Cover（Emblem 付）",
+     "id": "missing",
+     "price": 111100,
+     "priceNote": "稅込",
+     "partNo": "1K002B00"
+    },
+    {
+     "slot": "fender",
+     "product": "Over Fender",
+     "id": "missing",
+     "price": 176000,
+     "priceNote": "稅込",
+     "partNo": "1K002F00"
+    },
+    {
+     "slot": "rearBumper",
+     "product": "Rear Bumper（Sensor-less）",
+     "id": "missing",
+     "price": 113300,
+     "priceNote": "稅込",
+     "partNo": "1K002P00"
+    },
+    {
+     "slot": "spoiler",
+     "product": "Roof Spoiler Electronics TYPE3（LED）",
+     "id": "rowen",
+     "price": 117700,
+     "priceNote": "稅込",
+     "partNo": "1K002R30"
+    },
+    {
+     "slot": "exhaust",
+     "product": "Premium01S Muffler（側出三本）",
+     "id": "missing",
+     "price": 178200,
+     "priceNote": "稅込",
+     "partNo": "1K002Z20"
+    }
+   ],
+   "silhouette": "原廠高度附近、加寬葉子板、前保桿上方 LED 射燈＋車頂 LED 擾流，側出三尾管",
+   "note": "零件價與品番來自 ROWEN 官網（稅込）。輪框胎規格只見於 LETS GO 4WD 報導，非原廠頁；車色與懸吊均未載。id=177 頁為 JB64 版（葉子板 1K003F00 ¥122,100），勿混用。"
+  },
+  {
+   "maker": "4x4 ESPOIR（浜松）",
+   "name": "ジムニーシエラJB74 ４インチアップ仕様",
+   "chassis": "JB74",
+   "url": "https://www.4x4espoir.com/democar/jb74-4inch/",
+   "sources": [
+    "https://www.4x4espoir.com/democar/",
+    "https://www.4x4espoir.com/democar/jb74-4inch/"
+   ],
+   "color": {
+    "maker": "未載",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "4 インチアップコイル＋MONROE ショック＋ラテラルロッド等",
+    "mm": 100,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "MOTOR FARM",
+    "model": "J-REVOLUTION",
+    "size": "16x5.5J ±0",
+    "colour": "未載",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "DUNLOP",
+    "model": "GRANDTREK MT2",
+    "size": "235/85R16",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "絞盤前保桿（品牌未載）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "other",
+     "product": "2Lo キット、前後電子デフロック、トランスファー 77% ダウン",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "4 吋升高＋235/85R16 高窄泥地胎，明顯高於原廠，前保桿帶絞盤",
+   "note": "頁面只列零件名稱，無價格、無車色。4 吋換算約 100mm 為概估。"
+  },
+  {
+   "maker": "4x4 ESPOIR（浜松）",
+   "name": "ジムニーシエラJB74 2.2インチアップ仕様",
+   "chassis": "JB74",
+   "url": "https://www.4x4espoir.com/democar/jb74-2.2inch/",
+   "sources": [
+    "https://www.4x4espoir.com/democar/",
+    "https://www.4x4espoir.com/democar/jb74-2.2inch/"
+   ],
+   "color": {
+    "maker": "未載",
+    "code": null,
+    "twoTone": false
+   },
+   "lift": {
+    "product": "4x4エスポワール JB74 専用 2.2 インチアップコイル＋スーパーロングショック",
+    "mm": 56,
+    "id": "missing",
+    "price": null
+   },
+   "wheel": {
+    "brand": "415 COBRA",
+    "model": "BADRUCKER DⅡ",
+    "size": "16x5.5J +25",
+    "colour": "未載",
+    "id": "missing",
+    "price": null
+   },
+   "tyre": {
+    "brand": "COMFORSER",
+    "model": "CF3000",
+    "size": "215/85R16",
+    "owl": null,
+    "sizeId": "missing",
+    "modelId": "missing"
+   },
+   "parts": [
+    {
+     "slot": "frontBumper",
+     "product": "JAOS フロントスポーツカウル",
+     "id": "jaos_cowl",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "fender",
+     "product": "K Edition オーバーフェンダー",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    },
+    {
+     "slot": "roofRack",
+     "product": "SHOWA GARAGE ルーフキャリア（型號未載）",
+     "id": "missing",
+     "price": null,
+     "priceNote": "",
+     "partNo": ""
+    }
+   ],
+   "silhouette": "約 2 吋升高＋215/85R16 高窄胎、JAOS 前下護板、SHOWA GARAGE 車頂架",
+   "note": "頁面只列零件名稱，無價格、無車色；SHOWA GARAGE 車頂架型號未寫，故不對應 showa_foot／basket。2.2 吋換算約 56mm。"
+  }
+ ],
+ "makersWithoutDemoCar": [
+  {
+   "maker": "OUTCLASS",
+   "name": null,
+   "chassis": "JB74",
+   "url": "https://outclass.ocnk.net/product/1067",
+   "sources": [
+    "https://outclass.jp/",
+    "https://outclasscars.jp/",
+    "https://outclasscars.jp/?page_id=1329",
+    "https://outclass.ocnk.net/product-group/81",
+    "https://outclass.ocnk.net/product/1067",
+    "https://outclass.ocnk.net/product/1093",
+    "https://outclass.ocnk.net/product/1095",
+    "https://outclass.ocnk.net/product/1237",
+    "https://outclass.ocnk.net/product-list/119"
+   ],
+   "note": "官網沒有 JB74 示範車規格頁：outclasscars.jp 的 JB74 頁 404、首頁示範車連結轉回首頁；網店「ジムニーシエラ新車コンプリート」（product/1067）為開放價、只列可選項目，沒有照片車的規格。網店商品頁可補目錄：JB74 FRP 葉子板（片側寬 9mm）¥121,000 稅込、TYPE3 FRP 前保桿（5 型對應）¥52,800 稅込，目錄都還沒有。第三方 jimnypark 有一台 OUTCLASS 完成車圖庫，未讀。"
+  },
+  {
+   "maker": "4x4 Engineering Service",
+   "name": null,
+   "url": "https://www.4x4es.co.jp/gallery/model/jimny-sierra/",
+   "sources": [
+    "https://www.4x4es.co.jp/gallery/",
+    "https://www.4x4es.co.jp/gallery/model/jimny-sierra/",
+    "https://www.4x4es.co.jp/gallery/jimny-sierrajb74/",
+    "https://www.4x4es.co.jp/gallery/jimny-sierrajb74-9/",
+    "https://www.4x4es.co.jp/gallery/jimny-sierrajb74-10/",
+    "https://www.4x4es.co.jp/?s=JB74+%E3%83%87%E3%83%A2%E3%82%AB%E3%83%BC",
+    "https://www.4x4es.co.jp/blog/2020/08/03/ジムニーシエラ（ｊｂ７４）の納車が増えてきま/"
+   ],
+   "note": "官網找不到自家 JB74 示範車：搜尋「デモカー」只出現自家 JB64、Nomade（JC74）、Triton、Delica D:5 示範車。JIMNY SIERRA（JB74）ギャラリー共 15 則，都只是輪圈裝車照（BRADLEY V／V EVOLUTION／Air/G，文字只有尺寸與顏色，例如 BRADLEY V 16×6.0J inset-6 Gunmetallic），沒寫是自家車，也沒列懸吊、輪胎、車色；其中兩則註明是 Rally Hokkaido 2025 賽車照片。"
+  },
+  {
+   "maker": "MLJ",
+   "name": null,
+   "url": "https://www.mljinc.co.jp/archives/1690",
+   "sources": [
+    "https://www.mljinc.co.jp/archives/1690",
+    "https://www.mljinc.co.jp/archives/1444",
+    "https://www.mljinc.co.jp/archives/1572",
+    "https://www.mljinc.co.jp/archives/1534",
+    "https://www.mljinc.co.jp/wp-json/wp/v2/search?search=JB74",
+    "https://www.mljinc.co.jp/wp-json/wp/v2/search?search=%E3%83%87%E3%83%A2%E3%82%AB%E3%83%BC"
+   ],
+   "note": "MLJ 官網是 mljinc.co.jp（mlj.co.jp 連不上）。MLJ 是輪圈代理商，官網沒有自家 JB74 示範車；JB74 文章都是別人的車：車主 @yuta_jb74 的車（XTREME-J XJ03 16×6.0 -5、BFGoodrich KO2 235/70R16、4 吋升高）、Quadruped Customs 的 4 吋示範車（American Racing AX202 16×8.0 ±0、BFG KM3 265/75R16，文中註明直上會凸出）、Car Style Japan 專案車（XJ03＋螺絲固定寬體葉子板），以及一則海外照片（AR202）。"
+  },
+  {
+   "maker": "K-PRODUCTS",
+   "name": null,
+   "note": "官網 k-products.jp 的コンプリートカー區只有 JB64 三款（BASE MODEL URBAN、OFF-ROAD MODEL REAL Series、D.racing Series），沒有 JB74 示範車頁；event 頁也沒列展示車規格。官方商店 k-products.shop 本次 DNS 解析失敗，無法讀取。另：搜尋結果中的 Rainbow Auto（千葉柏市）JB74W 示範車屬另一家店，不是 K-PRODUCTS（本社在山形縣小國町），不採用。",
+   "sources": [
+    "https://www.k-products.jp/",
+    "https://www.k-products.jp/event/"
+   ]
+  },
+  {
+   "maker": "TOY FACTORY",
+   "name": null,
+   "note": "正確網域是 toy-factory.jp（toyfactory.jp 查無此網域）。露營車廠，Jimny 產品線為 101TentCar（床組、側桌、側邊條紋貼），官網與官方商店都沒有 JB74 示範車規格頁（車色、輪框、胎、升高皆未寫）；MOTA 報導只講車內床組。可用的一手數字：101TentCar サイドストライプデカールキット ¥32,780 稅込，橘＋黑兩色，左右一組，適用 JB64W／JB74W（JB64W XG 除外），施工 5.0 小時——目錄 toy4 四色橘帶目前 price 為 null 且寫「四色」，官方頁寫的是橘黑兩色，需人工比對照片確認是否同一款。",
+   "parts": [
+    {
+     "slot": "stripe",
+     "product": "101TentCar サイドストライプデカールキット（橘／黑）",
+     "id": "toy4",
+     "price": 32780,
+     "priceNote": "稅込，左右一組",
+     "partNo": ""
+    }
+   ],
+   "sources": [
+    "https://toy-factory.jp/tentcar/",
+    "https://toy-factory.jp/parts/",
+    "https://www.toy-factory-shop.jp/view/item/000000000037",
+    "https://autoc-one.jp/suzuki/jimny/special-5007262/"
+   ]
+  },
+  {
+   "maker": "SPIELER",
+   "name": null,
+   "sources": [
+    "https://spieler.jp/",
+    "https://spieler.jp/collections/jimny",
+    "https://spieler.jp/products/jb64-jb74%E7%94%A8-%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B9%E3%83%86%E3%83%83%E3%83%97-1",
+    "https://4wdsuv.auto-g.jp/letsgo4wd/article/202411302/"
+   ],
+   "note": "官網（Shopify 商店）沒有展示車頁面，媒體報導也只拍零件未列整車規格。可確認的只有零件：JB64／JB74 側踏 ¥88,000 稅込（¥80,000 稅抜，目前缺貨）、車頂架 ¥126,500、後爬梯板金版 ¥59,400 起／鋁管版 ¥52,800 起（後三項未標稅別）。"
+  },
+  {
+   "maker": "Six Sense（SIXTH SENSE）",
+   "name": null,
+   "sources": [
+    "https://sixth-sense.shop-pro.jp/?mode=grp&gid=2394280",
+    "https://sixth-sense.shop-pro.jp/?pid=184181806"
+   ],
+   "note": "官網 sixth-sense.jp 連線被拒，Rakuten 店 403，無法讀到展示車頁。網路商店只有零件：EXP Classical Grille 前後套組 ¥110,000 稅込（品番 jimex108-nocl，JB64／JB74 共用，FRP 未塗裝）、僅前 ¥76,780。零售通路提到有 JB74 放低套件，未能讀到原廠頁。"
+  }
+ ],
+ "mostDistinctFromExistingStyles": [
+  {
+   "name": "AIMGAIN MUDRON GT",
+   "why": "氣壓避震放低＋20 吋 255/35R20 薄胎＋寬體，比現有「都會寬體低趴」（18 吋、降低彈簧）更低、輪框更大"
+  },
+  {
+   "name": "4x4 ESPOIR 4 インチアップ仕様",
+   "why": "4 吋升高配 235/85R16 高窄胎，剪影是又高又瘦；「澳洲越野」是寬胖的 31 吋胎加車頂載物"
+  },
+  {
+   "name": "Liberty Walk G-Mini Type1 sierra",
+   "why": "原廠高度＋寬體葉子板＋G63 換臉＋碳纖引擎蓋與車頂擾流，現有七款沒有換臉成 G-Class 的"
+  },
+  {
+   "name": "WALD BLACK BISON EDITION",
+   "why": "原廠高度附近用 15x6.5J -15 加 30mm 墊片、31x10.5R15 胖胎外凸，寬體但不降低，跟「都會寬體低趴」方向相反"
+  },
+  {
+   "name": "DAMD little Δ.／little 5.",
+   "why": "降低 2 吋＋四圓燈臉＋鼓包爆龜＋尾翼＋16 吋拉力圈配公路胎，80 年代拉力小鋼炮剪影；零件目錄已有（damd_delta 臉／爆龜、damd_wing），只差一個 style"
+  }
+ ],
+ "recurringLooks": [
+  "15x6.0J -5 配 LT215/75R15 泥地胎、原廠高度：DAMD little D.／G.／ROOTS 與 APIO TS4（40mm）都是這組，是日系「原廠高度復古臉」的標準腳。",
+  "16x6.0J ±0～+5 配 225/75R16 泥地胎、40–50mm 升高：JAOS、TANIGUCHI、RV4 Wild Goose 三家示範車都是這組。",
+  "原廠高度換臉：DAMD（美式、Defender、G、LJ10）、GARAGE ILL BRON55、Liberty Walk、KUHL，靠臉而不是靠高度區分。",
+  "G-Class 式寬體：WALD、Liberty Walk、AIMGAIN、KUHL、ROWEN、AERO OVER、FINAL BEAST 都做，葉子板每邊約外擴 30mm。",
+  "街上車主最常見：215/70R16 白字全地形胎（BFGoodrich KO2／KO3 最多）配 16 吋古銅或黑色六輻鍛造圈（RAYS A・LAP-J 在 CARTUNE 20 例中出現 3 次），升高 1 吋以內或不升。",
+  "日本業者的車頂架大多空著或只放平台架，車頂帳篷＋側帳只在 AIMGAIN MUDRON アドヴェンチャー出現。"
+ ],
+ "missingFromCatalogue": {
+  "counts": {
+   "other": 38,
+   "wheel": 19,
+   "tyreModel": 19,
+   "frontBumper": 18,
+   "tyreSize": 17,
+   "lift": 17,
+   "grille": 13,
+   "hood": 11,
+   "rearBumper": 8,
+   "exhaust": 7,
+   "spoiler": 7,
+   "fender": 6,
+   "sideStep": 5,
+   "lights": 4,
+   "roofRack": 3,
+   "spareCover": 2,
+   "mirrors": 1
+  },
+  "byslot": {
+   "frontBumper": [
+    "SHOWA GARAGE：SHOWA GARAGE JB74 專用樹脂前保桿",
+    "SHOWA GARAGE：SHOWA GARAGE Sierra 專用 ABS 前保桿",
+    "APIO：タクティカルフロントバンパー（シエラ JB74，1〜4 型） ¥121,000",
+    "TANIGUCHI / ORS：シエラ用 FRP フロントバンパー（白ゲルコート、未塗装、ウォッシャ穴あり／無し） ¥49,500",
+    "RV4 Wild Goose：クロカンウインチバンパー（WARN 絞盤可裝，單獨不過車檢） ¥107,800",
+    "DAMD：フロントバンパー（未塗裝） ¥63,800",
+    "DAMD：little 5./Δ. フロントバンパー（未塗裝） ¥92,400",
+    "DAMD：little 5./Δ. フロントバンパー（未塗裝） ¥92,400",
+    "Beyond Japan：リベルテ フロントバンパー 74専用 スペックⅡ（ステンレス・ブラック、フォグステー＋スキッドプレート付） ¥121,000",
+    "GARAGE ILL：BRON55 バンパー（FRP） ¥100,100",
+    "WALD：フロントバンパースポイラー（ABS，含 4 燈 LED） ¥178,200",
+    "KUHL RACING：BLOCKER フロントバンパー ¥77,000",
+    "AIMGAIN（MUDRON）：MUDRON GT フロントバンパー（LED フォグバー） ¥140,000",
+    "AIMGAIN（MUDRON）：MUDRON ADVENTURE フロントバンパー＋エクステンション ¥95,000",
+    "Liberty Walk：Front Bumper w/LED FRP ¥93,500",
+    "Liberty Walk：Front Bumper Type 2（LED）FRP ¥104,500",
+    "ROWEN：Front Bumper（LED 付） ¥172,700",
+    "4x4 ESPOIR（浜松）：絞盤前保桿（品牌未載）"
+   ],
+   "rearBumper": [
+    "SHOWA GARAGE：SHOWA GARAGE JB74 專用樹脂後保桿",
+    "TANIGUCHI / ORS：シエラ用 FRP リアバンパー（白ゲルコート、未塗装、要ナンバー移動） ¥44,000",
+    "DAMD：リアバンパー＋エクステンション（未塗裝） ¥96,800",
+    "WALD：リアバンパースポイラー（ABS） ¥161,700",
+    "KUHL RACING：BLOCKER リアバンパー ¥77,000",
+    "AIMGAIN（MUDRON）：MUDRON GT リアバンパー ¥85,000",
+    "AIMGAIN（MUDRON）：MUDRON ADVENTURE リアバンパー＋エクステンション",
+    "ROWEN：Rear Bumper（Sensor-less） ¥113,300"
+   ],
+   "hood": [
+    "SHOWA GARAGE：SHOWA GARAGE 碳纖維引擎蓋（減重 4.8kg）",
+    "JAOS：JAOS ボンネットプロテクター",
+    "DAMD：ボンネットフードカバー（未塗裝） ¥52,800",
+    "DAMD：ボンネットフードカバー（未塗裝；塗裝費另 ¥37,400） ¥52,800",
+    "DAMD：ボンネットカバー＋ボンネットウィンカー（套件內含，單價未對到）",
+    "WALD：ボンネットスクープカバー ¥123,200",
+    "KUHL RACING：BLOCKER ボンネットカバー（FULL 是否含未明） ¥88,000",
+    "AIMGAIN（MUDRON）：GT ボンネット FRP ¥130,000",
+    "AIMGAIN（MUDRON）：MUDRON ボンネットカバー ¥90,000",
+    "Liberty Walk：Bonnet Hood CFRP ¥198,000",
+    "ROWEN：Hood Cover（Emblem 付） ¥111,100"
+   ],
+   "spoiler": [
+    "SHOWA GARAGE：SHOWA GARAGE FRP 尾翼",
+    "WALD：フロントルーフスポイラー（LED） ¥135,300",
+    "WALD：リアルーフウイング ¥97,900",
+    "KUHL RACING：BLOCKER リアウイング ¥55,000",
+    "AIMGAIN（MUDRON）：リアルーフスポイラー ¥60,000",
+    "Liberty Walk：Rear Wing FRP ¥55,000",
+    "Liberty Walk：Rear Wing FRP ¥55,000"
+   ],
+   "fender": [
+    "KLC Heritage：OVER FENDER GARNISH ¥77,000",
+    "JAOS：JAOS オーバーフェンダープロテクター",
+    "DAMD：little G. オーバーフェンダー＆アルミステップ type-2 ¥162,800",
+    "AIMGAIN（MUDRON）：ワイドフェンダー＋サイドステップ＋バンパーエクステンション ¥290,000",
+    "ROWEN：Over Fender ¥176,000",
+    "4x4 ESPOIR（浜松）：K Edition オーバーフェンダー"
+   ],
+   "grille": [
+    "APIO：ABS タクティカルフロントグリル ¥52,800",
+    "JAOS：JAOS フロントグリル（マットブラック）",
+    "DAMD：little 5. フロントグリル（未塗裝） ¥129,800",
+    "DAMD：little Δ. フロントグリル（未塗裝） ¥173,800",
+    "Beyond Japan：ソルジャーフェイスグリル（FRP製・未塗装） ¥99,000",
+    "Beyond Japan：フェイスグリル Su11（ABS製，CODE01塗り＝車身色塗裝版） ¥140,800",
+    "WALD：ジャパメリカーナグリル（含頭燈蓋） ¥114,400",
+    "KUHL RACING：BLOCKER フロントグリル TYPEⅡ ¥55,000",
+    "AIMGAIN（MUDRON）：MUDRON GT フロントグリル ¥59,000",
+    "AIMGAIN（MUDRON）：MUDRON ADVENTURE グリル（Defender ¥69,000／Classic ¥45,000 稅抜，車上為哪款未載）",
+    "Liberty Walk：Front Grill FRP ¥55,000",
+    "Liberty Walk：Front Grill Type 2 FRP ¥66,000",
+    "ROWEN：Front Grille ¥95,700"
+   ]
+  }
+ },
+ "social": {
+  "blocked": [
+   "Instagram 標籤頁與搜尋只回登入頁；單篇貼文偶爾抓得到說明文字（例：autoclinicgroup_ph 的 JB74 降低車高貼文，ST XA 避震，菲律賓）",
+   "Threads 搜尋頁只回空殼",
+   "X 搜尋回 HTTP 402"
+  ],
+  "usedInstead": [
+   {
+    "source": "スタイルワゴン デモカーコレクション その1～4（2021-09）",
+    "urls": [
+     "https://motor-fan.jp/article/10026/",
+     "https://motor-fan.jp/article/10164/",
+     "https://motor-fan.jp/article/10230/",
+     "https://motor-fan.jp/stylewagon/article/10279/"
+    ],
+    "finding": "JB74 示範車另有 ROWEN、AIMGAIN、TRUST／GReddy（渦輪）、KEN STYLE ACTIVE、Liberty Walk G-mini Type2、NEW'S、AERO OVER（C62S 3 吋）、WALD、Explosion、JIMRIDE、FINAL BEAST、APIO（窄版葉子板）；只有文字描述、無規格，未列入 demoCars"
+   },
+   {
+    "source": "CARTUNE マガジン JB74W 輪框實例 20 選（2025-10-15 更新）",
+    "urls": [
+     "https://cartune.co.jp/magazine/articles/4003"
+    ],
+    "finding": "BFGoodrich KO2 出現 6 次、TOYO Open Country R/T 或 M/T 4 次；RAYS A・LAP-J 3 次、FORCE DELTA FORCE OVAL 3 次、American Racing BAJA 3 次；多數未標升高"
+   },
+   {
+    "source": "クラフト店舖部落格（JB64/JB74 實例）",
+    "urls": [
+     "https://www.craft-web.co.jp/news/jb64jb74/"
+    ],
+    "finding": "JB74 例子全是 16 吋配 215/70R16 或 225/70R16 白字胎（BFGoodrich KO3、TOYO R/T、DUNLOP R/T01），輪框多為深古銅"
+   },
+   {
+    "source": "スタイルワゴン 車主取材（2026-09）",
+    "urls": [
+     "https://motor-fan.jp/article/1618804/",
+     "https://motor-fan.jp/article/1618633/"
+    ],
+    "finding": "紅色 JB74 原廠高度＋BRON55 臉＋OZ Rally 16 吋＋185/85R16；藍色 JB74 七吋升高＋20 吋鍍鉻圈＋285/50 胎（美式極端例）"
+   },
+   {
+    "source": "みんカラ JB74 カスタムまとめ",
+    "urls": [
+     "https://minkara.carview.co.jp/car/suzuki/jimny_sierra/custom/?mg=3.13266"
+    ],
+    "finding": "改裝頻率依序：前保桿、輪框、前下擾流；常見輪框 CRIMSON MYRTLE GEAR DEMON、RAYS A-LAP 07X、NITRO POWER H12"
+   }
+  ]
+ },
+ "catalogueConflicts": [
+  "klc_sj：目錄 ¥16,000，KLC 官網 FACE GRILLE SJ 稅込 ¥55,000–¥93,500。",
+  "wildboar_sr：目錄 ¥48,400，APIO 15 吋（7200-18）頁為稅込 ¥47,300／單顆，¥48,400 可能是 16 吋。",
+  "wood／wood_full（DAMD trip basket）：wood 的 ¥56,000 是稅抜（稅込 ¥61,600）；wood_full 的 ¥19,800 其實是木板配件稅抜價，全長車頂架本體稅込 ¥64,900。",
+  "tg60：目錄 ¥220,220，TANIGUCHI 官方部落格 2020 年稅込 ¥209,440，未確認是否調價。",
+  "beyond_rear／beyond_liberte：目錄用 MRK 台幣價；Beyond 官方商店黑色後保桿稅込 ¥83,600。",
+  "toy4：目錄寫四色、無價；TOY FACTORY（toy-factory.jp）條紋組只有橘／黑，稅込 ¥32,780，是否同一商品待確認。",
+  "kuhl_blocker：¥220,000 對，但 KUHL 零件頁未寫稅込或稅抜。"
+ ]
+}

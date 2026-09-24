@@ -72,13 +72,16 @@ footer{margin-top:40px;font:500 10.5px/1.7 var(--mono);color:var(--ink-3)}
     <input id="q" type="search" placeholder="搜尋品牌、型號、關鍵字…">
   </div>
   <nav class="toc" id="toc"></nav>
+  <section id="demo"><h2>日本改裝大廠官方示範車<small id="demoN"></small></h2>
+    <p class="sub">各廠自己官網或展會頁上的 JB74 示範車，逐項對到本目錄：✓ 是目錄裡已有、可以直接套用的零件，其餘是目錄還沒收的。車色多數廠商沒寫。資料來源 docs/jb74-demo-cars.json（2026-09-25）。</p>
+    <div class="grid" id="demoGrid"><div class="empty">載入中…</div></div></section>
   <div id="cats"></div>
   <footer id="foot"></footer>
 </div>
 <script type="module">
 import { COLORS, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS,
   ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, OTHERS, KITS, HOODS, SPARE_COVERS,
-  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FACES, FENDERS, SPOILERS } from './parts.js';
+  LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FACES, FENDERS, SPOILERS, TENTS, CAMP_EXTRAS } from './parts.js';
 import { priceLabel, FX_NOTE } from './fx.js';
 
 // key = the configurator's state key, so "套用" can deep-link into app.html
@@ -97,6 +100,8 @@ const CATS = [
   ['換臉套件', 'face', FACES, '水箱罩、頭燈與前保桿整組換掉；選了就不再另選前保桿與水箱護罩'],
   ['寬體葉子板', 'fender', FENDERS, '比 Sierra 原廠爆龜再往外擴；歐美品牌查到的都只適用舊款窄體 JB23／JB43'],
   ['車頂尾翼', 'spoiler', SPOILERS, ''],
+  ['車頂帳', 'tent', TENTS, 'JB74 車頂載重 30kg（含車頂架），市面上所有車頂帳本身都超過'],
+  ['車尾／車側帳', 'campExtra', CAMP_EXTRAS, ''],
   ['前保桿', 'frontBumper', FRONT_BUMPERS, ''],
   ['後保桿', 'rearBumper', REAR_BUMPERS, ''],
   ['水箱護罩', 'grille', GRILLES, ''],
@@ -131,7 +136,7 @@ function card(it, key) {
     : it.key ? `<a class="apply" href="app.html?${it.key}=${it.key === 'wheel' ? 'maxx' : it.key === 'ladder' ? 'fr' : 'true'}">套用到配置器</a>` : '';
   return `<div class="card ${r === 'tw' ? 'tw' : ''}">
     <div class="top"><div><b>${esc(it.label)}</b><div class="brand">${esc(it.brand ?? '')}</div></div>
-      ${it.noPrice ? '' : `<div class="price ${it.price ? '' : 'na'}">${p.main}<small>${esc(p.sub)}${p.sub && it.cur === 'JPY' ? ' 含稅' : ''}</small></div>`}</div>
+      ${it.noPrice ? '' : `<div class="price ${it.price ? '' : 'na'}">${p.main}<small>${esc(p.sub)}</small></div>`}</div>
     ${it.hex != null ? `<div class="paint" style="background:#${it.hex.toString(16).padStart(6, '0')}"></div>` : ''}
     <div>${tags}</div>
     ${it.note ? `<div class="note">${esc(it.note)}</div>` : ''}
@@ -156,7 +161,7 @@ function render() {
       <div class="grid">${html || '<div class="empty">此篩選下沒有項目</div>'}</div></section>`;
   }).join('');
   document.getElementById('toc').innerHTML = CATS.map(([name, key]) => `<a href="#c-${key ?? 'others'}">${name}</a>`).join('');
-  document.getElementById('foot').textContent = `共 ${total} 項，價格一律換算台幣概估。${FX_NOTE} 原始標價為各廠商／通路頁面所示（日本含稅、澳洲含 GST），運費與關稅另計；標「待查證」者為估值。資料日期 2026-09-21。`;
+  document.getElementById('foot').textContent = `共 ${total} 項。價格先列廠商或通路的原幣標價，下方小字是台幣概估。${FX_NOTE} 原始標價為各廠商／通路頁面所示（日本含稅、澳洲含 GST），運費與關稅另計；標「待查證」者為估值。資料日期 2026-09-21。`;
 }
 document.getElementById('bar').addEventListener('click', (e) => {
   const b = e.target.closest('.chip'); if (!b) return;
@@ -166,6 +171,37 @@ document.getElementById('bar').addEventListener('click', (e) => {
 });
 document.getElementById('q').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
 render();
+
+/* Official demo cars, matched against the catalogue. A "套用" link carries
+   only the parts the catalogue actually has, so it opens the closest build
+   the configurator can show -- and the card says what is missing. */
+const LISTS = Object.fromEntries(CATS.filter(c => c[1]).map(c => [c[1], c[2]]));
+const SLOT = { spareCover: 'spareCoverKit' };
+const has = (key, id) => id && id !== 'missing' && (LISTS[key] ?? []).some(x => x.id === id);
+fetch('docs/jb74-demo-cars.json').then(r => r.json()).then(d => {
+  const cars = d.demoCars.filter(c => /JB74/.test(c.chassis));
+  document.getElementById('demoN').textContent = `${cars.length} 台`;
+  document.getElementById('demoGrid').innerHTML = cars.map(c => {
+    const rows = [], q = new URLSearchParams();
+    const line = (label, key, id, text) => { const ok = has(key, id); if (ok) q.set(key, id); rows.push(`<li class="${ok ? 'ok' : 'no'}">${esc(label)}：${esc(text || '官網未寫')}</li>`); };
+    if (c.color?.code && LISTS.color?.some(x => x.id === c.color.code)) { q.set('color', c.color.code); if (c.color.twoTone) q.set('twoTone', 'true'); }
+    line('懸吊', 'lift', c.lift?.id, [c.lift?.product, c.lift?.mm ? `${c.lift.mm}mm` : ''].filter(Boolean).join(' '));
+    line('輪框', 'wheel', c.wheel?.id, [c.wheel?.brand, c.wheel?.model, c.wheel?.size].filter(Boolean).join(' '));
+    line('輪胎', 'tyre', c.tyre?.sizeId, [c.tyre?.brand, c.tyre?.model, c.tyre?.size].filter(Boolean).join(' '));
+    if (has('tread', c.tyre?.modelId)) q.set('tread', c.tyre.modelId);
+    for (const p of c.parts ?? []) {
+      const key = SLOT[p.slot] ?? p.slot;
+      line({ frontBumper: '前保桿', rearBumper: '後保桿', grille: '水箱罩', fender: '葉子板', hood: '引擎蓋', spoiler: '尾翼', exhaust: '排氣管',
+        sideStep: '側踏', roofRack: '車頂架', face: '換臉', mirrors: '後照鏡', spareCoverKit: '備胎蓋' }[key] ?? '其他', key, p.id, p.product);
+    }
+    const n = [...q.keys()].filter(k => k !== 'twoTone').length;
+    return `<div class="card demo"><div class="top"><div><b>${esc(c.name)}</b><div class="brand">${esc(c.maker)}</div></div></div>
+      ${c.silhouette ? `<div class="sil">${esc(c.silhouette)}</div>` : ''}
+      <ul>${rows.join('')}</ul>
+      ${c.note ? `<div class="note">${esc(c.note)}</div>` : ''}
+      <div class="acts"><a href="${esc(c.url)}" target="_blank" rel="noopener">示範車頁 ↗</a>${n ? `<a class="apply" href="app.html?${q}">套用目錄已有的 ${n} 項</a>` : ''}</div></div>`;
+  }).join('');
+}).catch(() => { document.getElementById('demoGrid').innerHTML = '<div class="empty">示範車資料載入失敗</div>'; });
 </script>
 </body>
 </html>
