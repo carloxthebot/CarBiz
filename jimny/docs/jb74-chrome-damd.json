@@ -1,0 +1,2538 @@
+{
+ "sourcedAt": "2026-09-24",
+ "items": [
+  {
+   "id": "beyond_reve_front_mirror",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "レーヴ（Rêve）鏡面不鏽鋼前保桿",
+   "part": "FUJB74-KYFB",
+   "price": 74800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W／JC74W 專用（官網註明 5 型以後不適用，因感知器需移位）",
+   "looks": "JB74 專用設計的短式鋼管前保桿，整支鏡面拋光不鏽鋼，不需鑽孔直接上原廠孔位。造型是一道貼著車頭橫過去的主橫樑，兩端向後收成側翼包住保桿角，前伸量很小、幾乎貼著原廠保桿面，本體已含護板（スキッドプレート）與霧燈支架。它是整支取代原廠前保桿，不是加掛防撞桿。",
+   "url": "https://shop.beyond-jpn.com/products/fujb74-kyfb",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/fujb74-kyfb",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_reve_front_mirror_winker",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "レーヴ 鏡面不鏽鋼前保桿（含 JA11 方向燈支架）",
+   "part": "FUJB74-KYFBQ",
+   "price": 92400,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W／JC74W（5 型以後不適用）",
+   "looks": "與 FUJB74-KYFB 同一支鏡面不鏽鋼前保桿，另加一對 JA11 舊款方向燈立座，燈座從保桿上緣兩端立起來，把方向燈從原廠位置移到保桿上，正面看多兩顆小方燈。JA11 原廠方向燈本體要另購（右 35602-80052／左 35601-80052），且需配線加工。",
+   "url": "https://shop.beyond-jpn.com/products/fujb74-kyfbq",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/fujb74-kyfbq",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_reve_rear_mirror",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "レーヴ 鏡面不鏽鋼後保桿",
+   "part": "FUJB74-KYRB",
+   "price": 75900,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W／JC74W（4 型以後與 JC74 需另購倒車雷達移位套件）",
+   "looks": "取代原廠後保桿的鏡面不鏽鋼短保桿，JB74 專用設計免加工。因為位置靠上，會與備胎干涉，要配備胎上移支架。裝上後車尾下緣是一條亮面橫樑，比原廠塑膠保桿短很多，離去角變大。",
+   "url": "https://shop.beyond-jpn.com/products/fujb74-kyrb",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/fujb74-kyrb",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_liberte_front_mirror",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "リベルテ（Liberté）鏡面不鏽鋼前保桿（無霧燈座／無護板）",
+   "part": "befb64-ms",
+   "price": 65340,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 シエラ／JC74 共用（5 型以後不適用）；裝 JB74 時車體側需加工",
+   "looks": "復古直條式鏡面不鏽鋼前保桿，一根粗方管橫過車頭、兩端下折成短腳鎖在大樑。同型另有四種組合：加霧燈座 ¥77,220（befb64fg-ms）、加護板 ¥87,120（befb64sp-ms）、霧燈座＋護板全配 ¥97,020（befb64-msal）。基本款不含霧燈座與護板，安裝需鑽孔。",
+   "url": "https://shop.beyond-jpn.com/products/befb64-ms",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/befb64-ms",
+    "https://shop.beyond-jpn.com/products/befb64-msal",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_liberte_rear_mirror",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "リベルテ 鏡面不鏽鋼後保桿",
+   "part": "berb-ms",
+   "price": 78210,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 シエラ／JC74（4 型以後與 JC74 需倒車雷達移位套件）",
+   "looks": "鏡面不鏽鋼直條後保桿，兩端各留一個圓形燈孔，設計上搭 JA11 舊款圓形尾燈（另售 beta11），自備他廠尾燈則要改線。車牌座與牌照燈都可裝回。",
+   "url": "https://shop.beyond-jpn.com/products/berb-ms",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/berb-ms",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_front_skid_bar_74_mirror",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "フロントスキッドバー 74 專用（鏡面）",
+   "part": "befsb74-ms",
+   "price": 44000,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74 シエラ（～2025.10，5 型 2025.11 以後因感知器誤作動不適用）／JC74 ノマド（～2026.6）",
+   "looks": "掛在原廠保桿下緣的鏡面不鏽鋼護槓桿，是加掛件不是換保桿——保留原廠保桿，下面多一道亮面橫桿加兩支斜撐。原廠保桿直接鎖上，官方標示車檢對應。最便宜的「加一點亮件」做法。",
+   "url": "https://shop.beyond-jpn.com/products/befsb74-ms",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/befsb74-ms",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_super_moon_chrome",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "SUPER MOON 鍍鉻月亮盤鋼圈（單顆）",
+   "part": "bewl74-smch",
+   "price": 23100,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74W シエラ／JC74 ノマド 專用（JB64 為 bewl64-smch）",
+   "looks": "整面幾乎無輻的月亮盤造型鋼製輪圈，16 吋 6.0J、PCD 139.7、5 孔、ET −5，表面全鍍鉻。中央可裝原廠中心蓋（後輪側）。同型另有白色與黑色各 ¥19,800，鍍鉻版貴 ¥3,300。網頁標示單顆價，四顆要買四次。",
+   "url": "https://shop.beyond-jpn.com/products/bewl74-smch",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/bewl74-smch",
+    "https://shop.beyond-jpn.com/products/bewl74-smwh",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "beyond_legit_skid_mirror",
+   "thread": "chrome",
+   "brand": "BEYOND（ビヨンド／beyond-jpn）",
+   "label": "レジット ショートバンパー用護板（鏡面）",
+   "part": "besp-ms",
+   "price": 24640,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "搭配 BEYOND レジット ショートバンパー 使用（另有黑色版 besp-bl，已停售）",
+   "looks": "裝在 BEYOND レジット 短保桿下方的鏡面不鏽鋼護板，一片微彎的亮面鋼板貼著保桿下緣往前下方延伸，遮住前底盤。只是配件，不能單獨當保桿用。",
+   "url": "https://shop.beyond-jpn.com/products/besp-ms",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products/besp-ms",
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all"
+   ]
+  },
+  {
+   "id": "klc_trad74_front_mirror",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "トラディショナルバンパー74 前保桿（鏡面）",
+   "part": null,
+   "price": 110000,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W シエラ／JC74W ノマド 專用（シエラ 5 型、ノマド 2 型不可）",
+   "looks": "不鏽鋼鏡面拋光的圓管式前保桿：一根主管橫過車頭、兩端往後收，管身乾淨沒有多餘結構，前伸量小、貼著車頭。シエラ 專用設計，免加工直接鎖原廠孔，附護板。¥110,000 是含霧燈座版，不含霧燈座為 ¥99,000（皆税込）。DAMD 以外最正統的「亮面復古前桿」。",
+   "url": "https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_mirror/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_mirror/",
+    "https://www.klc-div.com/heritage/product/bumper/"
+   ]
+  },
+  {
+   "id": "klc_trad74_rear_mirror",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "トラディショナルバンパー74 後保桿（鏡面）",
+   "part": null,
+   "price": 88000,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W シエラ／JC74W ノマド",
+   "looks": "與前桿同語彙的鏡面不鏽鋼圓管後保桿，取代原廠塑膠後保桿，車尾下緣變成一道細亮橫管，兩端收在後輪拱後方。前後成對做，整台的亮件語言才會一致。",
+   "url": "https://www.klc-div.com/heritage/product/bumper/traditionalbumperrear_2_mirror/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/traditionalbumperrear_2_mirror/",
+    "https://www.klc-div.com/heritage/product/bumper/"
+   ]
+  },
+  {
+   "id": "klc_front_skid_bar_74",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "フロントスキッドバー74（不鏽鋼）",
+   "part": null,
+   "price": 60500,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W シエラ／JC74W ノマド",
+   "looks": "不鏽鋼製的前護槓桿，掛在原廠保桿下方，保留原廠保桿外型只在下緣加一道亮桿。官網規格欄只寫「ステンレス製」，未標明是否鏡面拋光——與同廠鏡面保桿同系列，實品為亮面，但「鏡面」字樣官方沒寫。",
+   "url": "https://www.klc-div.com/heritage/product/bumper/frontskidbar_2/",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/bumper/frontskidbar_2/",
+    "https://www.klc-div.com/heritage/product/bumper/"
+   ]
+  },
+  {
+   "id": "klc_shortbumper_skidplate_74_mirror",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "ショートバンパー用護板 74（鏡面）",
+   "part": null,
+   "price": 41800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W シエラ／JC74W ノマド",
+   "looks": "搭配 KLC 短保桿用的鏡面不鏽鋼護板，一片亮面鋼板從保桿下緣往前下方鋪出去。單獨看只是一片亮板，但正面剪影會在保桿下多一條水平高光。",
+   "url": "https://www.klc-div.com/heritage/product/exterior/shortbumperskidplate74mirror/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/exterior/shortbumperskidplate74mirror/",
+    "https://www.klc-div.com/heritage/product/exterior/"
+   ]
+  },
+  {
+   "id": "klc_bull_bar",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "ブルバー（不鏽鋼）",
+   "part": null,
+   "price": 60500,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W シエラ／JC74W ノマド（シエラ 5 型、ノマド 2 型不可）。標價為「ステー無（不含支架）」版",
+   "looks": "裝在水箱罩正前方的不鏽鋼護桿：一根直立中柱從保桿上緣立起，上端接一道橫樑跨過水箱罩下半，是澳洲／美式越野的招牌前臉配件。¥60,500 税込是不含支架的版本。官網規格欄只寫「ステンレス製」，未標明是否鏡面拋光。",
+   "url": "https://www.klc-div.com/heritage/product/exterior/bullbar/",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/exterior/bullbar/",
+    "https://www.klc-div.com/heritage/product/exterior/"
+   ]
+  },
+  {
+   "id": "klc_taillamp_garnish_chrome",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "尾燈飾框（鍍鉻）",
+   "part": null,
+   "price": 16500,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W シエラ／JC74W ノマド",
+   "looks": "ABS 電鍍的尾燈外框，貼著原廠直立式尾燈外緣繞一圈，把黑色燈殼邊緣變成一道亮邊。官方同價提供消光黑、鍍鉻、碳纖三色，鍍鉻是其中一個選項。黏貼式飾件，不換燈具。",
+   "url": "https://www.klc-div.com/heritage/product/exterior/taillampgarnish/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/exterior/taillampgarnish/",
+    "https://www.klc-div.com/heritage/product/exterior/"
+   ]
+  },
+  {
+   "id": "klc_highmount_ring_chrome",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "高位煞車燈飾圈（鍍鉻）",
+   "part": null,
+   "price": 3850,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W シエラ／JC74W ノマド",
+   "looks": "套在後門上方高位煞車燈外的一圈 ABS 鍍鉻飾框，尺寸很小，只是把那顆燈的邊緣描一道亮線。同價有消光黑／鍍鉻／碳纖三色。整份清單裡最便宜的亮件。",
+   "url": "https://www.klc-div.com/heritage/product/exterior/highmountstoplampring/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/exterior/highmountstoplampring/",
+    "https://www.klc-div.com/heritage/product/exterior/"
+   ]
+  },
+  {
+   "id": "klc_headlight_garnish_not_jb74",
+   "thread": "chrome",
+   "brand": "KLC Heritage",
+   "label": "頭燈飾框（鍍鉻）——不合 JB74",
+   "part": null,
+   "price": 18700,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "僅 JB23W。JB64／JB74／JC74 無此件",
+   "looks": "唯一查到明確標示「クローム」的 KLC 頭燈飾框，但適用車種欄只列 JB23W，對 JB74 無效。記在這裡是為了關掉這條線索：KLC 沒有出 JB74 的鍍鉻頭燈圈。想要把方形燈口收成圓形的飾圈，KLC 這邊查不到。",
+   "url": "https://www.klc-div.com/heritage/product/exterior/headlightgarnish/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/exterior/headlightgarnish/"
+   ]
+  },
+  {
+   "id": "pennylane_front_square_hg_sus_fog",
+   "thread": "chrome",
+   "brand": "PENNY LANE／PLUS SPORTS",
+   "label": "フロントスクエアバンパー HG（SUS）霧燈版・單品",
+   "part": null,
+   "price": 173800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "商品標題寫「JB64.74用」，但同頁內文又寫「JB64用」——兩者矛盾，下訂前必須跟店家確認 JB74 版本",
+   "looks": "不鏽鋼「スーパーポリッシュ（超級拋光）」的方管式前保桿：用方形斷面鋼管圍成一個方正的框，左右各留一個霧燈開口，整支是鏡面反光而非電鍍。單品 ¥173,800；加前護板整組 ¥200,200。無霧燈開口版單品 ¥148,500、加護板 ¥173,800。這是整份清單裡最貴也最亮的一支前桿。",
+   "url": "https://pennylane.base.shop/items/48544402",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://pennylane.base.shop/items/48544402",
+    "https://pennylane.base.shop/items/48545337",
+    "https://pennylane.base.shop/items/48545517",
+    "https://pennylane.base.shop/items/48545574",
+    "https://pennylane.base.shop/categories/6671759"
+   ]
+  },
+  {
+   "id": "pennylane_straight_twin_sus",
+   "thread": "chrome",
+   "brand": "PENNY LANE／PLUS SPORTS",
+   "label": "ストレートツインバンパー（不鏽鋼）霧燈版・單品",
+   "part": null,
+   "price": 73700,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 共用（商品標題「JB64.74用」）",
+   "looks": "兩根平行圓管橫過車頭的雙管式前保桿，不鏽鋼本色亮面。這是 us_retro_chrome 原型描述的「鏡面拋光不鏽鋼雙管前保桿」最接近的實物。霧燈版單品 ¥73,700、加護板整組 ¥93,500；無霧燈開口版單品 ¥60,500。價位只有方管 HG 版的四成。",
+   "url": "https://pennylane.base.shop/items/48574614",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://pennylane.base.shop/items/48574614",
+    "https://pennylane.base.shop/items/48574697",
+    "https://pennylane.base.shop/items/48577805",
+    "https://pennylane.base.shop/categories/6671759"
+   ]
+  },
+  {
+   "id": "pennylane_rear_square_hg_sus",
+   "thread": "chrome",
+   "brand": "PENNY LANE／PLUS SPORTS",
+   "label": "リアスクエアバンパー HG（SUS）PS 複合燈版",
+   "part": null,
+   "price": 126500,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 共用（商品標題「JB64.74用」）",
+   "looks": "與前方管桿成對的不鏽鋼超級拋光後保桿，方管框住車尾下緣，兩端嵌 PLUS SPORTS 自家的複合燈。前後買齊就是整台四個角都有亮面方管。",
+   "url": "https://pennylane.base.shop/items/48582745",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://pennylane.base.shop/items/48582745",
+    "https://pennylane.base.shop/categories/6671759"
+   ]
+  },
+  {
+   "id": "pennylane_rear_straight_sus",
+   "thread": "chrome",
+   "brand": "PENNY LANE／PLUS SPORTS",
+   "label": "リアストレートバンパー（不鏽鋼）原廠尾燈用",
+   "part": null,
+   "price": 60500,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 共用（商品標題「JB64.74用」）",
+   "looks": "一根不鏽鋼直管橫過車尾的極簡後保桿，沿用原廠尾燈不動燈具，是這批亮件裡最容易配的後桿。另有含車牌座版本 ¥79,200（純正牌照燈可續用）。4 型以後要加倒車雷達支架，不鏽鋼版 ¥26,400、鐵製黑色版 ¥13,200。",
+   "url": "https://pennylane.base.shop/items/48584436",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://pennylane.base.shop/items/48584436",
+    "https://pennylane.base.shop/items/126350804",
+    "https://pennylane.base.shop/items/131967689",
+    "https://pennylane.base.shop/categories/6671759"
+   ]
+  },
+  {
+   "id": "pennylane_front_skid_hg_sus",
+   "thread": "chrome",
+   "brand": "PENNY LANE／PLUS SPORTS",
+   "label": "フロントスキッドプレート HG（不鏽鋼超級拋光）",
+   "part": null,
+   "price": 30800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 共用（商品標題「JB64.74用」）",
+   "looks": "搭配 PLUS SPORTS 前保桿的不鏽鋼超級拋光護板，一片亮面鋼板鋪在保桿下方。另有不做拋光的一般不鏽鋼版 ¥25,300，差價 ¥5,500 就是那層鏡面。",
+   "url": "https://pennylane.base.shop/items/48545654",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://pennylane.base.shop/items/48545654",
+    "https://pennylane.base.shop/items/48545797",
+    "https://pennylane.base.shop/categories/6671759"
+   ]
+  },
+  {
+   "id": "mlj_daytona_ss_no_chrome_for_jb74",
+   "thread": "chrome",
+   "brand": "MLJ（DAYTONA SS）",
+   "label": "DAYTONA SS：JB74 的尺寸沒有鍍鉻版",
+   "part": null,
+   "price": 29700,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 ジムニーシエラ 對應的是 5-139.7 的兩個尺寸：15×6.0 INSET 0 與 16×6.0 INSET 0",
+   "looks": "鋼製兩件式輪圈，是這個風格的經典腳。但把 MLJ 官方尺寸價格表逐列讀完，結論要更正既有 archetypes 的假設：JB74 能裝的兩個尺寸（15×6.0 與 16×6.0，皆 5-139.7 INSET 0）**只出 BLACK（red/blue line）一色，沒有 CHROME 選項，也不附中心蓋**。16×6.0 定價 ¥27,000（税込 ¥29,700）、15×6.0 ¥26,000（税込 ¥28,600）。CHROME 只出現在 14×5.0 4-100（税込 ¥40,700）、16×6.5 與 16×7.0 6-139.7（皆税込 ¥48,400）這三個不合 Jimny 的尺寸上。想要鍍鉻鋼圈配 JB74，實際買得到的是 BEYOND SUPER MOON クローム（bewl74-smch，16×6.0 −5，單顆税込 ¥23,100）。",
+   "url": "https://www.mljinc.co.jp/product/daytona_ss/daytona_ss",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.mljinc.co.jp/product/daytona_ss/daytona_ss",
+    "https://shop.beyond-jpn.com/products/bewl74-smch"
+   ]
+  },
+  {
+   "id": "taniguchi_square_front_sus",
+   "thread": "chrome",
+   "brand": "TANIGUCHI（オフロードサービス タニグチ）",
+   "label": "フロント角バンパー（不鏽鋼 SUS304 #400 研磨）",
+   "part": null,
+   "price": 107800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 シエラ／JC74 共用。1～4 型用與 5 型對應（含倒車雷達開孔）同價",
+   "looks": "2mm 板厚的小型方形古典保桿，本體約 3kg，可沿用原廠霧燈並移設頭燈清洗噴嘴。重要限制：這支不能單獨裝，必須鎖在 TANIGUCHI 自家護板（スキッドプレート，含絞盤版）的側支架上。同型鋼製黑色粉體烤漆版 ¥58,300 税込，不鏽鋼版 ¥107,800 税込——差價 ¥49,500 就是那層亮面。注意材質寫的是 SUS304 #400 研磨（亮面研磨），不是全鏡面，反光比 PENNY LANE 的スーパーポリッシュ 柔一級。",
+   "url": "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/"
+   ]
+  },
+  {
+   "id": "taniguchi_square_rear_sus",
+   "thread": "chrome",
+   "brand": "TANIGUCHI（オフロードサービス タニグチ）",
+   "label": "リア角バンパー（不鏽鋼 SUS304 #400 研磨）",
+   "part": null,
+   "price": 121000,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74 シエラ／JC74。JB74 因封印關係無法把車牌移到中央下方（JB64 可以）",
+   "looks": "與前角桿成對的 2mm 板厚方形後保桿，約 4kg，免鑽孔螺栓直上，但要配小型尾燈（另售）、背面備胎必須拆掉或移位、車牌要移設。鋼製黑色 ¥63,800 税込、不鏽鋼 #400 研磨 ¥121,000 税込。官網註明支架簡化、不以強度為訴求，牽引勾要選鎖車架的款。",
+   "url": "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_rear/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_rear/"
+   ]
+  },
+  {
+   "id": "taniguchi_sierra_sidestep_sus",
+   "thread": "chrome",
+   "brand": "TANIGUCHI（オフロードサービス タニグチ）",
+   "label": "シエラ用二段可調側踏板（不鏽鋼）",
+   "part": null,
+   "price": 59400,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74 シエラ 專用（JC74 ノマド 另有前席／後席專用件）",
+   "looks": "踏板本體不鏽鋼、支架鋼製，設計成不超出原廠爆龜外緣所以過得了日本車檢；比側裙下緣外凸約 5cm，踏面高度可在下緣以下約 9cm 與約 6cm 兩段之間選。免鑽孔螺栓直上。右側 ¥59,400、左側 ¥56,100（皆税込），左右不同價。車側會多一道亮面水平線。",
+   "url": "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_side/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_side/"
+   ]
+  },
+  {
+   "id": "apio_chrome_center_cap_plain",
+   "thread": "chrome",
+   "brand": "APIO（アピオ）",
+   "label": "鍍鉻中心蓋（素面）",
+   "part": "7200-11C",
+   "price": 3740,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "APIO WILDBOAR Ventura／WILDBOAR SR+ 輪圈專用（前後皆可，含自由輪轂的前輪也適用）",
+   "looks": "一枚圓形鍍鉻中心蓋，蓋住輪圈中央的輪轂開口，表面素面無標誌。單顆 ¥3,740 税込，附專用拆卸工具，四顆要買四次。要有亮面輪心又不換整組輪圈，這是最小的動作。",
+   "url": "https://apio.jp/parts/7200-11c.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/7200-11c.html"
+   ]
+  },
+  {
+   "id": "apio_chrome_center_cap_amark",
+   "thread": "chrome",
+   "brand": "APIO（アピオ）",
+   "label": "鍍鉻中心蓋（A 字標）",
+   "part": "7200-11A",
+   "price": 5500,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "APIO WILDBOAR Ventura／WILDBOAR SR+ 輪圈專用",
+   "looks": "與素面版同尺寸的鍍鉻中心蓋，中央多一個 APIO 的 A 字浮雕標誌。單顆 ¥5,500 税込。",
+   "url": "https://apio.jp/parts/7200-11a.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/7200-11a.html",
+    "https://apio.jp/parts/7200-11c.html"
+   ]
+  },
+  {
+   "id": "apio_bronco_chrome_bumper_not_jb74",
+   "thread": "chrome",
+   "brand": "APIO（アピオ）",
+   "label": "ブロンコ風前保桿（鍍鉻）——不合 JB74",
+   "part": "3109-02M",
+   "price": 42350,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "僅 JA11／JB31。不適用 JB64／JB74／JC74",
+   "looks": "鋼製鍍鉻的美式方頭前保桿，是 APIO 目前唯一明確標示「仕上げ：メッキ」的保桿，造型就是一道厚實的方形鍍鉻橫樑，沿用原廠方向燈、螺栓直上。但適用只到 JA11／JB31，對 JB74 無效。列在這裡是為了收掉這條線索：APIO 沒有出 JB74 的鍍鉻保桿。",
+   "url": "https://apio.jp/parts/3109-02m.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/3109-02m.html",
+    "https://apio.jp/?s=%E3%83%A1%E3%83%83%E3%82%AD"
+   ]
+  },
+  {
+   "id": "suzuki_classic_emblem",
+   "thread": "chrome",
+   "brand": "SUZUKI 純正",
+   "label": "SUZUKI 經典立體徽章（純正）",
+   "part": "77860-84F51-ZG4",
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "純正零件，由 SUZUKI 經銷商訂購；APIO 以它搭配 JB64／JB74／JC74 的鐵製水箱罩使用",
+   "looks": "老 Jimny 的 SUZUKI 立體字母徽章，APIO 在ヴィンテージアイアングリル 的示範車上貼在水箱罩中央那道平肋上。APIO 明說這顆不含在商品內、要自己去 SUZUKI 買。價格與表面處理（是否鍍鉻）在查到的頁面上都沒有標示，不臆測。",
+   "url": "https://apio.jp/parts/3033-57.html",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://apio.jp/parts/3033-57.html"
+   ]
+  },
+  {
+   "id": "jparts_chrome_mirror_cover",
+   "thread": "chrome",
+   "brand": "J パーツプロジェクト（Jパーツ）",
+   "label": "鏡面鍍鉻後視鏡蓋（左右一組）",
+   "part": null,
+   "price": 4630,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "3BA-JB64W XL／XG 與 3BA-JB74W JL（頁面逐字列出兩者）",
+   "looks": "整份清單裡最便宜的鍍鉻後視鏡蓋：一對 ABS 電鍍外殼，套在原廠後視鏡外殼外面，沿著它的圓角矩形輪廓走，方向燈鏡片位置留空。背面預貼 3M 型雙面膠，沒有任何扣具，所以壓上去就不能再調位置。¥4,630 送料無料（Yahoo 購物為總額標示＝税込，但頁面本身沒有印出「税込」二字）。品號 null：店家只給商品編號 1995，不是廠商品號。",
+   "url": "https://store.shopping.yahoo.co.jp/jparts/1995.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/jparts/1995.html",
+    "https://item.rakuten.co.jp/j-auto/1995/",
+    "https://jimny-style.work/doormirror/"
+   ]
+  },
+  {
+   "id": "okada_chrome_mirror_cover",
+   "thread": "chrome",
+   "brand": "オカダエンタープライズ",
+   "label": "鍍鉻後視鏡蓋（左右一組）",
+   "part": "OEPZ000239",
+   "price": 11334,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W 與 JB74W，且限「ウインカー付ドアミラー専用モデル」（附方向燈的後視鏡）",
+   "looks": "比 J パーツ 貴一倍多的鍍鉻後視鏡蓋，同樣是左右一組、用附的雙面膠貼上。差別在它明確標成「附方向燈後視鏡專用」的模型，開孔位置對得比較準。¥11,334 税込（定價 ¥12,188）。OEPZ000239 是 AutoStyle／オートバックス 的商品代碼，廠商自己的品號沒有公布。",
+   "url": "https://autostyle.autobacs.com/product/OEPZ000239",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://autostyle.autobacs.com/product/OEPZ000239"
+   ]
+  },
+  {
+   "id": "suzuki_chrome_mirror_cover_jb64_only",
+   "thread": "chrome",
+   "brand": "SUZUKI 純正",
+   "label": "純正鍍鉻後視鏡蓋——只有 JB64，沒有 JB74",
+   "part": null,
+   "price": 20900,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "⚠️ 僅 JB64W，且限 XC 等級、附側方向燈的後視鏡。頁面上沒有 JB74 シエラ 版",
+   "looks": "SUZUKI 純正的樹脂電鍍後視鏡蓋，材質敘述逐字「樹脂クロームメッキ製の綺麗な輝きです」。是整片替換掉原廠烤漆鏡蓋，不是套上去的蓋子，所以接合面最乾淨。左右一組附安裝說明書，¥20,900 税込。但 JB74 買不到——這是原廠亮件在這台車上的唯一一顆，而且不給 Sierra。零售頁的 H04-0188995175 是店家自編代碼，不是 SUZUKI 品號。",
+   "url": "https://kazz.ocnk.net/product/2570",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://kazz.ocnk.net/product/2570"
+   ]
+  },
+  {
+   "id": "gracetrim_chrome_door_handle_protector",
+   "thread": "chrome",
+   "brand": "GRACE TRIM",
+   "label": "鍍鉻門把防刮片（左右兩件）",
+   "part": "CC-JM-DHPT",
+   "price": 4380,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W",
+   "looks": "要分清楚它是什麼：不是換掉門把本身，而是兩片弧形 ABS 電鍍殼，貼在門把後下方的鈑件上當防刮片（開門時指甲會刮到的那一塊）。材質逐字「カラー：クロームメッキ／素材：ABS樹脂」，雙面膠直接貼。前門左右各一，¥4,380。",
+   "url": "https://store.shopping.yahoo.co.jp/gracetrim2/cc-jm-dhpt.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/gracetrim2/cc-jm-dhpt.html"
+   ]
+  },
+  {
+   "id": "gracetrim_chrome_tailgate_handle",
+   "thread": "chrome",
+   "brand": "GRACE TRIM",
+   "label": "鍍鉻尾門把手蓋（兩件）",
+   "part": "CC-JM-RHC",
+   "price": 4280,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W",
+   "looks": "兩片 ABS 電鍍殼，罩住尾門那支橫向把手總成，雙面膠貼上。材質逐字「カラー：クロームメッキ／素材：ABS樹脂」。¥4,280。車尾在原本全黑的把手位置多一道亮橫線，配後保桿的亮件時是很便宜的呼應。",
+   "url": "https://store.shopping.yahoo.co.jp/gracetrim2/cc-jm-rhc.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/gracetrim2/cc-jm-rhc.html"
+   ]
+  },
+  {
+   "id": "sunrise_chrome_handle_knob_3pc",
+   "thread": "chrome",
+   "brand": "（無品牌，オートパーツ・サンライズ 販售）",
+   "label": "鍍鉻門把握把蓋＋尾門把蓋三件組",
+   "part": null,
+   "price": 3000,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64 ジムニー（H30 年 7 月～）／JB74 ジムニーシエラ（H30 年 7 月～）",
+   "looks": "與 GRACE TRIM 的防刮片不同：這組蓋的是**握把本體**——左右前門各一片握把蓋，加一片尾門把手蓋，共三件。ABS 製，雙面膠貼。頁面說產品是對實車做 3D 掃描開模的。¥3,000 税込。品號 null：頁面的商品コード 欄是空的。這是把門把變亮最直接的一組。",
+   "url": "https://autoparts-sunrise.com/view/item/000000002306",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://autoparts-sunrise.com/view/item/000000002306"
+   ]
+  },
+  {
+   "id": "chrome_headlight_ring_tsurime",
+   "thread": "chrome",
+   "brand": "（無品牌，セレクトショップダナエ 販售）",
+   "label": "鍍鉻頭燈飾圈（吊眼造型）",
+   "part": null,
+   "price": 6480,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64／JB74／JC74（ジムニー／ジムニーシエラ／ジムニーノマド）",
+   "looks": "⚠️ 這是「把方形燈口收成圓形」這條需求最接近的答案，但它做不到那件事：左右一對 ABS 電鍍環，外緣順著原廠方形（圓角）燈口走，內緣切出一道上揚的「つり目」斜線，所以只是把內上角的可見燈面壓窄一點，看起來兇一些——燈口仍然是方的。材質逐字「カラー：クロームメッキ／材質：ABS樹脂」，雙面膠貼在既有燈框上。¥6,480。品號 null。",
+   "url": "https://store.shopping.yahoo.co.jp/selectshopdanae/jimny-jb64-headlightcover-chrome.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/selectshopdanae/jimny-jb64-headlightcover-chrome.html"
+   ]
+  },
+  {
+   "id": "no_round_headlamp_bezel_for_jb74",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "把方形燈口變圓的鍍鉻頭燈圈：不存在",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "JB64／JB74／JC74",
+   "looks": "這是原始需求裡唯一整條落空的項目。JB74 買不到任何「鍍鉻飾圈把方形頭燈開口收成圓形」的產品。市面上叫「ヘッドライトリング／ベゼル」的都只是貼在既有方形燈口上的裝飾環（如上面那款吊眼造型 ¥6,480），改不了開口形狀。KLC Heritage 唯一標示クローム 的ヘッドライトガーニッシュ ¥18,700 適用車種只寫 JB23W。真的要圓燈，走的是整張臉換掉的路線：DAMD little Δ.（四圓燈水箱罩 ¥173,800）或 DAMD ARMATA（JC74），而那是換水箱罩＋換燈具，不是加一圈飾框。",
+   "url": "https://store.shopping.yahoo.co.jp/selectshopdanae/jimny-jb64-headlightcover-chrome.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/selectshopdanae/jimny-jb64-headlightcover-chrome.html",
+    "https://www.klc-div.com/heritage/product/exterior/headlightgarnish/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+   ]
+  },
+  {
+   "id": "motorfarm_grille_bezel_garnish",
+   "thread": "chrome",
+   "brand": "モーターファーム（MOTOR FARM）",
+   "label": "前水箱罩飾條 鏡面鍍鉻 5 片組",
+   "part": "64ex-fgvg",
+   "price": 7920,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64／JB74（頁面逐字「JB64/74」）",
+   "looks": "不用換整片水箱罩就能讓正臉有鍍鉻的做法：五片獨立的 ABS 電鍍飾條，嵌進原廠水箱罩的直向柵格裡，黑底上多五道垂直亮線。材質逐字「ABS素材で作成しており、軽量で耐衝撃性を持つ…鏡面メッキ仕上げ」。¥7,920 税込。附帶查證結果：MOTOR FARM 的 JB74 外裝線其餘品項（霧燈蓋、頭燈蓋、尾燈蓋、方向燈蓋、側標識燈飾框）全是燻黑／淺燻／碳纖／迷彩，沒有第二件鍍鉻。",
+   "url": "https://parts-farm.com/shopdetail/64ex-fgvg/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://parts-farm.com/shopdetail/64ex-fgvg/"
+   ]
+  },
+  {
+   "id": "shiningparts_highmount_ring_chrome",
+   "thread": "chrome",
+   "brand": "シャイニングパーツ（Shining Parts）",
+   "label": "鍍鉻高位煞車燈飾圈",
+   "part": "hw05s4918a",
+   "price": 3344,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W",
+   "looks": "單片 ABS 電鍍飾圈，預貼雙面膠，繞在尾門上方的高位煞車燈外圈。材質逐字「ABS樹脂、メッキ」。¥3,344 税込。功能與 KLC 的 ¥3,850 同款件重疊，兩者擇一即可。",
+   "url": "http://www.shiningparts.jp/item/hw05s4918a/",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "http://www.shiningparts.jp/item/hw05s4918a/",
+    "https://www.shiningparts.jp/category/71/"
+   ]
+  },
+  {
+   "id": "kproducts_side_winker_garnish_chrome",
+   "thread": "chrome",
+   "brand": "K-PRODUCTS",
+   "label": "側方向燈鍍鉻飾框（左右一組）",
+   "part": "240308-4",
+   "price": 1716,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W／JC74W。目前 SOLD OUT",
+   "looks": "前葉子板上那顆側方向燈的水滴形小飾框，左右一組，尺寸約 5.2×8.4cm，雙面膠貼；原廠燈與換裝的 LED 燈都能配。材質逐字「材質：ABS樹脂／カラー：メッキ鏡面仕上げ」。定價 ¥1,716、清倉價 ¥876，但商品頁沒有標示税込或税抜（同店分類頁用的是「X円（税込：Y円）」格式，所以這個裸數字的稅別未確認）。目前缺貨。",
+   "url": "https://www.k-products.shop/shopdetail/000000001914/",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.k-products.shop/shopdetail/000000001914/"
+   ]
+  },
+  {
+   "id": "avest_window_moulding_ss",
+   "thread": "chrome",
+   "brand": "AVEST",
+   "label": "車窗下緣不鏽鋼鏡面飾條（左右 2 片）",
+   "part": "TC-HW05S4914",
+   "price": 8250,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64W／JB74W",
+   "looks": "唯一一件確定是真不鏽鋼鏡面的小飾件：材質敘述逐字「■ドアウィンドウに鏡面ステンレスの輝きを」。左右兩片細長條，各沿一扇車門玻璃的下緣（腰線）從後視鏡貼到 B 柱。附雙面膠，官網自己提醒弧線處兩端容易翹起、可能要補膠。税抜 ¥7,500／税込 ¥8,250。裝上去車側會有一道貫穿的細亮線，和 DAMD 的不鏽鋼側飾條是同一種效果但便宜非常多。",
+   "url": "https://avest.jp/shopdetail/000000000032/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://avest.jp/shopdetail/000000000032/"
+   ]
+  },
+  {
+   "id": "avest_rear_step_guard_ss",
+   "thread": "chrome",
+   "brand": "AVEST",
+   "label": "後保桿踏板護片（不鏽鋼）",
+   "part": "TC-HN09S4958A（銀）／TC-HN09S4958BK（黑不鏽鋼）",
+   "price": null,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64W／JB74W",
+   "looks": "貼在後保桿上緣踏面的不鏽鋼護片，材質欄寫「丈夫なステンレス製」，雙面膠貼。銀色與黑不鏽鋼兩色。價格為 null：列表頁顯示 ¥4,950 起，但商品頁的價格是 JS 動態載入，抓不到税込／税抜 的區分，不臆測。",
+   "url": "https://avest.jp/shopdetail/000000000030/",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://avest.jp/shopdetail/000000000030/"
+   ]
+  },
+  {
+   "id": "customwagon_bumper_protector_black_hairline",
+   "thread": "chrome",
+   "brand": "カスタムワゴン",
+   "label": "JB74 專用不鏽鋼前保桿護片——但刻意做成黑髮絲，不亮",
+   "part": "jim1161",
+   "price": 14800,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB74 シエラ 專用",
+   "looks": "不鏽鋼材質但故意不做亮面：材質欄逐字「素材/カラー：ステンレス製/ブラックヘアライン仕上げ」，是黑色髮絲紋。四片一組，雙面膠貼在原廠前保桿上。¥14,800 税込。列進來是為了提醒「不鏽鋼」不等於「亮」——這件在配置器裡應該歸到黑件而不是亮件。",
+   "url": "https://www.custom-wagon.com/c/557/jim1161",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.custom-wagon.com/c/557/jim1161"
+   ]
+  },
+  {
+   "id": "no_chrome_wiper_arms_for_jb74",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "鍍鉻／不鏽鋼雨刷臂：JB74 沒有——只有雨刷臂蓋",
+   "part": "AP-XT1327-KSI",
+   "price": 7560,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64W／JB74W（2018.7～）",
+   "looks": "需求清單裡第二條落空的項目：JB64／JB74 買不到鏡面不鏽鋼或鍍鉻的雨刷「臂」，前後都沒有。那條產品線停在 JA11／JA12／JA22 與 JB23（NTS 技研 JB23-WP ¥14,200、WPAB-JA11 ¥13,200），BRIGHTZ 有 173 個鍍鉻後雨刷蓋品項、Jimny 一個都沒有，SUZUKI 原廠配件表也沒有亮面雨刷件。JB74 真正買得到的是**雨刷臂蓋**：AP（オートパーツエージェンシー）AP-XT1327-KSI，¥7,560 送料無料，「鏡面シルバー ABS製」——是電鍍 ABS 不是不鏽鋼，頁面關鍵字列自己寫「ABS樹脂…鏡面 クローム chrome メッキ」。一組四件（每側兩件）：一條開底 U 形長蓋從轉軸罩到雨刷勾，加一顆水滴形的轉軸底座蓋（中央有個圓凹罩住軸帽）。安裝方式頁面沒寫，不要假設是雙面膠。另有個人賣家的不鏽鋼雨刷臂螺帽（前 2 後 1 共三顆）¥819。原廠雨刷臂為黑色，品號 38310-77R10 ¥3,769／38330-77R10 ¥4,005／後 38821-77R00 ¥2,683。",
+   "url": "https://store.shopping.yahoo.co.jp/apagency/504677640.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/apagency/504677640.html",
+    "https://paypayfleamarket.yahoo.co.jp/item/z631976256"
+   ]
+  },
+  {
+   "id": "brightz_taillight_ring_ss",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "超鏡面不鏽鋼尾燈飾圈 2 片",
+   "part": "TAIL−087",
+   "price": 4950,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W（商品名自己標出車型）",
+   "looks": "BRIGHTZ 是這次找到最完整的一條真鏡面不鏽鋼小件產品線，每個品名都寫著「超鏡面ステンレスメッキ」。這一對是寬版亮環，整圈框住原廠那兩顆直立式尾燈；買家評論形容「鏡面が太くガッチリテールランプを囲っている」——亮帶很寬、把燈整個包起來。¥4,950（Yahoo 購物為總額標示＝税込，頁面本身未印出）。商品碼 o0023jph0019。比 KLC 的同類件（¥16,500）便宜三分之二。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0023jph0019.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0023jph0019.html"
+   ]
+  },
+  {
+   "id": "brightz_window_moulding_ss",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "超鏡面不鏽鋼車窗飾條 2 片",
+   "part": "WIN−SIL−135",
+   "price": 3080,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W",
+   "looks": "每側前門一條細長亮條，蓋在車窗玻璃下緣那道黑色膠條上。¥3,080——比 AVEST 同位置的件（¥8,250）便宜一大截。買家提醒兩點：條長略有餘要自己裁，而且要從後視鏡那端開始貼。商品碼 o0007jph0005。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0007jph0005.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0007jph0005.html"
+   ]
+  },
+  {
+   "id": "brightz_side_door_moulding_ss",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "超鏡面不鏽鋼車側門飾條 6 片",
+   "part": "SID−MOL−135",
+   "price": 6380,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W。目前缺貨（OUT OF STOCK）",
+   "looks": "六片一組的車側腰線亮條，位置比上面那條窗下飾條更低、貼在門板中段——也就是 DAMD little G. サイドモール（¥30,800）那個位置的平價替代。裝上去車側會有一道從前葉子板貫到後葉子板的水平高光，是側面剪影改變最大的小件。¥6,380，商品碼 o0017jph0031。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0017jph0031.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0017jph0031.html"
+   ]
+  },
+  {
+   "id": "brightz_mesh_grille_cover_ss",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "超鏡面不鏽鋼網狀水箱罩蓋",
+   "part": "GRI−COV−S−006",
+   "price": 5280,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W",
+   "looks": "罩在原廠水箱罩開口上的鏡面不鏽鋼網，¥5,280。這是在「整片鍍鉻水箱罩只剩小廠兩款」之外，第三條讓正臉變亮的路：不換水箱罩本體，只在開口加一層亮網。商品碼 o0013jph0004。與 MOTOR FARM 的五片直向飾條（¥7,920）是互斥的兩種做法——一個是加網、一個是加條。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0013jph0004.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0013jph0004.html"
+   ]
+  },
+  {
+   "id": "brightz_side_sill_guard_ss",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "超鏡面不鏽鋼側裙護板",
+   "part": "SID−GUA−001",
+   "price": 27500,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W",
+   "looks": "BRIGHTZ 這條線裡最大也最貴的一件，¥27,500。貼在車側下緣門檻位置的鏡面不鏽鋼護板，面積大、離地近，遠看就是車身下方一道長亮帶。商品碼 o0022jph0004。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0022jph0004.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0022jph0004.html"
+   ]
+  },
+  {
+   "id": "brightz_small_ss_parts",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "超鏡面不鏽鋼小件群（七件）",
+   "part": "OTHER−SMA−025／REA−DHC−036／HI−MOU−RIN−017／FUELLID−087／SID−ETC−SMA−014／AIR−LOU−041／REA−ETC−BIG−009",
+   "price": 1760,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W（各商品名自標車型）",
+   "looks": "同一條產品線的其餘小件，全部是「超鏡面ステンレスメッキ」，價格從 ¥1,760 到 ¥4,620：前保桿轉角飾片 4 片 OTHER−SMA−025 ¥3,080、尾門把手蓋＋按鈕皿 2 片 REA−DHC−036 ¥1,760、高位煞車燈飾圈 HI−MOU−RIN−017 ¥1,980、油箱蓋飾片 FUELLID−087 ¥2,200、葉子板側飾片 SID−ETC−SMA−014 ¥2,420、葉子板進氣飾板 AIR−LOU−041 ¥2,860、尾門內側飾板 REA−ETC−BIG−009 ¥4,620（這片是車內面）。⚠️ 一個容易搞錯的點：SID−ETC−SMA−014 雖然叫「フェンダーガーニッシュ」，關鍵字列寫的是サイド エアー ルーバー インテーク ダクト——它是葉子板側面那塊小飾板，不是輪拱飾條。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0022jph0150.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0022jph0150.html",
+    "https://store.shopping.yahoo.co.jp/brightz/o0014jph0747.html",
+    "https://store.shopping.yahoo.co.jp/brightz/o0022jph0443.html",
+    "https://store.shopping.yahoo.co.jp/brightz/o0010jph0005.html",
+    "https://store.shopping.yahoo.co.jp/brightz/o0022jph0379.html",
+    "https://store.shopping.yahoo.co.jp/brightz/o0022jph0437.html"
+   ]
+  },
+  {
+   "id": "brightz_taillight_guard_chrome",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "鍍鉻尾燈護框 2 片",
+   "part": "TAIL−ETC−023",
+   "price": 4400,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "ジムニーシエラ JB74W",
+   "looks": "與上面的 TAIL−087 飾圈是兩件不同的東西：這是套在尾燈外圈的護框（ガード），品名只寫「メッキ」沒有寫不鏽鋼，底材未標示。兩片一組，¥4,400，商品碼 o0023jph0023。飾圈是貼著燈緣的細環，護框是外一圈的立體框——兩者可以擇一。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0023jph0023.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0023jph0023.html"
+   ]
+  },
+  {
+   "id": "brightz_mirror_cover_chrome",
+   "thread": "chrome",
+   "brand": "BRIGHTZ（ブライツ）",
+   "label": "鍍鉻後視鏡蓋 2 片",
+   "part": "MIR−SID−274",
+   "price": 3740,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74",
+   "looks": "兩片鍍鉻外殼，罩在原廠後視鏡殼上。¥3,740，在三家後視鏡蓋裡價格居中（J パーツ ¥4,320–4,630、オカダ ¥11,334）。品名只寫「メッキ」，底材未標示。",
+   "url": "https://store.shopping.yahoo.co.jp/brightzdx2/8230845.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightzdx2/8230845.html"
+   ]
+  },
+  {
+   "id": "suzuki_genuine_chrome_mirror_cover_pn",
+   "thread": "chrome",
+   "brand": "SUZUKI 純正",
+   "label": "純正鍍鉻後視鏡蓋（有真品番）",
+   "part": "99122-77R11（AC2W，附 LED 側方向燈鏡用）／99122-77R00（ABLW，XC 用）",
+   "price": 10450,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "依配件型錄：AC2W 給附 LED 側方向燈的後視鏡，ABLW 給 XC 等級",
+   "looks": "SUZUKI 官方配件型錄裡的鍍鉻後視鏡蓋，材質欄「クロームメッキ 左右セット」。重點是它**整片替換掉原廠鏡蓋**（型錄逐字「※標準装備品を取り外して装着します」），不是套上去的殼子，所以接縫最乾淨。型錄標價各 10,450 円（本体 6,050 円＋參考安裝工資 4,400 円）。⚠️ 型錄的價格欄位在品番列旁邊而不在同一列，引用前應向經銷商再確認一次；另外市面零售的純正鍍鉻鏡蓋頁面（¥20,900）只標 JB64W，JB74 是否有對應品需向經銷商查。",
+   "url": "https://www.suzuki.co.jp/accessory_car/catalog-library/jimny202506.pdf",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.suzuki.co.jp/accessory_car/catalog-library/jimny202506.pdf",
+    "https://kazz.ocnk.net/product/2570"
+   ]
+  },
+  {
+   "id": "suzuki_fog_garnish_jb64_only",
+   "thread": "chrome",
+   "brand": "SUZUKI 純正",
+   "label": "純正霧燈飾框（鍍鉻＋消光黑）——JB64 專用",
+   "part": "99114-77R10（ABLY）",
+   "price": 30910,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "⚠️ JB64 XG／XL／XC。型錄未列 JB74 シエラ",
+   "looks": "SUZUKI 純正的霧燈飾框，材質欄「クロームメッキ+艶消しブラック塗装 左右セット」——鍍鉻配消光黑的雙色件。30,910 円（本体 25,410 円＋參考安裝工資 5,500 円），型錄註明價格為消費税 10% 込。列進來是要標明它不給 Sierra：JB74 的霧燈亮框要走 SIXTH SENSE 或 MOTOR FARM 的社外品。",
+   "url": "https://www.suzuki.co.jp/accessory_car/jimny/jimny.pdf",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.suzuki.co.jp/accessory_car/jimny/jimny.pdf"
+   ]
+  },
+  {
+   "id": "sixthsense_fog_garnish_jb74",
+   "thread": "chrome",
+   "brand": "SIXTH SENSE",
+   "label": "原廠保桿用霧燈飾框 S（仿鍍鉻）",
+   "part": "JIMex059-S",
+   "price": 15400,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB74 シエラ 原廠保桿用",
+   "looks": "JB74 買得到的霧燈亮框裡最正式的一款，ABS 製，飾面標的是「クロームメッキ**調**」——仿鍍鉻不是真電鍍，跟 SUZUKI 純正那款（真鍍鉻但只給 JB64）要分開看。15,400 円 税込（税抜 14,000 円）。同廠另有原廠保桿用前護板蓋 JIMex060-CRM「クロームメッキ調」¥21,780 税込（JB74W，'18/07～，雙面膠貼），兩件搭起來就是把原廠保桿下半整排變亮。",
+   "url": "https://sixth-sense.shop-pro.jp/?pid=166527301",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://sixth-sense.shop-pro.jp/?pid=166527301",
+    "https://aero-tk.com/products/detail/5874"
+   ]
+  },
+  {
+   "id": "motorfarm_fog_ring_chrome",
+   "thread": "chrome",
+   "brand": "モーターファーム（MOTOR FARM）",
+   "label": "霧燈飾圈 鏡面鍍鉻 2 片",
+   "part": "64EX-FLRG",
+   "price": 5005,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64／JB74",
+   "looks": "兩片 ABS 電鍍飾圈，套在原廠霧燈外緣，「ABS樹脂製 メッキ仕上げ」。¥5,005，是 JB74 霧燈亮框裡最便宜的。⚠️ 這件目前不在 MOTOR FARM 自家現行網站上，價格與品號是在經銷商頁面確認的，可能已停產。搭同廠的水箱罩五片飾條（64ex-fgvg ¥7,920）就是完整的一組平價亮臉。",
+   "url": "https://store.shopping.yahoo.co.jp/horidashimono/aajz0040abnm.html",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/horidashimono/aajz0040abnm.html"
+   ]
+  },
+  {
+   "id": "ks_window_moulding_sus304",
+   "thread": "chrome",
+   "brand": "Ks 問屋／Kross Link",
+   "label": "SUS304 不鏽鋼鏡面車窗飾條 2 片",
+   "part": "60187",
+   "price": 7149,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64／JB74（左右前門一組）。目前缺貨",
+   "looks": "窗下飾條的第三個選項，規格標得最清楚：「材質：SUS-304ステンレス」「カラー：シルバー（鏡面仕上げ）」「取り付け箇所：左右ウインドウ下部モール部分」「取り付け：両面テープ」「入数：2P」。¥7,149（另一通路 zest-group ¥6,358），介於 BRIGHTZ ¥3,080 與 AVEST ¥8,250 之間，但它是唯一把鋼種寫出來的。⚠️ 同店的 60186 サイドドアモール ¥8,771 不要搞混——那款是「ヘアライン加工」的髮絲面，故意不亮。",
+   "url": "https://store.shopping.yahoo.co.jp/ksplanning/60187.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/ksplanning/60187.html"
+   ]
+  },
+  {
+   "id": "jparts_rear_gate_hinge_cover",
+   "thread": "chrome",
+   "brand": "J パーツプロジェクト（Jパーツ）",
+   "label": "尾門鉸鏈鍍鉻蓋（上下一組）",
+   "part": null,
+   "price": 1990,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "ジムニー 64 系／ジムニーシエラ 74 系 全等級",
+   "looks": "兩片窄長弧形蓋，罩住尾門上下兩支外露的鉸鏈臂（原廠是消光黑）。ABS 製，可選鏡面鍍鉻或亮面碳纖紋。¥1,990，商品碼 2075。車尾外露的鉸鏈是 Jimny 造型的一部分，把它變亮在正後方視角很明顯。同類件另有 Ks 問屋 60165 ¥3,469（ABS 樹脂，雙面膠，JB64／JB74，兩色皆缺貨）。",
+   "url": "https://store.shopping.yahoo.co.jp/jparts/2075.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/jparts/2075.html",
+    "https://store.shopping.yahoo.co.jp/ksplanning/60165.html"
+   ]
+  },
+  {
+   "id": "danae_headlight_grille_panel_set",
+   "thread": "chrome",
+   "brand": "（無品牌，セレクトショップダナエ 販售）",
+   "label": "頭燈＋水箱罩鍍鉻飾板七件組",
+   "part": null,
+   "price": 13800,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64／JB74（JC74 未列）。※ 限原廠五柵式水箱罩",
+   "looks": "七片一組：左右頭燈外框，加上水箱罩的框條。「材質：ABS樹脂」「取付：両面テープ固定」，¥13,800 送料無料。頁面說頭燈環可以單獨使用。這是把整張臉的輪廓線一次描亮的做法——頭燈框加水箱罩框，正面看是一個連續的鍍鉻外框，比只換水箱罩更有整體感。但一樣不會把方形燈口變圓。",
+   "url": "https://store.shopping.yahoo.co.jp/selectshopdanae/jb64-headlightgrill-chrome2.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/selectshopdanae/jb64-headlightgrill-chrome2.html"
+   ]
+  },
+  {
+   "id": "jparts_chrome_mirror_cover_turnlamp",
+   "thread": "chrome",
+   "brand": "J パーツプロジェクト（Jパーツ）",
+   "label": "鏡面鍍鉻後視鏡蓋（附方向燈鏡用）",
+   "part": null,
+   "price": 4320,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "ジムニー XC 等級／ジムニーシエラ JC 等級的「ウィンカードアミラー付き車」",
+   "looks": "與同廠 ¥4,630 那款是姊妹品，差別只在對應的後視鏡等級：這一款（商品碼 1986）給**附方向燈**的後視鏡（Sierra 的 JC 等級），¥4,630 那款（商品碼 1995）給沒有方向燈的（JL 等級）。兩款都是 ABS 鏡面鍍鉻外殼、雙面膠貼在原廠鏡蓋上。買之前先確認自己那台是哪種鏡。",
+   "url": "https://store.shopping.yahoo.co.jp/jparts/1986.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/jparts/1986.html",
+    "https://store.shopping.yahoo.co.jp/jparts/1995.html"
+   ]
+  },
+  {
+   "id": "no_chrome_overfender_trim",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "鍍鉻／鏡面的爆龜輪拱飾條：不存在",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "JB64／JB74",
+   "looks": "需求清單裡第三條落空的項目。JB64／JB74 沒有任何鍍鉻或鏡面不鏽鋼的輪拱飾條（オーバーフェンダーモール）。市面上每一款 JB74 爆龜都是未塗裝的黑色 ABS 或 AES：JAOS type-X、DAMD、GRANGIO、worldnet HI-62 ¥17,980「未塗装ABS樹脂」。一個容易誤判的陷阱：BRIGHTZ 有一件叫「フェンダーガーニッシュ」（SID−ETC−SMA−014，¥2,420），名字看起來像輪拱件，但它的關鍵字列是サイド エアー ルーバー インテーク ダクト——是葉子板**側面**那塊小飾板，不是輪拱。想在輪拱上做亮線，目前只能自己拉貼紙。",
+   "url": "https://store.shopping.yahoo.co.jp/brightz/o0022jph0379.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/o0022jph0379.html"
+   ]
+  },
+  {
+   "id": "no_chrome_pillar_garnish",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "鍍鉻／鏡面的車柱飾板：不存在",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "JB64／JB74",
+   "looks": "查過 BRIGHTZ（五頁）、J パーツ、Ks 問屋、Your Parts、セカンドステージ、サムライプロデュース、LC Japan、サンライズ、モーターファーム，沒有任何一家做 JB64／JB74 的鍍鉻或鏡面 A／B 柱飾板。セカンドステージ 全站有一個ピラーガーニッシュ 分類，但車種清單裡沒有 Jimny。這一項不是還沒找到，是確定沒有。",
+   "url": "https://www.2ndstage.jp/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.shopping.yahoo.co.jp/brightz/",
+    "https://store.shopping.yahoo.co.jp/jparts/1986.html"
+   ]
+  },
+  {
+   "id": "round_eye_kits_no_chrome_bezel",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "圓燈化套件全部不含鍍鉻飾圈——而且全是素地自己烤",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "painted",
+   "fits": "JB64W／JB74W／JC74（各套件適用範圍見內文）",
+   "looks": "把三家做丸目化的廠商官網讀完，結論一致：沒有任何一款圓燈套件附鍍鉻或鏡面飾圈，而且全部是未塗裝出貨、要自己烤漆。GARAGE ILL BRON55：水箱罩＋頭燈組 ¥198,000（鹵素）／¥231,000（LED），保桿 ¥100,100，材質「グリル（ABS製未塗装）」「バンパー（FRP製未塗装）」，適用 JB64W／JB74W 2018.7–2025.10 與 Nomad 1 型。GARAGE ILL 70YO.70：¥462,000 税込（鹵素）／¥495,000 税込（LED），烤漆另加 ¥120,000 起；它是唯一把ヘッドライトバッフル 與ヘッドライトベース 做成兩層分件的套件——但兩層都是素地。DAMD little Δ：¥539,000 税込 未塗装品素地，換丸目四燈頭燈＋圓形小燈＋水箱罩＋前後保桿；DAMD 全文唯一出現「メッキ」的地方，是警告方形霧燈的鍍鉻部位會生鏽。最便宜的 DIY 路線是ネクサスジャパン 的 7 吋圓燈支架 HLSZ064-BKT，10,800 円（内税），JB64W／JB74W H30.7～，只有兩片鋼支架、不含燈也沒有外露飾圈，目前缺貨。另外 LC JAPAN 的 HL-SZ18-C-V1（¥66,000 税込）是整顆圓形魚眼燈具替換，它的「リング」是會發光的 LED 光圈，不是鍍鉻飾圈。",
+   "url": "https://nexusjapan.shop-pro.jp/?pid=165461304",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://nexusjapan.shop-pro.jp/?pid=165461304",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+    "https://www.lanbo.co.jp/product/323"
+   ]
+  },
+  {
+   "id": "where_the_chrome_is_not",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "哪些大廠完全沒有亮件——別再往那邊找",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "JB64／JB74／JC74",
+   "looks": "掃過之後確定沒有任何鍍鉻或鏡面外觀件的廠商：サムライプロデュース（JB74 線全是銀／黑髮絲＋Raptor 塗層）、APIO（66 件 JB64／JB74 外裝清單，零鍍鉻外觀件，只有輪圈中心蓋）、昭和ガレージ 外裝、シェアスタイル Jimny 外裝、K-PRODUCTS 主要外裝分類——全是消光、黑或髮絲。這台車的亮件實際上只來自兩個地方：預算型 ABS 電鍍廠（GRACE TRIM、J パーツ、シャイニングパーツ、K-PRODUCTS、モーターファーム）以及做真不鏽鋼的 AVEST／KLC／TANIGUCHI／PENNY LANE／WirusWin／Auto Rubys。",
+   "url": "https://apio.jp/parts/category/jbext/",
+   "taiwan": "露天上沒有任何日系品牌的鍍鉻 JB74 飾件；搜到的是碳纖紋或含 LED 方向燈的後視鏡蓋 NT$998–3,110，以及一件「Jimny 備胎護蓋 輪圈蓋 15吋 不鏽鋼鍍鉻材質 髮絲紋」NT$1,500。「JB74 鍍鉻亮條」「JB74 門把 鍍鉻」兩組關鍵字皆 0 筆",
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/category/jbext/",
+    "https://www.ruten.com.tw/"
+   ]
+  },
+  {
+   "id": "damd_truck_mirror_chrome",
+   "thread": "chrome",
+   "brand": "DAMD（ダムド）",
+   "label": "トラックミラー（鍍鉻）",
+   "part": null,
+   "price": 81400,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB64／JB74 シエラ（JC74 ノマド 版目前官網只列マットブラック塗装品）",
+   "looks": "卡車式外後視鏡：一面直長方形的大鏡體，靠一根 U 字形粗管固定在原廠鏡座位置，整組鍍鉻。鏡體內建加熱，可對應原廠有電熱鏡的車。這是 DAMD 全線唯一的鍍鉻外觀件，消光黑版 ¥75,900、鍍鉻版 ¥81,400（皆税込），差價 ¥5,500。裝上去正側面剪影會整個改變，比換保桿還明顯。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/"
+   ]
+  },
+  {
+   "id": "damd_side_mole_stainless",
+   "thread": "chrome",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. サイドモール（日本製不鏽鋼板）",
+   "part": null,
+   "price": 30800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74 シエラ／JC74（little G. 全系列共用；ARMATA 同款）",
+   "looks": "車側門板腰線那一條橡膠飾條，上面壓一片日本製不鏽鋼亮板，兩端加端蓋收尾。是一整台份的套件，從前葉子板一路貫到後葉子板，把車側切出一道水平高光。官網未標示是否鏡面拋光，只寫「高級ステンレスプレート」。little G. ADVANCE 套件內附的那片特別註明不是黑色版。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/"
+   ]
+  },
+  {
+   "id": "damd_spare_tyre_cover_ss_band",
+   "thread": "chrome",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 備胎蓋（不鏽鋼固定帶版）",
+   "part": null,
+   "price": 63800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74 シエラ／JC74（建議胎外徑與胎寬需符合不鏽鋼帶尺寸，胎太寬會超出帶寬）",
+   "looks": "仿 G-Class 的硬殼備胎蓋，中央一顆 dd 徽章，外圈用一條不鏽鋼亮帶把蓋子箍在備胎上，帶上附防盜鎖。素地未烤漆 ¥63,800、烤漆另加 ¥24,200；同款換黑色帶為 ¥74,800。車尾正中央那一圈亮環是這個風格最好認的記號。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/"
+   ]
+  },
+  {
+   "id": "damd_little_d_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little D. 前水箱罩",
+   "part": null,
+   "price": 52800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（JB64 另有專用頁）",
+   "looks": "仿舊款 Land Rover Defender 的臉：橫向凹凸分明的肋條面，兩端各嵌一顆專為此罩開發的圓形燈（出廠是透明假燈殼）。消光黑塗裝品 ¥52,800；車身色×消光黑雙色塗裝品 ¥75,900。要讓兩顆圓燈真的會亮，另加「LED アクセサリーランプキット」¥8,580。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": "MRK 4X4：DAMD『Little D』經典全套件 JB74 專用 NT$120,000（四件：引擎蓋飾板、水箱罩、前保桿、後保桿），工資、烤漆、運費另計",
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/",
+    "https://www.mrk.com.tw/product_ii.html?ID=1287"
+   ]
+  },
+  {
+   "id": "damd_little_d_front_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little D. 前保桿 for SIERRA",
+   "part": null,
+   "price": 63800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74 專用（與 saudade 共用同一支）",
+   "looks": "刻意把量感壓到很薄的平板式前保桿，一道近乎直線的橫板橫過車頭下緣，前伸量小、幾乎不外凸，取代原廠塑膠保桿。素地 ¥63,800、烤漆另加 ¥35,200；官方烤漆版故意留粗顆粒的消光黑質感，模擬鋼板。裝有雷達／聲納的車另購對應套件 ¥17,380。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/"
+   ]
+  },
+  {
+   "id": "damd_little_d_rear_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little D. 後保桿 for SIERRA",
+   "part": null,
+   "price": 81400,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（JC74 需另購尾燈線組 ¥4,180 與後霧燈 ¥17,380）",
+   "looks": "與前保桿同語彙的薄板式後保桿，兩端各嵌一顆 DAMD 自製的圓形燈，尺寸與形狀都重新開模。素地 ¥81,400、烤漆另加 ¥24,200。可另加倒車鏡頭套件 ¥4,180，或把車牌移到後門的移位套件 ¥10,780。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/"
+   ]
+  },
+  {
+   "id": "damd_little_d_bonnet",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little D. 引擎蓋飾板（ボンネットフードカバー）",
+   "part": null,
+   "price": 52800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "貼在原廠引擎蓋上的一片罩子，中央鼓起一塊量體，讓正面剪影的上緣多一道隆起。素地 ¥52,800、烤漆另加 ¥37,400。可再加 little D. 字母銘牌（消光黑或消光銀，¥7,480）。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/"
+   ]
+  },
+  {
+   "id": "damd_little_d_emblems",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little D. 字母銘牌與橢圓徽章",
+   "part": null,
+   "price": 7480,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB64／JB74／JC74（銘牌為引擎蓋飾板專用）",
+   "looks": "引擎蓋飾板專用的 little D. 字母銘牌，消光黑或消光銀二選一，¥7,480 税込。另有刻著 little D. 的綠色橢圓徽章，前用、後用各 ¥3,080 税込。體積都很小，但是這個系列最好認的記號。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/"
+   ]
+  },
+  {
+   "id": "damd_little_g_std_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. STANDARD 前水箱罩",
+   "part": null,
+   "price": 63800,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ／JC74（JB64 另有專用頁）",
+   "looks": "仿第一代 G-Class 的入門臉：開口偏運動化，裡面刻意做成「別體」的鍍鉻件當裝飾條，正中一顆 dd 徽章，兩側各一條直立式 LED 方向燈（原廠是水平燈）。素地 ¥63,800、烤漆另加 ¥23,100，烤漆版為車身色×消光黑雙色。與引擎蓋飾板同裝時要加方向燈分接線組 ¥2,090。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_std_front_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. STANDARD 前保桿 for SIERRA",
+   "part": null,
+   "price": 75900,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "厚實的面構成前保桿，中央鑲一塊鍍鉻飾件當重心，左右是大面積的塑件。素地 ¥75,900、烤漆另加 ¥31,900（little G. 頁）或 ¥46,200（AVENTURA 頁），烤漆版為車身色×消光槍灰雙色。雷達／聲納車另購對應套件 ¥26,400。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_overfender_step_t1",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 爆龜＋鋁製側踏 type-1",
+   "part": null,
+   "price": 140800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（type-1 搭 little G. STANDARD 前保桿）",
+   "looks": "四片外擴的輪拱蓋加一對鋁製側踏板的套件，把車側從原廠的平面變成有明顯輪拱厚度與一道踏板水平線。素地 ¥140,800、烤漆另加 ¥48,400（烤漆版爆龜為車身色）。鋁踏板的托架要在車身底部鑽孔。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_overfender_step_t2",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 爆龜＋鋁製側踏 type-2",
+   "part": null,
+   "price": 162800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（TRADITIONAL／ADVANCE 用；type-2 可搭原廠前後保桿）",
+   "looks": "比 type-1 更飽滿的輪拱造型，同樣配鋁製側踏。官網特別註明 type-2 可以和原廠前後保桿組合——也就是只想加寬不想換保桿的人選這組。素地 ¥162,800、烤漆另加 ¥48,400。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/"
+   ]
+  },
+  {
+   "id": "damd_little_g_trad_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. TRADITIONAL 前水箱罩",
+   "part": null,
+   "price": 75900,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（JB64 另有專用頁）",
+   "looks": "這個系列裡最狠的一片：刻意跨過原廠水箱罩外圍的分模線，往兩側一路蓋到葉子板上，正面看整張臉變寬。百葉窗式的橫向ルーバー做出偏移面（オフセット面）所以有立體層次，很像老車。中央一顆 dd 徽章。只出消光黑塗裝品 ¥75,900 税込，沒有素地版。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/"
+   ]
+  },
+  {
+   "id": "damd_little_g_trad_front_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. TRADITIONAL 前保桿",
+   "part": null,
+   "price": 96800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（ARMATA 用的是同一支）",
+   "looks": "做成鋼板保桿的樣子：一塊乾淨的平面橫過車頭，左右各嵌一顆別體的方形黃光霧燈，車牌不對稱地偏一邊掛。素地 ¥96,800、烤漆另加 ¥31,900。官網警語提到方形霧燈的鍍鉻部位會隨使用環境與時間劣化——也就是霧燈框本身是鍍鉻件。雷達／聲納車套件 ¥17,380。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_armata/"
+   ]
+  },
+  {
+   "id": "damd_little_g_trad_rear_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. TRADITIONAL 後保桿（含方形尾燈）",
+   "part": null,
+   "price": 85800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "與前保桿同語彙的鋼板風後保桿，自帶古典造型的方形尾燈（卡車式），車尾看起來像 1980 年代的四驅車。素地 ¥85,800、烤漆另加 ¥27,500。另有尾燈用的擋石護網 ¥13,200（JB74）。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/"
+   ]
+  },
+  {
+   "id": "damd_little_g_bonnet_cover",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 引擎蓋罩（含蓋上方向燈）",
+   "part": null,
+   "price": 74800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（TRADITIONAL／ADVANCE／AVENTURA 共用）",
+   "looks": "中央大幅隆起的引擎蓋罩，左右各一顆立在蓋面上的方向燈（G-Class 的招牌），附 L/R 一對。素地 ¥74,800、烤漆另加 ¥37,400，烤漆版為車身色。裝了它依法要加前方鏡頭：若車上沒有「直前直左確認鏡」對策，必須另購前鏡頭＋螢幕組 ¥21,780。方向燈另有擋石護網 ¥15,400。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_adv_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. ADVANCE 前水箱罩",
+   "part": null,
+   "price": 52800,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "和 TRADITIONAL 同樣跨過分模線、蓋到葉子板的大面積水箱罩，但裡面換成一組做工精細的「別體鍍鉻鰭片」，整張臉從復古轉成高級運動感。中央一顆 dd 徽章。素地 ¥52,800、烤漆另加 ¥23,100——是 little G. 三款水箱罩裡最便宜的一片。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/"
+   ]
+  },
+  {
+   "id": "damd_little_g_adv_front_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. ADVANCE 前保桿（含 LED 霧燈）",
+   "part": null,
+   "price": 107800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "開口內嵌一片別體網格，左右各一顆造型銳利的 LED 霧燈，面構成做得比 STANDARD 複雜。素地 ¥107,800、烤漆另加 ¥30,800。雷達／聲納車套件 ¥26,400。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/"
+   ]
+  },
+  {
+   "id": "damd_little_g_adv_rear_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. ADVANCE 後保桿（含 415COBRA LED 尾燈）",
+   "part": null,
+   "price": 162800,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ／JC74（4 型／JC74 1 型與 5 型／JC74 2 型各有專屬聲納套件 ¥17,380）",
+   "looks": "銳利收斂的現代造型後保桿，兩端嵌 415COBRA 製 LED 尾燈（支援流水方向燈），中央一塊鍍鉻飾件壓住重心。素地 ¥162,800、烤漆另加 ¥30,800——是 DAMD 全線最貴的單件後保桿。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_aventura_kit",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. AVENTURA 外觀全套件",
+   "part": null,
+   "price": 836000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "現有 complete-kits 檔案沒有收的一款：拿 little G. STANDARD 的臉（水箱罩＋前保桿＋type-1 爆龜鋁踏），接上 ADVANCE 的 415COBRA LED 尾燈後保桿，再加工業風的 ソリッドラック 車頂架與 trip basket 木板備胎架。素地 ¥836,000、烤漆另加 ¥128,700；含 little G. 16×6J −5 輪圈四顆的完全版 ¥957,000。是 DAMD 全線最貴的套件。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/",
+    "https://www.damd.co.jp/products/suzuki/"
+   ]
+  },
+  {
+   "id": "damd_solid_rack",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "ソリッドラック for JIMNY 車頂架",
+   "part": null,
+   "price": 217800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB64／JB74 シエラ／JC74（AVENTURA 套件內含）",
+   "looks": "日本製的金屬車頂架：前後兩端用花紋鋼板（縞鋼板）、側面是一道曲線收邊，整體工業風。¥217,800 税込，可加裝 IPF 工作燈組 ¥64,900。車頂輪廓會整個被這片架子改寫。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_trip_basket_spare_guard",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "trip basket 備胎護架",
+   "part": null,
+   "price": 140800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74。適用胎外徑 685–720mm、胎寬 185–225mm",
+   "looks": "鋼管焊成的備胎護架，背面鋪一片天然木板，抱住備胎外圈。夾持段可依胎寬與外徑調整。¥140,800 税込。車尾正面會從「一顆備胎」變成「一個木板框住的備胎」。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_b_kit",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little B. 外觀五件套",
+   "part": null,
+   "price": 275000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（JB64 另有專用頁）",
+   "looks": "走 20 世紀美式越野車路線的五件：APIO 製鋼板 Iron Grille、DAMD 美式字體銘牌、引擎蓋飾板、前保桿、後保桿＋延伸片。官網明寫「ボディパーツはABS製（グリルのみスチール製）」——只有水箱罩是鐵的。素地 ¥275,000、烤漆另加 ¥118,800。另有 WHITE EDITION ¥308,000，差別是限定棉白色鋼製水箱罩。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/"
+   ]
+  },
+  {
+   "id": "damd_little_b_front_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "the ROOTS／little B. 共用前保桿",
+   "part": null,
+   "price": 63800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB64／JB74 シエラ／JC74 共用（雷達／聲納對應套件品名即寫 JB64/JB74/JC74）",
+   "looks": "the ROOTS 與 little B. 共用同一支前保桿：基本到近乎樸素的橫板造型，官網形容「バンパーの根元とも言えるベーシックな造形」。素地 ¥63,800、烤漆另加 ¥35,200，烤漆有多種顏色可選（the ROOTS 示範車是象牙色）。雷達／聲納對應套件 ¥17,380。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/"
+   ]
+  },
+  {
+   "id": "damd_little_b_rear_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "the ROOTS／little B. 後保桿＋延伸片",
+   "part": null,
+   "price": 96800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（延伸片是シエラ 專用的輪拱蓋）",
+   "looks": "古典直線造型的後保桿，另附シエラ 專用的後輪拱延伸蓋（エクステンション），把保桿與輪拱連成一整塊。素地 ¥96,800、烤漆另加 ¥46,200；烤漆版兩側延伸片一律消光黑。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/"
+   ]
+  },
+  {
+   "id": "damd_roots_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "the ROOTS 前水箱罩",
+   "part": null,
+   "price": 52800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（JB64 另有專用頁）",
+   "looks": "致敬 1970 年初代 LJ10 的水箱罩：造型是左右往中央收的直線肋條，而且刻意不受原廠水箱罩外框限制，做成「オーバーラップ形狀」溢出框外。素地 ¥52,800、烤漆另加 ¥17,600——DAMD 全線最便宜的一片水箱罩。官網文案沒有提到任何鍍鉻或立體字，既有文件裡「上緣有 SUZUKI 鍍鉻立體字」的說法在 DAMD 頁面上查不到依據。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "taiwan": "MRK 4X4（露天）：DAMD『the ROOTS』經典三套件 JB74 專用 NT$65,000（未烤漆）",
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.ruten.com.tw/item/22544285919506/"
+   ]
+  },
+  {
+   "id": "damd_roots_3pc",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "the ROOTS 外觀三件套",
+   "part": null,
+   "price": 213400,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "水箱罩＋前保桿＋後保桿（含延伸片）三件，是 DAMD 進入門檻最低的一套。素地 ¥213,400、烤漆另加 ¥99,000。加 DAMD Cantabile 15 吋輪圈五顆為 ¥363,000，加 APIO WILDBOAR SR 五顆 ¥451,000；再配 BRIDGESTONE DUELER M/T 674（LT215/75R15）分別是 ¥528,000／¥594,000。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "taiwan": "MRK 4X4（露天）NT$65,000（未烤漆）",
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.ruten.com.tw/item/22544285919506/"
+   ]
+  },
+  {
+   "id": "damd_little5_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little 5.（サンク）前水箱罩",
+   "part": null,
+   "price": 129800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ（2018.7-）／JC74",
+   "looks": "把 JB74 的兩顆圓燈整個換掉：水箱罩本體帶「各目 2 灯」也就是每邊兩顆方形頭燈的開口，用柯達（コイト／Koito）製方形雙燈鹵素頭燈，罩面是古典百葉造型，中央一顆 DAMD 鑽石徽章。素地 ¥129,800。這是換臉級，不是換件級——配置器要重建燈具才畫得出來。saudade 用的是同一片水箱罩。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/"
+   ]
+  },
+  {
+   "id": "damd_little5_front_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little 5./Δ. 共用前保桿",
+   "part": null,
+   "price": 92400,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（雷達／聲納對應套件品名寫 JB74/JC74）",
+   "looks": "古典運動風的前保桿，左右各一顆方形黃光霧燈。官網說可選車身色或灰色等配色。little 5. 與 little Δ. 共用這一支。素地 ¥92,400。雷達／聲納套件 ¥17,380。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+   ]
+  },
+  {
+   "id": "damd_little5_overfender",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little 5./Δ. 鼓包式爆龜（ブリスター）",
+   "part": null,
+   "price": 140800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "大幅外擴的鼓包型爆龜四片，官網形容為「フレンチモンスター」該有的張力，面與縮腰的造型是刻意為反光設計的。素地 ¥140,800。這組會真正改變車寬剪影，不是貼片級。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+   ]
+  },
+  {
+   "id": "damd_little5_rear_bumper",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little 5./Δ. 後保桿（含 DB 製方形尾燈）",
+   "part": null,
+   "price": 74800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "古典運動風後保桿，嵌 DB 社製的方形尾燈。素地 ¥74,800。搭配另售的 FRP 尾翼 ¥63,800（角度可自由調，金屬支架）就是完整的拉力車尾。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+   ]
+  },
+  {
+   "id": "damd_little_delta_grille",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little Δ.（デルタ）前水箱罩",
+   "part": null,
+   "price": 173800,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ／JC74",
+   "looks": "四顆圓形頭燈排成一列的水箱罩，官網明寫特徵是「スパルタンなメッキパーツ」——也就是罩面上有粗獷的鍍鉻件，底是古典金屬網（ラス網），中央一顆 DAMD 三角徽章。素地 ¥173,800，是 DAMD 最貴的單片水箱罩。ARMATA（JC74 用）用的是同一片。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_armata/"
+   ]
+  },
+  {
+   "id": "damd_little_delta_kit",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little Δ. 完整套件（車體件）",
+   "part": null,
+   "price": 539000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ（2018.7-）／JC74",
+   "looks": "水箱罩＋三角徽章＋圓形四燈頭燈與 LED 燈泡＋圓形小燈＋方形方向燈＋前保桿＋Koito 方形霧燈＋爆龜＋側裙＋後保桿＋DB 方形尾燈＋FRP 尾翼。素地 ¥539,000。本體 ABS、尾翼 FRP。可加購 OZ Racing Rally Racing 16×6J −5（PCD139.7，單顆 8.584kg）單顆 ¥53,900／五顆 ¥269,500。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+   ]
+  },
+  {
+   "id": "damd_saudade_kit",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "saudade 完整套件",
+   "part": null,
+   "price": 393800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74；需切輪拱內襯",
+   "looks": "水箱罩＋Koito 方形雙燈鹵素頭燈＋前保桿＋爆龜＋側裙飾板＋後保桿＋圓形燈＋倒車鏡頭套件。不含引擎蓋飾板為 ¥393,800，含引擎蓋飾板 ¥437,800。前臉用的水箱罩與 little 5. 同款（¥129,800 單售），前後保桿則與 little D. 共用。官方只供應素地，沒有烤漆版，官網八個顏色都是 CG。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/"
+   ]
+  },
+  {
+   "id": "damd_armata_kit",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "ARMATA 完整套件（JC74 ノマド 專用）",
+   "part": null,
+   "price": 385000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JC74W ジムニーノマド 專用（5 門）。所附後保桿需另購 SUZUKI 純正線組",
+   "looks": "現有 complete-kits 檔案完全沒有的一款，是 DAMD 為五門 Nomade 做的新系列：拿 little Δ. 的四圓燈鍍鉻水箱罩，接 little G. TRADITIONAL 的鋼板風前後保桿與方形尾燈，再加不鏽鋼板側飾條。素地 ¥385,000、烤漆另加 ¥74,800；含 OZ Rally Racing 4×4 16×6J 五顆為 ¥605,000。後保桿安裝需自購 SUZUKI 純正線組（右 35658-77R00／左 35678-77R00），且不附後霧燈（另購 ¥17,380）。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_nomade_armata/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_armata/",
+    "https://www.damd.co.jp/products/suzuki/"
+   ]
+  },
+  {
+   "id": "damd_nomade_little_g_trad",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. TRADITIONAL 完整套件（JC74 ノマド 版）",
+   "part": null,
+   "price": 569800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JC74W ジムニーノマド 專用（5 門）",
+   "looks": "JB74 版 TRADITIONAL 的五門版，零件語彙相同（跨葉子板的百葉水箱罩、鋼板風前後保桿與方形尾燈、引擎蓋罩與蓋上方向燈），但因為軸距加長，爆龜與側踏改用專屬的 type-3。素地 ¥569,800（JB74 版是 ¥547,800）；加 Cantabile 五顆為 ¥726,000。JC74 專屬追加件：後霧燈 ¥17,380。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/"
+   ]
+  },
+  {
+   "id": "damd_nomade_little_g_adv",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. ADVANCE 完整套件（JC74 ノマド 版）",
+   "part": null,
+   "price": 649000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JC74W ジムニーノマド 專用（5 門）",
+   "looks": "JB74 版 ADVANCE 的五門版，同樣是鍍鉻鰭片水箱罩＋LED 霧燈前保桿＋415COBRA LED 尾燈後保桿，爆龜側踏改 type-3。素地 ¥649,000（與 JB74 版同價）；加 little G. 輪圈四顆 ¥781,000。後保桿的聲納對應套件依年式分 JC74 1 型與 2 型兩種。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_advance/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/"
+   ]
+  },
+  {
+   "id": "damd_little_g_overfender_step_t3",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 爆龜＋鋁製側踏 type-3（JC74 專用）",
+   "part": null,
+   "price": 176000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JC74W ジムニーノマド 專用（5 門，軸距加長）",
+   "looks": "為五門 Nomade 開的第三種爆龜＋鋁踏套件，四片輪拱蓋加一對加長的鋁製側踏——因為 Nomade 車身多一對車門，type-1／type-2 的踏板長度不夠。素地 ¥176,000、烤漆另加 ¥48,400。只出現在 Nomade 的 TRADITIONAL 與 ADVANCE 兩頁。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-g_advance/"
+   ]
+  },
+  {
+   "id": "damd_nomade_little_d",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little D. 完整套件（JC74 ノマド 版）",
+   "part": null,
+   "price": 305800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JC74W ジムニーノマド 專用",
+   "looks": "JB74 版 little D. 的五門移植：水箱罩＋前保桿＋後保桿＋倒車鏡頭套件＋引擎蓋飾板＋土除板＋字母與橢圓徽章。素地 ¥305,800；加 DAMD Cantabile 15×6J −5 五顆為 ¥451,000。JC74 專屬的兩個追加件：尾燈線組 ¥4,180、後霧燈 ¥17,380。後視鏡為 NOMADE 專用トラックミラー，目前只出消光黑 ¥75,900（沒有鍍鉻版）。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/",
+    "https://www.damd.co.jp/products/suzuki/"
+   ]
+  },
+  {
+   "id": "damd_little_g_stone_guards",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 擋石護網三件（引擎蓋方向燈／頭燈／尾燈）",
+   "part": null,
+   "price": 15400,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74。尾燈用有 JB74 專用與 STANDARD 兩種頁面標示",
+   "looks": "三種消光黑的金屬擋石護網，好拆好裝，可以只在越野時裝：引擎蓋方向燈用 L/R 一組 ¥15,400、頭燈用 ¥15,400、尾燈用 ¥13,200（皆税込）。造型是格柵狀護片直接罩在燈面前，老式越野車的語彙。裝上頭燈護網的狀態在日本屬競技用途、不過車檢（DAMD 對ストーンガード的通用警語）。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_front_camera",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G. 前鏡頭＋螢幕組（法規對應）",
+   "part": null,
+   "price": 21780,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB74 シエラ／JC74。裝 little G. ボンネットカバー 時，若原車未做「直前直左確認鏡」對策則為必購",
+   "looks": "不是造型件而是法規件：引擎蓋罩把車頭正前方視野擋掉，日本保安基準要求補一顆前方鏡頭加車內螢幕。¥21,780 税込。DAMD 警告此品可能干擾車上數位電視等無線接收，安裝位置要拉開距離。建模用不到，但報價要算進去。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_little_g_trad_camel_decal",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "TRADITIONAL 駱駝貼紙（ラクダデカール）",
+   "part": null,
+   "price": 15400,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB74 シエラ／JC74（little G. TRADITIONAL 專用）",
+   "looks": "車側的駱駝圖案貼紙，L/R 一組 ¥15,400 税込，銅金屬色或黑色二選一。是 TRADITIONAL 這款拉沙漠遠征意象的收尾。純平面貼紙，建模只需貼圖。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/"
+   ]
+  },
+  {
+   "id": "damd_mud_flap",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "マッドフラップ（橡膠土除板）",
+   "part": null,
+   "price": 42900,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB74 シエラ／JC74（little D. 版與 little G. TRADITIONAL 版同價）",
+   "looks": "刻意不用主流材質、做出古典質感的橡膠土除板，長度特別加長，所以車高拉高之後比例仍然對。¥42,900 税込。四片式，掛在前後輪拱後緣。little D. 完整套件內含，單買也是這個價。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/"
+   ]
+  },
+  {
+   "id": "damd_slash_garnish",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "スラッシュガーニッシュ（後側窗斜飾板）",
+   "part": null,
+   "price": 52800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB64／JB74 シエラ／JC74（各系列頁面共同販售）",
+   "looks": "貼在後四分之一車側的一道斜線飾板，把原廠的方形側窗視覺上切成三角窗＋方窗的老式篷車（キャノピー）造型，可再加 trip basket 木飾板 ¥21,780。素地 ¥52,800、烤漆另加 ¥33,000。是 DAMD 少數只動車側、不動臉的件。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/"
+   ]
+  },
+  {
+   "id": "damd_dually_marker_mount",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "デューリーマーカーマウント（車頂標識燈座）",
+   "part": null,
+   "price": 52800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB64／JB74 シエラ／JC74",
+   "looks": "黏貼在車頂前緣的一條燈座，接線用接頭直插。刻意用「マーカーランプ（標識燈）」而不是工作燈，所以常時點亮也過車檢、也不刺眼。消光黑塗裝品 ¥52,800。車頂前緣會多一排小燈，是美式卡車語彙。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/"
+   ]
+  },
+  {
+   "id": "damd_cantabile_wheel",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "DAMD Cantabile 15 吋輪圈（五顆組）",
+   "part": null,
+   "price": 176000,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ 專用設計（15×6J −5）；the ROOTS 頁的五顆組為 ¥159,500",
+   "looks": "碟盤式（ディッシュ）但做出很深的內凹（コンケイブ）：外圈到中心呈規整的漏斗形，面上加古典圖形。15 吋 6J −5。銀／黑／金三色。little D. 頁標價五顆 ¥176,000，the ROOTS 頁同名五顆組 ¥159,500——兩頁價格不同，以各自套件為準。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/"
+   ]
+  },
+  {
+   "id": "damd_little_g_wheel",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "little G ホイール 16×6J −5",
+   "part": null,
+   "price": 41800,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74（16×6J inset −5）",
+   "looks": "簡潔但帶銳利折面的輪圈，靠升到 16 吋做出量感。單顆銀色 ¥41,800、黑色 ¥42,900；四顆組 ¥167,200／¥171,600，五顆組 ¥209,000／¥214,500（皆含運税込）。是 little G. 系列的指定腳。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/"
+   ]
+  },
+  {
+   "id": "damd_oz_rally_racing",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）×OZ Racing",
+   "label": "OZ Racing Rally Racing 16×6J（復刻）",
+   "part": null,
+   "price": 53900,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB74 シエラ／JC74。16 inch × 6J、inset −5、PCD 5-139.7、單顆 8.584kg",
+   "looks": "1980–90 年代拉力場上那顆 Rally Racing 的原設計復刻，由 OZ Racing 協力、以現代 flow forming 製法減重。單顆 ¥53,900、五顆 ¥269,500 税込。顏色：賽車白／深石墨／消光黑／消光古銅。ARMATA 套件用的是 Rally Racing 4×4 版本。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_armata/"
+   ]
+  },
+  {
+   "id": "damd_trip_basket_roof_rack",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "trip basket 車頂架（鋼製＋天然木板）",
+   "part": "TB-RR1／TB-RRKJB／TB-HR1／TB-HRKJB",
+   "price": 64900,
+   "cur": "JPY",
+   "finish": "painted",
+   "fits": "JB64／JB74 シエラ／JC74（附基座版品號 TB-RRKJB／TB-HRKJB）",
+   "looks": "鋼製車頂架配紐西蘭輻射松乙醯化處理的高耐久木板「アコヤ」，架體黑色。全尺寸單體【TB-RR1】¥64,900、含基座【TB-RRKJB】¥84,700；半尺寸單體【TB-HR1】¥61,600、含基座【TB-HRKJB】¥81,400。半尺寸的用意是車頂留一半空間放滑雪板或衝浪板。這是 DAMD 少數有公開品號的外觀件。",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/"
+   ]
+  },
+  {
+   "id": "damd_no_public_part_numbers",
+   "thread": "damd",
+   "brand": "DAMD（ダムド）",
+   "label": "關於 DAMD 品號：外觀件官網不公開",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "全系列",
+   "looks": "把 DAMD 十四個 JB74／JC74 頁面全部抓下來比對後：所有車體外觀件（水箱罩、前後保桿、引擎蓋罩、爆龜、側飾條）官網一律只標品名與價格，沒有品號，購買走「見積もり（報價）」流程。頁面上出現的品號只有兩類：trip basket 週邊的 TB-xxxx，以及 ARMATA 後保桿需要自購的 SUZUKI 純正線組 35658-77R00／35678-77R00。使用者提到的「d04e/4j2i wl4ru04」與這兩類格式都不像，全站也查不到相符字串，無法對應任何 DAMD 產品。",
+   "url": "https://www.damd.co.jp/products/suzuki/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_armata/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_aventura/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/",
+    "https://www.damd.co.jp/products/suzuki/jimny_nomade_little-d/"
+   ]
+  },
+  {
+   "id": "smz_chrome_grille",
+   "thread": "chrome",
+   "brand": "シートメタルジップ（SMZ）",
+   "label": "鍍鉻前水箱罩",
+   "part": "C1012",
+   "price": 19250,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "ジムニー JB64／JB74（官網適合欄逐字「ジムニー JB64/74」）",
+   "looks": "目前唯一在售、整片真電鍍的 JB74 水箱罩。官網材質逐字寫「メッキになっておりますので高級感がある仕様になります」，全頁沒有出現「ステンレス」或「鏡面」——所以是電鍍不是不鏽鋼拋光。拆掉原廠水箱罩，用附的支架整組換上，內容物只有本體＋取付ステー。¥19,250 税込，是所有亮件裡最便宜的整片換裝件，可自行噴漆。柵格數與 SUZUKI 廠徽怎麼處理官網沒寫。",
+   "url": "https://www.smz-jimny.com/products/detail/427",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.smz-jimny.com/products/detail/427"
+   ]
+  },
+  {
+   "id": "kikaiya_chrome_look_grille",
+   "thread": "chrome",
+   "brand": "KIKAIYA",
+   "label": "前水箱罩（仿鍍鉻／クロームメッキ調）",
+   "part": "JMY-FG-CCD",
+   "price": 25800,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "JB64／JB74／JC74",
+   "looks": "ABS 樹脂做的整片換裝水箱罩，附鍍鉻徽章與鍍鉻銘牌。但材質欄寫的是「クロームメッキ**調**」——「調」字是關鍵，意思是仿鍍鉻外觀，不是真電鍍層，實際反光與耐候都和 SMZ C1012 不同級。¥25,800 税込。列進來是為了讓兩者不要被混為一談。",
+   "url": "https://kikaiya.shop/?pid=184987031",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://kikaiya.shop/?pid=184987031"
+   ]
+  },
+  {
+   "id": "chrome_grille_landscape",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "JB74 的鍍鉻水箱罩只剩小廠兩款——大廠一家都不做",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "JB64／JB74／JC74",
+   "looks": "把所有大廠目錄逐件比對後的地圖：真鍍鉻水箱罩只剩 SMZ C1012（¥19,250 税込，真メッキ）與 KIKAIYA JMY-FG-CCD（¥25,800，メッキ「調」仿品）兩款小廠貨。大廠全數陣亡：BEYOND 162 件商品沒有任何一件叫「サニーフェイス／Sunny Face」，水箱罩全是 ABS／FRP 素地或烤漆（Su11／Le27／Tr27／ランクル／クラシカル／オールドカントリー／セブンスロット），名稱最接近的是 Su11，既有 archetypes 寫的「Beyond Sunny Face 橫柵鍍鉻水箱罩」查無依據；APIO 六片水箱罩（レイヤードグリル 3033-7 ¥53,900、SJ グリル 3033-58G ¥58,300、ヴィンテージアイアングリル 3033-57 ¥55,000、マーカーヴィンテージ 3033-59B ¥75,900）全是消光黑／槍灰／古銅烤漆；KLC Heritage フェイスグリル 全系列 ABS／FRP；SUZUKI 原廠配件表沒有任何メッキ品項，最接近的是フロントバンパーアンダーガーニッシュ 金属調塗装 ¥66,000 税込（金屬感烤漆，不是電鍍）。Revier／Reiz 的 GL-18-9526-C 鍍鉻罩（¥19,800）官網已標「廃盤(再入荷しません)」。",
+   "url": "https://shop.beyond-jpn.com/collections/all",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://shop.beyond-jpn.com/products.json?limit=250",
+    "https://shop.beyond-jpn.com/collections/all",
+    "https://apio.jp/parts/3033-7.html",
+    "https://apio.jp/parts/3033-58g.html",
+    "https://apio.jp/parts/3033-57.html",
+    "https://apio.jp/parts/3033-59.html",
+    "https://www.klc-div.com/heritage/product/grille/",
+    "https://www.klc-div.com/heritage/product/grille/facegrillenostalgic/",
+    "https://www.smz-jimny.com/products/detail/427",
+    "https://kikaiya.shop/?pid=184987031"
+   ]
+  },
+  {
+   "id": "apio_wildboar_hr_chrome",
+   "thread": "chrome",
+   "brand": "APIO（アピオ）",
+   "label": "WILDBOAR HR 濺鍍鉻輪圈",
+   "part": "7200-32C",
+   "price": 72600,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ 等普通車 Jimny。6J×15、INSET −5、PCD 139.7／5 孔、約 8.0kg",
+   "looks": "JB74 能買到最亮的一顆輪圈：鋁鑄一片式，整個盤面是一片帶層次的深碟（dish），外唇很深，全面鉻色。官網形容「深いリムと立体感のあるディッシュデザインがどこかアメリカ西海岸を彷彿とさせるホットロッドなデザイン」——不是輻條輪，是整片盤。材質欄逐字寫「カラー：クローム（スパッタリング）」，是濺鍍不是電鍍，3D 材質要和真メッキ分開。附專用中心蓋，前輪 free hub 也可裝。單顆 ¥72,600 税込，只有一個尺寸一個顏色。",
+   "url": "https://apio.jp/parts/7200-32c.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/7200-32c.html"
+   ]
+  },
+  {
+   "id": "apio_wildboar_ventura_chrome",
+   "thread": "chrome",
+   "brand": "APIO（アピオ）",
+   "label": "WILDBOAR Ventura ブライトクローム輪圈",
+   "part": "7200-31C",
+   "price": 72600,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "6.0J×15 INSET −5＝シエラ／ノマド 用（7200-30C 5.5J×16 +20 主要給輕規 JB64）",
+   "looks": "鑄造一片式，盤面偏平，外緣繞一圈明顯的假 bead-lock 螺絲環帶，唇部深度中等。單顆 ¥72,600 税込，同規格的黑／白／亮銀版只要 ¥48,400——鉻色加價 ¥24,200 一顆。注意兩個限制：16 吋的 Sierra 尺寸（7200-35B，6J×16 −5）只出鐵黑色沒有鉻，所以 JB74 要鉻色 Ventura 只能選 15 吋；官網註明「純正キャップ使用不可」。",
+   "url": "https://apio.jp/parts/7200-30.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/7200-30.html"
+   ]
+  },
+  {
+   "id": "mbro_old_country_chrome",
+   "thread": "chrome",
+   "brand": "MBRO／Colin Project",
+   "label": "OLD COUNTRY 鍍鉻鋼圈（JB74 專用尺寸）",
+   "part": "MBRO-OLD-5660TM",
+   "price": 26400,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "JB74 シエラ 用（頁名直寫）。16×6.0J、INSET −5、5H-139、輪轂孔 108.0φ、鋼製",
+   "looks": "整份清單裡最便宜的亮面輪圈，單顆 ¥26,400 税込（同款黑色 ¥20,900）。經典 Daytona 風的鋼製碟盤：中央一圈橢圓長槽沿盤面外圍排成一輪，盤面微鼓、外唇窄而直；全鍍鉻之後長槽的深度會產生很強的明暗對比，遠看就是一圈亮點。附氣嘴與中心蓋，中心蓋可裝可拆。另有 16×5.5J +20 版 ¥24,200。",
+   "url": "https://wheel.co.jp/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://wheel.co.jp/"
+   ]
+  },
+  {
+   "id": "farm_daytona_chrome",
+   "thread": "chrome",
+   "brand": "FARM（モーターファーム）",
+   "label": "デイトナ 鍍鉻鋼圈（四顆一組）",
+   "part": "DCH-P",
+   "price": 65120,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "16×5.5J、5H-139.7、INSET +20。街用只能選 DCH-P",
+   "looks": "Daytona 風鋼製輪圈，單顆約 11.6kg，¥65,120 税込是四顆一組的價（同規格黑／白／紅藍線／黃線四顆只要 ¥35,640，鉻色整組加價 ¥29,480）。⚠️ 同系列的 DCH-M（16×6.0J，INSET −18）不可買：官網逐字寫「ホイールオフセット-18ですのでジムニーに取り付ける場合タイヤが車体より突出します、公道での走行はお控えください。競技用またはカーショー等の展示用です」——輪胎會突出車身，只能展示不能上路。",
+   "url": "https://parts-farm.com/shopdetail/000000000239/ct435/page1/order/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://parts-farm.com/shopdetail/000000000239/ct435/page1/order/"
+   ]
+  },
+  {
+   "id": "mooneyes_trim_ring_16",
+   "thread": "chrome",
+   "brand": "MOONEYES",
+   "label": "不鏽鋼輪圈唇環（トリムリング）16 吋",
+   "part": "PWLTR16EA",
+   "price": 4180,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "通用品，只看輪圈直徑 16 吋；MOONEYES 未公布 Jimny 適配",
+   "looks": "風險最低的一個亮件：只夾在輪圈**外唇**上的一圈約 25–35mm 寬亮環，不遮盤面，輻條、中心蓋、螺帽全部保留可見。材質欄逐字「材質：ステンレス スチール製」——是真不鏽鋼鏡面不是電鍍。卡入式，背面的爪可用鉗子微調。單片 ¥4,180 税込，四顆 ¥16,720。可以和下面的月亮盤疊用（盤在面、環在唇）就是最經典的 moon disc 造型。14／15 吋為 ¥3,850–3,960。",
+   "url": "https://www.mooneyesshop.jp/product/12231",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.mooneyesshop.jp/product/12231"
+   ]
+  },
+  {
+   "id": "mooneyes_moon_discs",
+   "thread": "chrome",
+   "brand": "MOONEYES",
+   "label": "MOON DISCS 月亮盤（IR 卡扣式／STANDARD 鎖固式）",
+   "part": "PWLMD0161IRP／PWLMD0151IRP／MD0161／MD0151",
+   "price": 11550,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "⚠️ 通用品，MOONEYES 官網明說「車種専用ではなく汎用」，完全沒有公布 Jimny 適配；IR 型最大只到 16 吋",
+   "looks": "整面平到微鼓的圓盤，蓋住整個輪圈面到唇緣，看不到輻條與螺帽，只有 MOON 標誌；IR 背面有一圈金屬固定環，留一個氣嘴缺口。重要材質更正：不是鍍鉻也不是鏡面拋光——IR 是「材質：アルミ」＋クリアーコートフィニッシュ，STANDARD 是「スペシャル サン レイ フィニッシュ」的紡旋鋁，成品是帶放射狀車紋的霧銀，渲染時不能當 chrome 用。價格（單片税込）：IR 16 吋 ¥11,550、IR 15 吋 ¥10,450、STANDARD 16 吋 ¥10,450、STANDARD 15 吋 ¥9,900。每片約 300g。IR 是卡扣式、只能裝在吃得下原廠卡扣蓋的鋼圈，STANDARD 要在輪圈上鑽三個 4mm 孔。JB74 原廠 15 吋是鋁圈，IR 裝不上去，只能走鑽孔的 STANDARD。",
+   "url": "https://www.mooneyesshop.jp/product/13633",
+   "taiwan": "露天「I LOVE 樂多」有 MOONEYES 輪圈蓋，四片一台車份 NT$7,220–8,360（12–15 吋）、15 吋 HOT ROD 不鏽鋼鍍鉻 NT$15,200；沒有 16 吋，且標題材質敘述與 MOONEYES 原廠目錄對不起來，只能當「台灣有貨」的證據，不能當價格依據",
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.mooneyesshop.jp/product/13633",
+    "https://www.mooneyesshop.jp/product/12231"
+   ]
+  },
+  {
+   "id": "mooneyes_starburst_cap",
+   "thread": "chrome",
+   "brand": "MOONEYES",
+   "label": "StarBurst Cap 15 吋輪圈蓋",
+   "part": "MC0415EA",
+   "price": 7700,
+   "cur": "JPY",
+   "finish": "other",
+   "fits": "通用 15 吋，無 16 吋；MOONEYES 未公布 Jimny 適配",
+   "looks": "15 吋整面蓋，中央一個明顯隆起的圓頂，從圓頂放射出星芒紋路到平邊。材質欄只寫「材質：スチール」，MOONEYES 沒有印出メッキ字樣，所以飾面不替廠商斷言（視覺上是亮鉻感）。⚠️ 官網自己警告「装着した場合、真ん中の盛り上がっている部分がフェンダーより出てしまう場合がございます」——圓頂可能凸出葉子板，Jimny 輪距窄要特別注意。單片 ¥7,700 税込。",
+   "url": "https://www.mooneyesshop.jp/product/6790",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.mooneyesshop.jp/product/6790"
+   ]
+  },
+  {
+   "id": "work_crag_galvatre",
+   "thread": "chrome",
+   "brand": "WORK（CRAG GALVATRE）",
+   "label": "CRAG GALVATRE 三片式輪圈（外圈拋光陽極）",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "mirror-polished stainless",
+   "fits": "5H-139.7；官網列出的尺寸為 15 吋 5.5J +0 與 15 吋 8.0J −31",
+   "looks": "唯一查到的真「バフ」拋光亮面輪圈：規格欄寫「ディスク：カットクリア(標準)」「リム：NORMAL(形状)／バフアルマイト(標準)」——外圈是拋光陽極處理，不是電鍍。深唇配整圈鍍鉻拉釘（クロームピアスボルト 標配）。價格為 null：WORK 的價格表是 JS 動態載入，抓不到原始數字，不臆測。",
+   "url": "https://www.work-wheels.co.jp/search/detail/129/",
+   "taiwan": null,
+   "confidence": "uncertain",
+   "sources": [
+    "https://www.work-wheels.co.jp/search/detail/129/"
+   ]
+  },
+  {
+   "id": "dean_california_centre_chrome",
+   "thread": "chrome",
+   "brand": "DEAN",
+   "label": "DEAN CALIFORNIA（僅中央鍍鉻）",
+   "part": null,
+   "price": 44000,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "16×6.0J −5（PCD 5-139.7、輪轂孔 φ108.8）為 JB74 尺寸；另有 16×5.5J +20 ¥42,900",
+   "looks": "輪圈本體只有 MAT BLACK 與 BURNISH GRAY 兩色，亮面只來自中央那一塊——官網原文「センターパートのメッキがネオレトロを主張」。也就是說這不是一顆亮面輪圈，是一顆黑輪圈配鍍鉻輪心。想要整台跳的反光效果，這顆撐不起來，列在這裡是為了不要誤選。",
+   "url": "https://www.dean-wheels.com/california/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.dean-wheels.com/california/"
+   ]
+  },
+  {
+   "id": "farm_chrome_wheel_nut",
+   "thread": "chrome",
+   "brand": "FARM（モーターファーム）",
+   "label": "鍍鉻輪圈螺帽",
+   "part": "WN",
+   "price": 79,
+   "cur": "JPY",
+   "finish": "chrome-plated",
+   "fits": "M12×P1.25、19HEX、全長 35mm、60°錐座。官網推薦給 FARM 的 Jimny／Sierra 尺寸輪圈",
+   "looks": "唯一查到、確定是道路用而非競技用的亮面輪圈螺帽。高強度碳鋼，鍍鉻或黑色二選一，單顆希望零售價 ¥79，可單買或 20 顆一組。官網提醒「クロームタイプは品質保持の為、防錆油を塗布しておりますので使用前に洗浄を行って下さい」——出廠帶防鏽油，裝之前要洗。細節小但在近景鏡頭裡看得出來。",
+   "url": "https://parts-farm.com/shopdetail/000000002688",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://parts-farm.com/shopdetail/000000002688"
+   ]
+  },
+  {
+   "id": "wiruswin_ss_rear_bumper_jb74",
+   "thread": "chrome",
+   "brand": "WirusWin（ウイルズウィン）",
+   "label": "JB74 專用 SUS304 不鏽鋼後保桿（車牌與備胎維持原位版）",
+   "part": null,
+   "price": 59400,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB74W 專用（3BA-JB74W／K15B／2018.7-）。JB64 是分開的品項、分開的頁面，不是共用件",
+   "looks": "配置器上最省事的一支亮面後保桿：管狀，換掉原廠後保桿直接鎖上、免加工，原廠尾燈直上，自帶車牌座所以車牌維持原位，而且官網明說「純正のスペアタイヤに干渉しない設計」——備胎不必移。材質逐字「材質は耐久性、耐腐食性の高いSUS304ステンレス製です」，是唯一明確標出 SUS304 鋼種的廠商；但整頁沒有出現「鏡面」或「バフ」，照片是拋光亮面，官方沒用鏡面二字。基本款（車牌需移位）¥44,000，移設 Kit 另加 ¥14,300 或通用版 ¥8,800。車檢逐字：「※車検公認は受けておりませんので、車検に合格する保障はできません。」另有リアサイドエプロン ¥12,100 遮外露的車身線。",
+   "url": "https://wiruswin.com/car/jimny_sierra_jb74/parts/jimny_sierra_jb74_stainless_rear_bumper2.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://wiruswin.com/car/jimny_sierra_jb74/parts/jimny_sierra_jb74_stainless_rear_bumper2.html"
+   ]
+  },
+  {
+   "id": "willswill_is_wiruswin",
+   "thread": "chrome",
+   "brand": "（更正）",
+   "label": "「Willswill」查無此廠——實際是 WirusWin",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "—",
+   "looks": "既有 archetypes 檔案裡寫的「Willswill（ウィルズウィル）不鏽鋼短後保桿」找不到這家公司：所有 willswill.* 網域 DNS 都不通。做 Jimny 不鏽鋼後保桿、日文讀音接近的是 **WirusWin（ウイルズウィン，wiruswin.com）**。既有文件的這個名字應該更正過去，否則後續查證會一直撞牆。",
+   "url": "https://wiruswin.com/",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://wiruswin.com/car/jimny_sierra_jb74/parts/jimny_sierra_jb74_stainless_rear_bumper2.html",
+    "https://wiruswin.com/"
+   ]
+  },
+  {
+   "id": "autorubys_oldschool_front_ss",
+   "thread": "chrome",
+   "brand": "Auto Rubys（オートルビーズ）",
+   "label": "オールドスクール 不鏽鋼前保桿（含護板）",
+   "part": null,
+   "price": 107800,
+   "cur": "JPY",
+   "finish": "mirror-polished stainless",
+   "fits": "JB64W／JB74W／JC74W 分別下單選型式，但**限 1～4 型**。裝了原廠角落感知器的車一律不可裝",
+   "looks": "這家是唯一按 JB64／JB74／JC74 分開選型式下單的，對配置器做車型分支最乾淨。但材質是分層的、不是整件鏡面：官網逐字「バンパー本体：ステンレス製／上部プレート：アルミ製（ボディーカラー塗装）／スキッドプレート：スチール製（マットブラック塗装）」——亮面只有保桿本體，上蓋板是車身色、護板是消光黑。安裝上 JB64 要在車體鑽孔，但官網註明「（JB74・JC74は穴あけ不要）」。同系列還有オールドスタイル前保桿 ¥132,000、アイコニックナナマル 前保桿 ¥126,500、オールドスクール 後保桿（圓形或方形 LED 尾燈）各 ¥132,000、ステップ後保桿含 LED 尾燈 ¥148,500（皆税込）。受注生產 1–1.5 個月。材質欄只寫「ステンレス製」，沒有鏡面／バフ／SUS304 字樣。",
+   "url": "https://store.autorubys.com/products/school-stainless",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://store.autorubys.com/products/school-stainless"
+   ]
+  },
+  {
+   "id": "no_stainless_bumper_apio_showa_rv4",
+   "thread": "chrome",
+   "brand": "（跨品牌調查結果）",
+   "label": "APIO／昭和ガレージ／RV4 都沒有不鏽鋼保桿——但有公布管徑",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "painted",
+   "fits": "JB64／JB74／JC74",
+   "looks": "三家硬派保桿廠查完的結果，對建模反而有用。APIO：全站搜「ステンレス」只回傳排氣管、鋼杯與牽引勾，HD しし狩りバンパー 3102-09 ¥147,400 税込是「スチール」＋半消光黑粉體塗裝——但 APIO 是少數公布管徑的：主管 φ60.5×t1.6、上管 φ50.8×t1.6、燈護管 φ42.7×t1.6。昭和ガレージ：分類名直接叫「アイアンバンパー」，全黑，JB74 前保桿 E00991 ¥118,800／E00990 ¥122,100 税込。RV4 ワイルドグース：クローラーフロントバンパー JM-0107 ¥94,600 税込，「スチール製」＋半消光黑，管徑 φ76.3×t1.6。相對地 KLC、TANIGUCHI、PENNY LANE、WirusWin、Auto Rubys 五家不鏽鋼廠一家都沒公布管徑，要精確建模只能實測或去信問。",
+   "url": "https://apio.jp/parts/3102-09.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/3102-09.html"
+   ]
+  },
+  {
+   "id": "finish_taxonomy_for_modelling",
+   "thread": "chrome",
+   "brand": "（建模用）",
+   "label": "五種亮面材質要分開貼圖，不能併成一個 chrome",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "—",
+   "looks": "全部查完之後，JB74 的「亮件」其實有五種完全不同的表面，反射率差很多，併成一個材質會渲染錯：①鏡面不鏽鋼（KLC トラディショナル 鏡面、MOONEYES トリムリング）——最亮、鏡面反射；②SUS304 #400 研磨（TANIGUCHI）——緞面髮絲光，反射率明顯低一級，官網整頁沒有「鏡面」「バフ」「メッキ」任何一字；③スーパーポリッシュ（PENNY LANE HG 線）——他們自己的鏡面用語；④電鍍メッキ（APIO 中心蓋、SMZ 水箱罩、MBRO／FARM 鋼圈、DAMD トラックミラー）；⑤濺鍍クローム スパッタリング（APIO WILDBOAR HR）與紡旋鋁サンレイ（MOON DISCS，是霧銀不是鏡面）。另外 JB74 原廠腳的基準是 195/80R15、15 吋 5.5J、ET +5、PCD 139.7、5 孔——上面所有 16 吋都是加大尺寸，只有 APIO 15×6.0J −5 接近原廠直徑。",
+   "url": "https://apio.jp/parts/7200-32c.html",
+   "taiwan": null,
+   "confidence": "confirmed",
+   "sources": [
+    "https://apio.jp/parts/7200-32c.html",
+    "https://www.mooneyesshop.jp/product/13633",
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/",
+    "https://www.klc-div.com/heritage/product/bumper/traditionalbumperfront_2_mirror/"
+   ]
+  },
+  {
+   "id": "taiwan_no_bright_parts",
+   "thread": "chrome",
+   "brand": "（台灣通路調查結果）",
+   "label": "日系亮面件台灣一家都沒有——全部要日本調貨",
+   "part": null,
+   "price": null,
+   "cur": "",
+   "finish": "other",
+   "fits": "—",
+   "looks": "用露天官方 API 查證（不是靠頁面摘要）：「JB74 鍍鉻 鋁圈」「Jimny 鍍鉻 鋁圈」「JB74 不鏽鋼 保桿」「Jimny 白鐵 保桿」四組關鍵字全部 0 筆。水箱罩有 60 筆但全是中國製前臉中網／復古罩，NT$1,310–9,208，沒有一件標示鍍鉻日系品牌。鋁圈 45 筆 NT$4,000–28,000，清一色霧黑／陶瓷白／銀；MRK 4X4 有 DEAN Cross Country 16 吋 NT$10,500、DEAN Colorado NT$10,200、NITRO POWER H12 NT$8,950，都沒有鍍鉻版。唯一例外是 MOONEYES 輪圈蓋（露天「I LOVE 樂多」），但只到 15 吋。結論：這條路線的每一件亮件都要從日本調貨。",
+   "url": "https://www.mrk.com.tw/",
+   "taiwan": "無",
+   "confidence": "confirmed",
+   "sources": [
+    "https://www.mrk.com.tw/",
+    "https://www.ruten.com.tw/"
+   ]
+  }
+ ]
+}

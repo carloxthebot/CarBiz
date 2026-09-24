@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609241340** · 239 catalogue entries · 7 styles
+Current build: **202609241411** · 239 catalogue entries · 7 styles
 
 ---
 
@@ -171,7 +171,7 @@ all — twelve entries and every one is A/T, R/T or M/T.
 | `docs/jb74-archetypes.json` | 6 accepted archetypes, 11 rejected with reasons, plus the Taiwan regulation dossier |
 | `docs/jb74-stripes.json` | 26 stripe treatments with modelling geometry; the `modellingNotes` block (three vertical slots, six rear terminations) is the useful part |
 | `docs/jb74-graphics.json` | 10 graphic styles with Taiwanese marketplace prices and the 變更登記 answer |
-| `docs/jb74-chrome-damd.json` | **may not exist yet** — an agent was writing it when the session ended. Chrome parts + DAMD's full JB74 line. Check for it first. |
+| `docs/jb74-chrome-damd.json` | **landed after all: 133 items.** 86 chrome (9 of them negative findings — see below), 47 DAMD. 46 have real part numbers, 119 have prices, none inferred. |
 | `docs/jb74-snorkels.json`, `jb74-wheel-atlas.json`, `jb74-fitment.json`, `jb74-accessory-atlas.json` | earlier dossiers |
 
 ### The unapplied corrections backlog
@@ -200,6 +200,8 @@ fine and only the Nostalgic pair is JB64-only).
 
 ## 5. Spend the search budget on these
 
+Chrome and DAMD (item 6) are already answered — start at 1.
+
 1. A real 17–18" wheel for the JB74, to replace the `street18` class entry.
 2. GARAGE ILL BRON55 and any other JB74 face-swap kit — part numbers, prices,
    and above all photographs clear enough to model the grille and lamps from.
@@ -208,9 +210,14 @@ fine and only the Nostalgic pair is JB64-only).
 4. A road-pattern tyre for `TYRE_MODELS` — the list has no highway tread.
 5. Red, and any colour outside Suzuki's eight, for the rally style. This means
    respray or wrap, so the entry has to be honest that it is not a factory code.
-6. Whatever `docs/jb74-chrome-damd.json` turns out to be missing: mirror-polished
-   stainless bumpers, chrome grilles, chrome mirror caps, chrome headlamp
-   bezels, and DAMD's full JB74 line beyond the complete kits.
+6. ~~Chrome and DAMD~~ — **done**, see `docs/jb74-chrome-damd.json`. What is
+   left there is modelling, not research. Four leads in it came back EMPTY and
+   are recorded as negative findings, so do not go looking again: there is no
+   chrome bezel that turns the square lamp opening round (round lamps mean a
+   whole new face), no chrome wiper arms, no chrome arch trim, no chrome pillar
+   trim. It also corrects two things written elsewhere: Beyond's "Sunny Face"
+   chrome grille does not exist, and MLJ's DAYTONA SS has no chrome version in
+   either 5H-139.7 size, which is what a JB74 needs.
 
 ---
 

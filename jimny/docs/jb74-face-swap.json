@@ -1,0 +1,222 @@
+{
+  "sourcedAt": "2026-09-24",
+  "scope": "JB74 換臉套件（整張臉換掉：水箱罩＋頭燈＋保桿），以 archetype bronco_face 為主。DAMD／LIBERTY WALK／KUHL／WALD／AIMGAIN 等整車套件已在 docs/jb74-complete-kits.json，這裡只以 id 交叉引用，不重複。",
+  "recommended": {
+    "id": "garage_ill_bron55",
+    "label": "BRON55 換臉套件（水箱罩＋頭燈組＋前保桿）",
+    "brand": "GARAGE ILL（JET★GOGO）",
+    "url": "https://www.garage-ill.co.jp/bron55/category/sierra/",
+    "shopUrl": "https://shop.jetgogo.jp/items/69169821",
+    "part": null,
+    "price": 297000,
+    "cur": "JPY",
+    "note": "1〜4 型 JB74W（2018/7〜2025/10）純正 LED 車用、素地未塗裝，税込 ¥297,000（鹵素車用 ¥264,000）。原廠沒有公布料號，shopUrl 是官方網購（BASE）的商品頁。價格是**税込**，不是先前記的税抜。2025/11 以後的 5 型必須買附感知器移位套件的專用版（LED 車用 ¥330,000 税込）。頭燈官方明寫「不對應令和 6 年 8 月起的前照燈檢查」。",
+    "uncertain": false
+  },
+  "corrections": [
+    {
+      "where": "docs/jb74-archetypes.json bronco_face.missing ＆ docs/jb74-complete-kits.json garage_ill_bron55.note",
+      "was": "¥264,000 鹵素版／¥297,000 LED 版，税抜",
+      "is": "同樣的數字是**税込**。税抜是 ¥240,000／¥270,000。",
+      "evidence": "BRON55 頁面本身沒寫税込或税抜，但同一家的 CH:AMP 頁面寫「※価格は税込みです」，而兩頁的共用選配價格完全一樣（Defender Works 拖車鉤 ¥107,800、BAJA 霧燈 ¥121,000、座椅套 1 排 ¥71,500）；70YO.70 頁面把同一件座椅套標成「¥65,000／¥71,500（税込）」；5 型公告寫「上記価格は税込みです」；官方網購 BASE 商品頁標價也一致（¥264,000／¥297,000）。另外每一個 BRON55 價格都能被 1.1 整除。",
+      "sources": [
+        "https://www.garage-ill.co.jp/contents/champ/",
+        "https://www.garage-ill.co.jp/contents/70yo70/",
+        "https://www.garage-ill.co.jp/news/jb74w5gata/",
+        "https://shop.jetgogo.jp/items/68166469"
+      ]
+    },
+    {
+      "where": "docs/jb74-complete-kits.json garage_ill_bron55.fitment",
+      "was": "JB64W、JB74W、JC74W Nomade 三車通用",
+      "is": "品牌三車都有，但**每個車型是不同的商品**（JB74W、JB64W、JC74W 各自一組品項）。JB74W 的整組與保桿只適用 1〜4 型（2025/10 以前）；5 型要買同梱感知器移位套件的專用版。只買「水箱罩＋頭燈組」不動保桿的話，JB74W 全年式適用。",
+      "sources": [
+        "https://www.garage-ill.co.jp/bron55/category/sierra/",
+        "https://shop.jetgogo.jp/categories/4736293",
+        "https://www.garage-ill.co.jp/news/jb74w5gata/"
+      ]
+    },
+    {
+      "where": "docs/jb74-complete-kits.json garage_ill_bron55.includes",
+      "was": "daylight winkers",
+      "is": "現行品叫「ポジションウインカーランプ」：白／琥珀雙色，改版後白光改為跟位置燈連動點亮，不再當日行燈。JB64 頁面仍是舊寫法。",
+      "sources": ["https://www.garage-ill.co.jp/bron55/category/sierra/"]
+    },
+    {
+      "where": "docs/jb74-archetypes.json bronco_face.sources",
+      "was": "https://apio.jp/parts/3109-1sa.html 列為本風格來源",
+      "is": "APIO 3109-1SA「ブロンコ風外装フルキット」¥154,000（税込）只適用 JA11、JB31，是舊世代 Jimny 的套件，**不是 JB74**。不能當作 JB74 的產品證據。",
+      "sources": ["https://apio.jp/parts/3109-1sa.html"]
+    },
+    {
+      "where": "docs/jb74-archetypes.json bronco_face.examples (Jimny Park)",
+      "was": "「同一個造型語彙有第二家在賣」",
+      "is": "Jimny Park 賣的就是 BRON55 本身（說明文字與品項內容和 GARAGE ILL 官方一字不差，只是品名沒寫 BRON55），是經銷而不是第二個廠牌。其 JB74 LED 車用品項標 ¥245,000（頁面未註明税込或税抜），內容只有水箱罩＋頭燈組，不含保桿，而且品名寫「フェイスキット」容易誤會。",
+      "sources": ["https://www.jimnypark.com/cathand/detail-881889.html"]
+    },
+    {
+      "where": "docs/jb74-archetypes.json bronco_face.why",
+      "was": "「頭燈都還是原廠那兩顆方的」",
+      "is": "JB74 原廠頭燈本來就是圓燈（本任務的量測基準也是原廠圓燈約 180mm）。BRON55 的差別不在『方變圓』，而是換成帶光圈（イカリング）的 7 吋級 LED 圓燈，並用一條橫向燈條從圓燈中間穿過、接到中央字樣，形成一條貫穿整個車頭的橫線。建議改寫這句。",
+      "sources": ["https://www.garage-ill.co.jp/bron55/"]
+    }
+  ],
+  "kits": [
+    {
+      "id": "garage_ill_bron55",
+      "brand": "GARAGE ILL（大阪府羽曳野市；網購品牌 JET★GOGO）",
+      "kit": "BRON55（ブロンゴーゴー）フェイスキット",
+      "archetype": "bronco_face",
+      "url": "https://www.garage-ill.co.jp/bron55/category/sierra/",
+      "partNumbers": "官網未公布料號。官方網購（shop.jetgogo.jp，GARAGE ILL 自營 BASE 商店）的商品編號列在 rows[].shopItem，只是網店 ID，不是原廠料號。",
+      "rows": [
+        { "chassis": "JB74W 1〜4 型（〜2025/10）", "what": "整組 未塗裝（純正鹵素車用）", "price税込": 264000, "price税抜": 240000, "shopItem": "https://shop.jetgogo.jp/items/68166469" },
+        { "chassis": "JB74W 1〜4 型（〜2025/10）", "what": "整組 未塗裝（純正 LED 車用）", "price税込": 297000, "price税抜": 270000, "shopItem": "https://shop.jetgogo.jp/items/69169821" },
+        { "chassis": "JB74W 1〜4 型", "what": "整組 雙色塗裝完成品（鹵素車用）", "price税込": 356400, "shopItem": "https://shop.jetgogo.jp/items/113264946" },
+        { "chassis": "JB74W 1〜4 型", "what": "整組 雙色塗裝完成品（LED 車用）", "price税込": 389400, "shopItem": "https://shop.jetgogo.jp/items/113264547" },
+        { "chassis": "JB74W 全年式（不換保桿，不影響 5 型安全系統）", "what": "水箱罩＋頭燈組 未塗裝（鹵素車用）", "price税込": 198000, "shopItem": "https://shop.jetgogo.jp/items/68165956" },
+        { "chassis": "JB74W 全年式", "what": "水箱罩＋頭燈組 未塗裝（LED 車用，附 LED 轉換線組）", "price税込": 231000, "shopItem": "https://shop.jetgogo.jp/items/69169469" },
+        { "chassis": "JB74W 1〜4 型", "what": "前保桿 未塗裝（FRP）", "price税込": 100100, "shopItem": "https://shop.jetgogo.jp/items/68166345" },
+        { "chassis": "JB74W 1〜4 型", "what": "前保桿 雙色塗裝完成品", "price税込": 152900, "shopItem": "https://shop.jetgogo.jp/items/113262782" },
+        { "chassis": "JB74W 5 型（2025/11〜）", "what": "整組 未塗裝（鹵素車用），同梱感知器移位套件", "price税込": 297000, "shopItem": null },
+        { "chassis": "JB74W 5 型（2025/11〜）", "what": "整組 未塗裝（LED 車用），同梱感知器移位套件", "price税込": 330000, "shopItem": null },
+        { "chassis": "JB74W 5 型（2025/11〜）", "what": "前保桿 單買，同梱感知器移位套件", "price税込": 123750, "shopItem": null }
+      ],
+      "paintOptions": "塗裝加價（税込）：水箱罩單色 +¥39,600〜；保桿單色 +¥39,600〜、雙色 +¥52,800〜；整組『水箱罩＋保桿都單色』+¥79,200〜、『水箱罩單色＋保桿雙色』+¥92,400〜。示範車的雙色是『上橫樑車身色＋中央模組與下緣銀色』。",
+      "includes": [
+        "水箱罩（ABS，素地未塗裝）",
+        "BRON55 字樣徽章",
+        "頭燈左右（帶光圈，附頭燈底座 ヘッドライトベース）",
+        "位置燈兼方向燈（白／琥珀雙色，橫向條狀）",
+        "角燈（琥珀，左右）",
+        "各種固定架",
+        "LED 轉換線組（LED 車用才有）",
+        "前保桿（FRP，素地未塗裝）"
+      ],
+      "excludes": [
+        "後保桿（JB74 用 ¥145,200 税込，含後輪拱延伸件、尾燈、倒車燈，只適用 1〜3 型）",
+        "拖車鉤（示範車上的鍍鉻鉤是選配 Defender Works ¥107,800；仿製假鉤 ¥53,900）",
+        "霧燈（保桿兩側開口專用的 BAJA 風格霧燈 ¥121,000〜¥181,500，官方註明為競技用品）",
+        "發光徽章（¥94,600）",
+        "引擎蓋腳架 ボンネットフット（¥79,200）",
+        "塗裝、安裝工資、運費（大件，只能寄到法人或西濃營業所）"
+      ],
+      "jb64VsJb74": "JB64 與 JB74 價格完全相同（¥198,000／¥231,000／¥100,100／¥264,000／¥297,000），但是分開的商品，保桿寬度不同，不能互換。JC74W Nomade 另有自己的品項，只確認適用 1 型。",
+      "compliance": "官方網購頁原文：「本商品のヘッドライトは、令和６年８月１日より国土交通省実施の前照灯検査へは対応しておりません」——連日本本國 2024/8 起的頭燈檢查都不對應。車檢是否通過由檢驗員判斷，GARAGE ILL 不負責。",
+      "leadTime": "接單生產，交期可能數個月；付款後不可取消。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.garage-ill.co.jp/bron55/",
+        "https://www.garage-ill.co.jp/bron55/category/sierra/",
+        "https://www.garage-ill.co.jp/bron55/category/jimny/",
+        "https://www.garage-ill.co.jp/news/jb74w5gata/",
+        "https://shop.jetgogo.jp/categories/4736293",
+        "https://shop.jetgogo.jp/items/68166469",
+        "https://shop.jetgogo.jp/items/69169821",
+        "https://shop.jetgogo.jp/items/113264946",
+        "https://shop.jetgogo.jp/items/113264547",
+        "https://shop.jetgogo.jp/items/68165956",
+        "https://shop.jetgogo.jp/items/69169469",
+        "https://shop.jetgogo.jp/items/68166345",
+        "https://shop.jetgogo.jp/items/113262782"
+      ]
+    },
+    {
+      "id": "garage_ill_champ",
+      "brand": "GARAGE ILL",
+      "kit": "CH:AMP フェイスキット（皮卡風方燈臉）",
+      "archetype": null,
+      "url": "https://www.garage-ill.co.jp/contents/champ/",
+      "partNumbers": "官網未公布",
+      "rows": [
+        { "chassis": "JB74W 1〜4 型、JC74W 1 型", "what": "整組 未塗裝（鹵素車用）", "price税込": 407000 },
+        { "chassis": "JB74W 1〜4 型、JC74W 1 型", "what": "整組 未塗裝（LED 車用）", "price税込": 429000 },
+        { "chassis": "JB74W 5 型", "what": "整組（鹵素車用），同梱感知器移位套件", "price税込": 440000 },
+        { "chassis": "JB74W 5 型", "what": "整組（LED 車用），同梱感知器移位套件", "price税込": 462000 }
+      ],
+      "includes": ["水箱罩", "下水箱罩＋網", "前保桿", "頭燈（投射式方燈）", "頭燈飾框、底座、遮光件", "徽章", "角燈＋底座", "固定架", "LED 轉換線組（LED 車用）"],
+      "paint": "未塗裝；單色 +¥66,000〜、三色 +¥96,800〜（5 型公告寫三色 ¥94,380〜，兩處不一致）。塗裝版徽章基本色為紅。",
+      "fitment": "只有 JB74W／JC74W，**JB64 不適用**。",
+      "note": "同一家的第二張臉，走美式皮卡的方燈路線，和 BRON55 的圓燈是對照組。頁面明寫「※価格は税込みです」，這也是判斷 BRON55 價格為税込的依據之一。",
+      "confidence": "confirmed",
+      "sources": ["https://www.garage-ill.co.jp/contents/champ/", "https://www.garage-ill.co.jp/news/jb74w5gata/"]
+    },
+    {
+      "id": "garage_ill_70yo70",
+      "brand": "GARAGE ILL",
+      "kit": "70YO.70 ボディキット（Land Cruiser 70 風）",
+      "archetype": null,
+      "url": "https://www.garage-ill.co.jp/contents/70yo70/",
+      "partNumbers": "官網未公布",
+      "rows": [
+        { "chassis": "JB64W／JB74W／JC74W 全年式", "what": "整組 未塗裝（鹵素車用）", "price税込": 462000, "price税抜": 420000 },
+        { "chassis": "JB64W／JB74W／JC74W 全年式", "what": "整組 未塗裝（LED 車用）", "price税込": 495000, "price税抜": 450000 }
+      ],
+      "includes": ["引擎蓋罩", "水箱罩", "70YO.70 徽章", "頭燈遮光件、底座、頭燈", "角燈＋飾框", "AdBlue 蓋（造型件）", "通風口造型件", "70 角落蓋", "DESTROYER 徽章", "直前直左 180 度攝影機＋螢幕", "固定架"],
+      "paint": "未塗裝；塗裝 +¥120,000〜（税込，只含引擎蓋罩、水箱罩、角落蓋）。",
+      "fitment": "**不換保桿**，所以 5 型與 Nomade 2 型也能裝，是三張臉裡唯一全年式通用的。",
+      "note": "只賣整組，不拆售。示範車把原廠保桿下半部噴成銀色。",
+      "confidence": "confirmed",
+      "sources": ["https://www.garage-ill.co.jp/contents/70yo70/"]
+    },
+    {
+      "id": "jimnypark_bronco_face",
+      "brand": "Jimny Park（經銷，非製造商）",
+      "kit": "【JB74Wシエラ・純正LED車用】ブロンコ風・フェイスキット",
+      "archetype": "bronco_face",
+      "url": "https://www.jimnypark.com/cathand/detail-881889.html",
+      "rows": [{ "chassis": "JB74W", "what": "水箱罩＋頭燈組（LED 車用），不含保桿", "price": 245000, "taxBasis": "頁面只寫「▼価格 ¥245,000」，未註明" }],
+      "note": "產品就是 BRON55 的水箱罩＋頭燈組（說明文字與內容一字不差），不是另一個廠牌。價格比原廠直售的 ¥231,000 税込還高，而且品名叫『フェイスキット』卻不含保桿。不建議當 catalogue 來源。",
+      "confidence": "confirmed",
+      "sources": ["https://www.jimnypark.com/cathand/detail-881889.html"]
+    }
+  ],
+  "alreadyCovered": {
+    "note": "以下 JB74 換臉／大包已在 docs/jb74-complete-kits.json，本輪沒有重查，不重複列。其中真正『連頭燈造型一起換』的只有 BRON55、CH:AMP 與 70YO.70；DAMD 各款與其他家多半保留原廠頭燈、只換水箱罩與保桿。",
+    "ids": ["damd_little_d", "damd_little_g_standard", "damd_little_g_traditional", "damd_little_g_advance", "damd_little_b", "damd_the_roots", "damd_little_5", "damd_little_delta", "damd_saudade", "mudron_vintage", "mudron_adventure_defender", "mudron_adventure_classic", "lb_gmini_t1_light", "lb_gmini_t2_light", "kuhl_blocker_sierra_basic", "kuhl_iron_build_sierra", "wald_black_bison_4p", "aero_over_g62_6p", "sixsense_explosion", "garage_ill_bron55"],
+    "notJb74": "APIO 3109-1SA ブロンコ風外装フルキット（¥154,000 税込）只適用 JA11／JB31。"
+  },
+  "geometry": {
+    "subject": "GARAGE ILL BRON55，JB74W 1〜4 型，整組（水箱罩＋頭燈組＋前保桿），示範車為深灰車身、雙色塗裝保桿。",
+    "method": "全部是從官方頁面照片目測估算（正面圖 bron01-1.png 788px 寬、近正面保桿圖 bron-kit-once02-img01.png、3/4 主視覺 mv.jpg、未塗裝零件圖），**不是原廠尺寸**。比例尺用兩個已知尺寸互相校對：日本普通車牌 330×165mm（正面圖約 2.12 mm/px；保桿特寫約 2.25 mm/px），以及輪拱外緣全寬 1,645mm（正面圖約 2.20 mm/px）。以下取約 2.15 mm/px，誤差估計 ±10%。正面圖是長焦近正視，透視變形小。",
+    "photosViewed": [
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/10/mv.jpg",
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/11/bron01-1.png",
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/11/bron-kit-once01-img01.png",
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/11/bron-kit-once02-img01.png",
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/11/bron55-kit-600x357.png",
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/11/01bda51c864e618e2435fba16cce12e8-600x454.jpg",
+      "https://www.garage-ill.co.jp/cwp/wp-content/uploads/2022/11/fog_01-600x269.jpg"
+    ],
+    "grille": {
+      "outline": "一片橫向長方形框，四角圓角（估 R35–45mm），兩端包住頭燈，兩側有往後折的側面回折（角燈就裝在這個回折面上）。上緣緊貼引擎蓋前緣，整片佔滿原廠水箱罩＋頭燈的位置。",
+      "sizeMm": { "width": "約 1,330（約為車寬 1,645 的 81%）", "height": "約 220", "cornerRadius": "約 40（估）" },
+      "finish": "未塗裝件是白色 ABS 一體成形。示範車：外框塗車身色（深灰），往內凹的格柵面為黑／極深灰。",
+      "openings": "中央格柵區寬約 820mm（兩端各留給頭燈），由圓角長孔（膠囊形）以磚牆交錯排列：字樣帶上方 3 排、下方 3 排（未塗裝件照片下方可見第 4 排，裝車後被保桿上緣遮住一部分）。每排約 13–14 孔，上下排錯開半格。單孔約 48×20mm，橫向節距約 60mm，縱向節距約 26mm。孔與孔之間的格柵肋是實心面，不是細桿——看起來像蜂巢而不是橫桿。",
+      "letterBand": "在頭燈中心高度有一條貫穿全寬的水平帶，把格柵分成上下兩半。帶上從左到右依序是：左頭燈的橫向燈條 → 一小塊 3 道直立細縫的通風格 → BRON55 字樣 → 另一塊 3 道細縫 → 右頭燈的橫向燈條。整條線是這張臉最重要的辨識特徵。"
+    },
+    "lettering": {
+      "text": "BRON55（讀作ブロンゴーゴー）。字型是超寬、方正的粗無襯線字（Eurostile Extended／Microgramma 一類），兩個 5 的造型刻意做得像 S，遠看像 BRONSS。",
+      "sizeMm": { "totalWidth": "約 600（約為水箱罩寬的 45%）", "capHeight": "約 32–40（約為頭燈直徑的 1/5）", "perChar": "約 80 寬，字距約 105" },
+      "placement": "水箱罩正中，字的垂直中心與兩顆頭燈中心同高。",
+      "finish": "徽章是獨立零件、立體浮起。示範車為白／亮銀字貼在黑色帶上；塗裝版的標準色是紅字（零件照）。選配發光徽章可 16 色點亮。"
+    },
+    "headlamps": {
+      "type": "圓形 LED 投射式頭燈，外圈一道白色光圈（イカリング），內部上下兩顆投射鏡。鍍鉻頭燈底座（ヘッドライトベース）固定在水箱罩後方，燈面從水箱罩的圓孔露出——燈是**嵌在水箱罩裡**，不是獨立燈座。",
+      "diameterMm": "露出的燈面約 165–175，推定為 7 吋（178mm）級通用圓燈；與原廠 JB74 圓燈（約 180mm）幾乎同大。",
+      "positionMm": "左右燈中心距約 1,090；燈外緣距水箱罩外緣約 45；燈垂直置中於水箱罩（上下各留約 25–30）。",
+      "drlBar": "一支橫向長方形燈條（位置燈兼方向燈，白／琥珀雙色）從燈面外側約 1/5 處起，水平穿過燈中心，往內延伸超出燈緣，長約 190、高約 18mm，末端接到字樣帶的細縫通風格。這支燈條把圓燈『切成』上下兩半，就是 Bronco 臉的 C 字燈效果。"
+    },
+    "cornerMarkers": "琥珀色長條角燈，約 50 高 × 10 寬 mm（直立），裝在水箱罩兩端往後折的側面上，位置約在頭燈中心高度、緊貼葉子板前緣。",
+    "bumper": {
+      "overall": "FRP 一體式前保桿，全寬約 1,590–1,620mm（左右端大致與輪拱外緣齊平，沒有突出車寬），總高約 370–380mm，上緣在水箱罩下緣之下約 50mm。",
+      "upperBeam": "最上方是一支貫穿全寬的方管感橫樑，正面高約 65mm、上表面平，兩端是直角轉折往後包向輪拱前緣（端部略為往後收）。示範車塗車身色（深灰）。3/4 圖估計橫樑前緣比水箱罩面往前約 120–180mm（估計值，側面照片不足）。",
+      "centreModule": "中央一塊往前凸的梯形模組，寬約 940mm，示範車塗銀色（雙色塗裝的第二色）。模組上有兩個直立長方形凹槽（約 90 寬 × 140 高 mm，中心距約 670mm），示範車在裡面裝了鍍鉻拖車鉤（選配）。兩凹槽之間是一片黑色蜂巢網進氣口，約 370 × 95mm，下方掛車牌。",
+      "skid": "銀色部分往下延伸成下護板造型的下緣，高約 85mm，正面有一道水平壓線，底部有 4 個小長方形凹口。它是保桿本體的一部分，不是另外的金屬護板——銀色只是塗裝。",
+      "outerPockets": "橫樑兩端下方、中央模組外側，各有一個黑色開口（約 300 寬 × 85 高 mm），標準狀態是空的，可選配 BAJA 風格方形霧燈（黃 1＋白 2 燈）裝在裡面。",
+      "colourLogic": "車身色＝上橫樑＋兩端；銀色＝中央模組＋下緣；黑色＝開口與網。整組雙色塗裝完成品就是這個配色。"
+    },
+    "unchanged": "引擎蓋、葉子板、原廠輪拱、後半車身都不動。BRON55 **沒有**附引擎蓋或葉子板。",
+    "modellingOrder": "1) 水箱罩框（1330×220，圓角）→ 2) 兩個 Ø175 圓孔＋燈 → 3) 貫穿中心線的燈條＋字樣帶 → 4) 上下各 3 排交錯膠囊孔 → 5) 保桿上橫樑（全寬、65 高、直角端）→ 6) 銀色中央模組＋兩個拖鉤槽＋蜂巢網 → 7) 下緣壓線與 4 個凹口 → 8) 兩端黑色開口。"
+  }
+}

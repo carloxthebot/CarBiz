@@ -1270,6 +1270,60 @@ def flares():
     return root
 
 
+def widebody(pid, W, shape='box', mat=None, lip=None):
+    """Over-fenders that go WIDER than the Sierra's own resin arches, laid over
+    them. The shell is revolved round each axle but its inner face follows the
+    measured arch (ARCH_HALF_W) angle by angle, so it sits on the stock flare
+    all the way round instead of floating off it at the ends.
+
+    `W` is the maker's added width per side where one is published (WALD +30,
+    AERO OVER +35); the others publish none and parts.js says so. 'box' is
+    the squared-off G-class section (WALD, KUHL, LB, AERO OVER), 'blister' the
+    rounded rally bulge (DAMD little delta) that also swells up into the
+    fender above the arch."""
+    root = group(f'fender_{pid}')
+    mat = mat or PAINT
+    if shape == 'blister':
+        # (r from the axle, x outward of the stock arch surface)
+        prof = [(392, -36), (392, W - 6), (402, W), (440, W + 2), (500, W * 0.78), (560, W * 0.42), (610, W * 0.12),
+                (640, -4), (630, -30)]
+    else:
+        prof = [(392, -36), (392, W - 2), (404, W + 2), (505, W + 3), (522, W - 4), (548, 6), (552, -4), (545, -30)]
+    for s in (-1, 1):
+        for kind, zc in (('front', CAR['anchors']['frontAxleZ']), ('rear', CAR['anchors']['rearAxleZ'])):
+            bm = bmesh.new()
+            rings = []
+            steps = 40
+            for i in range(steps + 1):
+                deg = 12 + 156 * i / steps
+                a = math.radians(deg)
+                hw = arch_half_w(kind, min(165, max(15, deg))) - 4
+                rings.append([bm.verts.new(P(s * (hw + dx), 346 + r * math.sin(a), zc + r * math.cos(a))) for (r, dx) in prof])
+            k = len(prof)
+            for r0, r1 in zip(rings, rings[1:]):
+                for j in range(k):
+                    bm.faces.new((r0[j], r0[(j + 1) % k], r1[(j + 1) % k], r1[j]))
+            bm.faces.new(list(reversed(rings[0])))
+            bm.faces.new(rings[-1])
+            bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+            lib.new_object(f'{kind}{s}', bm, mat, root, smooth=True)
+            if lip:                              # a black rubber edge trim along the opening
+                prof2 = [(386, -30), (386, W + 1), (398, W + 1), (398, -30)]
+                bm = bmesh.new()
+                rings = []
+                for i in range(steps + 1):
+                    deg = 12 + 156 * i / steps
+                    a = math.radians(deg)
+                    hw = arch_half_w(kind, min(165, max(15, deg))) - 4
+                    rings.append([bm.verts.new(P(s * (hw + dx), 346 + r * math.sin(a), zc + r * math.cos(a))) for (r, dx) in prof2])
+                for r0, r1 in zip(rings, rings[1:]):
+                    for j in range(4):
+                        bm.faces.new((r0[j], r0[(j + 1) % 4], r1[(j + 1) % 4], r1[j]))
+                bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+                lib.new_object(f'lip{kind}{s}', bm, lip, root, smooth=True)
+    return root
+
+
 # ============================================================ SNORKEL VARIANTS
 # All on the vehicle's RIGHT (the 1.5L airbox side). The "no-drill" kits
 # (Bravo, Urnieta, Supa-Sleek) replace the black fender-corner garnish at the
@@ -3030,6 +3084,11 @@ def build():
     rack_platform('urnieta_salado', 1366, 1890, slat_dir='across', slats=7, rail=(52, 48), legs=6, deflector=True)
     rack_platform('urnieta_salado_half', 1366, 1100, slat_dir='across', slats=5, rail=(52, 48), legs=4, deflector=True)
     flares()
+    widebody('wald_bison', 30, 'box')
+    widebody('kuhl_blocker', 30, 'box')
+    widebody('lb_gmini', 35, 'box', lip=RUBBER)
+    widebody('aero_over', 35, 'box')
+    widebody('damd_delta', 40, 'blister')
     decals()
     cage_wildgoose()
     stripe_retro3()

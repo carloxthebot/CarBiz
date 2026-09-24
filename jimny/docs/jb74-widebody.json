@@ -1,0 +1,151 @@
+{
+  "sourcedAt": "2026-09-24",
+  "scope": "JB74 Jimny Sierra之外の（wider-than-stock）寬體／爆龜型過輪拱蓋（over-fenders that go WIDER than the Sierra's own factory resin flares）。JB74 本來就有原廠樹脂爆龜——這是 JB74 與 JB64 的差異之一——所以這裡只收會再往外擴的產品，不收原廠寬度的裝飾件。與 docs/jb74-archetypes.json 的 euro_rally／street_wide_low 兩個 archetype 直接對應，資料不與 docs/jb74-complete-kits.json 重複建檔，MUDRON 兩筆用引用（cite）方式帶出寬度數字。",
+  "method": "先讀 docs/jb74-archetypes.json（euro_rally、street_wide_low 兩個 archetype 的 parts／missing／examples）與 docs/jb74-complete-kits.json（避免重複建檔），再用 WebFetch 直連各廠官網逐一確認，找不到就用 WebSearch 補一次。所有寬度數字只收官網原文寫的公厘數，官網沒寫的一律標記「未公布」，不用其他寬體套件的數字去推算。",
+  "items": [
+    {
+      "id": "wald_black_bison_overfender",
+      "maker": "WALD INTERNATIONAL",
+      "product": "SPORTS LINE BLACK BISON EDITION オーバーフェンダー（單獨購入的爆龜組件，屬於 jimnysierra_bb 4P 套件的一部分，見 docs/jb74-complete-kits.json#wald_black_bison_4p）",
+      "partNumber": "官網未列型號",
+      "price": { "amount_ABS": 234300, "amount_FRP": 222200, "currency": "JPY", "taxStatus": "税込", "note": "ABS 版 10 件組 ¥234,300、FRP 版 8 件組 ¥222,200，皆為爆龜單獨的價格，不含 Black Bison 4P 套件其餘的保桿與水箱罩" },
+      "widthPerSideMm": 30,
+      "widthSource": "官網原文「片側約30mmワイド」",
+      "repacesOrCovers": "覆蓋——蓋在原廠爆龜外側，不是取代原廠保桿",
+      "boltOnOrCutting": "兩種材質答案不同，官網原文分開寫：ABS 版沒有提到需要加工；FRP 版明寫「JIMNYに装着の際は加工が必要です」（裝在 JIMNY 上需要加工／切割）。要哪一版就決定要不要切鈑金。另外兩版都要求搭配 WALD 自家的前後保桿擾流（「付属パーツの装着にはWALDフロントバンパースポイラー／リアバンパースポイラーが必要」），不能單獨裝原廠保桿。",
+      "material": "ABS 或 FRP（兩種可選）",
+      "paintedOrUnpainted": "未塗裝（素地），官網未列烤漆選項",
+      "shape": "方塊化、厚實外擴的鼓包，邊角比 DAMD 的爆龜更方正，接近「Brabus 化 G-Class」的量感而非拉力賽車的圓潤鼓包",
+      "legalWidthNote": "官網未提及日本車寬變更／構造變更相關文字",
+      "bestFitStyle": "street_wide_low（都會寬體低趴／street, lowered, 18-inch wheel）——docs/jb74-archetypes.json 的 street_wide_low 已把 WALD BLACK BISON 列為範例，形容它是六台裡「最都會、最不越野」的一款",
+      "confidence": "confirmed",
+      "sources": ["https://wald.co.jp/carrange/jimnysierra_bb/"]
+    },
+    {
+      "id": "kuhl_blocker_sierra_widefender",
+      "maker": "KUHL RACING (KUHL JAPAN)",
+      "product": "BLOCKER SIERRA ワイドフェンダーキット（單獨購入的寬體葉子板，是 BLOCKER SIERRA BASIC SET 4PIECES 的其中一件，見 docs/jb74-complete-kits.json#kuhl_blocker_sierra_basic）",
+      "partNumber": "官網未列型號",
+      "price": { "amount": 220000, "currency": "JPY", "taxStatus": "税込" },
+      "widthPerSideMm": null,
+      "widthSource": "官網未公布公厘數字，只用圖片與「ワイドフェンダー」文案表達",
+      "repacesOrCovers": "覆蓋——蓋在原廠爆龜外側，官網說明是与 BLOCKER SIERRA 前保桿／側裙／後保桿搭配的套件之一",
+      "boltOnOrCutting": "官網頁面沒有明確寫「ボルトオン」或「要加工」，未公布",
+      "material": "FRP",
+      "paintedOrUnpainted": "未塗裝（素地）；官網列出單件烤漆 ¥8,800–44,000 不等的加價選項",
+      "shape": "厚重方塊感的外擴輪拱，與 KUHL 自家的低姿態前後保桿搭配走都會風，不是越野鼓包",
+      "legalWidthNote": "官網未提及車寬變更／構造變更相關文字",
+      "bestFitStyle": "street_wide_low（都會寬體低趴）——docs/jb74-archetypes.json 已把它列為 street_wide_low 的範例，形容它是「KUHL 唯一含寬體葉子板的 Jimny 套件」",
+      "confidence": "confirmed",
+      "sources": ["https://kuhl-japan.com/ec/aeroparts/20425"]
+    },
+    {
+      "id": "damd_little_delta_overfender",
+      "maker": "DAMD（ダムド）",
+      "product": "little Δ（デルタ）オーバーフェンダー4点セット（little Δ 完整套件的其中一項，見 docs/jb74-complete-kits.json#damd_little_delta；little 5. 用的是同一組模具）",
+      "partNumber": "官網未列型號",
+      "price": { "amount_taxExcl": 128000, "amount_taxIncl": 140800, "currency": "JPY", "taxStatus": "分別列稅抜／稅込兩種，兩者恰為 10% 關係" },
+      "widthPerSideMm": null,
+      "widthSource": "官網未公布公厘數字，只用「オーバーフェンダー」與示範車圖片表達鼓包程度",
+      "repacesOrCovers": "覆蓋——蓋在原廠爆龜外側，前後左右共 4 片",
+      "boltOnOrCutting": "官網未明確寫「ボルトオン」或「要加工」；頁面只提醒安裝需另計運費與「お取付業者様でのお取付工賃」（找店家施工的工資），未講是否要切鈑金",
+      "material": "ABS（未塗裝／素地）",
+      "paintedOrUnpainted": "未塗裝（素地），官網說「リアフェンダー後端のダクトはダミーとなります」（後葉子板末端的導風孔是裝飾用假孔，不通風）",
+      "shape": "鼓包式圓潤爆龜（ブリスターフェンダー），配合 little Δ 的四圓燈與 FRP 尾翼，是這份清單裡外型最接近拉力賽車的一款",
+      "legalWidthNote": "官網未提及車寬變更／構造變更相關文字",
+      "bestFitStyle": "euro_rally（歐系拉力寬體／blistered, red car, 四顆圓燈）——docs/jb74-archetypes.json 的 euro_rally archetype 本身就是以 little Δ 當範例車（紅車＋白色雙中線＋四圓燈＋OZ Rally Racing 輪框）",
+      "confidence": "confirmed",
+      "sources": ["https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta", "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/"]
+    },
+    {
+      "id": "lb_works_gmini_widefender",
+      "maker": "LIBERTY WALK (LB-WORKS)",
+      "product": "LB Wide Fender（G mini type 1／type 2 系列共用的寬體葉子板單品，見 docs/jb74-complete-kits.json#lb_gmini_t2_light 等多筆）",
+      "partNumber": "官網未列型號",
+      "price": { "amount": 154000, "currency": "JPY", "taxStatus": "税込（官網「価格は全て税込」，但同頁註明為概算，正式報價需業務確認）" },
+      "widthPerSideMm": null,
+      "widthSource": "官網未公布公厘數字。官網文字與客服都只用「ワイド」形容，本輪 WebFetch 直讀商品頁確認官網沒有列出任何 mm 數字",
+      "repacesOrCovers": "覆蓋——蓋在原廠爆龜外側，是 G mini 前保桿＋水箱罩＋寬體葉子板三件式的其中一件",
+      "boltOnOrCutting": "官網頁面沒有明確寫安裝方式，未公布",
+      "material": "FRP",
+      "paintedOrUnpainted": "未塗裝（素地）",
+      "shape": "方正外擴，模仿賓士 G63 後期／前期臉（type 2／type 1）的寬體輪拱，是六家裡唯一 JB64／JB74 車身件完全通用的日系名牌套件",
+      "legalWidthNote": "官網未提及車寬變更／構造變更相關文字",
+      "bestFitStyle": "street_wide_low——docs/jb74-archetypes.json 把 LB-WORKS G mini type 2 列為 street_wide_low 的第一個範例（圓形 LED 頭燈＋直柵 G 水箱罩＋寬體＋貼地前下擾流，全黑示範車）",
+      "confidence": "confirmed",
+      "sources": ["https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/"]
+    },
+    {
+      "id": "aero_over_g62s_plus_widefender",
+      "maker": "K-FACTORY（AERO OVER）",
+      "product": "AERO OVER G62／G62S オーバーフェンダー 4P セット，以及 JB74 專用的「G62Sプラスワイドフェンダー」加寬版（G62 6P 套件的其中一項，見 docs/jb74-complete-kits.json#aero_over_g62_6p）",
+      "partNumber": "官網未列型號",
+      "price": { "amount_base4p": 120000, "currency": "JPY", "taxStatus": "税抜（標準 G62／G62S 爆龜 4 件組，JB64W／JB74W 共用，訂購時需指定車型）", "note": "「G62Sプラスワイドフェンダー」加寬版為另計，官網頁面沒有把它拆出獨立定價，只列出加寬後的公厘數與構造變更提醒" },
+      "widthPerSideMm": 35,
+      "widthSource": "官網原文：JB74W 專用「G62Sプラスワイドフェンダー」片側35㎜ワイド（標準 4P 爆龜本身寬度官網未另外標公厘數，只有這個 JB74 限定加寬版寫了數字）",
+      "repacesOrCovers": "覆蓋——蓋在原廠爆龜外側，與 G62/G62S 系列的前後保桿、側踏配套",
+      "boltOnOrCutting": "官網未明確寫「ボルトオン」，但明確提出構造變更門檻（見下）",
+      "material": "FRP",
+      "paintedOrUnpainted": "未塗裝（素地），官網另計烤漆費與安裝工資",
+      "shape": "方正的 G-Class 風格外擴輪拱，與 6P 套件的蜂巢網前保桿、水箱罩配成一套",
+      "legalWidthNote": "這是六件裡唯一官網主動講清楚門檻的一款——原文：JB74W 裝上 G62S 加寬版葉子板、全車寬達到 172cm 以上時，需要辦「構造変更」（日本的結構變更登記），才能領三號車牌。這是廠商自己說的話，本檔案照實引用，不另外加台灣法規判讀。",
+      "bestFitStyle": "越野／軍風向的方盒子造型（不是本輪要求的兩個推薦風格，但因為是唯一寫出 JB74 專屬寬度數字與登記門檻的產品，列入比較）",
+      "confidence": "confirmed",
+      "sources": ["https://k-factory.ne.jp/art/g62-jimny3door/"]
+    },
+    {
+      "id": "mudron_gtx_widefender_cite",
+      "maker": "AIMGAIN / MUDRON",
+      "product": "MUDRON GT-X ワイドフェンダー（已完整記錄在 docs/jb74-complete-kits.json#mudron_gtx_complete_wide／#mudron_gtx_full_normal，此處只引用寬度數字做比較，不重複建檔）",
+      "partNumber": null,
+      "price": { "note": "見 docs/jb74-complete-kits.json：寬體版套件 ¥750,000 税抜、窄體版 ¥490,000 税抜，兩者價差 ¥260,000 就是寬體葉子板＋側踏＋保桿延伸件那一組，官網沒有把葉子板單獨定價" },
+      "widthPerSideMm": 30,
+      "widthSource": "docs/jb74-complete-kits.json 已引用官網原文「寬葉子板每側約寬 30mm」（AIMGAIN／MUDRON 官網）",
+      "repacesOrCovers": "覆蓋——保留原廠保桿孔位，蓋在原廠爆龜外側",
+      "boltOnOrCutting": "docs/jb74-complete-kits.json 未記錄明確的加工需求文字，本輪也沒有另外查證，維持未公布",
+      "material": "FRP（黑色未塗裝，gel-coat）",
+      "paintedOrUnpainted": "未塗裝",
+      "shape": "MUDRON 系列「GT-X 舉高版」的外擴輪拱，比同廠 GT／GT-X 窄體版明顯厚一圈，與 MUDRON SPORT WIDE 的 +25mm/side（同樣已記錄在 complete-kits.json）不共用",
+      "legalWidthNote": "docs/jb74-complete-kits.json 未記錄相關文字",
+      "bestFitStyle": "列入比較用，非本輪兩個推薦之一",
+      "confidence": "confirmed（引用既有檔案，未重新查證）",
+      "sources": ["docs/jb74-complete-kits.json#mudron_gtx_complete_wide", "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/"]
+    }
+  ],
+  "negativeFindings": [
+    {
+      "id": "apio_3032_20_is_narrowing_not_widening",
+      "finding": "APIO 官網真正在賣的 JB74 葉子板產品是「ABSナローフェンダー（JB74）」料號 3032-20，方向跟寬體完全相反——是把原廠爆龜『收窄』，不是加寬。官網數字：原廠葉子板前 90mm／後 85mm，換裝後前 61mm／後 58mm（換算約前縮 29mm、後縮 27mm，每邊）。ABS 材質、真空成型、螺栓直上（ボルトオン），¥88,000 税込。官網並註明車寬變更需辦構造変更檢驗（此點與 docs/jb74-chrome-damd.json 既有記錄一致）。這代表 APIO 目前沒有在賣會讓 JB74 變寬的過輪拱蓋，收窄版才是它的正式商品——查詢寬體時容易被『APIO 有出葉子板』這句話誤導成加寬。",
+      "confidence": "confirmed",
+      "sources": ["https://apio.jp/parts/3032-20.html", "https://www.apio.jp/parts/3032-20.pdf"]
+    },
+    {
+      "id": "jaos_sells_protectors_not_wide_fenders",
+      "finding": "JAOS 對 JB74 的葉子板相關商品是「オーバーフェンダープロテクター」（過輪拱蓋護板／防護片），設計目的是保護原廠爆龜不被石頭砸傷，官網文字強調『保留純正過輪拱蓋原本的量感』，不是把車變寬的產品。JAOS 沒有一款會讓 JB74 車寬變大的過輪拱蓋，本輪查證後排除。",
+      "confidence": "confirmed",
+      "sources": ["https://www.jaos.co.jp/product/B632518/2975/", "https://www.jaos.co.jp/news/product_000718.html"]
+    },
+    {
+      "id": "western_flare_brands_target_older_gen_not_jb74",
+      "finding": "Kut Snake（澳洲）、JimnyBits 的寬體套件、以及大部分 eBay／Amazon 上標「Suzuki Jimny fender flares」的西方副廠商品，查證後幾乎全部只寫明適用 1998–2018 的舊款窄體 Jimny（JB23／JB43），不適用 2018 年後的現行 JB74／Sierra——因為 JB74 出廠時已經比舊款寬、已經帶原廠爆龜，市場上『幫窄體 Jimny 加寬』的舊商品邏輯用不上。歐洲 HM4X4 賣的「+5cm」葉子板（€490、ABS、螺栓直上、含墊片與不鏽鋼螺絲）官網頁面完全沒有標示適用哪一代（沒有 JB23／JB43／JB64／JB74 任何字樣），無法確認是否適用 JB74，本輪不敢當成 JB74 可用的產品列入主表。結論：Bushwacker／Rival／TJM／Kut Snake 這類西方或澳洲品牌，目前查不到任何一款有明確標示適用 JB74 的加寬過輪拱蓋。",
+      "confidence": "confirmed（西方品牌不適用 JB74 這件事查得到；HM4X4 是否適用 JB74 查不到，誠實列為不確定而非排除）",
+      "sources": [
+        "https://www.jimnybits.com/jimny-wide-arch-fender-flares-kit.html",
+        "https://www.kut-snake.com/",
+        "https://www.hm4x4.com/en/suzuki-jimny-fender-flares"
+      ]
+    }
+  ],
+  "styleRecommendations": {
+    "street_lowered_18inch": {
+      "pick": "wald_black_bison_overfender",
+      "why": "官網自己公布 +30mm/side 是本輪唯一同時滿足『數字確定、覆蓋不取代原廠爆龜、走都會低趴調性』三個條件的產品；docs/jb74-archetypes.json 的 street_wide_low archetype 也已經把 WALD BLACK BISON 列為範例車，形容它是六台裡『最都會、最不越野』的一款。次選是 KUHL BLOCKER SIERRA（同一 archetype 的另一個範例），但 KUHL 官網沒有公布寬度數字。",
+      "priceJPY": "¥234,300（ABS）／¥222,200（FRP），皆税込，僅爆龜本身"
+    },
+    "european_rally_blistered_red_four_round_lamps": {
+      "pick": "damd_little_delta_overfender",
+      "why": "docs/jb74-archetypes.json 的 euro_rally archetype 本身就是拿 DAMD little Δ 當範例車（紅車＋白色雙中線＋四顆圓形頭燈＋OZ Rally Racing 輪框），這款爆龜是同一套件裡的原裝配件，鼓包造型也最接近拉力賽車。缺點是 DAMD 官網沒有公布加寬的公厘數字。",
+      "priceJPY": "¥128,000 税抜／¥140,800 税込，僅爆龜 4 件組"
+    }
+  }
+}

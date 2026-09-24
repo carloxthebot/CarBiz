@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241340" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241411" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -549,6 +549,11 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <select id="selKit" aria-label="全車套件"></select><p class="hint" id="hKit"></p>
         </div>
         <div class="grp">
+          <p class="lbl">寬體葉子板</p><select id="selFender" aria-label="寬體葉子板"></select><p class="hint" id="hFender"></p>
+          <p class="lbl" style="margin-top:16px">外掛防滾籠</p><select id="selCage" aria-label="外掛防滾籠"></select><p class="hint" id="hCage"></p>
+          <p class="lbl" style="margin-top:16px">車身拉花</p><select id="selStripe" aria-label="車身拉花"></select><p class="hint" id="hStripe"></p>
+        </div>
+        <div class="grp">
           <p class="lbl">前保桿</p><select id="selBumper" aria-label="前保桿"></select><p class="hint" id="hBumper"></p>
           <p class="lbl" style="margin-top:16px">水箱護罩</p><select id="selGrille" aria-label="水箱護罩"></select><p class="hint" id="hGrille"></p>
           <p class="lbl" style="margin-top:16px">後保桿</p><select id="selRear" aria-label="後保桿"></select><p class="hint" id="hRear"></p>
@@ -621,14 +626,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609241340';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, STYLES } from './parts.js?v=202609241340';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241340';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241340';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241340';
+import { rigJimny, applyConfig } from './rig.js?v=202609241411';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, STYLES } from './parts.js?v=202609241411';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241411';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241411';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241411';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609241340';
+const BUILD = '202609241411';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -744,7 +749,7 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   kit: 'none', hood: 'stock', spareCoverKit: 'none', gullwing: false, frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: 'none', spareBag: false, spareCover: false,
-  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none' };
+  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none' };
 // things that hang off a quarter-window guard and therefore pick a side
 const SIDED = ['guardCan', 'guardAxe', 'guardBoard'];
 const SIDE_DEF = { guardCan: 'right', guardAxe: 'right', guardBoard: 'left' };
@@ -940,6 +945,7 @@ function update() {
   if (S.gullwing) add(buildAccessory('gullwing', undefined, paint), 'gullwing');
   if (S.stripe !== 'none') add(buildAccessory('stripe', S.stripe, paint), 'stripe');
   if (S.cage !== 'none') add(buildAccessory('cage', S.cage, paint), 'cage');
+  if (S.fender !== 'none') add(buildAccessory('fender', S.fender, paint), 'fender');
   if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint), 'rearBumper');
   // 'safari' is a legacy id kept so old links still work; the part is Ironman's
   if (S.snorkel !== 'none')
@@ -970,7 +976,7 @@ function update() {
   countTo($('hClearN'), 210 + total + Math.round((ty.dia - 693) / 2));
   $('sum0').textContent = total ? total + 'mm 舉升' : '原廠';
   $('sum1').textContent = ty.label;
-  const n1 = (S.kit !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
+  const n1 = (S.kit !== 'none') + (S.fender !== 'none') + (S.cage !== 'none') + (S.stripe !== 'none') + (S.frontBumper !== 'stock') + (S.grille !== 'stock') + (S.rearBumper !== 'stock')
     + (S.hood !== 'stock') + (S.spareCoverKit !== 'none') + (S.mirrors !== 'stock');
   $('sum2').textContent = col.name.split('（')[0] + (n1 ? ` · ${n1} 項` : '');
   const n2 = ['windowGuards','spareBag','spareCover','shovel','flares','decals','pillarPods','sideSkirt','gullwing'].filter(k => S[k]).length
@@ -1186,6 +1192,9 @@ function aimFor(k) {
   switch (k) {
     case 'frontBumper': case 'grille': case 'grilleLight': return [0.55, 0.16, 7.8];
     case 'hood': return [0.5, 0.52, 8.4];
+    case 'fender': return [0.85, 0.12, 8.6];
+    case 'cage': return [0.95, 0.5, 9.4];
+    case 'stripe': return [LEFT_AZ, 0.14, 8.8];
     case 'rearBumper': case 'ladder': case 'spareCoverKit': case 'spareCover': case 'spareBag':
       return [2.55, 0.18, 8.2];
     case 'roofRack': case 'lightBar': case 'roofLights': case 'shovel': return [0.95, 0.62, 9.6];
@@ -1275,7 +1284,7 @@ const ALL_LISTS = { lift: LIFTS, wheel: WHEELS, tyre: TYRES, frontBumper: FRONT_
   rearBumper: REAR_BUMPERS, grille: GRILLES, snorkel: SNORKELS, mirrors: MIRRORS,
   roofRack: ROOF_RACKS, awning: AWNINGS, sideStep: SIDE_STEPS, ladder: LADDERS,
   lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS,
-  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES, cage: CAGES,
+  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES, cage: CAGES, fender: FENDERS,
   spareCoverKit: SPARE_COVERS };
 let styleAt = null;
 
@@ -1689,7 +1698,8 @@ function buildUI() {
     ['selRack', ROOF_RACKS, S.roofRack], ['selAwning', AWNINGS, S.awning],
     ['selStep', SIDE_STEPS, S.sideStep], ['selLadder', LADDERS, S.ladder],
     ['selExhaust', EXHAUSTS, S.exhaust], ['selLightBar', LIGHT_BARS, S.lightBar],
-    ['selRoofLights', ROOF_LIGHTS, S.roofLights], ['selGrilleLight', GRILLE_LIGHTS, S.grilleLight]]) opt(id, L, cur);
+    ['selRoofLights', ROOF_LIGHTS, S.roofLights], ['selGrilleLight', GRILLE_LIGHTS, S.grilleLight],
+    ['selFender', FENDERS, S.fender], ['selCage', CAGES, S.cage], ['selStripe', STRIPES, S.stripe]]) opt(id, L, cur);
   $('extPick').innerHTML = EXTINGUISHERS.map(e =>
     `<button data-v="${e.id}" aria-pressed="${S.extinguisher === e.id}">${esc(e.label.replace('掛', ''))}</button>`).join('');
 
@@ -1734,7 +1744,8 @@ function hints() {
     ['hMirror', MIRRORS, S.mirrors], ['hRack', ROOF_RACKS, S.roofRack], ['hAwning', AWNINGS, S.awning],
     ['hStep', SIDE_STEPS, S.sideStep], ['hLadder', LADDERS, S.ladder],
     ['hExhaust', EXHAUSTS, S.exhaust], ['hLightBar', LIGHT_BARS, S.lightBar],
-    ['hRoofLights', ROOF_LIGHTS, S.roofLights], ['hGrilleLight', GRILLE_LIGHTS, S.grilleLight]]) $(id).textContent = n(find(L, cur));
+    ['hRoofLights', ROOF_LIGHTS, S.roofLights], ['hGrilleLight', GRILLE_LIGHTS, S.grilleLight],
+    ['hFender', FENDERS, S.fender], ['hCage', CAGES, S.cage], ['hStripe', STRIPES, S.stripe]]) $(id).textContent = n(find(L, cur));
   $('extNote').textContent = n(find(EXTINGUISHERS, S.extinguisher)) || '市面沒有 JB74 尾梯專用架';
   const c = COLORS.find(x => x.code === S.color) || COLORS[0];
   $('colName').textContent = c.code + (c.tw ? '' : ' · 日規');
@@ -1817,12 +1828,12 @@ for (const [id, key] of [['selBumper', 'frontBumper'], ['selGrille', 'grille'], 
   ['selHood', 'hood'], ['selSpareKit', 'spareCoverKit'], ['selMirror', 'mirrors'], ['selRack', 'roofRack'],
   ['selAwning', 'awning'], ['selStep', 'sideStep'], ['selLadder', 'ladder'], ['selSnorkel', 'snorkel'],
   ['selExhaust', 'exhaust'], ['selLightBar', 'lightBar'], ['selRoofLights', 'roofLights'],
-  ['selGrilleLight', 'grilleLight']]) {
+  ['selGrilleLight', 'grilleLight'], ['selFender', 'fender'], ['selCage', 'cage'], ['selStripe', 'stripe']]) {
   const el = $(id); if (!el) continue;
   const list = { frontBumper: FRONT_BUMPERS, grille: GRILLES, rearBumper: REAR_BUMPERS, hood: HOODS,
     spareCoverKit: SPARE_COVERS, mirrors: MIRRORS, roofRack: ROOF_RACKS, awning: AWNINGS,
     sideStep: SIDE_STEPS, ladder: LADDERS, snorkel: SNORKELS, exhaust: EXHAUSTS,
-    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS }[key];
+    lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS, fender: FENDERS, cage: CAGES, stripe: STRIPES }[key];
   el.addEventListener('pointerenter', () => {
     highlight(BUILT[key] ?? null, 0);
     if (list && matchMedia('(hover: hover)').matches) {
@@ -1909,6 +1920,7 @@ on('selRack', v => S.roofRack = v); on('selAwning', v => S.awning = v);
 on('selStep', v => S.sideStep = v); on('selLadder', v => S.ladder = v);
 on('selExhaust', v => S.exhaust = v); on('selLightBar', v => S.lightBar = v);
 on('selRoofLights', v => S.roofLights = v); on('selGrilleLight', v => S.grilleLight = v);
+on('selFender', v => S.fender = v); on('selCage', v => S.cage = v); on('selStripe', v => S.stripe = v);
 $('selKit').onchange = e => {
   S.kit = e.target.value;
   const k = find(KITS, S.kit);
@@ -1965,6 +1977,9 @@ $('btnExport').onclick = () => {
     S.frontBumper !== 'stock' && '前保桿 ' + find(FRONT_BUMPERS, S.frontBumper).label,
     S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
     S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label,
+    S.fender !== 'none' && '寬體葉子板 ' + find(FENDERS, S.fender).label,
+    S.cage !== 'none' && '外掛防滾籠 ' + find(CAGES, S.cage).label,
+    S.stripe !== 'none' && '車身拉花 ' + find(STRIPES, S.stripe).label,
     S.hood !== 'stock' && '引擎蓋 ' + find(HOODS, S.hood).label,
     S.spareCoverKit !== 'none' && '備胎蓋 ' + find(SPARE_COVERS, S.spareCoverKit).label,
     S.mirrors !== 'stock' && '後照鏡 ' + find(MIRRORS, S.mirrors).label,

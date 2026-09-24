@@ -138,8 +138,9 @@ export const WHEELS = [
     note: '8 根支柱＋亮面 pin bolt＋側唇一圈鉚釘，霧黑／霧銅。日本定價 ¥37,400 一顆；台灣通路未查證到現貨' },
   { id: 'daytona_ss', photo: false, url: 'https://www.mljinc.co.jp/product/daytona_ss/daytona_ss', label: 'DAYTONA SS 兩件式鋼圈', rim: 16, width: 6.0, offset: 0, style: 'daytona',
     price: 29700, cur: 'JPY', brand: 'MLJ', note: '10 孔 rally 鋼圈、全平面零凹陷、螺帽全露；5×139.7 不附中心蓋。街價約 ¥13,360。白色版只有 16×5.5J +20' },
-  { id: 'super_moon', photo: false, url: 'https://shop.beyond-jpn.com/collections/%E3%83%9B%E3%82%A4%E3%83%BC%E3%83%AB', label: 'SUPER MOON 月亮盤', rim: 16, width: 6.0, offset: -5, needsFlares: true, style: 'moon',
-    price: 19800, cur: 'JPY', brand: 'Beyond Japan', note: '完全無孔的光滑碟盤，最極端的 moon disc 語彙。黑／白 ¥19,800、鍍鉻 ¥23,100' },
+  { id: 'super_moon', photo: false, url: 'https://shop.beyond-jpn.com/products/bewl74-smch', label: 'SUPER MOON 月亮盤', rim: 16, width: 6.0, offset: -5, needsFlares: true, style: 'moon',
+    price: 23100, cur: 'JPY', brand: 'Beyond Japan', part: 'bewl74-smch',
+    note: '完全無孔的光滑碟盤，最極端的 moon disc 語彙。16×6.0J INSET −5、PCD 139.7，品名就寫「スーパームーン【JB74W・クローム】」——JB74W／JC74 專用，JB64 是另一個品番。鍍鉻 ¥23,100（原價 ¥38,500 特價中）、黑／白 ¥19,800，**都是一顆的價**，官網寫明「こちらの商品ページは単品販売となります」' },
   { id: 'watanabe_f8', photo: false, url: 'https://www.rs-watanabe.co.jp/jimny/', label: 'F8 八輻輪框', rim: 16, width: 5.5, offset: 0, style: 'watanabe',
     price: 45000, cur: 'JPY', brand: 'RS Watanabe', note: 'Sierra 專用 ±0；正統 8 幅、幅面平薄、中心開放（蓋另購）。黑色標配，銀／金／鎂／紅／藍／白 +¥3,000。台灣無代理' },
   { id: 'mrk_retro', photo: false, url: 'https://www.mrk.com.tw/', label: '復古輪框（陶瓷白）', rim: 16, width: 5.5, offset: 20, style: 'daytona',
@@ -796,6 +797,33 @@ export const CAGES = [
   { id: 'wildgoose', photo: true, url: 'https://www.rv4wildgoose.com/parts/jimny-64-74/protection_64/jm-2424.html',
     label: '外掛式防滾籠 JM-2424', price: 203500, cur: 'JPY', brand: 'RV4 Wild Goose', part: 'JM-2424',
     note: '主管 38.1×2.3t、中央橫樑 25.4×2.3t，25kg。前端鎖引擎蓋固定點——所以側 cowl 與葉子板都要切——後端鎖車頂雨槽 8 點。廠方寫明「車検対応品として、構造変更無しで使用出来ます」。注意：雙色車與有雨槽飾條的車不適用' },
+];
+
+/**
+ * Wide-body over-fenders: kits that go WIDER than the Sierra's own resin
+ * arches and are laid over them. `widen` is the added width per side in mm --
+ * the maker's figure where one is published, otherwise the modelled
+ * estimate, and the entry is then marked uncertain. The kit list
+ * (docs/jb74-widebody.json) has the western brands checked too: every one
+ * found fits only the old narrow JB23/JB43.
+ */
+export const FENDERS = [
+  { id: 'none', label: '原廠爆龜', price: 0 },
+  { id: 'wald_bison', url: 'https://wald.co.jp/carrange/jimnysierra_bb/', label: 'SPORTS LINE BLACK BISON 爆龜', widen: 30,
+    price: 234300, cur: 'JPY', brand: 'WALD',
+    note: '官網「片側約30mmワイド」。ABS 10 件組 ¥234,300、FRP 8 件組 ¥222,200，皆稅込、素地未塗裝。蓋在原廠爆龜外側；FRP 版官網明寫裝 Jimny 需要加工，ABS 版沒寫。兩版都要配 WALD 自家的前後保桿下擾流才裝得上。方正厚實的 G-Class 式樣' },
+  { id: 'kuhl_blocker', url: 'https://kuhl-japan.com/ec/aeroparts/20425', label: 'BLOCKER SIERRA 寬體葉子板', widen: 30,
+    price: 220000, cur: 'JPY', brand: 'KUHL RACING', uncertain: true,
+    note: '¥220,000 稅込，FRP 素地，另有單件烤漆加價。蓋在原廠爆龜外側。加寬幾 mm 官網沒有公布，模型先照 WALD 的 30mm 畫；是否要切鈑金官網也沒寫' },
+  { id: 'lb_gmini', url: 'https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/', label: 'G mini 寬體葉子板', widen: 35,
+    price: 154000, cur: 'JPY', brand: 'LIBERTY WALK', uncertain: true,
+    note: '¥154,000 稅込（官網註明是概算價，正式以業務報價為準），FRP 素地。G mini 前保桿＋水箱罩＋寬體三件式的其中一件，JB64／JB74 車身件通用。加寬量官網未公布，模型照 35mm 估' },
+  { id: 'aero_over', url: 'https://k-factory.ne.jp/art/g62-jimny3door/', label: 'G62S プラスワイドフェンダー', widen: 35,
+    price: null, cur: 'JPY', brand: 'AERO OVER（K-FACTORY）', uncertain: true,
+    note: 'JB74 專用的加寬版，官網寫每邊 +35mm、全車寬到 172cm，日本要辦構造變更。加寬版沒有單獨標價；標準寬度的 G62／G62S 爆龜 4 件組是 ¥120,000 稅抜' },
+  { id: 'damd_delta', url: 'https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta', label: 'little Δ 鼓包爆龜 4 件組', widen: 40,
+    price: 140800, cur: 'JPY', brand: 'DAMD', uncertain: true,
+    note: '¥140,800 稅込（¥128,000 稅抜），ABS 素地，前後左右 4 片蓋在原廠爆龜外。圓潤的拉力式鼓包，後葉子板末端的導風孔是假孔。加寬量官網未公布，模型照示範車照片估 40mm；是否要切鈑金官網沒寫' },
 ];
 
 /**
