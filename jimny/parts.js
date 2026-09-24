@@ -767,3 +767,50 @@ export const SPARE_COVERS = [
   { id: 'urnieta_1970', url: 'https://urnieta.com/product/1970-spare-tire-cover-kit-for-jimny-jb74-jc74-jb64/', label: '1970 備胎蓋', price: null, cur: 'TWD', brand: 'URNIETA', kit: 'urnieta_1970', uncertain: true,
     note: 'MOLLE 格帶面板／收納包雙模式。3.4kg，JB64 也能裝。官網不標價' },
 ];
+
+/**
+ * Styles: a starting point, not a package.
+ *
+ * 230 parts across eleven families is a wall to anyone opening this for the
+ * first time, so the configurator asks for a STYLE before it asks for
+ * anything else. Picking one applies the whole set below at once -- the same
+ * mechanism the demo car already used, just visible and with five of them --
+ * and every single item stays changeable afterwards. Nothing here is a
+ * package you can buy in one box; the Japanese makers' complete kits are
+ * real products and live in the parts lists instead.
+ *
+ * `set` holds only what differs from stock, so a style reads as a list of
+ * decisions rather than a dump of state.
+ */
+export const STYLES = [
+  { id: 'jp_retro', label: '日系復古', sw: ['#1d2224', '#c9c2ae', '#8c8f86'],
+    desc: 'KLC 不鏽鋼雙管前後保桿配 SJ 世代的水箱罩，卡車式復古後照鏡，鐵灰框包白字越野胎。街上開的樣子，不是準備上山的樣子。',
+    set: { color: 'ZJ3', lift: 'td60', wheel: 'maxx', tyre: 't225r16', tread: 'toyo_mt', owl: true,
+      rimColor: 0x373b41, grille: 'hbar_suzuki', frontBumper: 'tube_heritage', rearBumper: 'klc_heritage_rear',
+      mirrors: 'damd', sideStep: 'jst', ladder: 'jst', exhaust: 'hks_legal', flares: true, sideSkirt: true } },
+
+  { id: 'au_offroad', label: '澳洲越野', sw: ['#3f4a3c', '#1d2224', '#8a6b45'],
+    desc: '呼吸管、絞盤前桿、車頂架配 270 度車邊帳、鐵窗與滅火器。澳洲人怎麼弄一台上路好幾天的車，這組就是那個答案。',
+    set: { color: 'ZVL', lift: 'td60', wheel: 'wildboar', tyre: 't31', tread: 'bfg_km3',
+      frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb', awning: 'arb_touring_25', awningSide: 'left',
+      sideStep: 'ironman', ladder: 'tube', lightBar: 'ipf', windowGuards: true, guardCan: 'right',
+      guardAxe: 'right', shovel: true, extinguisher: 'ladder', flares: true } },
+
+  { id: 'city', label: '都會輕改', sw: ['#d8d8d4', '#2e4a63', '#1d2224'],
+    desc: '只動輪框、胎和 1 吋舉升，加一道側裙。車高留在行照容許範圍內，驗車不用解釋，停車場高度也進得去。',
+    set: { color: 'ZVR', lift: 'apio20', wheel: 'dean_cross', tyre: 't215r16', tread: 'toyo_at3',
+      rimColor: 0x1d2224, sideSkirt: true, mirrors: 'stock' } },
+
+  { id: 'military', label: '軍風', sw: ['#4a513a', '#2a2c26', '#9a9478'],
+    desc: '原廠軍綠配方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶與斧頭。配色與零件都走消光，沒有一顆亮件。',
+    set: { color: 'ZZC', lift: 'td40', wheel: 'oemsteel', tyre: 't225r16', tread: 'bfg_km3',
+      rimColor: 0x3c4138, frontBumper: 'taniguchi_square', rearBumper: 'taniguchi_rear_pipe',
+      roofRack: 'platform', windowGuards: true, guardCan: 'right', guardAxe: 'right', guardBoard: 'left',
+      shovel: true, extinguisher: 'left', decals: true, flares: true } },
+
+  { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
+    desc: '車頂架、車邊帳、側踏與尾梯這一整套上下車與遮蔭的東西，胎走安靜的全地形而不是越野胎，長途開起來不吵。',
+    set: { color: 'ZVG', twoTone: true, lift: 'td60', wheel: 'dean_cross', tyre: 't225r16', tread: 'toyo_at3',
+      roofRack: 'pioneer', awning: 'yakima_270s', awningSide: 'left', sideStep: 'jst', ladder: 'jst',
+      spareBag: true, extinguisher: 'ladder', flares: true } },
+];

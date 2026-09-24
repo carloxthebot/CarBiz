@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609240343" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609240714" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -280,6 +280,31 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
    full-width buttons plus two open advisory cards were about a third of a
    phone screen -- so the advisories collapse to one line that says how many
    there are, and the buttons sit on a single row. */
+/* Style cards. They are the first thing anyone sees, so they carry the one
+   thing a list of part names cannot: what the car ends up looking like. */
+.styles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.style{text-align:left;background:var(--sur);border:1px solid var(--line);border-radius:4px;
+  padding:12px 13px 11px;cursor:pointer;display:grid;gap:5px;align-content:start;
+  color:var(--ink);font:inherit;-webkit-tap-highlight-color:transparent}
+.style:hover{border-color:var(--line2)}
+.style[aria-pressed=true]{border-color:var(--acc);background:#1c1810}
+.style b{font:700 15px/1.2 var(--disp);letter-spacing:.01em}
+.style[aria-pressed=true] b{color:var(--acc)}
+.style .tone{display:flex;gap:3px}
+.style .tone i{width:14px;height:14px;border-radius:2px;display:block;box-shadow:inset 0 0 0 1px #ffffff1a}
+.style .ds{font-size:12.5px;line-height:1.65;color:var(--ink2)}
+.style .pr{font:500 11px/1 var(--mono);color:var(--ink3);letter-spacing:.02em;margin-top:2px}
+.style[aria-pressed=true] .pr{color:var(--acc-ink);background:var(--acc);border-radius:2px;
+  padding:5px 7px;justify-self:start}
+.styleNote{font-size:12px;line-height:1.7;color:var(--ink3);margin:14px 0 0}
+.styleNote b{color:var(--ink2)}
+@media(max-width:860px){
+  .styles{grid-template-columns:1fr 1fr;gap:7px}
+  .style{padding:10px 11px}
+  .style b{font-size:14px}
+  .style .ds{font-size:11.5px;line-height:1.6}
+  .style .pr{font-size:10px}
+}
 .flags{padding:9px 20px 0;display:grid;gap:6px;flex:none}
 .flags:empty{padding:0}
 .flagbar{display:flex;align-items:center;gap:9px;width:100%;padding:9px 12px;border-radius:3px;
@@ -368,7 +393,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
   body.sheet .hero .h-l b{font-size:23px;margin-top:2px}
   body.sheet .hero .h-r i{font-size:11px}
   body.sheet .hero .h-r em{font-size:10.5px}
-  body.sheet .steps button{padding:8px 6px 7px}
+  body.sheet .steps button{padding:8px 3px 7px}
+  .steps button b{font-size:13.5px}
+  .steps button i{font-size:9.5px}
   .acts{gap:15px;margin-top:6px;padding:8px 16px calc(9px + env(safe-area-inset-bottom))}
   .acts button{font-size:12.5px}
   .flags{padding:8px 16px 0}
@@ -451,15 +478,25 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     </div>
 
     <div class="steps" id="steps" role="tablist">
-      <button role="tab" data-s="0" aria-selected="true"><b>底盤</b><i id="sum0">原廠</i></button>
-      <button role="tab" data-s="1" aria-selected="false"><b>胎框</b><i id="sum1">原廠</i></button>
-      <button role="tab" data-s="2" aria-selected="false"><b>外觀</b><i id="sum2">原廠</i></button>
-      <button role="tab" data-s="3" aria-selected="false"><b>裝備</b><i id="sum3">無</i></button>
+      <button role="tab" data-s="0" aria-selected="true"><b>風格</b><i id="sumStyle">未選</i></button>
+      <button role="tab" data-s="1" aria-selected="false"><b>底盤</b><i id="sum0">原廠</i></button>
+      <button role="tab" data-s="2" aria-selected="false"><b>胎框</b><i id="sum1">原廠</i></button>
+      <button role="tab" data-s="3" aria-selected="false"><b>外觀</b><i id="sum2">原廠</i></button>
+      <button role="tab" data-s="4" aria-selected="false"><b>裝備</b><i id="sum3">無</i></button>
     </div>
 
     <div class="body" id="body">
-      <!-- 1 ── 底盤 -->
+      <!-- 0 ── 風格 -->
       <div class="pane on" data-p="0">
+        <div class="grp">
+          <p class="lbl">先選一種風格<span class="hint" id="styleCount"></span></p>
+          <div class="styles" id="styles"></div>
+          <p class="styleNote">風格只是起點：選完之後每一項都還能換，也可以直接按上面四個分頁自己配。
+            金額是照目錄現價把這組零件加起來的概估，<b>不含輪胎、工資與安裝</b>，標「洽詢」的是原廠沒公布價格的品項。</p>
+        </div>
+      </div>
+      <!-- 1 ── 底盤 -->
+      <div class="pane" data-p="1">
         <div class="grp">
           <p class="lbl">懸吊舉升 <em id="liftCount"></em></p>
           <div class="live"><b id="liftPick"></b><p id="liftNote"></p></div>
@@ -469,7 +506,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       </div>
 
       <!-- 2 ── 胎框 -->
-      <div class="pane" data-p="1">
+      <div class="pane" data-p="2">
         <div class="grp">
           <p class="lbl">輪框 <em id="wheelCount"></em></p>
           <div class="live"><b id="wheelPick"></b><p id="wheelNote"></p></div>
@@ -496,7 +533,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       </div>
 
       <!-- 3 ── 外觀 -->
-      <div class="pane" data-p="2">
+      <div class="pane" data-p="3">
         <div class="grp">
           <p class="lbl">車身配色 <em id="colName"></em></p>
           <div class="live"><b id="colPick"></b><p id="colNote"></p></div>
@@ -522,7 +559,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
       </div>
 
       <!-- 4 ── 裝備 -->
-      <div class="pane" data-p="3">
+      <div class="pane" data-p="4">
         <div class="grp">
           <p class="lbl">車頂架</p><select id="selRack" aria-label="車頂架"></select><p class="hint" id="hRack"></p>
           <p class="lbl" style="margin-top:16px">車邊帳</p><select id="selAwning" aria-label="車邊帳"></select><p class="hint" id="hAwning"></p>
@@ -582,14 +619,14 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609240343';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS } from './parts.js?v=202609240343';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609240343';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609240343';
-import { priceLabel, FX_NOTE } from './fx.js?v=202609240343';
+import { rigJimny, applyConfig } from './rig.js?v=202609240714';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STYLES } from './parts.js?v=202609240714';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609240714';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609240714';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609240714';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609240343';
+const BUILD = '202609240714';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -814,7 +851,15 @@ function loadBody(tries = 0) {
   $('boot').classList.add('gone');
   setTimeout(() => { $('boot').style.display = 'none'; }, 480);
   loadAccessories();
+  buildStyles();
+  // A first-time reader gets the style step; anyone who has been here before
+  // gets the car, because making them dismiss the same screen every visit is
+  // how a helpful first step turns into a toll gate.
+  let seen = null;
+  try { seen = localStorage.getItem('jimny.style'); } catch {}
   if (preset) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
+  else if (seen) goStep(1);
+  else goStep(0);
   }, (p) => { if (!p.total) return;
     const k = p.loaded / p.total;
     drawCar(k);
@@ -930,6 +975,9 @@ function update() {
     + (S.exhaust !== 'stock' ? 1 : 0)
     + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.snorkel !== 'none');
   $('sum3').textContent = n2 ? `${n2} 項` : '無';
+  const st = STYLES.find(x => x.id === styleAt);
+  const drift = styleDrift();
+  $('sumStyle').textContent = !st ? '未選' : drift ? `${st.label}・改 ${drift}` : st.label;
   $('hCol').textContent = col.name;
   $('hVer').textContent = accessoriesIn ? `版本 ${BUILD}` : `版本 ${BUILD} · 配件載入中…`;
   prevS = { ...S };
@@ -1214,11 +1262,86 @@ function showHeight() {
   }
 }
 
+/* ═══ styles: where a configuration starts ═══════════════════════════════
+   230 parts is a wall to anyone opening this for the first time, so the
+   first step asks for a style and applies a whole set at once. It is the
+   same mechanism the demo car used, made visible. Everything stays
+   changeable afterwards, and the tab keeps score of what has moved since. */
+const ALL_LISTS = { lift: LIFTS, wheel: WHEELS, tyre: TYRES, frontBumper: FRONT_BUMPERS,
+  rearBumper: REAR_BUMPERS, grille: GRILLES, snorkel: SNORKELS, mirrors: MIRRORS,
+  roofRack: ROOF_RACKS, awning: AWNINGS, sideStep: SIDE_STEPS, ladder: LADDERS,
+  lightBar: LIGHT_BARS, roofLights: ROOF_LIGHTS, grilleLight: GRILLE_LIGHTS,
+  exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS,
+  spareCoverKit: SPARE_COVERS };
+let styleAt = null;
+
+/** What a style's parts add up to, and how many of them nobody publishes a
+ *  price for. A sum of what is known beats a range nobody can source.
+ *  Wheels are quoted per wheel, so a set is four of them. Tyres are not
+ *  counted at all -- the tyre list is a list of SIZES and carries no prices --
+ *  which the card says out loud rather than quietly leaving out. The plain
+ *  on/off extras (a shovel, a set of flares) are not counted either: calling
+ *  a 500-dollar shovel "洽詢" makes the number look worse than it is. */
+const QTY = { wheel: 4 };
+function styleCost(st) {
+  let sum = 0, open = 0;
+  for (const [k, v] of Object.entries(st.set)) {
+    const list = ALL_LISTS[k];
+    if (list) {
+      const it = list.find(x => x.id === v);
+      if (!it || it.price === 0) continue;                     // stock costs nothing
+      const n = it.price == null ? null : toTWD(it.price, it.cur);
+      if (n == null) { open++; continue; }
+      sum += n * (QTY[k] ?? 1);
+    }
+  }
+  return { sum, open };
+}
+const wan = (n) => (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '');
+
+/** How far the current configuration has drifted from the style it started
+ *  from. Counting it is what lets the style be a starting point rather than
+ *  a cage -- the reader can always see they are still free. */
+function styleDrift() {
+  const st = STYLES.find(x => x.id === styleAt);
+  if (!st) return 0;
+  const base = { ...DEF, ...st.set };
+  return Object.keys(DEF).filter(k => S[k] !== base[k]).length;
+}
+
+function buildStyles() {
+  $('styleCount').textContent = `${STYLES.length} 種`;
+  $('styles').innerHTML = STYLES.map(st => {
+    const { sum, open } = styleCost(st);
+    const price = sum ? `零件約 NT$${wan(sum)} 萬・不含胎${open ? `・${open} 項洽詢` : ''}` : '洽詢';
+    return `<button class="style" data-style="${st.id}" aria-pressed="${st.id === styleAt}">
+      <span class="tone">${st.sw.map(c => `<i style="background:${esc(c)}"></i>`).join('')}</span>
+      <b>${esc(st.label)}</b>
+      <span class="ds">${esc(st.desc)}</span>
+      <span class="pr">${esc(price)}</span></button>`;
+  }).join('');
+}
+
+function applyStyle(id) {
+  const st = STYLES.find(x => x.id === id);
+  if (!st) return;
+  styleAt = id;
+  try { localStorage.setItem('jimny.style', id); } catch {}
+  S = { ...DEF, ...st.set };
+  tyreSwap = '';
+  buildUI(); update(); buildStyles();
+  goStep(1);
+}
+$('styles').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-style]');
+  if (b) applyStyle(b.dataset.style);
+});
+
 /* ═══ step navigation ════════════════════════════════════════════════════ */
-const STEP_OF = { lift:0, wheel:1, rimColor:1, tyre:1, tread:1, owl:1,
-  color:2, kit:2, frontBumper:2, grille:2, rearBumper:2, hood:2, spareCoverKit:2, mirrors:2 };
-const stepOf = (k) => STEP_OF[k] ?? 3;
-const STEPS = 4;
+const STEP_OF = { lift:1, wheel:2, rimColor:2, tyre:2, tread:2, owl:2,
+  color:3, kit:3, frontBumper:3, grille:3, rearBumper:3, hood:3, spareCoverKit:3, mirrors:3 };
+const stepOf = (k) => STEP_OF[k] ?? 4;
+const STEPS = 5;
 let stepAt = 0;
 function goStep(i) {
   const back = i < stepAt;

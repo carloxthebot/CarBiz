@@ -1,0 +1,975 @@
+{
+  "sourcedAt": "2026-09-24",
+  "vehicle": "Suzuki Jimny Sierra JB74 (3-door, 2018-)",
+  "scope": "大面積車身圖樣（車身彩繪貼／ステッカー／デカール／ラッピング）——不含小徽章、車標、後擋小貼。為台灣買家的 3D 配置器編的，所以價格以台灣買得到的通路優先，日規原廠與專門店套件列出來當風格與上限參考。",
+  "researchNote": "本輪的 WebSearch 配額在開始前就已用盡（600/600），全程以 WebFetch 直連＋r.jina.ai 代理 html.duckduckgo.com 當搜尋引擎完成，約 200 次抓取。淘寶商品頁經 r.jina.ai 可讀到標題、店名、價格，但讀不到已售出數、材質與運費；蝦皮商品頁與 API 全部被登入牆與 403 擋住，本檔所有蝦皮價格都來自 BigGo 比價頁轉載，價格可信但已售出數一律無法驗證；露天搜尋頁與商品頁可直接讀，但逐筆打開的商品幾乎都是銷售 0 件；Mobile01、Facebook 社團、Instagram 全程 403 或需登入，完全沒有取得車主實付金額。法規條文直接抓自全國法規資料庫。",
+  "rules": [
+    "大面積車身圖樣在日本的 Jimny 圈是小眾，不是主流——這是整輪調查最反直覺、但四條獨立線索一致指向的結果。みんカラ JB64「ステッカー・デカール」分類評價數前段全是油箱蓋碳纖貼、假進氣壩網格貼、備胎罩小徽章，唯一的條紋套件只有 1 則評價；CARTUNE「#サイドデカール」標籤下 Jimny 只有 6 篇；日本改裝媒體談風格時（Overland／Wild／Retro／Street／Crossover 五分法、或 スタイリッシュ／無骨／レトロ 三分法、或「JB64 定番カスタム12選」）幾乎完全不談貼紙，「復古」在日本的實現手段是角型不鏽鋼保桿與 Sunny Face 水箱罩。連貼了原廠リバイバル 的車主自己都在みんカラ寫「很少看到有人貼」。日本的 Jimny 風格是用金屬件做的，不是用圖形做的——所以配置器如果以日本審美為準，貼紙應該是配角。",
+    "JB74 是三門車：車側可用的連續面只有前葉子板、一片車門、後四分之一板。日規有不少側貼是 JC74W（五門 Nomad）專用——CRAZY COLORZ 整條レトロサイドストライプ 系列（¥20,900–42,800）與 APIO 的 4135-2L（¥37,400）都明寫不適 JB74，淘寶的 SKU 也常出現「5门」。另一批好東西則是 JB64（三門輕型）專用，JB74 同樣買不到：Craphts 的整套菜單、STOCK'S COMPANY 的木紋貼都是。選型時門數與車型代號兩個都要對。",
+    "同一個 SUZUKI 原廠品番，各通路開價從 ¥21,380 到 ¥31,857 都有，價差一半。原廠件要逐頁比價，不要看到「純正」就當定價。",
+    "⚠ 原廠側貼的品項歸屬有未解的矛盾：通路商把リバイバルA／B／ツールギア／カモフラージュ 四款都當「サイドデカール」賣（¥21,889–35,247），但 SUZUKI 現行官方配件頁只有一款リバイバル 是車側貼，ツールギア 與 カモフラージュ 被列為備胎罩貼（各 ¥8,470）。差四倍不可能是同一物，推測是早期年式的設定但未證實。下單前務必向經銷商確認品番對應的是車側還是備胎罩。",
+    "台灣沒有任何一家 JIMNY 改裝專門店在賣車身圖組。不二吉選 BUERJI SELECT、Heekis 希琦、MRK 4X4 三家都查過，產品線是保桿、行李架、鐵窗、爬梯、排氣管這類硬件，貼紙一件都沒有。台灣線上賣的幾乎全是同一批中國代發貨。",
+    "「便宜的貼紙」與「昂貴的貼紙」不是同一件事：NT$200–3,000 這一段是自己貼的預裁片，¥16,500–42,900 那一段是 JB74 專用裁型、覆膜、可撕膠的套件，其中 OUTCLASS 與 TOY FACTORY 還明寫要找業者施工。配置器上應該分開呈現，不要合成一條價格帶。",
+    "淘寶顯示的價格是最便宜的 SKU，不是整組價。最明顯的例子是一筆標 ¥9.8 的 Heritage 彩條，但它看得到的 SKU 是「兩側＋車尾」的整組——實際成交價會落在各風格價帶的上緣。",
+    "行情會變。本檔所有電商價格都是 2026-09-24 當天讀到的，淘寶多筆帶「活動價／大減價／熱銷」標籤，露天與蝦皮的賣場更替頻繁，下單前請重新核對。"
+  ],
+  "gaps": [
+    "加州衝浪風（棕櫚＋夕陽＋衝浪板）：三個市場都零證據，查不到任何 JB74 專用圖組。淘寶 500 筆搜尋結果裡沒有；日本只有 maniac collection 一款 5.2×30cm 的「海」引擎蓋側小貼 ¥4,400（通用件，商品照是 JC74W，https://item.rakuten.co.jp/maniac-collection/demcarbosauw/ ）。日本的「加州風 Jimny」走的是 Cal's Motor Beas 那條路——鍍鉻＋雙色車頂的完成車 ¥3,380,000 起——不是貼紙。所以這個風格在配置器裡應該對應到雙色包膜，不是一組貼。",
+    "拉力／達卡贊助條：日規、淘寶、台灣三邊都查不到 JB74 專用的贊助條套件。最接近的是 MONSTER SPORT 的割字側貼（通用件）、已停售的格紋側貼、與淘寶可訂製的紅灰雙側分色（¥128）。日本媒體上唯一的達卡風 Jimny 是德國 Delta 4x4 的改裝完成車（報導稱整車約 100 萬日圓起），不是可單買的圖組。",
+    "沙漠／Baja：零證據，沒有獨立品項，只以「沙漠迷彩」這個花色存在於整卷改色膜裡。",
+    "以上三項是「沒找到」不是「不存在」：本輪 WebSearch 完全不可用，只靠代理搜尋，覆蓋可能不足。",
+    "ツートン／車頂包膜在日規沒有任何 JB64／JB74 專用套件可買，全是按施工計價的服務。",
+    "6666 Customs 完全無法驗證（6666customs.jp DNS 不存在、6666customs.com 回空白）。Bunker、RANGER、SHIFT SPORTS 找不到對應官網，無法確認是否販售車身圖形——建議人工確認正確店名後再查。",
+    "銷量數據：淘寶與蝦皮都不對未登入者顯示已售出數；1688 上查到的成交筆數只有 2–18 筆。本檔任何一筆都無法宣稱「熱銷賣家」。",
+    "材質：只有兩筆淘寶listing自述材質（防水 PVC、進口材質），沒有任何一筆經查證使用 3M。日規那邊 APIO 標 Avery Dennison、CRAZY COLORZ 標 3M，這是有寫在頁面上的。",
+    "運費到台灣：淘寶沒有任何一頁顯示港澳台運費。",
+    "台灣「貼拉花」的施工工錢：查無公開牌價，M.J WRAPS、Wrap Bull、CF Car Film 全部「價格電洽」。有牌價的只有按面積算的包膜工資。",
+    "ツールギア（SUZUKI 原廠貼第三款）的實際外觀沒有查證，只知道它與復刻 A／B、迷彩同屬一個系列。",
+    "GOOSFAM 側貼三個來源三個價（¥36,300 税込／¥39,000–46,000／樂天未渲染），未能收斂。",
+    "CRAZY COLORZ フードサイドストライプ 的分類頁與商品頁價格不一致（¥10,450 對 ¥16,720），兩個都照抄未推測。",
+    "只在搜尋摘要看到、未經抓頁驗證因此不可引用的：MOON EYES Multi Stripe Kit [DA]、HB1st ドアサイドステッカー、m2k サイドストライプ、Outclass 樂天版、auc-megumikoubou ダイノック木目、pennylane.base.shop、shop.tigral.net、モーターファーム。"
+  ],
+  "corrections": [
+    "KLC 的「Heritage」是復古硬件（水箱罩、保桿）的品牌名，不是橫條貼紙套件。klc-div.com 的 exterior 全表查過，沒有任何貼紙或 decal。容易誤報。",
+    "DAMD 沒有「Classico」這條產品線。DAMD 的 Suzuki 頁上有 decal 的只有 little D. AOL 與 TRADITIONAL ラクダ 兩款；スラッシュガーニッシュ 是樹脂實體件不是圖樣。DAMD 的軍風特輯（featured/004）裡四件全是硬件，沒有貼紙。",
+    "AIMGAIN 的 aimgain.jp 網域不存在，Jimny 作品在子品牌 MUDRON 名下，而且全是板金與烤漆，沒有任何貼紙。",
+    "STOCK'S COMPANY 的木紋貼（¥88,000）只做 JB64，沒有 JB74 版本。Craphts 的整套風格菜單（¥10,000–45,000）同樣只做 JB64。",
+    "heritage-jimny.com 名字叫 Heritage，但賣的只有 ¥1,980 的小貼紙（GO WEST／SAFARI／Solo Camp）與 ¥5,500 備胎罩，沒有條紋套件。",
+    "以下日系名店經實際抓頁確認「沒有」大面積車身圖形：SHOWA GARAGE（只有 ¥550 的 15cm logo 貼）、TANIGUCHI／ORS 自家站（貼紙分類 17 件全是小 logo，最大 4.2×58cm；他們的腰線條在 K-PRODUCTS 通路上架）、LIBERTY WALK（只有 LB-WORKS 車身套件）、RV4 ワイルドグース、C.L.LINK（4 款 ¥880–1,100 小貼）。HARD CARGO 官網是 h-cargo.com（hardcargo.jp／hard-cargo.com 未解析），產品線是輕型貨卡專用，沒有 Jimny 商品。",
+    "ESSEX 與 Jimny 無關，是 200 系 HIACE 專用品牌（官網 essex-japan.com，essex-jp.com DNS 不存在）。",
+    "K-PRODUCTS 的「K-PRO ロゴ入りカラー車体装飾ステッカー セット」（商品コード 191121-1，¥6,105）選項以輪胎尺寸區分，判斷為備胎罩用而非側身圖形；該頁兩次抓取內容不一致，低信心，需人工複核。",
+    "搜尋結果中高排名的 streisand.homes/detail/59582479934.html 標題寫著「Suzuki Jimny JB64W/JB74W Side Stripe Decal Kit」，實際是俄系 VPN 導流網域、404、無此商品。OUTCLASS 自己也公告有仿冒站盜用其商品照。不要採用。",
+    "網路上關於台灣車身顏色變更的「1/3 面積」說法沒有法源，可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述；「30%」是中國大陸公安部規定被誤植。交通部行政解釋資料庫裡查不到任何關於貼紙面積與顏色變更界線的函釋。"
+  ],
+  "styles": [
+    {
+      "id": "retro_side_stripe",
+      "label": "復古橫條（復刻側貼）",
+      "look": "從前葉子板橫貫車側、收在後四分之一板的粗橫條，通常是兩到三道平行色帶疊在腰線上，寬度從數公分到接近半個車側都有，左右各一大片、部分套件再加車尾一片。配色走七〇／八〇年代的橘×黑、棕×白邊、米白×深棕這一路；高階品把品牌字樣直接印在條紋裡（APIO 的「LIFE IS JIMNY」是兩道線加字）。這不是副廠的點子——SUZUKI 原廠目錄自己就有一款叫「リバイバル」的側貼，頁面寫「旧型のデザインをモチーフにしたデカール」，澳洲 2023 年還出過限量 300 台、用紅橘雙色車身貼紙的 Jimny HERITAGE 紀念車。這是 JB74 車身圖樣裡品項最多、從原廠到專門店都有在做的一類。",
+      "placement": [
+        "front fender",
+        "front door",
+        "rear quarter",
+        "tailgate (部分套件)"
+      ],
+      "examples": [
+        {
+          "seller": "SUZUKI 純正（官方配件頁）",
+          "market": "maker",
+          "url": "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+          "price": 21780,
+          "cur": "JPY",
+          "note": "サイドデカール リバイバルA 左右セット，¥21,780（官方頁標示為「本体価格」，同頁另有一處註記寫含 10% 稅，稅別兩種讀法都出現過，請以實際頁面為準），JL／JC 等級，參考工時 0.6h。⚠ 原廠一款車只給一種圖樣：JB74 是 A、JB64 是 B（¥21,780、工時 0.7h、XL/XC 限定）。原廠頁註明各種 decal 要在車體鍍膜施工前貼——實務上是經銷商施工品"
+        },
+        {
+          "seller": "Alternative Auto",
+          "market": "maker",
+          "url": "https://alternativeauto.jp/products/y08-sz0001-00022",
+          "price": 21380,
+          "cur": "JPY",
+          "note": "同款原廠件的通路價：リバイバルA 品番 99230-78R00-001，¥21,380 税込，JB74W 2018.07- JL／JC。同店 リバイバルB（-002）也是 ¥21,380（https://alternativeauto.jp/products/y08-sz0001-00020 ）"
+        },
+        {
+          "seller": "（同一原廠品番的通路價差）",
+          "market": "rakuten",
+          "url": "https://store.shopping.yahoo.co.jp/desir-de-vivre/99230-78r00-002.html",
+          "price": 31857,
+          "cur": "JPY",
+          "note": "⚠ 同一個原廠品番 99230-78R00-002，各通路開價從 ¥21,380 到 ¥31,857 税抜都有（marucorp ¥26,402 税込、okamoto-p ¥21,780 税込＋運費 1,111、SUZY SPORTS ¥21,780＋運費 2,200）。買原廠件務必逐頁比價；SUZY SPORTS 該頁標題與內文的品番還互相矛盾（78R 對 77R）"
+        },
+        {
+          "seller": "みんカラ JB74 車主實付（非賣價）",
+          "market": "maker",
+          "url": "https://minkara.carview.co.jp/userid/3002113/car/3469440/13005273/parts.aspx",
+          "price": 25080,
+          "cur": "JPY",
+          "note": "貼 リバイバルA 的 JB74 車主自述含經銷商施工共付 ¥25,080；套件附的「JIMNY」字樣他嫌不夠復古沒貼，並說「很少看到有人貼」。這是查到唯一的日本實付含工金額"
+        },
+        {
+          "seller": "K-BREAK",
+          "market": "rakuten",
+          "url": "https://store.shopping.yahoo.co.jp/sh-store/k-54038.html",
+          "price": 30056,
+          "cur": "JPY",
+          "note": "レインボーラインデカール 品番 k-54038，¥30,056（頁面記載為税抜）、免運；沿腰線的彩虹色水平條紋，ラッピングシート 材質，JB64W／JB74W"
+        },
+        {
+          "seller": "大澤商会（京都）",
+          "market": "rakuten",
+          "url": "https://item.rakuten.co.jp/oskkyoto/compass1749460295/",
+          "price": 45800,
+          "cur": "JPY",
+          "note": "オリジナル サイドデカールセット ¥45,800–55,800（依規格）、免運，3M プレミアムカッティングシート、左右一台份，訂製 1–2 週，JB64／JB74／Nomad。⚠ 頁面未標稅別；且明寫「貼り付けは簡単ではありません」不建議 DIY"
+        },
+        {
+          "seller": "GOOSFAM（佐野オート商会）",
+          "market": "maker",
+          "url": "https://goosfam.stores.jp/items/68de96a396bb959d11d2f86c",
+          "price": 39000,
+          "cur": "JPY",
+          "note": "オリジナルサイドデカール ¥39,000–46,000（官方店，稅別未標）。⚠ 同一商品在 4WD 媒體零件指南標 ¥36,300 税込（ https://4wdsuv.auto-g.jp/parts/p57442/ ），樂天販售頁 GF6474SD0003 價格未渲染——三個來源不一致，下單前直接問店家"
+        },
+        {
+          "seller": "SUZUKI 純正 海外仕様（Auto Parts Online 販售）",
+          "market": "maker",
+          "url": "https://www.autopartsonline.jp/pg/detail/sz02b-a00017.html",
+          "price": 26800,
+          "cur": "JPY",
+          "note": "レトロ デカール 品番 SZ02B-A00017，¥26,800 税込，左右一組，JB64／JB74（2018-）；該站分類為「海外仕様車用スズキ純正アクセサリー」。⚠ 頁面未說明配色與貼附位置"
+        },
+        {
+          "seller": "crafis（Yahoo! ショッピング）",
+          "market": "rakuten",
+          "url": "https://store.shopping.yahoo.co.jp/crafis/26ac09a045201.html",
+          "price": 5280,
+          "cur": "JPY",
+          "note": "ボディストライプ ステッカー A／B ¥5,280 税込，PVC 防水，JB64W／JB74W，DIY——日規價格帶的下緣。更便宜的還有 Calore ¥3,280 税抜 8 色（ https://store.shopping.yahoo.co.jp/calore/cv052505856.html ）"
+        },
+        {
+          "seller": "TOY FACTORY",
+          "market": "maker",
+          "url": "https://www.toy-factory-shop.jp/view/item/000000000037",
+          "price": 32780,
+          "cur": "JPY",
+          "note": "101TentCar サイドストライプデカールキット，¥32,780 税込，橘×黑七〇年代橫條；JB74W 現貨、JB64W 訂製（XG 等級不適用）。分片供應，施工者要自己量車門位置裁切，參考工時 5 小時，原廠建議找專業貼膜店"
+        },
+        {
+          "seller": "APIO",
+          "market": "maker",
+          "url": "https://apio.jp/parts/4135-1-2.html",
+          "price": 34100,
+          "cur": "JPY",
+          "note": "サイドデカール「LIFE IS JIMNY」，品番 4135-1Y（黃×橘）／4135-1L（淺棕×棕），¥34,100 税込，一台份；Avery Dennison 長期可撕膠＋抗 UV 覆膜，轉印式可水貼 DIY，車檢 OK。⚠ 同名的 4135-2L ¥37,400 是 JC74 Nomad 專用，不適 JB74"
+        },
+        {
+          "seller": "OUTCLASS（ジムニー専門店 アウトクラス）",
+          "market": "maker",
+          "url": "https://outclass.ocnk.net/product/1338",
+          "price": 42900,
+          "cur": "JPY",
+          "note": "ヴィンテージサイドデカール，¥39,000 税別／¥42,900 税込；下拉選 JB64/JB74、JC74、DA17。頁面明寫「施工には基本的に業者の方にご依頼ください」需專業施工，交期約一週。⚠ 該店自己公告有仿冒網站盜用商品照"
+        },
+        {
+          "seller": "痛车族旗舰店",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/bVFSMjF4RktiVXIvTHI5bVpOQzBRdz09.htm",
+          "price": 138,
+          "cur": "CNY",
+          "note": "「适用于铃木jimny吉姆尼车贴拉花 jb74装饰改装车身汽车贴纸彩条」，標題明寫 jb74；已售出數未登入看不到"
+        },
+        {
+          "seller": "痛车族旗舰店",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/a2pjZHRhK3cwRmRtM0g3RXlLRGFIUT09.htm",
+          "price": 98,
+          "cur": "CNY",
+          "note": "四代吉姆尼彩貼；買家評價裡讀到的 SKU 是「两侧：棕色+白边」，即棕底白邊的兩側橫條"
+        },
+        {
+          "seller": "拯救者精品店（sr9168）",
+          "market": "ruten",
+          "url": "https://www.ruten.com.tw/item/22528134002470/",
+          "price": 350,
+          "cur": "TWD",
+          "note": "NT$350–755，24 種變體（標準／原廠級／進口膜，黑／白／銀灰／深灰／香檳金），兩側側裙彩條。⚠ 該商品銷售 0 件、尚未有評價（賣家累積 2,696 評）；標題未標 JB74 或三門／五門"
+        },
+        {
+          "seller": "smilejoya 汽車百貨優選（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/",
+          "price": 883,
+          "cur": "TWD",
+          "note": "NT$883–1,435，標題明寫 JB74／JB43 車門拉花。⚠ 價格與賣家名取自 BigGo 比價頁，蝦皮商品頁被登入牆擋住，已售出數無法驗證"
+        }
+      ],
+      "priceRange": {
+        "low": 350,
+        "high": 3032,
+        "cur": "TWD"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 50,
+          "high": 138,
+          "cur": "CNY",
+          "note": "淘寶預裁貼，含 ¥9.8 的入門 SKU 與 ¥50–98 的主力價帶"
+        },
+        {
+          "low": 3280,
+          "high": 55800,
+          "cur": "JPY",
+          "note": "日規從雜牌 ¥3,280 到訂製 ¥55,800 都有；主流套件帶是原廠復刻 ¥21,380–31,857、TOY FACTORY ¥32,780、APIO ¥34,100、GOOSFAM ¥36,300–46,000、OUTCLASS ¥42,900"
+        }
+      ],
+      "diy": "看價位分兩種。淘寶／蝦皮／露天的預裁貼與 APIO 都是 DIY 取向（APIO 明寫轉印式可水貼），自己花一兩個小時貼得完。但貴的那一段幾乎都要送店：OUTCLASS ヴィンテージ 明寫「基本上請委託業者施工」，大澤商会 明寫「貼り付けは簡単ではありません」，TOY FACTORY 分片供應、要自己量車門位置裁切、參考工時 5 小時且建議找專業貼膜店，原廠リバイバル 在日本本來就算經銷商施工品（一位 JB74 車主含工實付 ¥25,080）。日本另一則買家評論提到請業者貼一組側貼另付工資約 ¥15,000。台灣有公開牌價的只有「整面包膜」工資，沒有「貼拉花」的公開工錢：捷匠 JIEJIANG 小型車全車改色 PET $60,000 起、引擎蓋 $15,000 起、車頂（含窗框、車頂架，各）$8,000 起；G'ZOX 引擎蓋 $12,000、車頂 $9,000、車門 $5,000／片、葉子板 $5,000／片；XPEL 台灣引擎蓋 $15,000–20,000、全車套餐 $90,000–160,000（後者是透明 PPF 不是改色）。做客製彩繪的 M.J WRAPS、台中 Wrap Bull 銳步設計頁面都只寫「價格電洽」。",
+      "legal": "主色沒變的拉花／局部貼紙，實務上監理站不會要求登記——但這是慣例，沒有成文豁免規定。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。另注意第 23-1 條明定車燈不得噴色或貼膠紙，這一項連登記都不行。",
+      "sources": [
+        "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/jimny-accessory.html",
+        "https://alternativeauto.jp/products/y08-sz0001-00022",
+        "https://alternativeauto.jp/products/y08-sz0001-00020",
+        "https://store.shopping.yahoo.co.jp/marucorp/9923078r00001-jb74w.html",
+        "https://store.shopping.yahoo.co.jp/okamoto-p/99230-78r00-002.html",
+        "https://store.shopping.yahoo.co.jp/desir-de-vivre/99230-78r00-002.html",
+        "https://item.rakuten.co.jp/suzysports/10002407/",
+        "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+        "https://store.shopping.yahoo.co.jp/parts-conveni/jimny202512-side-decal.html",
+        "https://item.rakuten.co.jp/hinode-syoukai/99230-013-jimny26-04/",
+        "https://minkara.carview.co.jp/userid/3002113/car/3469440/13005273/parts.aspx",
+        "https://www.autopartsonline.jp/pg/detail/sz02b-a00017.html",
+        "https://store.shopping.yahoo.co.jp/sh-store/k-54038.html",
+        "https://item.rakuten.co.jp/oskkyoto/compass1749460295/",
+        "https://goosfam.stores.jp/items/68de96a396bb959d11d2f86c",
+        "https://4wdsuv.auto-g.jp/parts/p57442/",
+        "https://item.rakuten.co.jp/sanoauto/gf6474sd0003/",
+        "https://store.shopping.yahoo.co.jp/crafis/26ac09a045201.html",
+        "https://store.shopping.yahoo.co.jp/calore/cv052505856.html",
+        "https://store.shopping.yahoo.co.jp/hakuro-shop/cv042602300.html",
+        "https://kuruma-news.jp/post/621104",
+        "https://www.toy-factory-shop.jp/view/item/000000000037",
+        "https://apio.jp/parts/4135-1-2.html",
+        "https://apio.jp/parts/4135-2-2.html",
+        "https://outclass.ocnk.net/product-list/229",
+        "https://outclass.ocnk.net/product/1338",
+        "https://www.taobao.com/list/item/bVFSMjF4RktiVXIvTHI5bVpOQzBRdz09.htm",
+        "https://www.taobao.com/list/item/a2pjZHRhK3cwRmRtM0g3RXlLRGFIUT09.htm",
+        "https://www.taobao.com/list/item/SG5zRncxd2Y5NCtzL0VBaWY0MTRqZz09.htm",
+        "https://www.taobao.com/list/item/MmlSQ0NscWxvbCt4ckpaK0VGa21XZz09.htm",
+        "https://www.ruten.com.tw/item/22528134002470/",
+        "https://www.ruten.com.tw/item/22526950150894/",
+        "https://www.ruten.com.tw/find/?q=JIMNY%20%E6%8B%89%E8%8A%B1",
+        "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "pinstripe",
+      "label": "細腰線（單線側貼）",
+      "look": "只有一道細線，沿著車門腰線或側裙上緣從頭拉到尾，寬度大約 7.5–17 公分。JAOS 的版本是 2,200×75mm 的 PVC 長條、左右各一片，供應時是直的、由施工者照車身折線自己修邊；台中 letsmove 在露天賣的是 17×145cm 單張，可指定左側／右側／雙側。顏色以黑、銀、消光黑為主，也有橘、藍、黃的復古色。這是最不動聲色的一種，不會改變車子的辨識色。",
+      "placement": [
+        "front fender",
+        "front door",
+        "rear quarter"
+      ],
+      "examples": [
+        {
+          "seller": "JAOS",
+          "market": "maker",
+          "url": "https://www.jaos.co.jp/product/B646011/3200",
+          "price": 11000,
+          "cur": "JPY",
+          "note": "サイドデカール ブラック 品番 B646011，¥10,000 税抜／¥11,000 税込，2,200×75mm、兩片（左右）、PVC；通用件由施工者裁切，參考工時 0.5–1.0 小時，可 DIY。JAOS 示範車含 JB74"
+        },
+        {
+          "seller": "JAOS",
+          "market": "maker",
+          "url": "https://www.jaos.co.jp/product/B646012/3201",
+          "price": 11000,
+          "cur": "JPY",
+          "note": "同款シルバー，品番 B646012，尺寸與價格相同"
+        },
+        {
+          "seller": "CRAZY COLORZ",
+          "market": "maker",
+          "url": "https://shop.crazycolorz-carwrap.com/collections/suzuki/products/jimny-hood-side-stripe",
+          "price": 10450,
+          "cur": "JPY",
+          "note": "フードサイドストライプ プレカット：引擎蓋側緣到前葉子板的細條、左右兩枚，顏色有 RETRO／BLUE RETRO／YELLOW RETRO ACCENT 及各自的消光版、黑、消光黑；JB64W・JB74W・JC74W 都適用，DIY（施工難度 ★★）。⚠ 分類頁顯示 ¥10,450（通常 ¥11,000），另一次抓商品頁得到 ¥16,720（通常 ¥17,600）——兩個數字並存，應是不同規格的起價，下單前確認。⚠ 同店的レトロサイドストライプ 全系列（¥20,900–42,800）明寫只適 JC74W 五門 Nomad，三門 JB74 買不到"
+        },
+        {
+          "seller": "TANIGUCHI（K-PRODUCTS 通路）",
+          "market": "rakuten",
+          "url": "https://item.rakuten.co.jp/k-products/t-270/",
+          "price": 6589,
+          "cur": "JPY",
+          "note": "ボディストライプテープ 品番 jb64-es-bss02b，頁面寫「6,589 円 送料無料」（未標稅別）；約 117cm 貼在車門腰線折線上，黑底、TANIGUCHI logo 與線條處鏤空露出車身原色，左右兩枚；JB64・JB74。⚠ TANIGUCHI 自家站上的貼紙分類 17 件全是小 logo 貼，這條側線只在 K-PRODUCTS 通路上架"
+        },
+        {
+          "seller": "ODKSTYLE",
+          "market": "maker",
+          "url": "https://odkstyle999.base.shop/items/65321003",
+          "price": 4620,
+          "cur": "JPY",
+          "note": "ボンネットサイドステッカー ¥4,620 税込、免運，560×45mm、左右兩枚一組，消光黑／銀／白，JB64／JB74，DIY。這是查到唯一有現貨的「引擎蓋位置」細線貼，其他 bonnet 都是包膜施工案例"
+        },
+        {
+          "seller": "letsmove（台中南屯）",
+          "market": "ruten",
+          "url": "https://www.ruten.com.tw/item/22229833811944/",
+          "price": 380,
+          "cur": "TWD",
+          "note": "NT$380–800，17×145cm 單張車門腰線貼，霧面／亮面多色，可指定單側或雙側，可來圖客製換文字。已售出 1 件、賣家 57 則好評——是少數真的在台灣出貨、又能客製的賣家"
+        },
+        {
+          "seller": "淘寶 list 頁（賣家名未顯示）",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/product/%E5%90%89%E5%A7%86%E5%B0%BC%E8%BD%A6%E8%B4%B4%E6%8B%89%E8%8A%B1.htm",
+          "price": 50,
+          "cur": "CNY",
+          "note": "「适用于铃木新吉姆尼车贴拉花 Jimny个性车身腰线装饰贴纸改装彩条」¥50（大減價標籤），評分 4.8；同頁另有側裙彩條 ¥58（4.9）、可訂製字母款 ¥19.9（熱銷、4.8）"
+        }
+      ],
+      "priceRange": {
+        "low": 380,
+        "high": 800,
+        "cur": "TWD"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 19.9,
+          "high": 58,
+          "cur": "CNY",
+          "note": "淘寶腰線／側裙單線貼"
+        },
+        {
+          "low": 4620,
+          "high": 11000,
+          "cur": "JPY",
+          "note": "日規細線：ODKSTYLE ¥4,620、TANIGUCHI ¥6,589、CRAZY COLORZ ¥10,450、JAOS ¥11,000"
+        }
+      ],
+      "diy": "全部都是 DIY 級。JAOS 自己標參考工時 0.5–1.0 小時，CRAZY COLORZ 附說明書、明講是 DIY 商品不是店家施工品，ODKSTYLE 與 TANIGUCHI 也都是自己貼。唯一要注意的是 JAOS 是 2,200mm 通用直條，要自己照車身折線修邊，手不穩會歪；TANIGUCHI 那條是照腰線折線走的 117cm，容錯高一點。台灣沒有這種單線貼的公開施工牌價。",
+      "legal": "主色沒變的拉花／局部貼紙，實務上監理站不會要求登記——但這是慣例，沒有成文豁免規定。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。另注意第 23-1 條明定車燈不得噴色或貼膠紙，這一項連登記都不行。",
+      "sources": [
+        "https://www.jaos.co.jp/product/B646011/3200",
+        "https://www.jaos.co.jp/product/B646012/3201",
+        "https://shop.crazycolorz-carwrap.com/collections/suzuki",
+        "https://shop.crazycolorz-carwrap.com/collections/suzuki/products/jimny-hood-side-stripe",
+        "https://shop.crazycolorz-carwrap.com/collections/all",
+        "https://item.rakuten.co.jp/k-products/t-270/",
+        "https://odkstyle999.base.shop/items/65321003",
+        "https://www.ors-taniguchi.co.jp/parts-cat/sticker/",
+        "https://crazycolorz-carwrap.com/jimny-decal-protection-film-guide/",
+        "https://www.ruten.com.tw/item/22229833811944/",
+        "https://www.taobao.com/list/product/%E5%90%89%E5%A7%86%E5%B0%BC%E8%BD%A6%E8%B4%B4%E6%8B%89%E8%8A%B1.htm"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "military_stencil",
+      "label": "軍風星徽與模板字",
+      "look": "由一堆小圖拼出來的低密度軍用車感，不是大面積色塊——這也是日本軍風的正統做法：車色走橄欖綠，部隊標示用模板噴印風格的小貼分散在引擎蓋、車門、保桿上，重點反而在鐵製水箱罩、頭燈護網、車頂架加油桶這些硬件。兩個核心貼紙元素：一是白或黑的五角星／二戰美軍星徽，貼前門或引擎蓋，市售尺寸 S 10cm、M 20cm、L 30cm；二是模板字體（stencil）的規格文字。日本車主的實際做法是把「型式／車台番号／エンジンタイプ／最高出力」分別貼在引擎蓋兩側、左右車門與車尾，看起來像軍用車的資料牌。台灣線上另有「74Division」軍事風引擎蓋側邊貼與 OUTDOOR ADVENTURE 戰術字樣。",
+      "placement": [
+        "front door",
+        "bonnet side",
+        "front fender",
+        "tailgate"
+      ],
+      "examples": [
+        {
+          "seller": "征服者汽車配件專營店",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/UjhBUzBOak9BdWNyREhPb2VvNWREQT09.htm",
+          "price": 40,
+          "cur": "CNY",
+          "note": "「吉姆尼 越野全车贴 车身改装拉花 JIMNY 车门星星贴纸」，車門星徽；頁面材質只寫「进口材质」未指名品牌"
+        },
+        {
+          "seller": "RS プロダクト",
+          "market": "amazon",
+          "url": "https://www.amazon.co.jp/dp/B0D3PS5BNT",
+          "price": null,
+          "cur": "JPY",
+          "note": "ジムニー用 星ステッカー JMSTK，白／黑，S 10cm・M 20cm・L 30cm。⚠ 商品頁價格未渲染（搜尋摘要顯示 ¥2,150，未經頁面確認）；評價只有 1 則 2★，評者說轉貼到車身不容易"
+        },
+        {
+          "seller": "pitifa（DK shisancar 汽車改裝）",
+          "market": "ruten",
+          "url": "https://www.ruten.com.tw/item/22446226621939/",
+          "price": 462,
+          "cur": "TWD",
+          "note": "NT$462–629，圓五角星／二戰星／OFFROAD 字樣，黑白兩色，含葉子板側標；標題明列 JB74／JB43。⚠ 銷售 0 件、暫無評價（賣家 688 則好評）"
+        },
+        {
+          "seller": "Skuland（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny+jb74+%E8%B2%BC%E7%B4%99/",
+          "price": 380,
+          "cur": "TWD",
+          "note": "「74Division JIMNY 軍事風格引擎蓋側邊貼」NT$380。⚠ 價格與賣家名取自 BigGo 比價頁，蝦皮頁被登入牆擋住，已售出數無法驗證"
+        },
+        {
+          "seller": "bon0925（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny+jb74+%E8%B2%BC%E7%B4%99/",
+          "price": 250,
+          "cur": "TWD",
+          "note": "「Jimny JB74 戰術風車貼 OUTDOOR ADVENTURE」NT$250–400，同樣來自 BigGo 轉載"
+        }
+      ],
+      "priceRange": {
+        "low": 250,
+        "high": 629,
+        "cur": "TWD"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 40,
+          "high": 40,
+          "cur": "CNY",
+          "note": "淘寶車門星徽單組"
+        }
+      ],
+      "diy": "純 DIY，不需要送店。日本一位 JB74 車主在みんカラ記錄整套模板字貼完不到 30 分鐘。要注意的是星徽這種單一大圖轉貼時容易起泡，Amazon 那則評價就是卡在這裡。台灣蝦皮／露天賣的都是自己貼的散片，沒有施工服務。日本 Amazon／樂天的「ミリタリー ステンシル」大宗是 200×89mm、約 ¥1,016 起的無品牌割字貼。",
+      "legal": "面積極小、主色完全不變，實務上不涉及變更登記。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。",
+      "sources": [
+        "https://www.taobao.com/list/item/UjhBUzBOak9BdWNyREhPb2VvNWREQT09.htm",
+        "https://www.amazon.co.jp/dp/B0D3PS5BNT",
+        "https://www.amazon.co.jp/dp/B0FF9T3D11",
+        "https://minkara.carview.co.jp/userid/220042/car/2717611/5993481/note.aspx",
+        "https://minkara.carview.co.jp/userid/3165037/car/2811432/6101276/note.aspx",
+        "https://buff-s4.com/report/jimny-military/",
+        "https://www.ruten.com.tw/item/22446226621939/",
+        "https://biggo.com.tw/s/jimny+jb74+%E8%B2%BC%E7%B4%99/",
+        "https://www.damd.co.jp/featured/004/"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "camo",
+      "label": "迷彩",
+      "look": "三種做法差很多，規模差一個數量級。最小的是 SUZUKI 原廠的「カモフラージュ」——原廠現行目錄把它列為備胎罩貼（スペアタイヤハーフカバーデカール，¥8,470），只蓋備胎那一圈；中間是日規社外的車側預裁套件，例如マットラミ 的 JB74 專用迷彩側貼，消光覆膜、左右一組已切好；最猛的是中國賣的整卷迷彩改色膜（森林與沙漠兩種花色，1.5m×30m 整卷或按米賣），自己裁，可以只貼引擎蓋＋車頂，也可以貼滿全車。日本的軍風玩法其實不貼整片迷彩，是用橄欖綠車色配小張模板字。台灣線上只找得到 12cm 級的小迷彩標，沒有 JB74 專用的預裁大件。",
+      "placement": [
+        "front fender",
+        "front door",
+        "rear quarter",
+        "bonnet",
+        "roof",
+        "spare tyre cover"
+      ],
+      "examples": [
+        {
+          "seller": "SUZUKI 純正（官方配件頁）",
+          "market": "maker",
+          "url": "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+          "price": 8470,
+          "cur": "JPY",
+          "note": "スペアタイヤハーフカバーデカール カモフラージュ ¥8,470（同系列ツールギア 也是 ¥8,470；リバイバルA／B 各 ¥7,260；片假名「ジムニー」／四駆 各 ¥3,080）。JB64・JB74 共通。⚠ 這是備胎罩貼，不是車側貼"
+        },
+        {
+          "seller": "パーツコンビニ（Yahoo! ショッピング）",
+          "market": "rakuten",
+          "url": "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+          "price": 35247,
+          "cur": "JPY",
+          "note": "⚠ 品項歸屬有疑義，不要照單全收。通路商把原廠四款（リバイバルA -001／B -002／ツールギア -003／カモフラージュ -004）全部當「サイドデカール」賣，カモフラージュ 標 ¥35,247；但原廠現行目錄頁把ツールギア／カモフラージュ 列為備胎罩貼 ¥8,470，車側只有一款リバイバル。差四倍不可能是同一物（推測是早期年式的設定，未證實）。該頁也未標稅別。下單前務必向經銷商確認這個品番到底是車側還是備胎罩"
+        },
+        {
+          "seller": "maniac collection（マットラミ）",
+          "market": "rakuten",
+          "url": "https://item.rakuten.co.jp/maniac-collection/dewcarjimny9/",
+          "price": 16500,
+          "cur": "JPY",
+          "note": "ジムニーシエラ オリジナルサイドデカールキット 迷彩カモフラ，頁面寫「16,500 円」綠×黑，左右一組已切好的塩ビ＋覆膜，好貼曲面、ヤマト免運、JB74 專用。同店另有五色組合版（迷彩グリーン×イエロー／グリーン×ホワイト／グレー×イエロー／グレー×ホワイト／グレー×ベリー，同價，https://item.rakuten.co.jp/maniac-collection/demcarjims/ ）。⚠ 三個頁面都沒印出「税込」或「税抜」；只附貼紙不附說明書也不附定位標記；未顯示評價數"
+        },
+        {
+          "seller": "Craphts（team-inkjet，橫濱）",
+          "market": "maker",
+          "url": "https://craphts.team-inkjet.co.jp/jimny/",
+          "price": 45000,
+          "cur": "JPY",
+          "note": "SIDE L 方案 ¥45,000 税抜，CAMO 自成一整類（Lite Gray／Gray／Khaki 三色），噴墨印刷式整片車側圖。店頭施工另加 ¥15,000 税抜，也可郵購自己貼。⚠ 該服務明寫 JB64 專用，沒有 JB74 版本——列在這裡是因為它把日本這一行的風格選單攤開來看"
+        },
+        {
+          "seller": "尊柏信 4 工厂店",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/MjZNU2FCaWo4bEthUExCTEFqeFByQT09.htm",
+          "price": 1224,
+          "cur": "CNY",
+          "note": "「汽车迷彩贴膜沙漠迷彩车身贴纸个性车贴迷彩改色膜1.5m*30m」整卷。⚠ 該頁有登入牆，只讀到標題／店名／價格，捲材規格與已售出數未能在頁面上確認；同類按米賣的在搜尋結果裡標 ¥20 與 ¥45"
+        },
+        {
+          "seller": "Let's Move（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/",
+          "price": 200,
+          "cur": "TWD",
+          "note": "迷彩車標／雪地迷彩紋 12cm，NT$200–400——是小標不是大面積。台灣目前就只到這個級別。價格取自 BigGo 轉載"
+        }
+      ],
+      "priceRange": {
+        "low": 8470,
+        "high": 45000,
+        "cur": "JPY"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 1224,
+          "high": 1224,
+          "cur": "CNY",
+          "note": "淘寶整卷沙漠迷彩改色膜；按米賣的單價在 ¥20–45"
+        },
+        {
+          "low": 200,
+          "high": 400,
+          "cur": "TWD",
+          "note": "台灣線上只有 12cm 級小迷彩標，不是車身圖組"
+        }
+      ],
+      "diy": "マットラミ 的預裁側貼是 DIY 貼得起來的（只是不附定位標記，第一次貼會很痛苦）；原廠備胎罩貼更簡單。Craphts 那種整片印刷圖有店頭施工選項 ¥15,000 税抜。整卷改色膜貼滿全車一定要送包膜店。台灣有公開牌價的只有「整面包膜」工資，沒有「貼拉花」的公開工錢：捷匠 JIEJIANG 小型車全車改色 PET $60,000 起、引擎蓋 $15,000 起、車頂（含窗框、車頂架，各）$8,000 起；G'ZOX 引擎蓋 $12,000、車頂 $9,000、車門 $5,000／片、葉子板 $5,000／片；XPEL 台灣引擎蓋 $15,000–20,000、全車套餐 $90,000–160,000（後者是透明 PPF 不是改色）。做客製彩繪的 M.J WRAPS、台中 Wrap Bull 銳步設計頁面都只寫「價格電洽」。 也就是說，只要迷彩是「整面」而不是「一條」，台灣的實際成本就從貼紙錢跳到包膜工資，小型車全車 $60,000 起。",
+      "legal": "這是最需要留意的一種。只貼車側一條迷彩，主色未變，實務上不辦；但迷彩膜貼滿全車就等於改色，行照顏色欄與車輛不符就要辦變更登記，且要驗車。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。 另外 2016 年公路總局修正檢驗規定後，一般自用車可以登記為「彩繪車」，報導指車身 4 種以上顏色即可登記，且明確涵蓋「以彩繪或貼紙黏貼在車身」——迷彩通常是三到四色，剛好卡在這條線上，建議送驗前先問監理站。規費小客車約 650 元（檢驗費 450 ＋行照費 200），比 900–1,800 元罰鍰加責令改正便宜。",
+      "sources": [
+        "https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html",
+        "https://www.suzuki.co.jp/accessory_car/jimny-accessory.html",
+        "https://store.shopping.yahoo.co.jp/parts-conveni/sierra202512-side-decals.html",
+        "https://store.shopping.yahoo.co.jp/parts-conveni/jimny202512-side-decal.html",
+        "https://store.shopping.yahoo.co.jp/carparts-hinode/99230-14-jimny2018-12.html",
+        "https://item.rakuten.co.jp/ap-murase/9923077r00004-jb74w/",
+        "https://item.rakuten.co.jp/maniac-collection/dewcarjimny9/",
+        "https://item.rakuten.co.jp/maniac-collection/demcarjims/",
+        "https://item.rakuten.co.jp/maniac-collection/decar21070901_2/",
+        "https://craphts.team-inkjet.co.jp/jimny/",
+        "https://buff-s4.com/report/jimny-military/",
+        "https://www.taobao.com/list/item/MjZNU2FCaWo4bEthUExCTEFqeFByQT09.htm",
+        "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/",
+        "https://www.jiejiang.com.tw/articles/car-wrap-price/",
+        "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=23",
+        "https://www.thb.gov.tw/News_Content_table.aspx?n=12181&s=234474",
+        "https://www.cardu.com.tw/news/detail.php?29587"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "woodgrain",
+      "label": "木紋側板（Woodie）",
+      "look": "把整片車側腰線以下貼成木紋，模仿美式 woodie 旅行車的木板側面，是日本獨有的一路。マットラミ 的 JB74 專用款是棕或黑木紋、消光覆膜、左右一組預裁；STOCK'S COMPANY 的則是整片戶外招牌等級膜材、四種木色可選（深棕／淺棕／黃棕／相思木），但那款只做 JB64。視覺上不像貼紙，遠看像換了一塊材質。橫濱的 Craphts 在菜單裡也把 WOOD 列為三個色的獨立大類（SIDE L ¥45,000 税抜），可見這在日本是成立的一個類別，不是單一店家的異想。",
+      "placement": [
+        "front fender",
+        "front door",
+        "rear quarter"
+      ],
+      "examples": [
+        {
+          "seller": "maniac collection（マットラミ）",
+          "market": "rakuten",
+          "url": "https://item.rakuten.co.jp/maniac-collection/dewcarjimny8/",
+          "price": 16500,
+          "cur": "JPY",
+          "note": "ジムニーシエラ オリジナルサイドデカールキット ウッド調 木目，¥16,500 税込，棕或黑，左右一組預裁塩ビ＋消光覆膜，ヤマト免運。⚠ 不附說明書與定位標記；該頁未顯示評價數。這是唯一查到的 JB74 專用木紋件，只有一家在賣"
+        },
+        {
+          "seller": "STOCK'S COMPANY",
+          "market": "maker",
+          "url": "https://www.stocks-company.com/view/item/000000000196",
+          "price": 88000,
+          "cur": "JPY",
+          "note": "オリジナルウッドデカール ¥88,000 税込，整片木紋、四種木色、戶外招牌等級膜材、訂製 7–10 天，價格不含施工費。⚠ 明寫【JB64用】，該店沒有 JB74 版本（Nomad 版是 ¥110,000）——列在這裡是為了說明這個風格的上限價位，不是 JB74 買得到的品項"
+        }
+      ],
+      "priceRange": {
+        "low": 16500,
+        "high": 16500,
+        "cur": "JPY"
+      },
+      "priceRangeAlt": [],
+      "diy": "マットラミ 那款是預裁 DIY，但賣場明寫不附說明書也不附定位標記，要照商品照對位，木紋又是有方向性的圖案，貼歪很明顯——建議兩個人貼或直接找貼膜店。台灣沒有代理，要日本轉運。台灣包膜店可以拿木紋膜現裁，但那是按面積報價的客製工，沒有公開牌價。",
+      "legal": "主色沒變的拉花／局部貼紙，實務上監理站不會要求登記——但這是慣例，沒有成文豁免規定。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。另注意第 23-1 條明定車燈不得噴色或貼膠紙，這一項連登記都不行。 木紋覆蓋的是腰線以下一整片，面積不小，若車身主色因此看起來變成雙色，建議還是去辦。",
+      "sources": [
+        "https://item.rakuten.co.jp/maniac-collection/dewcarjimny8/",
+        "https://www.stocks-company.com/view/item/000000000196",
+        "https://craphts.team-inkjet.co.jp/jimny/"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "matte_hood",
+      "label": "消光黑引擎蓋",
+      "look": "引擎蓋整面或大半面貼消光黑膜，原本的目的是擋擋風玻璃反光（越野與拉力車的老做法），視覺上把車頭壓暗、拉出前後雙色感。CRAZY COLORZ 那款是 3M 膜、一台份、三種造型可選（Stylish／Impact／Surrounded），JB64W・JB74W・JC74W 通用，但只適原廠引擎蓋。常見的搭法是配上引擎蓋兩側的細線或軍風模板字。",
+      "placement": [
+        "bonnet"
+      ],
+      "examples": [
+        {
+          "seller": "CRAZY COLORZ",
+          "market": "maker",
+          "url": "https://shop.crazycolorz-carwrap.com/products/jimny-hood-decal",
+          "price": 16720,
+          "cur": "JPY",
+          "note": "反射防止ボンネットフードデカール マットブラック，特價 ¥16,720（原價 ¥17,600）；3M 膜、一台份、三種造型；膜等分標準（水貼）與プレミアム（乾貼）；附說明書、明講是 DIY 商品。僅適原廠引擎蓋"
+        },
+        {
+          "seller": "車樂趣汽車精品（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny+jb74+%E8%B2%BC%E7%B4%99/",
+          "price": 265,
+          "cur": "TWD",
+          "note": "「鈴木車身裝飾 Swift Jimny 機蓋／引擎蓋貼」NT$265–725——是引擎蓋上的圖案貼，不是整面改色。價格取自 BigGo 轉載"
+        },
+        {
+          "seller": "G'ZOX（台灣）",
+          "market": "maker",
+          "url": "https://www.gzox.com.tw/pricing_main/ppf/",
+          "price": 12000,
+          "cur": "TWD",
+          "note": "引擎蓋單件包膜工資 NT$12,000（同表車頂 $9,000、車門 $5,000／片、葉子板 $5,000／片）——這是「不買貼紙、直接請店家用膜做」的價格"
+        }
+      ],
+      "priceRange": {
+        "low": 10450,
+        "high": 16720,
+        "cur": "JPY"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 12000,
+          "high": 20000,
+          "cur": "TWD",
+          "note": "台灣引擎蓋單件包膜工資：G'ZOX $12,000、捷匠 $15,000 起、XPEL $15,000–20,000"
+        },
+        {
+          "low": 265,
+          "high": 725,
+          "cur": "TWD",
+          "note": "台灣線上的引擎蓋圖案貼（非整面）"
+        }
+      ],
+      "diy": "CRAZY COLORZ 明講是 DIY 商品、附說明書，還分水貼與乾貼兩種膜等給不同熟練度的人選。不想自己貼就走包膜店：台灣引擎蓋單件有公開牌價，G'ZOX NT$12,000、捷匠 $15,000 起、XPEL $15,000–20,000，算下來跟買日規套件自己貼差不多。",
+      "legal": "這一項最靠近界線。只有引擎蓋一片變黑，遠看車子的主色有沒有變，就是監理人員的判斷點——深色車配黑引擎蓋通常看不出來，淺色車配黑引擎蓋等於雙色。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。 公路局公告已明白說雙色可以登記，所以淺色車做這個，建議直接去辦（小客車規費約 650 元、需驗車），不要賭。",
+      "sources": [
+        "https://shop.crazycolorz-carwrap.com/products/jimny-hood-decal",
+        "https://crazycolorz-carwrap.com/jimny-decal-protection-film-guide/",
+        "https://www.gzox.com.tw/pricing_main/ppf/",
+        "https://www.jiejiang.com.tw/articles/car-wrap-price/",
+        "https://www.xpel.com.tw/2026/06/25/paint-protective-film-price-list/",
+        "https://biggo.com.tw/s/jimny+jb74+%E8%B2%BC%E7%B4%99/",
+        "https://tpcmv.thb.gov.tw/News_Content.aspx?n=11845&sms=14423&s=236939"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "totem_illustration",
+      "label": "圖騰插畫側貼",
+      "look": "車側放一個大圖案當主角，而不是條紋。華語市場最常見的三種是犀牛（側面剪影，一邊一隻）、駱駝（沙漠駝隊剪影，常配一道橫條）、山稜線（三角山峰加等高線，常配日出）；日規這邊 DAMD 的 TRADITIONAL 也是駱駝插畫，little D. 的 AOL 則是 Union Jack 加一隻狗加「Adventure of a lifetime」字樣。多半是鏤空單色（黑／白／銀／反光），左右各一片，有些附後擋小圖。",
+      "placement": [
+        "front door",
+        "rear quarter",
+        "rear window"
+      ],
+      "examples": [
+        {
+          "seller": "DAMD",
+          "market": "maker",
+          "url": "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional",
+          "price": 15400,
+          "cur": "JPY",
+          "note": "TRADITIONAL ラクダデカール 左右一組，¥15,400（DAMD 價格欄標示稅込），駱駝插畫，顏色コパーメタリック／ブラック"
+        },
+        {
+          "seller": "DAMD",
+          "market": "maker",
+          "url": "http://www.damd.co.jp/products/suzuki/jimny_little-d",
+          "price": 30800,
+          "cur": "JPY",
+          "note": "little D. AOL デカール 左右一組，¥30,800 税込，只有消光黑；Union Jack ＋狗插畫＋「Adventure of a lifetime」字樣貼車側。適用 JB64／JB74（2018.7-）"
+        },
+        {
+          "seller": "Lucky Galla／奮鬥不打烊（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/",
+          "price": 581,
+          "cur": "TWD",
+          "note": "犀牛車身貼，NT$581–1,794（兩家賣同款不同價）。價格取自 BigGo 轉載，已售出數無法驗證"
+        },
+        {
+          "seller": "丫仔軒精選車品（蝦皮）",
+          "market": "shopee",
+          "url": "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/",
+          "price": 147,
+          "cur": "TWD",
+          "note": "駱駝貼／越野全車貼 NT$147–245（小件）；同站的山形圖裝飾貼紙 NT$707–858"
+        },
+        {
+          "seller": "拯救者精品店（sr9168）",
+          "market": "ruten",
+          "url": "https://www.ruten.com.tw/item/22528132276684/",
+          "price": 368,
+          "cur": "TWD",
+          "note": "「適用於新款吉姆尼車貼拉花 jimny改裝飾駱駝車身側裙彩條貼紙」NT$368–845，駱駝＋側裙彩條的組合款"
+        },
+        {
+          "seller": "酷車貼",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/aWtQdExuMGdiRWh6eW5hYkg1WjR5QT09.htm",
+          "price": 19.9,
+          "cur": "CNY",
+          "note": "「适用于铃木JIMMY吉姆尼越野全车贴 车身改装拉花 防水PVC装饰贴」，標題自述防水 PVC、全車份"
+        },
+        {
+          "seller": "ykn ストア（Yahoo! ショッピング）",
+          "market": "rakuten",
+          "url": "https://store.shopping.yahoo.co.jp/ykn-sutoa/nananaka48334.html",
+          "price": 13580,
+          "cur": "JPY",
+          "note": "マウンテングラフィック ドアサイドステッカー ¥13,580 税抜，山稜線圖案，12 色可選，DIY，JB23／JB74——山峰這個圖騰在日規也有，跟台灣蝦皮的「山形圖」是同一個母題"
+        }
+      ],
+      "priceRange": {
+        "low": 147,
+        "high": 1794,
+        "cur": "TWD"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 19.9,
+          "high": 96,
+          "cur": "CNY",
+          "note": "淘寶圖騰貼／越野全車貼"
+        },
+        {
+          "low": 13580,
+          "high": 30800,
+          "cur": "JPY",
+          "note": "日規：山稜線 ¥13,580、DAMD 駱駝 ¥15,400、DAMD little D. AOL ¥30,800"
+        }
+      ],
+      "diy": "全部 DIY。鏤空單色圖的容錯比條紋高很多——歪一點看不出來，因為沒有一條直線可以拿來比對。DAMD 兩款是左右一組的大片插畫，難度接近條紋。台灣沒有這類貼紙的施工牌價。",
+      "legal": "主色沒變的拉花／局部貼紙，實務上監理站不會要求登記——但這是慣例，沒有成文豁免規定。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。另注意第 23-1 條明定車燈不得噴色或貼膠紙，這一項連登記都不行。",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional",
+        "http://www.damd.co.jp/products/suzuki/jimny_little-d",
+        "https://store.shopping.yahoo.co.jp/ykn-sutoa/nananaka48334.html",
+        "https://biggo.com.tw/s/jimny%E8%BB%8A%E8%BA%AB%E6%8B%89%E8%8A%B1/",
+        "https://www.ruten.com.tw/item/22528132276684/",
+        "https://www.ruten.com.tw/item/22336626703336/",
+        "https://www.taobao.com/list/item/aWtQdExuMGdiRWh6eW5hYkg1WjR5QT09.htm"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "racing_lettering",
+      "label": "賽車字樣側貼",
+      "look": "車側拉一整排大字，用品牌名或贊助字體當圖案本身，離地拉力車的視覺很近但沒有真的贊助商牌面。MONSTER SPORT 那款是 1,900×160mm 的割字貼、左右兩片、訂製約 10 個工作天；OUTCLASS 的「ポルシェ風」則是把店名字樣排成保時捷側身字的味道，標準黑、其他顏色可問。淘寶另有可訂製的紅灰雙側配色，接近拉力塗裝的分色，但賣家沒有以拉力命名。",
+      "placement": [
+        "front door",
+        "rear quarter",
+        "front fender"
+      ],
+      "examples": [
+        {
+          "seller": "MONSTER SPORT",
+          "market": "maker",
+          "url": "https://www.monster-sport.com/product/parts/accessory/sticker/index.html",
+          "price": 24200,
+          "cur": "JPY",
+          "note": "MONSTER TUNING サイドデカール 品番 768500-5200M，¥22,000 税抜／¥24,200 税込，1,900×160mm、兩片（左右）、割字貼，訂製約 10 個工作天。⚠ 這是通用件，MONSTER SPORT 的 JB64W／JB74W 車型頁上沒有任何 Jimny 專用的大面積圖樣"
+        },
+        {
+          "seller": "OUTCLASS",
+          "market": "maker",
+          "url": "https://outclass.ocnk.net/product/1337",
+          "price": 22000,
+          "cur": "JPY",
+          "note": "ポルシェ風サイドデカール ¥22,000 税込，OUTCLASS 字樣側貼，標準黑、其他顏色可詢"
+        },
+        {
+          "seller": "JAOS",
+          "market": "maker",
+          "url": null,
+          "price": 2750,
+          "cur": "JPY",
+          "note": "レーシングレター ホワイト 品番 B654003，¥2,500 税抜／¥2,750 税込，800×100mm 單片。⚠ 這是一條字不是車身圖組，列在這裡當價格下限參考；本筆是從 JAOS 站內清單讀到的，沒有單獨驗證商品頁網址，請用品番在 jaos.co.jp 搜尋"
+        },
+        {
+          "seller": "jparts（Yahoo! ショッピング）",
+          "market": "rakuten",
+          "url": "https://store.shopping.yahoo.co.jp/jparts/1924.html",
+          "price": 3980,
+          "cur": "JPY",
+          "note": "チェッカー（賽車格紋）側貼 ホワイト 品番 1924 ¥3,980 税抜（シルバー 品番 1923 ¥2,980），JB64W／JB74W（H30.7-）。⚠ 兩款都顯示在庫なし；該頁買家評論說另付施工費約 ¥15,000、業者反映膜偏薄、建議避開洗車機"
+        },
+        {
+          "seller": "痛车族汽车贴纸拉花",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/ZXpmcVNZNUx3cTFTRnRudDgrcDFBdz09.htm",
+          "price": 128,
+          "cur": "CNY",
+          "note": "「吉姆尼车贴拉花 越野车装饰改装 车身贴纸客制化红灰双侧设计」——紅灰雙側分色、可訂製。⚠ 賣家沒有稱它拉力風，這是我看圖樣做的歸類，不是賣家的說法"
+        }
+      ],
+      "priceRange": {
+        "low": 2980,
+        "high": 24200,
+        "cur": "JPY"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 128,
+          "high": 168,
+          "cur": "CNY",
+          "note": "淘寶可訂製的雙側分色款"
+        }
+      ],
+      "diy": "MONSTER SPORT 與 OUTCLASS 都是長條割字，字與字之間要對齊、間距要一致，比整片轉印難很多，建議送貼膜店。OUTCLASS 對自家側貼的官方說法就是「基本上請委託業者施工」。日本有一則實際案例可以當工錢參考：一位車主買 ¥3,980 的格紋側貼，另付施工費約 ¥15,000，而且業者反映「デカールその物が薄い」、建議避開洗車機——便宜的膜配上專業工錢，是最不划算的組合。台灣沒有割字貼的公開施工牌價，要找 M.J WRAPS、台中 Wrap Bull 這類做車身彩繪的店電洽。",
+      "legal": "主色沒變的拉花／局部貼紙，實務上監理站不會要求登記——但這是慣例，沒有成文豁免規定。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。另注意第 23-1 條明定車燈不得噴色或貼膠紙，這一項連登記都不行。 要另外注意的是：若字樣帶商業廣告性質（公司行號車身廣告），監理規定另有一套，一般私人車貼品牌字樣不受此限。",
+      "sources": [
+        "https://www.monster-sport.com/product/parts/accessory/sticker/index.html",
+        "https://tajimastore.com/shopdetail/000000000360/sticker/page1/order/",
+        "https://store.shopping.yahoo.co.jp/jparts/1924.html",
+        "https://creative311.com/?p=66040",
+        "https://syachiraku.com/archives/20190617/delta-4x4-suzuki-jimny-paris-dakar.html",
+        "https://outclass.ocnk.net/product/1337",
+        "https://outclass.ocnk.net/product-list/229",
+        "https://www.jaos.co.jp/product/B646011/3200",
+        "https://www.taobao.com/list/item/ZXpmcVNZNUx3cTFTRnRudDgrcDFBdz09.htm",
+        "https://mjwraps.com/wrapping-services/cutomize-design-wrapping/"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "two_tone_wrap",
+      "label": "改色／雙色包膜",
+      "look": "不是貼圖案，是整面換色。最常見的是把車頂連同窗框、A／B 柱貼黑，做出原廠雙色車頂的樣子；再上去是引擎蓋、整車。台灣賣的 JB74 原廠雙色只有黑頂一種，包膜可以做出台灣買不到的組合——日本 Cal's Motor 的 Beas 完成車就是走這條，用 Black × Dolphin Blue Metallic、Black × Tropical Yellow 這種配色撐起整個加州風。用的是改色 PET 或 TPU 膜，不是貼紙，撕得掉、不傷原漆。",
+      "placement": [
+        "roof",
+        "window frame",
+        "A pillar",
+        "B pillar",
+        "bonnet",
+        "full body"
+      ],
+      "examples": [
+        {
+          "seller": "捷匠 JIEJIANG（淡水／北投）",
+          "market": "maker",
+          "url": "https://www.jiejiang.com.tw/articles/car-wrap-price/",
+          "price": 60000,
+          "cur": "TWD",
+          "note": "全車改色 PET，小型車 $60,000 起（JB74 車長 3.6m 屬小型車級距）；同表引擎蓋 $15,000 起、車頂（含窗框、車頂架，各）$8,000 起、大燈一對 $3,000、後視鏡 $3,500、B/C 柱左右 $2,500 起。這是查到最透明的台灣公開牌價"
+        },
+        {
+          "seller": "G'ZOX（台灣）",
+          "market": "maker",
+          "url": "https://www.gzox.com.tw/pricing_main/ppf/",
+          "price": 9000,
+          "cur": "TWD",
+          "note": "車頂 NT$9,000、引擎蓋 $12,000、車門 $5,000／片、前後保桿各 $15,000。全車不公開定價，須個別估價"
+        },
+        {
+          "seller": "XPEL 台灣",
+          "market": "maker",
+          "url": "https://www.xpel.com.tw/2026/06/25/paint-protective-film-price-list/",
+          "price": 90000,
+          "cur": "TWD",
+          "note": "全車套餐 $90,000–160,000、迎風面套餐 $40,000–55,000、引擎蓋 $15,000–20,000。⚠ 這是透明 PPF 保護膜不是改色膜，列出來是因為很多人拿它比價；站上自己註明「價格僅供參考」"
+        },
+        {
+          "seller": "Cal's Motor",
+          "market": "maker",
+          "url": "https://cals-motor.jp/products/beas",
+          "price": 3380000,
+          "cur": "JPY",
+          "note": "Beas 完成車 ¥3,380,000 起（税込）、Adventure Line ¥4,290,000 起；Body Kit 單買為 open price 不含烤漆工資。日本的「加州風 Jimny」是靠雙色＋鍍鉻做出來的，不是靠貼紙——這條是給配置器的風格參考，不是可單買的圖組"
+        }
+      ],
+      "priceRange": {
+        "low": 8000,
+        "high": 60000,
+        "cur": "TWD"
+      },
+      "priceRangeAlt": [],
+      "diy": "一定要包膜店，沒有 DIY 這個選項——整片膜要拉伸包邊、進窗框與門把縫，自己貼會翹邊。日規市場完全沒有 JB74 專用的車頂或全車包膜「套件」可買，Rakuten／Yahoo 上全是按施工計價的服務，連 Craphts 這種做整片印刷圖的也只做車側與下緣、不做車頂。台灣這一項反而是所有風格裡價格最透明的：車頂單件 $8,000–9,000、引擎蓋 $12,000–20,000、全車改色 $60,000 起。日本方面唯一有具體金額的是一位 JB64 車主自述車頂包膜 ¥8,900／公尺 × 約 3 公尺、難度「上級」、6 小時完成；另有部落格整理稱日本車頂行情 ¥60,000–100,000，但那不是店家價目表，未經證實。",
+      "legal": "這一項一定要辦變更登記，沒有模糊空間。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。 公路局公告直接寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」，也就是說雙色車頂是可以登記、而且應該登記的。流程：備車主身分證明、印章、行車執照、新領牌照登記書車主聯（自用小型車免）、有效期逾 30 日之強制險證、異動登記書 2 份，到監理所檢驗室驗車；小客車規費約 650 元（檢驗費 450 ＋行照費 200）。小型自用車可在代檢廠「定期檢驗兼變更車身顏色」一次辦完。",
+      "sources": [
+        "https://www.jiejiang.com.tw/articles/car-wrap-price/",
+        "https://www.gzox.com.tw/pricing_main/ppf/",
+        "https://www.xpel.com.tw/2026/06/25/paint-protective-film-price-list/",
+        "https://cals-motor.jp/products/beas",
+        "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=23",
+        "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=16",
+        "https://www.thb.gov.tw/News_Content_table.aspx?n=12181&s=234474",
+        "https://tpcmv.thb.gov.tw/News_Content.aspx?n=11845&s=230625",
+        "https://www.thb.gov.tw/cp.aspx?n=468",
+        "https://minkara.carview.co.jp/userid/214374/car/3459854/7549344/note.aspx"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "custom_order",
+      "label": "客製訂做圖樣",
+      "look": "不是買現成圖，是把自己的設計拿去裁。淘寶「痛车族」一批賣家標明可訂製，連仿 G-Class 外觀的車身裝飾都做；台中 letsmove 在露天賣的 17×145cm 腰線貼可來圖製作、可換文字；實體端台中 Wrap Bull 銳步設計與北投 M.J WRAPS 做全車線條彩繪與痛車彩繪。形狀、顏色、字樣全部自己指定，所以這一格在配置器裡是「其他」的出口。",
+      "placement": [
+        "front fender",
+        "front door",
+        "rear quarter",
+        "bonnet",
+        "roof",
+        "tailgate"
+      ],
+      "examples": [
+        {
+          "seller": "letsmove（台中南屯）",
+          "market": "ruten",
+          "url": "https://www.ruten.com.tw/item/22229833811944/",
+          "price": 380,
+          "cur": "TWD",
+          "note": "NT$380–800，17×145cm 腰線貼，可來圖詢問製作、可換文字，單側／雙側可選。已售出 1 件、賣家 57 則好評——需求量很小，但這是台灣真的能客製又會出貨的賣家"
+        },
+        {
+          "seller": "痛车族汽车贴纸拉花",
+          "market": "taobao",
+          "url": "https://www.taobao.com/list/item/653371923465.htm",
+          "price": 118,
+          "cur": "CNY",
+          "note": "「吉姆尼车贴拉花 仿大G车身装饰汽车贴纸可订制」——仿 G-Class 外觀，標題自述可訂製；商品評價僅 1 則（系統預設好評）"
+        },
+        {
+          "seller": "Craphts（team-inkjet，橫濱）",
+          "market": "maker",
+          "url": "https://craphts.team-inkjet.co.jp/jimny/",
+          "price": 10000,
+          "cur": "JPY",
+          "note": "菜單式的整片車側圖服務，價格全標税抜：LOWER（下緣線）¥10,000／SIDE LINE ¥28,000／SIDE M・SIDE HALF 各 ¥38,000／SIDE L ¥45,000；店頭施工另加 ¥15,000，也可郵購自己貼。圖樣選單本身就是一張風格地圖——BASIC（Blue&Orange／Lite Blue&Beige／Brown&Orange）、THREE LINE、TWO LINE、WOOD 三色、CAMO 三色、MARBLE 三色、EDGE、WAVE、RETRO、Triangle LINE、STRIPE LINE。⚠ 明寫 JB64 專用，沒有 JB74 版本"
+        },
+        {
+          "seller": "M.J WRAPS（北投／蘆洲／新莊）",
+          "market": "maker",
+          "url": "https://mjwraps.com/wrapping-services/cutomize-design-wrapping/",
+          "price": null,
+          "cur": "TWD",
+          "note": "局部／全車線條彩繪、痛車彩繪、公司行號車身廣告。頁面明寫「價格電洽」，依車型、膜料、施工部位、設計費報價。⚠ 網路流傳的「NT$10,000–50,000」只在搜尋摘要出現，進到頁面該處寫的是電洽，不採信"
+        },
+        {
+          "seller": "Wrap Bull 銳步設計（台中南屯）",
+          "market": "maker",
+          "url": "https://www.wrapbull.com.tw/painted.html",
+          "price": null,
+          "cur": "TWD",
+          "note": "全車改色、車身塗裝拉線設計、客製彩繪。站上完全沒有標價，只留電話與 LINE。同時也在蝦皮賣 Jimny 客製貼紙（搜尋摘要顯示約 NT$500–1,500，未進頁面驗證）"
+        }
+      ],
+      "priceRange": {
+        "low": 380,
+        "high": 800,
+        "cur": "TWD"
+      },
+      "priceRangeAlt": [
+        {
+          "low": 118,
+          "high": 168,
+          "cur": "CNY",
+          "note": "淘寶可訂製款"
+        },
+        {
+          "low": 10000,
+          "high": 55800,
+          "cur": "JPY",
+          "note": "日規訂製：Craphts ¥10,000–45,000 税抜（JB64 專用，施工另加 ¥15,000）、大澤商会 ¥45,800–55,800"
+        }
+      ],
+      "diy": "小片貼紙客製是 DIY；全車彩繪一定送店。台灣做客製彩繪的店一家都沒有公開牌價，M.J WRAPS、Wrap Bull、CF Car Film 全部「電洽」，報價依車型、膜料、施工部位與設計費分別算。誠實的答案是：台灣這一項沒有固定價格，要現場估。唯一有牌價可以拿來抓數量級的是日本的 Craphts——整片車側 ¥45,000 税抜＋施工 ¥15,000 税抜，換算過來大致就是台灣包膜店「引擎蓋＋車頂」那個級距。",
+      "legal": "分兩層。單純加幾條線、換個字樣，主色未變，實務上不辦。但整車彩繪就要辦：2016 年公路總局修正檢驗規定後，一般自用車可以登記為「彩繪車」，報導指車身 4 種以上顏色即可登記，且明確涵蓋「以彩繪或貼紙黏貼在車身」的痛車。限制是不得涉及暴力、色情、謾罵，玻璃不得有圖樣，車燈仍不得噴色或貼膠紙。道路交通安全規則第 23 條把「顏色」列為必須向公路監理機關辦理變更登記的項目，且顏色變更屬「須檢驗合格」那一類；未依規定申報登記依道路交通管理處罰條例第 16 條第 1 項第 1 款處 900–1,800 元罰鍰並責令改正。公路局（高雄／臺北區監理所）公告明寫「車體透過烤漆、包膜方式變更顏色，不論是純色、雙色或彩繪都沒問題」——包膜與烤漆一視同仁。但法規完全沒有訂面積門檻：網路流傳的「1/3」可追到的最早出處是 2016 年 TVBS 訪問一位包膜業者的口述，不是法源；「30%」是中國大陸公安部規定被誤植。實務判準是監理人員目視行照登記顏色與車輛主色是否相同。",
+      "sources": [
+        "https://www.ruten.com.tw/item/22229833811944/",
+        "https://www.taobao.com/list/item/653371923465.htm",
+        "https://www.taobao.com/list/item/ZXpmcVNZNUx3cTFTRnRudDgrcDFBdz09.htm",
+        "https://craphts.team-inkjet.co.jp/jimny/",
+        "https://item.rakuten.co.jp/oskkyoto/compass1749460295/",
+        "https://mjwraps.com/wrapping-services/cutomize-design-wrapping/",
+        "https://www.wrapbull.com.tw/painted.html",
+        "https://www.cardu.com.tw/news/detail.php?29587",
+        "https://www.7car.tw/articles/read/33582/"
+      ],
+      "confidence": "uncertain"
+    }
+  ]
+}
