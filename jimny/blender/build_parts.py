@@ -19,6 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import lib  # noqa: E402
 from lib import P, box, tube, sweep, group, material, rounded_rect, circle, fillet, annulus, sphere, text, cut, lathe, prism  # noqa: E402
+from mathutils import Matrix  # noqa: E402
 import bmesh  # noqa: E402
 import bpy  # noqa: E402
 from mathutils import Matrix  # noqa: E402
@@ -45,6 +46,10 @@ PAINT = material('BodyPaint', 0xe8e0c8, rough=0.45, metal=0.25)     # swapped fo
 PLATE = material('NumberPlate', 0xf2f2ec, rough=0.5)
 ALU_CHEQ = material('AluChequer', 0xb0b3b6, rough=0.5, metal=0.9)
 RED = material('FairleadRed', 0xb0261c, rough=0.4, metal=0.3)
+# A smooth dielectric goes almost white at a grazing angle, which is exactly
+# how a window panel is usually seen, so this is deliberately rough and half
+# transparent -- it has to read as tinted glass, not as a mirror or a lid.
+GLASS = material('PrivacyGlass', 0x0a0d0f, rough=0.55, metal=0.0)
 
 
 # ------------------------------------------------------------- body facts
@@ -2199,22 +2204,56 @@ def spare_urnieta_1970():
 
 
 def gullwing_urnieta_1970():
-    """1970 Gullwing Window Kit (0703009), 6.35 kg: the rear quarter glass is
-    re-hung on a top hinge with two gas struts, in a framed surround. No
-    cutting -- the frame clamps over the existing aperture."""
+    """URNIETA 1970 Gullwing Window Kit (0703009), 6.35 kg, ABS + aluminium-
+    magnesium + glass, black. It REPLACES the rear quarter glass rather than
+    sitting over it: the original pane comes out, a fixed surround goes into
+    the aperture, and the opening pane hangs inside THAT on a top hinge with
+    two gas struts. No cutting, no drilling.
+
+    Redrawn twice, 2026-09-24. The first version was an 800 x 540 slab laid on
+    the flank -- the aperture (QUARTER, sampled off the model) is only 600 x
+    360, so it overhung the glass on every edge. The second filled the whole
+    aperture, which is still wrong: the part that MOVES is not the aperture,
+    it is what is left inside the fixed surround, so it comes out about 520 x
+    280 -- a good deal smaller than the window it sits in. The page hides the
+    stock pane behind it (cfg.hideQuarterGlass).
+    """
     root = group('gullwing')
     q = QUARTER
-    cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2 + 20
-    PW, PH = 800, 540
+    cz, cy = (q['z0'] + q['z1']) / 2, (q['y0'] + q['y1']) / 2
+    XB = 702                                                 # the glass surface, |x|
+    BAR = 36                                                 # the fixed surround's width
+    OW, OH = q['z1'] - q['z0'] + 20, q['y1'] - q['y0'] + 20  # surround, outer
+    IW, IH = OW - 2 * BAR, OH - 2 * BAR                      # the hole left in it
+    PW, PH, PT = IW + 26, IH + 26, 20                        # the pane that moves
+    HINGE_Y = cy + IH / 2 + 6
+    TH = math.radians(36)                                    # how far it is propped open
+    sin, cos = math.sin(TH), math.cos(TH)
     for s in (-1, 1):
-        x = s * 712
-        for (dy, dz, sy, sz) in ((PH / 2, 0, 34, PW), (-PH / 2, 0, 34, PW), (0, PW / 2, PH, 34), (0, -PW / 2, PH, 34)):
-            box(f'frame{s}{dy}{dz}', (x, cy + dy, cz + dz), (16, sy, sz), TEXBLACK, root, bevel=4)
-        for k in (-1, 1):                                    # top hinges
-            box(f'hinge{s}{k}', (s * 700, cy + PH / 2 + 16, cz + k * 230), (40, 30, 90), TEXBLACK, root, bevel=4)
-        for k in (-1, 1):                                    # gas struts, slightly open
-            lib.cylinder(f'strut{s}{k}', (s * 690, cy + 60, cz + k * 170), (0, 0.9, 0.44), 20, 250, STEEL, root, n=12)
-            box(f'strutFoot{s}{k}', (s * 690, cy - 60, cz + k * 170), (26, 30, 30), TEXBLACK, root, bevel=3)
+        # the fixed surround, flush in the aperture
+        for (dy, dz, sy, sz) in ((IH / 2 + BAR / 2, 0, BAR, OW), (-IH / 2 - BAR / 2, 0, BAR, OW),
+                                 (0, IW / 2 + BAR / 2, IH, BAR), (0, -IW / 2 - BAR / 2, IH, BAR)):
+            box(f'surround{s}{dy}{dz}', (s * XB, cy + dy, cz + dz), (18, sy, sz), TEXBLACK, root, bevel=5)
+        # the pane, swung up about the hinge at the top of the hole
+        rot = Matrix.Rotation(-s * TH, 3, 'Y')
+        px, py = XB + 4 + (PH / 2) * sin, HINGE_Y - (PH / 2) * cos
+        box(f'frame{s}', (s * px, py, cz), (PT, PH, PW), TEXBLACK, root, bevel=7, rot=rot)
+        gx, gy = px + 7 * cos, py + 7 * sin
+        box(f'glass{s}', (s * gx, gy, cz), (6, PH - 58, PW - 58), GLASS, root, bevel=0, rot=rot)
+        # hinges on the surround's top bar
+        for k in (-1, 1):
+            box(f'hinge{s}{k}', (s * (XB + 6), HINGE_Y + 10, cz + k * (IW / 2 - 60)),
+                (26, 22, 62), TEXBLACK, root, bevel=4)
+        # gas struts: foot on the surround's bottom bar, head partway up the pane
+        for k in (-1, 1):
+            z = cz + k * (IW / 2 - 90)
+            fx, fy = XB + 6, cy - IH / 2 - 4
+            hx_, hy = XB + 4 + 92 * sin, HINGE_Y - 92 * cos   # 92 mm down the pane
+            dx, dy = hx_ - fx, hy - fy
+            L = math.hypot(dx, dy)
+            lib.cylinder(f'strut{s}{k}', (s * (fx + dx / 2), fy + dy / 2, z),
+                         (s * dx, dy, 0), 16, L, STEEL, root, n=12)
+            box(f'strutFoot{s}{k}', (s * fx, fy, z), (22, 22, 22), TEXBLACK, root, bevel=3)
     return root
 
 

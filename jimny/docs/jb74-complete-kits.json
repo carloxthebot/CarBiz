@@ -1,0 +1,1623 @@
+{
+  "sourcedAt": "2026-09-24",
+  "kits": [
+    {
+      "id": "damd_little_d",
+      "brand": "DAMD",
+      "kit": "little D. コンプリートキット for SIERRA (little D. Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/",
+      "refs": [
+        "https://www.mrk.com.tw/product_ii.html?ID=1287"
+      ],
+      "priceJPY": 305800,
+      "partNumbers": [],
+      "includes": [
+        "front grille",
+        "front bumper",
+        "rear bumper",
+        "bonnet hood cover",
+        "mud flap",
+        "letter emblem",
+        "oval emblem"
+      ],
+      "excludes": [
+        "wheels",
+        "paint",
+        "radar/sonar adapter kit (JPY 17,380)",
+        "fitting labour",
+        "shipping"
+      ],
+      "paint": "unpainted (素地) as standard; painting +JPY 88,000-96,800 (税込)",
+      "fitment": "JB74/JC74 (2018.7-). A separate JB64 version exists at JPY 360,800 税込 on its own page.",
+      "taiwan": "MRK 4X4（新北蘆洲／台中龍井）：「DAMD『Little D』經典全套件 SUZUKI JIMNY JB74專用」NT$120,000，四件（引擎蓋飾板、水箱罩、前保桿、後保桿），安裝工資、烤漆與運費另計",
+      "note": "DAMD 最暢銷的一款，把 JB74 改成舊款 Land Rover Defender 的臉：六道橫肋水箱罩配綠色橢圓徽章，頭燈外側加兩顆小圓燈，前保桿是平直鋼板風橫樑。材質 ABS，水箱罩一律消光黑出貨，其餘素地。另有三種含輪圈的組合：配 Cantabile 15 吋 ¥451,000、配 APIO WILDBOAR SR ¥539,000、配 DEAN CROSS COUNTRY 16 吋 ¥605,000（皆税込未烤漆）。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-d",
+        "http://www.damd.co.jp/products/suzuki/jimny_little-d",
+        "http://www.damd.co.jp/products/suzuki"
+      ]
+    },
+    {
+      "id": "damd_little_g_standard",
+      "brand": "DAMD",
+      "kit": "little G. STANDARD コンプリートキット (little G. Standard Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g/",
+      "refs": [],
+      "priceJPY": 374000,
+      "partNumbers": [],
+      "includes": [
+        "front grille (with vertical LED winkers, dd emblem)",
+        "front bumper",
+        "over-fender & aluminium step type-1",
+        "side mole",
+        "spare tyre cover with stainless band",
+        "G15 emblem"
+      ],
+      "excludes": [
+        "rear bumper (sold separately, JPY 118,800 painted)",
+        "wheels",
+        "paint"
+      ],
+      "paint": "unpainted; painting +JPY 141,900 (税込)",
+      "fitment": "JB74 (JB64 version sold on a separate page)",
+      "taiwan": null,
+      "note": "把 JB74 變成第一代 G-Class（W460）的入門版：直柵水箱罩內建直立式 LED 方向燈，前保桿雙色（車身色＋霧銀），再加上爆龜與鋁製側踏板、側飾條與不鏽鋼帶備胎蓋。注意這一組**不含後保桿**，後保桿要另外加 ¥118,800。加購 little G 專用 16×6J −5 輪圈四顆的套裝為 ¥517,000 税込。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g"
+      ]
+    },
+    {
+      "id": "damd_little_g_traditional",
+      "brand": "DAMD",
+      "kit": "little G. TRADITIONAL コンプリートキット (little G. Traditional Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/",
+      "refs": [],
+      "priceJPY": 547800,
+      "partNumbers": [],
+      "includes": [
+        "front grille",
+        "bonnet cover",
+        "bonnet winkers",
+        "front bumper",
+        "Koito halogen square fog lamps",
+        "over-fender & aluminium step type-2",
+        "side mole",
+        "rear bumper",
+        "halogen square tail lamps",
+        "mud flap",
+        "dd emblem"
+      ],
+      "excludes": [
+        "wheels",
+        "paint",
+        "fitting labour"
+      ],
+      "paint": "unpainted; painting +JPY 145,200 (税込)",
+      "fitment": "JB74 (a JB64 version is sold on its own page)",
+      "taiwan": null,
+      "note": "DAMD 最完整也最貴的 G-Wagen 仿作：12 道水平百葉水箱罩、引擎蓋罩與蓋上方向燈、方形鹵素霧燈、type-2 爆龜＋鋁踏板，後保桿自帶卡車式方形尾燈。全套 11 件，是這份清單裡少數連引擎蓋與燈具都換掉的套件。含 Cantabile 輪圈五顆為 ¥693,000，含輪胎的五件組 ¥781,000 目前受注停止（皆税込未烤漆）。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional"
+      ]
+    },
+    {
+      "id": "damd_little_g_advance",
+      "brand": "DAMD",
+      "kit": "little G. ADVANCE コンプリートキット (little G. Advance Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance/",
+      "refs": [],
+      "priceJPY": 649000,
+      "partNumbers": [],
+      "includes": [
+        "front grille",
+        "bonnet cover",
+        "bonnet winkers",
+        "front bumper with PIAA LED fog lamps",
+        "over-fender & aluminium step type-2",
+        "rear bumper with 415COBRA LED tail lamps",
+        "spare tyre cover (stainless band)",
+        "side mole",
+        "emblems"
+      ],
+      "excludes": [
+        "wheels",
+        "tyres",
+        "paint"
+      ],
+      "paint": "unpainted; painting +JPY 194,700 (税込)",
+      "fitment": "JB74",
+      "taiwan": null,
+      "note": "little G. 系列的頂規，燈具全部升級：前保桿改 PIAA LED 霧燈、後保桿改 415COBRA LED 尾燈，其餘與 TRADITIONAL 同構。官網標示為「見積もり」（報價制），¥649,000 是頁面列出的未塗裝税込價。含 little G 輪圈四顆 ¥781,000、含輪圈＋BRIDGESTONE ALENZA 215/70R16 輪胎 ¥770,000（該組已受注停止）。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_advance"
+      ]
+    },
+    {
+      "id": "damd_little_b",
+      "brand": "DAMD",
+      "kit": "little B. エクステリア5点キット (little B. Exterior 5-Piece Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-b/",
+      "refs": [],
+      "priceJPY": 275000,
+      "partNumbers": [],
+      "includes": [
+        "APIO iron grille",
+        "DAMD American letter emblem",
+        "bonnet hood cover",
+        "front bumper",
+        "rear bumper + extension"
+      ],
+      "excludes": [
+        "wheels",
+        "paint",
+        "over fenders"
+      ],
+      "paint": "unpainted; painting +JPY 118,800 (税込); factory colours ZZC / ZJ3 / ZVL / ZVG",
+      "fitment": "JB74 (a JB64 version is sold on its own page)",
+      "taiwan": null,
+      "note": "走 20 世紀美式越野車路線，DAMD 自己形容為「復刻美好的美國」，做出來是台古典小型 SUV。水箱罩用的是 APIO 的鋼製 Iron Grille，再加引擎蓋罩、前後保桿與美式字體銘牌，五件。另有 WHITE EDITION ¥308,000 税込，差別是限定的棉白色鋼製水箱罩。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-b"
+      ]
+    },
+    {
+      "id": "damd_the_roots",
+      "brand": "DAMD",
+      "kit": "JIMNY the ROOTS. エクステリア3点キット (the ROOTS. Exterior 3-Piece Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/",
+      "refs": [
+        "https://www.ruten.com.tw/item/22544285919506/"
+      ],
+      "priceJPY": 213400,
+      "partNumbers": [],
+      "includes": [
+        "front grille",
+        "front bumper",
+        "rear bumper + extension"
+      ],
+      "excludes": [
+        "wheels",
+        "paint",
+        "roof rack (trip basket sold separately)"
+      ],
+      "paint": "unpainted; painting +JPY 99,000 (税込); painted版延伸片一律消光黑",
+      "fitment": "JB74 (a JB64 version is sold on its own page)",
+      "taiwan": "MRK 4X4（露天）：「DAMD『the ROOTS』經典三套件 SUZUKI JIMNY JB74專用」NT$65,000（未烤漆）",
+      "note": "與 APIO 共同開發，致敬 1970 年的初代 LJ10：象牙色雙層前保桿、車身色水箱罩被四根直肋分成五格，上緣是 SUZUKI 鍍鉻立體字。三件式是這份清單裡最便宜的日系原廠級套件。含 Cantabile 輪圈五顆 ¥363,000、含 APIO WILDBOAR SR 輪圈五顆 ¥451,000，再加 BRIDGESTONE DUELER M/T 輪胎分別是 ¥528,000／¥594,000（皆税込未烤漆）。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_theroots",
+        "https://www.ruten.com.tw/item/22544285919506/"
+      ]
+    },
+    {
+      "id": "damd_little_5",
+      "brand": "DAMD",
+      "kit": "little 5.（サンク）コンプリートキット (little Cinq Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+      "refs": [],
+      "priceJPY": 495000,
+      "partNumbers": [],
+      "includes": [
+        "front grille with DAMD diamond emblem",
+        "Koito square dual halogen headlights",
+        "front bumper with square fog lamps",
+        "blister over-fenders (4 pcs)",
+        "side sill garnish",
+        "rear bumper with square tail lamps (DB)",
+        "rear wing (FRP)"
+      ],
+      "excludes": [
+        "wheels",
+        "paint",
+        "fitting labour",
+        "shipping"
+      ],
+      "paint": "unpainted (素地); paint quoted separately",
+      "fitment": "JB74 2018.7-",
+      "taiwan": null,
+      "note": "致敬 1980 年代法國拉力小車（Renault 5 Turbo 一路的語彙），是 DAMD 少數把圓燈換成方形四燈的套件：柯達（Koito）方形雙燈頭燈、前保桿方霧燈、四片爆龜爆出寬體，後面還加一片 FRP 尾翼。本體 ABS，只有尾翼是 FRP。裝上去等於換了整張臉，配置器要重建燈具才畫得出來。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_little5"
+      ]
+    },
+    {
+      "id": "damd_little_delta",
+      "brand": "DAMD",
+      "kit": "little Δ（デルタ）コンプリートキット (little Delta Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+      "refs": [],
+      "priceJPY": 539000,
+      "partNumbers": [],
+      "includes": [
+        "front grille with DAMD triangle emblem",
+        "round quad headlamps with LED bulbs",
+        "round position lamps",
+        "rectangular turn signals",
+        "front bumper",
+        "Koito rectangular fog lamps",
+        "over-fenders",
+        "side sill garnish",
+        "rear bumper",
+        "rectangular tail lamps (DB)",
+        "rear wing (FRP)"
+      ],
+      "excludes": [
+        "wheels",
+        "paint",
+        "fitting labour",
+        "shipping"
+      ],
+      "paint": "unpainted (素地); paint quoted separately",
+      "fitment": "JB74 2018.7-",
+      "taiwan": null,
+      "note": "致敬 Lancia Delta Integrale 的方向：前臉換成四顆圓形頭燈（LED 燈泡）＋圓形小燈與方形方向燈，配爆龜寬體、側裙與 FRP 尾翼，是 DAMD 系列裡最「拉力車」的一款。本體 ABS，尾翼 FRP。與 little 5. 一樣屬於整張臉重做，不是換件級的改裝。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta"
+      ]
+    },
+    {
+      "id": "damd_saudade",
+      "brand": "DAMD",
+      "kit": "saudade コンプリートキット (saudade Complete Kit)",
+      "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/",
+      "refs": [],
+      "priceJPY": 393800,
+      "partNumbers": [],
+      "includes": [
+        "front grille",
+        "Koito square dual halogen headlights",
+        "front bumper",
+        "over-fenders",
+        "side sill garnish",
+        "rear bumper",
+        "round lamps",
+        "back camera kit"
+      ],
+      "excludes": [
+        "bonnet hood cover (the JPY 437,800 version includes it)",
+        "wheels",
+        "paint",
+        "radar/sonar adapter kit (JPY 17,380)"
+      ],
+      "paint": "unpainted only (素地) — DAMD currently offers no painted version; the 8 colours on the page are CG renders",
+      "fitment": "JB74; requires trimming the wheel-arch liner",
+      "taiwan": null,
+      "note": "DAMD 說它要做的是「骨董般的正統感」：方形雙燈頭燈配典雅的前臉、爆龜與側裙撐出肌肉線條，後面用圓形燈具。¥393,800 是不含引擎蓋罩的版本，含引擎蓋罩為 ¥437,800（皆税込）。目前官方只供應素地，沒有烤漆版本，官網八個顏色都是 CG 示意圖。",
+      "confidence": "confirmed",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_saudade"
+      ]
+    },
+    {
+      "id": "mudron_gt_complete_wide",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT コンプリートキット（ワイドフェンダーバージョン）/ MUDRON GT Complete Kit (Wide Fender ver.)",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-gt/",
+      "refs": [],
+      "priceJPY": 800000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper (LED daylight + aluminium mesh)",
+        "rear bumper (LED licence lamp)",
+        "front grille type1 or type2",
+        "rear roof spoiler",
+        "GT bonnet (FRP)",
+        "front roof spoiler type1",
+        "wide fenders + side steps + bumper extensions + side emblem"
+      ],
+      "excludes": [
+        "paint",
+        "fitting labour",
+        "shipping",
+        "wheels",
+        "carbon bonnet upgrade (+JPY 70,000)"
+      ],
+      "paint": "unpainted black gel-coat FRP; paint quoted separately",
+      "fitment": "JB74W Jimny Sierra only",
+      "taiwan": null,
+      "note": "AIMGAIN 的越野副牌 MUDRON 唯一走「降車高、寬體、公路風」的一條線，裝完又低又寬，完全不像越野車。¥800,000 是官網公布的成套價，但**標示為税抜**，加稅約 ¥880,000，而且不含烤漆與工資。寬體版比窄體版貴 ¥260,000，差的就是寬葉子板＋側踏＋保桿延伸件那一組。AIMGAIN 官網註明不受理以出口為目的的訂單，台灣要買得透過代購。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-gt/",
+        "https://aimgain.net/products/aero/jimny_74mudron_gt/index.html"
+      ]
+    },
+    {
+      "id": "mudron_gt_full_normal",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT フルキット（ノーマルフェンダーバージョン）/ MUDRON GT Full Kit (Normal Fender ver.)",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-gt/",
+      "refs": [],
+      "priceJPY": 540000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper",
+        "rear bumper",
+        "front grille type1 or type2",
+        "rear roof spoiler",
+        "GT bonnet (FRP)",
+        "front roof spoiler type1"
+      ],
+      "excludes": [
+        "wide fenders / side steps / bumper extensions",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted black gel-coat FRP",
+      "fitment": "JB74W only；保留原廠葉子板，車寬不變",
+      "taiwan": null,
+      "note": "GT 的窄體版，保留原廠葉子板所以日本不必辦結構變更、台灣也不會動到車寬。¥540,000 **税抜**，含前後保桿、水箱罩、前後車頂擾流與 FRP 引擎蓋六大件。想要 GT 的低姿態臉但不想動車身寬度，就是這一包。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-gt/"
+      ]
+    },
+    {
+      "id": "mudron_gt_3pcs",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT 3点キット / MUDRON GT 3-Piece Kit",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-gt/",
+      "refs": [],
+      "priceJPY": 270000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper",
+        "rear bumper",
+        "front grille type1 or type2"
+      ],
+      "excludes": [
+        "bonnet",
+        "roof spoilers",
+        "wide fenders",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted black gel-coat FRP",
+      "fitment": "JB74W only",
+      "taiwan": null,
+      "note": "GT 系列的入門三件組，¥270,000 **税抜**。要注意 GT 是低姿態造型，前保桿會比原廠往前約 90mm、往下約 20mm，接近角變差，不適合會走爛路的車。FRP 未塗裝出貨。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/jimny-sierra-jb74w-gt/"
+      ]
+    },
+    {
+      "id": "mudron_gtx_complete_wide",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT-X コンプリートキット（ワイドフェンダーバージョン）/ MUDRON GT-X Complete Kit (Wide Fender ver.)",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/",
+      "refs": [],
+      "priceJPY": 750000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper (genuine-fog compatible, LED daylight, aluminium mesh)",
+        "rear bumper (LED licence lamp)",
+        "front grille type1 or type2",
+        "GT bonnet (FRP)",
+        "front roof spoiler type2 or quad roof spoiler",
+        "wide fenders (approx +30mm/side) + side steps + bumper extensions"
+      ],
+      "excludes": [
+        "paint",
+        "labour",
+        "shipping",
+        "GT wing",
+        "winch mount",
+        "carbon bonnet (+JPY 70,000)"
+      ],
+      "paint": "unpainted black gel-coat FRP",
+      "fitment": "JB74W only；前保桿延伸件可選降低版或舉高版",
+      "taiwan": null,
+      "note": "GT-X 是 GT 的「舉高版」：同一套模具，但前保桿兩側延伸件做得較窄以容納大徑越野胎，霧燈還能沿用原廠。¥750,000 **税抜**。寬葉子板每側約寬 30mm，與 SPORT 線的 +25mm 不通用。車頂擾流可選一般款或附 45W 投射燈＋50W 霧燈的四燈架，兩者同價。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/",
+        "https://aimgain.net/products/aero/jimny_74mudron_gtx/index.html"
+      ]
+    },
+    {
+      "id": "mudron_gtx_full_normal",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT-X フルキット（ノーマルフェンダーバージョン）/ MUDRON GT-X Full Kit (Normal Fender ver.)",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/",
+      "refs": [],
+      "priceJPY": 490000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper",
+        "rear bumper",
+        "front grille type1 or type2",
+        "GT bonnet (FRP)",
+        "front roof spoiler type2 or quad roof spoiler"
+      ],
+      "excludes": [
+        "wide fender set",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted black gel-coat FRP",
+      "fitment": "JB74W only",
+      "taiwan": null,
+      "note": "GT-X 的窄體版，¥490,000 **税抜**，保留原廠葉子板。與寬體版一樣差 ¥260,000。這是 MUDRON 越野調性裡最划算的一包，含引擎蓋與車頂燈架。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/"
+      ]
+    },
+    {
+      "id": "mudron_gtx_3pcs",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT-X 3点キット / MUDRON GT-X 3-Piece Kit",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/",
+      "refs": [],
+      "priceJPY": 260000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper",
+        "rear bumper",
+        "front grille type1 or type2"
+      ],
+      "excludes": [
+        "bonnet",
+        "roof spoiler",
+        "wide fenders",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted black gel-coat FRP",
+      "fitment": "JB74W only",
+      "taiwan": null,
+      "note": "GT-X 三件組 ¥260,000 **税抜**，是 MUDRON 最便宜的入門包。改用 LED 霧燈橫桿飾件要加價，但 AIMGAIN 官網寫 +¥10,000、MUDRON 官網寫 +¥12,000，兩個官方站數字不一致，下單前要確認。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-x/",
+        "https://aimgain.net/products/aero/jimny_74mudron_gtx/index.html"
+      ]
+    },
+    {
+      "id": "mudron_gtx_normalfender_3pcs",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON GT-X NORMAL FENDER ver. 3点キット / GT-X Normal Fender 3-Piece Kit",
+      "url": "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-normalfender/",
+      "refs": [],
+      "priceJPY": 270000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper (lift-up spec: +20mm ride height, +80mm length)",
+        "rear bumper",
+        "front grille type1 or type2"
+      ],
+      "excludes": [
+        "bonnet",
+        "roof spoiler",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted black gel-coat FRP",
+      "fitment": "JB74W only",
+      "taiwan": null,
+      "note": "獨立的一個 SKU，前保桿規格與上面的 GT-X 三件組不同（這組是往上 20mm、往前 80mm 的舉高規格），所以價格是 ¥270,000 **税抜**。命名在兩個官方站不一致：AIMGAIN 叫「GTX ノーマルフェンダーバージョン」，MUDRON 選單叫「GT ノーマルフェンダー」但頁面標題寫 GT-X。訂購時要用料號或頁面連結溝通，不要只報名字。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://mudron.jp/products/products-aero-jimny-sierra/mudron-gt-normalfender/",
+        "https://aimgain.net/products/aero/jimny_74mudron_gtx_normal/index.html"
+      ]
+    },
+    {
+      "id": "mudron_vintage",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON VINTAGE コンプリートキット / MUDRON VINTAGE Complete Kit",
+      "url": "https://aimgain.net/products/aero/jimny_74mudron_vintage/index.html",
+      "refs": [],
+      "priceJPY": 430000,
+      "partNumbers": [
+        "MRVS04（附水箱罩方向燈）",
+        "MRVS005（不附水箱罩方向燈，¥420,000）",
+        "MRVS01 front face kit ¥190,000",
+        "MRVS02 rear bumper set ¥140,000",
+        "MRVS03 vintage bonnet ¥120,000"
+      ],
+      "includes": [
+        "front face kit (front bumper + grille + fender extensions)",
+        "rear bumper set (with dedicated tail lamps + LED licence lamp)",
+        "vintage bonnet (FRP, replacement type)"
+      ],
+      "excludes": [
+        "headlight ring kit",
+        "bonnet winker",
+        "emblem",
+        "spare tyre bracket",
+        "paint",
+        "labour"
+      ],
+      "paint": "unpainted FRP; paint quoted separately",
+      "fitment": "JB74W Jimny Sierra。前保桿比原廠往前約 70mm、高度少約 10mm；後保桿往後約 5mm、高度少約 70mm",
+      "taiwan": null,
+      "note": "MUDRON 唯一有公開料號的一條線，走復古方燈老 Jimny 風格，整套換臉。官網有明確的成套料號：MRVS04 ¥430,000（附水箱罩方向燈）、MRVS005 ¥420,000（不附），皆 **税抜、未塗裝**。也是 MUDRON 唯一註明倒車雷達可以移設沿用的後保桿，其他線都不行。廠方要求下單附車檢證影本與照片以防仿冒，代表是原廠直營管道。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://aimgain.net/products/aero/jimny_74mudron_vintage/index.html",
+        "https://mudron.jp/products/products-aero-jimny-sierra/vintage/"
+      ]
+    },
+    {
+      "id": "mudron_adventure_defender",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON ADVENTURE DEFENDER（含 ADVENTURE ARMY）",
+      "url": "https://aimgain.net/products/aero/jimny_74mudron/index.html",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [
+        "front bumper type1/type2 + extension JPY 95,000",
+        "rear bumper type1 JPY 108,000 / type2 JPY 98,000",
+        "Defender grille with LED turn/position JPY 69,000",
+        "quad front roof spoiler (45W spot + 50W fog) JPY 108,000",
+        "bonnet cover JPY 90,000"
+      ],
+      "excludes": [
+        "no bundled kit price is published — every item is a separate order"
+      ],
+      "paint": "unpainted black gel-coat standard；chipping paint +JPY 18,000、semi-gloss black +JPY 45,000（每件）",
+      "fitment": "JB74W Jimny Sierra（保桿延伸件為 Sierra 規格）；JB64W 有各自的頁面",
+      "taiwan": null,
+      "note": "MUDRON 走 Land Rover Defender 方盒子臉的一條線，也是 AIMGAIN 在 Jimny 上最有辨識度的造型。**但官網只有「単品購入」，沒有任何成套價格**，所以這裡的 priceJPY 記 null——要整套就是把五項單價自己加起來，不是廠商定義的套件。ADVENTURE ARMY 是同一套件換軍規水箱罩的版本，同樣只有單品價。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://aimgain.net/products/aero/jimny_74mudron/index.html"
+      ]
+    },
+    {
+      "id": "mudron_adventure_classic",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON ADVENTURE CLASSIC",
+      "url": "https://aimgain.net/products/aero/jimny_74mudron_classic/index.html",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [
+        "front bumper type1/type2 + extension JPY 95,000",
+        "rear bumper type1 JPY 108,000 / type2 JPY 98,000",
+        "classic grille JPY 45,000",
+        "quad front roof spoiler JPY 108,000",
+        "bonnet cover JPY 90,000",
+        "triple-line side decal JPY 48,000"
+      ],
+      "excludes": [
+        "no bundled kit price is published"
+      ],
+      "paint": "unpainted black gel-coat；paint is a chargeable per-part option",
+      "fitment": "JB74W Jimny Sierra",
+      "taiwan": null,
+      "note": "ADVENTURE 的復古圓燈版本，水箱罩換成白膠衣的 CLASSIC GRILL，可搭三色側貼紙。與 DEFENDER 一樣**官網只列單品價、沒有成套價**，所以 priceJPY 記 null。想比價就把前後保桿、水箱罩、引擎蓋飾板四項加起來，約 ¥338,000 起（税抜、未塗裝）。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://aimgain.net/products/aero/jimny_74mudron_classic/index.html"
+      ]
+    },
+    {
+      "id": "mudron_sport",
+      "brand": "AIMGAIN / MUDRON",
+      "kit": "MUDRON SPORT（ノーマル／WIDE FENDER 兩種）",
+      "url": "https://aimgain.net/products/aero/jimny_74mudron_sp/index.html",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [
+        "front bumper JPY 73,000",
+        "front grille type1/type2 with LED turn signal JPY 50,000",
+        "rear bumper JPY 63,000",
+        "rear roof spoiler JPY 60,000",
+        "spare-tyre-less gate cover JPY 42,000",
+        "wide ver. adds side skirts JPY 70,000 + wide fenders (+25mm) JPY 168,000"
+      ],
+      "excludes": [
+        "no bundled kit price is published"
+      ],
+      "paint": "unpainted black gel-coat；chipping +JPY 15,000 / semi-gloss black +JPY 38,000 on bumpers",
+      "fitment": "JB74W；寬體版葉子板每側 +25mm，與 GT／GT-X 的 +30mm 不通用",
+      "taiwan": null,
+      "note": "MUDRON 最貼近原廠造型的一條線，短前後保桿加運動化水箱罩，前保桿比原廠短約 45mm（含車牌座）。寬體版再加側裙與 +25mm 葉子板。**官網同樣只有單品價，沒有成套價**，priceJPY 記 null。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://aimgain.net/products/aero/jimny_74mudron_sp/index.html"
+      ]
+    },
+    {
+      "id": "lb_gmini_t2_premium_carbon",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 2 Premium complete body kit《Carbon Bonnet Hood Ver.》",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/",
+      "refs": [],
+      "priceJPY": 665500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 2 (LED daylight)",
+        "LB front grille type 2",
+        "LB wide fenders",
+        "LB rear wing",
+        "LB front roof spoiler",
+        "LB bonnet hood (CFRP)",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "paint",
+        "fitting labour",
+        "shipping",
+        "duty",
+        "LED tail lamp kit",
+        "LED headlights",
+        "wheels"
+      ],
+      "paint": "unpainted FRP + carbon bonnet；kit price explicitly excludes paint",
+      "fitment": "JB64 + JB74（官網標題就是「SUZUKI Jimny & Jimny Sierra」，兩代通用）；type 2 對應 G63 後期臉",
+      "taiwan": null,
+      "note": "Liberty Walk 給 Jimny 的套件內部代號叫「G mini」，做的就是把 Jimny 變成賓士 G63 的臉，type 2 對應 G63 後期款。這是四階裡最高的一包，寬體＋尾翼＋車頂擾流，引擎蓋換碳纖維。官網明寫「価格は全て税込」，但同頁又註明表示金額為概算，正式報價要業務確認。**這是全清單裡唯一 JB64／JB74 車身件完全通用的日系名牌套件。**",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t2_premium",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 2 Premium complete body kit",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/",
+      "refs": [],
+      "priceJPY": 588500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 2 (LED daylight)",
+        "LB front grille type 2",
+        "LB wide fenders",
+        "LB rear wing",
+        "LB front roof spoiler",
+        "LB bonnet hood (FRP)",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "JB64 + JB74",
+      "taiwan": null,
+      "note": "與碳纖維版內容完全相同，只是引擎蓋改 FRP，價差 ¥77,000。¥588,500 税込。這一階已含車頂擾流與尾翼，是完整的 G63 臉。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t2_full",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 2 Full complete body kit",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/",
+      "refs": [],
+      "priceJPY": 379500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 2 (LED daylight)",
+        "LB front grille type 2",
+        "LB wide fenders",
+        "LB rear wing",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "bonnet hood",
+        "front roof spoiler",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "JB64 + JB74",
+      "taiwan": null,
+      "note": "Light 版再加一支尾翼，¥379,500 税込。G63 臉的關鍵就是前保桿＋水箱罩＋寬體三樣，這包都有，是 LW Jimny 最常見的組合。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t2_light",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 2 Light complete body kit",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/",
+      "refs": [],
+      "priceJPY": 324500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 2 (LED daylight)",
+        "LB front grille type 2",
+        "LB wide fenders",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "rear wing",
+        "bonnet",
+        "roof spoiler",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "JB64 + JB74",
+      "taiwan": null,
+      "note": "type 2 的入門包，¥324,500 税込，只有前臉三件加標。值得注意的是單買前保桿 ¥104,500＋水箱罩 ¥66,000＋寬體葉子板 ¥154,000 剛好等於 ¥324,500，**成套沒有折扣**，買套件買的是配套保證而不是省錢。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t1_premium_carbon",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 1 Premium complete body kit《Carbon Bonnet Hood Ver.》",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/",
+      "refs": [],
+      "priceJPY": 643500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 1 (LED daylight)",
+        "LB front grille type 1",
+        "LB wide fenders",
+        "LB rear wing",
+        "LB front roof spoiler",
+        "LB bonnet hood (CFRP)",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP + carbon bonnet",
+      "fitment": "JB64 + JB74；type 1 對應 G63 前期臉",
+      "taiwan": null,
+      "note": "type 1 是 G63 **前期**臉的版本，零件組成與 type 2 相同，只差前保桿與水箱罩造型，每一階都比 type 2 便宜約 ¥22,000。¥643,500 税込。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t1_premium",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 1 Premium complete body kit",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/",
+      "refs": [],
+      "priceJPY": 566500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 1",
+        "LB front grille type 1",
+        "LB wide fenders",
+        "LB rear wing",
+        "LB front roof spoiler",
+        "LB bonnet hood (FRP)",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "JB64 + JB74",
+      "taiwan": null,
+      "note": "type 1 前期臉的全 FRP 高階包，¥566,500 税込，內容對應 type 2 Premium。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t1_full",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 1 Full complete body kit",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/",
+      "refs": [],
+      "priceJPY": 357500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 1",
+        "LB front grille type 1",
+        "LB wide fenders",
+        "LB rear wing",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "bonnet",
+        "roof spoiler",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "JB64 + JB74",
+      "taiwan": null,
+      "note": "type 1 的中階包，¥357,500 税込，比 type 2 同階便宜 ¥22,000。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/"
+      ]
+    },
+    {
+      "id": "lb_gmini_t1_light",
+      "brand": "LIBERTY WALK (LB-WORKS)",
+      "kit": "LB-WORKS G mini type 1 Light complete body kit",
+      "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/",
+      "refs": [],
+      "priceJPY": 302500,
+      "partNumbers": [],
+      "includes": [
+        "LB front bumper type 1 (LED daylight)",
+        "LB front grille type 1",
+        "LB wide fenders",
+        "G mini emblem"
+      ],
+      "excludes": [
+        "rear wing",
+        "bonnet",
+        "roof spoiler",
+        "paint",
+        "labour",
+        "shipping"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "JB64 + JB74",
+      "taiwan": null,
+      "note": "整個 LW Jimny 線最便宜的一包，¥302,500 税込。官網註明選配的 LB 16 吋鋁圈是 Sierra（JB74）尺寸，但車身件本身 JB64／JB74 通用。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-1/"
+      ]
+    },
+    {
+      "id": "kuhl_74r_gt_basic",
+      "brand": "KUHL RACING (KUHL JAPAN)",
+      "kit": "74R-GT エアロキット BASIC SET＜5pieces＞/ 74R-GT Body Kit Basic Set",
+      "url": "https://kuhl-japan.com/ec/aeroparts/12919",
+      "refs": [
+        "https://www.kspec.com.tw/products/%E3%80%90%E6%98%8E%E6%B0%B4%E8%87%AA%E5%8B%95%E8%BB%8A%E3%80%91-kuhl-74r-gt-%E7%A9%BA%E5%8A%9B%E5%A5%97%E4%BB%B6%E7%B5%84-suzuki-jimny-jb74w"
+      ],
+      "priceJPY": 245300,
+      "partNumbers": [],
+      "includes": [
+        "74R-GT front bumper",
+        "74R-GT front floating diffuser",
+        "74R-GT rear bumper",
+        "74R-GT front bumper attachment",
+        "74R-GT rear bumper attachment"
+      ],
+      "excludes": [
+        "side step JPY 60,500",
+        "rear floating diffuser",
+        "front grille",
+        "paint",
+        "shipping",
+        "labour"
+      ],
+      "paint": "unpainted FRP black gel-coat；烤漆另計，雙色再加 JPY 18,700／件",
+      "fitment": "3BA-JB74W，**官網明寫「2025年MC前に限る」**（2025 年小改款前的車才裝得上）",
+      "taiwan": "明水自動車 kspec.com.tw 有掛「KUHL 74R-GT 空力套件組 JB74W」NT$12,000（訂購進口品）；該價遠低於日本原價，且列的內容（含側裙）與日本 BASIC SET 不符，研判是訂金或單件價，下單前必須確認",
+      "note": "KUHL 的 74R-GT 走低姿態都會風，靠前後保桿與浮動式分流器堆出層次，不是越野方向。¥245,300 **税込**，是原廠公告的成套價。FRP 未塗裝出貨。這是 KUHL 四包裡最便宜、改動也最保守的一款，車身寬度不變。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://kuhl-japan.com/ec/aeroparts/12919",
+        "https://kuhl-japan.com/ec/aeroparts/maker/suzuki",
+        "https://www.kspec.com.tw/products?query=kuhl"
+      ]
+    },
+    {
+      "id": "kuhl_74r_gt2_basic",
+      "brand": "KUHL RACING (KUHL JAPAN)",
+      "kit": "74R-GTⅡ エアロキット BASIC SET＜5pieces＞/ 74R-GTII Body Kit Basic Set",
+      "url": "https://kuhl-japan.com/ec/aeroparts/19984",
+      "refs": [],
+      "priceJPY": 372900,
+      "partNumbers": [],
+      "includes": [
+        "74R-GTⅡ front bumper",
+        "74R-GTⅡ side step",
+        "74R-GTⅡ rear bumper (MARVELOUS)",
+        "74R-GTⅡ rear floating diffuser TYPE2"
+      ],
+      "excludes": [
+        "front grille TYPE2 JPY 55,000（疑為第五件，官網未列入內容）",
+        "paint",
+        "shipping",
+        "labour"
+      ],
+      "paint": "unpainted FRP black gel-coat；雙色 +JPY 18,700／件",
+      "fitment": "3BA-JB74W，「2025年MC前に限る」",
+      "taiwan": null,
+      "note": "74R-GT 的第二代，加上側裙變成前、側、後一體的環繞式造型，後保桿帶 MARVELOUS 分流器。¥372,900 **税込**。**注意官網標題寫「5pieces」但內容只列四項**，第五件推測是零件表裡的 FRONT GRILLE TYPE2（ABS 材質，¥55,000），官方沒寫進成套內容，下單要問清楚。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://kuhl-japan.com/ec/aeroparts/19984"
+      ]
+    },
+    {
+      "id": "kuhl_blocker_sierra_basic",
+      "brand": "KUHL RACING (KUHL JAPAN)",
+      "kit": "BLOCKER SIERRA エアロキット BASIC SET＜4PIECES＞",
+      "url": "https://kuhl-japan.com/ec/aeroparts/20425",
+      "refs": [],
+      "priceJPY": 440000,
+      "partNumbers": [],
+      "includes": [
+        "BLOCKER SIERRA wide fender kit (單買就 JPY 220,000)",
+        "BLOCKER SIERRA front bumper",
+        "BLOCKER SIERRA side step",
+        "BLOCKER SIERRA rear bumper"
+      ],
+      "excludes": [
+        "paint（單件烤漆 JPY 8,800–44,000 不等）",
+        "muffler",
+        "shipping",
+        "labour"
+      ],
+      "paint": "unpainted FRP；烤漆與碳紋為加價選項，雙色 +JPY 18,700／件",
+      "fitment": "3BA-JB74W，「2025年MC前に限る」",
+      "taiwan": null,
+      "note": "KUHL 目前 JB74 最完整也最貴的一包，¥440,000 **税込**。關鍵是它**是 KUHL 唯一含寬體葉子板的 Jimny 套件**，光那組葉子板單買就 ¥220,000，等於佔一半價錢。造型走厚重方塊感，四件式：寬葉子板＋前保桿＋側裙＋後保桿。FRP 未塗裝。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://kuhl-japan.com/ec/aeroparts/20425"
+      ]
+    },
+    {
+      "id": "kuhl_iron_build_sierra",
+      "brand": "KUHL RACING (KUHL JAPAN)",
+      "kit": "IRON BUILD JIMNY SIERRA エアロキット BASIC SET＜3pieces＞",
+      "url": "https://kuhl-japan.com/ec/aeroparts/22142",
+      "refs": [],
+      "priceJPY": 275000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper protector JPY 110,000",
+        "side step protector JPY 88,000",
+        "rear under protector JPY 77,000"
+      ],
+      "excludes": [
+        "paint",
+        "shipping",
+        "labour",
+        "SLASH 4TAIL muffler"
+      ],
+      "paint": "unpainted FRP black gel-coat；雙色 +JPY 18,700／件",
+      "fitment": "3BA-JB74W，「2025年MC前に限る」",
+      "taiwan": null,
+      "note": "KUHL 新推的越野方向系列，三件都叫 protector（前保桿護板、側踏護板、後下護板），視覺上是鋼板包覆感而不是低姿態空力。¥275,000 **税込**，三件單買合計剛好也是 ¥275,000，**成套沒有折扣**。同系列另有 JB64 版 ¥335,500 與 5 門 Nomade 版 ¥466,400。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://kuhl-japan.com/ec/aeroparts/22142",
+        "https://kuhl-japan.com/ec/aeroparts/maker/suzuki"
+      ]
+    },
+    {
+      "id": "kuhl_64r_gt_jb64only",
+      "brand": "KUHL RACING (KUHL JAPAN)",
+      "kit": "64R-GT エアロキット BASIC SET（JB64 專用，非 JB74）",
+      "url": "https://kuhl-japan.com/ec/aeroparts/maker/suzuki",
+      "refs": [],
+      "priceJPY": 266200,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [
+        "not applicable to JB74"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "**JB64 輕自動車專用，裝不上 JB74**",
+      "taiwan": null,
+      "note": "列在這裡只為了避免誤買：KUHL 的 64R-GT ¥266,200 與 IRON BUILD JIMNY ¥335,500 都是 **JB64 輕自動車版**，車身尺寸與 JB74 Sierra 不同（Sierra 有寬輪拱），不能互換。日本二手／代購市場上 JB64 件比 JB74 件便宜且量大，是台灣買家最常踩的坑。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://kuhl-japan.com/ec/aeroparts/maker/suzuki"
+      ]
+    },
+    {
+      "id": "wald_black_bison_4p",
+      "brand": "WALD INTERNATIONAL",
+      "kit": "SPORTS LINE BLACK BISON EDITION 4Pキット / Black Bison Edition 4-Piece Kit",
+      "url": "https://wald.co.jp/carrange/jimnysierra_bb/",
+      "refs": [],
+      "priceJPY": 674300,
+      "partNumbers": [],
+      "includes": [
+        "front bumper spoiler (with 4 LED lamp housings)",
+        "rear bumper spoiler",
+        "Japamericana grille (with headlight covers)",
+        "over fenders"
+      ],
+      "excludes": [
+        "add-on aero bonnet",
+        "roof LED basement",
+        "front/rear roof wings",
+        "the LED lamps themselves",
+        "paint",
+        "wheels",
+        "labour"
+      ],
+      "paint": "unpainted；ABS 版 JPY 674,300、FRP 版 JPY 624,800（皆税込）",
+      "fitment": "JB74W + JB64W，2018/8–2025/9（4 型以前）",
+      "taiwan": null,
+      "note": "WALD 的 Black Bison 走豪華凶狠路線，前保桿內嵌四顆 LED 燈窩、配寬輪拱與專屬 Japamericana 水箱罩，整體接近「G-Class Brabus」的調性，是這份清單裡最都會、最不越野的一款。官網有明確的四件式成套價：**ABS ¥674,300／FRP ¥624,800，皆為税込**。引擎蓋、車頂 LED 架與頂翼都是另購件，不在 4P 內。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://wald.co.jp/carrange/jimnysierra_bb/"
+      ]
+    },
+    {
+      "id": "aero_over_g62_6p",
+      "brand": "K-FACTORY / AERO OVER",
+      "kit": "G62／G62S 6Pボディキット（3ドア車用）/ AERO OVER G62 6-Piece Body Kit",
+      "url": "https://k-factory.ne.jp/art/g62-jimny3door/",
+      "refs": [
+        "https://www.aero-over.com/?mode=cate&cbid=2161997&csid=24"
+      ],
+      "priceJPY": 490000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper (honeycomb mesh + DRL winker)",
+        "front grille",
+        "side steps",
+        "front over fenders",
+        "rear over fenders",
+        "spare tyre cover"
+      ],
+      "excludes": [
+        "rear bumper JPY 83,000",
+        "bonnet hood JPY 75,000",
+        "LED tail/reverse lamp set JPY 58,000",
+        "rear pillar dummy duct JPY 40,000",
+        "millimetre-wave radar relocation kit for 5型 JPY 29,800",
+        "paint",
+        "labour"
+      ],
+      "paint": "unpainted FRP；烤漆另報價",
+      "fitment": "JB64W + JB74W 三門；訂購時要指定 4 型以前或 5 型以後，5 型另需毫米波雷達移設套件",
+      "taiwan": null,
+      "note": "把 Jimny 做成方正寬體的 G-Class 風格六件式車身套件，是少數真的以**一個價格整組**販售的日本製套件。原廠型錄頁標 ¥490,000 **税別**（加稅約 ¥539,000）。**注意這一組不含後保桿**，後保桿要另加 ¥83,000。全件 FRP 未塗裝。廠方自營網購店把整組標到 ¥602,800 含稅，與型錄價對不上，可能配置不同，下單前要確認。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://k-factory.ne.jp/art/g62-jimny3door/",
+        "https://www.aero-over.com/?mode=cate&cbid=2161997&csid=24"
+      ]
+    },
+    {
+      "id": "garage_ill_bron55",
+      "brand": "GARAGE ILL",
+      "kit": "BRON55（ブロン55）フェイスキット / BRON55 Face Kit",
+      "url": "https://www.garage-ill.co.jp/bron55/",
+      "refs": [],
+      "priceJPY": 264000,
+      "partNumbers": [],
+      "includes": [
+        "grille (ABS, unpainted)",
+        "emblem",
+        "headlights",
+        "daylight winkers",
+        "corner markers",
+        "brackets",
+        "front bumper (FRP, unpainted)"
+      ],
+      "excludes": [
+        "rear bumper",
+        "over fenders",
+        "paint",
+        "labour"
+      ],
+      "paint": "unpainted（水箱罩 ABS 素地、前保桿 FRP 素地）",
+      "fitment": "JB64W（2018/7–2025/10）、JB74W（2018/7–2025/10）、JC74W Nomade（2025/4–）三車通用",
+      "taiwan": null,
+      "note": "把 Jimny 前臉整個換成復古圓燈造型的「換臉套件」：水箱罩、大燈、日行燈方向燈、角燈與前保桿一次到位，視覺改變非常大，**但只改前臉，後面完全不動**。整組價鹵素版 ¥264,000、LED 版 ¥297,000，皆 **税抜**。單買是水箱罩大燈組 ¥198,000／¥231,000 加前保桿 ¥100,100，所以成套省約 ¥34,000。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.garage-ill.co.jp/bron55/"
+      ]
+    },
+    {
+      "id": "mzspeed_zeus_cross_line",
+      "brand": "M'z SPEED",
+      "kit": "EXCLUSIVE ZEUS CROSS LINE ジムニーシエラ / ZEUS Cross Line",
+      "url": "https://www.mzspeed.co.jp/products/body-kit/catalog/316",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [
+        "front bumper guard JPY 45,375 unpainted / JPY 109,175 painted",
+        "rear bumper guard JPY 45,375",
+        "front grille JPY 47,190–56,650",
+        "rear wing JPY 58,080 unpainted / JPY 115,280 painted",
+        "bonnet protector JPY 33,880",
+        "door mirror covers",
+        "LED fog lamp kit",
+        "MZ98 exhaust JPY 130,900",
+        "logo plate"
+      ],
+      "excludes": [
+        "no bundled set price is published — every part is priced separately",
+        "over fenders",
+        "side steps",
+        "wheels"
+      ],
+      "paint": "both — 未塗裝與原廠色烤漆是分開的料號與價格",
+      "fitment": "JIMNY SIERRA JB74W 2018/7–",
+      "taiwan": null,
+      "note": "M'z SPEED 在 ZEUS 品牌下的越野線「CROSS LINE」，走的是**加裝式保桿護板**而不是整支換掉的大包，所以外觀變化溫和、偏都會精緻感。**官網每件分開標價（皆税込），沒有公布一口價的整組價**，所以 priceJPY 記 null。不含寬輪拱與側踏。特色是它有原廠色烤漆版的現成料號，不必自己送烤漆。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.mzspeed.co.jp/products/body-kit/catalog/316"
+      ]
+    },
+    {
+      "id": "sixsense_explosion",
+      "brand": "SIX SENSE / EXPLOSION",
+      "kit": "EXPLOSION クラシック 2点セット / EXP Explosion Classic 2-Piece Set",
+      "url": "https://sixth-sense.shop-pro.jp/?mode=grp&gid=2394280",
+      "refs": [
+        "https://aero-tk.com/products/detail/5860"
+      ],
+      "priceJPY": 110000,
+      "partNumbers": [],
+      "includes": [
+        "front bumper (FRP, unpainted)",
+        "second piece of the 2-point classic set — the shop page does not itemise it"
+      ],
+      "excludes": [
+        "rear bumper (sold separately JPY 87,780)",
+        "fender ducts",
+        "grille",
+        "paint"
+      ],
+      "paint": "unpainted FRP",
+      "fitment": "2 點組標示 JB64 + JB74；單品保桿為 JB74 專用",
+      "taiwan": null,
+      "note": "Six Sense 給 Jimny 的線叫 EXPLOSION，有「クラシック」復古臉與一般 Explosion 兩種調性，parts.js 現有的 Explosion Classic 水箱罩就是同一家。目前只查到一個 2 點組 ¥110,000（FRP 未塗裝），**沒有涵蓋前後＋寬輪拱的完整一口價套裝**，而且賣場頁沒有列出第二件是什麼。官網 sixth-sense.jp 連線失敗，資料來自其自營網購店與零售商頁面，故標為 uncertain。",
+      "confidence": "uncertain",
+      "sources": [
+        "https://sixth-sense.shop-pro.jp/?mode=grp&gid=2394280"
+      ]
+    },
+    {
+      "id": "cllink_cl20_jb64only",
+      "brand": "C.L.LINK",
+      "kit": "CL20 コンプリートセット（JB64 專用，非 JB74）",
+      "url": "https://www.cllink.jp/view/category/ct51",
+      "refs": [],
+      "priceJPY": 428450,
+      "partNumbers": [],
+      "includes": [
+        "front bumper",
+        "rear bumper",
+        "aero components — the category page does not itemise them"
+      ],
+      "excludes": [
+        "paint",
+        "wheels",
+        "labour"
+      ],
+      "paint": "not stated on the page",
+      "fitment": "**JB64 專用。** 分 1型（1～3型 JPY 428,450／4型 JPY 446,050）與 2型（1～3型 JPY 373,450／4型 JPY 391,050）。查不到任何 JB74 Sierra 版本",
+      "taiwan": null,
+      "note": "C.L.LINK 自有品牌 CL20 確實有明碼標價的「コンプリートセット」，是真正的廠商整組套件而不是零售商拼裝。**但查到的品項全部只寫 JB64（輕自動車版），沒有 JB74 Sierra 的對應套裝**，所以對三門 1.5L 的目標不適用，列在這裡是提醒不要誤買。價格區間 ¥373,450–446,050。",
+      "confidence": "uncertain",
+      "sources": [
+        "https://www.cllink.jp/view/category/ct51"
+      ]
+    },
+    {
+      "id": "apio_jb74_ts4",
+      "brand": "APIO",
+      "kit": "JB74-TS4 コンプリートカー / JB74-TS4 Complete Car（APIO SPECIAL EDITION）",
+      "url": "https://apio.jp/newcompletecar/",
+      "refs": [],
+      "priceJPY": 2635120,
+      "partNumbers": [
+        "1034-1AE",
+        "2004-03S",
+        "7200-18",
+        "3033-6",
+        "3032-61",
+        "3032-71",
+        "3070-36R",
+        "3070-37",
+        "3013-S"
+      ],
+      "includes": [
+        "7440Ti 40mm lift suspension (1034-1AE)",
+        "steering damper",
+        "Shizuka-Gozen muffler (2004-03S)",
+        "WILDBOAR SR 15x6J -5 alloys x4 (7200-18)",
+        "ABS Tactical front grille (3033-6)",
+        "Tactical front bumper (3032-61)",
+        "Tactical rear bumper (3032-71)",
+        "number-plate relocation kit",
+        "front + rear tow hooks",
+        "spare tyre cover",
+        "the car itself"
+      ],
+      "excludes": [
+        "諸費用（領牌、運送、稅費）",
+        "over fenders (3032-20 JPY 99,000 is a separate option)",
+        "front wide extension (3032-82 JPY 49,500)"
+      ],
+      "paint": "整車交車即為完成品。單買保桿則是未塗裝未加工：前保桿烤漆 +JPY 35,200、後保桿 +JPY 33,000",
+      "fitment": "JB74 only。**Tactical 保桿只支援 1–4 型**，5 型前保桿內有毫米波雷達與倒車雷達，不支援",
+      "taiwan": null,
+      "note": "**這是整車，不是套件。** APIO 拿新車 JB74 裝上自家零件後整車出售，¥2,635,120 是 JL 車型 MT 的**本體價（含稅、不含規費）**，AT 加 ¥126,500。TS4 是三款中最高階：前後 Tactical 方形保桿、Tactical 水箱罩、40mm 升高懸吊、WILDBOAR SR 15 吋鋁圈，整體是方正軍規越野臉。APIO 官網**沒有任何「TS4 套件」的單一料號**，上述零件一律分開販售。價格表是圖片，本次已下載圖檔核對過。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://apio.jp/newcompletecar/",
+        "https://apio.jp/newcompletecar/img/sp_74r.png",
+        "https://apio.jp/newcompletecar/img/sp_74l.png",
+        "https://apio.jp/parts/3032-61.html",
+        "https://apio.jp/parts/3032-71.html",
+        "https://apio.jp/parts/3033-6.html",
+        "https://apio.jp/parts/1034-1ae.html"
+      ]
+    },
+    {
+      "id": "apio_jb74_ts7",
+      "brand": "APIO",
+      "kit": "JB74-TS7 コンプリートカー / JB74-TS7 Complete Car",
+      "url": "https://apio.jp/newcompletecar/",
+      "refs": [],
+      "priceJPY": 2526770,
+      "partNumbers": [
+        "1028-1AA",
+        "2004-03S",
+        "7200-18",
+        "3033-6",
+        "3032-61",
+        "3032-71"
+      ],
+      "includes": [
+        "7420SA 20mm lift suspension (1028-1AA)",
+        "steering damper",
+        "Shizuka-Gozen muffler",
+        "WILDBOAR SR alloys x4",
+        "ABS Tactical front grille",
+        "Tactical front bumper",
+        "Tactical rear bumper",
+        "number-plate relocation kit",
+        "tow hooks",
+        "spare tyre cover",
+        "the car itself"
+      ],
+      "excludes": [
+        "諸費用",
+        "over fenders",
+        "front wide extension"
+      ],
+      "paint": "整車交車即為完成品",
+      "fitment": "JB74 only；Tactical 保桿 1–4 型",
+      "taiwan": null,
+      "note": "**整車，不是套件。** TS7 的外觀零件與 TS4 完全相同，差別只在懸吊：TS7 是 20mm 升高的 7420SA，TS4 是 40mm 的 7440Ti。官網圖說寫得很清楚：「前後タクティカルバンパー＋20mm アップサスペンション」。¥2,526,770 為 JL、MT、含稅本體價，AT 加 ¥126,500。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://apio.jp/newcompletecar/",
+        "https://apio.jp/newcompletecar/img/sp_74r.png",
+        "https://apio.jp/parts/1028-1aa.html"
+      ]
+    },
+    {
+      "id": "apio_jb74_ts3",
+      "brand": "APIO",
+      "kit": "JB74-TS3 コンプリートカー / JB74-TS3 Complete Car",
+      "url": "https://apio.jp/newcompletecar/",
+      "refs": [],
+      "priceJPY": 2247205,
+      "partNumbers": [
+        "1028-1AA",
+        "2004-03S",
+        "7200-18",
+        "3033-6",
+        "3070-32L",
+        "3070-33L",
+        "3013-S"
+      ],
+      "includes": [
+        "7420SA 20mm lift suspension",
+        "steering damper",
+        "Shizuka-Gozen muffler",
+        "WILDBOAR SR alloys x4",
+        "ABS Tactical front grille",
+        "tow hooks for the stock bumper",
+        "spare tyre cover",
+        "the car itself"
+      ],
+      "excludes": [
+        "Tactical front/rear bumpers — **stock bumpers retained**",
+        "number-plate relocation kit",
+        "諸費用"
+      ],
+      "paint": "n/a — 這一級沒有換保桿",
+      "fitment": "JB74 only",
+      "taiwan": null,
+      "note": "**整車，不是套件。** TS3 是入門版：保留原廠前後保桿，只換水箱罩、鋁圈、排氣管與 20mm 懸吊，所以外觀變化最小、價格最低 ¥2,247,205（JL、MT、含稅本體價）。標配 8 項，比 TS4／TS7 的 11 項少了前後保桿與車牌移位套件。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://apio.jp/newcompletecar/",
+        "https://apio.jp/newcompletecar/img/sp_74r.png"
+      ]
+    },
+    {
+      "id": "apio_no_kit_sku",
+      "brand": "APIO",
+      "kit": "（查證結果：APIO 沒有 JB74 外觀套件的單一料號）",
+      "url": "https://apio.jp/parts/category/jb64ext/",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [
+        "3032-61 front bumper JPY 121,000",
+        "3032-71 rear bumper JPY 140,800",
+        "3033-6 grille JPY 52,800",
+        "3032-20 narrow over fenders JPY 99,000",
+        "3032-82 front wide extension JPY 49,500",
+        "3060-27 number-plate relocation kit ver.3 JPY 22,000"
+      ],
+      "includes": [],
+      "excludes": [
+        "沒有成套 SKU，每一件都要分開下單"
+      ],
+      "paint": "前後保桿出貨為**未塗裝、未加工**，烤漆各加 JPY 35,200／33,000；水箱罩與爆龜為已處理表面；前保桿延伸件出貨即為紋理黑烤漆",
+      "fitment": "3032-61／3032-71／3032-20／3032-82 均 JB74 專用；保桿 1–4 型；3033-6 則 JB64／JB74／JC74 通用。3032-20 爆龜會改變車寬，日本需辦結構變更",
+      "taiwan": null,
+      "note": "這不是 APIO 賣的套件，是把 TS4／TS7 的外觀零件列出來，讓人可以自己湊出同樣的臉。**APIO 官網沒有任何 JB74「エアロキット／コンプリートキット」單一料號**，零件一律分開販售。自己湊前保桿＋後保桿＋水箱罩＝¥314,600（未塗裝、含稅），加爆龜與延伸件約 ¥463,100。兩件事要注意：保桿出貨是未塗裝未加工，噴漆要另加錢；爆龜會改變車寬。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://apio.jp/parts/category/jb64ext/",
+        "https://apio.jp/parts/3032-61.html",
+        "https://apio.jp/parts/3032-71.html",
+        "https://apio.jp/parts/3032-20.html",
+        "https://apio.jp/parts/3033-6.html"
+      ]
+    },
+    {
+      "id": "trust_greddy_no_aero_kit",
+      "brand": "TRUST / GReddy",
+      "kit": "（查證結果：只有單支鋼管前保桿，整套是性能取向的完成車）",
+      "url": "https://www.trust-power.com/products/aero/jb74wgreddy-aero-kit-front-cross-bumper",
+      "refs": [
+        "https://greddy-completecar.com/jimnysierra/"
+      ],
+      "priceJPY": 173800,
+      "partNumbers": [
+        "17090301",
+        "JAN 4991995609186"
+      ],
+      "includes": [
+        "front cross bumper body (steel, 48φ pipe)",
+        "towing hook",
+        "front apron",
+        "fitting parts"
+      ],
+      "excludes": [
+        "rear bumper",
+        "over fenders",
+        "grille — 通通沒有"
+      ],
+      "paint": "出廠即為陽離子＋靜電塗裝的半光黑，不必再烤漆",
+      "fitment": "JB74W 3BA / K15B，2018.7–2025.10，車検対応",
+      "taiwan": null,
+      "note": "這家要分清楚兩件事：外觀上 TRUST **只有一支鋼管式前保桿 ¥173,800（税込）**，不是整套外觀套件；真正叫「コンプリート」的是 GReddy PERFORMANCE EDITION **整車**，MT ¥4,620,000／AT ¥4,700,000（含稅），內容以渦輪套件、油冷、避震、ECU、輪圈為主，屬性能取向而非造型。要的是外觀大包的話，這家可以排除。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.trust-power.com/products/aero/jb74wgreddy-aero-kit-front-cross-bumper",
+        "https://greddy-completecar.com/jimnysierra/"
+      ]
+    },
+    {
+      "id": "jaos_no_aero_kit",
+      "brand": "JAOS",
+      "kit": "（查證結果：JB74 只賣單件，唯一叫「コンプリート」的是懸吊組）",
+      "url": "https://www.jaos.co.jp/product/type_search/7810-b/",
+      "refs": [],
+      "priceJPY": 169400,
+      "partNumbers": [
+        "A734518B"
+      ],
+      "includes": [
+        "BATTLEZ リフトアップセット VFS ver.B(20) コンプリート — 避震器＋彈簧的懸吊套組"
+      ],
+      "excludes": [
+        "所有外觀件（前保桿、下擾流、爆龜、尾翼）一律單件販售，沒有成套價"
+      ],
+      "paint": "n/a",
+      "fitment": "JB74 系列",
+      "taiwan": "JAOS 單件在台灣通路買得到（MRK 有 Front Sport Cowl NT$18,700、Rear Sport Cowl NT$26,500），但沒有成套套件",
+      "note": "JAOS 在 JB74 只賣單件，官網商品列表裡**唯一叫「コンプリート」的是懸吊套組 ¥169,400（税込）**，不是外觀套件。市面上看到的「JAOS コンプリートカー」是經銷商（NS-Stage、ジムニーパーク 等）把 JAOS 單件搭成整車來賣，屬於**店家組合，不是 JAOS 自己的一口價外觀套裝**。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.jaos.co.jp/product/type_search/7810-b/"
+      ]
+    },
+    {
+      "id": "hardcargo_none",
+      "brand": "HARD CARGO",
+      "kit": null,
+      "url": "https://www.h-cargo.com/",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": null,
+      "fitment": "**完全沒有 Jimny 產品線。**",
+      "taiwan": null,
+      "note": "查證結果：HARD CARGO **沒有任何 JB74 或 JB64 的產品**，而且 hardcargo.jp 這個網域不存在，官方網站是 h-cargo.com。他們四條產品線全部是輕型貨車與商用車：軽トラック、バン／デッキバン、Suzuki Super Carry、以及 HIACE／PROBOX／TOWNACE／ELFmio。網路上看到的「HARD CARGO ジムニー」多半是改裝店把他們的輕卡貨架裝到別的車上。這是查證過的否定結論，不是漏查。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.h-cargo.com/",
+        "https://www.h-cargo.com/item/",
+        "https://www.h-cargo.com/work/"
+      ]
+    },
+    {
+      "id": "shinke_none",
+      "brand": "SHINKE",
+      "kit": null,
+      "url": "https://www.shinke-box.com/",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": null,
+      "fitment": "**完全沒有 Jimny 產品線。**",
+      "taiwan": null,
+      "note": "查證結果：SHINKE 這個品牌存在，但**不做 Jimny**。官網是 shinke-box.com（不是 shinke.jp），車型只有 200 系 HIACE、NV350 CARAVAN、NV200、TOWNACE、EVERY、HIJET、ATRAI，主力產品是車中泊床組。在他們自家商店搜尋「ジムニー」是零筆。另外 shinke.jp 是大阪的「株式会社新家」建築金屬加工公司，與汽車改裝無關，兩者常被混為一談。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.shinke-box.com/",
+        "https://www.shinke-box.com/p/search?keyword=%E3%82%B8%E3%83%A0%E3%83%8B%E3%83%BC"
+      ]
+    },
+    {
+      "id": "rockyauto_none",
+      "brand": "ROCKY AUTO",
+      "kit": null,
+      "url": "https://rockyauto.co.jp/",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": null,
+      "fitment": "**完全沒有 Jimny 產品線。**",
+      "taiwan": null,
+      "note": "查證結果：ROCKY AUTO 是愛知縣的舊車／名車專門店，受注生產的只有 Rocky2000GT（TOYOTA 2000GT 複刻）、Rocky3000GT 與 R32 KEN&MARY GT-R，庫存分類是 SKYLINE、FAIRLADY Z、CLASSIC。全站對「ジムニー／JB74」命中零筆。正確網域是 rockyauto.co.jp，rockyauto.jp 與 rocky-auto.net 都不存在。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://rockyauto.co.jp/"
+      ]
+    },
+    {
+      "id": "renoca_flexdream_none",
+      "brand": "FLEX DREAM / Renoca",
+      "kit": null,
+      "url": "https://www.flexnet.co.jp/renoca/lineup",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": null,
+      "fitment": "**Renoca 車型表裡沒有任何 Jimny。**",
+      "taiwan": null,
+      "note": "查證結果：Renoca 的車型表只有八款，**全部是 TOYOTA**：AMERICAN CLASSIC（Prado）、COLOR BOMB（Prado）、COAST LINES（HIACE）、PHOENIX（Land Cruiser）、WONDER（Land Cruiser）、106（Land Cruiser）、COAST LINES Narrow（HIACE）、EURO BOX（PROBOX）。沒有 Jimny。而且 Renoca 賣的是「車輛込み」的整車，不是外掛套件。flexdream.jp 的車系同樣只有 Land Cruiser／Prado／HIACE／HILUX／US TOYOTA。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.flexnet.co.jp/renoca/lineup",
+        "https://www.flexdream.jp/"
+      ]
+    },
+    {
+      "id": "brawny_not_found",
+      "brand": "（BRAWNY／ブローニー）",
+      "kit": null,
+      "url": null,
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": null,
+      "fitment": "n/a",
+      "taiwan": null,
+      "note": "查證結果：**找不到任何叫 BRAWNY／ブローニー 的 Jimny 外觀套件品牌。** 三輪不同的搜尋只找到 Mazda Bongo Brawny（一台廂型車）與一款叫 BrawnyRIW 的露營改裝，都與 Jimny 無關。最接近的兩個可能是 GARAGE ILL 的 **BRON55（ブロン55）** 復古換臉套件，以及 CARSTYLE 的 **BRAWLER BAR** 前防撞桿，兩者都已另立紀錄。「TOYO」作為 Jimny 外觀改裝廠同樣查無此品牌。",
+      "confidence": "uncertain",
+      "sources": []
+    },
+    {
+      "id": "klc_showa_taniguchi_no_kit",
+      "brand": "KLC Heritage / SHOWA GARAGE / TANIGUCHI / Beyond Japan / OUTCLASS / RV4 Wild Goose",
+      "kit": "（查證結果：這六家 JB74 都只賣單件，沒有成套外觀套件）",
+      "url": "https://www.klc-div.com/heritage/",
+      "refs": [],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": null,
+      "fitment": "n/a",
+      "taiwan": null,
+      "note": "這六家是 parts.js 現有名單裡份量最重的日系廠，本次逐一查過官網，**沒有一家賣一口價的外觀成套套件**，全部是單件（保桿、水箱罩、輪圈各自下單）。KLC Heritage 雖然有 47 個「品牌概念」（COMBAT／SURVIVE／BUSHIDO 等），但那是造型路線的分類，不是成套商品。RV4 Wild Goose 有叫「コンプリートキット」的東西，但那是 HMS 2 吋懸吊組 ¥283,250，屬於懸吊不是外觀。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.klc-div.com/heritage/",
+        "https://www.showa-garage.shop/",
+        "https://www.ors-taniguchi.co.jp/",
+        "https://shop.beyond-jpn.com/",
+        "https://outclass.ocnk.net/",
+        "https://www.rv4wildgoose.com/parts/jimny-64-74/"
+      ]
+    },
+    {
+      "id": "tw_gclass_replica",
+      "brand": "無品牌（台灣通路仿品）/ unbranded Taiwan-market replica",
+      "kit": "類賓士大G 爆龜空力套件 全套大包 (G-Class-look wide-body full kit)",
+      "url": null,
+      "refs": [
+        "https://www.ruten.com.tw/item/22032053390784/",
+        "https://www.ruten.com.tw/item/22634446764390/"
+      ],
+      "priceJPY": null,
+      "partNumbers": [],
+      "includes": [],
+      "excludes": [],
+      "paint": "unknown — the listings publish no finish information",
+      "fitment": "listings say only 'SUZUKI JIMNY'; they do not state JB74 vs JB64",
+      "taiwan": "露天：小傑車燈精品 NT$99,999、精品 NT$119,999",
+      "note": "這不是原廠級套件，而是台灣賣場把中國製的大 G 外觀仿件整組出售。露天上至少兩家在賣，價格 NT$99,999–119,999，外觀語彙抄的是 DAMD little G．（直柵水箱罩＋爆龜＋方形燈）。賣場頁完全沒有寫件數、材質、塗裝與適用年式／車型，只留電話請買家自己問，所以無法確認是否真的能裝 JB74。列在這裡是因為它是台灣買得到、價格差距最大的替代路線，不是推薦。",
+      "confidence": "uncertain",
+      "sources": [
+        "https://www.ruten.com.tw/find/?q=jimny%20%E9%A1%9E%E8%B3%93%E5%A3%AB%E5%A4%A7G%20%E7%A9%BA%E5%8A%9B%E5%A5%97%E4%BB%B6",
+        "https://www.ruten.com.tw/item/22032053390784/"
+      ]
+    },
+    {
+      "id": "tw_lb_widebody_replica",
+      "brand": "泰山美研社（台灣通路，標示 LB 寬體）",
+      "kit": "LB寬體 空力套件 (LB-style wide-body aero kit)",
+      "url": null,
+      "refs": [
+        "https://www.ruten.com.tw/item/22511925692431/"
+      ],
+      "priceJPY": null,
+      "partNumbers": [
+        "25031402（賣場自編號）"
+      ],
+      "includes": [],
+      "excludes": [],
+      "paint": "unknown — the listing publishes no finish information",
+      "fitment": "listing says only 'Suzuki Jimny'; JB74 fitment not stated",
+      "taiwan": "露天：泰山美研社 NT$88,800（標示「依當月報價為準」）",
+      "note": "台灣賣場掛「LB寬體」名義出售的寬體套件，賣場沒有任何 LIBERTY WALK 授權標示，也沒有列件數、材質與適用車型，價格還註明依當月報價浮動。同一家另有一組「前保＋引擎蓋＋側裙＋輪弧」的 Jimny 空力套件標 NT$178,000。真偽與是否為正廠 LB 件無法從賣場頁確認，購買前要先跟賣家確認車型與件數。",
+      "confidence": "uncertain",
+      "sources": [
+        "https://www.ruten.com.tw/find/?q=jimny%20LB%20%E5%AF%AC%E9%AB%94",
+        "https://www.ruten.com.tw/item/22511925692431/",
+        "https://www.ruten.com.tw/find/?q=jimny%20%E7%A9%BA%E5%8A%9B%E5%A5%97%E4%BB%B6"
+      ]
+    }
+  ]
+}
