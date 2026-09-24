@@ -47,6 +47,12 @@ export const LIFTS = [
   { id: 'stock', label: '原廠', inch: '原廠', lift: 0, body: 0, price: 0, brand: 'SUZUKI',
     note: '原廠離地 210mm；原廠高度最大可裝 215/70R16' },
   // ---- 1 吋 (20–30mm)
+  // The list ran from stock upwards only, which quietly made "modified" mean
+  // "taller". Japan's street scene goes the other way and this is the spring
+  // it uses.
+  { id: 'klc_turtles', url: 'https://www.klc-div.com/heritage/product/suspension/superdownspringturtles/', label: 'SUPER DOWN SPRING TURTLES 降低彈簧', inch: '−1.5"', lift: -40, body: 0, price: 30800, cur: 'JPY',
+    brand: 'KLC Heritage', uncertain: true,
+    note: '只換彈簧的降低組，適用 JB64W／JB74W／JC74W，¥30,800 稅込。廠方只公布 JB64 的數字「純正比約 40 ミリのローダウン」，JB74 降多少官網沒有單獨寫，這裡先照 40mm 估' },
   { id: 'klc30', url: 'https://www.klc-div.com/heritage/product/suspension/lift-upspringtodoroki/', label: 'Heritage 轟 升高彈簧', inch: '1"', lift: 30, body: 0, price: 38500, cur: 'JPY',
     brand: 'KLC', note: '只換彈簧，沿用原廠避震；車檢 OK' },
   { id: 'sg25', url: 'https://www.showa-garage.shop/shopdetail/000000000529/', label: '1 吋升高彈簧', inch: '1"', lift: 25, body: 0, price: 40700, cur: 'JPY',
@@ -147,6 +153,9 @@ export const WHEELS = [
   { id: 'wildboar_sr', url: 'https://apio.jp/parts/7200-28.html', label: 'WILDBOAR SR 四弧槽輪框', rim: 16, width: 6.0, offset: -5, style: 'arc4',
     price: 48400, cur: 'JPY', brand: 'APIO', needsFlares: true,
     note: '復古壓鋼圈造型：外圈平帶＋內凹中央盤，四道細長弧槽在 1:30／4:30／7:30／10:30，槽緣有滾邊。Iron Black／Iron Grey／Cotton White' },
+  { id: 'street18', label: '18 吋街車多輻輪框', rim: 18, width: 7.0, offset: -20, style: 'dwindow',
+    price: null, cur: 'JPY', brand: '多家（日系街車向）', uncertain: true, needsFlares: true,
+    note: '這是一筆「類別」而不是某一顆產品：18×7.0J −20 是日本車高短 JB74 常見的規格，但本目錄還沒有查證到單一款式的品番與定價。要下單前請先確認實品的 J 數、offset 與中心孔' },
   { id: 'xj07', url: 'https://www.mljinc.co.jp/product/xtreme-j/xj07/', label: 'XTREME-J XJ07 梯形窗輪框', rim: 16, width: 6.0, offset: -5, style: 'dwindow',
     price: 67100, cur: 'JPY', brand: 'MLJ', needsFlares: true,
     note: '8 個梯形 D 窗；官方標示 16×6.0J −5 為 ULTRA DEEP CONCAVE（全系列最深）。無鉚釘、無假 beadlock。孔徑 φ108.5' },
@@ -189,6 +198,8 @@ export const TYRES = [
     legal: true, note: '+6.9%，需 40–50mm 舉升＋修內襯與保桿；滿舵與扭曲時會磨。澳洲法規上限' },
   { id: 't205r16', label: '205R16', dia: 741, width: 205, rim: 16, needLift: 40, needBody: 0,
     legal: true, note: '與 235/75R15 同外徑但較輕' },
+  { id: 't215r18', label: '215/55R18', dia: 694, width: 215, rim: 18, needLift: 0, needBody: 0,
+    legal: true, note: '外徑 694mm，跟原廠 195/80R15 幾乎一樣，所以不必動舉升；差別全在胎壁——55 系列的側面高度只有原廠的一半出頭，輪拱會被輪框而不是被胎填滿' },
   { id: 't30', label: '30×9.50R15', dia: 762, width: 241, rim: 15, needLift: 50, needBody: 0,
     legal: false, note: '+10%，需 50mm 舉升＋修改。超出澳洲法規' },
   { id: 't31', label: '31×10.50R15', dia: 787, width: 267, rim: 15, needLift: 50, needBody: 25,
@@ -669,9 +680,16 @@ export const OTHERS = [
 export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   const out = [];
   const totalLift = (lift?.lift ?? 0) + (bodyLift?.body ?? 0);
-  if (tyre.needLift > totalLift) {
+  // Lowering is not "insufficient lifting". A road tyre that needs no lift is
+  // fine on a lowered car, so the comparison floors at stock height; a tyre
+  // that genuinely needs clearance still fails, and gets told the real gap.
+  if (tyre.needLift > Math.max(totalLift, 0)) {
     out.push({ level: 'error',
-      msg: `${tyre.label} 需要約 ${tyre.needLift}mm 舉升，目前只有 ${totalLift}mm` });
+      msg: `${tyre.label} 需要約 ${tyre.needLift}mm 舉升，目前${totalLift < 0 ? `是降低 ${-totalLift}mm` : `只有 ${totalLift}mm`}` });
+  }
+  if (totalLift < 0 && tyre.dia > 700) {
+    out.push({ level: 'warn',
+      msg: `降低 ${-totalLift}mm 配 ${tyre.label}（外徑 ${tyre.dia}mm）：車身壓低又用大外徑胎，滿載或過坑時輪拱內襯容易磨到` });
   }
   if (tyre.needBody > (bodyLift?.body ?? 0)) {
     out.push({ level: 'error',
@@ -858,6 +876,12 @@ export const STYLES = [
       rimColor: 0x24262a, cage: 'wildgoose', frontBumper: 'wmd_winch',
       rearBumper: 'taniguchi_rear_pipe', sideStep: 'taniguchi_bar', windowGuards: true,
       guardCan: 'right', shovel: true, flares: true } },
+
+  { id: 'street_low', label: '都會寬體低趴', sw: ['#1d2224', '#b8bcc0', '#2e3236'],
+    desc: '六台裡唯一往下走的：降低彈簧配 18 吋大框與 55 系列扁平胎，輪拱被輪框而不是被胎填滿，車頂完全空的。亮黑車身才撐得起這個對比。',
+    set: { color: 'ZJ3', lift: 'klc_turtles', wheel: 'street18', tyre: 't215r18', tread: 'toyo_at3',
+      rimColor: 0x17191c, stripe: 'jaos', grille: 'outclass_g', frontBumper: 'jaos_cowl',
+      rearBumper: 'jaos_rear_cowl', exhaust: 'kakimoto_kr_lr', sideSkirt: true } },
 
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
     desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
