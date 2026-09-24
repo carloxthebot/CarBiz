@@ -669,6 +669,19 @@ export const OTHERS = [
 export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   const out = [];
   const totalLift = (lift?.lift ?? 0) + (bodyLift?.body ?? 0);
+  // Checked first-hand against the official PDF of 道安規則 附件十五 (第23條's
+  // own attachment, law.moj.gov.tw FileId 0000403808), 三、底盤:
+  //   「懸吊系統之避震器 ｜ 變更後不得超過原核定車身高度。」
+  // That is the whole rule. A shock change is registrable, but only downward:
+  // there is no registration path for raising the car, and no tolerance is
+  // written anywhere in the attachment -- the only percentage in all of it is
+  // a 2% body-LENGTH allowance for a cab-over truck's nose trim. The ~2 cm
+  // owners report at inspection is what inspectors wave through, not a rule,
+  // and saying so is the difference between a catalogue and a rumour.
+  if (totalLift > 0) {
+    out.push({ level: 'warn',
+      msg: `舉升 ${totalLift}mm：道安規則附件十五對避震器只寫「變更後不得超過原核定車身高度」，升高沒有登記管道、法規也沒有寫任何容許值。車友回報驗車現場約有 2cm 的裁量空間，那是實務不是規定` });
+  }
   if (tyre.needLift > totalLift) {
     out.push({ level: 'error',
       msg: `${tyre.label} 需要約 ${tyre.needLift}mm 舉升，目前只有 ${totalLift}mm` });

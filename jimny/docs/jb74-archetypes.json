@@ -1,0 +1,334 @@
+{
+  "sourcedAt": "2026-09-24",
+  "method": "先讀完 parts.js 的 STYLES 與全部零件 id、docs/jb74-stripes.json、docs/jb74-complete-kits.json、docs/jb74-jp-gapfill.json，確定哪些方向已經做過。本輪 WebSearch 額度一開始就是 600/600 用盡，所有搜尋改用 WebFetch 直連＋ r.jina.ai 代理 html.duckduckgo.com。視覺判斷一律是把圖檔下載下來自己打開看過才寫（delta_main.jpg、delta_b.jpg、bron55_mv.jpg、lb_gmini(TYPE-214).jpg、cage_7401.jpg、us_1-1.jpg、truck1.jpeg 共七張），沒有開過的圖不寫外觀。parts 欄位裡的 id 全部回頭用 node 掃過 parts.js 的陣列確認存在。",
+  "partsNote": "parts 欄位裡的每一個 id 都用 node 掃過 parts.js 的陣列驗證存在（含 COLORS 的 code）。parts.js 本身有少數 id 在不同家族重複，我盡量避開了；唯一一個仍然有歧義的是 bronco_face 的 'ipf'，那裡指的是 LIGHT_BARS 的 IPF 600 S-Series 40 吋燈條，不是 ROOF_RACKS 的 IPF 車頂架。",
+  "acceptanceTest": "只有在十公尺外就讀得出不同才收：剪影（車高、車頂載什麼、輪拱寬度、輪框大小）、車身顏色、或一個一眼認得出的招牌零件。換了哪一家的保桿不算。",
+  "notes": {
+    "instagram": "本輪沒有開過任何 IG 貼文（沿用 jb74-stripes.json 的結論：無登入態拿不到），所以沒有一筆 example 來自 IG。",
+    "minkara": "minkara 透過 r.jina.ai 可讀，但搜尋頁（/search/）是 JS 渲染、代理回來只有殼，讀得到的是分類版的パーツレビュー列表。實際讀到兩份：車頂架／車頂箱分類、頭燈分類。兩份都帶出重要的否定結論，見下。",
+    "minkaraFindings": "1) 車頂分類裡 JB74 車主實際掛的是行李架、籃架、尾門箱，整頁沒有一筆車頂帳——車頂帳在 JB74 上不是普遍做法。2) 頭燈分類裡 JB74 車主做的是換 LED 燈泡與加裝 LED 光圈（イカリング），沒有一筆圓燈總成換裝——『圓燈化』在 JB74 是店家套件的世界，不是草根改法，這點在 bronco_face 的 confidence 說明裡誠實標出。",
+    "unreachable": "carscoops.com、carsguide.com.au、drive.com.au 三個澳洲／新聞站對 WebFetch 全部回 403，所以澳規 Jimny Heritage 限量車我只拿到搜尋摘要（3 門、300 台、$33,490），沒有親眼看過圖，因此沒有把它寫成一個 archetype。midori-m.com 那篇皮卡文章網址回 404。",
+    "existingCoverage": "docs/jb74-stripes.json 已經提案過第六個 style「原廠復刻（SUZUKI BLACK REVIVAL STYLE）」並附完整原廠料號，這份不重複提案，列在 rejected 裡註明原因是『已經有人做過』而不是『不合格』。"
+  },
+  "taiwanRegulation": {
+    "summary": "本輪另外把台灣法規從全國法規資料庫第一手查了一遍（道安規則全文＋附件十五、附件七 PDF 原件），結論比想像中嚴，而且它不只影響這份新提案，也影響現有的五個 style。最關鍵的一句：附件十五第三點對避震器只寫「變更後不得超過原核定車身高度」——台灣對車高沒有任何容許公差，升高根本沒有登記管道，只有降低是合法方向。",
+    "rules": {
+      "lift": "(不可) 附件十五・底盤「懸吊系統之避震器：變更後不得超過原核定車身高度」。全份附件十五只有一處提到公差，是平頭小貨車車頭飾板的車長 2%，與車高無關。另第 23 條之 1 明文禁止變更支臂、三角架與連桿機構，所以含 control arm／拉桿的 lift kit 是絕對禁止。",
+      "width": "(不可) 附件十五沒有「車寬變更」這個項目，反而每一個車身外加裝項目都重複「不得突出車身兩側」。另第 38 條：後輪胎外緣與車身內緣距離小型車不得超過 10 公分——Jimny 加寬胎或墊片時這條比車寬更早踩線。齊平輪弧與外擴爆龜的界線沒有毫米級成文標準，是檢驗員現場認定。",
+      "tyre": "(須變更登記，且實務標準嚴) 第 23 條把輪胎尺寸列為應辦變更登記且須檢驗合格，但附件十五裡根本沒有輪胎項目，法條內部有空缺。業界通說是外徑誤差 2% 以內、輪圈外緣不超出葉子板即免辦，但查不到政府出處。以原廠 195/80R15 外徑約 680mm 計：215/70R16 約 +0.3%、215/55R18 約 +2%（剛好在通說邊緣）、225/75R16 約 +9.4%、31×10.50R15 約 +15.7%。後兩者過不了。",
+      "bumper": "(可辦變更登記) 附件十五第二點・車身「防撞桿」：須車廠安裝證明＋統一發票＋檢驗合格。基準五項，其中車長有明確上限——前方延伸 ≤30 公分、後方延伸 ≤25 公分，且不得遮蔽號牌燈光、不得有銳利邊角、不得突出車身兩側。絞盤另列第三點，須合法業者施工＋檢驗＋變更登記。查無撞擊或行人保護要求。",
+      "headlamp": "(可辦變更登記，門檻高) 附件十五第二點・電系：108/7/1 起變更頭燈須車廠出具改裝證明，且頭燈必須是通過台灣「車輛型式安全審驗合格」的燈具，近光另須自動調整垂直傾角裝置（總目標發光量低於 2,000 流明除外），並通過明暗截止線檢驗；第 39 條之 1 第 6 款規定變更後每次定檢都要重驗光型。沒有審驗的社外圓燈總成過不了，行駛中依處罰條例第 18 條可罰 2,400–9,600 元。",
+      "roofRack": "(可辦變更登記，門檻最高) 附件十五第一點「小型汽車固定式置放架」須經 ARTC 審驗合格＋統一發票＋檢驗合格才能登記，基準含靜態強度、不得突出車身兩側、後伸不得超過後側車身外 50 公分。高度上限是第 38 條：小型車全高不得超過全寬 1.5 倍且不得超過 2.85 公尺；JB74 三門全寬 1,645mm→上限約 2,467mm，原廠全高 1,725mm，車頂加東西有約 74 公分餘裕，絕對高度幾乎不會超標。車頂帳在法規裡完全沒有對應項目，無法判定。",
+      "lights": "車頂燈條 (不可)——第 23 條之 1 明文「車身外附加燈飾」不得變更，附件七一、二、三點也沒有這個燈種，未經主管機關核定不得裝設。工作燈／聚光燈 (可)——附件七第三點第 5 目明文允許，限白或淡黃、開關不得與其他燈光連動，且行駛中會影響他車視野者應以固定遮蔽裝置蓋起來（這就是「上路要蓋起來」的法源）。霧燈 (可)，有對稱、顏色、高度不得高於近光燈等條件。紅／藍閃光警示燈 (不可)，僅消防、救護、警備、工程救險車執行任務時適用。",
+      "snorkel": "(查不到) 附件十五四點全部、第 23 條、第 23 條之 1、第 39 條、第 39 條之 1 都沒有任何關於呼吸管或進氣管外移的規定，正反皆無。呼吸管在車寬包絡線內，不觸犯「不得突出車身兩側」，但切葉子板與 A 柱鈑金算不算須登記的車身變更沒有成文答案，實務上是檢驗員裁量。",
+      "pickup": "(不可行) 第 23 條雖然把車身式樣列為可登記欄位，但附件十五沒有給小客車／客貨兩用車任何路徑：第二點唯一涉及切鈑金的是「廂式平頭小貨車車側或車頂鈑金件變更」，要求底盤與駕駛室樑柱結構不得變更、切除樑柱須由改裝車廠向交通部認可檢測機構申請車身結構強度檢測並附「未侵入駕駛室人員生存空間」證明與到廠查核——那是為平頭廂式小貨車寫的，不是為 SUV。使用性質改小貨車還卡在第 16 條第 7 項：自用小貨車牌照不得以個人名義申請（例外須依附件一審核）。違者處罰條例第 12 條第 1 項第 2 款 3,600–36,000 元、當場移置保管，車輛得沒入。",
+      "colour": "改色 (須變更登記)，第 23 條列為應登記項目，定檢由第 39 條之 1 第 7 款「顏色與紀錄相符」抓。禁止項目只有兩個：第 42 條第 10 款車身顏色不得與警用巡邏車相同；第 11、12 款計程車須用塗料公會色卡 1-18 號純黃，且「轎式、旅行式或廂式自用小客車」變更顏色不得與之相同——注意這款沒有列客貨兩用車，是漏列還是有意排除查不到函釋。消防大紅只規定消防車要漆，並未禁止自用車漆紅。大面積貼紙／彩繪：道安規則對自用車車身廣告完全沒有規定，唯一牽制是主色若變了理論上仍要辦顏色變更登記，沒有面積百分比門檻。"
+    },
+    "impactOnExistingStyles": "照這個讀法，現有五個 style 有三個在台灣領不了牌：澳洲越野（75mm 舉升＋31 吋胎＋車頂燈條＋爆龜）、軍風（40mm 舉升＋225/75R16）、露營（60mm 舉升＋25mm 車身舉升＋225/75R16）。日系復古（60mm）也一樣。只有都會輕改（20mm 舉升仍超過『不得超過原核定車身高度』、但 215/70R16 外徑幾乎不變）比較接近，嚴格講舉升那一項還是過不了。這不是這份調查的題目，但配置器如果要對台灣買家誠實，這件事比多幾個 style 重要。",
+    "unverified": [
+      "呼吸管——法規完全沉默",
+      "輪胎外徑 2%／升級二級——業界通說，找不到政府出處",
+      "車頂帳，以及裝了車頂置放架之後車高是否要重新核定",
+      "爆龜「不得突出車身兩側」的毫米級判準、彩繪面積門檻、鹵素對鹵素同型式換頭燈是否須登記",
+      "防撞桿的撞擊／行人保護要求——查無，但無法證明不存在"
+    ],
+    "sources": [
+      "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040013",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=23",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=23-1",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=38",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=39-1",
+      "https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000403808&lan=C",
+      "https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000420182&lan=C",
+      "https://www.mvdis.gov.tw/webMvdisLaw/Download.aspx?type=Law&ID=42726",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=12",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=16",
+      "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=18",
+      "https://4wheels.com.tw/blog/post-171",
+      "https://auto.ltn.com.tw/news/3842/38",
+      "https://speed.ettoday.net/news/1021875"
+    ]
+  },
+  "archetypes": [
+    {
+      "id": "street_wide_low",
+      "label": "都會寬體低趴",
+      "why": "五台現有的 style 全部是原廠高度或往上舉升，沒有一台比原廠低、也沒有一台真的把車身加寬；這是唯一往下又往外走的一台，輪拱被 17–18 吋大輪框與扁平胎塞滿，車頂完全空的。",
+      "silhouette": {
+        "lift": "-40 ~ -55mm（降低，不是舉升）",
+        "tyre": "公路扁平胎，215/55R18 或 225/55R18 等級",
+        "wheel": "17–18 吋多輻鋁圈，亮黑或消光灰",
+        "roofLoad": "什麼都沒有",
+        "flares": "寬——單邊真正外擴的鼓包葉子板"
+      },
+      "bodyColour": "黑（ZJ3）。日本這條線的示範車幾乎都是亮面黑或深灰，亮黑才撐得起大輪框與黑鍍鉻的反差；灰（ZVL）是第二選擇。",
+      "signature": "直柵式大 G 水箱罩配兩顆圓形 LED 頭燈，加上幾乎貼地的前下擾流。",
+      "parts": ["damd_little_g_trad", "damd_little_g_trad_rear", "little_g_trad", "outclass_g", "mrk_angry", "jaos_cowl", "jaos_rear_cowl", "te37xt", "nitro_h12", "xj07", "kakimoto_kr_lr", "showa_skirt", "spieler"],
+      "missing": [
+        "降低懸吊：LIFTS 目前最低就是 stock，整個負值區間不存在（日本現成品有 Silkroad 55mm、K-Break JIMRIDE 2 吋、KLC Heritage Super Down Spring Turtles 40mm）",
+        "17–18 吋輪框與 55 系列扁平胎：TYRES 最大只到 16 吋與 33 吋越野胎，沒有公路扁平比",
+        "真正外擴的寬體葉子板：配置器的 flares 是『輪弧鉚釘』，不會把車變寬",
+        "圓形 LED 頭燈總成",
+        "車頂後緣尾翼"
+      ],
+      "examples": [
+        { "where": "shop", "url": "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/", "what": "LB-WORKS G mini type 2，圓形 LED 頭燈＋直柵 G 水箱罩＋寬體＋貼地前下擾流，全黑示範車（我開過該頁的 TYPE-214 原圖）" },
+        { "where": "shop", "url": "https://kuhl-japan.com/ec/aeroparts/20425", "what": "KUHL BLOCKER SIERRA，KUHL 唯一含寬體葉子板的 Jimny 套件，¥440,000 税込" },
+        { "where": "shop", "url": "https://wald.co.jp/carrange/jimnysierra_bb/", "what": "WALD BLACK BISON，前保桿嵌四顆 LED 燈窩＋寬輪拱，最都會最不越野的一款" },
+        { "where": "shop", "url": "https://silkroad-jp.com/wpblog/2023/07/08/jb64-71/", "what": "Silkroad 55mm 降低組——證明『往下』在日本是一條有現成商品的路線，不是一台展示車" }
+      ],
+      "taiwan": "法規上這是六台裡最有機會的一台，但有一個硬傷。可以的部分：台灣對車高只規定「變更後不得超過原核定車身高度」，降低是唯一合法的方向，所以 -40 ~ -55mm 反而沒問題；18 吋輪框配 215/55R18 外徑約 693mm，對原廠 195/80R15 的 680mm 只差約 2%，剛好在業界通說的門檻上；前下擾流屬附件十五第四點空力套件，不得突出車身兩側與前後方即可。硬傷是寬體：附件十五沒有「車寬變更」這個項目，每一個車身外加裝項目都重複「不得突出車身兩側」，爆龜在台灣沒有登記管道。→ 建議做成「低趴但不加寬」的台版，寬體只當視覺選項並標明不可領牌。零件面：露天已有整組仿大 G 寬體 NT$88,800–119,999（見 jb74-complete-kits.json 的 tw_gclass_replica／tw_lb_widebody_replica，賣場不寫件數材質，真偽要自己問）；降低彈簧要代購。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://libertywalk.co.jp/bodykit/suzuki-g-mini-type-2/",
+        "https://kuhl-japan.com/ec/aeroparts/20425",
+        "https://kuhl-japan.com/ec/aeroparts/12919",
+        "https://wald.co.jp/carrange/jimnysierra_bb/",
+        "https://k-factory.ne.jp/art/g62-jimny3door/",
+        "https://silkroad-jp.com/wpblog/2023/07/08/jb64-71/",
+        "https://www.klc-div.com/heritage/product/suspension/superdownspringturtles/",
+        "https://kbreak.thebase.in/items/80993631"
+      ]
+    },
+    {
+      "id": "us_retro_chrome",
+      "label": "美式西海岸復古",
+      "why": "軍風那台的描述自己寫著「整台沒有一顆亮件」，其他四台也都是黑件或消光件；這台反過來，前後保桿、輪框、後照鏡、頭燈飾圈全部鏡面鍍鉻，配螢光黃車身，十公尺外最先看到的是反光。",
+      "silhouette": {
+        "lift": "none 或 25mm 以內",
+        "tyre": "215/75R15 或 215/70R16，白字胎壁",
+        "wheel": "鍍鉻兩件式鋼圈（Daytona 型）或月亮盤",
+        "roofLoad": "空",
+        "flares": "原廠寬度"
+      },
+      "bodyColour": "黃（ZZB Kinetic Yellow）。這個風格在日本幾乎綁定亮黃或象牙白，鍍鉻件要有高彩度車身才跳得出來。台灣只進雙色的黃黑，車頂會是黑的。",
+      "signature": "鏡面拋光不鏽鋼雙管前保桿，配鍍鉻輪框與白字胎。",
+      "parts": ["daytona_ss", "super_moon", "mrk_retro15", "mrk_retro165", "t215r15", "t215r16", "toyo_rt", "toyo_at3", "taishan_retro", "kpro_folksy", "hbar_suzuki", "beyond_liberte", "beyond_rear", "klc_trad", "taniguchi_double", "tw_tip", "sg25"],
+      "missing": [
+        "鏡面拋光不鏽鋼的保桿材質：現有的管狀保桿只有黑（tube_heritage）與象牙白（klc_trad）兩種塗裝，沒有鏡面金屬",
+        "鍍鉻後照鏡蓋",
+        "鍍鉻頭燈飾圈（把方燈開口收成圓形的那一圈）",
+        "Beyond「Sunny Face」橫柵鍍鉻水箱罩",
+        "白字胎目前只在部分尺寸有 owl，鍍鉻鋼圈配白字的組合要確認 owlSizes"
+      ],
+      "examples": [
+        { "where": "shop", "url": "https://www.lionheart2005.com/archives/34081/", "what": "Lion Heart／RiSE 四日市北店的 Kinetic Yellow 車：PENNY LANE 鏡面不鏽鋼雙管前保桿、Willswill 不鏽鋼短後保桿、Beyond Sunny Face 水箱罩、Farm Daytona 鍍鉻鋼圈配 Open Country R/T 白字胎（我開過 1-1 原圖）" },
+        { "where": "shop", "url": "https://riseauto.jp/blog/risenorth/p1282/", "what": "同一家集團另一間店的同配方車，店內把這個風格叫「レトロアメリカンスタイル」——同一配方出現在兩間店，才算得上一種風格而不是一台車" },
+        { "where": "shop", "url": "https://pennylane.base.shop/categories/6671759", "what": "PENNY LANE 自營店的不鏽鋼保桿分類，標示 JB64／JB74 皆有" }
+      ],
+      "taiwan": "法規上是六台裡最乾淨的：不動車高、不動車寬，管狀保桿走附件十五第二點防撞桿，備齊車廠安裝證明與統一發票就登記得起來，前伸 30 公分／後伸 25 公分的上限對這種貼身雙管桿綽綽有餘。兩個要注意的點：一，輪胎 215/75R15 外徑約 703mm，比原廠大 3.4%，超過業界通說的 2%，建議改用 215/70R16（約 +0.3%）配 16 吋鍍鉻鋼圈；二，顏色——台灣只進雙色黃黑（DG5），純黃 ZZB 沒進，而且自己烤黃要先拿塗料公會色卡比對，第 42 條禁止自用小客車用計程車的 1-18 號純黃（該條只列轎式／旅行式／廂式，沒列客貨兩用車，是漏列還是有意排除查不到函釋，別賭）。Kinetic Yellow 偏黃綠，落在禁區的機率低，但要比過才算數。鍍鉻件全部代購，PENNY LANE、Willswill、Beyond 都沒有台灣代理。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.lionheart2005.com/archives/34081/",
+        "https://riseauto.jp/blog/risenorth/p1282/",
+        "https://pennylane.base.shop/categories/6671759",
+        "https://www.mljinc.co.jp/product/daytona_ss/daytona_ss"
+      ],
+      "caveat": "我實際打開的兩張示範車照片，車身輪拱是車身色且齊平，判讀為 JB64（輕規窄體）而不是 JB74。風格本身成立、零件也都出 JB74 版，但我沒有親眼看過一台 JB74 的完成車，這點不能含糊。"
+    },
+    {
+      "id": "bronco_face",
+      "label": "美式方頭換臉",
+      "why": "整張臉換掉：兩顆圓燈夾一面刻著大寫字母的寬水箱罩，下面是車身色厚保桿配銀色護板。現有五台不管怎麼換保桿，頭燈都還是原廠那兩顆方的——這是唯一從正面就認不出是 Jimny 的一台。",
+      "silhouette": {
+        "lift": "25–40mm",
+        "tyre": "225/75R16 全地形胎",
+        "wheel": "15–16 吋仿鋼圈造型鋁圈，消光黑",
+        "roofLoad": "空，或頂多一支細燈條",
+        "flares": "原廠"
+      },
+      "bodyColour": "灰（ZVL）或白（ZVR）。示範車是深灰，這個臉配素色低彩度車身才像美式硬派；亮色會變成玩具感。",
+      "signature": "寬水箱罩正中的大寫字母，兩側各一顆圓燈。",
+      "parts": ["ms20", "sg25", "dean_cross", "wildboar16", "t225r16", "bfg_ko2", "toyo_at3", "showa", "ironman", "ipf", "wlm_guard"],
+      "missing": [
+        "整組換臉件：圓燈總成＋字樣寬水箱罩＋車身色厚保桿＋銀色下護板（GARAGE ILL BRON55 是一口價 ¥264,000 鹵素版／¥297,000 LED 版，税抜，素地未塗裝）",
+        "車身色保桿的上色邏輯：現有保桿都是固定塗裝，沒有『跟車身同色』這個選項"
+      ],
+      "examples": [
+        { "where": "shop", "url": "https://www.garage-ill.co.jp/bron55/", "what": "GARAGE ILL BRON55 換臉套件，適用 JB64W／JB74W／JC74W Nomade；示範車是深灰＋黑鋼圈造型輪框＋全地形胎，只改前臉後面完全不動（我開過該頁主視覺原圖）" },
+        { "where": "shop", "url": "https://www.jimnypark.com/cathand/detail-881889.html", "what": "Jimny Park 的「【JB74Wシエラ・純正LED車用】ブロンコ風・フェイスキット」——同一個造型語彙有第二家在賣，且是 JB74 專用" },
+        { "where": "shop", "url": "https://shop.jetgogo.jp/items/113264547", "what": "Jet★Gogo 賣的 BRON55 雙色塗裝完成品，JB74W 純正 LED 車用" }
+      ],
+      "taiwan": "招牌件本身就是法規最硬的一項。水箱罩與保桿沒問題（防撞桿走附件十五第二點，前伸 30 公分內），25–40mm 舉升過不了（車高只能降不能升），但這台的舉升本來就可有可無。真正的門檻是頭燈：附件十五規定 108/7/1 起變更頭燈須由汽車車廠出具改裝證明，且燈具必須通過台灣「車輛型式安全審驗合格」，近光還要有自動調整垂直傾角裝置，並通過明暗截止線檢驗，之後每次定檢都要重驗光型。台灣現有的替代路線——蝦皮匠技研的「大 G 款圓燈殼」含 LED 光圈與日行燈、含工資約 NT$1,500——幾乎可以確定沒有台灣型式審驗，行駛中被抓依處罰條例第 18 條罰 2,400–9,600 元並責令檢驗。→ 要賣這個臉，先確認有沒有取得審驗的圓燈總成；沒有的話只能做成「水箱罩＋保桿」的半套，招牌就沒了。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.garage-ill.co.jp/bron55/",
+        "https://www.jimnypark.com/cathand/detail-881889.html",
+        "https://shop.jetgogo.jp/items/113264547",
+        "https://apio.jp/parts/3109-1sa.html"
+      ]
+    },
+    {
+      "id": "exo_cage",
+      "label": "外掛防滾籠硬派",
+      "why": "車頂輪廓被一圈黑鋼管整個包住，A 柱前面多一道橫樑跨過擋風玻璃上緣。澳洲越野那台車頂上是行李架、車邊帳與一排探照燈，這台車頂什麼都不載，只有籠子——同樣是最高最兇的那一群，剪影卻完全不同。",
+      "silhouette": {
+        "lift": "50–75mm",
+        "tyre": "31×10.50R15 泥地胎",
+        "wheel": "16 吋消光黑越野鋁圈或 Beadlock 造型",
+        "roofLoad": "只有籠子本身，不載東西",
+        "flares": "原廠寬度，但葉子板前後切短並加鋼板護片"
+      },
+      "bodyColour": "米色（ZVG）。示範車是沙色／米色系，籠子的黑跟沙色的對比是這台的全部；深色車身會讓籠子消失。",
+      "signature": "外掛式防滾籠——RV4 Wild Goose JM-2424，¥203,500 税込、25kg、主管 38.1mm×2.3t，前端鎖引擎蓋固定點與側 cowl（需切葉子板），後端鎖車頂雨槽 8 點。",
+      "parts": ["br75", "sg75", "beadlock", "xtremej", "t31", "cp_stt", "toyo_mt", "outclass_t2", "wmd_winch", "wildgoose_box_rear", "taniguchi_rear_pipe", "wlm_guard", "taniguchi_bar", "apio_guard"],
+      "missing": [
+        "外掛式防滾籠本體（最重要的一件，整台的招牌就是它）",
+        "葉子板切短與鑽石紋鋼板護片",
+        "車頂長鞭狀天線",
+        "米色以外的沙／卡其色（COLORS 裡沒有真正的沙色）"
+      ],
+      "examples": [
+        { "where": "shop", "url": "https://www.rv4wildgoose.com/parts/jimny-64-74/protection_64/jm-2424.html", "what": "RV4 Wild Goose 外掛防滾籠 JM-2424，官網寫明「構造変更無しで使用出来ます」；示範車是米色車身＋黑籠＋絞盤前桿＋鐵窗＋泥地胎（我開過 jm-2424_7401.jpg 原圖）" },
+        { "where": "shop", "url": "https://www.rollbar.jp/car-models/suzuki_jimny-sierra/", "what": "サイトウロールケージ 的 JB74W 專用防滾架清單——另一家專做籠子的廠，證明這不是單一商品" },
+        { "where": "shop", "url": "https://www.4x4espoir.com/jimny-outer-rollcage/", "what": "4x4 Espoir 談外掛籠的車身保護與造型效果" }
+      ],
+      "taiwan": "四項全踩線，是這份清單裡法規負擔僅次於皮卡的一台。(1) 50–75mm 舉升——附件十五只准「不得超過原核定車身高度」，沒有升高的登記管道；若是換支臂或連桿的套件，第 23 條之 1 是絕對禁止。(2) 31×10.50R15 外徑約 787mm，比原廠大 15.7%，遠超業界通說的 2%，且幾乎必然超出葉子板，另觸第 38 條「後輪胎外緣與車身內緣不得超過 10 公分」。(3) 外掛籠固定在車外，最接近的登記項目是附件十五第一點的固定式置放架，那要 ARTC 審驗合格才登記得起來，一支日本製鋼籠拿不到；而且基準明寫「不得突出車身兩側」，籠子比車頂寬是它的設計本意。(4) 絞盤前桿反而是唯一沒問題的，附件十五第三點有明確路徑。→ 這台在台灣是展示用途，不是可領牌配置。零件也全數要代購。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://www.rv4wildgoose.com/parts/jimny-64-74/protection_64/jm-2424.html",
+        "https://www.rollbar.jp/car-models/suzuki_jimny-sierra/",
+        "https://www.4x4espoir.com/jimny-outer-rollcage/",
+        "https://reversegear.theblog.me/posts/54842197"
+      ]
+    },
+    {
+      "id": "work_truck",
+      "label": "皮卡工作車",
+      "why": "把 B 柱後面整個切掉換成有掀邊的鋼製貨床，車頂只剩駕駛艙那一段。這是整份清單裡唯一改變車身輪廓本身的一台——其他每一台都還是同一個盒子加掛件，這台不是。",
+      "silhouette": {
+        "lift": "40–50mm",
+        "tyre": "31×10.50R15 或 225/75R16 泥地胎",
+        "wheel": "15–16 吋鋼圈或消光黑鋁圈",
+        "roofLoad": "駕駛艙上方一支防滾桿或窄行李架，後面是敞開的貨床",
+        "flares": "原廠"
+      },
+      "bodyColour": "軍綠（ZZC）或灰（ZVL）。實車是墨綠／深灰全車重新烤漆，工作車的調性不用亮色。",
+      "signature": "三面可掀的鋼製貨床邊板，加上車艙後方那支一體式防滾桿。",
+      "parts": ["td40", "es30", "oemsteel", "wildboar16", "t31", "t225r16", "cp_stt", "toyo_mt", "taniguchi_square", "outclass_t2", "taniguchi_bar"],
+      "missing": [
+        "車身切割本體：B 柱後車體移除、車艙背板、貨床地板與三面掀邊",
+        "車艙後方防滾桿",
+        "貨床尾燈（實車用的是輕卡式的方形三色尾燈）",
+        "加長車架（獵車版把車架加長約 40cm 並移植 Carry 車艙背板）"
+      ],
+      "examples": [
+        { "where": "media", "url": "https://motor-fan.jp/article/128542/", "what": "大阪 Auto Messe 2024 展出、大阪 R&F（品牌 Estilo）的 JB74 皮卡：拆 B 柱、用原廠尾門上半做貨床後擋並保留橫開機構、加一支 one-off 防滾桿，約 ¥700,000 含車身加工與公認手續，開發時就跟陸運局確認安全帶固定點維持原位，是「完全公認」" },
+        { "where": "shop", "url": "https://oita4x4.com/jimnytruck/", "what": "大分 4x4 的 Jimny 貨卡：墨綠車身、三面掀邊鋼製貨床、輕卡式方形尾燈、鑽石紋護板、泥地胎（我開過 IMG_5195 原圖）；店家寫「車検も問題ありません」，價格尚未定" },
+        { "where": "media", "url": "https://nosweb.jp/customcar/articles/detail/8745", "what": "把 JB74 行李廂切掉、移植 Carry 車艙背板做成加長雙排座獵車，車架加長約 40cm，浪板貨床＋吊臂，中灰加黑重新烤漆，Revolver 15×6J 配 31×10.5 胎" }
+      ],
+      "taiwan": "不可行，而且是這份清單裡唯一一台我會直接建議不要放進配置器當可下單品項的，法條查得很清楚。第 23 條確實把「車身式樣」列為可登記欄位，但附件十五沒有給小客車／客貨兩用車任何路徑：唯一涉及切鈑金的項目是「廂式平頭小貨車車側或車頂鈑金件變更」，要求底盤與駕駛室樑柱結構不得變更、切除樑柱必須由改裝車廠向交通部認可的檢測機構申請車身結構強度檢測，並附「未侵入駕駛室人員生存空間」的證明與到廠查核——那是為平頭廂式小貨車寫的。就算過得了，使用性質改小貨車還卡在第 16 條第 7 項：自用小貨車牌照不得以個人名義申請。罰則也重：處罰條例第 12 條第 1 項第 2 款「已領用牌證而變更原登檢規格」3,600–36,000 元、當場移置保管，車輛得沒入。日本那三台靠的是「構造変更／完全公認」，那份公認書在台灣不通用。→ 要放就當造型展示，並在畫面上明寫台灣不可領牌。",
+      "confidence": "confirmed",
+      "sources": [
+        "https://motor-fan.jp/article/128542/",
+        "https://oita4x4.com/jimnytruck/",
+        "https://nosweb.jp/customcar/articles/detail/8745",
+        "https://www.youtube.com/watch?v=xP4BycQumAc"
+      ]
+    },
+    {
+      "id": "euro_rally",
+      "label": "歐系拉力寬體",
+      "why": "四顆圓形頭燈排成一列、引擎蓋到車頂兩道白色直線、車尾一片可調角度尾翼，配正紅車身。五台現有的 style 沒有任何一台帶賽車語彙，連最低的都會輕改也只是一條低腰銀線。",
+      "silhouette": {
+        "lift": "none（原廠高度）",
+        "tyre": "公路胎，215/70R16 等級",
+        "wheel": "OZ Rally Racing 16 吋，白色或銀色",
+        "roofLoad": "空",
+        "flares": "寬——四片鼓包式（ブリスター）爆龜"
+      },
+      "bodyColour": "正紅。原廠八色裡沒有紅，一定要整車烤漆；DAMD 官網自己的主視覺車就是紅車配白色雙中線與義大利國旗。",
+      "signature": "四顆圓形頭燈配黃色方霧燈，加上車頂後緣的尾翼。",
+      "parts": ["t215r16", "yk_g015", "showa_skirt", "spieler"],
+      "missing": [
+        "四圓燈總成（DAMD 這組是圓形 LED 頭燈＋圓形小燈，官網自己提醒要確認光度符合車檢）",
+        "鼓包式寬體葉子板四片",
+        "車頂後緣尾翼（角度可調）",
+        "OZ Rally Racing 輪框",
+        "紅色車身（COLORS 沒有）",
+        "引擎蓋到車頂的雙白中線拉花（STRIPES 六款都是腰線，沒有縱向中線）",
+        "純公路胎胎紋：TYRE_MODELS 十二款全是 A/T、R/T、M/T，沒有一款公路胎"
+      ],
+      "examples": [
+        { "where": "shop", "url": "http://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta", "what": "DAMD little Δ 完整套件 ¥539,000 税込：圓四燈、四片鼓包爆龜 ¥140,800、可調角度尾翼 ¥63,800、OZ Rally Racing 輪框五顆 ¥269,500。我開過主視覺與前臉特寫原圖：紅車、白色雙中線、黃色方霧燈、公路胎配黑色多輻鋁圈" },
+        { "where": "shop", "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/", "what": "同廠的 little 5.（致敬 Renault 5 Turbo）：方形四燈＋四片爆龜＋FRP 尾翼，同一個造型邏輯的第二款" }
+      ],
+      "taiwan": "三件事裡有兩件過不了。紅色烤漆沒問題——第 42 條只禁止與警用巡邏車同色與計程車純黃，消防大紅那款講的是消防車要漆紅，沒有禁止自用車漆紅，辦顏色變更登記即可。過不了的是另外兩件：爆龜在台灣沒有車寬變更的登記管道（附件十五無此項目，且每個外加裝項目都寫「不得突出車身兩側」）；四圓燈總成要通過台灣車輛型式安全審驗才裝得上，DAMD 這種日規素地件不會有。零件只能代購且未塗裝，加上整車烤漆與工資，落地成本本來就是六台裡最高的。→ 法規與成本雙殺，建議排在最後。",
+      "confidence": "uncertain",
+      "sources": [
+        "http://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta",
+        "https://www.damd.co.jp/products/suzuki/jimny_sierra_little5/",
+        "https://www.damd.co.jp/products/suzuki/jimny_sierra_saudade/"
+      ],
+      "caveat": "標 uncertain 的理由是重複性，不是存在性：產品確實在賣、官方圖我也開過，但我找不到任何證據顯示這是日本車主群裡重複出現的風格——它目前看起來是單一廠商（DAMD）的目錄車。要不要收，取決於你願不願意為一個『廠商定義的風格』做模型。"
+    }
+  ],
+  "rejected": [
+    {
+      "id": "lj_sj_sixties",
+      "label": "六〇／七〇年代 LJ・SJ 復刻（圓燈、窄鋼圈、不舉升）",
+      "why": "十公尺外跟日系復古是同一台。米色對象牙色差不出來，招牌件（DAMD the ROOTS 象牙色雙層前保桿＋五格車身色水箱罩、URNIETA 1970 全套）在 parts.js 已經有 roots 與 urnieta_1970 兩組完整套件，連引擎蓋、備胎蓋、鷗翼窗都在。這不是一個新 style，是 jp_retro 裡面換一組零件就到的變化。",
+      "sources": ["https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/"]
+    },
+    {
+      "id": "roof_tent_first",
+      "label": "車頂帳優先（硬殼帳）",
+      "why": "只是在露營那台的車頂再加一個箱子，沒有帶進任何新的造型語彙——露營已經有車頂架、車邊帳、側踏、尾梯。而且 minkara 的 JB74 車頂架／車頂箱分類整頁十幾筆，沒有一筆是車頂帳，車主實際掛的是行李架、籃架與尾門箱；jb74-jp-gapfill.json 自己的註記也是用 30kg 行駛中車頂載重在算 DAMD 木架剩多少額度，硬殼帳會直接吃光。本輪找不到第一手的原廠車頂載重數字，所以這個數字標為內部推算。",
+      "sources": ["https://minkara.carview.co.jp/car/suzuki/jimny_sierra/partsreview/review.aspx?bi=5&ci=78&mg=3.13266"]
+    },
+    {
+      "id": "snow_ski",
+      "label": "雪地／滑雪",
+      "why": "搜到的全部是「雪板怎麼放進 JB74」「車頂架怎麼選」這類教學，不是一種外觀。除了車頂箱以外沒有共同的顏色、剪影或招牌件——白車加車頂箱不構成一個十公尺外認得出的類型。",
+      "sources": ["https://48rider.com/snowboard-into-the-jimny/", "https://jimm.hateblo.jp/entry/roofca"]
+    },
+    {
+      "id": "murdered_out",
+      "label": "全黑暗色系",
+      "why": "只差在顏色與把亮件拆掉，剪影跟軍風一模一樣；而軍風的描述本來就寫著「整台沒有一顆亮件」。這是一個上色選項，不是一個 style。",
+      "sources": []
+    },
+    {
+      "id": "desert_prerunner",
+      "label": "沙漠 prerunner",
+      "why": "查不到 JB74 的長行程懸吊／玻璃纖維前葉子板的實車。搜尋 prerunner／long travel 回來的全部是 overland 長途露營車（suzukijimny4x4 Nomad、Peach Overlanding、advanywhere），那就是澳洲越野那台，不是另一種。",
+      "sources": ["https://suzukijimny4x4.com/builds/nomad/", "https://peachoverlanding.com/jimny-jb74-gen4-build/"]
+    },
+    {
+      "id": "fire_rescue",
+      "label": "迷你消防／救援車",
+      "why": "以「消防団 赤 回転灯 仕様」搜 JB74 回來的全是燈泡與警示燈商品頁，沒有任何一台塗裝車，構不成重複出現的風格。台灣端補一句查證結果：紅色漆本身其實可以（第 42 條只規定消防車要漆大紅，沒禁止自用車漆紅），真正違規的是閃光警示燈——第 23 條之 1 明文「車身外附加燈飾」不得變更，附件七也沒有這個燈種；加裝警鳴器另觸第 39 條之 1 第 5 款與處罰條例第 16 條，喇叭會被沒入。",
+      "sources": ["https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=23-1", "https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000420182&lan=C"]
+    },
+    {
+      "id": "utility_yellow",
+      "label": "郵務／工務黃（黃車配警示燈）",
+      "why": "同上，找不到重複出現的 JB74 實車，只有零散的黃色車身照片。台灣端還多一層：黃色旋轉警示燈同樣受第 23 條之 1「車身外附加燈飾不得變更」拘束；而純黃車身要先避開第 42 條第 11、12 款的計程車 1-18 號純黃禁令（該款只列轎式／旅行式／廂式自用小客車，沒列客貨兩用車，語意不明，不值得賭）。是雙重不成立。",
+      "sources": ["https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040013", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=23-1"]
+    },
+    {
+      "id": "mega_jimny_touring",
+      "label": "Mega Jimny／澳洲長途旅行車",
+      "why": "就是澳洲越野那台，差別只在多拖一台露營拖車與後箱。零件語彙（絞盤桿、呼吸管、車頂架、車邊帳、岩石滑桿）完全重疊。",
+      "sources": ["https://www.4x4australia.com.au/reviews/custom-4x4s/jimny-built-for-long-distance-touring"]
+    },
+    {
+      "id": "motorsport_trial",
+      "label": "競技／トライアル 賽車",
+      "why": "日本 JB74 的競技改裝重點是六點式內籠與外掛籠，外觀上跟本清單已收的 exo_cage 完全重疊，不另立一筆。真正的比賽車（拆內裝、切輪拱、無牌照）也不是配置器賣得出去的東西。",
+      "sources": ["https://reversegear.theblog.me/posts/54842197"]
+    },
+    {
+      "id": "soft_top",
+      "label": "軟頂／敞篷",
+      "why": "查不到 JB74 的量產軟頂或 targa 產品。最接近的是把 B 柱後切掉的皮卡改裝（已另立 work_truck），不是可收合的軟頂。無法確認，故不收。",
+      "sources": []
+    },
+    {
+      "id": "suzuki_revival",
+      "label": "原廠復刻（SUZUKI BLACK REVIVAL STYLE／澳規 Jimny Heritage）",
+      "why": "不是被否決，是已經有人做過：docs/jb74-stripes.json 的 notes.sixthStyle 已經完整提案過這個第六個 style，連原廠料號（サイドデカール リバイバルA 99230-78R00-001）、¥261,800／工時 6.4h 都寫進去了，這份不重複。順帶記一筆本輪的新資訊：SUZUKI 官方配件頁確實把 JB74 配件分成「Craggy」與「Revival」兩個主題；澳規 3 門 Jimny Heritage 限量 300 台、$33,490 起，但 carscoops／carsguide／drive 三個站對 WebFetch 全部回 403，我沒有親眼看過圖，所以不敢寫外觀。",
+      "sources": ["https://www.suzuki.co.jp/accessory_car/jimny_sierra-accessory.html"]
+    }
+  ]
+}
