@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609241521** · 247 catalogue entries · 9 styles
+Current build: **202609241615** · 247 catalogue entries · 7 styles
 
 ---
 
@@ -90,7 +90,7 @@ snorkel's skirt come out as a tall thin fin.
 
 ## 2. What is live
 
-**Nine styles**, each a preset applied from the first step. They are pushed
+**Seven styles**, each a preset applied from the first step. They are pushed
 apart on silhouette — height, roof load, arch width, face, wheel size — not on
 which bumper they wear, because cars differing by bumper alone read the same
 from ten metres.
@@ -100,8 +100,6 @@ from ten metres.
 | 都會寬體低趴 `street_low` | the only one below stock; RAYS 18" forged, 225/60R18 H/T, WALD +30 mm fenders |
 | 都會輕改 `city` | bare roof, low black pinstripe |
 | 日系復古 `jp_retro` | sand body, three-band retro stripe, steel look |
-| 美式方頭換臉 `bronco_face` | GARAGE ILL BRON55 face: round lamps, lettered grille, two-tone bumper |
-| 歐系拉力寬體 `euro_rally` | DAMD little Δ four-lamp face, blister fenders, wing, OZ wheels, red wrap, centre stripe |
 | 軍風 `military` | white star and stencils, loaded window guards |
 | 露營 `camp` | two-tone roof, body lift, four orange bands |
 | 外掛籠硬派 `exo_cage` | roll cage over the roof, nothing else up there |
@@ -129,6 +127,12 @@ legality back in front of the buyer. (The research is still in
 `docs/jb74-archetypes.json` under `taiwanRegulation` if it is ever wanted; the
 one clause verified first-hand from the official PDF is 附件十五 三、底盤:
 「懸吊系統之避震器｜變更後不得超過原核定車身高度」.)
+
+**美式方頭換臉 `bronco_face` and 歐系拉力寬體 `euro_rally` were built and then
+removed as styles** — the owner: 「美式方頭換臉跟歐系寬體都先拿掉，不好」
+(2026-09-25). Their parts (FACES, FENDERS, SPOILERS, OZ wheel, red wrap,
+little Δ rear bumper, centre stripe) are still in the catalogue and pickable.
+Do not put the two styles back without asking.
 
 **皮卡工作車 `work_truck` is dropped** — the owner said 「先不要做，這個改太大切車身」.
 Do not build it.

@@ -975,16 +975,6 @@ export const STYLES = [
       rimColor: 0x17191c, stripe: 'jaos', grille: 'outclass_g', frontBumper: 'jaos_cowl',
       rearBumper: 'jaos_rear_cowl', exhaust: 'kakimoto_kr_lr', sideSkirt: true } },
 
-  { id: 'bronco_face', label: '美式方頭換臉', sw: ['#63645f', '#b4b8bb', '#1d2224'],
-    desc: '整張臉換掉：兩顆圓燈夾一面寫著 BRON55 的寬水箱罩，下面是車身色保桿配銀色中段。後半台完全原廠，只從正面就認不出是 Jimny。',
-    set: { color: 'ZVL', lift: 'td40', wheel: 'dean_cross', tyre: 't225r16', tread: 'bfg_ko2', owl: true,
-      rimColor: 0x1d2224, face: 'bron55', sideStep: 'showa' } },
-
-  { id: 'euro_rally', label: '歐系拉力寬體', sw: ['#c81b22', '#e9e2cc', '#1f3a2c'],
-    desc: '四顆圓燈排一列、鼓包爆龜、車頂後緣一片尾翼，紅車身配一條米白深綠中線。原廠高度、公路胎、OZ 拉力輪框——七台裡唯一的賽車語彙。',
-    set: { color: '2080-G13', wheel: 'oz_rally', tyre: 't215r16', tread: 'bs_ht684', rimColor: 0xd8d9d6,
-      face: 'damd_delta', fender: 'damd_delta', rearBumper: 'damd_delta_rear', spoiler: 'damd_wing', stripe: 'damd_center' } },
-
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
     desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
     set: { color: 'ZVG', twoTone: true, lift: 'td60', wheel: 'wildboar_d',
