@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609250609** · 247 catalogue entries · 7 styles
+Current build: **202609251702** · 247 catalogue entries · 10 styles
 
 ---
 
@@ -90,7 +90,7 @@ snorkel's skirt come out as a tall thin fin.
 
 ## 2. What is live
 
-**Seven styles**, each a preset applied from the first step, listed AFTER the makers' complete kits (`KITS` shown as `kit_<id>` cards, the kit on an otherwise stock car). They are pushed
+**Ten styles**, each a preset applied from the first step, listed AFTER the makers' complete kits (`KITS` shown as `kit_<id>` cards, the kit on an otherwise stock car). They are pushed
 apart on silhouette — height, roof load, arch width, face, wheel size — not on
 which bumper they wear, because cars differing by bumper alone read the same
 from ten metres.
@@ -158,9 +158,14 @@ First fix shipped: a bright studio (default; CSS backdrop, studio HDR) and an
 outdoor stage (Poly Haven "Goegap Road", CC0, model/env_goegap_2k.hdr,
 GroundedSkybox at 1.8 m / 160 m, sun aimed from the brightest pixel, pixels
 capped at 24 because the half-float post chain overflowed to a black car).
-Next, per docs/jb74-beyond-styles.json: two-tone split paint at the window
-line (Beyond's single biggest trick), one finish for all hardware, wheels that
-contrast the body. Instagram (KLC, SHOWA) needs the Chrome extension
+Then, per docs/jb74-beyond-styles.json: **split paint** (`SPLIT_PAINTS`,
+`S.split`; a second colour below y 1000 in the body-paint shader on world
+height, rig.js `split` / `updateSplit`) with **painted flares**
+(`S.paintFlares` puts the stock flares on the body paint), and Beyond's
+Liberte bars in **mirror / ivory** as catalogue entries sharing geometry
+(`node`, `finish`; app.html `finishOf`). Three styles use them: 加州雙色,
+灰紫時裝, 夕陽 JA11. Still open from that file: woodgrain side panel,
+cream-painted rack, yellow headlamp covers, Beyond's own grilles. Instagram (KLC, SHOWA) needs the Chrome extension
 connected; it was not.
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".

@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609250609" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609251702" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -579,6 +579,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
           <select id="selColor" style="margin-top:10px" aria-label="車身配色"></select>
           <button class="tg solo" id="tgTwo" aria-pressed="false">
             <span class="nm">雙色車頂<i id="twoNote">黑頂 ZJ3</i></span><span class="st">關閉</span></button>
+          <p class="lbl" style="margin-top:16px">下半車身分色 <em>窗線以下重烤或貼膜</em></p>
+          <select id="selSplit" aria-label="下半車身分色"></select><p class="hint" id="hSplit"></p>
+          <button class="tg solo" id="tgFlare" aria-pressed="false">
+            <span class="nm">輪弧烤成車身色<i>分色時跟下半同色，黑色塑膠件就不見了</i></span><span class="st">原廠黑</span></button>
         </div>
         <div class="grp">
           <p class="lbl">全車套件</p>
@@ -694,15 +698,15 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609250609';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, STYLES } from './parts.js?v=202609250609';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609250609';
-import { openAwning, roofTent, campExtra } from './camp.js?v=202609250609';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609250609';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609250609';
+import { rigJimny, applyConfig, updateSplit } from './rig.js?v=202609251702';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, SPLIT_PAINTS, SPLIT_Y, STYLES } from './parts.js?v=202609251702';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609251702';
+import { openAwning, roofTent, campExtra } from './camp.js?v=202609251702';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609251702';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609251702';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609250609';
+const BUILD = '202609251702';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -893,7 +897,7 @@ const DEF = { color: 'ZVL', twoTone: false, lift: 'stock', bodyLift: 'none', whe
   kit: 'none', hood: 'stock', spareCoverKit: 'none', gullwing: false, frontBumper: 'stock', grille: 'stock', rearBumper: 'stock',
   snorkel: 'none', mirrors: 'stock', pillarPods: false, roofRack: 'none', awning: 'none', awningSide: 'left', windowGuards: false, ladder: 'none',
   sideStep: 'none', lightBar: 'none', spareBag: false, spareCover: false,
-  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none', face: 'none', spoiler: 'none', rackShift: 0, tent: 'none', tentOpen: false, awningOpen: false, awningRoom: false, campExtra: 'none',
+  roofLights: 'none', grilleLight: 'none', exhaust: 'stock', extinguisher: 'none', guardCan: 'none', guardAxe: 'none', guardBoard: 'none', shovel: false, flares: false, decals: false, sideSkirt: false, stripe: 'none', cage: 'none', fender: 'none', face: 'none', spoiler: 'none', rackShift: 0, split: 'none', paintFlares: false, tent: 'none', tentOpen: false, awningOpen: false, awningRoom: false, campExtra: 'none',
   ...Object.fromEntries(ARB_RACK_ACC.map(a => [a.key, false])) };
 // 50 mm a press, 200 mm either way: the gutter feet clamp anywhere along the
 // drip rail, but past that the rack's end legs run off the roof panel
@@ -1035,6 +1039,19 @@ function loadBody(tries = 0) {
 loadBody();
 $('bootretry').onclick = () => location.reload();
 
+/** One part in another of its maker's finishes: the black powder coat and
+ *  textured black swapped for mirror stainless or ivory, lamps and plates
+ *  left alone. Beyond sell each Liberte bar in all three. */
+const FINISH_MATS = {};
+function finishOf(node, finish) {
+  if (!node || !finish) return node;
+  FINISH_MATS[finish] ??= finish === 'mirror'
+    ? new THREE.MeshStandardMaterial({ name: 'FinishMirror', color: 0xeef1f3, roughness: 0.07, metalness: 1 })
+    : new THREE.MeshPhysicalMaterial({ name: 'FinishIvory', color: 0xe9e1cc, roughness: 0.38, metalness: 0.05, clearcoat: 0.6, clearcoatRoughness: 0.2 });
+  node.traverse((o) => { if (o.isMesh && /PowderBlack|TextureBlack/.test(o.material?.name ?? '')) o.material = FINISH_MATS[finish]; });
+  return node;
+}
+
 /* ═══ scene update ═══════════════════════════════════════════════════════ */
 let prevS = null, prevGeom = null, prevPaint = null;
 const BUILT = {};                       // family -> the node currently on the car
@@ -1054,7 +1071,8 @@ function update() {
     tread: { ...find(TYRE_MODELS, S.tread), owl: S.owl }, rimColor: S.rimColor,
     spacer: Math.max(0, -wh.offset) * 0.7,
     hideBumper: S.frontBumper !== 'stock' || S.face !== 'none', hideGrille: S.grille !== 'stock' || S.face !== 'none',
-    hideHeadlamps: S.face !== 'none', hideRear: S.rearBumper !== 'stock',
+    hideHeadlamps: S.face !== 'none',
+    splitColor: find(SPLIT_PAINTS, S.split).hex ?? null, splitY: SPLIT_Y, paintFlares: S.paintFlares, hideRear: S.rearBumper !== 'stock',
     hideMirrors: S.mirrors !== 'stock', hideFlares: false, hideRearLamps: !!find(REAR_BUMPERS, S.rearBumper).ownLamps,
     hideQuarterGlass: S.gullwing,
     buildWheel: (o) => buildWheel(THREE, { ...o, rimNode: getPart('rim_' + o.style) }),
@@ -1097,7 +1115,8 @@ function update() {
   if (S.fender !== 'none') add(buildAccessory('fender', S.fender, paint), 'fender');
   if (S.face !== 'none') add(buildAccessory('face', S.face, paint), 'face');
   if (S.spoiler !== 'none') add(buildAccessory('spoiler', S.spoiler, paint), 'spoiler');
-  if (S.rearBumper !== 'stock') add(buildAccessory('rearBumper', S.rearBumper, paint), 'rearBumper');
+  if (S.rearBumper !== 'stock') { const e = find(REAR_BUMPERS, S.rearBumper);
+    add(finishOf(buildAccessory('rearBumper', e.node ?? e.id, paint), e.finish), 'rearBumper'); }
   // 'safari' is a legacy id kept so old links still work; the part is Ironman's
   if (S.snorkel !== 'none')
     add(buildAccessory('snorkel', S.snorkel === 'safari' ? 'ironman'
@@ -1106,7 +1125,8 @@ function update() {
   if (S.roofRack !== 'none') add(buildAccessory('roofRack', S.roofRack, paint), 'roofRack');
   if (S.awning !== 'none') add(buildAccessory('awning', `${S.awning}_${S.awningSide}`, paint), 'awning');
   if (S.sideStep !== 'none') add(buildAccessory('sideStep', S.sideStep, paint), 'sideStep');
-  if (S.frontBumper !== 'stock' && S.face === 'none') add(buildAccessory('frontBumper', S.frontBumper, paint), 'frontBumper');
+  if (S.frontBumper !== 'stock' && S.face === 'none') { const e = find(FRONT_BUMPERS, S.frontBumper);
+    add(finishOf(buildAccessory('frontBumper', e.node ?? e.id, paint), e.finish), 'frontBumper'); }
   if (S.grille !== 'stock' && S.face === 'none') add(buildAccessory('grille', S.grille, paint), 'grille');
 
   // The camping area: open tents and awnings are built from their catalogue
@@ -1876,6 +1896,7 @@ function syncToggles() {
   document.querySelectorAll('[data-r]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.r === S.rimColor));
   const owl = $('tgOwl');
   if (!owl.disabled) { owl.setAttribute('aria-pressed', S.owl); owl.querySelector('.st').textContent = S.owl ? '開啟' : '關閉'; }
+  const fl = $('tgFlare'); fl.setAttribute('aria-pressed', S.paintFlares); fl.querySelector('.st').textContent = S.paintFlares ? '車身色' : '原廠黑';
   const two = $('tgTwo'); two.setAttribute('aria-pressed', S.twoTone);
   two.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉';
 }
@@ -1902,6 +1923,7 @@ function buildUI() {
   renderLiftSeg(); renderLiftCards();
   renderWChips(); renderWheels(); renderLadder(); renderTabs();
 
+  $('selSplit').innerHTML = SPLIT_PAINTS.map(p => `<option value="${p.id}"${p.id === S.split ? ' selected' : ''}>${esc(p.label)}</option>`).join('');
   $('selColor').innerHTML = [['台灣在售', c => c.tw], ['日規專屬', c => !c.tw && !c.wrap], ['改色膜（非原廠色）', c => c.wrap]].map(([g, f]) => {
     const list = COLORS.filter(f); if (!list.length) return '';
     return `<optgroup label="${g}">` + list.map(c =>
@@ -1950,6 +1972,8 @@ function hints() {
   $('colPick').textContent = c.name + (S.twoTone && c.twoTone ? `　雙色 ${c.twoTone}` : '');
   $('colNote').textContent = [c.tw === '雙色' ? '台灣只有雙色版，請開啟下方雙色車頂。' : '',
     c.tw || c.wrap ? '' : '台灣未導入。', c.note].filter(Boolean).join(' ');
+  { const sp = find(SPLIT_PAINTS, S.split);
+    $('hSplit').textContent = sp.id === 'none' ? '整台同一個顏色' : `窗線以下 ${sp.label}${sp.note ? '・' + sp.note : ''}。非原廠選項：要整車下半重烤或貼膜，價格依烤漆廠報價` ; }
   $('twoNote').textContent = c.twoTone ? `黑頂 ZJ3　台灣組合代碼 ${c.twoTone}` : '此色無原廠雙色組合';
 }
 
@@ -2202,6 +2226,8 @@ $('rimSw').onclick = e => { const b = e.target.closest('[data-r]'); if (!b) retu
 $('selColor').onchange = e => { S.color = e.target.value; syncToggles(); hints(); update(); };
 $('colSw').onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return;
   S.color = b.dataset.c; $('selColor').value = S.color; syncToggles(); hints(); update(); };
+$('selSplit').onchange = e => { S.split = e.target.value; if (S.split !== 'none' && !S.paintFlares) S.paintFlares = true; syncToggles(); hints(); update(); };
+$('tgFlare').onclick = () => { S.paintFlares = !S.paintFlares; syncToggles(); update(); };
 $('tgTwo').onclick = e => { S.twoTone = !S.twoTone;
   e.currentTarget.setAttribute('aria-pressed', S.twoTone);
   e.currentTarget.querySelector('.st').textContent = S.twoTone ? '開啟' : '關閉'; update(); };
@@ -2283,6 +2309,8 @@ $('btnExport').onclick = () => {
     S.grille !== 'stock' && '水箱護罩 ' + find(GRILLES, S.grille).label,
     S.rearBumper !== 'stock' && '後保桿 ' + find(REAR_BUMPERS, S.rearBumper).label,
     S.face !== 'none' && '換臉套件 ' + find(FACES, S.face).label,
+    S.split !== 'none' && '下半車身分色 ' + find(SPLIT_PAINTS, S.split).label,
+    S.paintFlares && '輪弧烤成車身色',
     S.spoiler !== 'none' && '車頂尾翼 ' + find(SPOILERS, S.spoiler).label,
     S.fender !== 'none' && '寬體葉子板 ' + find(FENDERS, S.fender).label,
     S.cage !== 'none' && '外掛防滾籠 ' + find(CAGES, S.cage).label,
@@ -2333,6 +2361,7 @@ resize(); setPeek(); applyCam();
 (function loop(t) {
   runTweens(t || performance.now());
   ambient(t || 0);
+  updateSplit(rig);
   if (composer) composer.render(); else renderer.render(scene, cam);
   requestAnimationFrame(loop);
 })();

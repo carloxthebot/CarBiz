@@ -42,6 +42,25 @@ export const COLORS = [
 COLORS.push(
   { code: '2080-G13', name: '紅色（3M 2080 Gloss Hot Rod Red 改色膜）', hex: 0xc81b22, twoTone: false, tw: false, wrap: true,
     note: '非原廠色。JB74 在日本、台灣、澳洲、英國都沒有原廠紅，只有五門的 JC74 有 Sizzling Red。這是 3M 改色膜 2080-G13；台灣包膜行的休旅車級距 3M 膜約 NT$115,000（不是 Jimny 專屬報價，車小可能更低）。顏色是照產品照片估的，3M 不公布色碼' });
+/**
+ * The lower half of a split-paint car: everything below the line round the
+ * car at the window sill (y 1000 mm), and the arch flares with it when they
+ * are painted. None of this is a Suzuki option -- it is a respray or a wrap
+ * of the lower body, which is how Beyond's demo cars are done -- so it says
+ * so and carries no invented price.
+ */
+export const SPLIT_PAINTS = [
+  { id: 'none', label: '單色（不分色）' },
+  { id: 'orange', label: '復古橘', hex: 0xd0621f, note: 'Beyond CODE01 的上象牙下橘' },
+  { id: 'purple', label: '紫（改色膜）', hex: 0x6a3a98, note: 'Beyond CODE20 的上灰下紫，紫色是改色膜' },
+  { id: 'black', label: '黑（ZJ3 同色）', hex: 0x16191c, note: 'Beyond CODE32 的上灰下黑' },
+  { id: 'cream', label: '奶油白', hex: 0xe8dfc6 },
+  { id: 'brown', label: '深咖啡', hex: 0x5a3b27 },
+  { id: 'green', label: '軍綠（ZZC 同色）', hex: 0x444a3a },
+  { id: 'red', label: '磚紅', hex: 0x9a2a1e },
+];
+export const SPLIT_Y = 1000;          // mm: the window sill line, sampled belt 995
+
 export const ROOF_BLACK = 0x16191c;   // ZJ3 — the only two-tone roof Suzuki offers
 
 // Suspension lifts, grouped by the inch class the trade uses. `lift` is the
@@ -308,7 +327,13 @@ export const FRONT_BUMPERS = [
   { id: 'urnieta_1970', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2210', label: '1970 復古前保桿', price: 20600, cur: 'TWD', brand: 'URNIETA', part: 'UR010',
     note: '工程圖 UN-JIMNY-FB-027：1547×331，兩端上揚翼形角＋三道散熱縫，中央百葉面板配 URNIETA 與 1970 SERIES 銘牌，下方平板配兩顆拖車環。21kg。短版復古、兩側上折收窄，保留原廠霧燈與洗燈' },
   { id: 'beyond_liberte', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2114', label: 'Liberte 復古前保桿', price: 28000, cur: 'TWD', brand: 'Beyond Japan',
-    note: '硬邊鋼製、霧燈架＋下護板；MRK 代理' },
+    note: '不鏽鋼（黑色是塗裝），霧燈架＋下護板；MRK 代理價。Beyond 官方同款有鏡面／黑／象牙三種表面，前桿依霧燈架與護板分四種，¥69,300–¥107,800 稅込' },
+  // the same bar in Beyond's other two finishes: same geometry (`node`), the
+  // black powder coat swapped for the finish
+  { id: 'beyond_liberte_mirror', node: 'beyond_liberte', finish: 'mirror', url: 'https://beyond-jpn.com/', label: 'Liberte 復古前保桿（鏡面不鏽鋼）', price: null, cur: 'JPY', brand: 'Beyond Japan', uncertain: true,
+    note: 'Beyond 官方的鏡面拋光不鏽鋼版；官方前桿依規格 ¥69,300–¥107,800 稅込，鏡面這一款的單價官網沒有分開寫清楚' },
+  { id: 'beyond_liberte_ivory', node: 'beyond_liberte', finish: 'ivory', url: 'https://beyond-jpn.com/', label: 'Liberte 復古前保桿（象牙白）', price: null, cur: 'JPY', brand: 'Beyond Japan', uncertain: true,
+    note: 'Beyond 官方的象牙白塗裝版；官方前桿依規格 ¥69,300–¥107,800 稅込' },
   { id: 'maverick', photo: true, url: 'https://i-pickup.com.tw/product/df0001/', label: '短版金屬前保桿', price: 29000, cur: 'TWD', brand: 'Maverick',
     part: 'DF0001', note: '鍍鋅鋼 NT$29,000／鋁合金 NT$35,000，塗裝 +9,000' },
   { id: 'mrk_abs', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1948', label: '短版 ABS 前保桿（消光黑）', price: 9500, cur: 'TWD', brand: 'MRK', part: 'JMY-FB-L',
@@ -357,7 +382,11 @@ export const REAR_BUMPERS = [
   { id: 'urnieta_1970_rear', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2219', ownLamps: true, label: '1970 復古後保桿', price: 20400, cur: 'TWD', brand: 'URNIETA', part: 'UR015',
     note: '工程圖 UN-JIMNY-FB-028：1617×265，每側兩顆圓形尾燈（官方寫致敬 Nissan GT-R）＋方形凹窗，右側 URNIETA 燈條銘牌，車牌置中。8.4kg。半高、兩端上折、圓形尾燈，8.4kg' },
   { id: 'beyond_rear', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=2112', label: 'Liberte 復古後保桿', price: 21000, cur: 'TWD', brand: 'Beyond Japan',
-    note: '精簡鋼桿、消光黑' },
+    note: '不鏽鋼（黑色是塗裝）的精簡管桿；MRK 代理價。Beyond 官方同款鏡面／黑／象牙三種表面 ¥83,600–¥86,900 稅込' },
+  { id: 'beyond_rear_mirror', node: 'beyond_rear', finish: 'mirror', url: 'https://beyond-jpn.com/', label: 'Liberte 復古後保桿（鏡面不鏽鋼）', price: null, cur: 'JPY', brand: 'Beyond Japan', uncertain: true,
+    note: 'Beyond 官方鏡面版；官方後桿三種表面 ¥83,600–¥86,900 稅込，鏡面單價官網未分開標' },
+  { id: 'beyond_rear_ivory', node: 'beyond_rear', finish: 'ivory', url: 'https://beyond-jpn.com/', label: 'Liberte 復古後保桿（象牙白）', price: null, cur: 'JPY', brand: 'Beyond Japan', uncertain: true,
+    note: 'Beyond 官方象牙白版；官方後桿三種表面 ¥83,600–¥86,900 稅込' },
   { id: 'jaos_rear_cowl', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1176', ownLamps: true, label: 'Rear Sport Cowl 後下擾流', price: 26500, cur: 'TWD', brand: 'JAOS', part: 'B042518',
     note: 'JAOS 台灣代理 MRK 定價 NT$26,500（未塗裝），日本官方 ¥92,400 稅込／¥84,000 稅抜，品番 B042518，聚氨酯未塗裝本體、不鏽鋼支架，單品 4.65kg。適合 JB74 系 1〜3 型（2018.07〜2024.04），4 型以後官網未列入適合表。四顆圓形 LED 尾燈通過 ECE 認證、可過原廠車檢；套件內附倒車攝影機支架（僅支架，不含攝影機本體）。' },
   // ---- 日本
@@ -1048,6 +1077,23 @@ export const STYLES = [
     desc: '原廠高度只換 185/85R16 窄高胎：胎比原廠瘦、又高一點，白字配白色鋼圈臉，前後換 Beyond Liberte 復古保桿與 K-PRODUCTS 橫鰭水箱罩，整台車看起來更輕更高。輪胎配置照浜松 URBAN OFF CRAFT 的 JB74 實車配置。',
     set: { color: 'ZWY', twoTone: true, wheel: 'dean_cross', tyre: 't185r16', tread: 'toyo_rt', owl: true,
       rimColor: 0xd8d9d6, grille: 'kpro_folksy', frontBumper: 'beyond_liberte', rearBumper: 'beyond_rear' } },
+
+  { id: 'cal_twotone', label: '加州雙色', sw: ['#e9dcc0', '#d0621f', '#c9ccd0'],
+    desc: '上米白、下復古橘，連輪弧一起烤成下半的顏色，黑色塑膠件全消失；前後鏡面不鏽鋼保桿配鍍鉻月亮盤。照 Beyond CODE01 的配色。',
+    set: { color: 'ZVG', split: 'orange', paintFlares: true, lift: 'klc30', wheel: 'super_moon', rimColor: 0xd8d9d6,
+      tyre: 't215r16', tread: 'bfg_ko2', owl: true, frontBumper: 'beyond_liberte_mirror', rearBumper: 'beyond_rear_mirror',
+      grille: 'hbar_suzuki' } },
+
+  { id: 'grey_purple', label: '灰紫時裝', sw: ['#8e8f8c', '#6a3a98', '#1d2224'],
+    desc: '上灰、下紫（連輪弧），鏡面管桿、黑鋼圈配泥地胎——有點街頭時裝的味道。照 Beyond CODE20 的配色，紫色是改色膜。',
+    set: { color: 'ZVL', split: 'purple', paintFlares: true, lift: 'klc30', wheel: 'dean_cross', rimColor: 0x1b1d1f,
+      tyre: 't225r16', tread: 'toyo_mt', frontBumper: 'beyond_liberte_mirror', rearBumper: 'beyond_rear_mirror',
+      grille: 'hbar_suzuki' } },
+
+  { id: 'sunset_ja', label: '夕陽 JA11', sw: ['#f2f3f0', '#e0662a', '#1d2224'],
+    desc: '白車配一整道橘紅棕漸層寬條紋，黑管桿、JA 水箱罩、黑鋼圈白字胎——向 90 年代 JA11 致敬。照 Beyond CODE26。',
+    set: { color: 'ZVR', stripe: 'toy4', lift: 'klc30', wheel: 'dean_cross', rimColor: 0x1b1d1f, tyre: 't215r16',
+      tread: 'toyo_rt', owl: false, frontBumper: 'beyond_liberte', rearBumper: 'beyond_rear', grille: 'klc_ja' } },
 
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
     desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，ARMANDO 鋼製前保桿、Wild Goose 圓管後保桿、復古水箱罩，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',

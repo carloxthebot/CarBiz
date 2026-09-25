@@ -155,6 +155,28 @@ export function rigJimny(THREE, gltfScene) {
       clearcoat: 1.0, clearcoatRoughness: 0.06 });
     for (const m of painted) m.material = paintMat;
   }
+  // ---- split paint: a second colour below a line round the car. Beyond's
+  // demo cars get most of their character this way -- ivory over orange,
+  // grey over purple -- with the arch flares painted the lower colour so the
+  // black plastic disappears. It is done in the shader on WORLD height, so
+  // anything wearing the body paint (painted bumpers, wide fenders, and the
+  // stock flares when they are painted) follows the same line.
+  const split = { y: { value: 1e9 }, lower: { value: new THREE.Color(0x6a6866) }, on: { value: 0 } };
+  if (paintMat) {
+    paintMat.onBeforeCompile = (sh) => {
+      sh.uniforms.uSplitY = split.y; sh.uniforms.uLower = split.lower; sh.uniforms.uSplitOn = split.on;
+      sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying float vWY;')
+        .replace('#include <project_vertex>', '#include <project_vertex>\nvWY = (modelMatrix * vec4(transformed, 1.0)).y;');
+      sh.fragmentShader = sh.fragmentShader.replace('#include <common>',
+        '#include <common>\nvarying float vWY;\nuniform float uSplitY;\nuniform vec3 uLower;\nuniform float uSplitOn;')
+        .replace('#include <color_fragment>', `#include <color_fragment>
+          if (uSplitOn > 0.5) {
+            float e = max(fwidth(vWY), 1e-4);
+            diffuseColor.rgb = mix(uLower, diffuseColor.rgb, smoothstep(uSplitY - e, uSplitY + e, vWY));
+          }`);
+    };
+    paintMat.customProgramCacheKey = () => 'bodypaint-split';
+  }
 
   // ---- roof, for two-tone: painted meshes in the top fifth of the car ----
   const roofMeshes = [];
@@ -332,7 +354,7 @@ export function rigJimny(THREE, gltfScene) {
 
   root.userData = {
     BODY, WHEELS, wheelGroups, spareBox, spare, anchors, stockBumper, stockGrille, stockRear, stockMirrors, stockFlares, stockRearLamps, stockQuarter, stockHeadlamps,
-    paintMat, roofMat, roofMeshes, painted, dims,
+    paintMat, roofMat, roofMeshes, painted, dims, split, splitMM: null, flareMats: null,
     baseTyreDia: wheelGroups[0]?.userData.baseDia ?? 0.693,
   };
   return root;
@@ -349,6 +371,13 @@ export function applyConfig(THREE, rig, cfg) {
   for (const m of U.stockRear) m.visible = !cfg.hideRear;
   for (const m of U.stockMirrors) m.visible = !cfg.hideMirrors;
   for (const m of U.stockFlares) m.visible = !cfg.hideFlares;
+  // painted flares wear the body paint, so below the split they take the
+  // lower colour; unpainted they go back to the black resin they came in
+  if (!U.flareMats) U.flareMats = U.stockFlares.map(m => m.material);
+  U.stockFlares.forEach((m, i) => { m.material = cfg.paintFlares && U.paintMat ? U.paintMat : U.flareMats[i]; });
+  U.splitMM = cfg.splitColor != null ? (cfg.splitY ?? 1010) : null;
+  U.split.on.value = U.splitMM != null ? 1 : 0;
+  if (U.splitMM != null) U.split.lower.value.setHex(cfg.splitColor);
   for (const m of U.stockRearLamps) m.visible = !cfg.hideRearLamps;
   for (const m of U.stockQuarter) m.visible = !cfg.hideQuarterGlass;
   for (const m of U.stockHeadlamps) m.visible = !cfg.hideHeadlamps;
@@ -411,4 +440,13 @@ export function applyConfig(THREE, rig, cfg) {
   }
 
   U.BODY.position.y = (cfg.lift ?? 0) * mm + (targetDia - U.baseTyreDia) / 2;
+}
+
+/** The split line is in world height, so it rides up with the body every
+ *  frame while the lift eases in. */
+export function updateSplit(rig) {
+  const U = rig?.userData;
+  if (!U || U.splitMM == null) return;
+  U.BODY.updateMatrixWorld(true);
+  U.split.y.value = U.BODY.position.clone().set(0, U.splitMM / 1000, 0).applyMatrix4(U.BODY.matrixWorld).y;
 }

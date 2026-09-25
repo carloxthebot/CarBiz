@@ -579,7 +579,10 @@ def grille_owner():
 # 1565 wide, y 342-714, front face z ~1770; a black valance behind each new
 # bar closes the gap to the radiator that the stock bumper used to cover.
 def valance(root, corners=True):
-    box('valance', (0, 560, 1500), (1200, 280, 24), RUBBER, root, bevel=4)
+    # 1100 wide and tucked right behind the bar (whose back stays ahead of
+    # 1545): at z 1500 it sat inside a 225/75R16's leading edge (1511) and
+    # a steered tyre brushed its ends
+    box('valance', (0, 560, 1533), (1100, 280, 20), RUBBER, root, bevel=4)
     for s in (-1, 1):                                    # chassis-rail mounts
         box(f'mount{s}', (s * 330, 540, 1600), (70, 120, 200), TEXBLACK, root, bevel=4)
     # (There used to be a 300 mm 'corner' block either side here, meant to
