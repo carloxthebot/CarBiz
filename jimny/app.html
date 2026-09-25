@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609250523" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609250609" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -43,6 +43,21 @@ body{background:var(--bg);color:var(--ink);font:16px/1.62 var(--body);
 .stage{position:relative;overflow:hidden;touch-action:none;
   background:radial-gradient(88% 70% at 50% 106%,#2d3e44 0%,#182227 44%,#0b1113 100%)}
 #cv{display:block;width:100%;height:100%}
+/* Two stages. The dark room made a grey car on a grey floor with nothing to
+   reflect -- it looked like a CAD viewport. The studio is bright, the way a
+   maker photographs a car; the outdoor stage is a real place. The overlay
+   text flips to dark on the studio and gets a shadow on the photograph. */
+.stage.studio{background:radial-gradient(90% 80% at 50% 38%,#fbfbfa 0%,#e9ecec 46%,#c3c9cb 100%)}
+.stage.studio .badge .mk,.stage.studio .hud,.stage.studio .credit,.stage.studio .credit a{color:#56666c}
+.stage.studio .badge .md,.stage.studio .hud b,.stage.studio .hud .stats i{color:#141b1e}
+.stage.studio .hud .stats{color:#3d4a4f}.stage.studio .hud .ver{color:#7d8a8f}
+.stage.outdoor .badge,.stage.outdoor .hud,.stage.outdoor .credit{text-shadow:0 1px 3px #000c,0 0 14px #0008}
+.stage.outdoor .badge .mk,.stage.outdoor .hud{color:#dfe6e8}
+.stagepick{position:absolute;top:56px;right:20px;display:flex;gap:1px;background:var(--line2);
+  border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.stagepick button{font:500 12px/1 var(--body);padding:8px 11px;border:0;cursor:pointer;background:#0f181bcc;color:var(--ink2);backdrop-filter:blur(6px)}
+.stagepick button[aria-pressed=true]{background:#eef2f1;color:#11181a;font-weight:700}
+.stagepick button[disabled]{opacity:.6;cursor:progress}
 .badge{position:absolute;top:18px;left:22px;pointer-events:none}
 .badge .mk{font:500 9.5px/1 var(--mono);letter-spacing:.28em;color:#6f8188}
 .badge .md{font:800 25px/1.05 var(--disp);letter-spacing:-.01em;color:#dfe8e9;margin-top:5px}
@@ -471,10 +486,12 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
     <button id="bootretry" type="button" hidden>重新載入</button>
   </div>
 <div class="app">
-  <div class="stage">
+  <div class="stage studio">
     <canvas id="cv"></canvas>
     <div class="badge"><div class="mk">SUZUKI · JB74W</div><div class="md">JIMNY SIERRA</div></div>
     <div class="views" id="views"></div>
+    <div class="stagepick" id="stagePick" role="group" aria-label="場景">
+      <button data-stage="studio" aria-pressed="true">攝影棚</button><button data-stage="outdoor" aria-pressed="false">戶外</button></div>
     <div class="hud" id="hud">
       <span class="tip">拖曳旋轉 · 雙指縮放</span>
       <b id="hCol">—</b>
@@ -671,26 +688,27 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609250523';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, STYLES } from './parts.js?v=202609250523';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609250523';
-import { openAwning, roofTent, campExtra } from './camp.js?v=202609250523';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609250523';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609250523';
+import { rigJimny, applyConfig } from './rig.js?v=202609250609';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, STYLES } from './parts.js?v=202609250609';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609250609';
+import { openAwning, roofTent, campExtra } from './camp.js?v=202609250609';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609250609';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609250609';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609250523';
+const BUILD = '202609250609';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
 // the scene fed the ambient-occlusion pass a phantom wall.
 const scene = new THREE.Scene();
-const cam = new THREE.PerspectiveCamera(30, 1, 0.05, 200);
+const cam = new THREE.PerspectiveCamera(30, 1, 0.05, 1000);   // far enough for the outdoor sky (radius 400)
 const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0);
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -703,8 +721,8 @@ const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 scene.environmentIntensity = 1.0;
 new RGBELoader().load(`model/env.hdr?v=${BUILD}`, (hdr) => {
-  scene.environment = pmrem.fromEquirectangular(hdr).texture;
-  scene.environmentIntensity = 1.35;
+  STUDIO.env = pmrem.fromEquirectangular(hdr).texture;
+  if (stageAt === 'studio') { scene.environment = STUDIO.env; scene.environmentIntensity = STUDIO.intensity; }
   hdr.dispose();
 });
 scene.add(new THREE.HemisphereLight(0xdfe8ef, 0x2b3a40, 0.55));
@@ -743,6 +761,81 @@ function ambient(t) {
   POOL.scale.setScalar(1 + 0.03 * Math.sin(t / 3900));
   POOL.position.z = 0.09 * Math.sin(t / 5200);
 }
+
+/* ═══ stages: studio and outdoor ════════════════════════════════════════ */
+// Studio: the bright backdrop is CSS behind the transparent canvas, the car
+// reflects the studio HDR, and it stands on a contact shadow only.
+// Outdoor: a CC0 Poly Haven panorama (Goegap Road, Greg Zaal) projected onto
+// the ground with GroundedSkybox, so the car sits IN the place and reflects
+// it; the sun lamp is aimed from the brightest pixel of the same image, so
+// the shadow falls the way the photograph's shadows do.
+const STUDIO = { env: null, intensity: 1.35 };
+const OUTDOOR = { env: null, sky: null, loading: null, sun: null };
+const stageEl = document.querySelector('.stage');
+let stageAt = 'studio';
+function sunFrom(tex) {
+  const { data, width: W, height: H } = tex.image;
+  let best = -1, bi = 0;
+  for (let i = 0; i < W * H; i++) {
+    const l = data[i * 4] * 0.2126 + data[i * 4 + 1] * 0.7152 + data[i * 4 + 2] * 0.0722;
+    if (l > best) { best = l; bi = i; }
+  }
+  const u = (bi % W + 0.5) / W, v = 1 - (Math.floor(bi / W) + 0.5) / H;
+  const phi = (u - 0.5) * 2 * Math.PI, lat = (v - 0.5) * Math.PI;
+  return new THREE.Vector3(Math.cos(lat) * Math.cos(phi), Math.sin(lat), Math.cos(lat) * Math.sin(phi));
+}
+function loadOutdoor() {
+  if (OUTDOOR.loading) return OUTDOOR.loading;
+  OUTDOOR.loading = new Promise((res, rej) => new RGBELoader().setDataType(THREE.FloatType)
+    .load(`model/env_goegap_2k.hdr?v=${BUILD}`, (hdr) => {
+      hdr.mapping = THREE.EquirectangularReflectionMapping;
+      OUTDOOR.sun = sunFrom(hdr);
+      // The sun's pixels run to tens of thousands; through the half-float
+      // post chain that overflowed to Inf and rendered the car solid black.
+      // The directional light carries the sun, so the image is capped.
+      const d = hdr.image.data;
+      for (let i = 0; i < d.length; i++) if (d[i] > 24) d[i] = 24;
+      hdr.needsUpdate = true;
+      OUTDOOR.env = pmrem.fromEquirectangular(hdr).texture;
+      // projected from about the height the panorama was shot at, so the
+      // gravel is the right size; the flat disc runs out far enough that its
+      // edge sits on the horizon rather than across the view
+      OUTDOOR.sky = new GroundedSkybox(hdr, 1.8, 160);
+      OUTDOOR.sky.position.y = 1.8 - 0.01;
+      res();
+    }, undefined, rej));
+  return OUTDOOR.loading;
+}
+async function setStage(name) {
+  const btn = document.querySelector(`[data-stage="${name}"]`);
+  if (name === 'outdoor' && !OUTDOOR.sky) {
+    btn.disabled = true; btn.textContent = '載入中…';
+    try { await loadOutdoor(); } catch { btn.disabled = false; btn.textContent = '戶外'; return; }
+    btn.disabled = false; btn.textContent = '戶外';
+  }
+  stageAt = name;
+  try { localStorage.setItem('jimny.stage', name); } catch {}
+  document.querySelectorAll('[data-stage]').forEach(b => b.setAttribute('aria-pressed', b.dataset.stage === name));
+  stageEl.classList.toggle('studio', name === 'studio');
+  stageEl.classList.toggle('outdoor', name === 'outdoor');
+  if (name === 'outdoor') {
+    scene.add(OUTDOOR.sky);
+    scene.environment = OUTDOOR.env; scene.environmentIntensity = 1.0;
+    kl.position.copy(OUTDOOR.sun).multiplyScalar(10); kl.intensity = 2.6; fl2.intensity = 0.25;
+    floor.material.opacity = 0.5; if (POOL) POOL.visible = false;
+    renderer.toneMappingExposure = 0.95;
+  } else {
+    if (OUTDOOR.sky) scene.remove(OUTDOOR.sky);
+    if (STUDIO.env) scene.environment = STUDIO.env;
+    scene.environmentIntensity = STUDIO.intensity;
+    kl.position.set(4, 6.5, 4.5); kl.intensity = 2.1; fl2.intensity = 0.9;
+    floor.material.opacity = 0.42; if (POOL) POOL.visible = false;
+    renderer.toneMappingExposure = 1.05;
+  }
+}
+document.getElementById('stagePick').onclick = (e) => { const b = e.target.closest('[data-stage]'); if (b && !b.disabled) setStage(b.dataset.stage); };
+{ let st = null; try { st = localStorage.getItem('jimny.stage'); } catch {}
+  setStage(st === 'outdoor' ? 'outdoor' : 'studio'); }
 
 // Desktop gets ambient occlusion through a post-processing chain (crevices,
 // grille slats and rack slats stop looking pasted on); phones render direct,

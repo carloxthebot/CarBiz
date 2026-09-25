@@ -1,0 +1,1417 @@
+{
+  "title": "Beyond Japan 示範車風格研究（JB74 為主）",
+  "sourcedAt": "2026-09-25",
+  "sources": [
+    "https://beyond-jpn.com/en/",
+    "https://beyond-jpn.com/jp/",
+    "https://beyond-jpn.com/jp/code01",
+    "https://beyond-jpn.com/jp/code02",
+    "https://beyond-jpn.com/jp/code03",
+    "https://beyond-jpn.com/jp/code04",
+    "https://beyond-jpn.com/jp/code05",
+    "https://beyond-jpn.com/jp/code06",
+    "https://beyond-jpn.com/jp/code07",
+    "https://beyond-jpn.com/jp/code08",
+    "https://beyond-jpn.com/jp/code09",
+    "https://beyond-jpn.com/jp/code10",
+    "https://beyond-jpn.com/jp/code11",
+    "https://beyond-jpn.com/jp/code12",
+    "https://beyond-jpn.com/jp/code13",
+    "https://beyond-jpn.com/jp/code14",
+    "https://beyond-jpn.com/jp/code15",
+    "https://beyond-jpn.com/jp/code16",
+    "https://beyond-jpn.com/jp/code17",
+    "https://beyond-jpn.com/jp/code18",
+    "https://beyond-jpn.com/jp/code19",
+    "https://beyond-jpn.com/jp/code20",
+    "https://beyond-jpn.com/jp/code21",
+    "https://beyond-jpn.com/jp/code22",
+    "https://beyond-jpn.com/jp/code23",
+    "https://beyond-jpn.com/jp/code24",
+    "https://beyond-jpn.com/jp/code25",
+    "https://beyond-jpn.com/jp/code26",
+    "https://beyond-jpn.com/jp/code27",
+    "https://beyond-jpn.com/jp/code28",
+    "https://beyond-jpn.com/jp/code29",
+    "https://beyond-jpn.com/jp/code30",
+    "https://beyond-jpn.com/jp/code31",
+    "https://beyond-jpn.com/jp/code32",
+    "https://beyond-jpn.com/jp/code33",
+    "https://beyond-jpn.com/jp/code34",
+    "https://beyond-jpn.com/jp/code35",
+    "https://beyond-jpn.com/jp/code36",
+    "https://shop.beyond-jpn.com/products.json?limit=250"
+  ],
+  "notRead": [
+    "Instagram（@beyond.japan、@beyond.japan_global）未抓；前一輪 jb74-demo-cars 已記錄 IG 只回登入頁",
+    "TikTok 未抓"
+  ],
+  "method": "抓日文官網 CODE01–36 每頁文字（概念文與品項清單）與主圖、部分圖庫圖（只存在 scratchpad，未進 repo）目視判讀車型、顏色、輪胎字樣；價格取官方商店 Shopify products.json。官網每頁都不寫車型、輪框、輪胎尺寸、升高 mm，這些欄位標 uncertain 或「目測」。",
+  "priceNote": "官方商店 products.json 的 compare_at_price 當定價、price 當特價；商店 JSON 不標稅別，同商店商品頁先前（jb74-demo-cars）核對為稅込",
+  "counts": {
+    "codePages": 36,
+    "jb74": 16,
+    "jb74Pages": 17,
+    "jb64": 18,
+    "jc74": 1,
+    "note": "CODE02 與 CODE10 看來是同一台 JB74 換輪框與格柵；英文站只列到 CODE23"
+  },
+  "designLessons": [
+    {
+      "lesson": "腰線分色才是 Beyond 最搶眼的東西，而且原廠做不到",
+      "detail": "CODE01 上象牙／下橘、CODE20 上灰／下紫、CODE32 上灰／下黑、CODE02 綠車夾白腰帶。分色線在窗框下緣，外擴葉子板一起漆成下半色——Sierra 的黑色塑膠葉子板因此消失，車看起來是一整塊色。原廠只有「黑頂」一種雙色。",
+      "configuratorGap": "目前只有 color＋twoTone（黑頂）。缺「下半車身色」與「葉子板同色」兩個選項，這是單一最大的缺口。"
+    },
+    {
+      "lesson": "硬件的「表面處理」是一個配色決定，整台車只選一種",
+      "detail": "Liberte／Rêve 保桿同一款有鏡面、黑、象牙三種表面。CODE23 鏡面保桿＋鍍鉻格柵＋鍍鉻月亮盤＋鏡面尾燈環；CODE19／22 全黑；CODE13 保桿、車頂架都象牙。從來不混。",
+      "configuratorGap": "目錄的 beyond_liberte 只有一種外觀；沒有「保桿表面：鏡面／黑／象牙」選項，也沒有車頂架顏色。"
+    },
+    {
+      "lesson": "格柵漆車身色或拆色，臉就是主角",
+      "detail": "每款格柵都是某台 70 年代老車（Sunny B110、Levin TE27、Trueno、JA11 一型、JA22）。CODE15／22 Soldier 漆車身色；CODE20 Su11 燈框與十字漆銀、百葉漆黑，模仿老車鍍鉻燈框。",
+      "configuratorGap": "格柵只有固定顏色，沒有「漆車身色／銀黑拆色」。"
+    },
+    {
+      "lesson": "輪框只在四種裡選，而且一定跟車身反差",
+      "detail": "鍍鉻碟盤（CODE01／10／14／23）、白鋼圈＋鍍鉻小蓋（CODE13）、紅鋼圈（CODE02）、黑鋼圈或黑月亮盤（CODE19／20／22／26／30）。全部 16 吋、配白字或胖的全地形胎，沒有大尺寸框。",
+      "configuratorGap": "rimColor 已有；缺「鍍鉻碟盤」的材質（super_moon 只能變色，沒有鏡面反光材質）與白鋼圈＋鉻蓋的組合。"
+    },
+    {
+      "lesson": "每台只放一個「故事」細節",
+      "detail": "草寫字標（CODE02／10／20）、木紋側板（CODE14／23）、夕陽條紋（CODE26）、笑臉備胎套（CODE02／20）、黃色大燈罩或霧燈片（CODE02／10／13／20）、JA11 琥珀方向燈與尾燈（CODE01／22／26／29／30）。一台只挑一兩樣。",
+      "configuratorGap": "缺木紋側板、草寫字標、黃燈罩、JA11 方向燈／尾燈、備胎套花樣；toy4 條紋已接近 CODE26。"
+    },
+    {
+      "lesson": "輪廓幾乎不動，顏色在做事",
+      "detail": "16 台 JB74 示範車裡只有 1 台（CODE13）裝車頂架、1 台（CODE15）明顯高升，其餘都是小升高、車頂空、原廠寬。跟我們 STYLES 註解「先拉開輪廓，再拉開貼紙」的方向相反——Beyond 證明同一輪廓靠配色也能完全不同。"
+    },
+    {
+      "lesson": "場景跟主題配套",
+      "detail": "加州風停在棕櫚樹下（CODE01／02）、Aloha 招牌與提基雕像（CODE13）、海灘救生員塔（CODE14）、黑車在工廠夜景（CODE22／32）、綠車在森林（CODE10／29／30）。全部低角度前 3/4、暖色光。",
+      "configuratorGap": "每個 style 可綁一個背景／光線預設。"
+    },
+    {
+      "lesson": "反例：全黑不亮眼",
+      "detail": "CODE17（黑車黑件黑輪）是全系列最不起眼的一台，同樣零件換到白車（CODE19）或象牙車（CODE22）就跳出來。"
+    }
+  ],
+  "looks": [
+    {
+      "code": "CODE01",
+      "page": "https://beyond-jpn.com/jp/code01",
+      "name": "nuit en ville｜アメリカンスタイル（加州老派雙色）",
+      "chassis": "JB74",
+      "chassisBasis": "東京車展頁寫 JB74；照片葉子板外擴且與下半車身同色",
+      "idea": "上象牙、下橘的腰線分色，連葉子板一起漆橘，配鏡面圓管前後桿與鍍鉻碟盤——像 70 年代美國小四驅。",
+      "bodyColour": {
+        "desc": "車頂、柱、引擎蓋象牙（シフォン系）；腰線以下含葉子板改漆橘",
+        "code": "ZVG（上半）＋改漆橘（下半）",
+        "type": "repaint",
+        "uncertain": true
+      },
+      "wheels": "鍍鉻平面碟盤＋中心蓋（官網未寫品名；東京車展頁寫コーリン オールドカントリー 16x6.0J -5）",
+      "tyres": "BFGoodrich 黑字 A/T（胎壁可見 BFGoodrich；東京車展頁寫 215/70R16）",
+      "rideHeight": "小幅升高（東京車展頁寫 Beyond 1.5 吋懸吊；官網未寫 mm）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ 64/74 フロントバンパー 鏡面（フォグ＆スキッド付）",
+          "id": "beyond_liberte",
+          "partNo": "befb64-msal",
+          "url": "https://shop.beyond-jpn.com/products/befb64-msal",
+          "price": 107800,
+          "salePrice": 97020,
+          "note": "目錄 beyond_liberte 只有一種外觀、掛 MRK 台幣價"
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー 鏡面（JA11 尾燈）",
+          "id": "beyond_rear",
+          "partNo": "berb-ms",
+          "url": "https://shop.beyond-jpn.com/products/berb-ms",
+          "price": 86900,
+          "salePrice": 78210,
+          "note": "目錄 beyond_rear 是消光黑"
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル Su11（ABS）CODE01 塗り＝分色塗裝済",
+          "id": "missing",
+          "partNo": "befgsu11t1-zzb",
+          "url": "https://shop.beyond-jpn.com/products/befgsu11t1-zzb",
+          "price": 140800,
+          "note": "未塗裝 ABS ¥84,700"
+        },
+        {
+          "slot": "other",
+          "product": "JA11 テールランプ（リアバンパー用）",
+          "id": "missing",
+          "partNo": "beta11",
+          "url": "https://shop.beyond-jpn.com/products/beta11",
+          "price": 41800
+        }
+      ],
+      "why": "兩個原廠沒有的顏色大面積分上下，葉子板跟著下半漆掉，黑色塑膠件完全消失；金屬件全鏡面，只剩兩種顏色＋鉻。"
+    },
+    {
+      "code": "CODE02／CODE10",
+      "page": "https://beyond-jpn.com/jp/code02",
+      "pageAlt": "https://beyond-jpn.com/jp/code10",
+      "name": "homme noir／CODE10（綠白腰帶＋手寫字）",
+      "chassis": "JB74",
+      "chassisBasis": "照片外擴葉子板漆成綠色；兩頁看來是同一台車換輪框與格柵，官網未寫車型",
+      "uncertain": true,
+      "idea": "軍綠車身在門把高度到下折線之間夾一條寬白帶，白帶上寫草寫「Beyond」字標——老派商用車塗裝。",
+      "bodyColour": {
+        "desc": "軍綠為底；車門腰線到下折線一整條白／米白帶，葉子板綠",
+        "code": "ZZC＋白色腰帶（改漆或貼膜，官網未寫）",
+        "type": "repaint_or_wrap",
+        "uncertain": true
+      },
+      "wheels": "CODE02：紅色鋼圈＋黑色中心；CODE10：鍍鉻碟盤（官網未寫品名）",
+      "tyres": "TOYO OPEN COUNTRY R/T 白字（胎壁可讀）；尺寸官網未寫",
+      "rideHeight": "小幅升高（目測，官網未寫）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ 64/74 フロントバンパー 鏡面",
+          "id": "beyond_liberte",
+          "partNo": "befb64-ms",
+          "url": "https://shop.beyond-jpn.com/products/befb64-ms",
+          "price": 72600,
+          "salePrice": 65340
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー 鏡面（JA11 尾燈）",
+          "id": "beyond_rear",
+          "partNo": "berb-ms",
+          "url": "https://shop.beyond-jpn.com/products/berb-ms",
+          "price": 86900,
+          "salePrice": 78210
+        },
+        {
+          "slot": "grille",
+          "product": "CODE02：フェイスグリル Su11 CODE02 塗り；CODE10：フェイスグリル Tr27",
+          "id": "missing",
+          "partNo": "befgsu11-ts",
+          "url": "https://shop.beyond-jpn.com/products/befgsu11-ts",
+          "price": 140800,
+          "note": "Tr27 ABS 未塗裝 ¥73,700（befgtr27-abs）"
+        },
+        {
+          "slot": "other",
+          "product": "リベル フォグカバー イエロー",
+          "id": "missing",
+          "partNo": "befgc",
+          "url": "https://shop.beyond-jpn.com/products/befgc",
+          "price": 11000,
+          "salePrice": 6600
+        },
+        {
+          "slot": "spareCover",
+          "product": "笑臉黃色備胎套（照片上寫 Jimny Life Style，官網品項未列）",
+          "id": "missing",
+          "price": null,
+          "note": "官網未列，品名價格不明"
+        }
+      ],
+      "why": "紅鋼圈與黃霧燈片是全車唯一的暖色點，跟軍綠／白兩色互補；白帶讓側面有一條強水平線，車看起來更長更低。"
+    },
+    {
+      "code": "CODE13",
+      "page": "https://beyond-jpn.com/jp/code13",
+      "name": "アイボリーの誘惑（象牙硬件＋牛仔布腰身）",
+      "chassis": "JB74",
+      "chassisBasis": "照片有外擴葉子板（漆灰）；官網未寫車型",
+      "uncertain": true,
+      "idea": "把最粗獷的零件（管桿、車頂架、鋼圈）全漆成奶油白，配黃色大燈罩——越野件變成衝浪風配件。",
+      "bodyColour": {
+        "desc": "車頂／上半軍綠，側面下半為牛仔布紋貼膜，葉子板灰",
+        "code": "ZZC＋牛仔布紋貼膜",
+        "type": "wrap",
+        "uncertain": true
+      },
+      "wheels": "白色鋼圈＋鍍鉻小中心蓋（官網未寫品名）",
+      "tyres": "黑字公路胎（目測，官網未寫）",
+      "rideHeight": "接近原廠（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ 64/74 フロントバンパー アイボリー（フォグ＆スキッド付）",
+          "id": "beyond_liberte",
+          "partNo": "befb64-ival",
+          "url": "https://shop.beyond-jpn.com/products/befb64-ival",
+          "price": 104500,
+          "salePrice": 73150,
+          "note": "象牙色版目錄沒有"
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー アイボリー",
+          "id": "beyond_rear",
+          "partNo": "berb-iv",
+          "url": "https://shop.beyond-jpn.com/products/berb-iv",
+          "price": 83600,
+          "salePrice": 50160
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル Su11（象牙白塗）",
+          "id": "missing",
+          "partNo": "befgsu11-abs",
+          "url": "https://shop.beyond-jpn.com/products/befgsu11-abs",
+          "price": 84700,
+          "note": "未塗裝價"
+        },
+        {
+          "slot": "roofRack",
+          "product": "リベルテ ルーフラック アイボリー",
+          "id": "missing",
+          "partNo": "berr-iv",
+          "url": "https://shop.beyond-jpn.com/products/berr-iv",
+          "price": 99000,
+          "note": "商店標【販売終了】"
+        },
+        {
+          "slot": "lamps",
+          "product": "リベル ヘッドライトカバー イエロー",
+          "id": "missing",
+          "partNo": "behlc",
+          "url": "https://shop.beyond-jpn.com/products/behlc",
+          "price": 19800,
+          "salePrice": 15840
+        },
+        {
+          "slot": "other",
+          "product": "アウターハンドルカバー 3点セット ウッド／ハイマウントストップリング ウッド",
+          "id": "missing",
+          "partNo": "behdc-w",
+          "url": "https://shop.beyond-jpn.com/products/behdc-w",
+          "price": 14300,
+          "salePrice": 11440,
+          "note": "ストップリング ウッド behim-w ¥4,400（特價 ¥3,520）"
+        }
+      ],
+      "why": "硬件統一一個淺色，跟深綠車身形成最大明度對比；黃燈罩＋木紋把手是小面積的第三色。"
+    },
+    {
+      "code": "CODE14",
+      "page": "https://beyond-jpn.com/jp/code14",
+      "name": "煌びやかなフロントグリル（黑車木紋＋全鍍鉻）",
+      "chassis": "JB74",
+      "chassisBasis": "官網文字寫「CODE14のJB74シエラ」",
+      "idea": "黑車身側面貼一整片木紋板，鍍鉻七孔格柵＋鏡面下護桿＋鍍鉻碟盤——Grand Wagoneer 式的 woodie。",
+      "bodyColour": {
+        "desc": "黑，車門到後葉子板一整片木紋貼",
+        "code": "ZJ3＋木紋貼膜",
+        "type": "wrap",
+        "uncertain": true
+      },
+      "wheels": "鍍鉻光面碟盤（目測像 SUPER MOON 鍍鉻，但 CODE14 品項未列）",
+      "tyres": "MONSTA MUD WARRIOR 白字（胎壁可讀）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "grille",
+          "product": "フロントグリル セブンスロット（ABS、鍍鉻調）",
+          "id": "missing",
+          "partNo": "befg7sl-abs",
+          "url": "https://shop.beyond-jpn.com/products/befg7sl-abs",
+          "price": 99000
+        },
+        {
+          "slot": "frontBumper",
+          "product": "フロントスキッドバー 74専用 鏡面（原廠保桿上加一支鏡面管）",
+          "id": "missing",
+          "partNo": "befsb74-ms",
+          "url": "https://shop.beyond-jpn.com/products/befsb74-ms",
+          "price": 55000,
+          "salePrice": 44000
+        },
+        {
+          "slot": "other",
+          "product": "ハイマウントストップリング 鏡面",
+          "id": "missing",
+          "price": null,
+          "note": "商店只剩 ウッド 版與已停售的原版"
+        },
+        {
+          "slot": "wheel",
+          "product": "SUPER MOON クローム（推定）",
+          "id": "super_moon",
+          "partNo": "bewl74-smch",
+          "url": "https://shop.beyond-jpn.com/products/bewl74-smch",
+          "price": 38500,
+          "salePrice": 23100,
+          "note": "CODE14 品項未列，只憑照片推定"
+        }
+      ],
+      "why": "只有黑、木、鉻三種材質；原廠保桿留著，只加一支鏡面管，成本低但一眼就是「豪華旅行車」。"
+    },
+    {
+      "code": "CODE15",
+      "page": "https://beyond-jpn.com/jp/code15",
+      "name": "超絶怒涛の「ワル」グリル（象牙兇臉高升）",
+      "chassis": "JB74",
+      "chassisBasis": "品項含「リベルテ サイドステップ74専用」；照片有外擴葉子板",
+      "idea": "象牙車身配同色 Soldier 兇臉格柵，拆掉前保桿只留黑色裙板，大幅升高＋泥地胎——壞人版 Wrangler。",
+      "bodyColour": {
+        "desc": "象牙米色，門上有圓形徽章貼",
+        "code": "ZVG",
+        "type": "factory",
+        "uncertain": true
+      },
+      "wheels": "黑色輪框，內側紅色（目測）",
+      "tyres": "BFGoodrich 泥地胎（目測）",
+      "rideHeight": "明顯升高，全系列最高（目測，官網未寫 mm）",
+      "parts": [
+        {
+          "slot": "grille",
+          "product": "フェイスグリル ソルジャー（FRP、KLC 合作）",
+          "id": "missing",
+          "partNo": "befgsd-frp",
+          "url": "https://shop.beyond-jpn.com/products/befgsd-frp",
+          "price": 99000,
+          "salePrice": 79200
+        },
+        {
+          "slot": "frontBumper",
+          "product": "バンパーレスエプロン（黑粉體鋼製）",
+          "id": "missing",
+          "partNo": "beble",
+          "url": "https://shop.beyond-jpn.com/products/beble",
+          "price": 27500,
+          "salePrice": 22000
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー ブラック",
+          "id": "beyond_rear",
+          "partNo": "berb-bl",
+          "url": "https://shop.beyond-jpn.com/products/berb-bl",
+          "price": 83600,
+          "salePrice": 75240
+        },
+        {
+          "slot": "sideStep",
+          "product": "リベルテ サイドステップ JB74W専用 ブラック",
+          "id": "missing",
+          "partNo": "bess74",
+          "url": "https://shop.beyond-jpn.com/products/bess74",
+          "price": 66000,
+          "salePrice": 52800
+        }
+      ],
+      "why": "格柵與車身同色，所以臉的造型本身就是裝飾；前面沒有保桿，輪胎整顆露出來。"
+    },
+    {
+      "code": "CODE17",
+      "page": "https://beyond-jpn.com/jp/code17",
+      "name": "出面まで純正然（全黑低調）",
+      "chassis": "JB74",
+      "chassisBasis": "品項為「レジットショートバンパー74専用」，文字寫シエラ",
+      "idea": "黑車、黑短版保桿、黑橫鰭格柵、黑輪——只靠形狀，不靠顏色。",
+      "bodyColour": {
+        "desc": "黑",
+        "code": "ZJ3",
+        "type": "factory",
+        "uncertain": true
+      },
+      "wheels": "黑色鋼圈感輪框（目測）",
+      "tyres": "泥地胎黑字（目測）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レジット ショートバンパー 74専用 スキッド一体（FRP）",
+          "id": "missing",
+          "partNo": "befsbsp74-bl",
+          "url": "https://shop.beyond-jpn.com/products/befsbsp74-bl",
+          "price": 90200,
+          "salePrice": 72160,
+          "note": "ABS 塗装済シボブラック版 berajb74-sb ¥96,800（特價 ¥67,760）"
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル オールドカントリー（FRP）CODE17 塗り シボブラック",
+          "id": "missing",
+          "partNo": "befgc10-ts17",
+          "url": "https://shop.beyond-jpn.com/products/befgc10-ts17",
+          "price": 138050,
+          "note": "未塗裝 ¥74,250"
+        }
+      ],
+      "why": "反例：全黑沒有對比，是整個系列最不起眼的一台，證明 Beyond 的「亮眼」主要來自顏色。"
+    },
+    {
+      "code": "CODE19",
+      "page": "https://beyond-jpn.com/jp/code19",
+      "name": "純正の素地パーツに馴染む（白車黑件）",
+      "chassis": "JB74",
+      "chassisBasis": "文字寫「ジムニーシエラをベースとした CODE19」",
+      "idea": "白車上所有外加件都選黑——黑管桿、黑 Tr27 格柵、黑輪——跟 Sierra 原廠黑葉子板連成一個黑框。",
+      "bodyColour": {
+        "desc": "白",
+        "code": "ZVR",
+        "type": "factory",
+        "uncertain": true
+      },
+      "wheels": "黑色輪框（目測）",
+      "tyres": "MONSTA MUD WARRIOR 白字（胎壁可讀）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ 64/74 フロントバンパー ブラック（フォグ＆スキッド付）",
+          "id": "beyond_liberte",
+          "partNo": "befb64-blal",
+          "url": "https://shop.beyond-jpn.com/products/befb64-blal",
+          "price": 104500,
+          "salePrice": 94050
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー ブラック",
+          "id": "beyond_rear",
+          "partNo": "berb-bl",
+          "url": "https://shop.beyond-jpn.com/products/berb-bl",
+          "price": 83600,
+          "salePrice": 75240
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル Tr27 CODE19 塗り（シボブラック）",
+          "id": "missing",
+          "partNo": "befgtr27-ts19",
+          "url": "https://shop.beyond-jpn.com/products/befgtr27-ts19",
+          "price": 122100
+        }
+      ],
+      "why": "白＋黑兩色，但黑色刻意放在會被看見的「外框」位置（臉、下緣、輪、葉子板），像熊貓配色。"
+    },
+    {
+      "code": "CODE20",
+      "page": "https://beyond-jpn.com/jp/code20",
+      "name": "妖艶な色合い（灰上紫下）",
+      "chassis": "JB74",
+      "chassisBasis": "照片外擴葉子板漆紫；文字拿 CODE01 的シエラ比較",
+      "uncertain": true,
+      "idea": "CODE01 的換色版：上半灰、下半原創紫（含葉子板），鏡面管桿，Su11 格柵拆色（燈框銀、百葉黑）。",
+      "bodyColour": {
+        "desc": "車頂與引擎蓋灰，腰線以下含葉子板「オリジナルパープル」",
+        "code": "ZVL？（上半）＋改漆紫",
+        "type": "repaint",
+        "uncertain": true
+      },
+      "wheels": "黑色鋼圈（目測）",
+      "tyres": "泥地胎（目測）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ 64/74 フロントバンパー 鏡面",
+          "id": "beyond_liberte",
+          "partNo": "befb64-ms",
+          "url": "https://shop.beyond-jpn.com/products/befb64-ms",
+          "price": 72600,
+          "salePrice": 65340
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー 鏡面",
+          "id": "beyond_rear",
+          "partNo": "berb-ms",
+          "url": "https://shop.beyond-jpn.com/products/berb-ms",
+          "price": 86900,
+          "salePrice": 78210
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル Su11（ABS）自行分色",
+          "id": "missing",
+          "partNo": "befgsu11-abs",
+          "url": "https://shop.beyond-jpn.com/products/befgsu11-abs",
+          "price": 84700
+        },
+        {
+          "slot": "lamps",
+          "product": "リベル フォグカバー イエロー",
+          "id": "missing",
+          "partNo": "befgc",
+          "url": "https://shop.beyond-jpn.com/products/befgc",
+          "price": 11000,
+          "salePrice": 6600
+        },
+        {
+          "slot": "spareCover",
+          "product": "スペアタイヤカバー スマイリービヨンド",
+          "id": "missing",
+          "partNo": "bestc-s",
+          "url": "https://shop.beyond-jpn.com/products/bestc-s",
+          "price": 5500,
+          "salePrice": 4400
+        }
+      ],
+      "why": "官網原話：用時尚界常用的灰＋紫配色。兩個中低彩度色＋鉻，看起來新又不俗。"
+    },
+    {
+      "code": "CODE22",
+      "page": "https://beyond-jpn.com/jp/code22",
+      "name": "猪突猛進 スペックⅡ（象牙車身全黑件）",
+      "chassis": "JB74",
+      "chassisBasis": "東京車展頁寫 JB74；品項 74 専用",
+      "idea": "象牙車身，所有硬件黑：粗管 Spec II 前桿、同色 Soldier 格柵、黑側踏、黑月亮盤、胖 235 胎。",
+      "bodyColour": {
+        "desc": "象牙米色",
+        "code": "ZVG",
+        "type": "factory"
+      },
+      "wheels": "SUPER MOON ブラック 16x6.0J -5",
+      "tyres": "YOKOHAMA GEOLANDAR X-AT 235/70R16（東京車展頁）",
+      "rideHeight": "小幅升高（東京車展頁寫 Heritage 轟 懸吊）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ フロントバンパー 74専用 スペックⅡ ブラック",
+          "id": "missing",
+          "partNo": "befb74-bl",
+          "url": "https://shop.beyond-jpn.com/products/befb74-bl",
+          "price": 121000,
+          "salePrice": 96800
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー ブラック（JA11 尾燈）",
+          "id": "beyond_rear",
+          "partNo": "berb-bl",
+          "url": "https://shop.beyond-jpn.com/products/berb-bl",
+          "price": 83600,
+          "salePrice": 75240
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル ソルジャー（FRP）",
+          "id": "missing",
+          "partNo": "befgsd-frp",
+          "url": "https://shop.beyond-jpn.com/products/befgsd-frp",
+          "price": 99000,
+          "salePrice": 79200
+        },
+        {
+          "slot": "sideStep",
+          "product": "リベルテ サイドステップ JB74W専用 ブラック",
+          "id": "missing",
+          "partNo": "bess74",
+          "url": "https://shop.beyond-jpn.com/products/bess74",
+          "price": 66000,
+          "salePrice": 52800
+        },
+        {
+          "slot": "wheel",
+          "product": "スーパームーン JB74W ブラック",
+          "id": "super_moon",
+          "partNo": "bewl74-smbl",
+          "url": "https://shop.beyond-jpn.com/products/bewl74-smbl",
+          "price": 33000,
+          "salePrice": 19800,
+          "note": "目錄 super_moon 用鍍鉻品番；黑色靠 rimColor 表達"
+        },
+        {
+          "slot": "other",
+          "product": "テールランプ JA11",
+          "id": "missing",
+          "partNo": "beta11",
+          "url": "https://shop.beyond-jpn.com/products/beta11",
+          "price": 41800
+        }
+      ],
+      "why": "淺色車身＋黑色硬件的最大對比；平滑碟盤讓輪子變成一塊黑色實心圓，胖胎撐滿輪拱。"
+    },
+    {
+      "code": "CODE23",
+      "page": "https://beyond-jpn.com/jp/code23",
+      "name": "落ち着きのあるグレーに煌めきを（灰車木紋全鍍鉻）",
+      "chassis": "JB74",
+      "chassisBasis": "照片有外擴黑葉子板；官網未寫車型",
+      "uncertain": true,
+      "idea": "中灰車身側面貼木紋板，前後桿、七孔格柵、月亮盤全鍍鉻——CODE14 的灰色版。",
+      "bodyColour": {
+        "desc": "中灰（官網文字寫ミディアムグレー），側面木紋貼",
+        "code": "ZVL＋木紋貼膜",
+        "type": "factory_plus_wrap"
+      },
+      "wheels": "SUPER MOON クローム",
+      "tyres": "MONSTA 白字（胎壁可讀）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "リベルテ 64/74 フロントバンパー 鏡面",
+          "id": "beyond_liberte",
+          "partNo": "befb64-msal",
+          "url": "https://shop.beyond-jpn.com/products/befb64-msal",
+          "price": 107800,
+          "salePrice": 97020
+        },
+        {
+          "slot": "rearBumper",
+          "product": "リベルテ 64/74 リアバンパー 鏡面",
+          "id": "beyond_rear",
+          "partNo": "berb-ms",
+          "url": "https://shop.beyond-jpn.com/products/berb-ms",
+          "price": 86900,
+          "salePrice": 78210
+        },
+        {
+          "slot": "grille",
+          "product": "フェイスグリル セブンスロット（ABS）",
+          "id": "missing",
+          "partNo": "befg7sl-abs",
+          "url": "https://shop.beyond-jpn.com/products/befg7sl-abs",
+          "price": 99000
+        },
+        {
+          "slot": "wheel",
+          "product": "スーパームーン JB74W クローム",
+          "id": "super_moon",
+          "partNo": "bewl74-smch",
+          "url": "https://shop.beyond-jpn.com/products/bewl74-smch",
+          "price": 38500,
+          "salePrice": 23100
+        }
+      ],
+      "why": "官網原話：零件用色統一，整體就會收斂。灰＋木＋鉻，素色車靠材質變高級。"
+    },
+    {
+      "code": "CODE26",
+      "page": "https://beyond-jpn.com/jp/code26",
+      "name": "JA11リスペクト（白車夕陽條紋）",
+      "chassis": "JB74",
+      "chassisBasis": "照片有外擴黑葉子板；官網未寫車型",
+      "uncertain": true,
+      "idea": "白車身側面一組橘→紅→深棕的漸層寬條紋跑過車門，黑管桿上掛 JA11 方形琥珀方向燈，JA11 一型格柵。",
+      "bodyColour": {
+        "desc": "白，側面三色漸層寬條紋（官網品項未列條紋）",
+        "code": "ZVR＋貼紙",
+        "type": "factory_plus_decal"
+      },
+      "wheels": "黑色鋼圈（目測）",
+      "tyres": "TOYO OPEN COUNTRY R/T 白字（胎壁可讀）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レーヴ フロントバンパー ウインカーステー付き ブラック（74）",
+          "id": "missing",
+          "partNo": "fujb74-fbq",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-fbq",
+          "price": 115500,
+          "salePrice": 92400
+        },
+        {
+          "slot": "rearBumper",
+          "product": "レーヴ リアバンパー ブラック（74）",
+          "id": "missing",
+          "partNo": "fujb74-rb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-rb",
+          "price": 75900
+        },
+        {
+          "slot": "grille",
+          "product": "クラシカルグリル（JA11 1型モチーフ）",
+          "id": "missing",
+          "partNo": "fujb64-fg2",
+          "url": "https://shop.beyond-jpn.com/products/fujb64-fg2",
+          "price": 74800
+        },
+        {
+          "slot": "lamps",
+          "product": "JA11 ウィンカーステー ブラック（燈本體另購）",
+          "id": "missing",
+          "partNo": "fuja11-wis",
+          "url": "https://shop.beyond-jpn.com/products/fuja11-wis",
+          "price": 27500,
+          "salePrice": 16500
+        }
+      ],
+      "why": "70 年代條紋＋白車＋黑鋼圈，是日本人認得出的「JA11 年代」符號；燈具細節（琥珀方向燈）讓懷舊不只是貼紙。"
+    },
+    {
+      "code": "CODE29",
+      "page": "https://beyond-jpn.com/jp/code29",
+      "name": "ワイドフォルムにアグレッシブ（軍綠 JA11 臉）",
+      "chassis": "JB74",
+      "chassisBasis": "文字寫シエラ",
+      "idea": "軍綠車身＋鏡面 Rêve 管桿＋JA11 方向燈＋JA11 一型格柵，亮面輪框。",
+      "bodyColour": {
+        "desc": "軍綠",
+        "code": "ZZC",
+        "type": "factory",
+        "uncertain": true
+      },
+      "wheels": "拋光／鍍鉻輪框（目測）",
+      "tyres": "全地形胎（目測）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レーヴ フロントバンパー ウインカーステー付き 鏡面（74）",
+          "id": "missing",
+          "partNo": "fujb74-kyfbq",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-kyfbq",
+          "price": 115500,
+          "salePrice": 92400
+        },
+        {
+          "slot": "rearBumper",
+          "product": "レーヴ リアバンパー 鏡面（74）",
+          "id": "missing",
+          "partNo": "fujb74-kyrb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-kyrb",
+          "price": 75900
+        },
+        {
+          "slot": "grille",
+          "product": "クラシカルグリル",
+          "id": "missing",
+          "partNo": "fujb64-fg2",
+          "url": "https://shop.beyond-jpn.com/products/fujb64-fg2",
+          "price": 74800
+        }
+      ],
+      "why": "單色車身上只有鉻與琥珀燈兩個點綴，重點是臉像 JA11。"
+    },
+    {
+      "code": "CODE30",
+      "page": "https://beyond-jpn.com/jp/code30",
+      "name": "ワイドボディのシエラをクラシカルに（白車 JA11 臉）",
+      "chassis": "JB74",
+      "chassisBasis": "文字寫 JB74W ジムニーシエラ",
+      "idea": "CODE29 的白車黑件版：黑 Rêve 管桿＋JA11 方向燈＋黑 JA11 格柵＋黑輪白字胎。",
+      "bodyColour": {
+        "desc": "白",
+        "code": "ZVR",
+        "type": "factory",
+        "uncertain": true
+      },
+      "wheels": "黑色輪框（目測）",
+      "tyres": "MONSTA 白字（胎壁可讀）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レーヴ フロントバンパー ブラック（74）＋JA11 ウィンカーステー",
+          "id": "missing",
+          "partNo": "fujb74-fb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-fb",
+          "price": 93500,
+          "salePrice": 74800
+        },
+        {
+          "slot": "rearBumper",
+          "product": "レーヴ リアバンパー ブラック（74）",
+          "id": "missing",
+          "partNo": "fujb74-rb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-rb",
+          "price": 75900
+        },
+        {
+          "slot": "grille",
+          "product": "クラシカルグリル",
+          "id": "missing",
+          "partNo": "fujb64-fg2",
+          "url": "https://shop.beyond-jpn.com/products/fujb64-fg2",
+          "price": 74800
+        }
+      ],
+      "why": "同 CODE19 的熊貓配色，只是臉換成 JA11。"
+    },
+    {
+      "code": "CODE31",
+      "page": "https://beyond-jpn.com/jp/code31",
+      "name": "魅惑の鏡面バンパー（黑車鏡面）",
+      "chassis": "JB74",
+      "chassisBasis": "文字寫シエラ專用設計",
+      "idea": "黑車＋鏡面 Rêve 前後桿（含護板）＋JA11 格柵，夜景拍攝讓鏡面反光。",
+      "bodyColour": {
+        "desc": "黑",
+        "code": "ZJ3",
+        "type": "factory",
+        "uncertain": true
+      },
+      "wheels": "黑色輪框（目測）",
+      "tyres": "全地形胎（目測）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レーヴ フロントバンパー 鏡面（74）",
+          "id": "missing",
+          "partNo": "fujb74-kyfb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-kyfb",
+          "price": 93500,
+          "salePrice": 74800
+        },
+        {
+          "slot": "rearBumper",
+          "product": "レーヴ リアバンパー 鏡面（74）",
+          "id": "missing",
+          "partNo": "fujb74-kyrb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-kyrb",
+          "price": 75900
+        },
+        {
+          "slot": "grille",
+          "product": "クラシカルグリル",
+          "id": "missing",
+          "partNo": "fujb64-fg2",
+          "url": "https://shop.beyond-jpn.com/products/fujb64-fg2",
+          "price": 74800
+        }
+      ],
+      "why": "黑車上唯一的亮面在最低處，視覺重心壓低。"
+    },
+    {
+      "code": "CODE32",
+      "page": "https://beyond-jpn.com/jp/code32",
+      "name": "よりスッキリ＆シャープに（灰上黑下）",
+      "chassis": "JB74",
+      "chassisBasis": "文字寫シエラ",
+      "idea": "上半灰、下半黑的分色（黑延伸到葉子板與管桿），克魯爾橫桿格柵，工廠夜景。",
+      "bodyColour": {
+        "desc": "上半灰，腰線以下黑",
+        "code": "ZVL？＋下半黑（改漆或貼膜，官網未寫）",
+        "type": "repaint_or_wrap",
+        "uncertain": true
+      },
+      "wheels": "黑色輪框（目測）",
+      "tyres": "泥地胎（目測）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レーヴ フロントバンパー ブラック（74）",
+          "id": "missing",
+          "partNo": "fujb74-fb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-fb",
+          "price": 93500,
+          "salePrice": 74800
+        },
+        {
+          "slot": "rearBumper",
+          "product": "レーヴ リアバンパー ブラック（74）",
+          "id": "missing",
+          "partNo": "fujb74-rb",
+          "url": "https://shop.beyond-jpn.com/products/fujb74-rb",
+          "price": 75900
+        },
+        {
+          "slot": "grille",
+          "product": "クルールグリル（未塗裝，自行分色）",
+          "id": "missing",
+          "partNo": "fujb64-fg",
+          "url": "https://shop.beyond-jpn.com/products/fujb64-fg",
+          "price": 74800,
+          "salePrice": 59840
+        }
+      ],
+      "why": "下半黑讓車身看起來更高、更瘦，葉子板、保桿、輪胎連成一整塊黑色底座。"
+    },
+    {
+      "code": "CODE34",
+      "page": "https://beyond-jpn.com/jp/code34",
+      "name": "シエラのポテンシャル（藍黑運動）",
+      "chassis": "JB74",
+      "chassisBasis": "文字寫 JB74 シエラ",
+      "idea": "原廠藍黑雙色，黑短版保桿＋網狀運動格柵＋單出尾管，古銅五輻輪——走街道性能路線。",
+      "bodyColour": {
+        "desc": "藍＋黑頂",
+        "code": "ZWY＋黑頂（原廠雙色 CZW）",
+        "type": "factory"
+      },
+      "wheels": "古銅／黑五輻輪框（目測）",
+      "tyres": "MONSTA MUD WARRIOR 白字（胎壁可讀）",
+      "rideHeight": "小幅升高（目測）",
+      "parts": [
+        {
+          "slot": "frontBumper",
+          "product": "レジット ショートバンパー 74専用（ABS）シボブラック",
+          "id": "missing",
+          "partNo": "berajb74-sb",
+          "url": "https://shop.beyond-jpn.com/products/berajb74-sb",
+          "price": 96800,
+          "salePrice": 67760
+        },
+        {
+          "slot": "other",
+          "product": "レジットショートバンパー74専用 スキッドプレート ブラック",
+          "id": "missing",
+          "partNo": "rajb74-sk",
+          "url": "https://shop.beyond-jpn.com/products/rajb74-sk",
+          "price": 38500,
+          "salePrice": 26950
+        },
+        {
+          "slot": "grille",
+          "product": "スポーツグリル（FRP）",
+          "id": "missing",
+          "partNo": "rajb64-sg",
+          "url": "https://shop.beyond-jpn.com/products/rajb64-sg",
+          "price": 71500,
+          "salePrice": 50050
+        },
+        {
+          "slot": "exhaust",
+          "product": "レベルサウンド 304",
+          "id": "missing",
+          "price": null,
+          "note": "商店 JSON 未列此品項，價格不明"
+        }
+      ],
+      "why": "唯一用原廠雙色的 JB74 示範車；亮點是飽和藍＋古銅輪。"
+    }
+  ],
+  "jb64Reference": [
+    {
+      "code": "CODE03–05",
+      "note": "黑車＋Su11／Le27／Tr27 格柵，Legit 短保桿，Nine 葉子板（JB64）"
+    },
+    {
+      "code": "CODE06",
+      "note": "絲光銀＋藍色細腰線＋黑 Liberte＋JA22 復刻格柵"
+    },
+    {
+      "code": "CODE07／21",
+      "note": "絲光銀／藍＋無保桿裙板＋Bad Face 眼罩"
+    },
+    {
+      "code": "CODE08／09",
+      "note": "軍綠＋Legit 短保桿漆銀當「鍍鉻鐵保桿」＋古銅鋼圈，CODE08 降低車高"
+    },
+    {
+      "code": "CODE11",
+      "note": "灰車＋白色鋼圈＋Kong／Minion 眼罩"
+    },
+    {
+      "code": "CODE12",
+      "note": "白車＋鏡面 Liberte＋Old Country 格柵＋黑鋼圈"
+    },
+    {
+      "code": "CODE16",
+      "note": "Kinetic Yellow＋側面木紋貼＋鍍鉻七孔格柵＋銀鋼圈"
+    },
+    {
+      "code": "CODE18",
+      "note": "白車＋黑 Liberte＋黑 Le27"
+    },
+    {
+      "code": "CODE24／25／27／28",
+      "note": "Simple Style／Classical／Couleur 格柵，灰、綠、灰、卡其；CODE28 側面大「Spiegel」字標、卡其備胎套"
+    },
+    {
+      "code": "CODE33",
+      "note": "藍＋Legit 短保桿＋Sport 格柵＋スムージングパネル"
+    },
+    {
+      "code": "CODE35",
+      "note": "白車＋藍色漸層條紋＋鏡面 Rêve＋Land Cruiser 格柵＋鍍鉻月亮盤"
+    },
+    {
+      "code": "CODE36",
+      "note": "JC74 Nomade 白車＋紅色條紋＋Napoleon 格柵＋鍍鉻月亮盤"
+    }
+  ],
+  "proposedStyles": [
+    {
+      "id": "cal_twotone",
+      "label": "加州雙色",
+      "sw": [
+        "#e9dcc0",
+        "#d9641e",
+        "#c9ccd0"
+      ],
+      "idea": "上象牙、下橘（含葉子板）的腰線分色，所有金屬件鏡面，鍍鉻碟盤——CODE01。",
+      "set": {
+        "color": "ZVG",
+        "lowerColor": "#d9641e(新)",
+        "flaresPainted": true,
+        "lift": "klc30",
+        "wheel": "super_moon",
+        "rimFinish": "chrome(新)",
+        "tyre": "t215r16",
+        "tread": "bfg_ko2",
+        "frontBumper": "beyond_liberte",
+        "bumperFinish": "mirror(新)",
+        "rearBumper": "beyond_rear",
+        "grille": "hbar_suzuki(代用；Su11 需新增)"
+      },
+      "needs": [
+        "下半車身色＋葉子板同色（程式新功能）",
+        "保桿表面：鏡面（新選項）",
+        "鍍鉻輪框材質",
+        "Su11 格柵 befgsu11-abs ¥84,700（可選）",
+        "JA11 尾燈 beta11 ¥41,800（可選）"
+      ]
+    },
+    {
+      "id": "woodie",
+      "label": "木紋旅行車",
+      "sw": [
+        "#63645f",
+        "#8a5a32",
+        "#d0d3d6"
+      ],
+      "idea": "灰車身側面一整片木紋板，保桿、格柵、月亮盤全鍍鉻——CODE23。",
+      "set": {
+        "color": "ZVL",
+        "stripe": "woodie(新)",
+        "lift": "klc30",
+        "wheel": "super_moon",
+        "rimFinish": "chrome(新)",
+        "tyre": "t215r16",
+        "tread": "bfg_ko2",
+        "owl": true,
+        "frontBumper": "beyond_liberte",
+        "bumperFinish": "mirror(新)",
+        "rearBumper": "beyond_rear",
+        "grille": "klc_nanaketsu(代用；七孔鍍鉻 befg7sl-abs 需新增)"
+      },
+      "needs": [
+        "木紋側板貼（新 stripe；官網未列品項，要貼膜行做）",
+        "保桿鏡面",
+        "七孔鍍鉻格柵 befg7sl-abs ¥99,000",
+        "鍍鉻輪框材質"
+      ]
+    },
+    {
+      "id": "sunset_ja",
+      "label": "夕陽 JA11",
+      "sw": [
+        "#f2f3f0",
+        "#e0662a",
+        "#1d2224"
+      ],
+      "idea": "白車＋橘紅棕漸層寬條紋，黑管桿掛琥珀方向燈，JA 格柵，黑鋼圈白字胎——CODE26。",
+      "set": {
+        "color": "ZVR",
+        "stripe": "toy4",
+        "lift": "klc30",
+        "wheel": "dean_cross",
+        "rimColor": "0x1b1d1f",
+        "tyre": "t215r16",
+        "tread": "toyo_rt",
+        "owl": true,
+        "frontBumper": "beyond_liberte",
+        "bumperFinish": "black(新)",
+        "rearBumper": "beyond_rear",
+        "grille": "klc_ja"
+      },
+      "needs": [
+        "只要目錄現有件就能做；想更像要加 Rêve 前保桿 fujb74-fbq ¥115,500、JA11 方向燈架 fuja11-wis ¥27,500、クラシカルグリル fujb64-fg2 ¥74,800"
+      ],
+      "note": "toy4 目前給「露營」用在米黑車上；換到白車上反差更大，露營可改用別的條紋。"
+    },
+    {
+      "id": "cream_hardware",
+      "label": "奶油硬件",
+      "sw": [
+        "#444a3a",
+        "#efe6cf",
+        "#e5d23a"
+      ],
+      "idea": "軍綠車身，所有粗獷零件（管桿、籃式車頂架、鋼圈）都漆奶油白，黃色大燈罩——CODE13。",
+      "set": {
+        "color": "ZZC",
+        "wheel": "mrk_retro",
+        "rimColor": "0xefe6cf",
+        "tyre": "t215r16",
+        "tread": "toyo_ht2",
+        "frontBumper": "klc_trad",
+        "rearBumper": "beyond_rear",
+        "bumperFinish": "ivory(新)",
+        "roofRack": "basket",
+        "rackColor": "ivory(新)",
+        "headlightTint": "yellow(新)"
+      },
+      "needs": [
+        "保桿象牙色（klc_trad 已是象牙白前桿；後桿需 berb-iv ¥83,600）",
+        "車頂架顏色選項",
+        "黃色大燈罩 behlc ¥19,800"
+      ],
+      "note": "輪廓唯一有車頂架的一台，但架子是淺色，視覺上是配色不是裝備。"
+    },
+    {
+      "id": "grey_purple",
+      "label": "灰紫時裝",
+      "sw": [
+        "#8e8f8c",
+        "#7a3fb0",
+        "#1d2224"
+      ],
+      "idea": "上灰下紫（含葉子板）、鏡面管桿、黑鋼圈泥地胎、笑臉備胎套——CODE20。",
+      "set": {
+        "color": "ZVL",
+        "lowerColor": "#7a3fb0(新，改色膜)",
+        "flaresPainted": true,
+        "lift": "klc30",
+        "wheel": "dean_cross",
+        "rimColor": "0x1b1d1f",
+        "tyre": "t225r16",
+        "tread": "toyo_mt",
+        "owl": false,
+        "frontBumper": "beyond_liberte",
+        "bumperFinish": "mirror(新)",
+        "rearBumper": "beyond_rear",
+        "grille": "hbar_suzuki"
+      },
+      "needs": [
+        "下半車身色＋紫色改色膜（非原廠色，需標 wrap）",
+        "保桿鏡面",
+        "笑臉備胎套 bestc-s ¥5,500（可選）"
+      ]
+    },
+    {
+      "id": "ivory_soldier",
+      "label": "象牙兇臉",
+      "sw": [
+        "#c3b79c",
+        "#16191c",
+        "#16191c"
+      ],
+      "idea": "象牙車身，所有硬件黑：Spec II 粗管前桿、同色兇臉格柵、黑側踏、黑月亮盤、胖胎——CODE22。",
+      "set": {
+        "color": "ZVG",
+        "lift": "klc30",
+        "wheel": "super_moon",
+        "rimColor": "0x17191c",
+        "tyre": "t225r16(代用；235/70R16 目錄沒有)",
+        "tread": "yk_xat",
+        "frontBumper": "beyond_liberte",
+        "bumperFinish": "black(新)",
+        "rearBumper": "beyond_rear",
+        "grille": "mrk_angry(代用)",
+        "sideStep": "jst"
+      },
+      "needs": [
+        "Soldier 格柵 befgsd-frp ¥99,000（漆車身色）",
+        "Liberte Spec II 前桿 befb74-bl ¥121,000",
+        "Liberte 側踏 bess74 ¥66,000",
+        "235/70R16 尺寸"
+      ],
+      "note": "跟現有「日系復古」同為米色，但硬件全黑、無腰線，視覺上是另一台。"
+    }
+  ],
+  "proposedStylesNote": "set 裡標「(新)」的鍵或值目前 app 不支援，需先加功能或目錄件；標「(代用)」的是用目錄現有件暫代。",
+  "missingFromCatalogue": [
+    {
+      "product": "フェイスグリル Su11（ABS）未塗裝",
+      "partNo": "befgsu11-abs",
+      "url": "https://shop.beyond-jpn.com/products/befgsu11-abs",
+      "price": 84700,
+      "salePrice": null
+    },
+    {
+      "product": "フェイスグリル Su11 塗装済（CODE01 塗り）",
+      "partNo": "befgsu11t1-zzb",
+      "url": "https://shop.beyond-jpn.com/products/befgsu11t1-zzb",
+      "price": 140800,
+      "salePrice": null
+    },
+    {
+      "product": "フロントグリル セブンスロット（鍍鉻調 ABS）",
+      "partNo": "befg7sl-abs",
+      "url": "https://shop.beyond-jpn.com/products/befg7sl-abs",
+      "price": 99000,
+      "salePrice": null
+    },
+    {
+      "product": "フェイスグリル ソルジャー（FRP）",
+      "partNo": "befgsd-frp",
+      "url": "https://shop.beyond-jpn.com/products/befgsd-frp",
+      "price": 99000,
+      "salePrice": 79200
+    },
+    {
+      "product": "フェイスグリル Tr27（ABS）",
+      "partNo": "befgtr27-abs",
+      "url": "https://shop.beyond-jpn.com/products/befgtr27-abs",
+      "price": 73700,
+      "salePrice": 44220
+    },
+    {
+      "product": "フェイスグリル Le27（ABS）",
+      "partNo": "befgle27-abs",
+      "url": "https://shop.beyond-jpn.com/products/befgle27-abs",
+      "price": 73700,
+      "salePrice": 51590
+    },
+    {
+      "product": "フェイスグリル オールドカントリー（FRP）",
+      "partNo": "befgc10-frp",
+      "url": "https://shop.beyond-jpn.com/products/befgc10-frp",
+      "price": 74250,
+      "salePrice": 51975
+    },
+    {
+      "product": "クラシカルグリル",
+      "partNo": "fujb64-fg2",
+      "url": "https://shop.beyond-jpn.com/products/fujb64-fg2",
+      "price": 74800,
+      "salePrice": null
+    },
+    {
+      "product": "クルールグリル",
+      "partNo": "fujb64-fg",
+      "url": "https://shop.beyond-jpn.com/products/fujb64-fg",
+      "price": 74800,
+      "salePrice": 59840
+    },
+    {
+      "product": "フェイスグリル ランクル",
+      "partNo": "befglc",
+      "url": "https://shop.beyond-jpn.com/products/befglc",
+      "price": 74800,
+      "salePrice": 59840
+    },
+    {
+      "product": "スポーツグリル",
+      "partNo": "rajb64-sg",
+      "url": "https://shop.beyond-jpn.com/products/rajb64-sg",
+      "price": 71500,
+      "salePrice": 50050
+    },
+    {
+      "product": "リベルテ フロントバンパー 74専用 スペックⅡ",
+      "partNo": "befb74-bl",
+      "url": "https://shop.beyond-jpn.com/products/befb74-bl",
+      "price": 121000,
+      "salePrice": 96800
+    },
+    {
+      "product": "リベルテ サイドステップ JB74W専用",
+      "partNo": "bess74",
+      "url": "https://shop.beyond-jpn.com/products/bess74",
+      "price": 66000,
+      "salePrice": 52800
+    },
+    {
+      "product": "レーヴ フロントバンパー（74）黑／鏡面",
+      "partNo": "fujb74-fb",
+      "url": "https://shop.beyond-jpn.com/products/fujb74-fb",
+      "price": 93500,
+      "salePrice": 74800
+    },
+    {
+      "product": "レーヴ フロントバンパー ウインカーステー付き（74）",
+      "partNo": "fujb74-fbq",
+      "url": "https://shop.beyond-jpn.com/products/fujb74-fbq",
+      "price": 115500,
+      "salePrice": 92400
+    },
+    {
+      "product": "レーヴ リアバンパー（74）黑／鏡面",
+      "partNo": "fujb74-rb",
+      "url": "https://shop.beyond-jpn.com/products/fujb74-rb",
+      "price": 75900,
+      "salePrice": null
+    },
+    {
+      "product": "JA11 ウィンカーステー",
+      "partNo": "fuja11-wis",
+      "url": "https://shop.beyond-jpn.com/products/fuja11-wis",
+      "price": 27500,
+      "salePrice": 16500
+    },
+    {
+      "product": "レジット ショートバンパー 74専用 ABS シボブラック",
+      "partNo": "berajb74-sb",
+      "url": "https://shop.beyond-jpn.com/products/berajb74-sb",
+      "price": 96800,
+      "salePrice": 67760
+    },
+    {
+      "product": "レジット ショートバンパー 74専用 スキッド一体 FRP",
+      "partNo": "befsbsp74-bl",
+      "url": "https://shop.beyond-jpn.com/products/befsbsp74-bl",
+      "price": 90200,
+      "salePrice": 72160
+    },
+    {
+      "product": "フロントスキッドバー 74専用 鏡面",
+      "partNo": "befsb74-ms",
+      "url": "https://shop.beyond-jpn.com/products/befsb74-ms",
+      "price": 55000,
+      "salePrice": 44000
+    },
+    {
+      "product": "バンパーレスエプロン",
+      "partNo": "beble",
+      "url": "https://shop.beyond-jpn.com/products/beble",
+      "price": 27500,
+      "salePrice": 22000
+    },
+    {
+      "product": "テールランプ JA11",
+      "partNo": "beta11",
+      "url": "https://shop.beyond-jpn.com/products/beta11",
+      "price": 41800,
+      "salePrice": null
+    },
+    {
+      "product": "リベル ヘッドライトカバー イエロー",
+      "partNo": "behlc",
+      "url": "https://shop.beyond-jpn.com/products/behlc",
+      "price": 19800,
+      "salePrice": 15840
+    },
+    {
+      "product": "リベル フォグカバー イエロー",
+      "partNo": "befgc",
+      "url": "https://shop.beyond-jpn.com/products/befgc",
+      "price": 11000,
+      "salePrice": 6600
+    },
+    {
+      "product": "スペアタイヤカバー スマイリービヨンド",
+      "partNo": "bestc-s",
+      "url": "https://shop.beyond-jpn.com/products/bestc-s",
+      "price": 5500,
+      "salePrice": 4400
+    },
+    {
+      "product": "スペアタイヤカバー エレガントホワイト",
+      "partNo": "bestc-w",
+      "url": "https://shop.beyond-jpn.com/products/bestc-w",
+      "price": 5500,
+      "salePrice": 3850
+    },
+    {
+      "product": "リベルテ ルーフラック アイボリー（販売終了）",
+      "partNo": "berr-iv",
+      "url": "https://shop.beyond-jpn.com/products/berr-iv",
+      "price": 99000,
+      "salePrice": null
+    },
+    {
+      "product": "リベルテ 64/74 前保桿 象牙版",
+      "partNo": "befb64-ival",
+      "url": "https://shop.beyond-jpn.com/products/befb64-ival",
+      "price": 104500,
+      "salePrice": 73150
+    },
+    {
+      "product": "リベルテ 64/74 後保桿 象牙版",
+      "partNo": "berb-iv",
+      "url": "https://shop.beyond-jpn.com/products/berb-iv",
+      "price": 83600,
+      "salePrice": 50160
+    }
+  ],
+  "catalogueConflicts": [
+    "beyond_liberte 備註寫「硬邊鋼製」，Beyond 官網每頁都寫リベルテ／レーヴ是ステンレス（不鏽鋼），黑色是塗裝。",
+    "beyond_liberte／beyond_rear 目前掛 MRK 台幣價、只有一種外觀；官方同款有鏡面／黑／象牙三種表面、前桿再依霧燈架與護板分四種，定價 ¥69,300–¥107,800（前）、¥83,600–¥86,900（後），稅込。",
+    "super_moon 用鍍鉻品番 bewl74-smch；黑／白是另品番 bewl74-smbl／bewl74-smwh，定價 ¥33,000（特價 ¥19,800），跟鍍鉻 ¥38,500（特價 ¥23,100）不同價。"
+  ]
+}

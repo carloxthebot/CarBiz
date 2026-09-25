@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609250523** · 247 catalogue entries · 7 styles
+Current build: **202609250609** · 247 catalogue entries · 7 styles
 
 ---
 
@@ -150,6 +150,18 @@ KO2, KLC short bumper + JA grille). **Physical plausibility is now checked**:
 shot found floating/unsupported parts (rally-bar legs, fog stalks, awning
 bags inside the rail, KLC rear lamps with no mount, tail pipes duplicated
 by bumpers, side exhaust outside the body) -- all fixed. Keep both clean.
+
+**Stages (2026-09-25).** The owner found the result "not stunning"; the
+diagnosis was the dark void stage, primitive-looking parts, a stock car as the
+first thing seen, no transitions, a spreadsheet-like panel and timid colours.
+First fix shipped: a bright studio (default; CSS backdrop, studio HDR) and an
+outdoor stage (Poly Haven "Goegap Road", CC0, ,
+GroundedSkybox at 1.8 m / 160 m, sun aimed from the brightest pixel, pixels
+capped at 24 because the half-float post chain overflowed to a black car).
+Next, per docs/jb74-beyond-styles.json: two-tone split paint at the window
+line (Beyond's single biggest trick), one finish for all hardware, wheels that
+contrast the body. Instagram (KLC, SHOWA) needs the Chrome extension
+connected; it was not.
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put
