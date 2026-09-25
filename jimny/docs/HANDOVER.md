@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609241719** · 247 catalogue entries · 8 styles
+Current build: **202609250523** · 247 catalogue entries · 7 styles
 
 ---
 
@@ -90,7 +90,7 @@ snorkel's skirt come out as a tall thin fin.
 
 ## 2. What is live
 
-**Eight styles**, each a preset applied from the first step. They are pushed
+**Seven styles**, each a preset applied from the first step, listed AFTER the makers' complete kits (`KITS` shown as `kit_<id>` cards, the kit on an otherwise stock car). They are pushed
 apart on silhouette — height, roof load, arch width, face, wheel size — not on
 which bumper they wear, because cars differing by bumper alone read the same
 from ten metres.
@@ -103,7 +103,6 @@ from ten metres.
 | 窄胎高瘦 `narrow` | stock height, 185/85R16 white-letter R/T on white DEAN faces — a real Hamamatsu shop build |
 | 軍風 `military` | white stencils (no star — owner removed it 2026-09-25), loaded window guards |
 | 露營 `camp` | two-tone roof, body lift, four orange bands |
-| 外掛籠硬派 `exo_cage` | roll cage over the roof, nothing else up there |
 | 澳洲越野 `au_offroad` | tallest, 31s, lit roof rack, snorkel |
 
 New families this session (all pickable in 外觀, all in `parts.html`):
@@ -141,6 +140,16 @@ Added 2026-09-25:
   rendered on parts.html from docs/jb74-demo-cars.json, each matched against
   the catalogue with a link that applies the parts we have. Instagram,
   Threads and X all refuse fetching.
+
+Owner feedback 2026-09-25, applied: picking a style no longer jumps to the
+底盤 tab; 外掛籠硬派 removed as a style ("不會有這種車"; the cage part stays);
+every style now carries real bumpers and grilles instead of stock; 都會輕改
+became the common Japanese owner build (1" lift, bronze 16" + white-letter
+KO2, KLC short bumper + JA grille). **Physical plausibility is now checked**:
+`node tools/tyre_audit.mjs` must print `{}`; a visual review of every part
+shot found floating/unsupported parts (rally-bar legs, fog stalks, awning
+bags inside the rail, KLC rear lamps with no mount, tail pipes duplicated
+by bumpers, side exhaust outside the body) -- all fixed. Keep both clean.
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put

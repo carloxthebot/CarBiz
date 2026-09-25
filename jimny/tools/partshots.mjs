@@ -56,6 +56,13 @@ for (const key of families) {
     if (!process.env.FORCE && fs.existsSync(file)) { skipped++; continue; }
     const box = await page.evaluate(async ([key, id]) => {
       const J = window.__jimny;
+      // shoot each part on what it mounts to: an awning or a rack tent
+      // needs a rack, the ladder extinguisher a ladder, the side ones the
+      // window guard -- without them they float in the picture
+      const L = window.__jimnyLists;
+      const needs = { awning: { roofRack: 'arb' }, extinguisher: id === 'ladder' ? { ladder: 'tube' } : { windowGuards: true },
+        tent: L.tent?.find(t => t.id === id)?.noRack ? {} : { roofRack: 'arb' } }[key] ?? {};
+      for (const [k, v] of Object.entries(needs)) J.S[k] = v;
       J.S[key] = id;
       J.update();
       window.__jimnyFrame(key);
@@ -73,7 +80,7 @@ for (const key of families) {
     made++;
     process.stderr.write(`\r${made} shots  (${key}/${id})            `);
   }
-  await page.evaluate((k) => { window.__jimny.S[k] = window.__jimnyDefault(k); window.__jimny.update(); }, key);
+  await page.evaluate((k) => { for (const x of [k, 'roofRack', 'ladder', 'windowGuards']) window.__jimny.S[x] = window.__jimnyDefault(x); window.__jimny.update(); }, key);
 }
 console.error(`\n${made} written, ${skipped} skipped, ${failed.length} failed, ${errs.length} page errors`);
 if (failed.length) console.error(failed.slice(0, 8).join('\n'));

@@ -582,11 +582,11 @@ def valance(root, corners=True):
     box('valance', (0, 560, 1500), (1200, 280, 24), RUBBER, root, bevel=4)
     for s in (-1, 1):                                    # chassis-rail mounts
         box(f'mount{s}', (s * 330, 540, 1600), (70, 120, 200), TEXBLACK, root, bevel=4)
-    if corners:                                          # closes the corner the stock bumper wrapped around
-        from mathutils import Matrix
-        for s in (-1, 1):
-            box(f'corner{s}', (s * 735, 560, 1490), (60, 300, 170), TEXBLACK, root, bevel=6,
-                rot=Matrix.Rotation(math.radians(s * 28), 3, 'Z'))
+    # (There used to be a 300 mm 'corner' block either side here, meant to
+    # close the corner the stock bumper wrapped round. It sat at z 1490 --
+    # exactly where the front tyre's leading edge is -- attached to nothing,
+    # and read as a slab floating in front of the wheel. Short bumpers leave
+    # that corner open on the real cars; so does this.)
 
 
 def fog_lamp(root, x, y, z, mat, dia=90):
@@ -626,7 +626,9 @@ def bumper_outclass():
     root = group('frontBumper_outclass_t2')
     y = 560
     # path runs through the box centre; the 200 mm deep profile puts the face at z 1750
-    path = [(-700, y, 1420), (-600, y, 1650), (600, y, 1650), (700, y, 1420)]
+    # ends chamfered back, but only to 1650 at the tips -- down at 1420 they
+    # ran 80 mm into the front tyres
+    path = [(-700, y, 1650), (-600, y, 1650), (600, y, 1650), (700, y, 1650)]
     sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(200, 220, 10, 3), TEXBLACK, root)
     box('fairleadFrame', (0, 640, 1756), (300, 100, 14), RED, root, bevel=3)
     box('fairleadSlot', (0, 640, 1764), (240, 56, 4), RUBBER, root, bevel=0)
@@ -893,7 +895,7 @@ def bumper_tube_heritage():
     cut(panel, [script])                                     # laser-cut script, open right through
     # what shows between the tubes: the galvanised crossmember and the bay
     box('crossmember', (0, 575, 1600), (1100, 70, 40), STEEL, root, bevel=4)
-    box('bay', (0, 540, 1420), (1050, 320, 20), RUBBER, root, bevel=4)
+    box('bay', (0, 540, 1420), (860, 320, 20), RUBBER, root, bevel=4)      # inside the tyres' steering sweep
     return root
 
 
@@ -914,13 +916,13 @@ def rear_bumper_tube():
         for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
             box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), TEXBLACK, root, bevel=2)
         # corner cover with a hex-mesh vent
-        box(f'corner{s}', (s * 740, 520, -1470), (50, 240, 180), TEXBLACK, root, bevel=6,
+        box(f'corner{s}', (s * 740, 520, -1545), (50, 240, 150), TEXBLACK, root, bevel=6,   # clear of a 31in tyre's back (-1440)
+
             rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
     box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
     box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
-    ex = RIGHT * 400
-    lib.cylinder('exhaust', (ex, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
-    lib.cylinder('exhaustIn', (ex + RIGHT * 38, 334, -1738), (RIGHT * 0.4, -0.06, -1), 50, 8, RUBBER, root, n=24)
+    # (no tail pipe here: the exhaust family draws it, and a second one used
+    # to poke out through the bumper)
     box('towHook', (RIGHT * 300, 365, -1600), (70, 26, 120), RED, root, bevel=5)
     annulus('shackle', (-RIGHT * 330, 360, -1630), 16, 28, 26, RED, root, n=24)
     box('shackleTab', (-RIGHT * 330, 385, -1600), (12, 60, 80), TEXBLACK, root, bevel=2)
@@ -988,13 +990,26 @@ def stripe_bands(name, bands, p_top, z0=STRIPE_Z0, z1=STRIPE_Z1):
     (height as a percentage of the flank, hex or None for a gap that shows
     body colour), read top to bottom, starting `p_top` below the belt."""
     root = group('stripe_' + name)
+    fa, ra = CAR['anchors']['frontAxleZ'], CAR['anchors']['rearAxleZ']
+
+    def span(ylo):
+        # A band low enough to cross a wheel opening stops at its edge: the
+        # opening is about 430 mm round the axle (y 346), and past it there
+        # is no panel to stick to -- the low bands used to run straight
+        # across the rear tyre. Higher bands keep running behind the flares.
+        a, b = z0, z1
+        if ylo < 346 + 430:
+            dz = math.sqrt(max(0.0, 430 ** 2 - (ylo - 346) ** 2)) + 15
+            a, b = max(a, ra + dz), min(b, fa - dz)
+        return a, b
     for s in (-1, 1):
         cut = p_top
         for i, (h, col) in enumerate(bands):
             if col is not None:
                 mat = material(f'Stripe{name}{i}', col, rough=0.5, metal=0.05)
-                box(f'b{s}{i}', (s * STRIPE_X, (py(cut) + py(cut + h)) / 2, (z0 + z1) / 2),
-                    (6, py(cut) - py(cut + h), z1 - z0), mat, root, bevel=0)
+                a, b = span(py(cut + h))
+                box(f'b{s}{i}', (s * STRIPE_X, (py(cut) + py(cut + h)) / 2, (a + b) / 2),
+                    (6, py(cut) - py(cut + h), b - a), mat, root, bevel=0)
             cut += h
     return root
 
@@ -1031,7 +1046,22 @@ def stripe_stencil():
     root = group('stripe_stencil')
     white = material('StencilWhite', 0xe7e4da, rough=0.8, metal=0.0)
     FONT = '/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf'
-    # no star: the owner asked for it off (2026-09-25); the stencils stay
+    # no star: the owner asked for it off (2026-09-25); the stencils stay,
+    # and there are more of them. Generic markings in the military-vehicle
+    # manner -- a bonnet serial, a vehicle data block on each door, tyre
+    # pressure over the rear arch -- not any real unit's codes.
+    ob = text('bonnetNo', 'JB 74-0419', (0, 1112, 1230), 78, 2, white, root, font=FONT)
+    ob.rotation_euler = (math.radians(-90 - 4), 0, 0)      # flat on the bonnet, read from the front
+    ob.location = P(0, 1112, 1230)
+    for s in (-1, 1):
+        # door skin is at |x| 707-709 from y 750 up (sampled at z -100); the
+        # rear quarter above the arch is at |x| 697 at y 950 (z -1000)
+        for i, (line, size, y, z, x) in enumerate((('MAX SPEED 90 KM/H', 30, 800, -120, 710),
+                                                   ('WT 1090 KG', 30, 765, -120, 709),
+                                                   ('TIRE 2.0 BAR', 30, 955, -1000, 699))):
+            ob = text(f'data{s}{i}', line, (s * x, y, z), size, 2, white, root, font=FONT)
+            ob.rotation_euler = (0, 0, math.radians(90 * s))
+            ob.location = P(s * x, y, z)
     for s in (-1, 1):
         for i, (line, size, y, z) in enumerate((('JB-74-1970', 58, 690, -430),
                                                 ('4x4', 74, 690, 640))):
@@ -1292,6 +1322,11 @@ def widebody(pid, W, shape='box', mat=None, lip=None):
     fender above the arch."""
     root = group(f'fender_{pid}')
     mat = mat or PAINT
+    # The opening must not come in past the stock arch lip, which sits about
+    # 430 mm from the axle (sampled at 30-150 degrees). These profiles were
+    # drawn from 392, so on the lowered street car the lip landed on the
+    # tyre; every radius below is pushed out by DR to start at the stock lip.
+    DR = 38
     if shape == 'blister':
         # (r from the axle, x outward of the stock arch surface)
         prof = [(392, -36), (392, W - 6), (402, W), (440, W + 2), (488, W * 0.72), (526, W * 0.32), (552, -2), (544, -30)]
@@ -1306,7 +1341,7 @@ def widebody(pid, W, shape='box', mat=None, lip=None):
                 deg = 12 + 156 * i / steps
                 a = math.radians(deg)
                 hw = arch_half_w(kind, min(165, max(15, deg))) - 4
-                rings.append([bm.verts.new(P(s * (hw + dx), 346 + r * math.sin(a), zc + r * math.cos(a))) for (r, dx) in prof])
+                rings.append([bm.verts.new(P(s * (hw + dx), 346 + (r + DR) * math.sin(a), zc + (r + DR) * math.cos(a))) for (r, dx) in prof])
             k = len(prof)
             for r0, r1 in zip(rings, rings[1:]):
                 for j in range(k):
@@ -1323,7 +1358,7 @@ def widebody(pid, W, shape='box', mat=None, lip=None):
                     deg = 12 + 156 * i / steps
                     a = math.radians(deg)
                     hw = arch_half_w(kind, min(165, max(15, deg))) - 4
-                    rings.append([bm.verts.new(P(s * (hw + dx), 346 + r * math.sin(a), zc + r * math.cos(a))) for (r, dx) in prof2])
+                    rings.append([bm.verts.new(P(s * (hw + dx), 346 + (r + DR) * math.sin(a), zc + (r + DR) * math.cos(a))) for (r, dx) in prof2])
                 for r0, r1 in zip(rings, rings[1:]):
                     for j in range(4):
                         bm.faces.new((r0[j], r0[(j + 1) % 4], r1[(j + 1) % 4], r1[j]))
@@ -1502,7 +1537,7 @@ def face_damd_delta():
     zb = 1740
     box('beam', (0, 680, zb - 60), (1480, 60, 120), PAINT, root, bevel=8)
     for s in (-1, 1):
-        box(f'end{s}', (s * 760, 530, zb - 200), (50, 350, 260), PAINT, root, bevel=8)
+        box(f'end{s}', (s * 760, 530, zb - 130), (50, 350, 160), PAINT, root, bevel=8)   # back edge at 1530, ahead of the tyre
     box('body', (0, 520, zb - 90), (1480, 300, 120), PAINT, root, bevel=8)
     for k in range(-2, 3):                                      # the row of five slots
         box(f'slot{k}', (k * 150, 615, zb - 28), (110, 26, 8), TEXBLACK, root, bevel=5)
@@ -2088,7 +2123,10 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
     rack_top = RACK_TOP
     # every case is centred on the roof, so it overhangs the same amount front
     # and rear -- never trailing a long tail off the back
-    x, y, zc = s * (ARB_W / 2 + W / 2 - 30), rack_top + 40 - H / 2, RACK_ZC
+    # hung OUTBOARD of the rack's side rail (it used to sit 30 mm inside it),
+    # and never lower than just above the gutter, or a tall bag runs into
+    # the roof side and over the top of the door glass
+    x, y, zc = s * (ARB_W / 2 + W / 2 + 5), max(rack_top + 40 - H / 2, 1595 + H / 2), RACK_ZC
     prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
     sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
     for k in (-1, 1):
@@ -2100,8 +2138,8 @@ def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
         box('zip', (x + s * W / 2, y - 30, zc), (3, 8, L - 120), WEBBING, root, bevel=0)
     for k in (-1, 1):
         z = zc + k * min(600, L * 0.3)
-        box(f'bracketH{k}', (s * (ARB_W / 2 + W / 2 - 30), y + H / 2 + 4, z), (W - 10, 8, 50), BLACK, root, bevel=2)
-        box(f'bracketV{k}', (s * (ARB_W / 2 - 4), y + H / 4, z), (8, H / 2 + 20, 50), BLACK, root, bevel=2)
+        box(f'bracketH{k}', (s * (ARB_W / 2 + W / 2 - 10), y + H / 2 + 4, z), (W + 40, 8, 50), BLACK, root, bevel=2)
+        box(f'bracketV{k}', (s * (ARB_W / 2 - 4), (y + H / 2 + RACK_TOP - 45) / 2, z), (8, max(40, y + H / 2 - RACK_TOP + 60), 50), BLACK, root, bevel=2)
     if hinge:                                            # 270 types: pivot plate at the rear end, flush with the bag
         box('hinge', (x, y - 4, zc - L / 2 - 22), (W + 10, H + 8, 40), BLACK, root, bevel=6)
         lib.cylinder('pivot', (x, y - H / 2 - 30, zc - L / 2 - 22), (0, 1, 0), 36, 50, BLACK, root)
@@ -2189,7 +2227,11 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
         stand = 12 if kind != 'abs' else 4
         n = 13
         xs = [-W / 2 + W * i / (n - 1) for i in range(n)]
-        path = [(x, y, min(zf, nose_z(x) + stand) - D / 2) for x in xs]
+        # the ends wrap back with the nose, but never into the front tyre:
+        # a 31in tyre's leading edge is at z 1532 (axle 1139), so outboard of
+        # |x| 520 -- the tyre's inner face, steered -- the bar's back face
+        # stays ahead of 1545
+        path = [(x, y, max(min(zf, nose_z(x) + stand) - D / 2, 1545 + D / 2 if abs(x) > 520 else -1e9)) for x in xs]
         sweep('body', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 8 if kind != 'abs' else 30, 4), mat, root)
         if kind == 'abs':
             mw, mh = W * 0.45, H * 0.45
@@ -2211,8 +2253,11 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
             fog_lamp(root, s * 430, y - 20, zf + 4, mat, dia=90)
     if fog_stalk:                                            # fogs on brackets off the bar's ends
         for s in (-1, 1):
-            box(f'fogArm{s}', (s * (W / 2 - 40), y + H / 2 - 10, zf - 30), (20, 90, 40), mat, root, bevel=2)
-            fog_lamp(root, s * (W / 2 - 40), y + H / 2 + 50, zf - 10, mat, dia=110)
+            # off the bar's OWN face at that x: the ends wrap back, and at the
+            # full-front z the lamps hung 30-70 mm in front of nothing
+            ze = min(zf, nose_z(W / 2 - 40) + 12)
+            box(f'fogArm{s}', (s * (W / 2 - 40), y + H / 2 - 10, ze - 20), (20, 90, 40), mat, root, bevel=2)
+            fog_lamp(root, s * (W / 2 - 40), y + H / 2 + 50, ze, mat, dia=110)
     if hump:                                                 # raised centre section of a moulded cowl
         box('hump', (0, y + H / 2 - 40, zf - D / 2 - 10), (W * 0.40, 110, D * 0.85), mat, root, bevel=26)
     if slot:                                                 # air slot across the face under the plate
@@ -2232,7 +2277,14 @@ def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fog
     if winch:
         box('fairleadFrame', (0, y + 30, zf + 6), (280, 100, 14), RED, root, bevel=3)
         box('fairleadSlot', (0, y + 30, zf + 14), (220, 56, 4), RUBBER, root, bevel=0)
-    number_plate(root, y - (20 if winch else 0) - (60 if winch else 0), zf + 8)
+    if kind == 'double':
+        # the plate hangs on two tabs off the lower tube's face, not in front of it
+        pz = zf - 30 + tube_d / 2 + 2
+        number_plate(root, y - 45, pz)
+        for s in (-1, 1):
+            box(f'plateTab{s}', (s * 110, y - 45, pz - tube_d / 4), (24, 60, tube_d / 2), mat, root, bevel=2)
+    else:
+        number_plate(root, y - (20 if winch else 0) - (60 if winch else 0), zf + 8)
     if skid:
         box('skid', (0, y - H / 2 - 40, zf - 120), (min(700, W - 500), 4, 240), mat, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
     valance(root, corners=corners and W < 1450)
@@ -2393,7 +2445,6 @@ def rear_damd_little_d():
     box('plate', (RIGHT * 60, 520, zf + 34), (330, 165, 3), PLATE, root, bevel=1)
     for s in (-1, 1):
         lib.cylinder(f'plateLamp{s}', (RIGHT * 60 + s * 120, 612, zf + 40), (0, 0, 1), 26, 16, CHROME, root, n=14)
-    lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
 
@@ -2452,7 +2503,6 @@ def rear_damd_little_g_trad():
         box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
     box('plateStep', (0, ytop - 176, zf + 6), (400, 200, 10), piano, root, bevel=3)
     box('plate', (0, ytop - 212, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
-    lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
 
@@ -2597,7 +2647,6 @@ def rear_urnieta_salado():
         box(f'endPlug{s}', (s * (W / 2 - 24), y, z + 118), (14, 40, 26), BLACK, root, bevel=6)
     box('platePanel', (0, y - 24, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
     box('plate', (0, y - 24, zf - 1), (330, 165, 3), PLATE, root, bevel=1)   # sits ON the panel, not 1.5 mm off it
-    lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
 
@@ -2659,7 +2708,6 @@ def rear_urnieta_1970():
     box('badgeText', (RIGHT * 250, y + 6, zf - 2), (150, 22, 4), UNT_TEXT, root, bevel=1)
     box('platePanel', (0, y - 16, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
     box('plate', (0, y - 16, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
-    lib.cylinder('exhaust', (RIGHT * 400, 340, -1640), (RIGHT * 0.4, -0.06, -1), 62, 210, CHROME, root, n=24)
     return root
 
 
@@ -2694,7 +2742,10 @@ def side_skirt_urnieta_1970():
     moulding along the sill with a long raised rib, three bolt heads along
     its top edge and a kicked-up tail at each end. 4.6 kg the pair."""
     root = group('sideStep_urnieta_1970')
-    z0, z1, ty = -600, 833, 338
+    # between the arches: the front one opens at z 700 (and a 31in tyre's
+    # back is at 746), the rear at -610 -- the drawn 833 put the front tail
+    # 48 mm into the tyre
+    z0, z1, ty = -560, 680, 338
     for s in (-1, 1):
         body = box(f'skirt{s}', (s * 762, ty, (z0 + z1) / 2), (46, 176, z1 - z0), TEXBLACK, root, bevel=12)
         body.modifiers['bevel'].segments = 3
@@ -2890,9 +2941,11 @@ def rack_wood(size='half'):
     top = deck + H
     # two TERZO cross bars with gutter feet
     for zz in (zc - 395, zc + 395):                          # TERZO bars, 790 apart (measured)
-        sweep(f'bar{zz}', [(-660, deck - 34, zz), (660, deck - 34, zz)], rounded_rect(70, 26, 6), BLACK, root)
+        # 20 mm higher than first drawn: at deck - 34 the bar's underside
+        # (1607) ran 15 mm into the roof's crown (1622)
+        sweep(f'bar{zz}', [(-660, deck - 14, zz), (660, deck - 14, zz)], rounded_rect(70, 26, 6), BLACK, root)
         for s in (-1, 1):
-            box(f'foot{s}{zz}', (s * (GUTTER_X + 10), ROOF_Y_EDGE + 16, zz), (60, 74, 52), BLACK, root, bevel=6)
+            box(f'foot{s}{zz}', (s * (GUTTER_X + 10), ROOF_Y_EDGE + 26, zz), (60, 94, 52), BLACK, root, bevel=6)
     xl, xr = xc - W / 2, xc + W / 2                          # the basket's own left and right
     # wire floor: rods along the car over cross rods
     n_rod = max(9, int(W / 48))
@@ -2981,6 +3034,12 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             # side. The hook has to bite into the tube -- hung 150 mm below it
             # with nothing between, it read as a red tag floating in mid-air.
             box(f'hook{s}', (s * 330, y - 72, z), (14, 116, 54), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
+            # With the stock bumper gone the stock lamps need something to
+            # sit in: a flat backing plate behind each one (x +-513, y 518)
+            # and a strap down to the tube, as KLC's own photos show.
+            box(f'lampPlate{s}', (s * 513, 518, -1556), (330, 120, 8), mat, root, bevel=3)
+            # a flat strap from the plate's top edge up and back to the tube
+            tube(f'lampStrap{s}', [(s * 513, 574, -1560), (s * 513, y - tube_d / 2 + 10, z)], 22, mat, root)
         elif lamps == 'housing':
             box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
         elif lamps == 'round':
@@ -3009,7 +3068,8 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
         box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
         for s in (-1, 1):
-            box(f'corner{s}', (s * min(740, W / 2 - 30), 520, -1470), (50, 240, 180), mat, root, bevel=6, rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+            box(f'corner{s}', (s * min(740, W / 2 - 30), 520, -1545), (50, 240, 150), mat, root, bevel=6,  # clear of the tyre
+ rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
     return root
 
 
@@ -3176,9 +3236,13 @@ def grille_light(pid):
         y = 690
         tube('hoop', [(-560, y, zf + 46), (560, y, zf + 46)], 63, STEEL, root)
         for s in (-1, 1):
-            leg = [(s * 540, y, zf + 46), (s * 540, 480, zf + 30), (s * 540, 430, zf - 30)]
-            tube(f'leg{s}', [tuple(p) for p in fillet(leg, 60)], 63, STEEL, root)
-            box(f'plate{s}', (s * 540, 415, zf - 40), (90, 40, 90), STEEL, root, bevel=4)
+            # the legs drop in front of the bumper and turn back through the
+            # lower aperture (y 550-600, recessed to z 1668 at |x| 300-400) to
+            # a plate on the chassis rail -- the first version stopped them
+            # in mid-air in front of the bumper face
+            leg = [(s * 540, y, zf + 46), (s * 540, 620, zf + 20), (s * 400, 590, zf - 10), (s * 400, 580, 1640)]
+            tube(f'leg{s}', [tuple(p) for p in fillet(leg, 50)], 63, STEEL, root)
+            box(f'plate{s}', (s * 400, 580, 1620), (110, 110, 12), STEEL, root, bevel=3)
         L, hh, dd, n = 546, 38, 80, 20
         y2 = y + 70
         sweep('housing', [(-L / 2, y2, zf + 40), (L / 2, y2, zf + 40)], rounded_rect(hh, dd, 8, 3), BLACK, root)
@@ -3192,7 +3256,7 @@ def grille_light(pid):
         L, hh, dd, n, lens = ((546, 38, 80, 20, STEDI_YELLOW) if pid == 'lower'
                               else (717, 62, 78, 21, LENS))
         y = 520 if pid == 'lower' else 470
-        zc = zf - (6 if pid == 'lower' else 34)              # the Bushranger sits behind the grille
+        zc = zf - (6 if pid == 'lower' else 94)              # the Bushranger sits BEHIND the lower mesh
         sweep('housing', [(-L / 2, y, zc), (L / 2, y, zc)], rounded_rect(hh, dd, 8, 3), BLACK, root)
         box('lens', (0, y, zc + dd / 2 - 3), (L - 40, hh - 18, 2), lens, root, bevel=0.5)
         for k in range(n):
@@ -3261,28 +3325,41 @@ def exhaust(pid, layout='rear', tip_d=76, tips=1, side=RIGHT, tip_y=330, protrud
         # tyre's leading edge. On a 744 mm tyre on the -1047 axle that edge is
         # at z = -675, so the tips finish near -475 and the canister sits
         # forward of them, under the door.
+        #
+        # Everything but the tips lives UNDER the floor, inboard of the rocker
+        # (the body side is at |x| 705 and the sill bottom at y 350): the
+        # first version hung the canister at |x| 790, outside the car, with
+        # the tips firing straight back into the tyre tread. Now the tips turn
+        # out sideways at the rocker line and end 130 mm ahead of the tyre.
         zc = -110
+        cx, cy = s * 520, 265
         if muffler:
             ml, md = muffler
-            lib.cylinder('canister', (s * 790, y + 30, zc), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
+            lib.cylinder('canister', (cx, cy, zc), (0, 0, 1), md, ml, EXH_STEEL, root, n=26)
             for k in range(9):                               # perforated heat shield
-                lib.cylinder(f'perf{k}', (s * 790, y + 30 + md / 2 - 4, zc - ml / 2 + 40 + k * (ml - 80) / 8),
+                lib.cylinder(f'perf{k}', (cx, cy + md / 2 - 4, zc - ml / 2 + 40 + k * (ml - 80) / 8),
                              (0, 1, 0), 16, 8, BLACK, root, n=8)
             for zz in (zc - ml / 2 - 10, zc + ml / 2 + 10):
-                box(f'strap{zz}', (s * 790, y + 30, zz), (md + 16, md + 16, 16), BLACK, root, bevel=4)
+                box(f'strap{zz}', (cx, cy, zz), (md + 16, md + 16, 16), BLACK, root, bevel=4)
+                box(f'hanger{zz}', (cx, cy + md / 2 + 30, zz), (24, 70, 16), BLACK, root, bevel=3)
+        z_tail = zc - (muffler[0] / 2 if muffler else 200)
         for k in range(tips):
-            xx = s * (790 + (k - (tips - 1) / 2) * (tip_d + 12))
-            tip_at(f'tip{k}', xx, zc - (muffler[0] / 2 if muffler else 200) - 150, y + 30)
-        lib.cylinder('run', (s * 760, y + 50, zc + 420), (0, 0, 1), tip_d - 16, 500, pipe, root, n=16)
+            zt = -560 - k * (tip_d + 14)
+            # a short pipe out of the canister's tail, then the tip turned out at the rocker
+            tube(f'tail{k}', [(cx, cy, z_tail - 20), (cx, cy, zt), (s * 640, cy, zt)], tip_d - 16, pipe, root, bend=60)
+            tip_at(f'tip{k}', s * 715, zt, cy, ax=(s, 0, 0))
+        lib.cylinder('run', (cx, cy + 10, zc + 420), (0, 0, 1), tip_d - 16, 500, pipe, root, n=16)
         return root
 
     if layout == 'through':
         # TANIGUCHI Compe R: the bullet turns out through the bumper corner,
         # high enough to stay out of a water crossing.
+        # The mouth has to be OUTSIDE the corner skin (|x| about 750 there);
+        # the first version buried the whole bullet and tip inside it.
         yy = 560 - EXH_LIFT
-        x = side * 620
-        lib.cylinder('bullet', (x - side * 60, yy, BUMPER_Z + 130), (1, 0, 0), tip_d + 60, 300, EXH_STEEL, root, n=24)
-        tip_at('tip', x + side * 50, BUMPER_Z + 130, yy, ax=(side, 0, 0))
+        x = side * 600
+        lib.cylinder('bullet', (x, yy, BUMPER_Z + 130), (1, 0, 0), tip_d + 60, 220, EXH_STEEL, root, n=24)
+        tip_at('tip', side * 775, BUMPER_Z + 130, yy, ax=(side, 0, 0))
         lib.cylinder('down', (side * 500, yy - 140, BUMPER_Z + 200), (0, 1, 0), tip_d - 12, 260, pipe, root, n=16)
         return root
 
@@ -3607,18 +3684,21 @@ def build():
     bumper_damd_roots()
     rear_damd_little_d()
     rear_damd_little_g_trad()
-    rear_bar('damd_roots_rear', 'plate', W=1230, H=150, D=120, y=520, lamps='round', mat=IVORY)
+    # every bar's top stays at or under y 580: the tailgate spare's bottom
+    # edge is at about 590, and a bar above that traps the tyre (tailgate
+    # would not open)
+    rear_bar('damd_roots_rear', 'plate', W=1230, H=150, D=120, y=500, lamps='round', mat=IVORY)
     # rear bumpers
     rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
     rear_bar('beyond_rear', 'plate', W=1360, H=160, D=120, y=460, lamps='wings')
-    rear_bar('jaos_rear_cowl', 'plate', W=1330, H=230, D=150, y=500, lamps='round')
+    rear_bar('jaos_rear_cowl', 'plate', W=1330, H=230, D=150, y=465, lamps='round')
     rear_bar('wildgoose_crawler_rear', 'tube', W=1330, tube_d=76, lamps='housing')
     rear_bar('wildgoose_box_rear', 'plate', W=1410, H=100, D=100, y=450, lamps='housing')
     rear_bar('showa_iron_rear', 'tube', W=1450, tube_d=60, lamps='wings')
     rear_bar('taniguchi_rear_pipe', 'tube', W=1420, tube_d=60, lamps='none')
-    rear_bar('apio_tactical_rear', 'plate', W=1290, H=280, D=200, y=520, lamps='housing')
-    rear_bar('outclass_rear_abs', 'plate', W=1310, H=220, D=170, y=500, lamps='round')
-    rear_bar('hamer_mx208', 'plate', W=1270, H=300, D=220, y=520, lamps='housing', steps=True)
+    rear_bar('apio_tactical_rear', 'plate', W=1290, H=280, D=200, y=440, lamps='housing')
+    rear_bar('outclass_rear_abs', 'plate', W=1310, H=220, D=170, y=470, lamps='round')
+    rear_bar('hamer_mx208', 'plate', W=1270, H=300, D=220, y=430, lamps='housing', steps=True)
     # grilles
     grille_generic('taishan_retro', v_slots=11)
     grille_generic('klc_ja', wire=True, marker=4, bezel='round', h_slats=1, slat_h=18)

@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609241719" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609250523" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -283,6 +283,10 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 /* Style cards. They are the first thing anyone sees, so they carry the one
    thing a list of part names cannot: what the car ends up looking like. */
 .styles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stylehead{grid-column:1/-1;margin:10px 0 0;font:700 13px/1.3 var(--body);color:var(--ink)}
+.stylehead:first-child{margin-top:0}
+.stylehead em{font-style:normal;font:400 11px var(--body);color:var(--ink2);margin-left:8px}
+.style .sb{font-style:normal;font:500 10px/1 var(--mono);letter-spacing:.1em;color:var(--acc);text-transform:uppercase}
 .style{text-align:left;background:var(--sur);border:1px solid var(--line);border-radius:4px;
   padding:12px 13px 11px;cursor:pointer;display:grid;gap:5px;align-content:start;
   color:var(--ink);font:inherit;-webkit-tap-highlight-color:transparent}
@@ -672,15 +676,15 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig } from './rig.js?v=202609241719';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, STYLES } from './parts.js?v=202609241719';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609241719';
-import { openAwning, roofTent, campExtra } from './camp.js?v=202609241719';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609241719';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609241719';
+import { rigJimny, applyConfig } from './rig.js?v=202609250523';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, STYLES } from './parts.js?v=202609250523';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609250523';
+import { openAwning, roofTent, campExtra } from './camp.js?v=202609250523';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609250523';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609250523';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609241719';
+const BUILD = '202609250523';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -973,8 +977,8 @@ function update() {
   const add = (n, key) => {
     if (!n) return;
     accGroup.add(n);
-    if (key) BUILT[key] = n;
-    if (key && chg.has(key) && prevS) { settleIn(n); flash = n; }
+    if (key) { BUILT[key] = n; n.userData.__acc = `${key}=${S[key] === true ? 'on' : S[key]}`; }
+    if (key && chg.has(key) && prevS && !window.__jimnyStill) { settleIn(n); flash = n; }
   };
   for (const k of ['windowGuards', 'spareBag', 'spareCover', 'flares', 'decals', 'shovel', 'sideSkirt'])
     if (S[k]) add(buildAccessory(k, undefined, paint), k);
@@ -1038,7 +1042,7 @@ function update() {
     b.disabled = Math.abs(S.rackShift + (+b.dataset.d) * RACK_STEP) > RACK_MAX);
 
   // ride height, tyre size and paint all ease into their new values
-  if (prevS && prevGeom) {
+  if (prevS && prevGeom && !window.__jimnyStill) {
     settleRide(total - prevGeom.lift, prevGeom.dia / ty.dia);
     fadePaint(prevPaint, col.hex, rig.userData.paintMat);
     if (S.twoTone !== prevS.twoTone && rig.userData.roofMat)
@@ -1064,7 +1068,7 @@ function update() {
     + (S.exhaust !== 'stock' ? 1 : 0)
     + (S.roofRack !== 'none') + (S.awning !== 'none') + (S.ladder !== 'none') + (S.sideStep !== 'none') + (S.snorkel !== 'none');
   $('sum3').textContent = n2 ? `${n2} 項` : '無';
-  const st = STYLES.find(x => x.id === styleAt);
+  const st = ALL_STYLES.find(x => x.id === styleAt);
   const drift = styleDrift();
   $('sumStyle').textContent = !st ? '未選' : drift ? `${st.label}・改 ${drift}` : st.label;
   $('hCol').textContent = col.name;
@@ -1371,6 +1375,11 @@ const ALL_LISTS = { lift: LIFTS, wheel: WHEELS, tyre: TYRES, frontBumper: FRONT_
   exhaust: EXHAUSTS, extinguisher: EXTINGUISHERS, kit: KITS, hood: HOODS, stripe: STRIPES, cage: CAGES, fender: FENDERS, face: FACES, spoiler: SPOILERS,
   spareCoverKit: SPARE_COVERS };
 let styleAt = null;
+// The makers' own complete kits come first in the style step, as the whole
+// kit on an otherwise stock car; our own combinations follow.
+const KIT_STYLES = KITS.filter(k => k.id !== 'none').map(k => ({
+  id: `kit_${k.id}`, kitOf: k, label: k.label, brand: k.brand, desc: k.note ?? '', set: { kit: k.id, ...k.set } }));
+const ALL_STYLES = [...KIT_STYLES, ...STYLES];
 
 /** What a style's parts add up to, and how many of them nobody publishes a
  *  price for. A sum of what is known beats a range nobody can source.
@@ -1402,34 +1411,41 @@ const wan = (n) => (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '');
  *  from. Counting it is what lets the style be a starting point rather than
  *  a cage -- the reader can always see they are still free. */
 function styleDrift() {
-  const st = STYLES.find(x => x.id === styleAt);
+  const st = ALL_STYLES.find(x => x.id === styleAt);
   if (!st) return 0;
   const base = { ...DEF, ...st.set };
   return Object.keys(DEF).filter(k => S[k] !== base[k]).length;
 }
 
 function buildStyles() {
-  $('styleCount').textContent = `${STYLES.length} 種`;
-  $('styles').innerHTML = STYLES.map(st => {
-    const { sum, open } = styleCost(st);
-    const price = sum ? `零件約 NT$${wan(sum)} 萬・不含胎${open ? `・${open} 項洽詢` : ''}` : '洽詢';
+  $('styleCount').textContent = `${KIT_STYLES.length} 套廠商套件・${STYLES.length} 種風格`;
+  const card = (st) => {
+    let price;
+    if (st.kitOf) {                                     // a maker's kit is priced as the kit, not as its panels
+      const k = st.kitOf, p = priceLabel(k);
+      price = k.price == null ? '套件價洽詢' : `套件 ${p.main}${p.sub ? `（${p.sub}）` : ''}`;
+    } else {
+      const { sum, open } = styleCost(st);
+      price = sum ? `零件約 NT$${wan(sum)} 萬・不含胎${open ? `・${open} 項洽詢` : ''}` : '洽詢';
+    }
     return `<button class="style" data-style="${st.id}" aria-pressed="${st.id === styleAt}">
       <img src="model/shots/style-${st.id}.webp?v=${BUILD}" alt="" loading="lazy" onerror="this.remove()">
-      <b>${esc(st.label)}</b>
+      ${st.brand ? `<i class="sb">${esc(st.brand)}</i>` : ''}<b>${esc(st.label)}</b>
       <span class="ds">${esc(st.desc)}</span>
       <span class="pr">${esc(price)}</span></button>`;
-  }).join('');
+  };
+  $('styles').innerHTML = `<p class="stylehead">廠商全車套件<em>整套換上，其他維持原廠</em></p>` + KIT_STYLES.map(card).join('')
+    + `<p class="stylehead">配置風格<em>我們依實車與官方示範車搭的整台</em></p>` + STYLES.map(card).join('');
 }
 
 function applyStyle(id) {
-  const st = STYLES.find(x => x.id === id);
+  const st = ALL_STYLES.find(x => x.id === id);
   if (!st) return;
   styleAt = id;
   try { localStorage.setItem('jimny.style', id); } catch {}
   S = { ...DEF, ...st.set };
   tyreSwap = '';
   buildUI(); update(); buildStyles();
-  goStep(1);
 }
 $('styles').addEventListener('click', (e) => {
   const b = e.target.closest('[data-style]');
@@ -2008,6 +2024,8 @@ const shotFor = (key, item) =>
 // thumbnails; nothing in the page itself reads them
 window.__jimnyLists = Object.fromEntries(Object.entries(SHOT_LIST).map(([k, f]) => [k, f()]));
 window.__jimnyAim = aimFor;
+// tools/_audit: the tyre in use, and a switch that stops parts easing in
+window.__jimnyTyre = () => { const t = find(TYRES, S.tyre); return { dia: t.dia, width: t.width }; };
 window.__jimnyDefault = (k) => DEF[k];
 // frame the part itself: at the whole-car distance a snorkel is a few pixels,
 // so the crop ends up being most of the car

@@ -833,6 +833,8 @@ export function validate(cfg, { tyre, lift, bodyLift, wheel }) {
   if (cfg.face && cfg.face !== 'none' && (cfg.frontBumper !== 'stock' || cfg.grille !== 'stock' || cfg.grilleLight !== 'none')) {
     out.push({ level: 'error', msg: '換臉套件已經包含水箱罩、頭燈與前保桿，前保桿、水箱護罩與車頭燈條請維持原廠' });
   }
+  if (cfg.awning && cfg.awning !== 'none' && cfg.roofRack === 'none')
+    out.push({ level: 'error', msg: '車邊帳是鎖在車頂架側軌上的，目前沒有車頂架' });
   const tent = TENTS.find(t => t.id === cfg.tent);
   if (tent && tent.id !== 'none') {
     if (tent.noRack && cfg.roofRack !== 'none')
@@ -1017,30 +1019,24 @@ export const STYLES = [
   { id: 'au_offroad', label: '澳洲越野', sw: ['#3f4a3c', '#1d2224', '#8a6b45'],
     desc: '最高最寬的一台：2 吋懸吊＋2 吋車身舉升、31 吋胎配爆龜、絞盤前桿與呼吸管，車頂載架上一排探照燈與 270 度車邊帳。',
     set: { color: 'ZVL', lift: 'combo100', wheel: 'wildboar', tyre: 't31', tread: 'bfg_km3',
-      rimColor: 0x2a2d30, frontBumper: 'wmd_winch', snorkel: 'safari', roofRack: 'arb', arbDeflector: true, arbBoards: true,
+      rimColor: 0x2a2d30, frontBumper: 'wmd_winch', rearBumper: 'hamer_mx208', grille: 'showa_hex', snorkel: 'safari', roofRack: 'arb', arbDeflector: true, arbBoards: true,
       awning: 'arb_touring_25', awningSide: 'left', sideStep: 'ironman', ladder: 'tube',
       lightBar: 'ipf', roofLights: 'kc_pro6', windowGuards: true, guardCan: 'right',
       shovel: true, extinguisher: 'ladder', flares: true } },
 
-  { id: 'city', label: '都會輕改', sw: ['#d8d8d4', '#2e4a63', '#1d2224'],
-    desc: '最乾淨的一台：只動輪框、胎和 20mm 舉升，加一道側裙與一條低腰銀線。車頂空的，機械車位進得去，驗車不用解釋。',
-    set: { color: 'ZVR', lift: 'apio20', wheel: 'dean_cross', tyre: 't215r16', tread: 'toyo_at3',
-      rimColor: 0x1d2224, stripe: 'jaos', sideSkirt: true } },
+  { id: 'city', label: '都會輕改', sw: ['#d8d8d4', '#8a6a3c', '#1d2224'],
+    desc: '日本車主最常見的那一套：白車、1 吋升高、深古銅 16 吋框配白字 KO2，KLC 短版前保桿與 JA 水箱罩、OUTCLASS 後保桿，加一道低腰銀線。比原廠精神、又不搶戲，車頂空的，機械車位進得去。',
+    set: { color: 'ZVR', lift: 'klc30', wheel: 'bradley', tyre: 't215r16', tread: 'bfg_ko2', owl: true,
+      rimColor: 0x8a6a3c, stripe: 'jaos', grille: 'klc_ja', frontBumper: 'klc_short', rearBumper: 'outclass_rear_abs',
+      mirrors: 'damd', sideSkirt: true } },
 
   { id: 'military', label: '軍風', sw: ['#4a513a', '#e7e4da', '#2a2c26'],
-    desc: '原廠軍綠配白色軍卡模板字——後板一組序號、前葉子板一個 4x4。方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶、斧頭與鏟子。',
+    desc: '原廠軍綠配白色軍卡模板字——引擎蓋編號、車門資料欄、後板序號、前葉子板 4x4，APIO SJ 鋼板水箱罩。方管前後桿、鋼輪、平台車頂架，側窗鐵窗上掛油桶、斧頭與鏟子。',
     set: { color: 'ZZC', lift: 'td40', wheel: 'wildboar_sr', tyre: 't225r16', tread: 'bfg_km3',
-      rimColor: 0x3c4138, stripe: 'stencil', frontBumper: 'taniguchi_square',
+      rimColor: 0x3c4138, stripe: 'stencil', grille: 'apio_sj', frontBumper: 'taniguchi_square',
       rearBumper: 'taniguchi_rear_pipe', roofRack: 'platform', windowGuards: true,
       guardCan: 'right', guardAxe: 'right', guardBoard: 'left', shovel: true,
       extinguisher: 'left', spareBag: true } },
-
-  { id: 'exo_cage', label: '外掛籠硬派', sw: ['#d8c9a4', '#1d2224', '#6b6f62'],
-    desc: '車頂被一圈黑鋼管整個包住，A 柱前面還跨一道橫樑過擋風玻璃。跟澳洲越野一樣兇，但那台車頂載滿東西、這台只有籠子——遠看剪影完全不同。',
-    set: { color: 'ZVG', lift: 'sg50bl', wheel: 'yaochi_h598', tyre: 't31', tread: 'cp_stt',
-      rimColor: 0x24262a, cage: 'wildgoose', frontBumper: 'wmd_winch',
-      rearBumper: 'taniguchi_rear_pipe', sideStep: 'taniguchi_bar', windowGuards: true,
-      guardCan: 'right', shovel: true, flares: true } },
 
   { id: 'street_low', label: '都會寬體低趴', sw: ['#1d2224', '#b8bcc0', '#2e3236'],
     desc: '唯一往下走的一台：降低彈簧配 RAYS 18 吋鍛造框與 55 系列公路胎，WALD 爆龜每邊再寬 30mm，輪拱被輪框而不是被胎填滿，車頂完全空的。亮黑車身才撐得起這個對比。',
@@ -1049,14 +1045,15 @@ export const STYLES = [
       rearBumper: 'jaos_rear_cowl', exhaust: 'kakimoto_kr_lr', sideSkirt: true } },
 
   { id: 'narrow', label: '窄胎高瘦', sw: ['#0f74a8', '#d8d9d6', '#1d2224'],
-    desc: '原廠高度只換 185/85R16 窄高胎：胎比原廠瘦、又高一點，白字配白色鋼圈臉，整台車看起來更輕更高。照浜松 URBAN OFF CRAFT 的 JB74 實車配置。',
+    desc: '原廠高度只換 185/85R16 窄高胎：胎比原廠瘦、又高一點，白字配白色鋼圈臉，前後換 Beyond Liberte 復古保桿與 K-PRODUCTS 橫鰭水箱罩，整台車看起來更輕更高。輪胎配置照浜松 URBAN OFF CRAFT 的 JB74 實車配置。',
     set: { color: 'ZWY', twoTone: true, wheel: 'dean_cross', tyre: 't185r16', tread: 'toyo_rt', owl: true,
-      rimColor: 0xd8d9d6 } },
+      rimColor: 0xd8d9d6, grille: 'kpro_folksy', frontBumper: 'beyond_liberte', rearBumper: 'beyond_rear' } },
 
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
-    desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
+    desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，ARMANDO 鋼製前保桿、Wild Goose 圓管後保桿、復古水箱罩，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
     set: { color: 'ZVG', twoTone: true, lift: 'td60', wheel: 'wildboar_d',
-      tyre: 't225r16', tread: 'toyo_at3', rimColor: 0x8a8d90, stripe: 'toy4',
+      tyre: 't225r16', tread: 'toyo_at3', rimColor: 0x8a8d90, stripe: 'toy4', grille: 'taishan_retro',
+      frontBumper: 'armando', rearBumper: 'wildgoose_crawler_rear',
       roofRack: 'pioneer', awning: 'yakima_270s', awningSide: 'left', sideStep: 'jst',
       ladder: 'jst', spareCover: true, extinguisher: 'ladder', flares: true } },
 ];

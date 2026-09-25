@@ -89,7 +89,7 @@ export function openAwning(THREE, aw, side, groundY, room = false) {
   const M = mats(THREE), g = new THREE.Group();
   const s = side === 'left' ? 1 : -1;
   const o = aw.open;
-  const bagX = s * (RACK_W / 2 + 70), bagY = RACK_TOP + 20;
+  const bagX = s * (RACK_W / 2 + 90), bagY = RACK_TOP + 20;   // the bag hangs outboard of the rail
   if (o.kind === 'rect') {
     const L = o.along, P = o.projection, z0 = RACK_ZC - L / 2, z1 = RACK_ZC + L / 2;
     // ARB publish 1900-2100 mm at the legs, so the outer edge sits at 2000 above
@@ -214,7 +214,7 @@ export function roofTent(THREE, t, open, side, groundY, base) {
   // popup
   const L = t.open.L, W = t.open.W, H0 = 300, lift = 1150;
   g.add(box(W, 140, L, 0, base + 70, zc, M.tentShell));
-  const lidY = open ? base + 140 + lift : base + H0 - 80;
+  const lidY = open ? base + 140 + lift : base + 140;      // closed, the lid sits on the base
   g.add(box(W, 160, L, 0, lidY + 80, zc, M.tentShell));
   if (open) {
     const y0 = base + 140, y1 = lidY;
