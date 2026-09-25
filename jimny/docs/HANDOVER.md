@@ -155,7 +155,7 @@ by bumpers, side exhaust outside the body) -- all fixed. Keep both clean.
 diagnosis was the dark void stage, primitive-looking parts, a stock car as the
 first thing seen, no transitions, a spreadsheet-like panel and timid colours.
 First fix shipped: a bright studio (default; CSS backdrop, studio HDR) and an
-outdoor stage (Poly Haven "Goegap Road", CC0, ,
+outdoor stage (Poly Haven "Goegap Road", CC0, model/env_goegap_2k.hdr,
 GroundedSkybox at 1.8 m / 160 m, sun aimed from the brightest pixel, pixels
 capped at 24 because the half-float post chain overflowed to a black car).
 Next, per docs/jb74-beyond-styles.json: two-tone split paint at the window
