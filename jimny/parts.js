@@ -1086,7 +1086,7 @@ export const STYLES = [
 
   { id: 'grey_purple', label: '灰紫時裝', sw: ['#8e8f8c', '#6a3a98', '#1d2224'],
     desc: '上灰、下紫（連輪弧），鏡面管桿、黑鋼圈配泥地胎——有點街頭時裝的味道。照 Beyond CODE20 的配色，紫色是改色膜。',
-    set: { color: 'ZVL', split: 'purple', paintFlares: true, lift: 'klc30', wheel: 'dean_cross', rimColor: 0x1b1d1f,
+    set: { color: 'ZVL', split: 'purple', paintFlares: true, lift: 'td40', wheel: 'dean_cross', rimColor: 0x1b1d1f,
       tyre: 't225r16', tread: 'toyo_mt', frontBumper: 'beyond_liberte_mirror', rearBumper: 'beyond_rear_mirror',
       grille: 'hbar_suzuki' } },
 
