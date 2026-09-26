@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609260852" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609261423" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -700,15 +700,15 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig, updateSplit } from './rig.js?v=202609260852';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, SPLIT_PAINTS, SPLIT_Y, LAMP_COVERS, RACK_PAINTS, STYLES } from './parts.js?v=202609260852';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609260852';
-import { openAwning, roofTent, campExtra } from './camp.js?v=202609260852';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609260852';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609260852';
+import { rigJimny, applyConfig, updateSplit } from './rig.js?v=202609261423';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, SPLIT_PAINTS, SPLIT_Y, LAMP_COVERS, RACK_PAINTS, STYLES } from './parts.js?v=202609261423';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609261423';
+import { openAwning, roofTent, campExtra } from './camp.js?v=202609261423';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609261423';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609261423';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609260852';
+const BUILD = '202609261423';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -1096,7 +1096,7 @@ function update() {
   const chg = new Set();
   if (prevS) for (const k of Object.keys(S)) if (S[k] !== prevS[k]) chg.add(k);
   applyConfig(THREE, rig, {
-    bodyColor: col.hex, twoTone: S.twoTone, roofColor: ROOF_BLACK, lift: total,
+    bodyColor: col.hex, bodyMetal: col.metal, twoTone: S.twoTone, roofColor: ROOF_BLACK, lift: total,
     tyreDia: ty.dia, tyreWidth: ty.width, rimDia: wh.rim, wheelStyle: wh.style,
     tread: { ...find(TYRE_MODELS, S.tread), owl: S.owl }, rimColor: S.rimColor,
     spacer: Math.max(0, -wh.offset) * 0.7,
@@ -1146,6 +1146,9 @@ function update() {
   if (S.fender !== 'none') add(buildAccessory('fender', S.fender, paint), 'fender');
   if (S.face !== 'none') add(buildAccessory('face', S.face, paint), 'face');
   if (S.spoiler !== 'none') add(buildAccessory('spoiler', S.spoiler, paint), 'spoiler');
+  // stock bumpers still carry plates
+  if (S.frontBumper === 'stock' && S.face === 'none') add(buildAccessory('plate_stockFront', undefined, paint));
+  if (S.rearBumper === 'stock') add(buildAccessory('plate_stockRear', undefined, paint));
   if (S.rearBumper !== 'stock') { const e = find(REAR_BUMPERS, S.rearBumper);
     add(finishOf(buildAccessory('rearBumper', e.node ?? e.id, paint), e.finish), 'rearBumper'); }
   // 'safari' is a legacy id kept so old links still work; the part is Ironman's
@@ -1160,6 +1163,9 @@ function update() {
     add(finishOf(buildAccessory('frontBumper', e.node ?? e.id, paint), e.finish), 'frontBumper'); }
   if (S.grille !== 'stock' && S.face === 'none') add(buildAccessory('grille', S.grille, paint), 'grille');
 
+  // things hung on the spare follow it when a bigger tyre moves it
+  { const sh = rig.userData.spareShift;
+    if (sh) for (const k of ['spareBag', 'spareCover', 'spareCoverKit']) if (BUILT[k]) BUILT[k].position.add(sh); }
   // The camping area: open tents and awnings are built from their catalogue
   // sizes (camp.js), down to wherever the ground is at this ride height.
   {

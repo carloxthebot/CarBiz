@@ -1,0 +1,1026 @@
+{
+ "title": "JB74 配置風格重整：每台一個主意、一組配色、不預設黑罩",
+ "sourcedAt": "2026-09-26",
+ "scope": "對 parts.js STYLES 的 11 款逐一給 keep／change，另提 3 款新風格。set 只用目錄現有 id；目錄沒有的東西列在 newCatalogueNeeded，附第一手來源與價格。rimColor 以 \"0x……\" 字串記錄，貼回 parts.js 時改成數字。",
+ "method": "以既有研究（jb74-beyond-styles、jb74-grille-finishes、jb74-demo-cars）為底，另抓 KLC Heritage 概念車頁（CAL、Phase、unlimited）、KLC Forty ABS 鍍鉻調頁、DAMD little B.／ROOTS／little Δ. 官網、APIO Marker 罩頁、RV4 Wild Goose JB74 クロスカントリーエディション頁、SHOWA GARAGE 與 OUTCLASS 在 STYLE WAGON（motor-fan.jp）的示範車專題、CARTUNE 輪框實例 20 選、クラフト JB74 實例、Appreciate 雙色罩頁。Instagram 未試（前幾輪已確認只回登入頁）。每個 set 都用 parts.js 的 validate() 與輪框／輪胎吋數、needLift、白字尺寸跑過，結果在各款 check 欄。",
+ "rules": [
+  "同一個車身色最多兩款：ZVG 日系復古／加州雙色、ZVR 都會輕改／夕陽 JA11、ZZC 軍風／奶油硬件、ZVL 澳洲越野／灰紫時裝、ZJ3 都會寬體低趴／木紋旅行車、ZZB 露營／拉力小鋼炮、ZWY 窄胎高瘦、3M 紅膜 LC40 紅白。",
+  "水箱罩：14 款裡 9 款不是黑罩（車身同色 5：klc_sj、sixsense_explosion、prostaff_minig、klc_forty×2；槍灰 3：klc_ja、apio_sj、taniguchi_washer；銀網 2：klc_nanaketsu×2）。留黑罩的 3 款（澳洲越野 showa_hex、都會寬體低趴 outclass_g、夕陽 JA11 apio_marker）都是因為對應的官方示範車本身就是黑罩，各款 changes 裡寫明依據。",
+  "輪框顏色一律跟車身拉開：黑車配青銅或鉻、白車配古銅或黑、米色配黑或鉻、綠車配黑或奶油白、藍車配白、黃車配古銅或白、紅車配白。軍風的黑框配綠車是唯一偏弱的一組，APIO WILDBOAR SR 只有黑與 Cotton White 兩色，白色已給奶油硬件。",
+  "輪胎吋數＝輪框吋數、needLift ≤ 舉升量，全數通過；兩台降低車（都會寬體低趴、拉力小鋼炮）各有一條「降低配外徑 >700mm」的警告，拉力小鋼炮換成真正的 215/65R16 就會消失（見 newCatalogueNeeded t215r65）。",
+  "四色橘帶 toy4 只剩夕陽 JA11 用；klc_ja 只剩都會輕改用；mrk_retro 從三台減為兩台。"
+ ],
+ "styles": [
+  {
+   "id": "jp_retro",
+   "verdict": "change",
+   "label": "日系復古",
+   "sw": [
+    "#d8c9a4",
+    "#b4703a",
+    "#1d2224"
+   ],
+   "idea": "象牙車身＋同色 SJ 臉＋三色腰線：臉跟車身是同一塊顏色，黑件只剩鋼圈與管桿。",
+   "changes": [
+    "grille hbar_suzuki（紋理黑）→ klc_sj（車身同色）：KLC 自己的 SJ 示範車就是象牙車配象牙罩、縫後黑網",
+    "lift td60（澳洲 Tough Dog）→ tg60（TANIGUCHI SOLVE ACE60，同為 60mm）：「日系」這台全用日本件"
+   ],
+   "set": {
+    "color": "ZVG",
+    "lift": "tg60",
+    "wheel": "mrk_retro",
+    "tyre": "t215r16",
+    "tread": "toyo_at3",
+    "owl": true,
+    "rimColor": "0x1b1d1f",
+    "stripe": "retro3",
+    "grille": "klc_sj",
+    "frontBumper": "tube_heritage",
+    "rearBumper": "klc_heritage_rear",
+    "mirrors": "damd",
+    "sideStep": "jst",
+    "ladder": "jst",
+    "exhaust": "hks_legal",
+    "sideSkirt": true
+   },
+   "desc": "米色車身配同色 SJ 水箱罩——整張臉跟車身是同一塊顏色，只剩深棕、鏽橘、米白三色腰線在側面走。黑鋼輪包白字全地形胎，KLC 不鏽鋼雙管前後保桿。車高只到 1.8 米出頭，是街上開的樣子。",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillesj.html",
+    "docs/jb74-grille-finishes.json（klc_sj：象牙示範車配象牙罩）",
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_suspension/"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 60,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "au_offroad",
+   "verdict": "change",
+   "label": "澳洲越野",
+   "sw": [
+    "#63645f",
+    "#1d2224",
+    "#d0621f"
+   ],
+   "idea": "最高最寬、載最多：灰車身讓黑色裝備成為輪廓，而不是跟白車對比成一張貼紙。",
+   "changes": [
+    "color ZVR → ZVL：白色讓給都會輕改與夕陽 JA11；SHOWA GARAGE 的戶外示範車正是灰車＋3 吋＋A-x 車頂架＋270 度車邊帳",
+    "rimColor 0x2a2d30 → 0x1b1d1f：APIO WILDBOAR X 只有レイドブラック／ガンブラック兩色，0x2a2d30 不是實際色",
+    "grille 維持 showa_hex 紋理黑：SHOWA 戶外示範車本來就是シボブラック ABS 罩，這台黑罩有實車依據"
+   ],
+   "set": {
+    "color": "ZVL",
+    "lift": "combo100",
+    "wheel": "wildboar",
+    "tyre": "t31",
+    "tread": "bfg_km3",
+    "rimColor": "0x1b1d1f",
+    "frontBumper": "wmd_winch",
+    "rearBumper": "hamer_mx208",
+    "grille": "showa_hex",
+    "snorkel": "safari",
+    "roofRack": "arb",
+    "arbDeflector": true,
+    "arbBoards": true,
+    "awning": "arb_touring_25",
+    "awningSide": "left",
+    "sideStep": "ironman",
+    "ladder": "tube",
+    "lightBar": "ipf",
+    "roofLights": "kc_pro6",
+    "windowGuards": true,
+    "guardCan": "right",
+    "shovel": true,
+    "extinguisher": "ladder",
+    "flares": true
+   },
+   "desc": "最高最寬的一台：2 吋懸吊＋2 吋車身舉升、31 吋胎配爆龜、絞盤前桿與呼吸管，車頂載架上一排探照燈與 270 度車邊帳。灰色車身讓整圈黑色裝備變成輪廓，照 SHOWA GARAGE 灰色戶外示範車的路線。",
+   "sources": [
+    "https://motor-fan.jp/article/42253/"
+   ],
+   "check": {
+    "tyreRim": 15,
+    "wheelRim": 15,
+    "needLift": 50,
+    "lift": 100,
+    "needBody": 25,
+    "body": 50,
+    "owlOk": true,
+    "validate": [
+     "warn: 31×10.50R15 超出澳洲法規上限（235/75R15）；各地法規請自行確認",
+     "warn: JB74 車頂動態載重只有 30kg；平盤車頂架 14–18kg 加上這組燈（KC Pro6 11.3kg／ST4K 6.6kg）已經吃滿，不要再放行李"
+    ]
+   }
+  },
+  {
+   "id": "city",
+   "verdict": "keep",
+   "label": "都會輕改",
+   "sw": [
+    "#f2f3f0",
+    "#8a6a3c",
+    "#4a4d50"
+   ],
+   "idea": "白車＋古銅輪＋槍灰 JA 臉：日本車主最常見的組合，金屬件全走暖古銅與槍灰，沒有一件是純黑。",
+   "changes": [
+    "全部保留；sw 第三色從黑改成槍灰，對應 klc_ja 的ガンメタ"
+   ],
+   "set": {
+    "color": "ZVR",
+    "lift": "klc30",
+    "wheel": "bradley",
+    "tyre": "t215r16",
+    "tread": "bfg_ko2",
+    "owl": true,
+    "rimColor": "0x8a6a3c",
+    "stripe": "jaos",
+    "grille": "klc_ja",
+    "frontBumper": "klc_short",
+    "rearBumper": "outclass_rear_abs",
+    "mirrors": "damd",
+    "sideSkirt": true
+   },
+   "desc": "日本車主最常見的那一套：白車、1 吋升高、深古銅 16 吋框配白字 KO2，KLC 短版前保桿配槍灰 JA 水箱罩、OUTCLASS 後保桿，加一道低腰銀線。比原廠精神、又不搶戲，車頂空的，機械車位進得去。",
+   "sources": [
+    "https://cartune.co.jp/magazine/articles/4003",
+    "docs/jb74-grille-finishes.json（klc_ja：ガンメタ＋銀網）"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 30,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "military",
+   "verdict": "change",
+   "label": "軍風",
+   "sw": [
+    "#444a3a",
+    "#e7e4da",
+    "#5a5d5f"
+   ],
+   "idea": "軍綠＋白色模板字＋槍灰鋼板臉：APIO 自家綠車配槍灰 SJ 罩就是這個組合。",
+   "changes": [
+    "rimColor 0x3c4138 → 0x1b1d1f：WILDBOAR SR 16 吋官網只有 Iron Black／Cotton White，綠灰色不是實際色；Cotton White 留給奶油硬件",
+    "grille apio_sj（槍灰）保留：APIO 示範車就是叢林綠配槍灰"
+   ],
+   "set": {
+    "color": "ZZC",
+    "lift": "td40",
+    "wheel": "wildboar_sr",
+    "tyre": "t225r16",
+    "tread": "bfg_km3",
+    "rimColor": "0x1b1d1f",
+    "stripe": "stencil",
+    "grille": "apio_sj",
+    "frontBumper": "taniguchi_square",
+    "rearBumper": "taniguchi_rear_pipe",
+    "roofRack": "platform",
+    "windowGuards": true,
+    "guardCan": "right",
+    "guardAxe": "right",
+    "guardBoard": "left",
+    "shovel": true,
+    "extinguisher": "left",
+    "spareBag": true
+   },
+   "desc": "原廠軍綠配白色軍卡模板字——後板序號、前葉子板 4x4，APIO SJ 槍灰鋼板水箱罩。方管前後桿、黑鋼圈泥地胎、平台車頂架，側窗鐵窗上掛油桶、斧頭與鏟子。",
+   "sources": [
+    "docs/jb74-grille-finishes.json（apio_sj：示範車叢林綠）",
+    "https://apio.jp/parts/7200-28.html"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 40,
+    "lift": 40,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "street_low",
+   "verdict": "change",
+   "label": "都會寬體低趴",
+   "sw": [
+    "#16191c",
+    "#6b5438",
+    "#b8bcc0"
+   ],
+   "idea": "黑車、寬體、18 吋青銅鍛造框：輪框是全車唯一的亮色，也是這台的重點。",
+   "changes": [
+    "rimColor 0x17191c → 0x6b5438：RAYS A・LAP-07X 有「青銅陽極」¥100,100 稅込單顆；原本黑框黑車是 Beyond CODE17 證明最不起眼的組合",
+    "grille outclass_g 保留紋理黑：OUTCLASS 所有示範車都是黑罩，G 臉配 WALD 的 G 式寬體",
+    "描述拿掉「唯一往下走」，因為新增的 little Δ 也降低"
+   ],
+   "set": {
+    "color": "ZJ3",
+    "lift": "klc_turtles",
+    "wheel": "street18",
+    "tyre": "t225r55",
+    "tread": "toyo_ht2",
+    "fender": "wald_bison",
+    "rimColor": "0x6b5438",
+    "stripe": "jaos",
+    "grille": "outclass_g",
+    "frontBumper": "jaos_cowl",
+    "rearBumper": "jaos_rear_cowl",
+    "exhaust": "kakimoto_kr_lr",
+    "sideSkirt": true
+   },
+   "desc": "往下走的寬體路線：降低彈簧配 RAYS 18 吋青銅鍛造框與 55 系列公路胎，WALD 爆龜每邊再寬 30mm，輪拱被輪框而不是被胎填滿，車頂完全空的。黑車身、黑 G 臉，只讓青銅框發亮。",
+   "sources": [
+    "https://www.rayswheels.co.jp/products/brand/detail/144",
+    "https://wald.co.jp/carrange/jimnysierra_bb/"
+   ],
+   "check": {
+    "tyreRim": 18,
+    "wheelRim": 18,
+    "needLift": 0,
+    "lift": -40,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": [
+     "warn: 降低 40mm 配 225/55R18（外徑 705mm）：車身壓低又用大外徑胎，滿載或過坑時輪拱內襯容易磨到"
+    ]
+   }
+  },
+  {
+   "id": "narrow",
+   "verdict": "change",
+   "label": "窄胎高瘦",
+   "sw": [
+    "#0f74a8",
+    "#d8d9d6",
+    "#16191c"
+   ],
+   "idea": "藍黑雙色＋同色臉＋白鋼圈窄高胎：車頭是藍的，腳是白的，整台輕。",
+   "changes": [
+    "grille kpro_folksy（黑）→ prostaff_minig（車身同色＋直柱）：Pro Staff 示範車是白車配同色罩；藍車配藍臉，黑色只剩車頂"
+   ],
+   "set": {
+    "color": "ZWY",
+    "twoTone": true,
+    "wheel": "dean_cross",
+    "tyre": "t185r16",
+    "tread": "toyo_rt",
+    "owl": true,
+    "rimColor": "0xd8d9d6",
+    "grille": "prostaff_minig",
+    "frontBumper": "beyond_liberte",
+    "rearBumper": "beyond_rear"
+   },
+   "desc": "原廠高度只換 185/85R16 窄高胎：胎比原廠瘦、又高一點，白字配白色鋼圈臉；水箱罩漆成車身藍、前後換 Beyond Liberte 復古保桿，整台車看起來更輕更高。輪胎配置照浜松 URBAN OFF CRAFT 的 JB74 實車配置。",
+   "sources": [
+    "https://www.craft-web.co.jp/blogs/urban_hamamatsu/192446/",
+    "docs/jb74-grille-finishes.json（prostaff_minig：白車配同色罩）"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 0,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "cal_twotone",
+   "verdict": "change",
+   "label": "加州雙色",
+   "sw": [
+    "#e9dcc0",
+    "#d0621f",
+    "#d0d3d6"
+   ],
+   "idea": "上象牙、下橘、全鏡面：兩種顏色＋鉻，黑色塑膠件完全消失，連水箱罩也不留黑。",
+   "changes": [
+    "grille hbar_suzuki（紋理黑）→ sixsense_explosion（車身同色＋鍍鉻 SUZUKI 字＋琥珀方燈）：Six Sense 示範車是象牙車配象牙罩；真正的 CODE01 是 Beyond Su11 分色塗裝罩，見 newCatalogueNeeded",
+    "rimColor 0xd8d9d6 → 0xd0d3d6（SUPER MOON クローム，待鍍鉻材質）"
+   ],
+   "set": {
+    "color": "ZVG",
+    "split": "orange",
+    "paintFlares": true,
+    "lift": "klc30",
+    "wheel": "super_moon",
+    "rimColor": "0xd0d3d6",
+    "tyre": "t215r16",
+    "tread": "bfg_ko2",
+    "owl": true,
+    "frontBumper": "beyond_liberte_mirror",
+    "rearBumper": "beyond_rear_mirror",
+    "grille": "sixsense_explosion"
+   },
+   "needs": [
+    "beyond_su11_code01"
+   ],
+   "desc": "上米白、下復古橘，連輪弧一起烤成下半的顏色，水箱罩也漆米白、只留鍍鉻字——黑色塑膠件全消失；前後鏡面不鏽鋼保桿配鍍鉻月亮盤。照 Beyond CODE01 的配色。",
+   "sources": [
+    "https://beyond-jpn.com/jp/code01",
+    "https://www.tokyoautosalon.jp/cars/detail/4779",
+    "docs/jb74-grille-finishes.json（sixsense_explosion：象牙車配象牙罩）"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 30,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "grey_purple",
+   "verdict": "change",
+   "label": "灰紫時裝",
+   "sw": [
+    "#8e8f8c",
+    "#6a3a98",
+    "#b8bcc0"
+   ],
+   "idea": "上灰下紫、金屬件全亮：鏡面管桿配銀色輪框，紫色才有對比。",
+   "changes": [
+    "grille hbar_suzuki → klc_nanaketsu（黑框＋銀鋁網）：CODE20 的 Su11 是燈框與十字漆銀、百葉黑；目錄裡只有 Nanaketsu 的銀網讀得出「銀黑拆色」，正解是 Su11 分色，見 newCatalogueNeeded",
+    "wheel dean_cross 黑 → mrk_retro 銀（MRK 官方色：陶瓷白／銀／消光黑）：黑鋼圈壓在深紫下半身上會糊掉，銀色跟鏡面保桿同一種表面"
+   ],
+   "set": {
+    "color": "ZVL",
+    "split": "purple",
+    "paintFlares": true,
+    "lift": "td40",
+    "wheel": "mrk_retro",
+    "rimColor": "0xb8bcc0",
+    "tyre": "t225r16",
+    "tread": "toyo_mt",
+    "frontBumper": "beyond_liberte_mirror",
+    "rearBumper": "beyond_rear_mirror",
+    "grille": "klc_nanaketsu"
+   },
+   "needs": [
+    "beyond_su11_split"
+   ],
+   "desc": "上灰、下紫（連輪弧），鏡面管桿、銀色復古鋁圈配泥地胎，水箱罩後面透出銀網——有點街頭時裝的味道。照 Beyond CODE20 的配色，紫色是改色膜。",
+   "sources": [
+    "https://beyond-jpn.com/jp/code20",
+    "https://www.mrk.com.tw/"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 40,
+    "lift": 40,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "sunset_ja",
+   "verdict": "change",
+   "label": "夕陽 JA11",
+   "sw": [
+    "#f2f3f0",
+    "#e0662a",
+    "#1d2224"
+   ],
+   "idea": "白車＋一整道夕陽漸層＋四顆琥珀燈：JA11 的致敬靠條紋和琥珀燈，不靠零件數。",
+   "changes": [
+    "grille klc_ja → apio_marker（半光黑、四顆 IPF 琥珀燈）：CODE26 的故事細節是 JA11 琥珀方向燈，Marker 罩剛好四顆琥珀燈；白車黑件是 CODE26 的原樣，所以這台黑罩有依據。klc_ja 留給都會輕改，不再兩台共用",
+    "現在 toy4 條紋只給這台用（露營拿掉），不再撞"
+   ],
+   "set": {
+    "color": "ZVR",
+    "stripe": "toy4",
+    "lift": "klc30",
+    "wheel": "dean_cross",
+    "rimColor": "0x1b1d1f",
+    "tyre": "t215r16",
+    "tread": "toyo_rt",
+    "owl": false,
+    "frontBumper": "beyond_liberte",
+    "rearBumper": "beyond_rear",
+    "grille": "apio_marker"
+   },
+   "desc": "白車配一整道橘紅棕漸層寬條紋，黑管桿、黑鋼圈，水箱罩上四顆琥珀燈——向 90 年代 JA11 致敬。照 Beyond CODE26。",
+   "sources": [
+    "https://beyond-jpn.com/jp/code26",
+    "https://apio.jp/parts/3033-59.html"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 30,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "cream_hw",
+   "verdict": "change",
+   "label": "奶油硬件",
+   "sw": [
+    "#444a3a",
+    "#e9e1cc",
+    "#f3c21c"
+   ],
+   "idea": "軍綠車身，所有粗件——管桿、車頂架、鋼圈、水箱罩內圈——都是奶油白。",
+   "changes": [
+    "grille hbar_suzuki（黑）→ klc_forty（外框車身綠＋內圈白）：KLC 自己的 CAL 示範車就是綠車配白色 Forty 罩、象牙管桿、象牙輪框、象牙車頂架",
+    "wheel mrk_retro → wildboar_sr Cotton White（APIO 官方色 7200-47W）：日本原廠色取代台灣副廠白，也讓 mrk_retro 不再三台共用"
+   ],
+   "set": {
+    "color": "ZZC",
+    "wheel": "wildboar_sr",
+    "rimColor": "0xe9e4d6",
+    "tyre": "t215r16",
+    "tread": "toyo_at3",
+    "owl": true,
+    "frontBumper": "klc_trad",
+    "rearBumper": "beyond_rear_ivory",
+    "roofRack": "basket",
+    "rackPaint": "ivory",
+    "lampCover": "beyond_yellow",
+    "grille": "klc_forty"
+   },
+   "desc": "軍綠車身，所有粗件——前後管桿、籃式車頂架、鋼圈、水箱罩圓燈框——都是奶油白，大燈貼黃色罩。車頂有架子，但看起來是配色不是裝備。照 Beyond CODE13 與 KLC CAL 示範車。",
+   "sources": [
+    "https://beyond-jpn.com/jp/code13",
+    "https://www.klc-div.com/heritage/concept/cal.html",
+    "https://apio.jp/parts/7200-28.html"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 0,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "camp",
+   "verdict": "change",
+   "label": "露營",
+   "sw": [
+    "#cbd232",
+    "#16191c",
+    "#7a6242"
+   ],
+   "idea": "黃黑雙色＋古銅輪＋槍灰臉：上下車的裝備全帶齊，但遠看先看到的是黃色。",
+   "changes": [
+    "color ZVG → ZZB 雙色（黃黑）：米色已有日系復古與加州雙色；RV4 Wild Goose 的 JB74 クロスカントリーエディション就有黃黑雙色",
+    "grille taishan_retro（黑）→ taniguchi_washer（深灰金屬色）：TANIGUCHI 官網寫明示範罩漆 ZSC ダークグレーメタリック，實車照有黃車",
+    "wheel wildboar_d 銀 → xj07 消光古銅（MLJ マットブロンズ／ブラックリム ¥67,100 稅込）：Wild Goose 同款車用 XC-GEAR 消光古銅，目錄沒有，XJ07 是同色系現有件",
+    "stripe toy4 → none：四色橘帶還給夕陽 JA11，黃車不用再加拉花",
+    "rearBumper wildgoose_crawler_rear → wildgoose_box_rear（JM-1101 角管，Wild Goose 同款車的後保桿）"
+   ],
+   "set": {
+    "color": "ZZB",
+    "twoTone": true,
+    "lift": "td60",
+    "wheel": "xj07",
+    "tyre": "t225r16",
+    "tread": "toyo_at3",
+    "rimColor": "0x7a6242",
+    "stripe": "none",
+    "grille": "taniguchi_washer",
+    "frontBumper": "armando",
+    "rearBumper": "wildgoose_box_rear",
+    "roofRack": "pioneer",
+    "awning": "yakima_270s",
+    "awningSide": "left",
+    "sideStep": "jst",
+    "ladder": "jst",
+    "spareCover": true,
+    "extinguisher": "ladder",
+    "flares": true
+   },
+   "desc": "黃黑雙色配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，ARMANDO 鋼製前保桿、Wild Goose 角管後保桿、深灰金屬色水箱罩，消光古銅輪框。胎走安靜的全地形，長途不吵。",
+   "sources": [
+    "https://www.rv4wildgoose.com/compcar_jb64/compcar_jb74_cc.html",
+    "docs/jb74-grille-finishes.json（taniguchi_washer：ZSC 塗裝、黃車實車照）",
+    "https://aero-tk.com/products/detail/5514"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 40,
+    "lift": 60,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  }
+ ],
+ "newStyles": [
+  {
+   "id": "woodie",
+   "label": "木紋旅行車",
+   "sw": [
+    "#16191c",
+    "#8a5a32",
+    "#d0d3d6"
+   ],
+   "idea": "黑車＋木頭＋鉻：木紋車頂籃、鍍鉻月亮盤、原廠保桿上一支鏡面管——Grand Wagoneer 式的 woodie。",
+   "set": {
+    "color": "ZJ3",
+    "lift": "klc30",
+    "wheel": "super_moon",
+    "rimColor": "0xd0d3d6",
+    "tyre": "t215r16",
+    "tread": "toyo_at3",
+    "owl": true,
+    "grille": "klc_nanaketsu",
+    "roofRack": "wood_full",
+    "mirrors": "damd"
+   },
+   "needs": [
+    "beyond_7slot",
+    "beyond_skidbar_mirror",
+    "damd_slash_wood"
+   ],
+   "desc": "黑車身配原木車頂籃、鍍鉻月亮盤與白字胎，前後保桿留原廠，只在前面加一支鏡面管。整台只有黑、木、鉻三種材質——Grand Wagoneer 式的 woodie。照 Beyond CODE14 與 DAMD little B. 的木紋路線。",
+   "refs": [
+    "CODE14",
+    "DAMD little B."
+   ],
+   "sources": [
+    "https://beyond-jpn.com/jp/code14",
+    "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-b",
+    "https://www.damd.co.jp/products/suzuki/"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": 30,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  },
+  {
+   "id": "little_delta",
+   "label": "拉力小鋼炮",
+   "sw": [
+    "#cbd232",
+    "#eeeeea",
+    "#c9ccd0"
+   ],
+   "idea": "降低 2 吋＋四圓燈臉＋鼓包爆龜＋尾翼＋白色 OZ 拉力圈：80 年代 Lancia Delta 的 Jimny。",
+   "set": {
+    "color": "ZZB",
+    "twoTone": false,
+    "lift": "klc_turtles",
+    "wheel": "oz_rally",
+    "rimColor": "0xeeeeea",
+    "tyre": "t215r16",
+    "tread": "bs_ht684",
+    "owl": false,
+    "face": "damd_delta",
+    "fender": "damd_delta",
+    "spoiler": "damd_wing",
+    "rearBumper": "damd_delta_rear"
+   },
+   "needs": [
+    "rainbow_down2",
+    "t215r65"
+   ],
+   "desc": "往下 2 吋、四顆圓燈排成一列的鍍鉻 Y 字臉、圓鼓鼓的拉力爆龜與車頂尾翼，腳下是白色 OZ Rally Racing 復刻圈配公路胎。整台黃色——80 年代拉力小鋼炮的樣子。照 DAMD little Δ.。",
+   "refs": [
+    "DAMD little Δ."
+   ],
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+    "docs/jb74-demo-cars.json（little Δ.：OZ 賽車白／深石墨／消光黑／消光古銅、ALENZA 001 215/65R16、Rainbow Auto 2 吋降低）"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 0,
+    "lift": -40,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": [
+     "warn: 降低 40mm 配 215/70R16（外徑 707mm）：車身壓低又用大外徑胎，滿載或過坑時輪拱內襯容易磨到"
+    ]
+   }
+  },
+  {
+   "id": "lc40",
+   "label": "LC40 紅白",
+   "sw": [
+    "#c81b22",
+    "#f0f0ec",
+    "#16191c"
+   ],
+   "idea": "紅車＋Forty 圓眼臉（紅框白圈）＋白色八輻圈：Land Cruiser 40 的紅白配色搬到 Sierra 上。",
+   "set": {
+    "color": "2080-G13",
+    "lift": "jaos40",
+    "wheel": "watanabe_f8",
+    "rimColor": "0xf0f0ec",
+    "tyre": "t225r16",
+    "tread": "toyo_mt",
+    "owl": true,
+    "grille": "klc_forty",
+    "frontBumper": "taniguchi_double",
+    "rearBumper": "showa_iron_rear",
+    "sideStep": "wildgoose_fold"
+   },
+   "needs": [
+    "white_roof"
+   ],
+   "desc": "紅色改色膜車身配 KLC Forty 圓眼水箱罩——外框跟車身同紅、燈圈白——白色 RS Watanabe 八輻圈包白字泥地胎，黑色雙管前桿。Land Cruiser 40 的紅白配色，車身紅是 3M 膜不是原廠色。",
+   "refs": [
+    "KLC Face Grille FORTY 示範照（紅／粉紅車）"
+   ],
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrill.html",
+    "docs/jb74-grille-finishes.json（klc_forty：外框車身色＋內側白，示範在綠、粉紅、紅車）",
+    "https://www.rs-watanabe.co.jp/"
+   ],
+   "check": {
+    "tyreRim": 16,
+    "wheelRim": 16,
+    "needLift": 40,
+    "lift": 40,
+    "needBody": 0,
+    "body": 0,
+    "owlOk": true,
+    "validate": []
+   }
+  }
+ ],
+ "references": [
+  {
+   "name": "KLC Heritage「CAL」",
+   "chassis": "JB64（同款零件 JB74 有對應品）",
+   "body": "綠",
+   "lower": null,
+   "grille": "Face Grille FORTY，白色塗裝＋SUZUKI 字（ABS 塗裝済 ¥93,500 稅込）",
+   "bumpers": "TRADITIONAL BUMPER 64 前後，象牙色不鏽鋼（前 ¥104,500、後 ¥88,000 稅込）",
+   "wheels": "Daytona's Vanilla 象牙色（¥27,500）",
+   "tyres": "官網未寫",
+   "height": "原廠（不升高）",
+   "roof": "匠 ルーフラック TypeB 象牙（¥93,500）",
+   "stripe": "無",
+   "story": "後照鏡漆原廠白、內裝黑＋酒紅椅套",
+   "usedBy": "cream_hw",
+   "url": "https://www.klc-div.com/heritage/concept/cal.html"
+  },
+  {
+   "name": "KLC Heritage「unlimited」",
+   "chassis": "JB74",
+   "body": "官網未寫",
+   "grille": "Face Grille SJ 亮黑塗裝",
+   "bumpers": "FRONT SHORT BUMPER 74 亮黑（¥102,300 塗裝）",
+   "wheels": "未寫",
+   "tyres": "未寫",
+   "height": "轟 1 吋",
+   "roof": "空",
+   "stripe": "無",
+   "story": "Over Fender Garnish（未塗裝 ABS ¥77,000）",
+   "usedBy": "（參考：klc_sj 除了車身色也有黑色）",
+   "url": "https://www.klc-div.com/heritage/concept/unlimited.html"
+  },
+  {
+   "name": "KLC Heritage「Phase」",
+   "chassis": "JB74",
+   "body": "官網未寫",
+   "grille": "Face Grille NANAKETSU",
+   "bumpers": "TRADITIONAL BUMPER 74 BK 不鏽鋼前後",
+   "wheels": "American Racing（色未寫）",
+   "tyres": "未寫",
+   "height": "轟 1 吋",
+   "roof": "空",
+   "stripe": "無",
+   "story": "備胎移位支架",
+   "usedBy": "—",
+   "url": "https://www.klc-div.com/heritage/concept/phase.html"
+  },
+  {
+   "name": "KLC Face Grille FORTY ABS 鍍鉻調",
+   "chassis": "JB64／JB74／JC74",
+   "grille": "整片鍍鉻調 ABS ¥99,000 稅込（SUZUKI 字另購），廠方寫「銀或白車、配鏡面保桿」",
+   "usedBy": "newCatalogueNeeded klc_forty_chrome（木紋旅行車備案）",
+   "url": "https://www.klc-div.com/heritage/product/grille/facegrillforty_abs/"
+  },
+  {
+   "name": "DAMD little B.",
+   "chassis": "JB74",
+   "body": "ミディアムグレー（ZVL）",
+   "grille": "APIO 鐵製罩（半光黑）；前一輪 demo-cars 記為 Cotton White 限定色，本輪讀官網得到半光黑，兩者不一致，見 catalogueConflicts",
+   "bumpers": "未塗裝／消光黑",
+   "wheels": "DEAN CROSS COUNTRY 16×6J −5",
+   "tyres": "TOYO OPEN COUNTRY R/T 215/65R16C",
+   "height": "原廠",
+   "roof": "trip basket 原木車頂籃（全長／半長）",
+   "stripe": "スラッシュガーニッシュ（木紋板）",
+   "story": "DAMD American Letter Emblem（橘／銀）",
+   "usedBy": "woodie",
+   "url": "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-b"
+  },
+  {
+   "name": "DAMD JIMNY the ROOTS.",
+   "chassis": "JB74",
+   "body": "叢林綠（主視覺）",
+   "grille": "車身同色＋黑網＋鍍鉻 SUZUKI 字",
+   "bumpers": "可選 Cotton White×粗目消光黑",
+   "wheels": "APIO WILDBOAR SR 15×6J −5，Cotton White 或 Iron Black",
+   "tyres": "DUELER M/T 674 LT215/75R15",
+   "height": "原廠",
+   "roof": "空",
+   "stripe": "スラッシュガーニッシュ",
+   "story": "LJ10 臉",
+   "usedBy": "（已是 KIT；確認 WILDBOAR SR 的 Cotton White 是官方色）",
+   "url": "http://www.damd.co.jp/products/suzuki/jimny_sierra_theroots"
+  },
+  {
+   "name": "DAMD little Δ.",
+   "chassis": "JB74",
+   "body": "官網色表：黑、藍、綠、灰、象牙、銀、白、黃（示範車色未寫）",
+   "grille": "四圓燈臉＋鍍鉻 Y 字框",
+   "bumpers": "同色",
+   "wheels": "OZ Rally Racing 16×6J，賽車白／深石墨／消光黑／消光古銅，¥53,900 稅込單顆",
+   "tyres": "BRIDGESTONE ALENZA 001 215/65R16（無白字）",
+   "height": "Rainbow Auto 2 吋降低",
+   "roof": "尾翼",
+   "stripe": "未寫",
+   "story": "四圓燈一字排開",
+   "usedBy": "little_delta",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/"
+  },
+  {
+   "name": "RV4 Wild Goose JB74 クロスカントリーエディション",
+   "chassis": "JB74",
+   "body": "13 色可選，含キネティックイエロー黑頂雙色",
+   "grille": "官網未寫",
+   "bumpers": "絞盤前保桿、可拆側保桿、3.2mm 角管後保桿（JM-1101）",
+   "wheels": "XC-GEAR 16 吋，消光黑或消光古銅",
+   "tyres": "YOKOHAMA GEOLANDAR M/T 215/70R16（原高）／225/75R16（2 吋）",
+   "height": "2 吋 HMS 懸吊",
+   "roof": "官網未寫",
+   "stripe": "未寫",
+   "story": "整台可選原廠任一色的越野完成車",
+   "usedBy": "camp",
+   "url": "https://www.rv4wildgoose.com/compcar_jb64/compcar_jb74_cc.html"
+  },
+  {
+   "name": "SHOWA GARAGE 戶外示範車",
+   "chassis": "JB74",
+   "body": "灰",
+   "grille": "ABS 罩シボブラック",
+   "bumpers": "ABS 前後シボブラック",
+   "wheels": "SHOWA Type-M 16×5.5J +20（¥22,000／顆）",
+   "tyres": "OPEN COUNTRY M/T 225/75R16",
+   "height": "SG アジャストコイル 75（3 吋）",
+   "roof": "A-x 車頂架 L 寬版＋270 度車邊帳",
+   "stripe": "無",
+   "story": "整套上下車裝備",
+   "usedBy": "au_offroad",
+   "url": "https://motor-fan.jp/article/42253/"
+  },
+  {
+   "name": "SHOWA GARAGE 運動示範車",
+   "chassis": "JB74",
+   "body": "白",
+   "grille": "燻黑 LED 燈組",
+   "bumpers": "ABS シボブラック",
+   "wheels": "RAYS gram LIGHTS 57DR-X 16×5.5J +0（¥38,500／顆）",
+   "tyres": "OPEN COUNTRY R/T 235/70R16",
+   "height": "SG 50（2 吋）",
+   "roof": "尾翼",
+   "stripe": "無",
+   "story": "L-RTM 碳纖引擎蓋",
+   "usedBy": "—（235/70R16 目錄沒有）",
+   "url": "https://motor-fan.jp/article/42253/"
+  },
+  {
+   "name": "OUTCLASS CARS JB74W（雙胞胎之一）",
+   "chassis": "JB74",
+   "body": "Mercedes G 的 Professional Blue（全塗裝，非 Suzuki 色）",
+   "grille": "Vintage G（¥42,900，報導當時價）",
+   "bumpers": "Iron 鋼製前保桿 raptor 塗層（¥168,000）、短版後保桿",
+   "wheels": "未寫",
+   "tyres": "未寫",
+   "height": "2 吋＋拉桿（¥281,600）",
+   "roof": "原廠",
+   "stripe": "復古側貼（樣式未寫）",
+   "story": "台灣製呼吸管、5Zigen 雙出排氣、每邊 9mm 爆龜",
+   "usedBy": "候選（需新增車色）",
+   "url": "https://motor-fan.jp/stylewagon/article/42339/"
+  },
+  {
+   "name": "JAOS JB74 2025 示範車",
+   "chassis": "JB74",
+   "body": "官網未寫",
+   "grille": "JAOS 前罩消光黑",
+   "bumpers": "Sport Cowl 前後消光黑",
+   "wheels": "EXCEL JX3 16×6.0J ±0 消光槍灰",
+   "tyres": "OPEN COUNTRY M/T 225/75R16",
+   "height": "BATTLEZ VFS",
+   "roof": "Flat Rack 1250×1400 type-B",
+   "stripe": "無",
+   "story": "—",
+   "usedBy": "—",
+   "url": "https://www.jaos.co.jp/gallery/photo-jimny_sierra_jb74/"
+  },
+  {
+   "name": "GO OUT JIMNY CAMP 車主車（Daisuke）",
+   "chassis": "JB74",
+   "body": "黑",
+   "grille": "Marvelous XJ 方燈換臉＋直柵",
+   "bumpers": "Auto Rubies Old School 前保桿（不鏽鋼點綴）",
+   "wheels": "DEAN Cross Country 黑＋鍍鉻中心蓋",
+   "tyres": "YOKOHAMA ice GUARD",
+   "height": "Auto Rubies 1.5 吋",
+   "roof": "—",
+   "stripe": "橘黃復古側貼",
+   "story": "黑車上的橘黃側貼",
+   "usedBy": "—（方燈臉目錄沒有）",
+   "url": "https://motor-fan.jp/stylewagon/article/185103/"
+  },
+  {
+   "name": "Appreciate 雙色塗裝罩",
+   "chassis": "JB74",
+   "grille": "ZVG／ZVL／ZZB／ZZC 各配消光黑的雙色塗裝済，另有全消光黑",
+   "usedBy": "佐證：車身色＋黑的雙色罩是市售主流款",
+   "url": "https://official.appreciate-japan.com/jb74_jimny_sierra_front-grille/"
+  },
+  {
+   "name": "Beyond CODE01／13／14／20／22／26",
+   "note": "詳見 docs/jb74-beyond-styles.json；本輪未重抓",
+   "usedBy": "cal_twotone、cream_hw、woodie、grey_purple、sunset_ja"
+  }
+ ],
+ "newCatalogueNeeded": [
+  {
+   "key": "beyond_su11_code01",
+   "family": "GRILLES",
+   "product": "Beyond フェイスグリル Su11（ABS）CODE01 塗り（分色塗裝済）",
+   "part": "befgsu11t1-zzb",
+   "price": 140800,
+   "cur": "JPY",
+   "tax": "商店 JSON 不標稅別，同商店先前核對為稅込",
+   "url": "https://shop.beyond-jpn.com/products/befgsu11t1-zzb",
+   "unpainted": {
+    "part": "befgsu11-abs",
+    "price": 84700
+   },
+   "for": "cal_twotone（取代暫用的 sixsense_explosion）",
+   "render": "需要一個分色材質：燈框與十字漆一色、百葉另一色"
+  },
+  {
+   "key": "beyond_su11_split",
+   "family": "GRILLES",
+   "product": "Beyond フェイスグリル Su11 CODE20 式分色（燈框與十字銀、百葉黑）",
+   "part": "befgsu11-abs（未塗裝，分色需另塗）",
+   "price": 84700,
+   "cur": "JPY",
+   "url": "https://shop.beyond-jpn.com/products/befgsu11-abs",
+   "uncertain": true,
+   "for": "grey_purple（取代暫用的 klc_nanaketsu）"
+  },
+  {
+   "key": "beyond_7slot",
+   "family": "GRILLES",
+   "product": "Beyond フロントグリル セブンスロット（ABS 鍍鉻調）",
+   "part": "befg7sl-abs",
+   "price": 99000,
+   "cur": "JPY",
+   "url": "https://shop.beyond-jpn.com/products/befg7sl-abs",
+   "for": "woodie（取代暫用的 klc_nanaketsu）",
+   "alt": {
+    "product": "KLC Face Grille FORTY ABS 鍍鉻調",
+    "price": 99000,
+    "tax": "稅込",
+    "url": "https://www.klc-div.com/heritage/product/grille/facegrillforty_abs/"
+   }
+  },
+  {
+   "key": "beyond_skidbar_mirror",
+   "family": "FRONT_BUMPERS",
+   "product": "Beyond フロントスキッドバー 74 専用 鏡面（原廠保桿上加一支鏡面管）",
+   "part": "befsb74-ms",
+   "price": 55000,
+   "cur": "JPY",
+   "note": "特價 ¥44,000",
+   "url": "https://shop.beyond-jpn.com/products/befsb74-ms",
+   "for": "woodie"
+  },
+  {
+   "key": "damd_slash_wood",
+   "family": "STRIPES",
+   "product": "DAMD スラッシュガーニッシュ（木紋板）",
+   "price": 52800,
+   "cur": "JPY",
+   "tax": "稅込（¥48,000 稅抜）",
+   "url": "http://www.damd.co.jp/products/suzuki/jimny_sierra_little-b",
+   "uncertain": true,
+   "note": "官網價格區間 ¥48,000–¥52,800 未塗裝；木紋是板件還是貼膜、覆蓋範圍，官網文字沒寫清楚，要看圖確認",
+   "for": "woodie"
+  },
+  {
+   "key": "rainbow_down2",
+   "family": "LIFTS",
+   "product": "Rainbow Auto JB74 専用スポーツダウンサスセット（2 インチダウン）",
+   "price": null,
+   "cur": "JPY",
+   "uncertain": true,
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+   "note": "DAMD little Δ. 頁面列名，價格官網未公布；暫用 klc_turtles（−40mm）",
+   "for": "little_delta"
+  },
+  {
+   "key": "t215r65",
+   "family": "TYRES",
+   "product": "215/65R16",
+   "dia": 686,
+   "width": 215,
+   "rim": 16,
+   "needLift": 0,
+   "note": "外徑為規格計算值（406.4＋2×139.75）；DAMD little Δ. 標配 BRIDGESTONE ALENZA 001 215/65R16",
+   "url": "https://www.damd.co.jp/products/suzuki/jimny_sierra_littledelta/",
+   "for": "little_delta（換上後「降低配大外徑胎」警告消失）"
+  },
+  {
+   "key": "white_roof",
+   "family": "（程式功能，非目錄件）",
+   "product": "白色車頂（roofColor 可選白）",
+   "note": "rig.js 已吃 cfg.roofColor，app.html 固定傳 ROOF_BLACK；LC40 紅白需要白頂才完整。非原廠選項，屬烤漆",
+   "for": "lc40"
+  },
+  {
+   "key": "chrome_wheel",
+   "family": "（材質）",
+   "product": "SUPER MOON クローム 的鍍鉻材質",
+   "part": "bewl74-smch",
+   "price": 23100,
+   "cur": "JPY",
+   "note": "單顆特價，原價 ¥38,500；目前只能用 rimColor 淺灰代表",
+   "url": "https://shop.beyond-jpn.com/products/bewl74-smch",
+   "for": "cal_twotone、woodie"
+  },
+  {
+   "key": "showa_hex_dgm",
+   "family": "GRILLES",
+   "product": "SHOWA GARAGE ABS フロントグリル ダークグレーメタリック",
+   "part": "E00501",
+   "price": 37400,
+   "cur": "JPY",
+   "tax": "稅込",
+   "url": "https://www.showa-garage.shop/",
+   "note": "可選：澳洲越野想要非黑罩時的原廠塗裝版本；同系列另有 ZJ3 同色 E00504 ¥37,400",
+   "for": "（可選）au_offroad"
+  }
+ ],
+ "candidatesNotAdded": [
+  {
+   "name": "OUTCLASS Professional Blue G",
+   "why": "強烈、真實的一台（淡藍灰 G 式車身、Vintage G 罩、Iron 保桿、呼吸管），但車身色是 Mercedes 色、目錄沒有，要先加一個「全塗裝」車色",
+   "url": "https://motor-fan.jp/stylewagon/article/42339/"
+  },
+  {
+   "name": "Beyond CODE22 象牙兇臉",
+   "why": "米色已有兩款；Soldier 罩 befgsd-frp ¥99,000 與 Liberte Spec II 前桿 befb74-bl ¥121,000 目錄也沒有",
+   "url": "https://beyond-jpn.com/jp/code22"
+  }
+ ],
+ "catalogueConflicts": [
+  "DAMD little B.：本輪讀官網得到「ミディアムグレー（ZVL）、APIO 鐵製罩半光黑」，docs/jb74-demo-cars.json 記的是「Cotton White 為 little B. 限定色」。WebFetch 是摘要，未親眼看圖，兩者需要再核對一次。",
+  "docs/jb74-demo-cars.json 的「APIO JB74-TS4 新車コンプリート」引用 https://apio.jp/completecar/ts4.html，但該頁寫明是 JB23 基底的 TS 系列，不是 JB74。",
+  "APIO Marker Vintage Iron 罩：Yahoo 代理店頁寫 ¥68,200，APIO 官網現為 ¥75,900 稅込（3033-59B 半光黑／3033-59L 淺古銅）；目錄的 ¥75,900 正確，代理店頁是舊價。",
+  "OUTCLASS Vintage G 罩：STYLE WAGON 舊報導寫 ¥42,900，目錄現價 ¥57,750 稅込（ASA 樹脂）；舊報導價不採用。"
+ ]
+}

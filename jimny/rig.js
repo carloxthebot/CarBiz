@@ -147,6 +147,14 @@ export function rigJimny(THREE, gltfScene) {
   raw.traverse((o) => {
     if (o.isMesh && /pintura/i.test(o.material?.name || '')) painted.push(o);
   });
+  // The stock tow hooks (one front, two rear: thin plates low under the
+  // bumpers) were modelled with the body paint and came out orange or
+  // purple under a two-tone car. They are black steel.
+  const hookMat = new THREE.MeshStandardMaterial({ name: 'TowHook', color: 0x1d1f21, roughness: 0.5, metalness: 0.6 });
+  for (let i = painted.length - 1; i >= 0; i--) {
+    const b = new THREE.Box3().setFromObject(painted[i]);
+    if ((b.max.y + b.min.y) / 2 < 0.5 && (b.max.x - b.min.x) < 0.03) { painted[i].material = hookMat; painted.splice(i, 1); }
+  }
   let paintMat = null;
   if (painted.length) {
     // car paint is a colour coat under clear lacquer; the clearcoat layer is
@@ -366,6 +374,7 @@ export function applyConfig(THREE, rig, cfg) {
   const mm = 0.001;
 
   if (U.paintMat && cfg.bodyColor != null) U.paintMat.color.setHex(cfg.bodyColor);
+  if (U.paintMat) U.paintMat.metalness = cfg.bodyMetal ?? 0.15;   // metallic silvers need more than the default
   for (const m of U.stockBumper) m.visible = !cfg.hideBumper;
   for (const m of U.stockGrille) m.visible = !cfg.hideGrille;
   for (const m of U.stockRear) m.visible = !cfg.hideRear;
@@ -440,6 +449,9 @@ export function applyConfig(THREE, rig, cfg) {
       // a wider tyre grows REARWARD (-Z) so its inner face stays on the carrier and
       // the carrier plate stays behind the rim face instead of poking through it
       w.position.set(c.x, c.y + (targetDia - spareDia) * 0.25, c.z - ((cfg.tyreWidth ?? 195) * 0.92 * mm / 2 - (U.spareBox.max.z - U.spareBox.min.z) / 2) - 0.03);
+      // how far the spare moved from where the model had it: anything hung
+      // on the spare (bag, hard cover) has to move with it
+      U.spareShift = w.position.clone().sub(c);
       w.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       U.BODY.add(w);
       U.builtWheels.push(w);

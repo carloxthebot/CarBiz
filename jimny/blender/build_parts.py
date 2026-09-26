@@ -1006,10 +1006,34 @@ def stripe_bands(name, bands, p_top, z0=STRIPE_Z0, z1=STRIPE_Z1):
             if col is not None:
                 mat = material(f'Stripe{name}{i}', col, rough=0.5, metal=0.05)
                 a, b = span(py(cut + h))
-                box(f'b{s}{i}', (s * STRIPE_X, (py(cut) + py(cut + h)) / 2, (a + b) / 2),
-                    (6, py(cut) - py(cut + h), b - a), mat, root, bevel=0)
+                y0, y1 = py(cut + h), py(cut)
+                for k, (za, zb) in enumerate(stripe_pieces(y0, y1, a, b)):
+                    box(f'b{s}{i}_{k}', (s * STRIPE_X, (y0 + y1) / 2, (za + zb) / 2),
+                        (6, y1 - y0, zb - za), mat, root, bevel=0)
             cut += h
     return root
+
+
+# Door furniture (and the fender's side repeater) a stripe must not run over. Measured off the model: the
+# handle is a body-colour moulding centred y 945, z -338, 41 tall and 143
+# long; the key cylinder is at y 890, z -449, 28 across. A cut-vinyl stripe
+# is trimmed round them with a few mm to spare, exactly as a wrap shop does.
+DOOR_CUTOUTS = [(915, 976, -420, -256), (872, 908, -468, -430),
+                (835, 885, 712, 792)]            # the amber side repeater on the front fender (y 860, z 751)
+
+
+def stripe_pieces(y0, y1, a, b):
+    """The z-spans left of a band from a to b once the door cut-outs that
+    overlap its height (y0..y1) are taken out."""
+    gaps = sorted((za, zb) for (ya, yb, za, zb) in DOOR_CUTOUTS if y1 > ya and y0 < yb)
+    pieces, z = [], a
+    for za, zb in gaps:
+        if za > z:
+            pieces.append((z, min(za, b)))
+        z = max(z, zb)
+    if z < b:
+        pieces.append((z, b))
+    return [(p, q) for (p, q) in pieces if q - p > 5]
 
 
 def star_prism(name, yc, zc, R, mat, root, x0=707, x1=712):
@@ -1048,9 +1072,12 @@ def stripe_stencil():
     # and there are more of them. Generic markings in the military-vehicle
     # manner -- a bonnet serial, a vehicle data block on each door, tyre
     # pressure over the rear arch -- not any real unit's codes.
-    ob = text('bonnetNo', 'JB 74-0419', (0, 1112, 1230), 78, 2, white, root, font=FONT)
-    ob.rotation_euler = (math.radians(-90 - 4), 0, 0)      # flat on the bonnet, read from the front
-    ob.location = P(0, 1112, 1230)
+    # mid-bonnet, just proud of its surface (1094 at z 1300, rising ~3.5
+    # degrees towards the screen), tilted to follow it -- the first go tilted
+    # the wrong way and sank the tops of the letters into the panel
+    ob = text('bonnetNo', 'JB 74-0419', (0, 1098, 1300), 78, 2, white, root, font=FONT)
+    ob.rotation_euler = (math.radians(-90 + 3.5), 0, 0)
+    ob.location = P(0, 1098, 1300)
     for s in (-1, 1):
         # door skin is at |x| 707-709 from y 750 up (sampled at z -100); the
         # rear quarter above the arch is at |x| 697 at y 950 (z -1000)
@@ -1062,7 +1089,7 @@ def stripe_stencil():
             ob.location = P(s * x, y, z)
     for s in (-1, 1):
         for i, (line, size, y, z) in enumerate((('JB-74-1970', 58, 690, -430),
-                                                ('4x4', 74, 690, 640))):
+                                                ('4x4', 74, 690, 530))):     # on the door, clear of the fender gap (~640)
             ob = text(f'mark{s}{i}', line, (s * 709, y, z), size, 3, white, root, font=FONT)
             ob.rotation_euler = (0, 0, math.radians(90 * s))
             ob.location = P(s * 709, y, z)
@@ -3249,6 +3276,8 @@ def bumper_damd_little_g_trad():
     box('meshBack', (0, 575, zf + 1), (340, 74, 4), RUBBER, root, bevel=2)
     wire_mesh(root, BLACK, 0, 575, zf + 4, 326, 62, pitch=11)
     number_plate(root, 466, at_x(st, RIGHT * 425, 4) + 5, RIGHT * 425)
+    for dx in (-110, 110):                                   # the two tabs it hangs from
+        box(f'plateTab{dx}', (RIGHT * 425 + dx, 560, at_x(st, RIGHT * 425, 4) - 2), (22, 60, 10), TEXBLACK, root, bevel=2)
     valance(root, corners=False)
     return root
 
@@ -4550,6 +4579,17 @@ PLATE_INK = material('PlateInk', 0x15171a, rough=0.5)
 PLATE_RIM = material('PlateRim', 0x2a2d31, rough=0.45, metal=0.3)
 
 
+def stock_plates():
+    """Plates for a car that keeps its stock bumpers -- otherwise a style that
+    leaves them alone drives about with no registration. Front on the stock
+    bumper's face below the lower opening (y 460, face z ~1772); rear on the
+    stock rear bumper's face (z -1612) in the middle."""
+    f = group('plate_stockFront')
+    box('plate', (0, 460, 1774), (330, 165, 3), PLATE, f, bevel=1)
+    r = group('plate_stockRear')
+    box('plate', (0, 470, -1615), (330, 165, 3), PLATE, r, bevel=1)
+
+
 def decorate_plates():
     """Every bumper carries a plate, and a blank white slab was the most
     toy-like thing on the car. After everything is built, each plate gets a
@@ -4802,6 +4842,7 @@ def build():
     grille_generic('kpro_folksy', h_slats=6, wire=False)      # the white is gelcoat primer; the maker shows it black
     grille_generic('prostaff_minig', v_slots=9, bezel='square', mat=PAINT)
     grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', text_mat=CHROME_TRIM, bezel='square', mat=PAINT)
+    stock_plates()
     decorate_plates()
     # Two files, because they are needed at different moments: the car cannot
     # be drawn at all without its wheels, but nothing needs an awning until

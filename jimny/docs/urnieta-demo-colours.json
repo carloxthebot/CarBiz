@@ -1,0 +1,108 @@
+{
+  "sourcedAt": "2026-09-26",
+  "brand": "URNIETA",
+  "method": "Headless Chrome (playwright-core) screenshots of urnieta.com home, /jimny/, /news/, site search (jimny / salado / 1970), all 10 SALADO JB74 product pages that carry vehicle photos and all 8 1970 product pages, plus the official Instagram and Facebook pages. Every real-photo and featured image on those pages (173 files) was pulled into the session scratchpad only and inspected; hex values are median pixel samples under studio or overcast light and are indicative only. Instagram/Facebook loaded but showed only a login wall / thumbnails with nothing beyond the site photos.",
+  "summaryNote": "URNIETA 官網沒有任何文字寫出示範車的車色；以下全部是從官方照片判讀。SALADO 有兩台主力示範車（白、消光黑），另有一台 JC74 五門奶茶色車與 1970 那台銀車也裝過 SALADO 零件；1970 只有一台示範車（銀）。",
+
+  "cars": [
+    {
+      "kit": "urnieta_salado",
+      "car": "SALADO primary demo car (JB74 3-door, white)",
+      "why": "Hero car of the homepage launch banner 'Urnieta Globally Launch For Salado 1970', 3 of the 4 /jimny/ build photos, and most outdoor SALADO product photos.",
+      "body": { "colour": "white, solid/pearl gloss", "factoryCode": "ZVR", "codeConfidence": "high for 'Suzuki white'; ZVR vs the solid 26U white cannot be told from a photo", "twoTone": false, "sampledHex": "#a8a8a8 (door, overcast, underexposed) — use the ZVR chip #f0f2f2 in the model" },
+      "roof": "body colour white (monotone, NOT the black two-tone roof); the rack side rails along the drip rail are also white",
+      "hood": "SALADO hood kit painted body colour white, with two black louvred vent inserts",
+      "grille": "SALADO grille matte black (horizontal louvres, silver URNIETA letters)",
+      "frontBumper": "SALADO front bumper with full-height bull bar, matte black; winch (synthetic rope, black hawse) in the bumper",
+      "rearBumper": "SALADO half-height rear bumper, matte black, with quad matte-black exhaust tips below",
+      "fenderFlares": "matte black over-fenders (wider than stock)",
+      "sideBars": "SALADO side bars (tube sliders), matte black",
+      "mirrors": "square black off-road mirrors on door-hinge arms",
+      "snorkel": "SALADO snorkel, black, right A-pillar, square forward-facing head",
+      "graphics": "black horizontal band along the lower doors with white 'URNIETA' lettering",
+      "wheels": { "model": "URNIETA SALADO wheel (steel-look, ring of oblong slots, UNT centre cap)", "colour": "matte black", "size": "15x7J ET-10 (cast into the wheel face)" },
+      "tyres": { "model": "BFGoodrich Mud-Terrain T/A KM3", "size": "31x10.50R15LT 109Q (read off the sidewall)", "whiteLetters": false, "note": "raised lettering is black / tone-on-tone" },
+      "rideHeight": "lifted — visible long-travel coil suspension, exposed diff/track bar; lift amount not published",
+      "roofItems": "SALADO roof rack (full length, matte black, stamped URNIETA front deflector) carrying a black UNT duffel bag and a black Pelican case; in the campfire shot a black roll-out awning on the right side; LED light on the ladder top",
+      "rear": "SALADO rear ladder (black, right/hinge side), black spare-wheel cover with URNIETA badge, spare on a KM3",
+      "other": "amber front indicators, round clear LED headlights; PIAA round auxiliary lamps on the bull bar in some shots",
+      "photos": [
+        "https://urnieta.com/wp-content/uploads/2026/06/Urnieta-Globally-Launch-For-Salado-1970.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/Jimny-builds-01-scaled.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/Jimny-builds-02-scaled.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/Jimny-builds-04-scaled.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-front-bumper-for-jimny-jb74-jc74-real-photo-02.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-hood-kit-for-jimny-jb74-jc74-real-photo-04.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-hood-kit-for-jimny-jb74-jc74-real-photo-05.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-rear-bumper-for-jimny-jb74-jc74-real-photo-02.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/SALADO-Rear-Bumper-for-Jimny-JB74-JC74-Real-Photos-05.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-roof-rack-for-jimny-jb74-jc74-real-photo-01.jpg"
+      ]
+    },
+    {
+      "kit": "urnieta_salado",
+      "car": "SALADO second demo car (JB74 3-door, matte black)",
+      "why": "Dominates the SALADO studio product photos (front bumper, hood, side bar, roof rack, wheel, snorkel) and appears in Jimny-builds-03.",
+      "body": { "colour": "matte / satin black", "factoryCode": null, "codeConfidence": "NOT a factory colour — Suzuki's only black (ZJ3 Bluish Black Pearl) is gloss; this is a matte wrap or matte repaint", "twoTone": false, "sampledHex": "#2b2c2c approx (matte, slightly warm charcoal under studio light)" },
+      "roof": "same matte black",
+      "hood": "SALADO hood kit, matte black (same as body)",
+      "grille": "matte black", "frontBumper": "SALADO bull-bar bumper, matte black, winch", "rearBumper": "SALADO rear bumper, matte black, quad black tips",
+      "fenderFlares": "matte black", "sideBars": "SALADO side bars, matte black", "snorkel": "SALADO snorkel, black",
+      "graphics": "tone-on-tone 'URNIETA' lettering on the lower doors (dark grey on black), 'Salado' script on the roof side rail",
+      "wheels": { "model": "SALADO wheel", "colour": "matte black", "size": "15x7J ET-10" },
+      "tyres": { "model": "BFGoodrich Mud-Terrain T/A KM3", "size": "31x10.50R15LT", "whiteLetters": false },
+      "rideHeight": "lifted",
+      "roofItems": "SALADO roof rack, black jerry can / hard case in studio shots; SALADO rear ladder with LED light; whip antenna on the rear",
+      "other": "side windows replaced by the solid panel with a jerry-can relief (1970 gullwing / side-window upgrade panel) on the rear quarter",
+      "photos": [
+        "https://urnieta.com/wp-content/uploads/2026/06/Jimny-builds-03-scaled.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-front-bumper-for-jimny-jb74-jc74-real-photo-04.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/SALADO-Front-Bumper-for-Jimny-JB74-JC74-Real-Photos-03.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/SALADO-Snorkel-Kit-for-Jimny-JB74-JC74-Real-Photos-04.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-wheel-kit-for-jimny-jb74-jc74-real-photo-02.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/salado-wheel-kit-for-jimny-jb74-jc74-real-photo-09.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-rear-bumper-kit-for-jimny-jb74-jc74-real-photo-01.jpg"
+      ],
+      "photoNote": "1970-rear-bumper-kit real-photo-01 is filed on the 1970 page but shows this black SALADO car (SALADO rear bumper, quad tips)."
+    },
+    {
+      "kit": "urnieta_1970",
+      "car": "1970 demo car (JB74 3-door, silver)",
+      "why": "The only car in every 1970 product photo (front bumper, grille, hood, wheel, side skirt, rear bumper, gullwing, spare cover).",
+      "body": { "colour": "light metallic silver", "factoryCode": "Z2S", "codeConfidence": "high — bright metallic silver, clearly lighter than ZVL Medium Gray", "twoTone": false, "sampledHex": "#dededd (hood, studio highlight); roof #b4b3a8 — both silver under studio light" },
+      "roof": "body colour silver (monotone, NOT the black two-tone roof)",
+      "hood": "1970 hood kit painted body colour silver, with a single black louvred scoop and small black side vent",
+      "grille": "1970 grille, matte black frame with fine black mesh centre and silver URNIETA letters",
+      "frontBumper": "1970 front bumper (short, no bull bar), matte black, two LED light bars and a '1970 SERIES' plate; PIAA round fog lamps below",
+      "rearBumper": "1970 rear bumper, matte black, round red + amber tail lamps each side, square LED reverse lamp; twin black exhaust tips",
+      "fenderFlares": "matte black over-fenders",
+      "sideSkirts": "1970 side skirts, matte black with '1970 SERIES' and URNIETA lettering",
+      "mirrors": "square black off-road mirrors",
+      "snorkel": "black snorkel with round head (SALADO snorkel) on the right A-pillar",
+      "graphics": "dark grey / black band along the lower doors with light-grey 'URNIETA' lettering and a thin silver pinstripe above",
+      "wheels": { "model": "URNIETA 1970 wheel (smooth dish with three-spoke 'propeller' centre and UNT cap; '1970 SERIES' cast in)", "colour": "matte black", "size": "15x7J ET-10 (cast into the wheel face)" },
+      "tyres": { "model": "BFGoodrich Mud-Terrain T/A KM3", "size": "LT235/75R15 110/107Q (read off the sidewall)", "whiteLetters": false, "note": "black lettering" },
+      "rideHeight": "lifted — clear daylight under the body and long-travel suspension; amount not published",
+      "roofItems": "low black roof rack with URNIETA front deflector (SALADO rack) on body-colour side rails badged '1970 SERIES'; long whip antenna at the left rear",
+      "rear": "black rear ladder, black 1970 spare-tyre cover with MOLLE panel and UNT bag",
+      "other": "1970 gullwing side window (black frame, lifts up) on the rear quarter; amber front indicators; clear round headlights",
+      "photos": [
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-hood-kit-for-jimny-jb74-jc74-real-photo-07.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/1970-Front-Bumper-Kit-for-Jimny-JB74-JC74-Real-Photos-01.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/1970-Front-Bumper-Kit-for-Jimny-JB74-JC74-Real-Photos-07.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-grille-for-jimny-jb74-jc74-real-photo-01.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-wheel-for-jimny-jb74-jc74-real-photo-05.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/1970-Wheel-for-Jimny-JB74-JC74-Real-Photos-06.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-side-skirt-kit-for-jimny-jb74-jc74-real-photo-02.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-rear-bumper-kit-for-jimny-jb74-jc74-real-photo-02.jpg",
+        "https://urnieta.com/wp-content/uploads/2026/06/14/1970-gullwing-window-kit-for-jimny-jb74-jc74-real-photo-07.jpg"
+      ]
+    }
+  ],
+
+  "otherCarsSeen": [
+    "A JC74 5-door in a beige/sand colour (looks like Chiffon Ivory ZVG, mono roof) wearing the SALADO bull bar, grille, rack and side bars — salado-front-bumper real-photo-03, salado-hood-kit real-photo-01, salado-roof-rack real-photo-04/05. It is a 5-door, so not a JB74 reference.",
+    "The silver 1970 car also carries the SALADO snorkel and rack; SALADO-Snorkel-Kit Real-Photos-01/02 show it."
+  ],
+  "decisionForOrchestrator": "SALADO has two JB74 demo cars. Recommend white ZVR mono roof as the kit card's colour (it is the launch hero); matte black is the alternative but is not a Suzuki colour."
+}

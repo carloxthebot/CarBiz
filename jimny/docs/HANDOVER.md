@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609260852** · 247 catalogue entries · 11 styles
+Current build: **202609261423** · 247 catalogue entries · 13 styles
 
 ---
 
@@ -189,6 +189,17 @@ Beyond's yellow headlamp covers (LAMP_COVERS, a tinted lens material on the
 stock headlamps), rack paint (RACK_PAINTS; painted BEFORE the part is added,
 because settleIn() restores the materials it saw on arrival), and the
 奶油硬件 style (Beyond CODE13).
+
+Owner round 2026-09-26 (evening): stripes are cut round the door handle,
+key lock and fender repeater (DOOR_CUTOUTS in build_parts.py); styles
+reworked per docs/jb74-style-rework.json (grilles not black by default, no
+colour on more than two styles; the DAMD little-delta rally style was left
+out -- the owner vetoed that look); URNIETA kits on their official demo
+colours (SALADO white ZVR, 1970 silver Z2S; docs/urnieta-demo-colours.json);
+stock tow hooks black steel instead of body paint; stock bumpers carry plates
+(plate_stockFront/Rear); spare bag and covers follow the spare when a larger
+tyre moves it (rig spareShift); silver gets metalness 0.55 so it does not
+read white. A 4-angle review of every style is the check to repeat.
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put
