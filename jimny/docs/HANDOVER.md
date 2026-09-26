@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609260351** · 247 catalogue entries · 10 styles
+Current build: **202609260625** · 247 catalogue entries · 10 styles
 
 ---
 
@@ -171,6 +171,17 @@ three-quarter on alternate sides when a style is chosen, turns slowly after
 cards show a bigger image with two lines of text. Still open from that file: woodgrain side panel,
 cream-painted rack, yellow headlamp covers, Beyond's own grilles. Instagram (KLC, SHOWA) needs the Chrome extension
 connected; it was not.
+
+**2026-09-26 round** (owner: grey kit cards on stock wheels, bumper
+proportions off, grilles all black): maker kits now carry `demo` sets
+(colour, wheels, tyres; DAMD little D. is officially Jungle Green, the rest
+are marked as our choice in `demoNote`); all 35 bumpers reworked from
+scratchpad review against the makers' photos (front tops at the grille's
+bottom edge y 730, wrapped ends, rear faces at z -1565 under the spare,
+plates where the product puts them; Beyond front is now a round tube);
+grilles take their real finishes (docs/jb74-grille-finishes.json: body
+colour, gunmetal, KLC silver mesh) and four wrong shapes fixed. Shot tools
+reset to stock and wait out the intro camera before shooting.
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put

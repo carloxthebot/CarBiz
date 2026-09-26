@@ -1,0 +1,808 @@
+{
+ "sourcedAt": "2026-09-26",
+ "scope": "parts.js GRILLES 全部 20 款（stock 除外）的出廠塗裝選項、示範車塗裝、分色方式與 build_parts 材質對照",
+ "rules": [
+  "預設不是黑色的有 8 款：damd_roots、klc_sj、klc_forty、sixsense_explosion、prostaff_minig（車身同色）；klc_ja、apio_sj、taniguchi_washer（槍灰／深灰）",
+  "車身同色的罩：面板、燈座、柵條用 BodyPaint；網子一律黑（PowderBlack）；字依廠商：ROOTS 與 Six Sense 鍍鉻、KLC SJ 黑貼紙、Forty 白",
+  "KLC 塗裝 ABS 的鋁網是銀色（Nostalgic、Nanaketsu、JA）；APIO SJ、DAMD 全系列、SHOWA、Taniguchi、Forty 的網是黑色",
+  "鍍鉻只用在字與徽章，不要整片鍍鉻",
+  "grille_generic 只有一個 mat，外框與內圈兩色（Forty、little D. 的車身色選項）需要多一個材質參數",
+  "app.html 第 1065 行會把 PowderBlack／TextureBlack 整批換成 FINISH_MATS；若套到水箱罩會連網子一起換色，建議水箱罩外框用獨立材質名（例如 GrilleFrame）"
+ ],
+ "builderMaterials": {
+  "grille_generic": {
+   "panel/bezels/slats/posts/ribs": "mat（預設 TextureBlack；apio_sj=Gunmetal，kpro_folksy=WhiteGel，sixsense_explosion=BodyPaint）",
+   "wire mesh": "ZincSteel（text_mat 為 None 時）否則 PowderBlack",
+   "hex mesh": "PowderBlack",
+   "backing": "Rubber",
+   "marker housing/lens": "PowderBlack／AmberLens",
+   "label": "LabelWhite 或 text_mat"
+  },
+  "grille_showa": {
+   "panel/bezels/lip": "TextureBlack",
+   "hex mesh": "PowderBlack",
+   "backing": "Rubber"
+  },
+  "grille_outclass": {
+   "panel/bezels/slats": "TextureBlack",
+   "script": "LedReflector（CHROME）",
+   "mesh": "PowderBlack",
+   "backing": "Rubber"
+  },
+  "grille_klc (klc_sj)": {
+   "panel/bezels": "BodyPaint",
+   "mesh": "ZincSteel",
+   "backing": "Rubber",
+   "SUZUKI": "LabelWhite"
+  },
+  "grille_owner (hbar_suzuki)": {
+   "panel/bezels/slats/dividers": "TextureBlack",
+   "mesh": "PowderBlack",
+   "SUZUKI": "LabelWhite"
+  },
+  "_urnieta_grille": {
+   "panel/bezels/surround/louvres/ticks": "TextureBlack",
+   "badge": "LedReflector",
+   "mesh": "PowderBlack",
+   "URNIETA/unt": "LabelWhite",
+   "backing": "Rubber"
+  },
+  "grille_damd_little_d": {
+   "panel/bezels/frame/ribs/aux housings": "TextureBlack",
+   "mesh": "PowderBlack",
+   "badge": "DamdGreen",
+   "aux lenses": "AmberLens／LedLens"
+  },
+  "grille_damd_little_g_trad": {
+   "panel/bezels/louvres/badge": "TextureBlack",
+   "badgeRing": "PowderBlack",
+   "backing": "Rubber"
+  },
+  "grille_damd_roots": {
+   "panel/bezels/ribs/frame/marker housing": "BodyPaint",
+   "mesh": "PowderBlack",
+   "SUZUKI": "ChromeTrim",
+   "marker lens": "AmberLens"
+  }
+ },
+ "items": [
+  {
+   "id": "urnieta_salado",
+   "builder": "_urnieta_grille('urnieta_salado','louvre')",
+   "sources": [
+    "https://urnieta.com/product/salado-grille-for-jimny-jb74-jc74/"
+   ],
+   "finishes": [
+    {
+     "finish": "黑色 ABS",
+     "part": "SKU 0702010",
+     "price": null,
+     "note": "官網只列黑色一種，不標價"
+    }
+   ],
+   "demoFinish": "黑色；官網所有實車照皆為黑色（本次 curl 被 403 擋，照片顏色依 WebFetch 讀取頁面結果，未親眼確認）",
+   "layout": "原廠外框、中央 592×126 凹槽內橫向百葉，URNIETA 立體字橫跨中央",
+   "twoColour": {
+    "frame": "黑",
+    "slats": "黑",
+    "mesh": "無（百葉）",
+    "letters": "URNIETA 立體字，官網稱 Dimensional Emblem，顏色未明寫（頁面描述為與本體同黑）"
+   },
+   "recommendedDefault": "消光黑（TextureBlack）",
+   "uncertain": true,
+   "swap": {
+    "frame": "TextureBlack（不變）",
+    "letters": "LabelWhite → 建議改深灰或同黑，目前白字比實品醒目；badge 目前用 LedReflector（鍍鉻），官網未見鍍鉻"
+   }
+  },
+  {
+   "id": "damd_little_d",
+   "builder": "grille_damd_little_d",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-d/"
+   ],
+   "finishes": [
+    {
+     "finish": "マットブラック塗装品",
+     "price": 52800,
+     "tax": "稅込"
+    },
+    {
+     "finish": "純正色×マットブラック塗装品（僅グリルセンター外周部為車身色）",
+     "price": 75900,
+     "tax": "稅込"
+    },
+    {
+     "finish": "未塗装品素地",
+     "price": 52800,
+     "tax": "稅込",
+     "note": "另付塗裝費 ¥12,100"
+    }
+   ],
+   "demoFinish": "消光黑；主示範車為灰色（ミディアムグレー 系），色樣圖在黑、藍、象牙、灰車上一律消光黑水箱罩",
+   "layout": "凸出的方框內六道粗橫肋＋黑網，側下方綠色橢圓 little D. 徽章（另購），頭燈外側兩顆小圓燈",
+   "twoColour": {
+    "frame": "消光黑（選配：中央開口外圈車身色）",
+    "slats": "消光黑",
+    "mesh": "黑（官網：網はブラック）",
+    "letters": "無字；綠色橢圓徽章"
+   },
+   "recommendedDefault": "消光黑（現狀正確）",
+   "swap": {
+    "frame": "TextureBlack；若做『純正色×マットブラック』選項，只把 box 'frame' 換 BodyPaint",
+    "mesh": "PowderBlack（不變）",
+    "badge": "DamdGreen（不變）"
+   }
+  },
+  {
+   "id": "damd_little_g_trad",
+   "builder": "grille_damd_little_g_trad",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_little-g_traditional/"
+   ],
+   "finishes": [
+    {
+     "finish": "マットブラック塗装品（唯一）",
+     "price": 75900,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "消光黑；示範圖在叢林綠與象牙車上皆為消光黑",
+   "layout": "跨過原廠分模線蓋到葉子板的整片百葉（中央分左右兩半），中央圓形 dd 徽章",
+   "twoColour": {
+    "frame": "消光黑",
+    "slats": "消光黑",
+    "mesh": "無",
+    "letters": "dd 徽章黑色，同色浮雕"
+   },
+   "recommendedDefault": "消光黑（現狀正確）",
+   "swap": {
+    "all": "TextureBlack／PowderBlack 不變"
+   }
+  },
+  {
+   "id": "damd_roots",
+   "builder": "grille_damd_roots",
+   "sources": [
+    "https://www.damd.co.jp/products/suzuki/jimny_sierra_theroots/"
+   ],
+   "finishes": [
+    {
+     "finish": "未塗装品素地",
+     "price": 52800,
+     "tax": "稅込"
+    },
+    {
+     "finish": "塗裝（另加）",
+     "price": 17600,
+     "tax": "稅込",
+     "note": "塗裝後合計 ¥70,400；色表列 マットブラック 與全純正色（ZVR／Z2S／ZZC／ZJ3／ZVL／ZWY／ZVG／ZZB／26U）"
+    }
+   ],
+   "demoFinish": "車身同色；主視覺為叢林綠車配同色罩，色樣圖在灰、象牙、白車上皆車身同色",
+   "layout": "車身色面板上三排橫向長孔（每排左中右三段），後方黑網，第一、二排之間 SUZUKI 原廠立體字，頭燈外側圓形琥珀方向燈",
+   "twoColour": {
+    "frame": "車身色",
+    "slats": "車身色（孔間橫肋）",
+    "mesh": "黑（官網：網はブラック）",
+    "letters": "SUZUKI 原廠立體字：銀色鍍鉻字、黑底"
+   },
+   "recommendedDefault": "車身同色（BodyPaint）＋鍍鉻字",
+   "builderMismatch": "現有模型畫成『一個大開口被四根直肋分五格、字在開口上方』，實品是三排橫孔、字在第一與第二排之間",
+   "swap": {
+    "frame": "BodyPaint（已是）",
+    "mesh": "PowderBlack（已是）",
+    "letters": "ChromeTrim（已是）"
+   }
+  },
+  {
+   "id": "hbar_suzuki",
+   "builder": "grille_owner",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillenostalgic/",
+    "https://heritage-jimny.com/?pid=187827209"
+   ],
+   "finishes": [
+    {
+     "finish": "ABS 塗裝済（シボブラック，アルミメッシュはシルバー，唯一顏色）",
+     "price": 93500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "ABS 未塗装",
+     "price": 60500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "FRP 未塗装",
+     "price": 55000,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "シボブラック（紋理黑）配銀色鋁網；示範車為銀灰金屬色，SUZUKI 字為白／銀（エンブレム不附）",
+   "layout": "方形燈座間橫鰭（比 BG 款少）加兩根直柱，後方銀色鋁網，中央可貼 SUZUKI 字",
+   "twoColour": {
+    "frame": "紋理黑",
+    "slats": "紋理黑",
+    "mesh": "銀（鋁網）",
+    "letters": "白／銀，另購"
+   },
+   "recommendedDefault": "紋理黑＋銀網",
+   "swap": {
+    "frame": "TextureBlack（不變）",
+    "mesh": "PowderBlack → ZincSteel（KLC 塗裝品的鋁網是銀色）",
+    "letters": "LabelWhite（可）"
+   }
+  },
+  {
+   "id": "taishan_retro",
+   "builder": "grille_generic('taishan_retro', v_slots=11)",
+   "sources": [
+    "https://www.ruten.com.tw/item/show?22105865989825"
+   ],
+   "finishes": [
+    {
+     "finish": "黑",
+     "price": 17500,
+     "cur": "TWD",
+     "note": "露天頁面標題只寫「復古水箱罩(黑)(依當月現場報價為準)」；目錄標籤的「銀」在頁面上查無"
+    }
+   ],
+   "demoFinish": "頁面主圖是灰車配黑色橫縫鐵網罩，圖上印 APIO 標誌——是 APIO ヴィンテージアイアングリル 的官方照片，不是泰山自己的實車",
+   "layout": "依照片是橫向沖壓長縫（APIO Vintage Iron 造型），不是目前模型的 11 道直柱",
+   "twoColour": {
+    "frame": "黑",
+    "slats": "黑",
+    "mesh": "無",
+    "letters": "無"
+   },
+   "recommendedDefault": "黑",
+   "uncertain": true,
+   "swap": {
+    "all": "TextureBlack（不變）"
+   },
+   "builderMismatch": "v_slots=11 應改為橫縫；目錄「KLC 風格」也與照片不符"
+  },
+  {
+   "id": "urnieta_1970",
+   "builder": "_urnieta_grille('urnieta_1970','mesh')",
+   "sources": [
+    "https://urnieta.com/product/1970-grille-for-jimny-jb74-jc74/",
+    "https://www.heekis.com/products/urnieta-1970-jimny-jb74-jc74-grille"
+   ],
+   "finishes": [
+    {
+     "finish": "黑（唯一）",
+     "price": 8400,
+     "cur": "TWD",
+     "note": "Heekis 售價；材質 ABS／鋁鎂合金沖壓網，1.6kg"
+    }
+   ],
+   "demoFinish": "黑；Heekis 實車照為灰車（中灰系）配黑罩，URNIETA 字牌在黑底上呈淺灰／銀",
+   "layout": "原廠外框、中央開口一體沖壓金屬細網，URNIETA 字牌居中",
+   "twoColour": {
+    "frame": "黑",
+    "slats": "無",
+    "mesh": "黑（沖壓金屬網）",
+    "letters": "淺灰／銀字（Heekis 照片）；urnieta.com 頁面讀取結果為黑，兩者不一致"
+   },
+   "recommendedDefault": "紋理黑",
+   "uncertain": true,
+   "swap": {
+    "frame": "TextureBlack",
+    "mesh": "PowderBlack",
+    "letters": "LabelWhite → 建議淺灰"
+   }
+  },
+  {
+   "id": "mrk_angry",
+   "builder": "grille_generic('mrk_angry', v_slots=7, bezel='square', wire=False)",
+   "sources": [
+    "https://www.mrk.com.tw/product_ii.html?ID=1670"
+   ],
+   "finishes": [
+    {
+     "finish": "消光黑（唯一）",
+     "price": 5500,
+     "cur": "TWD",
+     "part": "JB089"
+    }
+   ],
+   "demoFinish": "消光黑；官方照在白／銀灰車與黑車上",
+   "layout": "大燈座斜切的『憤怒眼』造型，中央 7 道直鰭，鰭間可見銀灰細網",
+   "twoColour": {
+    "frame": "消光黑",
+    "slats": "消光黑",
+    "mesh": "銀灰（產品照可見）",
+    "letters": "無"
+   },
+   "recommendedDefault": "消光黑",
+   "swap": {
+    "frame": "TextureBlack",
+    "mesh": "目前 wire=False 沒有網；若加網用 ZincSteel"
+   }
+  },
+  {
+   "id": "klc_sj",
+   "builder": "grille_klc",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillesj.html",
+    "https://heritage-jimny.com/?pid=171032949"
+   ],
+   "finishes": [
+    {
+     "finish": "ABS 塗装済（純正 12 色：ZZB／ZZC／Z2S／26U／ZVR／ZWY／ZJ3／ZVL／ZVG／WAA／ZTN／WBH）",
+     "part": "171032949",
+     "price": 93500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "ABS 未塗装",
+     "part": "171032904",
+     "price": 60500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "FRP 未塗装",
+     "part": "164585966",
+     "price": 55000,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "車身同色：象牙（シフォンアイボリー）車配象牙罩，縫後鋁網塗黑（官網：※デモカーは黒に塗装），SUZUKI 黑色貼紙",
+   "layout": "8 道直立長孔（8連縦ホール）後襯鋁網，上方 SUZUKI 字，罩體延伸包住方向燈，方向燈下白色反光片",
+   "twoColour": {
+    "frame": "車身色",
+    "slats": "車身色",
+    "mesh": "黑（示範車塗黑；出廠鋁網為銀）",
+    "letters": "黑色 SUZUKI 貼紙（附）"
+   },
+   "recommendedDefault": "車身同色（BodyPaint）＋黑網＋黑字",
+   "swap": {
+    "frame": "BodyPaint（已是）",
+    "mesh": "ZincSteel → PowderBlack",
+    "letters": "LabelWhite → 黑（PowderBlack 或新 LabelBlack）"
+   },
+   "builderMismatch": "模型 7 孔，官網寫 8 連縦ホール"
+  },
+  {
+   "id": "klc_ja",
+   "builder": "grille_generic('klc_ja', ...)",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrilleja/"
+   ],
+   "finishes": [
+    {
+     "finish": "ABS 塗装済：シボブラック 或 ガンメタ（鋁網皆銀色）",
+     "part": "180055610",
+     "price": 93500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "ABS 未塗装",
+     "part": "180055863",
+     "price": 60500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "FRP 未塗装",
+     "part": "157730549",
+     "price": 55000,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "槍灰（ガンメタ）配銀網，裝在叢林綠車上",
+   "layout": "JA22 風：大燈旁雙燈座（白色反光片），中央開口兩道橫桿＋銀色鋁網",
+   "twoColour": {
+    "frame": "槍灰",
+    "slats": "槍灰",
+    "mesh": "銀（鋁網）",
+    "letters": "無"
+   },
+   "recommendedDefault": "槍灰（Gunmetal）＋銀網",
+   "swap": {
+    "frame": "TextureBlack → Gunmetal（mat=GUNMETAL）",
+    "mesh": "ZincSteel（已是）",
+    "markers": "目前用 AmberLens，官網是白色反光片"
+   }
+  },
+  {
+   "id": "klc_nanaketsu",
+   "builder": "grille_generic('klc_nanaketsu', v_slots=7, bezel='square')",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillnanaketsu/"
+   ],
+   "finishes": [
+    {
+     "finish": "ABS 塗装済（シボブラック，鋁網銀，唯一顏色）",
+     "part": "173130349",
+     "price": 93500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "ABS 未塗装",
+     "part": "173130407",
+     "price": 60500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "FRP 未塗装",
+     "part": "173130421",
+     "price": 55000,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "紋理黑；三張示範照分別在叢林綠、白、黑車上，都是黑罩",
+   "layout": "方形圓角燈框＋7 道直立長孔，後襯鋁網",
+   "twoColour": {
+    "frame": "紋理黑",
+    "slats": "紋理黑",
+    "mesh": "銀（規格）；照片中看起來偏暗",
+    "letters": "無"
+   },
+   "recommendedDefault": "紋理黑（現狀正確）",
+   "swap": {
+    "frame": "TextureBlack",
+    "mesh": "ZincSteel（已是）"
+   }
+  },
+  {
+   "id": "klc_forty",
+   "builder": "grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round')",
+   "sources": [
+    "https://www.klc-div.com/heritage/product/grille/facegrillforty/",
+    "https://heritage-jimny.com/?pid=177988196"
+   ],
+   "finishes": [
+    {
+     "finish": "ABS 塗装済：外側 純正 9 色（ZZB／ZZC／Z2S／26U／ZVR／ZWY／ZJ3／ZVL／ZVG）或シボブラック；內側 ホワイト 或 グロスブラック（商店選單另有一欄シボブラック，用途未標）",
+     "price": 93500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "ABS 未塗装",
+     "price": 60500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "FRP 未塗装",
+     "price": 55000,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "雙色：外框車身色（叢林綠；另兩張在粉紅／紅色車上）＋內側燈圈與開口框白色，黑網，白色 SUZUKI 字",
+   "layout": "大燈外圈肋條，中央大開口黑網＋SUZUKI 字（エンブレム不附），燈旁假光軸調整孔",
+   "twoColour": {
+    "frame": "外側車身色",
+    "slats": "內側（燈圈＋開口框）白",
+    "mesh": "黑",
+    "letters": "白／銀 SUZUKI"
+   },
+   "recommendedDefault": "外側車身色＋內側白＋黑網＋白字",
+   "swap": {
+    "frame": "panel → BodyPaint",
+    "inner": "lamp_bezels 與開口框 → 新白色材質（例如 LabelWhite 或 GrilleWhite）",
+    "mesh": "ZincSteel → PowderBlack",
+    "letters": "LabelWhite（已是）"
+   },
+   "builderMismatch": "grille_generic 只有一個 mat，做不出外框／內圈兩色，需要多一個參數"
+  },
+  {
+   "id": "apio_sj",
+   "builder": "grille_generic('apio_sj', v_slots=9, mat=GUNMETAL)",
+   "sources": [
+    "https://apio.jp/parts/3033-58g.html"
+   ],
+   "finishes": [
+    {
+     "finish": "ガンメタリック（唯一），鋼製",
+     "part": "3033-58G",
+     "price": 58300,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "槍灰；示範車為叢林綠，另一張灰車",
+   "layout": "SJ30 風，7 道直立沖壓長縫，後襯黑色塗裝鋁網",
+   "twoColour": {
+    "frame": "槍灰",
+    "slats": "槍灰",
+    "mesh": "黑（官網：メッシュ塗装：ブラック）",
+    "letters": "無"
+   },
+   "recommendedDefault": "槍灰＋黑網",
+   "swap": {
+    "frame": "Gunmetal（已是）",
+    "mesh": "ZincSteel → PowderBlack（grille_generic 只有傳 text_mat 才會用黑網）"
+   },
+   "builderMismatch": "v_slots=9 畫出 10 根柱，照片是 7 道縫"
+  },
+  {
+   "id": "apio_marker",
+   "builder": "grille_generic('apio_marker', h_slats=4, marker=4)",
+   "sources": [
+    "https://apio.jp/parts/3033-59.html",
+    "https://apio.jp/parts/3033-57.html"
+   ],
+   "finishes": [
+    {
+     "finish": "セミグロスブラック",
+     "part": "3033-59B",
+     "price": 75900,
+     "tax": "稅込"
+    },
+    {
+     "finish": "ライトブロンズ",
+     "part": "3033-59L",
+     "price": 75900,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "半光黑裝在銀車與白車上；淺古銅裝在象牙車上",
+   "layout": "鋼製橫向沖壓長縫，中央一道平肋，上排 4 顆 IPF 琥珀標誌燈",
+   "twoColour": {
+    "frame": "半光黑或淺古銅",
+    "slats": "同本體",
+    "mesh": "無",
+    "letters": "平肋可貼 SUZUKI 原廠經典字（77860-84F51-ZG4，另購）"
+   },
+   "recommendedDefault": "半光黑；象牙車可切淺古銅",
+   "swap": {
+    "frame": "TextureBlack → 半光黑宜用 PowderBlack（較亮）；古銅需新材質（例如 0x8a7355 金屬感）",
+    "markers": "AmberLens（已是）",
+    "mesh": "目前 wire 預設 True 會畫銀網，實品沒有網，應 wire=False"
+   }
+  },
+  {
+   "id": "showa_hex",
+   "builder": "grille_showa",
+   "sources": [
+    "https://www.showa-garage.shop/shopdetail/000000000205/",
+    "https://www.showa-garage.shop/shopdetail/000000000011/"
+   ],
+   "finishes": [
+    {
+     "finish": "E00500 ABS 素地黑（官網建議塗裝使用）",
+     "part": "E00500",
+     "price": 16500,
+     "tax": "稅込"
+    },
+    {
+     "finish": "E00501 ダークグレーメタリック",
+     "part": "E00501",
+     "price": 37400,
+     "tax": "稅込"
+    },
+    {
+     "finish": "E00502 シボブラック",
+     "part": "E00502",
+     "price": 37400,
+     "tax": "稅込"
+    },
+    {
+     "finish": "E00504 ブルーイッシュブラックパール3（ZJ3）",
+     "part": "E00504",
+     "price": 37400,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "官網只有單品照（素地黑與深灰金屬色），沒有實車照",
+   "layout": "無字樣的簡潔罩，中央一個長方開口內黑色蜂巢網",
+   "twoColour": {
+    "frame": "黑或深灰或 ZJ3",
+    "slats": "無",
+    "mesh": "黑（塗裝品網子不塗，維持素地黑）",
+    "letters": "無"
+   },
+   "recommendedDefault": "紋理黑",
+   "swap": {
+    "frame": "TextureBlack",
+    "mesh": "PowderBlack（已是）"
+   },
+   "catalogueError": "目錄 note 寫 E00502 珍珠白、E00504 藍配白線，錯；官網是 E00501 ダークグレーメタリック／E00502 シボブラック／E00504 ZJ3"
+  },
+  {
+   "id": "outclass_g",
+   "builder": "grille_outclass",
+   "sources": [
+    "https://outclass.ocnk.net/product/1071"
+   ],
+   "finishes": [
+    {
+     "finish": "ASA 樹脂 ブラック（紋理，免塗裝）",
+     "part": "JB6474-A-FG-ASA",
+     "price": 57750,
+     "tax": "稅込（稅別 ¥52,500）"
+    },
+    {
+     "finish": "FRP 版（頁面只以『FRP製との違い』提到，價格比 ASA 便宜約 1 萬円，本頁未列售價）",
+     "price": null
+    }
+   ],
+   "demoFinish": "紋理黑；示範車有白、淺藍（自家塗裝）、象牙三台，全部黑罩",
+   "layout": "方形燈座，開口內 4 排橫向百葉、中央一根直柱分左右，後方黑網；字樣為白色筆記體 Suzuki 或 SUZUKI 字（另購）",
+   "twoColour": {
+    "frame": "紋理黑",
+    "slats": "紋理黑",
+    "mesh": "黑",
+    "letters": "白／鍍鉻（另購）"
+   },
+   "recommendedDefault": "紋理黑＋白字",
+   "swap": {
+    "frame": "TextureBlack",
+    "mesh": "PowderBlack",
+    "letters": "LedReflector（鍍鉻）可接受，白更接近照片"
+   },
+   "builderMismatch": "模型畫 12 根直立細條，實品是橫向百葉"
+  },
+  {
+   "id": "taniguchi_washer",
+   "builder": "grille_generic('taniguchi_washer', wire=True)",
+   "sources": [
+    "https://www.ors-taniguchi.co.jp/parts-cat/jb_exterior_front/"
+   ],
+   "finishes": [
+    {
+     "finish": "FRP 黑色ゲルコート（未塗装）ウォッシャ穴あり",
+     "price": 44000,
+     "tax": "稅込"
+    },
+    {
+     "finish": "同上 ウォッシャ穴無し（受注生産）",
+     "price": 44000,
+     "tax": "稅込"
+    }
+   ],
+   "demoFinish": "官網明寫「画像のグリルはZSCダークグレーメタリック塗装しています」；實車照有黃（キネティックイエロー）車與深色車",
+   "layout": "開口上下兩根管狀橫桿，中間大面積黑網，右下 TANIGUCHI 小牌（エンブレム別売）",
+   "twoColour": {
+    "frame": "深灰金屬色（示範）",
+    "slats": "同本體",
+    "mesh": "黑",
+    "letters": "TANIGUCHI 小牌銀／白"
+   },
+   "recommendedDefault": "深灰金屬色（Gunmetal），因為出廠只是黑色底漆級 gelcoat",
+   "swap": {
+    "frame": "TextureBlack → Gunmetal",
+    "mesh": "ZincSteel → PowderBlack"
+   }
+  },
+  {
+   "id": "kpro_folksy",
+   "builder": "grille_generic('kpro_folksy', h_slats=6, mat=WhiteGel, wire=False)",
+   "sources": [
+    "http://www.k-products.shop/shopdetail/000000001706/"
+   ],
+   "finishes": [
+    {
+     "finish": "FRP 白ゲルコート仕上げ（塗裝前底漆）",
+     "part": "190604-1",
+     "price": 42493,
+     "tax": "官網未標稅別",
+     "note": "頁面隱藏區塊留有舊價『通常価格 28,600円（税込）』"
+    }
+   ],
+   "demoFinish": "官方縮圖為白車配黑色罩（已塗黑）",
+   "layout": "橫鰭造型，中央張網",
+   "twoColour": {
+    "frame": "黑（示範）",
+    "slats": "黑",
+    "mesh": "黑網",
+    "letters": "無"
+   },
+   "recommendedDefault": "黑（示範車）；白色 gelcoat 是底漆，不是成品色",
+   "uncertain": true,
+   "swap": {
+    "frame": "WhiteGel → TextureBlack",
+    "mesh": "目前 wire=False，官網說中央有網，應加 PowderBlack 網"
+   }
+  },
+  {
+   "id": "prostaff_minig",
+   "builder": "grille_generic('prostaff_minig', v_slots=9, bezel='square')",
+   "sources": [
+    "https://www.4x4espoir.com/jb64-frontgrill/"
+   ],
+   "finishes": [
+    {
+     "finish": "未塗装",
+     "price": 38000,
+     "tax": "稅別",
+     "note": "僅二手轉載；官網連不上；適用寫 JB64W"
+    }
+   ],
+   "demoFinish": "白車配白色（車身同色）罩，開口內直柱為銀／黑（4x4espoir 轉載圖，水印 4x4prostaff.com）",
+   "layout": "Mini G-Class：車身色外框，中央開口密排直柱",
+   "twoColour": {
+    "frame": "車身色",
+    "slats": "銀灰直柱（照片判讀）",
+    "mesh": "黑底",
+    "letters": "無"
+   },
+   "recommendedDefault": "車身同色＋銀灰直柱",
+   "uncertain": true,
+   "swap": {
+    "frame": "TextureBlack → BodyPaint（panel＋bezels）",
+    "slats": "新材質或 ZincSteel"
+   }
+  },
+  {
+   "id": "sixsense_explosion",
+   "builder": "grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', bezel='square', mat=PAINT)",
+   "sources": [
+    "https://sixth-sense.shop-pro.jp/?pid=184181806"
+   ],
+   "finishes": [
+    {
+     "finish": "FRP 未塗装（需塗裝後安裝）",
+     "part": "jimex108-nocl",
+     "price": 110000,
+     "tax": "稅込（官網寫 販売価格 110,000円(税込)）"
+    },
+    {
+     "finish": "選配：專用クラシックウインカー＋LED チューブ",
+     "price": 16500
+    },
+    {
+     "finish": "選配：SUZUKI 大文字エンブレム",
+     "price": 3993
+    },
+    {
+     "finish": "選配：SUZUKI 筆記体エンブレム",
+     "price": 8470
+    }
+   ],
+   "demoFinish": "象牙車配象牙（車身同色）罩＋鍍鉻 SUZUKI 字＋琥珀方形燈；另有黑車配黑罩、灰車配黑罩",
+   "layout": "Classic Bronco 風：整片密排橫向百葉，中間 SUZUKI 大字或筆記體，兩側琥珀方形方向燈",
+   "twoColour": {
+    "frame": "車身色",
+    "slats": "車身色",
+    "mesh": "無（百葉）",
+    "letters": "鍍鉻"
+   },
+   "recommendedDefault": "車身同色＋鍍鉻字",
+   "swap": {
+    "frame": "BodyPaint（已是）",
+    "letters": "LabelWhite → ChromeTrim"
+   },
+   "catalogueError": "目錄 note 寫 ¥110,000 為稅別，官網現寫稅込"
+  }
+ ],
+ "ownerSurvey": {
+  "method": "みんカラ JB74 グリル パーツレビュー 前 4 頁 68 張縮圖逐張判讀（排除原廠罩、單品照、貼紙），另加廠商示範車（KLC、DAMD、APIO、OUTCLASS、Six Sense、TANIGUCHI）作對照",
+  "sources": [
+   "https://minkara.carview.co.jp/car/suzuki/jimny_sierra/partsreview/review.aspx?mg=3.13266&bi=5&ci=69",
+   "https://urisanblog.com/same-color-grille/",
+   "https://www.appreciate-japan.com/items/83936325",
+   "https://www.cllink.jp/view/item/000000000589"
+  ],
+  "ownerCarsCounted": 33,
+  "tally": [
+   {
+    "combo": "黑罩（紋理／消光黑）配任何車色",
+    "count": 23,
+    "notes": "灰、銀、白、綠、黑、藍、黃車都有；最常見。一半以上配白或銀 SUZUKI 字"
+   },
+   {
+    "combo": "車身同色罩",
+    "count": 9,
+    "notes": "象牙車 4（DAMD ROOTS、MASTERPIECE、HASE、KLC NANAMARU 外框）、黑 ZJ3 車 2（DAMD ROOTS、純正色グリル）、灰 1（KLC SJ）、銀 1（SHOWA ABS）、白 1（APIO レイヤード 外框白）"
+   },
+   {
+    "combo": "槍灰／深灰罩",
+    "count": 1,
+    "notes": "藍車（カーチス）；廠商示範另有 KLC JA、APIO SJ、TANIGUCHI"
+   },
+   {
+    "combo": "整片鍍鉻罩",
+    "count": 0,
+    "notes": "沒有；鍍鉻只出現在 SUZUKI 字與徽章（至少 5 台）"
+   },
+   {
+    "combo": "古銅罩",
+    "count": 0,
+    "notes": "只見 APIO 自家象牙示範車"
+   }
+  ],
+  "summary": "黑罩約七成、車身同色約兩成半；車身同色最集中在象牙（シフォンアイボリー）車，其次黑車與白／銀車。象牙車配象牙罩＋銀字、或象牙外框＋黑百葉，是最典型的『復古』組合；綠車幾乎都配黑或槍灰。鍍鉻只用在字，沒有人用整片鍍鉻罩（與 jb74-chrome-damd.json 大廠無鍍鉻罩的結論一致）。另有第三方廠商（Appreciate）直接販售『シフォンアイボリー×マットブラック 2 色塗装済』罩，說明象牙雙色是市場主流款式之一。"
+ }
+}

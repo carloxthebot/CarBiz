@@ -523,10 +523,10 @@ def grille_outclass():
     ow, oh = 520, 200
     grille_panel('panel', root, TEXBLACK, (ow, oh, 858))
     lamp_bezels(root, TEXBLACK, 'square')
-    n = 12                                                   # thin vertical slats across the opening (product photo)
+    n = 6                                                    # horizontal slats across the opening (OUTCLASS's photos)
     for k in range(n):
-        x = -ow / 2 + 22 + k * (ow - 44) / (n - 1)
-        box(f'slat{k}', (x, 858, face_z(0) + 2), (16, oh - 14, 22), TEXBLACK, root, bevel=3)
+        y = 858 - oh / 2 + 22 + k * (oh - 44) / (n - 1)
+        box(f'slat{k}', (0, y, face_z(0) + 2), (ow - 14, 16, 22), TEXBLACK, root, bevel=3)
     text('script', 'Suzuki', (0, 862, face_z(0) + 16), 60, 3, CHROME, root,
          font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
     wire_mesh(root, BLACK, 0, 858, face_z(0) - 20, ow - 10, oh - 10, pitch=9)
@@ -541,8 +541,8 @@ def grille_klc():
     root = group('grille_klc_sj')
     panel = grille_panel('panel', root, PAINT, None)
     cutters = []
-    for k in range(7):
-        x = -210 + k * 70
+    for k in range(8):                                       # eight slots (KLC's photos), not seven
+        x = -245 + k * 70
         cutters.append(box(f'cutSlot{k}', (x, 850, face_z(x)), (40, 190, 140), PAINT, None, bevel=0))
     cut(panel, cutters)
     lamp_bezels(root, PAINT, 'round')
@@ -598,54 +598,65 @@ def fog_lamp(root, x, y, z, mat, dia=90):
     lib.cylinder(f'fogLens{x}', (x, y, z + 6), (0, 0, 1), dia, 4, LENS, root)
 
 
-def number_plate(root, y, z):
-    box('plate', (0, y, z), (330, 165, 2), PLATE, root, bevel=1)
+def number_plate(root, y, z, x=0):
+    box('plate', (x, y, z), (330, 165, 2), PLATE, root, bevel=1)
 
 
 def bumper_klc():
     """KLC Heritage Traditional Bumper 74 in ivory (the black one is
-    bumper_tube_heritage): the colour is the product, not the car's paint."""
+    bumper_tube_heritage): the colour is the product, not the car's paint.
+    KLC publish no sizes; off their product shots with the 330 x 165 plate
+    as the ruler (+-40 mm): a 60 mm upper tube 1380 across at y 637, a 55 mm
+    lower tube 800 across 100 below it, round 88 mm fogs in flat plate boxes
+    at +-400 whose brackets drop to a 710 mm skid, and the plate on tabs
+    with its top level with the upper tube's top."""
     root = group('frontBumper_klc_trad')
     PAINT = material('KlcIvory', 0xe6dfcd, rough=0.5, metal=0.1)
-    y1, y2 = 615, 545
-    tube('upper', [(-650, y1, 1690), (650, y1, 1690)], 60, PAINT, root)
-    tube('lower', [(-330, y2, 1660), (330, y2, 1660)], 50, PAINT, root)
+    yu, yl, zu, zl = 637, 537, 1702, 1684
+    tube('upper', [(-690, yu, zu), (690, yu, zu)], 60, PAINT, root)
+    tube('lower', [(-400, yl, zl), (400, yl, zl)], 55, PAINT, root)
     for s in (-1, 1):
-        tube(f'link{s}', [(s * 250, y2, 1660), (s * 250, y1, 1690)], 30, PAINT, root)
-        box(f'fogBox{s}', (s * 340, y2 - 10, 1640), (100, 100, 90), PAINT, root, bevel=6)
-        fog_lamp(root, s * 340, y2 - 10, 1688, PAINT, dia=80)
-        tube(f'upright{s}', [(s * 330, 420, 1500), (s * 330, y1 - 20, 1682)], 45, PAINT, root)
-    number_plate(root, 520, 1682)
-    from mathutils import Matrix
-    box('skid', (0, 400, 1610), (520, 4, 260), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
+        lib.cylinder(f'cap{s}', (s * 691, yu, zu), (1, 0, 0), 60, 4, PAINT, root, n=24)
+        tube(f'link{s}', [(s * 250, yl, zl), (s * 250, yu, zu)], 30, PAINT, root)
+        box(f'fogBox{s}', (s * 400, yl, zl - 6), (104, 104, 80), PAINT, root, bevel=4)
+        fog_lamp(root, s * 400, yl, zl + 40, PAINT, dia=88)
+        # flat bracket from the fog box down to the skid (not a round tube)
+        box(f'bracket{s}', (s * 400, (yl - 52 + 420) / 2, zl - 20), (10, yl - 52 - 420, 70), PAINT, root, bevel=1)
+        box(f'plateTab{s}', (s * 110, 610, zu + 26), (24, 70, 10), PAINT, root, bevel=1)
+    number_plate(root, yu + 30 - 82.5, zu + 33)
+    box('skid', (0, 400, 1640), (710, 4, 240), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
     valance(root)
     return root
 
 
-# OUTCLASS TYPE2 winch bumper: flat-faced folded-steel box ~1500 x 250 x 200,
-# ends chamfered back, centre fairlead over the plate, four square LED pods,
-# shackle tabs, slotted skid apron at 45°.
+# OUTCLASS TYPE2 winch bumper (outclass.ocnk.net 1095; no dimensions or
+# weight published): see the builder's docstring.
 def bumper_outclass():
+    """OUTCLASS TYPE2 winch bar, folded steel. Off three near-straight-on
+    product photos with the headlamp centres (920 apart, ~3.3 mm/px) as the
+    ruler: 1450 across, 200 tall (y 500-700, its top ~50 under the grille)
+    and 200 deep, the outer ~120 of each end chamfered back 45 deg, the
+    fairlead on the face centre, four ~100 mm square LED pods at +-370 and
+    +-575, the plate hung below the bar in front of the winch bay, shackle
+    tabs and a slotted skid apron at 45 deg."""
     root = group('frontBumper_outclass_t2')
-    y = 560
-    # path runs through the box centre; the 200 mm deep profile puts the face at z 1750
-    # ends chamfered back, but only to 1650 at the tips -- down at 1420 they
-    # ran 80 mm into the front tyres
-    path = [(-700, y, 1650), (-600, y, 1650), (600, y, 1650), (700, y, 1650)]
-    sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(200, 220, 10, 3), TEXBLACK, root)
-    box('fairleadFrame', (0, 640, 1756), (300, 100, 14), RED, root, bevel=3)
-    box('fairleadSlot', (0, 640, 1764), (240, 56, 4), RUBBER, root, bevel=0)
-    number_plate(root, 540, 1758)
-    for x in (-520, -300, 300, 520):
-        box(f'pod{x}', (x, 595, 1756), (82, 82, 12), BLACK, root, bevel=2)
-        box(f'podLens{x}', (x, 595, 1763), (66, 66, 2), LENS, root, bevel=0)
+    W, top, H = 1450, 700, 200
+    st = front_stations(W, top, H, 200, cham=120, zf=1750)
+    xloft('body', st, TEXBLACK, root, r=10)
+    zf = at_x(st, 0, 4)
+    box('fairleadFrame', (0, 620, zf + 6), (300, 100, 14), RED, root, bevel=3)
+    box('fairleadSlot', (0, 620, zf + 14), (240, 56, 4), RUBBER, root, bevel=0)
+    for x in (-575, -370, 370, 575):
+        z = at_x(st, x, 4)
+        box(f'pod{x}', (x, 610, z + 6), (100, 100, 12), BLACK, root, bevel=2)
+        box(f'podLens{x}', (x, 610, z + 13), (82, 82, 2), LENS, root, bevel=0)
+    hung_plate(root, 0, 470, zf + 4, top - H, TEXBLACK)
     for s in (-1, 1):
-        box(f'tab{s}', (s * 350, 420, 1720), (12, 110, 90), TEXBLACK, root, bevel=2)
-        annulus(f'shackle{s}', (s * 350, 400, 1735), 12, 22, 24, STEEL, root, n=24)
-    from mathutils import Matrix
-    apron = box('apron', (0, 340, 1650), (720, 4, 300), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-45), 3, 'X'))
+        box(f'tab{s}', (s * 350, 470, zf - 30), (12, 110, 90), TEXBLACK, root, bevel=2)
+        annulus(f'shackle{s}', (s * 350, 440, zf - 15), 12, 22, 24, STEEL, root, n=24)
+    apron = box('apron', (0, 390, 1650), (720, 4, 300), TEXBLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-45), 3, 'X'))
     for k in range(3):
-        box(f'aslot{k}', (-150 + k * 150, 350, 1662), (90, 4, 24), RUBBER, root, bevel=0,
+        box(f'aslot{k}', (-150 + k * 150, 400, 1662), (90, 4, 24), RUBBER, root, bevel=0,
             rot=Matrix.Rotation(math.radians(-45), 3, 'X'))
     valance(root, corners=False)
     return root
@@ -856,26 +867,29 @@ def roof_lights():
 
 
 def bumper_tube_heritage():
-    """KLC Traditional Bumper 74 with KC FLEX ERA 4 pods, from the owner's
-    close-ups: a straight 76 mm upper tube with flat ends and two plate
-    tabs under its middle; a shorter 76 mm lower tube set back with the
-    square KC pods on its ends; a big flat "Heritage" panel below; the
-    silver crossmember visible between the tubes."""
+    """KLC Traditional Bumper 74 in black with KC FLEX ERA 4 pods, from the
+    owner's close-ups and KLC's product shots (klc-div.com
+    traditionalbumperfront_2_bk; 330 x 165 plate as the ruler): a straight
+    60 mm upper tube 1380 across with flat ends, a 55 mm lower tube 800
+    across set back 100 below it with the square KC pods on its ends at
+    +-400, the plate on two tabs with its top level with the upper tube's
+    top (it hides the tube's middle), a flat 'Heritage' panel about 720
+    wide below, and the silver crossmember visible between the tubes. (If
+    the owner's car turns out to wear 76 mm tubes, the car wins.)"""
     root = group('frontBumper_tube_heritage')
-    yu, zu = 640, 1694                                       # upper tube
-    yl, zl = 520, 1652                                       # lower tube, set back
-    tube('upper', [(-676, yu, zu), (676, yu, zu)], 76, TEXBLACK, root)
-    tube('lower', [(-450, yl, zl), (450, yl, zl)], 76, TEXBLACK, root)
+    yu, zu = 640, 1700                                       # upper tube
+    yl, zl = 540, 1666                                       # lower tube, set back
+    tube('upper', [(-690, yu, zu), (690, yu, zu)], 60, TEXBLACK, root)
+    tube('lower', [(-400, yl, zl), (400, yl, zl)], 55, TEXBLACK, root)
+    amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
+    kcred = material('KCRed', 0xa8231c, rough=0.45)
     for s in (-1, 1):
-        lib.cylinder(f'capU{s}', (s * 678, yu, zu), (1, 0, 0), 78, 6, TEXBLACK, root, n=28)
-        lib.cylinder(f'capL{s}', (s * 452, yl, zl), (1, 0, 0), 78, 6, TEXBLACK, root, n=28)
-        # plate tabs under the upper tube, with their bolt heads on top
-        box(f'tab{s}', (s * 120, yu - 55, zu + 6), (28, 60, 6), TEXBLACK, root, bevel=1)
-        lib.cylinder(f'tabBolt{s}', (s * 120, yu + 40, zu), (0, 1, 0), 14, 8, STEEL, root, n=6)
+        lib.cylinder(f'capU{s}', (s * 691, yu, zu), (1, 0, 0), 62, 5, TEXBLACK, root, n=28)
+        # plate tabs down the front of the upper tube, bolt heads on top
+        box(f'tab{s}', (s * 120, yu - 40, zu + 30), (28, 90, 6), TEXBLACK, root, bevel=1)
+        lib.cylinder(f'tabBolt{s}', (s * 120, yu + 32, zu), (0, 1, 0), 14, 8, STEEL, root, n=6)
         # KC FLEX ERA 4: square pod with a red bezel, two spots over two floods
-        px, py, pz = s * 520, yl, zl + 20
-        amber = material('AmberLens', 0xe08a1e, rough=0.15, metal=0.0)
-        kcred = material('KCRed', 0xa8231c, rough=0.45)
+        px, py, pz = s * 400, yl, zl + 20
         body = box(f'pod{s}', (px, py, pz), (104, 104, 62), BLACK, root, bevel=22)
         body.modifiers['bevel'].segments = 5
         ring = box(f'podBezel{s}', (px, py, pz + 30), (100, 100, 12), kcred, root, bevel=24)
@@ -886,18 +900,17 @@ def bumper_tube_heritage():
             lib.cylinder(f'cup{s}{dx}{dy}', (px + dx, py + dy, pz + 33), (0, 0, 1), 34, 8, CHROME, root, n=20)
             lib.cylinder(f'led{s}{dx}{dy}', (px + dx, py + dy, pz + 37), (0, 0, 1), 28, 3, m, root, n=20)
         box(f'podMount{s}', (px - s * 58, py, zl), (48, 26, 26), TEXBLACK, root, bevel=3)
-        # chassis legs and tow hooks
+        # chassis legs
         box(f'leg{s}', (s * 330, yu - 70, zu - 150), (60, 170, 180), TEXBLACK, root, bevel=3)
-    box('plate', (0, yu - 125, zu + 32), (330, 165, 3), PLATE, root, bevel=1)   # demo plate on the tabs
-    # Heritage panel: big flat plate hanging below the lower tube, slightly raked
-    # the plate spans the whole span between the KC pods and hangs well below
-    # the lower tube, raked back; the script sits low and left of centre
-    panel = prism('panel', [(yl - 58, zl - 30), (yl - 252, zl - 66), (yl - 252, zl - 74), (yl - 58, zl - 38)], -524, 524, TEXBLACK, root)
-    script = text('heritage', 'Heritage', (-120, yl - 176, zl - 60), 168, 70, TEXBLACK, None,
+    box('plate', (0, yu + 30 - 82.5, zu + 35), (330, 165, 3), PLATE, root, bevel=1)   # top level with the tube's top
+    # Heritage panel: flat plate hanging below the lower tube, slightly
+    # raked, 720 wide; the laser-cut script sits low and left of centre
+    panel = prism('panel', [(yl - 40, zl - 26), (yl - 210, zl - 60), (yl - 210, zl - 68), (yl - 40, zl - 34)], -360, 360, TEXBLACK, root)
+    script = text('heritage', 'Heritage', (-80, yl - 150, zl - 52), 132, 70, TEXBLACK, None,
                   font='/System/Library/Fonts/Supplemental/Zapfino.ttf' if os.path.exists('/System/Library/Fonts/Supplemental/Zapfino.ttf') else None)
     cut(panel, [script])                                     # laser-cut script, open right through
     # what shows between the tubes: the galvanised crossmember and the bay
-    box('crossmember', (0, 575, 1600), (1100, 70, 40), STEEL, root, bevel=4)
+    box('crossmember', (0, 590, 1600), (1100, 60, 40), STEEL, root, bevel=4)
     box('bay', (0, 540, 1420), (860, 320, 20), RUBBER, root, bevel=4)      # inside the tyres' steering sweep
     return root
 
@@ -906,12 +919,14 @@ def rear_bumper_tube():
     """Owner's rear bumper: one fat straight tube low across the back with
     squared end caps, plate wings above it carrying the stock tail lamps,
     exhaust tip out the right, tow hook and shackle underneath, mesh corner
-    covers where the stock bumper used to wrap round."""
+    covers where the stock bumper used to wrap round. The tube ends at
+    +-718, in line with the lamp wings' outer edge, so its caps stay inside
+    the flares' corners."""
     root = group('rearBumper_tube')
     y, z = 430, -1650
-    tube('bar', [(-745, y, z), (745, y, z)], 76, TEXBLACK, root)
+    tube('bar', [(-718, y, z), (718, y, z)], 76, TEXBLACK, root)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * 752, y, z), (14, 96, 96), TEXBLACK, root, bevel=3)
+        box(f'endCap{s}', (s * 725, y, z), (14, 96, 96), TEXBLACK, root, bevel=3)
         box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
         # wing plate behind the tail lamp, lamp framed on it
         box(f'wing{s}', (s * 513, 545, -1568), (400, 250, 8), TEXBLACK, root, bevel=3)
@@ -1559,24 +1574,35 @@ def face_damd_delta():
 
 
 def rear_damd_delta():
-    """little 5./delta rear bumper (74,800 yen): body colour, with raised
-    ribbed outer blocks carrying DB's square tail lamps (about 225 x 72 at
-    x +-580, y 535); grey lower edges both sides."""
+    """little 5./delta rear bumper (74,800 yen). DAMD publish no sizes;
+    everything is off their straight-on shot (plate 330 = 130 px, 2.54 mm/px,
+    heights anchored to the tailgate's bottom edge): a full-width body-colour
+    bumper about 1590 across wrapping round onto the flare corners, 225 tall
+    (y 645-420), with a grey lip 65 tall set back under both outer thirds;
+    raised outer blocks about 480 wide (to +-310) ribbed with seven
+    horizontal grooves, carrying DB's square tail lamps (about 228 x 60 at
+    +-590, y 530); the plate centred in a recess across the colour/grey
+    break."""
     root = group('rearBumper_damd_delta_rear')
     grey = material('DeltaGrey', 0x6b6e70, rough=0.6)
-    red = material('TailRed', 0xc0161a, rough=0.18)
-    zc = -1650
-    box('beam', (0, 540, zc), (1440, 190, 130), PAINT, root, bevel=8)
-    box('lower', (0, 420, zc + 10), (1400, 60, 110), grey, root, bevel=6)
+    W, ytop = 1590, REAR_TOP
+    zf = REAR_FACE
+    xloft('beam', rear_stations(W, ytop, 225, 140, wrap=120), PAINT, root, r=10)
     for s in (-1, 1):
-        box(f'block{s}', (s * 580, 535, zc - 30), (300, 150, 110), PAINT, root, bevel=10)
-        for k in range(3):                                      # the ribs round the lamp
-            box(f'rib{s}{k}', (s * 580, 590 - k * 55, zc - 88), (290, 10, 8), PAINT, root, bevel=2)
-        box(f'lampCase{s}', (s * 580, 535, zc - 88), (235, 82, 14), BLACK, root, bevel=4)
-        box(f'lampRed{s}', (s * (580 + 40), 535, zc - 96), (145, 70, 4), red, root, bevel=3)
-        box(f'lampAmb{s}', (s * (580 - 75), 535, zc - 96), (70, 70, 4), AMBER, root, bevel=3)
-        box(f'side{s}', (s * 715, 510, zc + 60), (30, 200, 180), PAINT, root, bevel=6)
-    box('plate', (RIGHT * 60, 540, zc - 70), (330, 165, 3), PLATE, root, bevel=1)
+        a, b = (265, W / 2) if s > 0 else (-W / 2, -265)
+        xloft(f'lip{s}', rear_stations(W, 422, 67, 110, face=zf + 25, wrap=120, x0=a, x1=b), grey, root, r=6)
+        a, b = (310, W / 2) if s > 0 else (-W / 2, -310)
+        blk = rear_stations(W, ytop - 4, 215, 60, face=zf - 15, wrap=120, x0=a, x1=b)
+        xloft(f'block{s}', blk, PAINT, root, r=8)
+        for k in range(7):                                   # the grooves across the block
+            box(f'groove{s}{k}', (s * 505, 440 + k * 30, zf - 16), (370, 5, 3), RUBBER, root, bevel=0.5)
+        box(f'lampCase{s}', (s * 590, 530, zf - 19), (240, 72, 8), BLACK, root, bevel=4)
+        box(f'lampRed{s}', (s * (590 + 38), 530, zf - 24), (148, 60, 3), TAILRED, root, bevel=3)
+        box(f'lampAmb{s}', (s * (590 - 76), 530, zf - 24), (70, 60, 3), AMBER, root, bevel=3)
+    box('plateRecess', (0, 458, zf - 1), (400, 200, 4), BLACK, root, bevel=4)
+    box('plate', (0, 458, zf - 4.5), (330, 165, 3), PLATE, root, bevel=1)
+    rear_mounts(root, ytop - 60)
+    rear_valance(root)
     return root
 
 
@@ -2214,86 +2240,486 @@ def side_step(pid, kind, tube_d=50, length=None, standoff=70, drop=40, pads=(), 
 GUNMETAL = material('Gunmetal', 0x3a3d42, rough=0.45, metal=0.7)
 
 
-def front_bar(pid, kind, W=1400, H=250, D=160, y=560, tube_d=60, hoop=False, fogs=False, skid=True, winch=False, mat=None, corners=True,
-              hooks=False, bash=False, hump=False, badge=None, slot=False, bolts=False, fog_stalk=False, mesh_off=0):
-    """kind: 'plate' (folded steel bar), 'box' (square tube), 'double' (two
-    tubes), 'short' (short plate between the wheels), 'abs' (OEM-shaped short
-    resin bumper with a mesh opening).
+# Where the bars sit. A photo review of all 35 bars (2026-09-26) found the
+# same faults over and over, and these numbers are its fixes.
+#
+# Front: the grille panel runs y 750-960 and the stock bumper's top edge was
+# 736. Every real bar tucks its top up under the grille (y 720-745); ours
+# stopped at 640-680 and left a strip of bare body showing under it.
+FRONT_TOP = 730
+# Rear: the stock bumper's face is at z -1605 at the lamps and -1543 in the
+# plate recess, and its bottom edge at the tailgate is y 645. The tailgate
+# spare hangs from z -1589 rearward; its underside is at y 547 (33in) to 585
+# (stock size) in the middle, 575-617 at |x| 200 and 630+ at |x| 300 (probed
+# through the page). The bars used to stand at -1650..-1745 -- 100-140 mm
+# proud of the stock line -- and low, under the spare; brought up to the
+# tailgate's edge where the real ones are, they would have trapped it (the
+# spare swings out with the side-hinged tailgate). So a rear bar's face
+# stands at -1565, flush with the stock line: the spare's tread overhangs it,
+# as it does in every maker photo. Anything behind z -1585 stays under the
+# spare's underside.
+REAR_FACE = -1565
+REAR_TOP = 645
+# where a relocated plate goes on the tailgate (the bars that need
+# 'ナンバー移動'): vehicle-left of the spare, clear of its rim
+TG_PLATE = (450, 780)
+TAILRED = material('TailRed', 0xc0161a, rough=0.18)
 
-    The flags are what tells one product from another in a photo: red tow
-    hooks (Armando), a bright skid plate under the face (Beyond, JAOS, MRK),
-    a raised centre section (JAOS cowl), an air slot under the plate (KLC),
-    exposed bolt heads (TOC), and fog lamps either recessed in the face or
-    hung on brackets off the ends."""
-    root = group(f'frontBumper_{pid}')
-    mat = mat or TEXBLACK
-    zf = 1745
-    if kind in ('plate', 'short', 'abs'):
-        # follow the nose: flat across the middle, wrapping back at the ends
-        stand = 12 if kind != 'abs' else 4
-        n = 13
-        xs = [-W / 2 + W * i / (n - 1) for i in range(n)]
-        # the ends wrap back with the nose, but never into the front tyre:
-        # a 31in tyre's leading edge is at z 1532 (axle 1139), so outboard of
-        # |x| 520 -- the tyre's inner face, steered -- the bar's back face
-        # stays ahead of 1545
-        path = [(x, y, max(min(zf, nose_z(x) + stand) - D / 2, 1545 + D / 2 if abs(x) > 520 else -1e9)) for x in xs]
-        sweep('body', [tuple(p) for p in fillet(path, 30, steps=3)], rounded_rect(D, H, 8 if kind != 'abs' else 30, 4), mat, root)
-        if kind == 'abs':
-            mw, mh = W * 0.45, H * 0.45
-            wire_mesh(root, BLACK, mesh_off, y - 10, zf - 6, mw, mh, pitch=14)
-            box('meshFrame', (mesh_off, y - 10, zf - 12), (mw + 20, mh + 20, 4), RUBBER, root, bevel=0)
-    elif kind == 'box':
-        xs = [-W / 2 + W * i / 8 for i in range(9)]
-        sweep('body', [(x, y, min(zf - 40, nose_z(x) - 28)) for x in xs], rounded_rect(80, 80, 6, 3), mat, root)
-    elif kind == 'double':
-        xs = [-W / 2 + W * i / 8 for i in range(9)]
-        for k, yy in enumerate((y + 45, y - 45)):
-            tube(f'bar{k}', [(x, yy, min(zf - 30, nose_z(x) - 20)) for x in xs], tube_d, mat, root, bend=100)
+
+def xloft(name, stations, mat, parent=None, r=8, n=3, smooth=True):
+    """A bar built from cross-sections standing across the car. Each station
+    is (x, ytop, ybot, z0, z1) and gets a rounded rectangle in the Y-Z plane.
+    Unlike sweep() nothing turns with the path, so a bar can get shallower,
+    shorter or step back toward its ends without its section twisting."""
+    bm = bmesh.new()
+    rings = []
+    for (x, yt, yb, z0, z1) in stations:
+        w, h = z1 - z0, yt - yb
+        rr = max(0.5, min(r, w / 2 - 0.5, h / 2 - 0.5))
+        zc, yc = (z0 + z1) / 2, (yt + yb) / 2
+        rings.append([bm.verts.new(P(x, yc + v, zc + u)) for (u, v) in rounded_rect(w, h, rr, n)])
+    k = len(rings[0])
+    for r0, r1 in zip(rings, rings[1:]):
+        for j in range(k):
+            bm.faces.new((r0[j], r0[(j + 1) % k], r1[(j + 1) % k], r1[j]))
+    bm.faces.new(list(reversed(rings[0])))
+    bm.faces.new(rings[-1])
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return lib.new_object(name, bm, mat, parent, smooth=smooth)
+
+
+def at_x(st, x, k):
+    """Field k of a station list (1 ytop, 2 ybot, 3 z0, 4 z1) at x."""
+    for a, b in zip(st, st[1:]):
+        if a[0] <= x <= b[0]:
+            t = (x - a[0]) / ((b[0] - a[0]) or 1)
+            return a[k] + (b[k] - a[k]) * t
+    return st[0][k] if x < st[0][0] else st[-1][k]
+
+
+def _span_xs(x0, x1, extra=(), n=24):
+    xs = {round(x0 + (x1 - x0) * i / n, 2) for i in range(n + 1)}
+    xs.update(round(e, 2) for e in extra if x0 <= e <= x1)
+    return sorted(xs)
+
+
+def front_stations(W, ytop, H, D, stand=12, cham=120, dmin=40, rise=0, drop=0, zf=1745, x0=None, x1=None, notch=None):
+    """Stations for a front bar that follows the nose (flat across the middle,
+    falling away past the headlights) and wraps back at its ends instead of
+    stopping square -- 13 of the 35 bars had square-cut ends the real ones
+    don't. Over the last `cham` mm the face swings back at 45 degrees and the
+    section thins to `dmin`, so the tip finishes just ahead of the wing
+    corner. `rise` lifts the lower edge over that run (ends that sweep up),
+    `drop` lowers it (end wings taller than the middle), and
+    `notch=(half_width, depth)` cuts the lower edge up in the middle.
+    Outboard of |x| 520 the back never comes behind z 1545: a 31in tyre's
+    leading edge is at 1532 (axle 1139) and a steered one swings in to 520."""
+    x0 = -W / 2 if x0 is None else x0
+    x1 = W / 2 if x1 is None else x1
+    extra = []
+    for s in (-1, 1):
+        extra += [s * (W / 2 - cham * f) for f in (0, 0.25, 0.5, 0.75, 1.0)]
+        if drop:
+            extra += [s * (W / 2 - cham - 60)]
+        if notch:
+            extra += [s * notch[0], s * (notch[0] + 14)]
+    out = []
+    for x in _span_xs(x0, x1, extra):
+        a = abs(x)
+        t = max(0.0, a - (W / 2 - cham))
+        face = min(zf, nose_z(x) + stand) - t
+        back = face - D
+        if a > 520:
+            back = max(back, 1545)
+        face = max(face, back + dmin)
+        yb = ytop - H + (rise * t / cham if cham else 0)
+        if drop:
+            yb -= drop * min(1.0, max(0.0, (a - (W / 2 - cham - 60)) / 60))
+        if notch and a <= notch[0] + 7:
+            yb += notch[1]
+        out.append((x, ytop, yb, back, face))
+    return out
+
+
+def rear_stations(W, ytop, H, D, face=REAR_FACE, wrap=110, dmin=40, rise=0, drop=0, x0=None, x1=None, extra=()):
+    """Stations for a rear bar: the face at `face` (a number, or a function of
+    x), the ends wrapping FORWARD round the body corners over the last `wrap`
+    mm at 45 degrees instead of stopping square. Outboard of |x| 470 nothing
+    comes forward of z -1470, which keeps the bar behind the rear tyres (a
+    33in tyre's back is at -1466)."""
+    x0 = -W / 2 if x0 is None else x0
+    x1 = W / 2 if x1 is None else x1
+    ex = list(extra)
+    for s in (-1, 1):
+        ex += [s * (W / 2 - wrap * f) for f in (0, 0.25, 0.5, 0.75, 1.0)]
+    out = []
+    for x in _span_xs(x0, x1, ex):
+        a = abs(x)
+        t = max(0.0, a - (W / 2 - wrap))
+        f = (face(x) if callable(face) else face) + t
+        fwd = f + D
+        if a > 470:
+            fwd = min(fwd, -1470)
+        f = min(f, fwd - dmin)
+        k = t / wrap if wrap else 0
+        out.append((x, ytop + drop * k, ytop - H + rise * k - drop * k, f, fwd))
+    return out
+
+
+def hung_plate(root, x, y, z, bar_bottom, mat, rear=False):
+    """A plate hung off a bar's lower edge on two flat tabs, which is how
+    most of these bars carry it (DAMD, OUTCLASS, TOC, Maverick, WMD...)."""
+    number_plate(root, y, z, x)
+    top = y + 82.5
+    lo, hi = top - 40, bar_bottom + 20
+    if hi > lo:
         for s in (-1, 1):
-            tube(f'link{s}', [(s * 300, y - 45, zf - 30), (s * 300, y + 45, zf - 30)], 30, mat, root)
-    if hoop:
-        tube('hoop', [(-400, y + H / 2 - 20, zf - 60), (-400, y + H / 2 + 140, zf - 60), (400, y + H / 2 + 140, zf - 60), (400, y + H / 2 - 20, zf - 60)], 48, mat, root, bend=110)
-    if fogs:
-        for s in (-1, 1):
-            fog_lamp(root, s * 430, y - 20, zf + 4, mat, dia=90)
-    if fog_stalk:                                            # fogs on brackets off the bar's ends
-        for s in (-1, 1):
-            # off the bar's OWN face at that x: the ends wrap back, and at the
-            # full-front z the lamps hung 30-70 mm in front of nothing
-            ze = min(zf, nose_z(W / 2 - 40) + 12)
-            box(f'fogArm{s}', (s * (W / 2 - 40), y + H / 2 - 10, ze - 20), (20, 90, 40), mat, root, bevel=2)
-            fog_lamp(root, s * (W / 2 - 40), y + H / 2 + 50, ze, mat, dia=110)
-    if hump:                                                 # raised centre section of a moulded cowl
-        box('hump', (0, y + H / 2 - 40, zf - D / 2 - 10), (W * 0.40, 110, D * 0.85), mat, root, bevel=26)
-    if slot:                                                 # air slot across the face under the plate
-        box('slot', (0, y - H / 2 + 50, zf - 2), (W * 0.46, 30, 12), RUBBER, root, bevel=3)
-    if bolts:                                                # exposed hex heads across the flat of the face
-        for k in range(9):
-            bx = -440 + k * 110
-            lib.cylinder(f'bolt{k}', (bx, y + H / 2 - 40, min(zf, nose_z(bx) + 12) + 2), (0, 0, 1), 18, 8, STEEL, root, n=6)
-    if hooks:
-        for s in (-1, 1):
-            box(f'hook{s}', (s * 270, y - H / 2 + 20, zf - 10), (16, 120, 64), RED, root, bevel=5)
-    if bash:                                                 # bright skid plate hung under the face
-        box('bash', (0, y - H / 2 - 34, zf - 100), (min(760, W - 420), 6, 250), ALU, root, bevel=2,
-            rot=Matrix.Rotation(math.radians(-28), 3, 'X'))
-    if badge:
-        text('badge', badge, (0, y - H / 2 + 108, zf + 4), 42, 3, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
-    if winch:
-        box('fairleadFrame', (0, y + 30, zf + 6), (280, 100, 14), RED, root, bevel=3)
-        box('fairleadSlot', (0, y + 30, zf + 14), (220, 56, 4), RUBBER, root, bevel=0)
-    if kind == 'double':
-        # the plate hangs on two tabs off the lower tube's face, not in front of it
-        pz = zf - 30 + tube_d / 2 + 2
-        number_plate(root, y - 45, pz)
-        for s in (-1, 1):
-            box(f'plateTab{s}', (s * 110, y - 45, pz - tube_d / 4), (24, 60, tube_d / 2), mat, root, bevel=2)
-    else:
-        number_plate(root, y - (20 if winch else 0) - (60 if winch else 0), zf + 8)
-    if skid:
-        box('skid', (0, y - H / 2 - 40, zf - 120), (min(700, W - 500), 4, 240), mat, root, bevel=1, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
-    valance(root, corners=corners and W < 1450)
+            box(f'plateTab{s}', (x + s * 110, (lo + hi) / 2, z + (5 if rear else -5)), (24, hi - lo, 6), mat, root, bevel=1)
+
+
+def tailgate_plate(root):
+    """The plate moved onto the tailgate beside the spare, on a flat bracket
+    -- where it goes when a bar has no place for it."""
+    x, y = TG_PLATE
+    box('plateBracket', (x, y, TAIL_Z - 3), (300, 120, 6), TEXBLACK, root, bevel=1)
+    box('plate', (x, y, TAIL_Z - 7.5), (330, 165, 3), PLATE, root, bevel=1)
+
+
+def frame_walls(name, poly, t, z0, z1, mat, root, back=None):
+    """An open box: the walls of a convex (x, y) outline, `t` thick, from z0
+    to z1, plus a back plate at `back` if given -- a lamp box that shows what
+    is inside it."""
+    cx = sum(p[0] for p in poly) / len(poly)
+    cy = sum(p[1] for p in poly) / len(poly)
+    for i, (a, b) in enumerate(zip(poly, poly[1:] + poly[:1])):
+        ex, ey = b[0] - a[0], b[1] - a[1]
+        L = math.hypot(ex, ey) or 1
+        nx, ny = -ey / L, ex / L
+        if nx * (cx - a[0]) + ny * (cy - a[1]) < 0:
+            nx, ny = -nx, -ny
+        quad = [a, b, (b[0] + nx * t, b[1] + ny * t), (a[0] + nx * t, a[1] + ny * t)]
+        slab(f'{name}Wall{i}', quad, z0, z1, mat, root)
+    if back is not None:
+        slab(f'{name}Back', poly, back - 3, back + 3, mat, root)
+
+
+def lamp_strip(root, tag, x, y, z, w, h, segs, rear=True):
+    """A flat combination lamp: black bezel, lens split across its width into
+    (share, material) segments, amber / red / clear as the maker's is."""
+    sgn = -1 if rear else 1
+    box(f'lampBezel{tag}', (x, y, z + sgn * 2), (w + 16, h + 16, 6), BLACK, root, bevel=3)
+    total = sum(s for s, _ in segs)
+    u = x - w / 2
+    for k, (share, m) in enumerate(segs):
+        sw = w * share / total
+        box(f'lampSeg{tag}{k}', (u + sw / 2, y, z + sgn * 6), (sw - 3, h, 3), m, root, bevel=1)
+        u += sw
+
+
+def round_lamp(root, tag, x, y, z, dia, lens, dome=True, rear=True):
+    sgn = -1 if rear else 1
+    lib.cylinder(f'lampCan{tag}', (x, y, z - sgn * 12), (0, 0, 1), dia + 12, 30, TEXBLACK, root, n=22)
+    lib.cylinder(f'lampRim{tag}', (x, y, z + sgn * 3), (0, 0, 1), dia + 6, 6, CHROME, root, n=22)
+    lib.cylinder(f'lampLens{tag}', (x, y, z + sgn * 6), (0, 0, 1), dia, 4, lens, root, n=22)
+    if dome:                                                 # the lenses are domed, not flat
+        flatten(lib.sphere(f'lampDome{tag}', (x, y, z + sgn * 6), dia, lens, root), (x, y, z + sgn * 6), 0.3)
+
+
+def rear_mounts(root, y, z=REAR_FACE, mat=None, x=330):
+    for s in (-1, 1):
+        box(f'mount{s}', (s * x, y, z + 110), (70, 100, 200), mat or TEXBLACK, root, bevel=4)
+
+
+def rear_valance(root):
+    # closes the gap to the body the stock bumper used to cover
+    box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
+
+
+def fog_pocket(root, tag, x, y, z, dia, mat=None, w=None, h=None):
+    """A stock round fog set into the bar's face in a dark pocket."""
+    box(f'fogPocket{tag}', (x, y, z - 2), (w or dia + 36, h or dia + 26, 8), BLACK, root, bevel=6)
+    fog_lamp(root, x, y, z - 2, mat or TEXBLACK, dia=dia)
+
+
+# --------------------------------------------------------------- front bars
+def bumper_armando():
+    """ARMANDO steel front bar (MRK ID=1542). No maker figures: measured off
+    the straight-on photo at 1.29 mm/px (headlamp centres 920 apart; the plate
+    agrees). Two tiers -- a 105 mm upper bar whose top meets the grille, with
+    a light-bar slot, over a lower tier set back 40 that carries the plate and
+    two square LED cubes at +-470 -- 1580 across with the ends chamfered round
+    to the arches; a flat trapezoid guard of 60 mm box standing only 60 mm
+    above the bar (950 across its feet, 750 across the top); red recovery
+    hooks under the face at +-330 and a stepped black plate under the middle."""
+    root = group('frontBumper_armando')
+    W, top = 1580, FRONT_TOP + 15
+    up = front_stations(W, top, 105, 200, cham=130)
+    xloft('upper', up, TEXBLACK, root)
+    lo = front_stations(W - 120, top - 105, 215, 160, zf=1705, cham=110, rise=30)
+    xloft('lower', lo, TEXBLACK, root)
+    zf, zl = at_x(up, 0, 4), at_x(lo, 0, 4)
+    box('lightSlot', (0, top - 52, zf + 1), (720, 34, 8), RUBBER, root, bevel=3)
+    box('lightLens', (0, top - 52, zf + 4), (690, 18, 3), LENS, root, bevel=1)
+    g = [(-475, top + 6, 1716), (-375, top + 60, 1716), (375, top + 60, 1716), (475, top + 6, 1716)]
+    sweep('guard', [tuple(p) for p in fillet(g, 30, steps=3)], rounded_rect(60, 60, 6, 3), TEXBLACK, root)
+    for s in (-1, 1):
+        x = s * 470
+        z = at_x(lo, x, 4)
+        box(f'fogPocket{s}', (x, 610, z - 2), (104, 100, 12), BLACK, root, bevel=6)
+        box(f'fogCube{s}', (x, 610, z + 4), (80, 80, 20), BLACK, root, bevel=5)
+        box(f'fogLens{s}', (x, 610, z + 15), (64, 64, 3), LENS, root, bevel=2)
+        box(f'hook{s}', (s * 330, 400, z - 40), (16, 90, 60), RED, root, bevel=5)
+    number_plate(root, 470, zl + 3)
+    box('skidStep', (0, 408, zl - 40), (760, 34, 80), TEXBLACK, root, bevel=4)
+    box('skid', (0, 360, zl - 110), (700, 6, 150), TEXBLACK, root, bevel=2, rot=Matrix.Rotation(math.radians(-30), 3, 'X'))
+    valance(root)
+    return root
+
+
+def bumper_beyond_liberte():
+    """Beyond Liberte front bar, a JB64/JB74 common part (MRK ID=2114 and
+    Beyond's own kit shots). Beyond publish no dimensions: sized off the
+    straight-on night shot at 1.28 mm/px, where the headlamp spacing and the
+    330 plate agree. One ~62 mm round tube about 1080 across with flat end
+    caps, ending near the headlamps' outer edge; two flat-bar uprights at
+    +-350 dropping to a big flat skid plate, a thin cross bar between them,
+    round fogs in square stays hung under the tube just outboard of the
+    uprights, and the plate standing on the tube's face.
+
+    One node carries all three catalogue finishes: the page swaps
+    PowderBlack/TextureBlack for mirror or ivory, so every piece that takes
+    the finish (skid included) is TEXBLACK and nothing else is."""
+    root = group('frontBumper_beyond_liberte')
+    d, y, zt = 62, 675, 1735
+    tube('tube', [(-540, y, zt), (540, y, zt)], d, TEXBLACK, root)
+    for s in (-1, 1):
+        lib.cylinder(f'cap{s}', (s * 541, y, zt), (1, 0, 0), d, 4, TEXBLACK, root, n=24)
+        box(f'upright{s}', (s * 350, 590, zt - 6), (12, 136, 50), TEXBLACK, root, bevel=1)
+        fx, fy = s * 440, 585
+        for (cx, cy, sx, sy) in ((0, 58, 128, 8), (0, -58, 128, 8), (-60, 0, 8, 124), (60, 0, 8, 124)):
+            box(f'fogStay{s}{cx}{cy}', (fx + cx, fy + cy, zt + 2), (sx, sy, 30), TEXBLACK, root, bevel=1)
+        fog_lamp(root, fx, fy, zt + 12, TEXBLACK, dia=90)
+        box(f'plateTab{s}', (s * 110, 640, zt + d / 2 - 3), (24, 90, 8), TEXBLACK, root, bevel=1)
+    lib.cylinder('crossBar', (0, 590, zt - 6), (1, 0, 0), 27, 700, TEXBLACK, root, n=16)
+    number_plate(root, 620, zt + d / 2 + 3)
+    # flat skid, raked: top edge (y 530) forward under the uprights, bottom
+    # edge (y 390) 80 mm further back
+    box('skid', (0, 460, zt - 40), (840, 6, 161), TEXBLACK, root, bevel=2, rot=Matrix.Rotation(math.radians(-60), 3, 'X'))
+    valance(root)
+    return root
+
+
+def bumper_maverick():
+    """Maverick DF0001 short steel bar (i-pickup.com.tw; no dimensions
+    published). Off the straight-on photo at 1.25 mm/px (headlamp spacing):
+    1580 across, 200 tall with its top under the grille, the ends running out
+    to the arches and kicking back, their wings 50 mm deeper than the middle;
+    four slot vents across the upper face, 75 mm round fogs near the ends at
+    +-545, and the plate NOT on the bar but on a separate winch-mount carrier
+    under the middle, with red D-shackles either side."""
+    root = group('frontBumper_maverick')
+    W, top = 1580, FRONT_TOP + 15
+    st = front_stations(W, top, 200, 170, cham=140, drop=50)
+    xloft('body', st, TEXBLACK, root)
+    zf = at_x(st, 0, 4)
+    for k, vx in enumerate((-330, -110, 110, 330)):
+        box(f'vent{k}', (vx, top - 42, zf + 1), (170, 22, 8), RUBBER, root, bevel=3)
+    for s in (-1, 1):
+        fog_pocket(root, s, s * 545, 600, at_x(st, s * 545, 4), 75)
+        annulus(f'shackle{s}', (s * 330, 520, zf - 30), 14, 26, 22, RED, root, n=24)
+        box(f'shackleTab{s}', (s * 330, 548, zf - 40), (12, 40, 60), TEXBLACK, root, bevel=2)
+    box('carrier', (0, 470, zf - 70), (440, 200, 120), TEXBLACK, root, bevel=6)
+    number_plate(root, 470, zf - 8)
+    valance(root)
+    return root
+
+
+def bumper_mrk_abs():
+    """MRK short ABS bumper JMY-FB-L (MRK ID=1948; no dimensions published).
+    From the fitted 3/4 and the part-only shots: a slim OEM-shaped bar, 190
+    tall (twice the stock fog) with its top right under the grille trim,
+    1560 across; the END blocks stand 20 mm proud and carry the stock round
+    fogs at +-500, the middle is recessed with a centred hex mesh about 780 x
+    100, and a flat black steel plate hangs raked under the middle."""
+    root = group('frontBumper_mrk_abs')
+    W, top, H = 1560, FRONT_TOP + 5, 190
+    st = front_stations(W, top, H, 170, stand=4, cham=120)
+    xloft('body', st, TEXBLACK, root, r=24)
+    zf = at_x(st, 0, 4)
+    for s in (-1, 1):
+        a, b = (420, W / 2) if s > 0 else (-W / 2, -420)
+        blk = front_stations(W, top + 3, H + 6, 70, stand=24, zf=1765, cham=120, x0=a, x1=b)
+        xloft(f'endBlock{s}', blk, TEXBLACK, root, r=20)
+        fog_pocket(root, s, s * 500, 640, at_x(blk, s * 500, 4), 90)
+    box('meshBack', (0, 640, zf + 1), (800, 116, 4), RUBBER, root, bevel=2)
+    hex_mesh(root, BLACK, 0, 640, zf + 4, 780, 100, cell=22, bar=2.4)
+    number_plate(root, 610, zf + 8)
+    box('skid', (0, top - H - 40, zf - 80), (700, 6, 170), BLACK, root, bevel=2, rot=Matrix.Rotation(math.radians(-35), 3, 'X'))
+    valance(root)
+    return root
+
+
+def bumper_wmd_winch():
+    """WMD-style short winch bar (Ruten listing 22105872751291; the listing
+    text gives nothing, so everything is off its small fitted photos with the
+    headlamp spacing as the ruler, ~3.2 mm/px -- low confidence). A thin
+    folded face plate only 140 tall, its top under the grille, five round
+    lightening holes along its lower edge; the winch sits exposed in an
+    open-top bay behind it with a small roller fairlead at the top centre and
+    a cover plate over the top; no hoop on any photo. The plate hangs below
+    the bar, with red D-ring mounts either side."""
+    root = group('frontBumper_wmd_winch')
+    W, top, H = 1200, FRONT_TOP + 5, 140
+    st = front_stations(W, top, H, 34, cham=80, dmin=20)
+    xloft('face', st, TEXBLACK, root, r=4)
+    zf = at_x(st, 0, 4)
+    bot = top - H
+    box('floor', (0, bot + 5, (zf + 1560) / 2), (W - 160, 10, zf - 1560), TEXBLACK, root, bevel=2)
+    for s in (-1, 1):
+        box(f'bayWall{s}', (s * 300, bot + 70, 1640), (8, 130, 150), TEXBLACK, root, bevel=2)
+        annulus(f'dring{s}', (s * 300, bot - 22, zf - 30), 14, 25, 20, RED, root, n=24)
+        box(f'dringTab{s}', (s * 300, bot - 4, zf - 40), (12, 36, 50), TEXBLACK, root, bevel=2)
+    for k in range(5):                                       # lightening holes
+        hx = -400 + k * 200
+        lib.cylinder(f'hole{k}', (hx, bot + 30, at_x(st, hx, 4) + 1), (0, 0, 1), 46, 4, RUBBER, root, n=20)
+    lib.cylinder('winchDrum', (0, 672, 1672), (1, 0, 0), 100, 380, BLACK, root, n=22)
+    lib.cylinder('winchMotor', (-265, 672, 1672), (1, 0, 0), 112, 150, BLACK, root, n=22)
+    box('winchGear', (265, 672, 1672), (130, 120, 120), BLACK, root, bevel=8)
+    box('cover', (0, top + 3, zf - 70), (560, 6, 110), TEXBLACK, root, bevel=2)
+    box('fairlead', (0, top - 34, zf + 5), (250, 60, 12), STEEL, root, bevel=6)
+    box('fairleadSlot', (0, top - 34, zf + 10), (170, 22, 4), RUBBER, root, bevel=4)
+    hung_plate(root, 0, 520, zf + 4, bot, TEXBLACK)
+    valance(root)
+    return root
+
+
+def bumper_jaos_cowl():
+    """JAOS Front Sport Cowl B040518. JAOS publish 5.05 kg, overall length
+    +10 mm and 'within the overall width'; the face is measured off their
+    straight-on studio shot at 1.37 mm/px (headlamp spacing; the plate
+    agrees): 240 tall with its top under the grille, full width to the
+    arches with the lower corners cut up, a recessed dark trapezoid opening
+    about 630 x 110 behind the plate between angled ribs, the stock round
+    fogs kept in angular pockets at +-590, and a nearly upright silver skid
+    about 690 wide under the middle carrying the JAOS lettering."""
+    root = group('frontBumper_jaos_cowl')
+    W, top, H = 1560, FRONT_TOP - 10, 240
+    st = front_stations(W, top, H, 180, stand=10, cham=130, rise=70)
+    xloft('body', st, TEXBLACK, root, r=28)
+    zf = at_x(st, 0, 4)
+    box('opening', (0, 600, zf + 1), (630, 110, 4), BLACK, root, bevel=8)
+    for s in (-1, 1):
+        box(f'rib{s}', (s * 360, 600, zf + 3), (16, 140, 8), TEXBLACK, root, bevel=3,
+            rot=Matrix.Rotation(math.radians(s * 25), 3, 'Y'))
+        x = s * 590
+        z = at_x(st, x, 4)
+        box(f'fogPocket{s}', (x, 575, z - 2), (160, 110, 10), BLACK, root, bevel=8,
+            rot=Matrix.Rotation(math.radians(-s * 12), 3, 'Y'))
+        fog_lamp(root, x, 575, z - 4, TEXBLACK, dia=90)
+    number_plate(root, 565, zf + 5)
+    bash = top - H - 36
+    box('bash', (0, bash, zf - 25), (690, 80, 6), ALU, root, bevel=2, rot=Matrix.Rotation(math.radians(10), 3, 'X'))
+    text('badge', 'JAOS', (0, bash, zf - 19), 40, 3, TEXBLACK, root,
+         font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
+    valance(root)
+    return root
+
+
+def bumper_klc_short():
+    """KLC Heritage Front Short Bumper 74 (klc-div.com; KLC publish no
+    sizes). Off their 3/4 shots with the plate and headlamp glass as rulers:
+    a slim OEM-shaped ABS bar 185 tall (twice the stock fog), its top under
+    the grille trim in every photo, 1580 across with OEM-shaped end blocks
+    standing a little proud and carrying the stock fogs at +-560; a fine
+    silver mesh opening across the middle, a dark panel under it, and the
+    plate offset 150 to the car's left, half hanging off the lower edge.
+    (The 'KLC' in the photos is their demo plate, not on the bumper.)"""
+    root = group('frontBumper_klc_short')
+    W, top, H = 1580, FRONT_TOP + 3, 185
+    st = front_stations(W, top, H, 170, stand=4, cham=120)
+    xloft('body', st, TEXBLACK, root, r=24)
+    zf = at_x(st, 0, 4)
+    for s in (-1, 1):
+        a, b = (470, W / 2) if s > 0 else (-W / 2, -470)
+        blk = front_stations(W, top + 2, H + 4, 70, stand=16, zf=1757, cham=120, x0=a, x1=b)
+        xloft(f'endBlock{s}', blk, TEXBLACK, root, r=20)
+        fog_pocket(root, s, s * 560, 640, at_x(blk, s * 560, 4), 90)
+    box('meshBack', (0, 650, zf + 1), (730, 116, 4), RUBBER, root, bevel=2)
+    wire_mesh(root, ALU, 0, 650, zf + 4, 700, 96, pitch=10, bar=1.8)
+    hung_plate(root, -RIGHT * 150, 560, zf + 6, top - H, TEXBLACK)
+    box('lowerPanel', (0, top - H - 30, zf - 60), (720, 6, 150), TEXBLACK, root, bevel=2, rot=Matrix.Rotation(math.radians(-40), 3, 'X'))
+    valance(root)
+    return root
+
+
+def bumper_toc_extreme():
+    """TOC BODYWORKS Extreme Bumper 74, FRP (tocbw.thebase.in; no dimensions
+    published). Off the straight-on photo with the headlamp centres (920) and
+    the flare width (1645) as rulers: 210 tall with its top tight under the
+    grille, block ends that run right up to the fronts of the over-fenders,
+    a row of nine 40 mm round holes across the upper face, the stock fogs in
+    small rectangular pockets at +-575, the middle 700 of the lower edge
+    notched up 60 for an LED bar (not included), and the plate hung below
+    the middle (TOC hang it on their skid plate, also not included)."""
+    root = group('frontBumper_toc_extreme')
+    W, top, H = 1560, FRONT_TOP, 210
+    st = front_stations(W, top, H, 200, cham=70, notch=(350, 60))
+    xloft('body', st, TEXBLACK, root)
+    zf = at_x(st, 0, 4)
+    for k in range(9):
+        hx = -440 + k * 110
+        lib.cylinder(f'hole{k}', (hx, 660, at_x(st, hx, 4) + 1), (0, 0, 1), 40, 4, RUBBER, root, n=20)
+    for s in (-1, 1):
+        fog_pocket(root, s, s * 575, 590, at_x(st, s * 575, 4), 70, w=130, h=90)
+    hung_plate(root, 0, 470, zf - 6, top - H + 60, TEXBLACK)
+    valance(root)
+    return root
+
+
+def bumper_taniguchi_square():
+    """TANIGUCHI square front bar (ors-taniguchi.co.jp: 2 mm sheet, about
+    3 kg, stock fogs relocatable, bolts to TANIGUCHI's own skid plate stays
+    and cannot be fitted without it). A short folded-plate bar, not a tube:
+    off one 3/4 photo with the plate and headlamp spacing as rulers, 145
+    tall, 130 deep, only as wide as the headlamps' outer edges (1230), its
+    last 100 mm chamfered back, the stock round fogs recessed at +-400; the
+    silver skid plate it needs is drawn under it."""
+    root = group('frontBumper_taniguchi_square')
+    W, top, H = 1230, 690, 145
+    st = front_stations(W, top, H, 130, cham=100)
+    xloft('body', st, TEXBLACK, root, r=5)
+    zf = at_x(st, 0, 4)
+    for s in (-1, 1):
+        fog_pocket(root, s, s * 400, 615, at_x(st, s * 400, 4), 70)
+    number_plate(root, 615, zf + 4)
+    box('skid', (0, 500, zf - 70), (760, 6, 200), ALU, root, bevel=2, rot=Matrix.Rotation(math.radians(-40), 3, 'X'))
+    valance(root)
+    return root
+
+
+def bumper_taniguchi_double():
+    """TANIGUCHI double-tube front bar (ors-taniguchi.co.jp: 'the middle is a
+    double tube, the sides are boxes that take the stock fog lamps', tube
+    48.6 x 2.3, about 9 kg). Off the maker's 3/4 photo (plate = 330): the two
+    tubes run only between the frame rails (+-450), at y 660 and 570; each
+    side is a square box about 300 x 145 x 130, its top level with the upper
+    tube, its outer end chamfered back toward the wing, a stock round fog in
+    its face at +-600. The plate stands on tabs in front of the tubes."""
+    root = group('frontBumper_taniguchi_double')
+    W, d, yu, yl = 1470, 48.6, 660, 570
+    top = yu + d / 2
+    zt = 1745 - d / 2 - 6
+    tube('upper', [(-450, yu, zt), (450, yu, zt)], d, TEXBLACK, root)
+    tube('lower', [(-450, yl, zt), (450, yl, zt)], d, TEXBLACK, root)
+    for s in (-1, 1):
+        tube(f'link{s}', [(s * 300, yl, zt), (s * 300, yu, zt)], 30, TEXBLACK, root)
+        a, b = (435, W / 2) if s > 0 else (-W / 2, -435)
+        st = front_stations(W, top, 145, 130, cham=110, x0=a, x1=b)
+        xloft(f'endBox{s}', st, TEXBLACK, root, r=5)
+        fog_pocket(root, s, s * 600, 600, at_x(st, s * 600, 4), 70)
+        box(f'plateTab{s}', (s * 110, 615, zt + d / 2), (24, 110, 8), TEXBLACK, root, bevel=1)
+    number_plate(root, 615, zt + d / 2 + 5)
+    valance(root)
     return root
 
 
@@ -2350,8 +2776,8 @@ def grille_damd_little_g_trad():
 
 
 def grille_damd_roots():
-    """JIMNY the ROOTS.: a body-colour panel with one wide opening split
-    into five cells by four upright ribs, chrome SUZUKI lettering above it,
+    """JIMNY the ROOTS.: a body-colour panel whose opening is three rows of
+    horizontal slots, chrome SUZUKI lettering on the band between the top two,
     and a small round amber marker outboard of each headlight."""
     root = group('grille_damd_roots')
     ow, oh = 600, 170
@@ -2360,12 +2786,13 @@ def grille_damd_roots():
     z = face_z(0)
     wire_mesh(root, BLACK, 0, 848, z - 16, ow - 10, oh - 10, pitch=9)
     box('backing', (0, 848, z - 28), (ow, oh, 3), RUBBER, root, bevel=0)
-    for k in range(4):
-        x = -ow / 2 + (k + 1) * ow / 5
-        box(f'rib{k}', (x, 848, z + 2), (22, oh - 6, 20), PAINT, root, bevel=4)
+    # three rows of horizontal slots (DAMD's photos), the chrome SUZUKI
+    # letters sitting on the wide band between the first and second rows
     box('frameTop', (0, 848 + oh / 2 + 8, z + 2), (ow + 16, 22, 20), PAINT, root, bevel=4)
     box('frameBot', (0, 848 - oh / 2 - 8, z + 2), (ow + 16, 22, 20), PAINT, root, bevel=4)
-    text('suzuki', 'SUZUKI', (0, 848 + oh / 2 + 44, z + 12), 54, 6, CHROME_TRIM, root,
+    box('bandLetters', (0, 848 + oh / 6, z + 2), (ow - 6, 44, 20), PAINT, root, bevel=4)
+    box('bandLow', (0, 848 - oh / 6 - 6, z + 2), (ow - 6, 18, 20), PAINT, root, bevel=4)
+    text('suzuki', 'SUZUKI', (0, 848 + oh / 6, z + 14), 38, 5, CHROME_TRIM, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
     for s in (-1, 1):
         lib.cylinder(f'mk{s}', (s * 612, 906, face_z(612) + 8), (0, 0, 1), 52, 24, PAINT, root, n=20)
@@ -2374,161 +2801,169 @@ def grille_damd_roots():
 
 
 def bumper_damd_little_d():
-    """little D. front, measured off DAMD's straight-on product shot: 1653
-    wide and flush with the wings, a 134 mm flat central face carrying the
-    stock round fogs at +-507 and a 734 x 72 mesh slot, square end blocks
-    212 wide wrapping back to the wing corners, and a gunmetal skid plate
-    with pressed teardrop dimples. Coarse matte black on the top platform and
-    the central face, gunmetal on the end blocks and the skid plate."""
+    """little D. front, measured off DAMD's straight-on product shot with the
+    headlamp (180) as the ruler, the grille's lower edge (y 735) checking it:
+    1510 across, a 170 mm flat central face (y 544-714) under a 16 mm top
+    deck that ends at the grille (730), carrying the stock round fogs at
+    +-473 and a 734 x 72 mesh slot; gunmetal end blocks about 180 wide in
+    front view whose backs are chamfered 45 deg round to the wing corners;
+    the plate hung off the face's lower edge over the top half of a 976 x
+    175 gunmetal skid with pressed teardrop dimples. Coarse matte black on
+    the deck and the central face."""
     root = group('frontBumper_damd_little_d')
     gun = material('DamdGunmetal', 0x4a4d52, rough=0.5, metal=0.6)
-    W, ytop, H = 1496, 720, 134
+    W, ytop, H = 1510, 714, 170
     y, zf = ytop - H / 2, 1772
-    inner = W / 2 - 212                                      # where the end blocks start
-    # flat central face
+    inner = W / 2 - 180                                      # where the end blocks start
     box('face', (0, y, zf - 60), (inner * 2, H, 120), TEXBLACK, root, bevel=5)
-    box('deck', (0, ytop + 16, zf - 70), (inner * 2, 34, 140), TEXBLACK, root, bevel=5)
-    # mesh slot across the middle
-    box('slotFrame', (0, 644, zf - 2), (734, 72, 14), TEXBLACK, root, bevel=3)
-    wire_mesh(root, BLACK, 0, 644, zf - 14, 720, 60, pitch=11)
+    box('deck', (0, ytop + 8, zf - 70), (inner * 2, 16, 140), TEXBLACK, root, bevel=4)
+    box('slotFrame', (0, 640, zf - 2), (734, 72, 14), TEXBLACK, root, bevel=3)
+    wire_mesh(root, BLACK, 0, 640, zf - 14, 720, 60, pitch=11)
     for k in (-1, 0, 1):
-        box(f'slotRib{k}', (k * 180, 644, zf - 4), (14, 64, 12), TEXBLACK, root, bevel=2)
+        box(f'slotRib{k}', (k * 180, 640, zf - 4), (14, 64, 12), TEXBLACK, root, bevel=2)
     for s in (-1, 1):
-        fog_lamp(root, s * 507, 658, zf + 2, TEXBLACK, dia=94)
-        # square end block, wrapped back onto the wing corner
-        ex = s * (inner + 106)
-        ez = min(zf, nose_z(abs(ex)) + 30)
-        box(f'endBlock{s}', (ex, y, ez - 60), (212, H, 130), gun, root, bevel=6)
-        box(f'endDeck{s}', (ex, ytop + 16, ez - 70), (212, 34, 150), TEXBLACK, root, bevel=5)
-        box(f'endSide{s}', (s * (W / 2 - 6), y, ez - 110), (14, H, 200), gun, root, bevel=5)
-    box('plate', (0, 586, zf + 6), (330, 165, 3), PLATE, root, bevel=1)
-    skid = box('skid', (0, 492, zf - 70), (1118, 198, 8), gun, root, bevel=4,
-               rot=Matrix.Rotation(math.radians(-24), 3, 'X'))
-    for k in range(8):                                       # shallow pressed teardrops
-        sx = -490 + k * 140
-        lib.cylinder(f'dimple{k}', (sx, 470, zf - 33), (0, 0.42, 1), 38, 4, gun, root, n=18)
-    for s in (-1, 1):
-        lib.cylinder(f'boss{s}', (s * 210, 540, zf - 11), (0, 0.42, 1), 34, 6, gun, root, n=18)
+        fog_lamp(root, s * 473, 645, zf + 2, TEXBLACK, dia=90)
+        a, b = (inner - 2, W / 2) if s > 0 else (-W / 2, -inner + 2)
+        es = front_stations(W, ytop + 16, H + 16, 130, stand=60, cham=160, zf=zf, x0=a, x1=b)
+        xloft(f'endBlock{s}', es, gun, root, r=6)
+    number_plate(root, 482, zf + 6)
+    # skid, raked 62 deg: its top edge meets the face's lower edge at the front
+    skid = box('skid', (0, 457, zf - 66), (976, 8, 198), gun, root, bevel=4,
+               rot=Matrix.Rotation(math.radians(-62), 3, 'X'))
+    for k in range(7):                                       # shallow pressed teardrops, below the plate
+        sx = -420 + k * 140
+        lib.cylinder(f'dimple{k}', (sx, 420, zf - 79), (0, -0.469, 0.883), 38, 4, gun, root, n=18)
     valance(root, corners=False)
     return root
 
 
 def rear_damd_little_d():
-    """little D. rear, measured off DAMD's straight-on shot: two layers --
-    an upper beam 1656 wide swelling into 486 mm end blocks, and a separate
-    lower beam set back and 47 mm below it. The stock lamps go entirely; the
-    kit's own domed round lamps take over, three a side plus a flat
-    reflector, all wired into the original harness. Coarse matte black."""
+    """little D. rear, measured off DAMD's straight-on shot (74littleD_REAR,
+    plate 330 = 130 px; DAMD quote 1656 full width, about 1615 straight on):
+    an upper beam 180 tall right under the tailgate swelling into end blocks
+    about 490 wide that wrap forward round the corners, and a lower beam only
+    1040 wide (between the mud flaps), 86 tall, set back directly under it.
+    The stock lamps go; the kit's own domed round lamps take over, three a
+    side plus a flat reflector, all wired into the original harness. The
+    plate sits on a step in the middle (DAMD's own shot shows it moved to
+    the tailgate, a separate kit). Coarse matte black."""
     root = group('rearBumper_damd_little_d_rear')
     amber = material('AmberLens', 0xe08a1e, rough=0.15)
-    red = material('TailRed', 0xc0161a, rough=0.18)
-    W, ytop, HB = 1462, 640, 133
-    zc, D = -1640, 140
-    zf = zc - D / 2
-    ymid = ytop - HB / 2
-    box('upper', (0, ymid, zc), (W - 972, HB, D - 30), TEXBLACK, root, bevel=6)
-    box('deck', (0, ytop + 16, zc + 10), (W, 34, D), TEXBLACK, root, bevel=5)
-    box('lower', (0, 417, zc + 26), (1378, 86, D - 40), TEXBLACK, root, bevel=6)
+    red = TAILRED
+    W, ytop, HB = 1615, REAR_TOP, 180
+    zf = REAR_FACE
+    inner = W / 2 - 490
+    xloft('upper', rear_stations(W, ytop, HB, 110, face=zf + 12, x0=-inner - 2, x1=inner + 2), TEXBLACK, root, r=6)
+    blocks = {}
     for s in (-1, 1):
-        ex = s * (W / 2 - 243)
-        box(f'endBlock{s}', (ex, ymid, zc - 6), (486, HB, D), TEXBLACK, root, bevel=8)
-        box(f'endSide{s}', (s * (W / 2 - 6), ymid, zc + 40), (14, HB, 170), TEXBLACK, root, bevel=5)
-        box(f'rubber{s}', (s * (W / 2 - 4), ymid, zf + 14), (20, HB - 20, 10), RUBBER, root, bevel=3)
-        # corner gusset that carries the reverse lamp and the flap bracket
-        prism(f'gusset{s}', [(507, zf + 6), (507, zf + 120), (398, zf + 120)], s * (W / 2 - 60), s * (W / 2 - 20), TEXBLACK, root)
+        a, b = (inner, W / 2) if s > 0 else (-W / 2, -inner)
+        blocks[s] = rear_stations(W, ytop, HB, 140, wrap=140, x0=a, x1=b)
+        xloft(f'endBlock{s}', blocks[s], TEXBLACK, root, r=8)
+    xloft('lower', rear_stations(1040, ytop - HB, 86, 100, face=zf + 30, wrap=0), TEXBLACK, root, r=6)
+    for s in (-1, 1):
         # the kit's own lamps: domed lenses, amber over red on a shallow
-        # diagonal, clear reverse out on the gusset, flat reflector below
+        # diagonal, clear reverse out at the corner, flat reflector below
         k = W / 1656.0                                       # the quoted x's are for DAMD's 1656 bar
         for (dx, yy, dia, mat_, dome) in ((703 * k, 573, 64, amber, True), (613 * k, 546, 64, red, True),
-                                          (757 * k, 471, 64, LENS, True), (453 * k, 430, 57, red, False)):
-            lib.cylinder(f'lampCan{s}{int(dx)}', (s * dx, yy, zf + 10), (0, 0, 1), dia + 12, 28, TEXBLACK, root, n=22)
-            lib.cylinder(f'lampRim{s}{int(dx)}', (s * dx, yy, zf - 6), (0, 0, 1), dia + 6, 6, CHROME, root, n=22)
-            lib.cylinder(f'lampLens{s}{int(dx)}', (s * dx, yy, zf - 10), (0, 0, 1), dia, 12 if dome else 4, mat_, root, n=22)
-            if dome:                                         # the lenses are domed, not flat
-                d = flatten(lib.sphere(f'lampDome{s}{int(dx)}', (s * dx, yy, zf - 6), dia, mat_, root), (s * dx, yy, zf - 6), 0.34)
-        box(f'mount{s}', (s * 330, ymid + 30, zc + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
-    box('plateStep', (0, 520, zc - 30), (420, 190, 60), TEXBLACK, root, bevel=5)
-    box('plate', (RIGHT * 60, 520, zf + 34), (330, 165, 3), PLATE, root, bevel=1)
+                                          (757 * k, 492, 58, LENS, True), (453 * k, 430, 57, red, False)):
+            z = at_x(blocks[s], s * dx, 3) if dx > inner else zf + 30
+            round_lamp(root, f'{s}{int(dx)}', s * dx, yy, z, dia, mat_, dome=dome)
+        box(f'rubber{s}', (s * (W / 2 - 60), ytop - HB / 2, at_x(blocks[s], s * (W / 2 - 60), 3) - 3), (40, HB - 30, 6), RUBBER, root, bevel=2)
+    rear_mounts(root, ytop - 60)
+    box('plateStep', (0, 520, zf + 12 - 4), (420, 190, 8), TEXBLACK, root, bevel=4)
+    box('plate', (RIGHT * 60, 520, zf + 12 - 9.5), (330, 165, 3), PLATE, root, bevel=1)
     for s in (-1, 1):
-        lib.cylinder(f'plateLamp{s}', (RIGHT * 60 + s * 120, 612, zf + 40), (0, 0, 1), 26, 16, CHROME, root, n=14)
+        lib.cylinder(f'plateLamp{s}', (RIGHT * 60 + s * 120, 612, zf + 12 - 12), (0, 0, 1), 26, 8, CHROME, root, n=14)
+    rear_valance(root)
     return root
 
 
 def bumper_damd_little_g_trad():
-    """little G. TRADITIONAL front: a flat steel beam with a band of close
-    vertical ribbing across its face, a chrome-framed amber SQUARE fog lamp
-    standing on the top edge at each end, and the plate hung off centre."""
+    """little G. TRADITIONAL front, off DAMD's fitted front photo with the
+    headlamp (180) as the ruler, +-30 mm; DAMD publish no sizes. A flat steel
+    beam 1600 across -- almost to the arches, its ends wrapping back -- 215
+    tall with its top under the grille, a band of close vertical ribbing
+    across the upper face, a chrome-framed amber Koito SQUARE fog set into
+    the upper face at each end (+-538), a mesh slot in the middle below the
+    ribbing, and the plate hung off-centre from the lower edge."""
     root = group('frontBumper_damd_little_g_trad')
-    y, zf, W, H, D = 585, 1745, 1428, 170, 140
-    xs = [-W / 2 + W * i / 12 for i in range(13)]
-    sweep('body', [(x, y, min(zf, nose_z(x) + 12) - D / 2) for x in xs], rounded_rect(D, H, 8, 4), TEXBLACK, root)
+    W, ytop, H, D = 1600, 713, 215, 140
+    st = front_stations(W, ytop, H, D, cham=130)
+    xloft('body', st, TEXBLACK, root)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * (W / 2 + 4), y, nose_z(W / 2) + 12 - D / 2), (10, H + 8, D + 8), TEXBLACK, root, bevel=3)
-        # Koito square fog on a chrome base, sitting on top of the beam
-        box(f'fogBase{s}', (s * 430, y + H / 2 + 16, zf - 44), (36, 34, 36), CHROME_TRIM, root, bevel=3)
-        box(f'fogHsg{s}', (s * 430, y + H / 2 + 70, zf - 36), (171, 92, 62), CHROME_TRIM, root, bevel=8)
-        box(f'fogLens{s}', (s * 430, y + H / 2 + 70, zf - 4), (141, 75, 5), AMBER, root, bevel=4)
-        lib.cylinder(f'fogLogo{s}', (s * 430, y + H / 2 + 70, zf - 1), (0, 0, 1), 34, 3, CHROME_TRIM, root, n=20)
-    for k in range(21):                                      # washboard ribbing across the face
-        bx = -450 + k * 45
-        box(f'ribV{k}', (bx, y + 20, min(zf, nose_z(bx) + 12) + 2), (12, H - 70, 10), TEXBLACK, root, bevel=2)
-    wire_mesh(root, BLACK, 0, y - 55, zf - 2, 300, 44, pitch=11)
-    box('plate', (RIGHT * 420, y - 6, zf + 10), (330, 165, 3), PLATE, root, bevel=1)
+        x = s * 538
+        z = at_x(st, x, 4)
+        box(f'fogHsg{s}', (x, 668, z - 6), (160, 90, 30), CHROME_TRIM, root, bevel=8)
+        box(f'fogLens{s}', (x, 668, z + 10), (134, 70, 5), AMBER, root, bevel=4)
+        lib.cylinder(f'fogLogo{s}', (x, 668, z + 13), (0, 0, 1), 30, 3, CHROME_TRIM, root, n=20)
+    for k in range(19):                                      # washboard ribbing across the face
+        bx = -405 + k * 45
+        box(f'ribV{k}', (bx, 650, at_x(st, bx, 4) + 2), (12, 90, 10), TEXBLACK, root, bevel=2)
+    zf = at_x(st, 0, 4)
+    box('meshBack', (0, 575, zf + 1), (340, 74, 4), RUBBER, root, bevel=2)
+    wire_mesh(root, BLACK, 0, 575, zf + 4, 326, 62, pitch=11)
+    number_plate(root, 466, at_x(st, RIGHT * 425, 4) + 5, RIGHT * 425)
     valance(root, corners=False)
     return root
 
 
 def rear_damd_little_g_trad():
     """DAMD little G. TRADITIONAL rear bar, from the fitting instructions and
-    product shots: 1650 mm across, matte black on every exposed face and
-    piano black in the recesses, carrying the kit's own truck-style lamp each
-    side (DAMD part E-476). The lens is 215 x 68 and reads, outboard to
-    inboard: amber indicator, a plain red reflector, a red stop/tail, then a
-    slightly proud clear reverse. Plate centred, its top 130 below the bar."""
+    DAMD's straight-on shot (74-TRA-REAR-2, plate = 139 px): 1650 mm along
+    the wrap, about 1570 straight on, 225 tall right under the tailgate, its
+    ends wrapping forward onto the flare corners (black side returns in
+    DAMD's shot); matte black on every exposed face and piano black in the
+    recesses, carrying the kit's own truck-style lamp each side (DAMD part
+    E-476) at +-526, 102 below the top. The lens is 215 x 68 and reads,
+    outboard to inboard: amber indicator, a plain red reflector, a red
+    stop/tail, then a slightly proud clear reverse. Plate centred, its top
+    118 below the bar's, hanging below the bar."""
     root = group('rearBumper_damd_little_g_trad_rear')
     piano = material('PianoBlack', 0x141416, rough=0.12, metal=0.25)
-    W, ytop, H, D, z = 1492, 640, 230, 150, -1650
-    y, zf = ytop - H / 2, z - 150 / 2
-    sweep('body', [(-W / 2, y, z), (W / 2, y, z)], rounded_rect(D, H, 10, 4), TEXBLACK, root)
-    box('ripple', (0, ytop - 26, zf + 4), (W - 120, 44, 10), piano, root, bevel=3)
+    W, ytop, H = 1570, REAR_TOP, 225
+    zf = REAR_FACE
+    st = rear_stations(W, ytop, H, 150, wrap=130)
+    xloft('body', st, TEXBLACK, root, r=10)
+    box('ripple', (0, ytop - 26, zf - 3), (W - 300, 44, 6), piano, root, bevel=3)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * (W / 2 + 4), y, z), (10, H + 6, D + 6), TEXBLACK, root, bevel=4)
-        ly = ytop - 105
-        box(f'recess{s}', (s * 540, ly, zf + 4), (345, 107, 12), piano, root, bevel=4)
-        box(f'bezel{s}', (s * 540, ly, zf - 3), (280, 100, 10), TEXBLACK, root, bevel=5)
-        box(f'lens{s}', (s * 540, ly, zf - 9), (215, 68, 6), TEXBLACK, root, bevel=2)
-        segs = ((617.5, 60, material('AmberLens', 0xe08a1e, rough=0.15)),
-                (562.8, 49, material('TailRed', 0xc0161a, rough=0.18)),
-                (513.2, 49, material('TailRed', 0xc0161a, rough=0.18)),
-                (460.5, 56, LENS))
+        ly, lx = ytop - 102, 526
+        box(f'recess{s}', (s * lx, ly, zf - 3), (345, 107, 6), piano, root, bevel=4)
+        box(f'bezel{s}', (s * lx, ly, zf - 8), (280, 100, 6), TEXBLACK, root, bevel=5)
+        box(f'lens{s}', (s * lx, ly, zf - 12), (215, 68, 4), TEXBLACK, root, bevel=2)
+        segs = ((77.5, 60, AMBER), (22.8, 49, TAILRED), (-26.8, 49, TAILRED), (-79.5, 56, LENS))
         for k, (dx, w, m) in enumerate(segs):
-            lib.cylinder(f'seg{s}{k}', (s * dx, ly, zf - 12 - (2 if k == 3 else 0)), (0, 0, 1),
+            lib.cylinder(f'seg{s}{k}', (s * (lx + dx), ly, zf - 15 - (2 if k == 3 else 0)), (0, 0, 1),
                          min(w - 4, 58), 4, m, root, n=22)
-        for (bx, by) in ((647, 0), (540, 44), (540, -44)):    # the lens screws
-            lib.cylinder(f'screw{s}{bx}{by}', (s * bx, ly + by, zf - 13), (0, 0, 1), 9, 4, STEEL, root, n=6)
-        box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), TEXBLACK, root, bevel=4)
-    box('plateStep', (0, ytop - 176, zf + 6), (400, 200, 10), piano, root, bevel=3)
-    box('plate', (0, ytop - 212, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
+        for (bx, by) in ((lx + 107, 0), (lx, 44), (lx, -44)):  # the lens screws
+            lib.cylinder(f'screw{s}{bx}{by}', (s * bx, ly + by, zf - 16), (0, 0, 1), 9, 4, STEEL, root, n=6)
+    rear_mounts(root, ytop - 80)
+    py = ytop - 118 - 82.5
+    box('plateStep', (0, py, zf - 3), (400, 200, 6), piano, root, bevel=3)
+    box('plate', (0, py, zf - 7.5), (330, 165, 3), PLATE, root, bevel=1)
+    rear_valance(root)
     return root
 
 
 def bumper_damd_roots():
-    """JIMNY the ROOTS. front: two layers -- an ivory pressed-steel beam
-    with a row of small slots along it, over a black lower valance carrying
-    the plate in the centre and a small chrome round fog each side."""
+    """JIMNY the ROOTS. front, off DAMD's straight-on shot with the plate
+    (330) as the ruler, +-25 mm: two layers -- an ivory pressed-steel beam
+    1400 across and 142 tall under the grille, its ends wrapping back along
+    the wings and tapering to a point with the lower edge rising, pierced by
+    two rows of three long slots in the middle; over a black lower valance
+    about 1015 wide that narrows downward, carrying the plate in the centre
+    and a 100 mm chrome round fog each side at +-432."""
     root = group('frontBumper_damd_roots')
-    y, zf, W, H, D = 640, 1745, 1444, 120, 110
-    xs = [-W / 2 + W * i / 12 for i in range(13)]
-    sweep('beam', [(x, y, min(zf, nose_z(x) + 10) - D / 2) for x in xs], rounded_rect(D, H, 8, 3), IVORY, root)
+    W, ytop, H, D = 1400, 716, 142, 110
+    st = front_stations(W, ytop, H, D, stand=10, cham=170, rise=70, dmin=24)
+    xloft('beam', st, IVORY, root, r=8)
+    for yy in (665, 625):                                    # two rows of long pressed slots
+        for (cx, w) in ((-262, 200), (0, 300), (262, 200)):
+            box(f'slot{yy}{cx}', (cx, yy, at_x(st, cx, 4) + 1), (w, 25, 8), RUBBER, root, bevel=4)
+    zv = at_x(st, 0, 4) - 30                                 # valance face, set back
+    slab('valance', [(-507, 573), (507, 573), (450, 366), (-450, 366)], zv - 100, zv, TEXBLACK, root)
+    number_plate(root, 508, zv + 2)
     for s in (-1, 1):
-        box(f'endCap{s}', (s * (W / 2 + 4), y, nose_z(W / 2) + 10 - D / 2), (10, H + 8, D + 8), IVORY, root, bevel=3)
-    for k in range(17):                                      # pressed slots along the beam
-        bx = -560 + k * 70
-        box(f'slot{k}', (bx, y, min(zf, nose_z(bx) + 10) + 2), (34, 22, 10), RUBBER, root, bevel=2)
-    box('valanceBox', (0, y - 165, zf - 96), (1380, 210, 130), TEXBLACK, root, bevel=10)
-    box('plate', (0, y - 165, zf - 28), (330, 165, 3), PLATE, root, bevel=1)
-    for s in (-1, 1):
-        fog_lamp(root, s * 420, y - 165, min(zf, nose_z(420)) - 30, CHROME_TRIM, dia=86)
+        fog_lamp(root, s * 432, 503, zv + 4, CHROME_TRIM, dia=100)
     return root
 
 
@@ -2575,145 +3010,162 @@ def grille_urnieta_1970():
 
 
 def bumper_urnieta_salado():
-    """SALADO front bumper (UN-JIMNY-FB-001), drawn 1426 x 670: a deep winch
-    bar with a U-shaped bull bar on two uprights, a recessed light pocket at
-    each end behind a mesh guard, an exposed winch plate with a hawse
-    fairlead, and a bolted skid plate under it. 42.8 kg of steel and alloy."""
+    """SALADO front bumper (UN-JIMNY-FB-001), drawn 1426 x 670 (42.8 kg);
+    every size below is measured off that drawing with 1426 as the scale
+    (+-15 mm): a 155 mm winch bar 1426 across with its ends wrapped back, a
+    grille guard loop 1395 wide of 42 mm tube whose lower run sits right on
+    the bar and whose top is 295 above the bar face, two inner uprights at
+    +-352, a recessed 277 x 128 light pocket at each end (+-573) holding a
+    small square mesh-guarded lamp, and a 705 wide winch box hanging 210
+    below the bar with a hawse fairlead and a bolted skid. The fitted height
+    is not drawn; the bar's top (678) puts the guard's lower run against
+    the grille's bottom edge, as on the 1970 bar from the same maker."""
     root = group('frontBumper_urnieta_salado')
-    W, y, zf = 1300, 566, 1768
-    D, H = 168, 150
-    xs = [-W / 2 + W * i / 12 for i in range(13)]
-    sweep('body', [(x, y, min(zf, nose_z(x) + 16) - D / 2) for x in xs], rounded_rect(D, H, 16, 4), TEXBLACK, root)
+    W, y, zf, D, H = 1426, 600, 1768, 168, 155
+    top, bot = y + H / 2, y - H / 2
+    st = front_stations(W, top, H, D, stand=16, cham=110, zf=zf)
+    xloft('body', st, TEXBLACK, root, r=16)
     for s in (-1, 1):
-        ez = min(zf, nose_z(W / 2) + 16)
-        box(f'endCap{s}', (s * (W / 2 + 4), y, ez - D / 2), (10, H + 6, D + 6), TEXBLACK, root, bevel=5)
-        # light pocket: a recessed rectangle behind a mesh stone guard
-        px = s * 480
-        pz = min(zf, nose_z(480) + 16)
-        box(f'pocket{s}', (px, y + 6, pz - 12), (262, 92, 24), BLACK, root, bevel=9)
-        box(f'lens{s}', (px, y + 6, pz - 2), (228, 64, 6), LENS, root, bevel=4)
-        wire_mesh(root, TEXBLACK, px, y + 6, pz + 4, 224, 62, pitch=12, bar=3)
-        # upright from the bar up to the hoop
-        box(f'postFoot{s}', (s * 340, y + 46, 1732), (62, 24, 62), TEXBLACK, root, bevel=4)
-    # the grille guard: a closed rounded-rectangle loop sitting in front of
-    # the grille only, its legs inboard of the headlights so the lamps stay
-    # clear. The loop does not reach the ground -- only two inner uprights
-    # run past it and down onto the bumper.
-    gx, gtop, gbot, hz = 640, 976, 716, 1734
-    tube('guard', [(-gx, gbot, hz), (-gx, gtop, hz), (gx, gtop, hz), (gx, gbot, hz), (-gx, gbot, hz)],
-         46, TEXBLACK, root, bend=92)
+        px = s * 573
+        pz = at_x(st, px, 4)
+        box(f'pocket{s}', (px, y, pz - 2), (277, 128, 8), BLACK, root, bevel=9)
+        box(f'lampBody{s}', (px, y, pz + 4), (112, 94, 16), BLACK, root, bevel=6)
+        box(f'lens{s}', (px, y, pz + 12), (100, 82, 3), LENS, root, bevel=3)
+        wire_mesh(root, TEXBLACK, px, y, pz + 16, 100, 82, pitch=12, bar=3)
+        box(f'postFoot{s}', (s * 352, top + 12, 1732), (62, 24, 62), TEXBLACK, root, bevel=4)
+    # the grille guard: a closed loop in front of the grille, its legs just
+    # outboard of the headlamps and swept back toward the wing; only the two
+    # inner uprights run down onto the bar
+    gx, gtop, gbot, hz, hzl = 676, 952, top + 21, 1734, 1650
+    loop = [(0, gbot, hz), (420, gbot, hz), (gx, gbot, hzl), (gx, gtop, hzl), (420, gtop, hz),
+            (-420, gtop, hz), (-gx, gtop, hzl), (-gx, gbot, hzl), (-420, gbot, hz), (0, gbot, hz)]
+    tube('guard', loop, 42, TEXBLACK, root, bend=92)
     for s in (-1, 1):
-        px2 = s * 340
-        tube(f'upright{s}', [(px2, y + 58, hz + 16), (px2, gtop + 4, hz + 16)], 42, TEXBLACK, root)
+        px2 = s * 352
+        tube(f'upright{s}', [(px2, top + 10, hz + 16), (px2, gtop + 4, hz + 16)], 42, TEXBLACK, root)
         for yy in (gtop - 14, gbot + 14):
             box(f'clamp{s}{yy}', (px2, yy, hz + 8), (54, 40, 44), TEXBLACK, root, bevel=5)
-    hy = gtop
-    text('salado', 'Salado', (-430, y - 128, zf + 2), 42, 4, UNT_TEXT, root)
-    text('unt', 'URNIETA', (452, gbot + 24, hz + 24), 22, 3, UNT_TEXT, root,
+    text('salado', 'Salado', (-290, bot + 24, zf + 2), 40, 4, UNT_TEXT, root)
+    text('unt', 'URNIETA', (290, top - 26, zf + 2), 24, 3, UNT_TEXT, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
-    # winch plate, fairlead and skid
-    box('plate', (0, y - 6, zf + 6), (330, 165, 3), PLATE, root, bevel=1)
-    box('winchBox', (0, y - 158, zf - 120), (640, 176, 210), TEXBLACK, root, bevel=6)
-    lib.cylinder('winchDrum', (0, y - 150, zf - 40), (1, 0, 0), 120, 420, BLACK, root, n=22)
+    for k in range(6):                                       # bolt heads along the top
+        lib.cylinder(f'wbolt{k}', (-250 + k * 100, top + 2, zf - 40), (0, 1, 0), 15, 8, STEEL, root, n=6)
+    number_plate(root, y - 4, zf + 6)
+    # winch box hanging 210 below the bar, fairlead and skid
+    wy = bot - 105
+    box('winchBox', (0, wy, zf - 120), (705, 210, 200), TEXBLACK, root, bevel=6)
+    box('fairlead', (0, wy + 10, zf - 14), (240, 70, 16), STEEL, root, bevel=14)
+    box('hawse', (0, wy + 10, zf - 8), (150, 32, 10), RUBBER, root, bevel=8)
     for s in (-1, 1):
-        lib.cylinder(f'winchEnd{s}', (s * 220, y - 150, zf - 40), (1, 0, 0), 150, 70, TEXBLACK, root, n=22)
-        box(f'ledBar{s}', (s * 300, y - H / 2 - 24, zf - 14), (180, 40, 34), BLACK, root, bevel=5)
-        box(f'ledLens{s}', (s * 300, y - H / 2 - 24, zf + 4), (154, 22, 5), LENS, root, bevel=2)
-        box(f'shackle{s}', (s * 250, y - 250, zf - 70), (44, 82, 40), STEEL, root, bevel=8)
-    box('winchPlate', (0, y - 150, zf - 96), (620, 190, 14), STEEL, root, bevel=3)
-    box('fairlead', (0, y - 246, zf - 30), (240, 70, 16), STEEL, root, bevel=14)
-    box('hawse', (0, y - 246, zf - 24), (150, 32, 10), RUBBER, root, bevel=8)
-    for k in range(6):
-        lib.cylinder(f'wbolt{k}', (-250 + k * 100, y + 66, zf - 8), (0, 0, 1), 15, 8, STEEL, root, n=6)
-    box('skid', (0, y - 258, zf - 150), (760, 8, 280), STEEL, root, bevel=3,
+        box(f'ledBar{s}', (s * 250, wy + 64, zf - 16), (150, 34, 20), BLACK, root, bevel=5)
+        box(f'ledLens{s}', (s * 250, wy + 64, zf - 5), (128, 18, 4), LENS, root, bevel=2)
+        box(f'shackle{s}', (s * 250, wy - 50, zf - 14), (44, 82, 40), STEEL, root, bevel=8)
+    box('skid', (0, wy - 120, zf - 150), (760, 8, 260), STEEL, root, bevel=3,
         rot=Matrix.Rotation(math.radians(-26), 3, 'X'))
     valance(root, corners=False)
     return root
 
 
 def rear_urnieta_salado():
-    """SALADO rear bumper (UN-JIMNY-FB-002), drawn 216 tall: a half-height bar
-    whose ends wrap back round the corners, a lit window each side (one badged
-    Salado, one URNIETA), a flat plate panel in the middle and a step pad
-    under each side. 16.4 kg."""
+    """SALADO rear bumper (UN-JIMNY-FB-002), 16.4 kg. The drawing's 1816 is
+    the developed length and its 216 includes the plate panel; scaling it by
+    its own 216 mark gives about 1600 straight on and a 150 mm face, and the
+    fitted photo agrees (bar about body width, top at the tailgate's bottom
+    edge). The ends wrap forward onto the flare corners as 165 mm blocks; a
+    230 x 90 lamp frame each side at +-560, 84 below the top; a PIAA
+    rectangular lamp inboard on the vehicle-left side only and the URNIETA
+    oval badge on the vehicle-right; the Salado script on the left lamp's
+    top frame; a 455 x 165 plate panel hanging 65 below the bar. No steps --
+    the drawing and the photos show mounting brackets there."""
     root = group('rearBumper_urnieta_salado_rear')
-    W, ytop, H, D, z = 1414, 620, 216, 150, -1648
-    y, zf = ytop - H / 2, z - 150 / 2
-    path = [(-W / 2, y, z + 150), (-W / 2 + 150, y, z), (W / 2 - 150, y, z), (W / 2, y, z + 150)]
-    sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 14, 4), TEXBLACK, root)
+    W, ytop, H = 1600, REAR_TOP, 150
+    zf = REAR_FACE
+    st = rear_stations(W, ytop, H, 150, wrap=120, drop=15)
+    xloft('body', st, TEXBLACK, root, r=14)
+    ly = ytop - 84
     for s in (-1, 1):
-        box(f'window{s}', (s * 520, y + 14, zf + 6), (300, 96, 16), BLACK, root, bevel=8)
-        box(f'lens{s}', (s * 520, y + 14, zf - 4), (268, 66, 6), material('TailRed', 0xc0161a, rough=0.2), root, bevel=4)
-        box(f'badge{s}', (s * 520, y - 54, zf - 2), (190, 26, 5), UNT_TEXT, root, bevel=1)
-        box(f'aux{s}', (s * 300, y + 14, zf + 2), (150, 84, 10), BLACK, root, bevel=6)
-        # step pad slung under the bar on two brackets
-        box(f'step{s}', (s * 470, y - H / 2 - 30, z + 10), (300, 12, 190), ALU_CHEQ, root, bevel=2)
-        for k in (-1, 1):
-            box(f'stepArm{s}{k}', (s * 470 + k * 110, y - H / 2 - 16, z + 10), (16, 40, 150), TEXBLACK, root, bevel=2)
-        box(f'endPlug{s}', (s * (W / 2 - 24), y, z + 118), (14, 40, 26), BLACK, root, bevel=6)
-    box('platePanel', (0, y - 24, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
-    box('plate', (0, y - 24, zf - 1), (330, 165, 3), PLATE, root, bevel=1)   # sits ON the panel, not 1.5 mm off it
+        x = s * 560
+        box(f'window{s}', (x, ly, zf - 3), (230, 90, 6), BLACK, root, bevel=8)
+        box(f'lens{s}', (x, ly, zf - 7), (200, 56, 4), TAILRED, root, bevel=4)
+    xl = -RIGHT                                              # vehicle left
+    box('aux', (xl * 367, ly, zf - 3), (150, 60, 6), BLACK, root, bevel=5)
+    box('auxLens', (xl * 367, ly, zf - 7), (130, 40, 3), LENS, root, bevel=3)
+    box('badge', (RIGHT * 363, ly, zf - 3), (130, 34, 5), UNT_TEXT, root, bevel=14)
+    sc = text('salado', 'Salado', (xl * 560, ly + 56, zf - 3), 24, 3, UNT_TEXT, root)
+    sc.rotation_euler = (0, 0, math.pi)                      # reads from behind
+    box('platePanel', (0, ytop - 216 + 82.5, zf - 4), (455, 165, 8), TEXBLACK, root, bevel=5)
+    box('plate', (0, ytop - 216 + 82.5, zf - 9.5), (330, 165, 3), PLATE, root, bevel=1)
+    rear_mounts(root, ytop - 60)
+    rear_valance(root)
     return root
 
 
 def bumper_urnieta_1970():
-    """1970 front bumper (UN-JIMNY-FB-027), drawn 1547 x 331: a slim beam
-    whose ends sweep back into winged corners with three vent slots each, a
-    louvred centre panel carrying URNIETA and a 1970 SERIES badge with a lamp
-    bracket either side, and a flat lower panel with two tow shackles. 21 kg,
-    plastic body on a full metal skid."""
+    """1970 front bumper (UN-JIMNY-FB-027), drawn 1547 x 331, 21 kg: a slim
+    beam 1547 across -- flush with the arches -- whose ends sweep back into
+    winged corners with three vent slots each, a louvred centre panel 935
+    wide carrying URNIETA and a 1970 SERIES badge, a lamp bracket each side
+    at +-382, and a flat lower panel about 770 x 220 with two tow shackles at
+    +-330 and the plate on it. W and the 331 overall are the drawing's; the
+    rest is off the straight-on product photo scaled by 1547 (+-20 mm), and
+    the fitted height off the fitted photo (headlamp 180 as the ruler): the
+    beam's top meets the grille's bottom edge."""
     root = group('frontBumper_urnieta_1970')
-    W, y, zf, D, H = 1434, 626, 1762, 118, 102
-    xs = [-W / 2 + W * i / 12 for i in range(13)]
-    sweep('body', [(x, y, min(zf, nose_z(x) + 10) - D / 2) for x in xs], rounded_rect(D, H, 12, 4), TEXBLACK, root)
-    box('centre', (0, y, zf - 6), (840, 86, 20), TEXBLACK, root, bevel=5)
+    W, y, zf, D, H = 1547, 650, 1762, 118, 125
+    top, bot = y + H / 2, y - H / 2
+    st = front_stations(W, top, H, D, stand=10, cham=150, drop=20, zf=zf)
+    xloft('body', st, TEXBLACK, root, r=12)
+    box('centre', (0, y, zf - 6), (935, H - 20, 20), TEXBLACK, root, bevel=5)
     for k in range(6):                                       # louvres across the centre panel
-        box(f'louvre{k}', (0, y - 32 + k * 13, zf + 6), (560, 6, 9), TEXBLACK, root, bevel=1)
-    box('badge1970', (272, y - 4, zf + 10), (168, 74, 8), TEXBLACK, root, bevel=6)
-    text('n1970', '1970', (272, y + 4, zf + 15), 40, 4, UNT_TEXT, root,
+        box(f'louvre{k}', (0, y - 34 + k * 14, zf + 6), (220, 6, 9), TEXBLACK, root, bevel=1)
+    box('badge1970', (200, y - 4, zf + 10), (150, 70, 8), TEXBLACK, root, bevel=6)
+    text('n1970', '1970', (200, y + 4, zf + 15), 38, 4, UNT_TEXT, root,
          font='/System/Library/Fonts/Supplemental/Arial Bold.ttf')
-    box('unt', (-232, y + 2, zf + 12), (104, 22, 6), UNT_TEXT, root, bevel=1)
+    box('unt', (-200, y + 2, zf + 12), (104, 22, 6), UNT_TEXT, root, bevel=1)
     for s in (-1, 1):
-        box(f'lampBrk{s}', (s * 470, y + 2, zf + 8), (190, 62, 12), TEXBLACK, root, bevel=4)
-        box(f'piaa{s}', (s * 470, y + 2, zf + 15), (150, 34, 8), BLACK, root, bevel=3)
-        box(f'piaaLens{s}', (s * 470, y + 2, zf + 19), (128, 22, 4), LENS, root, bevel=2)
-        ez = min(zf, nose_z(W / 2 - 90) + 10)
-        box(f'wing{s}', (s * (W / 2 - 90), y + 16, ez - 60), (180, 120, 150), TEXBLACK, root, bevel=16)
-        for k in range(3):                                   # vent slots in the wing
-            box(f'vent{s}{k}', (s * (W / 2 - 150), y - 8 + k * 26, ez + 4), (80, 12, 10), RUBBER, root, bevel=2)
-        box(f'shackle{s}', (s * 220, y - 128, zf - 22), (54, 92, 46), STEEL, root, bevel=8)
-        lib.cylinder(f'shacklePin{s}', (s * 220, y - 112, zf - 22), (1, 0, 0), 20, 66, STEEL, root, n=12)
-    box('lowerPanel', (0, y - 140, zf - 40), (1020, 210, 14), TEXBLACK, root, bevel=4)
-    box('plate', (0, y - 150, zf - 30), (330, 165, 3), PLATE, root, bevel=1)
+        box(f'lampBrk{s}', (s * 382, y + 2, zf + 8), (145, 55, 12), TEXBLACK, root, bevel=4)
+        box(f'piaa{s}', (s * 382, y + 2, zf + 15), (118, 32, 8), BLACK, root, bevel=3)
+        box(f'piaaLens{s}', (s * 382, y + 2, zf + 19), (100, 22, 4), LENS, root, bevel=2)
+        for k in range(3):                                   # vent slots in the winged end
+            vx = s * (W / 2 - 100)
+            box(f'vent{s}{k}', (vx, y - 20 + k * 26, at_x(st, vx, 4) + 1), (70, 12, 8), RUBBER, root, bevel=2)
+        box(f'shackle{s}', (s * 330, bot - 150, zf - 22), (54, 92, 46), STEEL, root, bevel=8)
+        lib.cylinder(f'shacklePin{s}', (s * 330, bot - 134, zf - 22), (1, 0, 0), 20, 66, STEEL, root, n=12)
+    box('lowerPanel', (0, bot - 110, zf - 40), (770, 220, 14), TEXBLACK, root, bevel=4)
+    box('plate', (0, 497, zf - 31.5), (330, 165, 3), PLATE, root, bevel=1)
     valance(root, corners=False)
     return root
 
 
 def rear_urnieta_1970():
-    """1970 rear bumper (UN-JIMNY-FB-028), drawn 1617 x 265: half height,
-    ends wrapped back, and the line's signature -- two round lamps a side
-    (the product page calls them GT-R inspired) beside a rectangular recess,
-    with a lit URNIETA badge panel on the right and the plate in the middle."""
+    """1970 rear bumper (UN-JIMNY-FB-028), drawn 1617 x 265, 8.4 kg; the 265
+    includes the plate bracket. Off the MRK product photos (ID=2219) with the
+    plate as the ruler: about 1600 straight on, a 150 mm face whose top
+    reaches the tailgate's bottom edge (no separate top rail), ends wrapped
+    forward, and the line's signature round lamps -- 62 mm lenses in 76 mm
+    bezels, AMBER outboard, red inboard -- then inboard of them a PIAA
+    rectangular lamp on the vehicle-left and a louvred vent carrying the
+    URNIETA badge on the vehicle-right. The plate hangs on a bracket below
+    the bar. Mud flaps, not steps, under the ends."""
     root = group('rearBumper_urnieta_1970_rear')
-    red = material('TailRed', 0xc0161a, rough=0.18)
-    W, ytop, H, D, z = 1421, 606, 205, 128, -1648
-    y, zf = ytop - H / 2, z - 140 / 2
-    path = [(-W / 2, y, z + 140), (-W / 2 + 140, y, z), (W / 2 - 140, y, z), (W / 2, y, z + 140)]
-    sweep('body', [tuple(p) for p in fillet(path, 36, steps=3)], rounded_rect(D, H, 14, 4), TEXBLACK, root)
-    box('rail', (0, ytop + 16, z + 40), (1180, 34, 120), TEXBLACK, root, bevel=4)
+    W, ytop, H = 1600, REAR_TOP, 150
+    zf = REAR_FACE
+    st = rear_stations(W, ytop, H, 128, wrap=100)
+    xloft('body', st, TEXBLACK, root, r=14)
+    y = ytop - H / 2
     for s in (-1, 1):
-        for k, dx in enumerate((618, 512)):                  # the two round lamps
-            lib.cylinder(f'lampCan{s}{k}', (s * dx, y + 6, zf + 16), (0, 0, 1), 92, 34, TEXBLACK, root, n=24)
-            lib.cylinder(f'lampRim{s}{k}', (s * dx, y + 6, zf - 2), (0, 0, 1), 88, 10, CHROME, root, n=24)
-            lib.cylinder(f'lampLens{s}{k}', (s * dx, y + 6, zf - 10), (0, 0, 1), 76, 10, red, root, n=24)
-            d = flatten(lib.sphere(f'lampDome{s}{k}', (s * dx, y + 6, zf - 14), 76, red, root), (s * dx, y + 6, zf - 14), 0.34)
-        box(f'recess{s}', (s * 372, y + 6, zf + 8), (150, 84, 14), BLACK, root, bevel=6)
-        box(f'step{s}', (s * 470, y - H / 2 - 24, z + 10), (250, 12, 170), ALU_CHEQ, root, bevel=2)
-        box(f'endPlug{s}', (s * (W / 2 - 22), y, z + 112), (14, 36, 24), BLACK, root, bevel=6)
-    box('badgePanel', (RIGHT * 250, y + 6, zf + 4), (200, 60, 10), BLACK, root, bevel=4)
-    box('badgeText', (RIGHT * 250, y + 6, zf - 2), (150, 22, 4), UNT_TEXT, root, bevel=1)
-    box('platePanel', (0, y - 16, zf + 8), (430, 190, 16), TEXBLACK, root, bevel=5)
-    box('plate', (0, y - 16, zf - 3), (330, 165, 3), PLATE, root, bevel=1)
+        for k, (dx, m) in enumerate(((W / 2 - 110, AMBER), (W / 2 - 230, TAILRED))):
+            round_lamp(root, f'{s}{k}', s * dx, y + 6, at_x(st, s * dx, 3), 62, m)
+    xl = -RIGHT                                              # vehicle left
+    box('piaa', (xl * 420, y + 6, zf - 3), (160, 55, 6), BLACK, root, bevel=4)
+    box('piaaLens', (xl * 420, y + 6, zf - 7), (140, 36, 3), LENS, root, bevel=3)
+    box('vent', (RIGHT * 420, y + 6, zf - 3), (160, 60, 6), BLACK, root, bevel=4)
+    for k in range(4):
+        box(f'louvre{k}', (RIGHT * 420, y - 15 + k * 12, zf - 7), (150, 4, 3), TEXBLACK, root, bevel=0.5)
+    box('badgeText', (RIGHT * 420, y + 6, zf - 9), (110, 18, 3), UNT_TEXT, root, bevel=1)
+    hung_plate(root, 0, 440, zf - 3, ytop - H, TEXBLACK, rear=True)
+    rear_mounts(root, ytop - 60)
+    rear_valance(root)
     return root
 
 
@@ -2724,7 +3176,7 @@ def side_bar_urnieta_salado():
     its top (URNIETA printed on it, a Salado badge near the rear) and tubular
     arms back to the chassis -- not a chequer-plate step."""
     root = group('sideStep_urnieta_salado')
-    z0, z1, ty = -555, 690, 330
+    z0, z1, ty = -555, 640, 330      # the front kick-up clears a 225/75R16 (its back edge z 767)
     for s in (-1, 1):
         xo = s * 796
         tube(f'bar{s}', [(s * 700, ty + 84, z0 - 58), (xo, ty, z0 + 50), (xo, ty, z1 - 50), (s * 700, ty + 84, z1 + 58)],
@@ -3012,83 +3464,307 @@ def rack_wood(size='half'):
     return root
 
 
-def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', steps=False, mat=None):
-    """kind: 'tube' or 'plate'; lamps: 'wings' (plate housings keeping the
-    stock lamps), 'round' (four small round lamps in the bar), 'housing'
-    (recessed boxes), 'none'."""
-    root = group(f'rearBumper_{pid}')
-    mat = mat or TEXBLACK
-    z = -1650
-    if lamps == 'klc':
-        z = -1640                                            # just proud of the lamps
-    if kind == 'tube':
-        tube('bar', [(-W / 2, y, z), (W / 2, y, z)], tube_d, mat, root)
-        if lamps != 'klc':                                   # the KLC bar is a bare round tube, no end blocks
-            for s in (-1, 1):
-                box(f'endCap{s}', (s * (W / 2 + 5), y, z), (12, tube_d + 20, tube_d + 20), mat, root, bevel=3)
-    else:
-        path = [(-W / 2 - 60, y, z + 150), (-W / 2, y, z), (W / 2, y, z), (W / 2 + 60, y, z + 150)]
-        sweep('body', [tuple(p) for p in fillet(path, 40, steps=3)], rounded_rect(D, H, 10, 3), mat, root)
+def rear_damd_roots():
+    """JIMNY the ROOTS. rear bumper + extension (DAMD publish no sizes; off
+    their straight-on photo, plate 330 = 137 px): a slim ivory beam 1460
+    across and 125 tall right up under the tailgate, ends cut square with
+    black corner pieces behind them, two small round lamps a side (amber
+    outboard at +-630, red at +-525), and a black extension panel 1085 x 140
+    set back under the beam carrying the plate and a small red reflector
+    each side -- the extension is half of what the catalogue entry sells."""
+    root = group('rearBumper_damd_roots_rear')
+    W, top, H = 1460, REAR_TOP, 125
+    zf = REAR_FACE
+    st = rear_stations(W, top, H, 110, wrap=0)
+    xloft('beam', st, IVORY, root, r=8)
     for s in (-1, 1):
-        box(f'mount{s}', (s * 330, y + 30, z + 110), (70, 100, 220), mat, root, bevel=4)
-        if lamps == 'wings':
-            box(f'wing{s}', (s * 513, 545, -1568), (400, 250, 8), mat, root, bevel=3)
-            for (cx, cy, sx, sy) in ((0, 76, 370, 12), (0, -76, 370, 12), (-180, 0, 12, 160), (180, 0, 12, 160)):
-                box(f'lampFrame{s}{cx}{cy}', (s * 513 + cx, 518 + cy, -1596), (sx, sy, 20), mat, root, bevel=2)
-        elif lamps == 'klc':
-            # the car's own tail lamps stay; the bar only carries a hook each
-            # side. The hook has to bite into the tube -- hung 150 mm below it
-            # with nothing between, it read as a red tag floating in mid-air.
-            box(f'hook{s}', (s * 330, y - 72, z), (14, 116, 54), RED, root, bevel=4, rot=Matrix.Rotation(s * 0.25, 3, 'Z'))
-            # With the stock bumper gone the stock lamps need something to
-            # sit in: a flat backing plate behind each one (x +-513, y 518)
-            # and a strap down to the tube, as KLC's own photos show.
-            box(f'lampPlate{s}', (s * 513, 518, -1556), (330, 120, 8), mat, root, bevel=3)
-            # a flat strap from the plate's top edge up and back to the tube
-            tube(f'lampStrap{s}', [(s * 513, 574, -1560), (s * 513, y - tube_d / 2 + 10, z)], 22, mat, root)
-        elif lamps == 'housing':
-            box(f'lampBox{s}', (s * 513, 518, -1560), (380, 170, 90), mat, root, bevel=4)
-        elif lamps == 'round':
-            # sit them on the bar's rear FACE, and space them off its end, so
-            # they neither sink into the bar nor drift as the bar changes width
-            zr = z - (D if kind == 'plate' else tube_d) / 2
-            for k, xx in enumerate((s * (W / 2 - 70), s * (W / 2 - 180))):
-                lib.cylinder(f'lampHsg{s}{k}', (xx, y, zr + 18), (0, 0, 1), 78, 44, BLACK, root, n=24)
-                lib.cylinder(f'lampRim{s}{k}', (xx, y, zr - 4), (0, 0, 1), 74, 6, CHROME, root, n=24)
-                lib.cylinder(f'lampLens{s}{k}', (xx, y, zr - 9), (0, 0, 1), 66, 6, material('TailRed', 0xc0161a, rough=0.2), root, n=24)
-                d = flatten(lib.sphere(f'lampDome{s}{k}', (xx, y, zr - 8), 66, material('TailRed', 0xc0161a, rough=0.2), root), (xx, y, zr - 8), 0.3)
-        if steps:
-            box(f'step{s}', (s * (W / 2 - 120), y + H / 2 + 4, z + 20), (240, 6, 160), ALU_CHEQ, root, bevel=1)
-    if lamps == 'klc':
-        # Plate on two tabs right under the tube. Every dimension here is
-        # measured off the tube's own underside and rear face so the tabs
-        # always bite into the tube and the plate always sits against the
-        # tabs -- the old absolute offsets left visible daylight between all
-        # three once the bar's diameter changed.
-        ty, tz = y - tube_d / 2, z - tube_d / 2
-        for s in (-1, 1):
-            box(f'plateTab{s}', (s * 110, ty - 38, tz - 12), (24, 96, 34), mat, root, bevel=1)
-        box('plate', (0, ty - 92, tz - 27), (330, 165, 3), PLATE, root, bevel=1)
-    else:
-        # on the bar's own rear face: the bars now stay under the spare, and
-        # the plate left at the old height ended up hidden behind them
-        ph = min(165, H - 20)
-        box('plate', (0, y, z - D / 2 - 3), (330, ph, 4), PLATE, root, bevel=1)
-    if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
-        box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
-        for s in (-1, 1):
-            box(f'corner{s}', (s * min(740, W / 2 - 30), 520, -1545), (50, 240, 150), mat, root, bevel=6,  # clear of the tyre
- rot=Matrix.Rotation(math.radians(-s * 25), 3, 'Z'))
+        box(f'corner{s}', (s * (W / 2 - 12), top - 70, -1522), (60, 150, 96), TEXBLACK, root, bevel=6)
+        round_lamp(root, f'{s}a', s * 630, top - H / 2, zf, 55, AMBER)
+        round_lamp(root, f'{s}r', s * 525, top - H / 2, zf, 55, TAILRED)
+        box(f'reflector{s}', (s * 450, 440, zf + 21), (70, 24, 4), TAILRED, root, bevel=1)
+    box('extension', (0, 435, zf + 25 + 30), (1085, 140, 60), TEXBLACK, root, bevel=5)
+    number_plate(root, 440, zf + 23.5)
+    rear_mounts(root, top - 60)
+    rear_valance(root)
+    return root
+
+
+def rear_klc_heritage():
+    """KLC Heritage Traditional rear bar (klc-div.com traditionalbumperrear_2_bk;
+    KLC publish no sizes or tube diameter). Off KLC's straight-on close-up
+    with the plate as the ruler (0.817 mm/px): the ends are closed trapezoid
+    boxes about 425 x 170 that enclose the car's own tail lamps (outer edge
+    +-720), and one fat round tube, about 90, runs only between them with its
+    top level with theirs; the plate hangs on two tabs under the tube and a
+    flat strap runs down from each box to the chassis. The tube stands 35 mm
+    forward of the boxes' rims: level with them its top (y 620) would sit
+    inside the tailgate spare's underside."""
+    root = group('rearBumper_klc_heritage_rear')
+    d, yt, top = 90, 575, 620
+    zt = -1580 + d / 2
+    tube('bar', [(-305, yt, zt), (305, yt, zt)], d, TEXBLACK, root)
+    for s in (-1, 1):
+        poly = [(305, top), (720, top), (720, 540), (650, 452), (305, 452)]
+        poly = [(s * x, y) for (x, y) in poly]
+        frame_walls(f'lampBox{s}', poly, 8, -1614, -1546, TEXBLACK, root, back=-1546)
+        box(f'strap{s}', (s * 420, 400, -1556), (50, 110, 8), TEXBLACK, root, bevel=1)
+        box(f'mount{s}', (s * 250, yt, zt + 100), (70, 90, 150), TEXBLACK, root, bevel=4)
+        box(f'plateTab{s}', (s * 110, yt - d / 2 - 30, zt - d / 2 + 14), (24, 80, 24), TEXBLACK, root, bevel=1)
+    number_plate(root, yt - d / 2 - 12 - 82.5, zt - d / 2 + 0.5)
+    return root
+
+
+def rear_beyond():
+    """Beyond Liberte rear bar (MRK ID=2112; Beyond publish no sizes): off
+    MRK's photos with the plate as the ruler. One 60 mm round tube about
+    1500 across that dips 115 mm through the middle on 45-degree bends to
+    carry the plate on two tabs below it, and an open square box hung under
+    each outer run holding a truck combination lamp (amber / red / clear):
+    the bar brings its own lamps. The dip keeps the tube under the spare, so
+    it can stand 35 mm behind the stock line as the real one does.
+    One node for all three finishes -- TEXBLACK is what the page swaps."""
+    root = group('rearBumper_beyond_rear')
+    d, yo, yc, z = 60, 605, 490, -1600
+    tube('bar', [(-750, yo, z), (-345, yo, z), (-230, yc, z), (230, yc, z), (345, yo, z), (750, yo, z)],
+         d, TEXBLACK, root, bend=90)
+    for s in (-1, 1):
+        lib.cylinder(f'cap{s}', (s * 751, yo, z), (1, 0, 0), d, 4, TEXBLACK, root, n=24)
+        x = s * 610
+        poly = [(x - 140, 575), (x + 140, 575), (x + 140, 465), (x - 140, 465)]
+        frame_walls(f'lampBox{s}', poly, 6, -1630, -1510, TEXBLACK, root, back=-1575)
+        lamp_strip(root, s, x, 520, -1590, 250, 90, [(1, AMBER), (1.2, TAILRED), (0.8, LENS)][::-s])
+        box(f'mount{s}', (s * 420, yo, z + 120), (70, 70, 200), TEXBLACK, root, bevel=4)
+        box(f'plateTab{s}', (s * 110, 440, z - d / 2 + 6), (24, 70, 12), TEXBLACK, root, bevel=1)
+    number_plate(root, 370, z - d / 2 - 1)
+    rear_valance(root)
+    return root
+
+
+def rear_jaos_cowl():
+    """JAOS Rear Sport Cowl B042518. JAOS publish: overall length 15 mm
+    shorter than stock, lower edge 29 mm lower (so y 370), plate height
+    unchanged, 4.65 kg. Width, pods and lamps off JAOS's photos with the
+    plate as the ruler: two boxy end pods about 450 x 270 wrapping forward to
+    the arches, a lower 150 mm centre beam set back 70 between them, two 80
+    mm round LED lamps a side in a black recess and a small square reverse
+    lamp inboard; the plate stays where the stock one was (centre y 460)."""
+    root = group('rearBumper_jaos_rear_cowl')
+    W, top, bot = 1600, 640, 370
+    zp = -1605 + 15                                          # 15 mm shorter than the stock face
+    for s in (-1, 1):
+        a, b = (350, W / 2) if s > 0 else (-W / 2, -350)
+        st = rear_stations(W, top, top - bot, 120, face=zp, wrap=150, x0=a, x1=b)
+        xloft(f'pod{s}', st, TEXBLACK, root, r=24)
+        box(f'recess{s}', (s * 515, 505, zp - 2), (260, 110, 6), BLACK, root, bevel=10)
+        round_lamp(root, f'{s}o', s * 570, 505, zp - 4, 80, TAILRED, dome=False)
+        round_lamp(root, f'{s}i', s * 460, 505, zp - 4, 80, TAILRED, dome=False)
+        box(f'revBezel{s}', (s * 395, 505, zp - 2), (70, 70, 6), BLACK, root, bevel=4)
+        box(f'reverse{s}', (s * 395, 505, zp - 6), (55, 55, 3), LENS, root, bevel=2)
+    zc = zp + 70
+    xloft('centre', rear_stations(W, bot + 150, 150, 110, face=zc, wrap=0, x0=-360, x1=360), TEXBLACK, root, r=20)
+    number_plate(root, 460, zc - 2.5)
+    rear_mounts(root, 560, zc)
+    return root
+
+
+def rear_wildgoose_crawler():
+    """WILD GOOSE crawler rear bar JM-1103 (rv4wildgoose.com: W1330 x H200 x
+    D225, 76.3 x 1.6 pipe, 6 mm brackets, 4.5 mm lamp frames with the lens
+    set 10 mm in, 9.3 kg, departure angle 55 deg; the plate has to move).
+    One straight 76.3 tube just under the body edge (centre y 530, off the
+    straight-on photo), an open lamp box about 260 x 105 sitting on each end
+    of it, a 6 mm plate bracket with a 50 mm tow hole under each end. The
+    plate goes to the tailgate; the lamps are bought separately."""
+    root = group('rearBumper_wildgoose_crawler_rear')
+    d, y, W = 76.3, 530, 1330
+    zt = -1570 + d / 2
+    tube('bar', [(-W / 2, y, zt), (W / 2, y, zt)], d, TEXBLACK, root)
+    for s in (-1, 1):
+        lib.cylinder(f'cap{s}', (s * (W / 2 + 1), y, zt), (1, 0, 0), d, 4, TEXBLACK, root, n=24)
+        x = s * 535
+        poly = [(x - 130, 652), (x + 130, 652), (x + 130, 548), (x - 130, 548)]
+        frame_walls(f'lampBox{s}', poly, 4.5, -1586, -1480, TEXBLACK, root, back=-1560)
+        lamp_strip(root, s, x, 600, -1570, 236, 82, [(1, AMBER), (1.2, TAILRED), (0.8, LENS)][::-s])
+        box(f'bracket{s}', (s * 330, y - 70, zt + 10), (6, 110, 130), TEXBLACK, root, bevel=1)
+        lib.cylinder(f'towHole{s}', (s * 330, y - 92, zt + 10), (1, 0, 0), 50, 8, RUBBER, root, n=20)
+        box(f'mount{s}', (s * 250, y, zt + 100), (70, 90, 150), TEXBLACK, root, bevel=4)
+    tailgate_plate(root)
+    rear_valance(root)
+    return root
+
+
+def rear_wildgoose_box():
+    """WILD GOOSE box rear bar JM-1101 (rv4wildgoose.com: beam 1410 x 100 x
+    100, 3.2 mm plate, 9 mm brackets, 13.2 kg, departure angle 60 deg; the
+    plate has to move). One straight square beam with its top at the body's
+    edge (y 640, off the fitted photo), ends cut square, and the
+    combination lamps set into its face at the extreme ends (lens about 270
+    x 85). The plate goes to the tailgate."""
+    root = group('rearBumper_wildgoose_box_rear')
+    W, y = 1410, 590
+    st = rear_stations(W, y + 50, 100, 100, face=-1570, wrap=0)
+    xloft('beam', st, TEXBLACK, root, r=4)
+    for s in (-1, 1):
+        box(f'endCap{s}', (s * (W / 2 + 3), y, -1520), (6, 100, 100), TEXBLACK, root, bevel=1)
+        lamp_strip(root, s, s * 555, y, -1570, 270, 78, [(1, AMBER), (1.2, TAILRED), (0.8, LENS)][::-s])
+    rear_mounts(root, y, -1570)
+    tailgate_plate(root)
+    rear_valance(root)
+    return root
+
+
+def rear_showa_iron():
+    """SHOWA GARAGE iron rear bar (showa-garage.shop 000000000843: main pipe
+    60, lamp pipe 42). Off the straight-on JB74 photo (plate 330, ~2.65 mm/px):
+    about 1420 across, the tube just under the body's edge (centre y 585),
+    passing through the sides of two small open lamp frames about 200 x 105
+    at +-610 with a small tail lamp inside each and a reflector strip under
+    it. The plate goes onto the tailgate beside the spare."""
+    root = group('rearBumper_showa_iron_rear')
+    d, y = 60, 585
+    zt = -1570 + d / 2
+    tube('bar', [(-705, y, zt), (705, y, zt)], d, TEXBLACK, root)
+    for s in (-1, 1):
+        x = s * 610
+        poly = [(x - 100, 637), (x + 100, 637), (x + 100, 533), (x - 100, 533)]
+        frame_walls(f'lampFrame{s}', poly, 8, -1610, -1472, TEXBLACK, root)
+        # the lamp sits on the tube's rear face, inside the frame
+        box(f'lamp{s}', (x, y, -1578), (120, 52, 18), BLACK, root, bevel=4)
+        box(f'lampLens{s}', (x, y, -1588), (104, 38, 4), TAILRED, root, bevel=2)
+        box(f'reflector{s}', (x, 518, -1598), (160, 16, 4), TAILRED, root, bevel=1)
+        lib.cylinder(f'cap{s}', (s * 706, y, zt), (1, 0, 0), d, 4, TEXBLACK, root, n=24)
+    rear_mounts(root, y, -1570)
+    tailgate_plate(root)
+    rear_valance(root)
+    return root
+
+
+def rear_taniguchi_pipe():
+    """TANIGUCHI off-road rear pipe bar (ors-taniguchi.co.jp: pipe 48.6 x
+    2.3, both ends bent, tail-lamp frames on top of the pipe, plate must be
+    moved; their small tail lamp's lens is 214 x 65). Off the 3/4 photo: about
+    1420 across, pipe centre y 525 (~130 under the body edge), its last 50 mm
+    bent forward about 55 deg round the corners (as far as the rear tyres
+    allow), a lamp frame about 235 x 80 on top of each end at +-580, and a
+    slotted steel panel between the frames closing the gap to the body."""
+    root = group('rearBumper_taniguchi_rear_pipe')
+    d, y = 48.6, 525
+    zt = -1582 + d / 2
+    tube('bar', [(-710, y, -1492), (-660, y, zt), (660, y, zt), (710, y, -1492)], d, TEXBLACK, root, bend=60)
+    for s in (-1, 1):
+        x = s * 580
+        box(f'lampFrame{s}', (x, 595, zt), (235, 80, 90), TEXBLACK, root, bevel=3)
+        lamp_strip(root, s, x, 595, zt - 45, 214, 65, [(1, AMBER), (1.4, TAILRED), (0.7, LENS)][::-s])
+    box('panel', (0, 596, -1562), (924, 88, 6), TEXBLACK, root, bevel=1)
+    for k in range(9):
+        box(f'slot{k}', (-360 + k * 90, 596, -1566), (50, 14, 3), RUBBER, root, bevel=1)
+    rear_mounts(root, y, zt - d / 2)
+    tailgate_plate(root)
+    rear_valance(root)
+    return root
+
+
+def rear_apio_tactical():
+    """APIO Tactical rear bumper 3032-71, ABS, JB74 only (apio.jp; the
+    1660 x 280 x 460 on the page is the shipping box -- no body size is
+    published). Off the straight-on photo with the flare width 1645 as the
+    ruler: about 1600 across and 170 tall under the tailgate, wrapping round
+    the corners with a flap down behind each rear wheel; three 70 mm round
+    lamps a side in the upper band (amber, red tail, red reflector, outboard
+    to inboard), a clear round reverse lamp each side lower down, a recessed
+    lower middle with a step lip. The plate goes onto the tailgate."""
+    root = group('rearBumper_apio_tactical_rear')
+    W, top = 1600, 620
+    st = rear_stations(W, top, 100, 140, wrap=130)
+    xloft('upper', st, TEXBLACK, root, r=16)
+    zf = REAR_FACE
+    for s in (-1, 1):
+        a, b = (400, W / 2) if s > 0 else (-W / 2, -400)
+        xloft(f'lower{s}', rear_stations(W, top - 100, 70, 140, wrap=130, x0=a, x1=b), TEXBLACK, root, r=12)
+        for k, (dx, m, dome) in enumerate(((675, AMBER, True), (585, TAILRED, True), (490, TAILRED, False))):
+            round_lamp(root, f'{s}{k}', s * dx, 560, at_x(st, s * dx, 3), 70, m, dome=dome)
+        round_lamp(root, f'{s}rev', s * 450, 482, zf, 56, LENS)
+        box(f'flap{s}', (s * 740, 380, -1500), (90, 170, 8), RUBBER, root, bevel=2)
+    xloft('lowerMid', rear_stations(W, top - 100, 70, 110, face=zf + 30, wrap=0, x0=-400, x1=400), TEXBLACK, root, r=10)
+    box('stepLip', (0, 456, zf + 10), (800, 14, 60), TEXBLACK, root, bevel=3)
+    rear_mounts(root, 560)
+    tailgate_plate(root)
+    rear_valance(root)
+    return root
+
+
+def rear_outclass_abs():
+    """OUTCLASS TYPE2 ABS rear bumper (outclass.ocnk.net 1094: ABS, the lower
+    edge 'shaped slim', small universal tail lamps as an option). Off the
+    straight-on photo (plate 330, ~3.4 mm/px): about 1450 across and 190
+    tall, wrapping forward round the corners with the lower edge chamfered
+    up, one small rectangular combination lamp (about 205 x 75) recessed in
+    each end of the upper face -- the bar covers where the stock lamps were --
+    and the plate on a bracket straddling the lower edge."""
+    root = group('rearBumper_outclass_rear_abs')
+    W, top = 1450, 600
+    st = rear_stations(W, top, 190, 150, wrap=130, rise=50)
+    xloft('body', st, TEXBLACK, root, r=24)
+    zf = REAR_FACE
+    for s in (-1, 1):
+        box(f'lampRecess{s}', (s * 525, 555, zf - 1), (230, 96, 4), BLACK, root, bevel=8)
+        lamp_strip(root, s, s * 525, 555, zf - 2, 205, 70, [(1, AMBER), (1.5, TAILRED), (0.8, LENS)][::-s])
+    box('plateBracket', (0, 426, zf - 2), (260, 110, 6), TEXBLACK, root, bevel=2)
+    number_plate(root, 420, zf - 6.5)
+    rear_mounts(root, 520)
+    rear_valance(root)
+    return root
+
+
+def rear_hamer_mx208():
+    """HAMER MX208 (hamer4x4.com: 4 mm steel, 1830 x 650 x 340 overall, 50
+    kg, keeps the car's own signal and reverse lamps). 1830 is measured along
+    the wrap; straight on it is about 1600 (flare width as the ruler). The
+    ends wrap forward to the flares with the stock tail lamps (x 346-680, y
+    476-603) set in deep pockets cut through the face; the middle drops as a
+    tapered panel to a receiver hitch at y 330; the corners' tops are the
+    steps. The plate goes onto the tailgate, as in Hamer's photos. The outer
+    faces stand at -1620 so the stock lenses (-1609) sit inside their
+    pockets; the middle comes forward to the stock line, clear of the spare."""
+    root = group('rearBumper_hamer_mx208')
+    W, top, bot = 1600, 630, 390
+
+    def face(x):
+        return -1620 + max(0.0, min(1.0, (345 - abs(x)) / 40)) * 55
+
+    kw = dict(face=face, wrap=150, extra=(-345, -305, 305, 345))
+    xloft('middle', rear_stations(W, top, top - bot, 150, x0=-345, x1=345, **kw), TEXBLACK, root, r=10)
+    for s in (-1, 1):
+        a, b = (345, 690) if s > 0 else (-690, -345)
+        xloft(f'below{s}', rear_stations(W, 472, 472 - bot, 150, x0=a, x1=b, **kw), TEXBLACK, root, r=6)
+        xloft(f'above{s}', rear_stations(W, top, top - 608, 150, x0=a, x1=b, **kw), TEXBLACK, root, r=4)
+        a, b = (690, W / 2) if s > 0 else (-W / 2, -690)
+        xloft(f'end{s}', rear_stations(W, top, top - bot, 150, x0=a, x1=b, **kw), TEXBLACK, root, r=10)
+        box(f'pocketBack{s}', (s * 515, 540, -1547), (345, 136, 6), BLACK, root, bevel=2)
+    zc = face(0)
+    slab('hitchPanel', [(-210, bot + 6), (210, bot + 6), (110, 330), (-110, 330)], zc, zc + 90, TEXBLACK, root)
+    box('receiver', (0, 345, zc + 60), (66, 66, 160), TEXBLACK, root, bevel=3)
+    box('receiverMouth', (0, 345, zc - 21), (46, 46, 4), RUBBER, root, bevel=1)
+    rear_mounts(root, 520, zc)
+    tailgate_plate(root)
+    rear_valance(root)
     return root
 
 
 def grille_generic(pid, h_slats=0, v_slots=0, hex_cells=False, wire=True, label=None, text_mat=None, bezel='round',
-                   marker=0, mat=None, ow=580, oh=215, slat_h=30, ribs=False, letters_over=True):
-    """Stock-outline panel with a centre opening filled per product."""
+                   marker=0, mat=None, ow=580, oh=215, slat_h=30, ribs=False, letters_over=True,
+                   frame_mat=None, bezel_mat=None, mesh_mat=None):
+    """Stock-outline panel with a centre opening filled per product.
+
+    `mat` is the slats and posts; `frame_mat` the panel round the opening
+    and `bezel_mat` the lamp rings, which on a painted grille are body colour
+    or white (docs/jb74-grille-finishes.json); `mesh_mat` the mesh behind,
+    silver aluminium on KLC's painted faces and black on everyone else's."""
     root = group(f'grille_{pid}')
     mat = mat or TEXBLACK
-    grille_panel('panel', root, mat, (ow, oh, 858))
-    lamp_bezels(root, mat, bezel)
+    frame_mat = frame_mat or mat
+    grille_panel('panel', root, frame_mat, (ow, oh, 858))
+    lamp_bezels(root, bezel_mat or frame_mat, bezel)
     z = face_z(0)
     if h_slats:
         pitch = oh / (h_slats + 0.2)
@@ -3103,7 +3779,7 @@ def grille_generic(pid, h_slats=0, v_slots=0, hex_cells=False, wire=True, label=
     if hex_cells:
         hex_mesh(root, BLACK, 0, 858, z - 16, ow - 20, oh - 20)
     elif wire:
-        wire_mesh(root, STEEL if text_mat is None else BLACK, 0, 858, z - 20, ow - 10, oh - 10, pitch=9)
+        wire_mesh(root, mesh_mat or BLACK, 0, 858, z - 20, ow - 10, oh - 10, pitch=9)
     box('backing', (0, 858, z - 32), (ow, oh, 3), RUBBER, root, bevel=0)
     if ribs:
         for s in (-1, 1):
@@ -3712,17 +4388,17 @@ def build():
     side_step('spieler', 'plate', plate_w=150)
     side_step('ironman', 'slider', tube_d=51)
     side_step('hamer', 'slider', tube_d=60, pads=[(120, 260, -300), (120, 260, 300)])
-    # front bumpers (TW/JP research 2026-09-16)
-    front_bar('armando', 'plate', W=1500, H=300, D=170, y=530, hoop=True, fogs=True, hooks=True, skid=False)
-    front_bar('beyond_liberte', 'plate', W=1400, H=230, D=150, fog_stalk=True, bash=True, skid=False)
-    front_bar('maverick', 'short', W=1300, H=200, D=140, y=540, fogs=True, skid=False)
-    front_bar('mrk_abs', 'abs', W=1520, H=250, D=170, y=540, skid=False, corners=False, hump=True, bash=True, mesh_off=RIGHT * 330, fogs=True)
-    front_bar('wmd_winch', 'short', W=1100, H=230, D=170, y=560, hoop=True, winch=True)
-    front_bar('jaos_cowl', 'abs', W=1470, H=280, D=180, y=540, skid=False, corners=False, hump=True, bash=True, badge='JAOS', mesh_off=0)
-    front_bar('taniguchi_square', 'box', W=1400, y=600, skid=False)
-    front_bar('taniguchi_double', 'double', W=1400, y=590, tube_d=48, skid=False)
-    front_bar('klc_short', 'abs', W=1500, H=230, D=170, y=540, fogs=True, skid=False, corners=False, slot=True, badge='KLC')
-    front_bar('toc_extreme', 'plate', W=1470, H=260, D=180, y=530, fogs=True, corners=False, bolts=True, skid=False)
+    # front bumpers (TW/JP research 2026-09-16; proportions per the photo review 2026-09-26)
+    bumper_armando()
+    bumper_beyond_liberte()
+    bumper_maverick()
+    bumper_mrk_abs()
+    bumper_wmd_winch()
+    bumper_jaos_cowl()
+    bumper_taniguchi_square()
+    bumper_taniguchi_double()
+    bumper_klc_short()
+    bumper_toc_extreme()
     # DAMD full body kits (damd.co.jp, 2026-09): panel sets that keep the
     # stock round headlights, so only the grille and the bumpers change
     grille_damd_little_d()
@@ -3733,26 +4409,29 @@ def build():
     bumper_damd_roots()
     rear_damd_little_d()
     rear_damd_little_g_trad()
-    # every bar's top stays at or under y 580: the tailgate spare's bottom
-    # edge is at about 590, and a bar above that traps the tyre (tailgate
-    # would not open)
-    rear_bar('damd_roots_rear', 'plate', W=1230, H=150, D=120, y=500, lamps='round', mat=IVORY)
+    # Rear bars reach up to the tailgate's edge like the real ones; the
+    # tailgate spare's underside is at y 547-585 in the middle, so anything
+    # above that stands forward of it (see REAR_FACE) and the spare swings
+    # clear when the tailgate opens.
+    rear_damd_roots()
     # rear bumpers
-    rear_bar('klc_heritage_rear', 'tube', W=1380, tube_d=76, y=648, lamps='klc')
-    rear_bar('beyond_rear', 'plate', W=1360, H=160, D=120, y=460, lamps='wings')
-    rear_bar('jaos_rear_cowl', 'plate', W=1330, H=230, D=150, y=465, lamps='round')
-    rear_bar('wildgoose_crawler_rear', 'tube', W=1330, tube_d=76, lamps='housing')
-    rear_bar('wildgoose_box_rear', 'plate', W=1410, H=100, D=100, y=450, lamps='housing')
-    rear_bar('showa_iron_rear', 'tube', W=1450, tube_d=60, lamps='wings')
-    rear_bar('taniguchi_rear_pipe', 'tube', W=1420, tube_d=60, lamps='none')
-    rear_bar('apio_tactical_rear', 'plate', W=1290, H=280, D=200, y=440, lamps='housing')
-    rear_bar('outclass_rear_abs', 'plate', W=1310, H=220, D=170, y=470, lamps='round')
-    rear_bar('hamer_mx208', 'plate', W=1270, H=300, D=220, y=430, lamps='housing', steps=True)
+    rear_klc_heritage()
+    rear_beyond()
+    rear_jaos_cowl()
+    rear_wildgoose_crawler()
+    rear_wildgoose_box()
+    rear_showa_iron()
+    rear_taniguchi_pipe()
+    rear_apio_tactical()
+    rear_outclass_abs()
+    rear_hamer_mx208()
     # grilles
     grille_generic('taishan_retro', v_slots=11)
-    grille_generic('klc_ja', wire=True, marker=4, bezel='round', h_slats=1, slat_h=18)
-    grille_generic('klc_nanaketsu', v_slots=7, bezel='square')
-    grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round')
+    # finishes per docs/jb74-grille-finishes.json: the makers' own demo cars
+    grille_generic('klc_ja', wire=True, marker=4, bezel='round', h_slats=1, slat_h=18, mat=GUNMETAL, mesh_mat=STEEL)
+    grille_generic('klc_nanaketsu', v_slots=7, bezel='square', mesh_mat=STEEL)
+    grille_generic('klc_forty', wire=True, label='SUZUKI', bezel='round', frame_mat=PAINT,
+                   bezel_mat=material('GrilleWhite', 0xefefea, rough=0.4), mesh_mat=STEEL)
     grille_urnieta_salado()
     side_bar_urnieta_salado()
     hood_urnieta_salado()
@@ -3767,12 +4446,12 @@ def build():
     bumper_urnieta_1970()
     rear_urnieta_1970()
     grille_generic('mrk_angry', v_slots=7, bezel='square', wire=False)
-    grille_generic('apio_sj', v_slots=9, mat=GUNMETAL)
+    grille_generic('apio_sj', v_slots=7, mat=GUNMETAL)        # seven slots
     grille_generic('apio_marker', h_slats=4, marker=4)
-    grille_generic('taniguchi_washer', wire=True)
-    grille_generic('kpro_folksy', h_slats=6, mat=material('WhiteGel', 0xeeeee8, rough=0.35), wire=False)
-    grille_generic('prostaff_minig', v_slots=9, bezel='square')
-    grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', bezel='square', mat=PAINT)
+    grille_generic('taniguchi_washer', wire=True, mat=GUNMETAL)
+    grille_generic('kpro_folksy', h_slats=6, wire=False)      # the white is gelcoat primer; the maker shows it black
+    grille_generic('prostaff_minig', v_slots=9, bezel='square', mat=PAINT)
+    grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', text_mat=CHROME_TRIM, bezel='square', mat=PAINT)
     decorate_plates()
     # Two files, because they are needed at different moments: the car cannot
     # be drawn at all without its wheels, but nothing needs an awning until

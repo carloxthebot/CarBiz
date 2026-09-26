@@ -125,22 +125,24 @@
       "note": "KLC Traditional 74: straight tube, ends inboard of the flares"
     },
     "frontBumper_damd_little_d": {
-      "w": [1420, 1560],
-      "note": "kit bumpers end inside the stock tyre line (766 half-width), not at the body edge (795)"
+      "w": [1470, 1560],
+      "note": "measured 1510 across off DAMD's straight-on shot (photo review 2026-09-26). The old rule held every kit bumper inside the stock tyre line (766 half-width) to keep it out of the tyres; that made them 80-280 mm narrower than the real bars. The tyres are now kept clear in depth instead -- front bars' backs stay ahead of z 1545 outboard of |x| 520, rear bars' behind -1470 outboard of 470 -- and tools/tyre_audit.mjs checks it"
     },
-    "frontBumper_damd_little_g_trad": { "w": [1420, 1560], "note": "as above" },
-    "frontBumper_damd_roots": { "w": [1420, 1560], "note": "as above" },
-    "rearBumper_damd_little_d_rear": { "w": [1420, 1560], "note": "as above" },
-    "rearBumper_damd_little_g_trad_rear": { "w": [1420, 1560], "note": "as above" },
-    "rearBumper_damd_roots_rear": { "w": [1300, 1560], "note": "as above" },
-    "frontBumper_urnieta_salado": { "w": [1380, 1540], "note": "drawn 1426 (UN-JIMNY-FB-001)" },
-    "rearBumper_urnieta_salado_rear": { "w": [1380, 1540], "note": "drawn 1816 developed; pulled inside the tyre line" },
-    "frontBumper_urnieta_1970": { "w": [1380, 1540], "note": "drawn 1547 (UN-JIMNY-FB-027)" },
-    "rearBumper_urnieta_1970_rear": { "w": [1380, 1540], "note": "drawn 1617 (UN-JIMNY-FB-028); pulled inside the tyre line" },
+    "frontBumper_damd_little_g_trad": { "w": [1560, 1640], "note": "about 1600 straight on, almost to the arches (DAMD's fitted front photo); tyres kept clear in depth, see little D" },
+    "frontBumper_damd_roots": { "w": [1360, 1460], "note": "about 1400 off DAMD's straight-on shot, plate as the ruler" },
+    "rearBumper_damd_little_d_rear": { "w": [1570, 1640], "note": "DAMD quote 1656 full width; about 1615 straight on" },
+    "rearBumper_damd_little_g_trad_rear": { "w": [1540, 1640], "note": "DAMD quote 1650 along the wrap; 1566 straight on in their photo" },
+    "rearBumper_damd_roots_rear": { "w": [1420, 1560], "note": "about 1460 off DAMD's straight-on shot (the corner pieces add a little)" },
+    "frontBumper_urnieta_salado": { "w": [1380, 1480], "note": "drawn 1426 (UN-JIMNY-FB-001)" },
+    "rearBumper_urnieta_salado_rear": { "w": [1560, 1640], "note": "drawn 1816 developed; scaled by the drawing's own 216 it is about 1600 straight on" },
+    "frontBumper_urnieta_1970": { "w": [1510, 1600], "note": "drawn 1547 (UN-JIMNY-FB-027)" },
+    "rearBumper_urnieta_1970_rear": { "w": [1560, 1640], "note": "drawn 1617 (UN-JIMNY-FB-028), about 1600 straight on" },
+    "frontBumper_beyond_liberte": { "w": [1040, 1200], "note": "one ~60 mm tube about 1080 across (Beyond's straight-on shot); the 1100 valance behind it is the widest thing in the node" },
+    "frontBumper_taniguchi_square": { "w": [1180, 1300], "note": "folded-plate bar only as wide as the headlamps' outer edges, about 1230 (maker photo)" },
     "rearBumper_klc_heritage_rear": {
-      "w": [1350, 1500],
-      "y_min": [420, 460],
-      "note": "tube runs above the tail lamps and out past their outer edge (x 680). y_min is now the bottom of the number plate hanging off the tube; it used to be the tail pipe, which has moved out to its own exhaust family"
+      "w": [1400, 1500],
+      "y_min": [330, 370],
+      "note": "two lamp boxes whose outer edges are at +-720 with a tube between them (KLC photos). y_min is the bottom of the number plate hanging on tabs under the tube"
     }
   }
 }

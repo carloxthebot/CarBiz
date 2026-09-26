@@ -38,6 +38,12 @@ await page.evaluate(() => {
   document.querySelector('.app').style.gridTemplateColumns = '1fr 0px';
   dispatchEvent(new Event('resize'));
 });
+// The page now opens on a built car (the hero style) and swings the camera
+// in; wait for that to finish and put everything back to stock, or every
+// shot is taken on the hero car from wherever the intro camera was.
+await page.waitForTimeout(2500);
+await page.evaluate(() => { const J = window.__jimny; for (const k of Object.keys(J.S)) J.S[k] = window.__jimnyDefault(k); J.update(); });
+await page.waitForTimeout(800);
 const spin = (n = 6) => page.evaluate((n) =>
   new Promise(r => { let i = 0; const f = () => (++i > n ? r() : requestAnimationFrame(f)); f(); }), n);
 
