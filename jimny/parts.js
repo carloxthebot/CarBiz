@@ -339,7 +339,7 @@ export const FRONT_BUMPERS = [
   { id: 'mrk_abs', photo: true, url: 'https://www.mrk.com.tw/product_ii.html?ID=1948', label: '短版 ABS 前保桿（消光黑）', price: 9500, cur: 'TWD', brand: 'MRK', part: 'JMY-FB-L',
     note: '原廠造型縮短版、ABS' },
   { id: 'wmd_winch', photo: true, url: 'https://www.ruten.com.tw/item/show?22105872751291', label: '絞盤短版前保桿', price: 18000, cur: 'TWD', brand: 'WMD（台灣）',
-    note: '台製鋼板、絞盤座、Ø50 護弓' },
+    note: '台製鋼板短版桿、中央絞盤座與上蓋板、兩側紅色 D 環座。賣場照片上沒有護弓，目錄原寫的「Ø50 護弓」已拿掉' },
   { id: 'jaos_cowl', photo: true, url: 'https://www.jaos.co.jp/product/B040518/2866', label: 'Front Sport Cowl 前下擾流', price: 18700, cur: 'TWD', brand: 'JAOS', part: 'B040518',
     note: 'JAOS 日本官網確認 ¥66,000 稅込／¥60,000 稅抜，品番 B040518，聚氨酯未塗裝黑本體配鋁網，單品 5.05kg。適合年式 2018 年 7 月〜2025 年 11 月、全等級皆可裝；全長 +10mm、下緣 −80mm，寬度在全寬內。官網目前顯示售完，預計 2026 年 11 月上中旬出貨。目錄中的 NT$18,700 是台灣售價，本次查證只找到 JAOS 日本官網資料，MRK 等台灣代理站上未查到這支前下巴的對應頁面，NT$ 數字暫無法對應到第一手來源，先標 uncertain。',
     uncertain: true },
