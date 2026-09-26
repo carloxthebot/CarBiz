@@ -3901,16 +3901,21 @@ def rear_beyond():
     it can stand 35 mm behind the stock line as the real one does.
     One node for all three finishes -- TEXBLACK is what the page swaps."""
     root = group('rearBumper_beyond_rear')
+    # Narrower than first drawn (the owner: "too wide"): on Beyond's own
+    # straight-behind shot (20240419_AM_BYD_003) the rear wheel centres,
+    # 1405 apart, measure 365 px, and the bar 329 px -- about 1265 mm -- with
+    # each lamp box's outer edge on the tyre's inner face. It was 1500.
     d, yo, yc, z = 60, 605, 490, -1600
-    tube('bar', [(-750, yo, z), (-345, yo, z), (-230, yc, z), (230, yc, z), (345, yo, z), (750, yo, z)],
+    E = 632
+    tube('bar', [(-E, yo, z), (-345, yo, z), (-230, yc, z), (230, yc, z), (345, yo, z), (E, yo, z)],
          d, TEXBLACK, root, bend=90)
     for s in (-1, 1):
-        lib.cylinder(f'cap{s}', (s * 751, yo, z), (1, 0, 0), d, 4, TEXBLACK, root, n=24)
-        x = s * 610
+        lib.cylinder(f'cap{s}', (s * (E + 1), yo, z), (1, 0, 0), d, 4, TEXBLACK, root, n=24)
+        x = s * 490
         poly = [(x - 140, 575), (x + 140, 575), (x + 140, 465), (x - 140, 465)]
         frame_walls(f'lampBox{s}', poly, 6, -1630, -1510, TEXBLACK, root, back=-1575)
         lamp_strip(root, s, x, 520, -1590, 250, 90, [(1, AMBER), (1.2, TAILRED), (0.8, LENS)][::-s])
-        box(f'mount{s}', (s * 420, yo, z + 120), (70, 70, 200), TEXBLACK, root, bevel=4)
+        box(f'mount{s}', (s * 400, yo, z + 120), (70, 70, 200), TEXBLACK, root, bevel=4)
         box(f'plateTab{s}', (s * 110, 440, z - d / 2 + 6), (24, 70, 12), TEXBLACK, root, bevel=1)
     number_plate(root, 370, z - d / 2 - 1)
     rear_valance(root)
@@ -4593,9 +4598,8 @@ def stock_plates():
 def decorate_plates():
     """Every bumper carries a plate, and a blank white slab was the most
     toy-like thing on the car. After everything is built, each plate gets a
-    raised black border, embossed characters in the Taiwanese small-car
-    format (three letters, a dash, four digits) and two chrome screws. The
-    registration is made up; a rear plate's lettering faces backwards."""
+    raised black border, the owner's project name PROJ / HORIZON on two
+    lines, and two chrome screws. A rear plate's lettering faces backwards."""
     plates = [o for o in bpy.data.objects if o.type == 'MESH' and o.name.split('.')[0] == 'plate'
               and o.data.materials and o.data.materials[0] == PLATE]
     for i, pl in enumerate(plates):
@@ -4616,11 +4620,14 @@ def decorate_plates():
         for k, (cx, cy, sx, sy) in enumerate(((0, h / 2 - 5, w - 6, 6), (0, -h / 2 + 5, w - 6, 6),
                                               (-w / 2 + 5, 0, 6, h - 6), (w / 2 - 5, 0, 6, h - 6))):
             box(f'plateRim{i}_{k}', (x + cx, y + cy, zf + sgn * t / 2), (sx, sy, t), PLATE_RIM, root, bevel=0.5)
-        ob = text(f'plateNo{i}', 'JMN-7474', (x, y - h * 0.04, zf + sgn * 1.5), h * 0.42, 2, PLATE_INK, root,
-                  font='/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf')
-        ob.scale = (min(1.0, (w * 0.84) / max(1.0, ob.dimensions.x / lib.MM)), 1, 1) if ob.dimensions.x else (1, 1, 1)
-        if not front:
-            ob.rotation_euler = (0, 0, math.pi)
+        # the owner's project name, on two lines
+        for j, (word, dy, size) in enumerate((('PROJ', h * 0.19, h * 0.30), ('HORIZON', -h * 0.15, h * 0.36))):
+            ob = text(f'plateNo{i}_{j}', word, (x, y + dy, zf + sgn * 1.5), size, 2, PLATE_INK, root,
+                      font='/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf')
+            if ob.dimensions.x:
+                ob.scale = (min(1.0, (w * 0.84) / (ob.dimensions.x / lib.MM)), 1, 1)
+            if not front:
+                ob.rotation_euler = (0, 0, math.pi)
         for k, dx in enumerate((-w * 0.36, w * 0.36)):
             lib.cylinder(f'plateBolt{i}_{k}', (x + dx, y + h * 0.36, zf + sgn * 2), (0, 0, 1), 12, 4, CHROME, root, n=10)
 

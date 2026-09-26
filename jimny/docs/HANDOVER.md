@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609261423** · 247 catalogue entries · 13 styles
+Current build: **202609261458** · 247 catalogue entries · 13 styles
 
 ---
 

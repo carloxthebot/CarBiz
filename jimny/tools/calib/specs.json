@@ -119,6 +119,7 @@
       "d": [1800, 2000],
       "note": "1.8 m case"
     },
+    "rearBumper_beyond_rear": { "w": [1200, 1330], "note": "Beyond's straight-behind shot: 329 px against 365 px for the 1405 rear track, about 1265 mm; the lamp boxes end on the tyres' inner faces" },
     "frontBumper_wmd_winch": { "w": [1050, 1300], "note": "a short winch bar that sits between the front wheels (drawn 1100); the 1500 it measured before came from two corner blocks that were not part of the product and stood in front of the tyres" },
     "frontBumper_tube_heritage": {
       "w": [1350, 1600],
