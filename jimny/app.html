@@ -9,7 +9,7 @@
      browser does not learn they exist until three.js has downloaded, parsed
      and run, which on a phone is seconds of an idle connection. -->
 <link rel="preload" as="fetch" type="model/gltf-binary" href="model/jimny-hq.glb" crossorigin>
-<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609251710" crossorigin>
+<link rel="preload" as="fetch" type="model/gltf-binary" href="model/rims.glb?v=202609260248" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
@@ -302,7 +302,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .stylehead:first-child{margin-top:0}
 .stylehead em{font-style:normal;font:400 11px var(--body);color:var(--ink2);margin-left:8px}
 .style .sb{font-style:normal;font:500 10px/1 var(--mono);letter-spacing:.1em;color:var(--acc);text-transform:uppercase}
-.style{text-align:left;background:var(--sur);border:1px solid var(--line);border-radius:4px;
+.style{text-align:left;background:var(--sur);border:1px solid var(--line);border-radius:4px;overflow:hidden;
   padding:12px 13px 11px;cursor:pointer;display:grid;gap:5px;align-content:start;
   color:var(--ink);font:inherit;-webkit-tap-highlight-color:transparent}
 .style:hover{border-color:var(--line2)}
@@ -311,9 +311,9 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-o
 .style[aria-pressed=true] b{color:var(--acc)}
 /* the card shows the car, because three colour chips cannot tell anyone what
    a style looks like and the whole point of the step is choosing by eye */
-.style img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:3px;display:block;
-  background:radial-gradient(62% 62% at 50% 46%,#233037,#131b1e)}
-.style .ds{font-size:12.5px;line-height:1.65;color:var(--ink2)}
+.style img{width:calc(100% + 26px);margin:-12px -13px 2px;aspect-ratio:4/3;object-fit:cover;border-radius:4px 4px 0 0;display:block;
+  background:#e9ecec}
+.style .ds{font-size:12px;line-height:1.55;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .style .pr{font:500 11px/1 var(--mono);color:var(--ink3);letter-spacing:.02em;margin-top:2px}
 .style[aria-pressed=true] .pr{color:var(--acc-ink);background:var(--acc);border-radius:2px;
   padding:5px 7px;justify-self:start}
@@ -698,15 +698,15 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { rigJimny, applyConfig, updateSplit } from './rig.js?v=202609251710';
-import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, SPLIT_PAINTS, SPLIT_Y, STYLES } from './parts.js?v=202609251710';
-import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609251710';
-import { openAwning, roofTent, campExtra } from './camp.js?v=202609251710';
-import { buildWheel, loadTreadMasks } from './wheels.js?v=202609251710';
-import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609251710';
+import { rigJimny, applyConfig, updateSplit } from './rig.js?v=202609260248';
+import { COLORS, ROOF_BLACK, LIFTS, WHEELS, TYRES, TYRE_MODELS, FRONT_BUMPERS, REAR_BUMPERS, GRILLES, SNORKELS, MIRRORS, ROOF_RACKS, AWNINGS, SIDE_STEPS, LADDERS, SIMPLE, validate, KITS, HOODS, SPARE_COVERS, LIGHT_BARS, ROOF_LIGHTS, GRILLE_LIGHTS, EXHAUSTS, EXTINGUISHERS, STRIPES, CAGES, FENDERS, FACES, SPOILERS, ARB_RACK_ACC, TENTS, CAMP_EXTRAS, SPLIT_PAINTS, SPLIT_Y, STYLES } from './parts.js?v=202609260248';
+import { buildAccessory, loadParts, getPart } from './accessories.js?v=202609260248';
+import { openAwning, roofTent, campExtra } from './camp.js?v=202609260248';
+import { buildWheel, loadTreadMasks } from './wheels.js?v=202609260248';
+import { priceLabel, toTWD, FX_NOTE } from './fx.js?v=202609260248';
 // Written by stamp.sh on each deploy; shown in the HUD so a stale cached copy
 // is obvious at a glance.
-const BUILD = '202609251710';
+const BUILD = '202609260248';
 
 const cv = document.getElementById('cv');
 // The backdrop is CSS behind a transparent canvas: a background texture in
@@ -867,6 +867,17 @@ if (HQ) {
 }
 
 const orbit = { az: .8, el: .18, dist: 9, ty: .85 };
+// Left alone for a while, the car turns slowly on its stand, the way a
+// showroom turntable does; any touch stops it at once.
+let lastTouch = performance.now(), lastSpin = 0;
+addEventListener('pointerdown', () => { lastTouch = performance.now(); }, true);
+addEventListener('wheel', () => { lastTouch = performance.now(); }, { capture: true, passive: true });
+function idleSpin(t) {
+  const dt = lastSpin ? Math.min(50, t - lastSpin) : 0; lastSpin = t;
+  // (never under automation: the shot tools frame the car and expect it to stay put)
+  if (REDUCED || navigator.webdriver || t - lastTouch < 9000 || tweens.some(w => w.tag === 'cam')) return;
+  orbit.az += dt * 0.00011; applyCam();
+}
 function applyCam() {
   orbit.el = Math.max(-.15, Math.min(1.1, orbit.el));
   orbit.dist = Math.max(4.5, Math.min(22, orbit.dist));
@@ -1016,6 +1027,9 @@ function loadBody(tries = 0) {
   // how a helpful first step turns into a toll gate.
   let seen = null;
   try { seen = localStorage.getItem('jimny.style'); } catch {}
+  // The first thing anyone sees is a built car, not a stock one: a returning
+  // reader gets the style they last chose, a new one the two-tone showcase.
+  if (!preset) loadStyle(ALL_STYLES.some(x => x.id === seen) ? seen : HERO_STYLE, false);
   if (preset) { document.body.classList.add('sheet'); goStep(stepOf([...q.keys()][0])); }
   else if (seen) goStep(1);
   else goStep(0);
@@ -1551,14 +1565,26 @@ function buildStyles() {
     + `<p class="stylehead">配置風格<em>我們依實車與官方示範車搭的整台</em></p>` + STYLES.map(card).join('');
 }
 
-function applyStyle(id) {
+const HERO_STYLE = 'cal_twotone';
+function loadStyle(id, remember = true) {
   const st = ALL_STYLES.find(x => x.id === id);
-  if (!st) return;
+  if (!st) return false;
   styleAt = id;
-  try { localStorage.setItem('jimny.style', id); } catch {}
+  if (remember) try { localStorage.setItem('jimny.style', id); } catch {}
   S = { ...DEF, ...st.set };
   tyreSwap = '';
   buildUI(); update(); buildStyles();
+  return true;
+}
+// Changing the whole car is the one moment worth a camera move: swing round
+// to a low three-quarter on alternate sides, so each new style is presented
+// rather than swapped in.
+let heroSide = 1;
+function applyStyle(id) {
+  if (!loadStyle(id)) return;
+  if (REDUCED) return;
+  heroSide = -heroSide;
+  flyTo(heroSide * 0.82, 0.12, 8.4, 1300);
 }
 $('styles').addEventListener('click', (e) => {
   const b = e.target.closest('[data-style]');
@@ -2360,6 +2386,7 @@ $('btnExport').onclick = () => {
 resize(); setPeek(); applyCam();
 (function loop(t) {
   runTweens(t || performance.now());
+  idleSpin(t || performance.now());
   ambient(t || 0);
   updateSplit(rig);
   if (composer) composer.render(); else renderer.render(scene, cam);

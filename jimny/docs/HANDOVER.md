@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609251710** · 247 catalogue entries · 10 styles
+Current build: **202609260248** · 247 catalogue entries · 10 styles
 
 ---
 
@@ -164,7 +164,11 @@ height, rig.js `split` / `updateSplit`) with **painted flares**
 (`S.paintFlares` puts the stock flares on the body paint), and Beyond's
 Liberte bars in **mirror / ivory** as catalogue entries sharing geometry
 (`node`, `finish`; app.html `finishOf`). Three styles use them: 加州雙色,
-灰紫時裝, 夕陽 JA11. Still open from that file: woodgrain side panel,
+灰紫時裝, 夕陽 JA11. The page now OPENS on a built car (HERO_STYLE 加州雙色 for a new reader,
+the last chosen style for a returning one), swings the camera to a low
+three-quarter on alternate sides when a style is chosen, turns slowly after
+9 s untouched (never under automation -- navigator.webdriver), and the style
+cards show a bigger image with two lines of text. Still open from that file: woodgrain side panel,
 cream-painted rack, yellow headlamp covers, Beyond's own grilles. Instagram (KLC, SHOWA) needs the Chrome extension
 connected; it was not.
 
