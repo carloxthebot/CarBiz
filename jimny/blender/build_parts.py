@@ -1303,8 +1303,11 @@ def flares():
     root = group('flares')
     for s in (-1, 1):
         for kind, z in (('front', CAR['anchors']['frontAxleZ']), ('rear', CAR['anchors']['rearAxleZ'])):
-            for t in range(11):
-                deg = 20 + 130 * t / 10
+            # from 55 degrees up: below that, at the front arch, the rivets
+            # sat on the stock bumper's corner, and with any other bumper they
+            # hung in the air
+            for t in range(9):
+                deg = 55 + 95 * t / 8
                 a = math.radians(deg)
                 r = 470
                 lib.cylinder(f'rivet{s}{kind}{t}', (s * (arch_half_w(kind, deg) - 3), 346 + r * math.sin(a), z + r * math.cos(a)),
@@ -3067,7 +3070,10 @@ def rear_bar(pid, kind, W=1450, H=200, D=120, y=440, tube_d=60, lamps='wings', s
             box(f'plateTab{s}', (s * 110, ty - 38, tz - 12), (24, 96, 34), mat, root, bevel=1)
         box('plate', (0, ty - 92, tz - 27), (330, 165, 3), PLATE, root, bevel=1)
     else:
-        box('plate', (0, 585, TAIL_Z - 6), (330, 165, 4), PLATE, root, bevel=1)
+        # on the bar's own rear face: the bars now stay under the spare, and
+        # the plate left at the old height ended up hidden behind them
+        ph = min(165, H - 20)
+        box('plate', (0, y, z - D / 2 - 3), (330, ph, 4), PLATE, root, bevel=1)
     if lamps != 'klc':                                       # the KLC tube stays open underneath, as fitted
         box('valance', (0, 520, -1430), (1300, 200, 20), RUBBER, root, bevel=4)
         for s in (-1, 1):
@@ -3515,6 +3521,46 @@ def ladder_urnieta():
     return root
 
 
+# ============================================================ NUMBER PLATES
+PLATE_INK = material('PlateInk', 0x15171a, rough=0.5)
+PLATE_RIM = material('PlateRim', 0x2a2d31, rough=0.45, metal=0.3)
+
+
+def decorate_plates():
+    """Every bumper carries a plate, and a blank white slab was the most
+    toy-like thing on the car. After everything is built, each plate gets a
+    raised black border, embossed characters in the Taiwanese small-car
+    format (three letters, a dash, four digits) and two chrome screws. The
+    registration is made up; a rear plate's lettering faces backwards."""
+    plates = [o for o in bpy.data.objects if o.type == 'MESH' and o.name.split('.')[0] == 'plate'
+              and o.data.materials and o.data.materials[0] == PLATE]
+    for i, pl in enumerate(plates):
+        bpy.context.view_layer.update()
+        mw = pl.matrix_world
+        cs = [mw @ Vector(c) for c in pl.bound_box]
+        bx0, bx1 = min(c.x for c in cs), max(c.x for c in cs)
+        by0, by1 = min(c.y for c in cs), max(c.y for c in cs)
+        bz0, bz1 = min(c.z for c in cs), max(c.z for c in cs)
+        # back to the car frame (mm): x = bx, y = bz, z = -by
+        x, y = (bx0 + bx1) / 2 / lib.MM, (bz0 + bz1) / 2 / lib.MM
+        w, h = (bx1 - bx0) / lib.MM, (bz1 - bz0) / lib.MM
+        front = (-(by0 + by1) / 2) > 0
+        zf = (-by0 / lib.MM) if front else (-by1 / lib.MM)       # the face that shows
+        sgn = 1 if front else -1
+        root = pl.parent
+        t = 3
+        for k, (cx, cy, sx, sy) in enumerate(((0, h / 2 - 5, w - 6, 6), (0, -h / 2 + 5, w - 6, 6),
+                                              (-w / 2 + 5, 0, 6, h - 6), (w / 2 - 5, 0, 6, h - 6))):
+            box(f'plateRim{i}_{k}', (x + cx, y + cy, zf + sgn * t / 2), (sx, sy, t), PLATE_RIM, root, bevel=0.5)
+        ob = text(f'plateNo{i}', 'JMN-7474', (x, y - h * 0.04, zf + sgn * 1.5), h * 0.42, 2, PLATE_INK, root,
+                  font='/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf')
+        ob.scale = (min(1.0, (w * 0.84) / max(1.0, ob.dimensions.x / lib.MM)), 1, 1) if ob.dimensions.x else (1, 1, 1)
+        if not front:
+            ob.rotation_euler = (0, 0, math.pi)
+        for k, dx in enumerate((-w * 0.36, w * 0.36)):
+            lib.cylinder(f'plateBolt{i}_{k}', (x + dx, y + h * 0.36, zf + sgn * 2), (0, 0, 1), 12, 4, CHROME, root, n=10)
+
+
 def build():
     for v in ('platform', 'basket'):
         roof_rack(v)
@@ -3727,6 +3773,7 @@ def build():
     grille_generic('kpro_folksy', h_slats=6, mat=material('WhiteGel', 0xeeeee8, rough=0.35), wire=False)
     grille_generic('prostaff_minig', v_slots=9, bezel='square')
     grille_generic('sixsense_explosion', h_slats=7, slat_h=12, label='SUZUKI', bezel='square', mat=PAINT)
+    decorate_plates()
     # Two files, because they are needed at different moments: the car cannot
     # be drawn at all without its wheels, but nothing needs an awning until
     # somebody picks one. Splitting them takes about 1.5 MB off what has to
