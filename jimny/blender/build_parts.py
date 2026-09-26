@@ -85,57 +85,54 @@ REAR_ARCH_Z = -610        # front edge of the rear wheel arch opening
 # the gutter, one-piece 1345 mm wind deflector. Black powder coat.
 # The basket variant is a generic 32 mm tube basket on the same legs.
 def roof_rack(variant):
-    root = group(f'roofRack_{variant}')
-    W, L = (1345, 1560) if variant == 'platform' else (1250, 1300)
-    zc = (ROOF_Z_FRONT + ROOF_Z_REAR) / 2 - 20
-    top = ROOF_Y_MID + 62                      # tray just clears the roof crown
-    deck = top - 50                              # underside of the tray
-    z0, z1 = zc - L / 2, zc + L / 2
-
-    for s in (-1, 1):                            # side rails with a T-slot down the outside
-        sweep(f'rail{s}', [(s * (W / 2 - 25), deck + 25, z0), (s * (W / 2 - 25), deck + 25, z1)],
-              rounded_rect(50, 50, 5), BLACK, root)
-        box(f'railSlot{s}', (s * W / 2, deck + 25, zc), (2, 10, L - 20), TEXBLACK, root, bevel=0)
-    n = 14 if variant == 'platform' else 11
-    pitch = (L - 60) / (n - 1)
-    for i in range(n):
-        z = z0 + 30 + i * pitch
-        end = i in (0, n - 1)
-        box(f'slat{i}', (0, top - 8, z), (W - 100, 15, 62), BLACK, root, bevel=2)
-        box(f'slot{i}', (0, top, z), (W - 120, 1.5, 9), TEXBLACK, root, bevel=0)
-        if end:                                  # L-section lip at front and rear
-            box(f'lip{i}', (0, top - 30, z + (30 if i else -30)), (W - 100, 45, 4), BLACK, root, bevel=1)
-    for s in (-1, 1):                            # six gutter legs, 130 tall, clamp under the gutter
-        for k in range(3):
-            z = z0 + 170 + k * (L - 340) / 2
-            yg = ROOF_Y_EDGE - 6
-            leg = [(s * (GUTTER_X + 18), yg - 25, z), (s * (GUTTER_X + 18), yg + 40, z),
-                   (s * (W / 2 - 25), deck, z)]
-            sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
-            box(f'legPlate{s}{k}', (s * (W / 2 - 25), deck - 4, z), (70, 8, 70), BLACK, root, bevel=2)
-            box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
-    zf = z1 + 70
-    from mathutils import Matrix
-    box('deflector', (0, top - 55, zf), (W - 60, 90, 3), BLACK, root, bevel=1,
-        rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
-    for s in (-1, 1):
-        box(f'deflBracket{s}', (s * (W / 2 - 40), top - 45, zf - 40), (6, 60, 90), BLACK, root, bevel=1)
-
     if variant == 'basket':
-        y = top + 150
-        hoop = [(-W / 2 + 20, y, z0 + 20), (W / 2 - 20, y, z0 + 20), (W / 2 - 20, y, z1 - 20),
-                (-W / 2 + 20, y, z1 - 20), (-W / 2 + 20, y, z0 + 20), (W / 2 - 20, y, z0 + 20)]
-        pts = fillet(hoop, 90)
-        sweep('hoop', [tuple(p) for p in pts[:-3]], circle(16, 14), BLACK, root, caps=False)
-        m = int(L // 250)
-        for s in (-1, 1):
-            for k in range(m + 1):
-                z = z0 + 20 + k * (L - 40) / m
-                tube(f'up{s}{k}', [(s * (W / 2 - 20), top, z), (s * (W / 2 - 20), y, z)], 22, BLACK, root)
-        for k in range(1, int(W // 250)):
-            x = -W / 2 + k * W / int(W // 250)
-            for z in (z0 + 20, z1 - 20):
-                tube(f'upx{k}{z}', [(x, top, z), (x, y, z)], 22, BLACK, root)
+        return rack_basket()
+    # Front Runner Slimline II: thin tray, low T-slot rail with moulded
+    # corner caps, hat-section slats flush with it, six tapered legs, one
+    # curved deflector.
+    return rack_frame('platform', 1345, 1560, rail=(30, 50), slats=14, slat_w=62, slat_h=18, flutes=1,
+                      legs=6, deflector=True)
+
+
+def rack_basket():
+    """SHOWA GARAGE A-x Half Rack M (E20008), 1400 x 1250, about 130 tall
+    folded, 11.4 kg: a wrinkle-black tube basket -- a rounded top hoop tied
+    to the floor frame by hairpin uprights, rods fore-aft on the floor, a
+    curved textured panel wrapping the front, four bracket feet (maker's
+    photos, 2026-09-26)."""
+    root = group('roofRack_basket')
+    W, L = 1250, 1400
+    top = RACK_TOP
+    zc = RACK_ZC
+    z0, z1 = zc - L / 2, zc + L / 2
+    yf, yh = top - 12, top + 108                           # floor frame, top hoop
+    fx, hx = W / 2 - 20, W / 2 - 38
+    hsweep('frame', rect_loop(fx, z0 + 20, z1 - 20, yf, 130, 6), circle(13, 10), TEXBLACK, root, closed=True, crisp=False)
+    hsweep('hoop', rect_loop(hx, z0 + 38, z1 - 38, yh, 150, 6), circle(13, 10), TEXBLACK, root, closed=True, crisp=False)
+    n = 13
+    for i in range(n):                                     # floor rods, fore-aft
+        x = -fx + 50 + i * (2 * fx - 100) / (n - 1)
+        lib.cylinder(f'rod{i}', (x, yf + 2, zc), (0, 0, 1), 12, L - 60, TEXBLACK, root, n=8)
+    for k in range(4):                                     # cross rods under them
+        z = z0 + 90 + k * (L - 180) / 3
+        lib.cylinder(f'cross{k}', (0, yf - 10, z), (1, 0, 0), 18, 2 * fx, TEXBLACK, root, n=10)
+    for s in (-1, 1):                                      # hairpin uprights down the sides
+        for k in range(7):
+            z = z0 + 150 + k * (L - 300) / 6
+            tube(f'up{s}{k}', [(s * fx, yf, z), (s * fx, yf + 40, z), (s * hx, yh, z)], 14, TEXBLACK, root, bend=40)
+    for k in range(5):                                     # and across the rear
+        x = -hx + 160 + k * (2 * hx - 320) / 4
+        tube(f'upr{k}', [(x, yf, z0 + 20), (x, yf + 40, z0 + 20), (x, yh, z0 + 38)], 14, TEXBLACK, root, bend=40)
+    # the curved textured wind panel wrapping the front
+    arc = bezier2((yf - 6, z1 - 14), (yf + 30, z1 + 26), (yh + 4, z1 - 34), 10)
+    curved_strip('frontPanel', -(hx - 90), hx - 90, arc, 4, TEXBLACK, root)
+    for s in (-1, 1):                                      # panel ends wrap round the corners
+        for f in range(3):
+            q = arc[3 + f * 3]
+            lib.cylinder(f'panelRib{s}{f}', (s * (hx - 60), q[0], q[1]), (1, 0, 0), 10, 60, TEXBLACK, root, n=8)
+    for s in (-1, 1):                                      # four bracket feet
+        for k in (-1, 1):
+            gutter_leg(root, f'leg{s}{k}', s, zc + k * (L / 2 - 260), fx, yf - 10, 'tower', 56)
     return root
 
 
@@ -821,31 +818,14 @@ RED_LABEL = material('LabelRed', 0xb3261e, rough=0.5)
 
 
 def roof_rack_arb():
-    root = group('roofRack_arb')
-    W, L, top = ARB_W, ARB_L, RACK_TOP
-    deck = top - 45
-    z0, z1 = RACK_ZC - L / 2, RACK_ZC + L / 2
-    for s in (-1, 1):                                    # dovetail side rails
-        sweep(f'rail{s}', [(s * (W / 2 - 22), deck + 22, z0), (s * (W / 2 - 22), deck + 22, z1)], rounded_rect(44, 45, 4), BLACK, root)
-        for k in range(int((L - 60) // 38)):
-            box(f'slot{s}{k}', (s * W / 2, deck + 22, z0 + 40 + k * 38), (2, 12, 20), TEXBLACK, root, bevel=0)
-    for zz in (z0, z1):                                  # end rails
-        sweep(f'end{zz}', [(-W / 2 + 44, deck + 22, zz + (22 if zz == z0 else -22)), (W / 2 - 44, deck + 22, zz + (22 if zz == z0 else -22))],
-              rounded_rect(45, 44, 4), BLACK, root)
-    n = 15                                               # planks across the car
-    pitch = (L - 120) / (n - 1)
-    for i in range(n):
-        z = z0 + 60 + i * pitch
-        box(f'plank{i}', (0, top - 8, z), (W - 88, 14, 78), BLACK, root, bevel=2)
-        box(f'gap{i}', (0, top - 2, z + 44), (W - 88, 2, 10), TEXBLACK, root, bevel=0)
-    for s in (-1, 1):                                    # six gutter legs
-        for k in range(3):
-            z = z0 + 170 + k * (L - 340) / 2
-            yg = ROOF_Y_EDGE - 6
-            leg = [(s * (GUTTER_X + 18), yg - 25, z), (s * (GUTTER_X + 18), yg + 40, z), (s * (W / 2 - 22), deck, z)]
-            sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
-            box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
-    lbl = text('arbLabel', 'BASE RACK', (0, deck + 22, z0 - 24), 22, 1, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
+    """ARB BASE Rack (1770020), 1545 x 1285: wide flat slats across the car
+    with narrow gaps, flush with a dovetail-grooved perimeter that runs round
+    large cast corners (two bolts each), four tower legs, BASE RACK on the
+    rear rail (maker's photos, 2026-09-26)."""
+    root = rack_frame('arb', ARB_W, ARB_L, rail=(44, 45), rail_kind='dovetail', R=90, castings=True, slats=15,
+                      slat_w=78, slat_h=16, flutes=2, legs=4, deflector=False)
+    z0 = RACK_ZC - ARB_L / 2
+    lbl = text('arbLabel', 'BASE RACK', (0, RACK_TOP - 22, z0 - 1), 22, 1, material('LabelWhite', 0xf0f0ec, rough=0.6), root)
     lbl.rotation_euler = (0, 0, math.pi)                    # faces the rear, so it reads from behind
     return root
 
@@ -2082,99 +2062,465 @@ def pillar_pods(sides=(-1, 1), suffix=''):
 
 # ============================================================ MORE VARIANTS
 # Generic builders so each catalogue entry only supplies dimensions.
-def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=6, deflector=True, mesh=False, top=None,
-                  hoop=0, round_bars=False):
-    """Flat aluminium platform on gutter legs. slat_dir 'across' (Front Runner,
-    ARB) or 'along' (Yakima LockNLoad, Rhino Pioneer). `hoop` adds a tube
-    perimeter standing that many mm above the deck (IPF, JAOS), `round_bars`
-    swaps the flat slats for round crossbars (Yakima LockNLoad) and `mesh`
-    lays a grid floor under them (APIO, Rhino Pioneer)."""
+# ============================================================ RACK & AWNING KIT
+# Shared pieces for every roof rack and awning bag. A photo review of all 17
+# racks and 14 awnings against the makers' own pages (2026-09-26) found the
+# same faults everywhere: rails were plain rounded bars with a 2 mm strip
+# stuck on as the "T-slot", slats were boxes, a leg was one bent strap, the
+# deflector a flat sheet tilted 58 degrees, and a fabric bag was a crisp black
+# beam. What makes the real ones read as bought parts, and what these helpers
+# draw: an extruded rail whose slot is a recess (a shadow line), a perimeter
+# that turns its corners (cast corner or rounded extrusion), hat-section slats
+# with a recessed slot and fluting, a foot on a rubber pad with a clamp plate
+# and bolt heads under a tapered tower, a curved pressed deflector, and a soft
+# pinched bag with welted seams, a zip, and webbing straps with buckles.
+
+def sharp(ob, angle=35):
+    """Smooth shading that still keeps the extrusion's corners crisp."""
+    m = ob.modifiers.new('split', 'EDGE_SPLIT')
+    m.split_angle = math.radians(angle)
+    return ob
+
+
+def hsweep(name, pts, prof, mat, parent=None, closed=False, caps=True, scale=None, crisp=True):
+    """Sweep an (out, up) profile along a HORIZONTAL car-frame path. 'out' is
+    to the left of the direction of travel (up x tangent), so a rectangle run
+    +Z along the +X side, then -X across the front, has 'out' pointing
+    outward the whole way round. `scale(i) -> k` shrinks ring i about the
+    path (for a pinched fabric bag)."""
+    n = len(pts)
+    bm = bmesh.new()
+    rings = []
+    for i, p in enumerate(pts):
+        a = pts[i - 1] if closed else pts[max(i - 1, 0)]
+        b = pts[(i + 1) % n] if closed else pts[min(i + 1, n - 1)]
+        tx, tz = b[0] - a[0], b[2] - a[2]
+        ln = math.hypot(tx, tz) or 1.0
+        lx, lz = tz / ln, -tx / ln
+        k = scale(i) if scale else 1.0
+        rings.append([bm.verts.new(P(p[0] + lx * u * k, p[1] + v * k, p[2] + lz * u * k)) for (u, v) in prof])
+    m = len(prof)
+    pairs = list(zip(rings, rings[1:])) + ([(rings[-1], rings[0])] if closed else [])
+    for r0, r1 in pairs:
+        for j in range(m):
+            bm.faces.new((r0[j], r0[(j + 1) % m], r1[(j + 1) % m], r1[j]))
+    if caps and not closed:
+        bm.faces.new(list(reversed(rings[0])))
+        bm.faces.new(rings[-1])
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    ob = lib.new_object(name, bm, mat, parent, smooth=True)
+    return sharp(ob) if crisp else ob
+
+
+def rail_prof(w, h, kind='tslot'):
+    """Side-rail extrusion, (out, up) about its centre. 'tslot' has a T-slot
+    recessed into the outboard face, 'dovetail' (ARB) a dovetail groove,
+    'round' (Yakima) a fat rounded aero face, 'plate' (APIO) a tall thin
+    plate."""
+    c = min(3.0, w * 0.08)
+    if kind == 'round':
+        return rounded_rect(w, h, min(w, h) * 0.42, 5)
+    if kind == 'plate':
+        return rounded_rect(w, h, 3, 2)
+    o = min(5.0, h * 0.12)                      # slot opening half-height
+    d = min(10.0, w * 0.28)                     # slot depth
+    if kind == 'dovetail':
+        slot = [(w / 2, -o), (w / 2 - d, -o - 4), (w / 2 - d, o + 4), (w / 2, o)]
+    else:
+        slot = [(w / 2, -o), (w / 2 - 3, -o), (w / 2 - 3, -o - 4), (w / 2 - d, -o - 4),
+                (w / 2 - d, o + 4), (w / 2 - 3, o + 4), (w / 2 - 3, o), (w / 2, o)]
+    return ([(-w / 2 + c, -h / 2), (w / 2 - c, -h / 2), (w / 2, -h / 2 + c)] + slot +
+            [(w / 2, h / 2 - c), (w / 2 - c, h / 2), (-w / 2 + c, h / 2), (-w / 2, h / 2 - c), (-w / 2, -h / 2 + c)])
+
+
+def slat_prof(sw, sh, flutes=0, slot=True):
+    """Hat-section slat, (across, up) with its top at up = 0: tapered sides,
+    a recessed T-slot down the middle and `flutes` shallow grooves either
+    side of it."""
+    top = []
+    fl = [sw * (0.18 + 0.2 * k) for k in range(flutes)]
+    for f in reversed(fl):                                  # right-hand flutes, outside in
+        top += [(f + 2.5, 0), (f, -1.8), (f - 2.5, 0)]
+    if slot:
+        top += [(4, 0), (4, -3), (7.5, -3), (7.5, -min(10, sh - 4)), (-7.5, -min(10, sh - 4)), (-7.5, -3), (-4, -3), (-4, 0)]
+    for f in fl:                                            # left-hand, inside out
+        top += [(-f + 2.5, 0), (-f, -1.8), (-f - 2.5, 0)]
+    return ([(-sw / 2 + 4, -sh), (sw / 2 - 4, -sh), (sw / 2, -3), (sw / 2 - 2, 0)] + top +
+            [(-sw / 2 + 2, 0), (-sw / 2, -3)])
+
+
+def rect_loop(xh, z0, z1, y, R, steps=6):
+    """Rounded-rectangle centre line, closed, run so hsweep's 'out' faces out."""
+    zm = (z0 + z1) / 2
+    pts = [(xh, y, zm), (xh, y, z1), (-xh, y, z1), (-xh, y, z0), (xh, y, z0), (xh, y, zm)]
+    return [tuple(p) for p in fillet(pts, R, steps)][:-1]
+
+
+def corner_arcs(xh, z0, z1, y, R, run=60, steps=6):
+    """The four corners of rect_loop, each with `run` mm of straight either side."""
+    out = []
+    corners = [((xh, y, z1), (0, 0, 1), (-1, 0, 0)), ((-xh, y, z1), (-1, 0, 0), (0, 0, -1)),
+               ((-xh, y, z0), (0, 0, -1), (1, 0, 0)), ((xh, y, z0), (1, 0, 0), (0, 0, 1))]
+    for c, di, do in corners:
+        c = Vector(c)
+        a = c - Vector(di) * (R + run)
+        b = c + Vector(do) * (R + run)
+        out.append([tuple(p) for p in fillet([a, c, b], R, steps)])
+    return out
+
+
+def curved_strip(name, x0, x1, arc, t, mat, parent=None):
+    """A pressed sheet across the car: `arc` is its section as (y, z) points,
+    `t` its thickness, built from quads only (a crescent-shaped n-gon cap
+    triangulates through itself)."""
+    bm = bmesh.new()
+    n = len(arc)
+    rows = []
+    for i, (y, z) in enumerate(arc):
+        (ya, za), (yb, zb) = arc[max(i - 1, 0)], arc[min(i + 1, n - 1)]
+        dy, dz = yb - ya, zb - za
+        ln = math.hypot(dy, dz) or 1.0
+        ny, nz = -dz / ln, dy / ln                          # normal in the section plane
+        rows.append([bm.verts.new(P(x, y + ny * o, z + nz * o)) for x in (x0, x1) for o in (0, -t)])
+    for r0, r1 in zip(rows, rows[1:]):                      # r = [x0 out, x0 in, x1 out, x1 in]
+        bm.faces.new((r0[0], r0[2], r1[2], r1[0]))
+        bm.faces.new((r0[1], r1[1], r1[3], r0[3]))
+        bm.faces.new((r0[0], r1[0], r1[1], r0[1]))
+        bm.faces.new((r0[2], r0[3], r1[3], r1[2]))
+    for r in (rows[0], rows[-1]):
+        bm.faces.new((r[0], r[1], r[3], r[2]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return sharp(lib.new_object(name, bm, mat, parent, smooth=True), 40)
+
+
+def bezier2(a, c, b, n=10):
+    return [tuple(a[k] * (1 - u) ** 2 + c[k] * 2 * u * (1 - u) + b[k] * u * u for k in range(len(a)))
+            for u in (i / n for i in range(n + 1))]
+
+
+def bolt(name, centre, axis, parent, dia=13, length=6, mat=None):
+    """Hex bolt head."""
+    return lib.cylinder(name, centre, axis, dia, length, mat or STEEL, parent, n=6)
+
+
+def gutter_leg(root, name, s, z, rail_x, deck, kind='tower', depth=64):
+    """One gutter mount: rubber pad on the gutter, foot casting, clamp plate
+    hooked under the gutter lip with its bolt, and the upright to the rail.
+    The gutter lip is at |x| 644 at y 1550 (sampled), so the clamp stands
+    just outboard of that; the roof side is at |x| 599 by y 1600, so nothing
+    inboard of |x| 612 comes below y 1595."""
+    gy = ROOF_Y_EDGE
+    box(f'{name}pad', (s * (GUTTER_X + 8), gy - 3, z), (44, 8, depth + 6), RUBBER, root, bevel=2)
+    box(f'{name}foot', (s * (GUTTER_X + 22), gy + 6, z), (50, 12, depth + 10), BLACK, root, bevel=3)
+    box(f'{name}clamp', (s * 652, gy - 12, z), (6, 44, depth - 14), BLACK, root, bevel=1.5)
+    box(f'{name}hook', (s * 650, gy - 32, z), (12, 5, depth - 14), BLACK, root, bevel=1)
+    bolt(f'{name}clampBolt', (s * 658, gy - 8, z), (1, 0, 0), root, dia=14, length=7)
+    xi, xo = rail_x - 26, max(rail_x + 22, GUTTER_X + 44)
+    if kind == 'plate3':                                   # Rhino: one plate along the car, three holes
+        th = 7
+        slab(f'{name}tower', [(s * (GUTTER_X + 6), gy + 12), (s * (GUTTER_X + 34), gy + 12),
+                              (s * (rail_x + 10), deck), (s * (rail_x - 14), deck)], z - 90, z + 90, BLACK, root)
+        xm = (GUTTER_X + 20 + rail_x - 2) / 2
+        box(f'{name}plate', (s * (xm + 10), (gy + 12 + deck) / 2 + 2, z), (th, deck - gy - 8, 200), BLACK, root, bevel=2)
+        for k in (-1, 0, 1):
+            lib.cylinder(f'{name}hole{k}', (s * (xm + 10), (gy + 12 + deck) / 2 + 4, z + k * 58), (1, 0, 0),
+                         30 if k else 36, th + 1.2, RUBBER, root, n=16)
+    elif kind == 'sleg':                                   # IPF: curved arm down to a knob clamp
+        arm = [(s * rail_x, deck, z), (s * (rail_x + 18), deck - 18, z), (s * (GUTTER_X + 30), gy + 22, z),
+               (s * (GUTTER_X + 24), gy + 10, z)]
+        sweep(f'{name}tower', [tuple(p) for p in fillet(arm, 20)], rounded_rect(14, 40, 4), BLACK, root)
+        lib.cylinder(f'{name}knob', (s * 668, gy - 8, z), (1, 0, 0), 30, 18, TEXBLACK, root, n=8)
+    else:                                                  # tapered cast tower
+        t = slab(f'{name}tower', [(s * (GUTTER_X + 2), gy + 12), (s * (GUTTER_X + 40), gy + 12),
+                                  (s * xo, deck + 2), (s * xi, deck + 2)],
+                 z - depth / 2, z + depth / 2, BLACK, root)
+        mod = t.modifiers.new('bevel', 'BEVEL'); mod.width = 4 * lib.MM; mod.segments = 2
+        bolt(f'{name}footBolt', (s * (GUTTER_X + 22), gy + 13, z + depth / 2 - 10), (0, 1, 0), root, dia=12, length=5)
+    for k in (-1, 1):                                      # bolts into the rail's slot
+        bolt(f'{name}railBolt{k}', (s * (rail_x + 1), deck - 3, z + k * depth * 0.3), (0, 1, 0), root, dia=11, length=5)
+
+
+def deflector_curve(root, W, top, zf, drop=62, reach=95, holes=0, inset=40):
+    """Curved pressed wind deflector across the front, on a bracket each end.
+    Its lowest edge stays above the roof's front (y 1599 at z 300, 1577 at
+    z 400 on the centre line)."""
+    arc = bezier2((top - 4, zf), (top - 4, zf + reach * 0.75), (top - drop, zf + reach), 10)
+    xh = W / 2 - inset
+    curved_strip('deflector', -xh, xh, arc, 3, BLACK, root)
+    for s in (-1, 1):
+        # a gusset plate under the sheet's end, following its curve
+        under = [(y - 3, z) for (y, z) in arc[:8]]
+        prism(f'deflBracket{s}', [(top - 6, zf - 34)] + under + [(top - drop * 0.8, zf - 34)],
+              s * (xh - 4), s * (xh + 2), BLACK, root)
+        bolt(f'deflBolt{s}', (s * (xh + 4), top - 22, zf - 18), (1, 0, 0), root, dia=11, length=5)
+    for k in range(holes):                                 # APIO: four round holes in the front plate
+        y, z = arc[5]
+        lib.cylinder(f'deflHole{k}', (-xh * 0.6 + k * xh * 0.4, y + 1, z + 1), (0, 0.8, 0.6), 34, 4.5, RUBBER, root, n=16)
+
+
+def rack_frame(pid, W, L, top=None, rail=(50, 45), rail_kind='tslot', R=None, castings=None,
+               slat_dir='across', slats=14, slat_w=62, slat_h=18, flutes=1, bars='slat', legs=6,
+               leg_kind='tower', deflector=True, defl_drop=62, fairing=False, defl_holes=0,
+               side_bars=0, tube_frame=0, spine=False, backbone=False, eyebolts=0, label=None,
+               badge=None, leg_depth=64):
+    """Platform on gutter legs, the construction every rack here shares:
+    extruded perimeter with rounded corners (castings optional), slats flush
+    with its top, gutter legs, optional deflector. Returns the root."""
     root = group(f'roofRack_{pid}')
     top = top or RACK_TOP
-    deck = top - rail[1]
-    z0, z1 = RACK_ZC - L / 2, RACK_ZC + L / 2
-    for s in (-1, 1):
-        sweep(f'rail{s}', [(s * (W / 2 - rail[0] / 2), deck + rail[1] / 2, z0), (s * (W / 2 - rail[0] / 2), deck + rail[1] / 2, z1)],
-              rounded_rect(rail[0], rail[1], 4), BLACK, root)
-        box(f'railSlot{s}', (s * W / 2, deck + rail[1] / 2, RACK_ZC), (2, 10, L - 20), TEXBLACK, root, bevel=0)
-    for zz, k in ((z0, 1), (z1, -1)):
-        sweep(f'end{zz}', [(-W / 2 + rail[0], deck + rail[1] / 2, zz + k * rail[0] / 2), (W / 2 - rail[0], deck + rail[1] / 2, zz + k * rail[0] / 2)],
-              rounded_rect(rail[1], rail[0], 4), BLACK, root)
+    rw, rh = rail
+    deck = top - rh
+    zc = RACK_ZC
+    z0, z1 = zc - L / 2, zc + L / 2
+    xh = W / 2 - rw / 2
+    R = R if R is not None else rw / 2 + 10
+    loop = rect_loop(xh, z0 + rw / 2, z1 - rw / 2, top - rh / 2, R)
+    hsweep('rail', loop, rail_prof(rw, rh, rail_kind), BLACK, root, closed=True)
+    if castings:                                            # cast corners over the extrusion
+        cw, ch = castings if isinstance(castings, tuple) else (rw + 8, rh + 6)
+        for i, arcp in enumerate(corner_arcs(xh, z0 + rw / 2, z1 - rw / 2, top - rh / 2 + 1.5, R, run=45)):
+            hsweep(f'corner{i}', arcp, rounded_rect(cw, ch, min(10, ch * 0.3), 3), BLACK, root)
+            for k, f in enumerate((0.3, 0.7)):
+                q = arcp[int(len(arcp) * f)]
+                bolt(f'cornerBolt{i}{k}', (q[0] * 0.995, top + 2.5, q[2] - math.copysign(4, q[2] - zc)), (0, 1, 0), root, dia=10, length=4)
+    else:                                                   # plastic end caps at the corners
+        for i, arcp in enumerate(corner_arcs(xh, z0 + rw / 2, z1 - rw / 2, top - rh / 2, R, run=8)):
+            hsweep(f'corner{i}', arcp, rounded_rect(rw + 3, rh + 3, 4, 2), TEXBLACK, root)
+    # slats, tucked 6 mm into the rails either end
+    inner = W / 2 - rw + 6
     if slat_dir == 'across':
-        n = slats or int((L - 60) // 110)
-        pitch = (L - 60 - 80) / (n - 1)
-        for i in range(n):
-            z = z0 + 70 + i * pitch
-            if round_bars:
-                tube(f'bar{i}', [(-W / 2 + rail[0], top - 4, z), (W / 2 - rail[0], top - 4, z)], 42, BLACK, root)
-                continue
-            box(f'slat{i}', (0, top - 8, z), (W - 2 * rail[0], 15, 62), BLACK, root, bevel=2)
-            box(f'slot{i}', (0, top, z), (W - 2 * rail[0] - 20, 1.5, 9), TEXBLACK, root, bevel=0)
+        pitch = (L - 2 * rw - slat_w - 20) / max(1, slats - 1)
+        for i in range(slats):
+            z = z0 + rw + 10 + slat_w / 2 + i * pitch
+            if bars == 'aero':
+                hsweep(f'slat{i}', [(-inner, top - 4, z), (inner, top - 4, z)],
+                       [(u, v - 4) for (u, v) in rounded_rect(slat_w, slat_h, slat_h * 0.45, 4)], BLACK, root, caps=False)
+                box(f'slot{i}', (0, top - 3.2, z), (2 * inner - 60, 1.5, 8), TEXBLACK, root, bevel=0)
+            else:
+                hsweep(f'slat{i}', [(-inner, top, z), (inner, top, z)], slat_prof(slat_w, slat_h, flutes), BLACK, root, caps=False)
     else:
-        n = slats or int((W - 2 * rail[0]) // 75)
-        pitch = (W - 2 * rail[0] - 60) / (n - 1)
-        for i in range(n):
-            x = -W / 2 + rail[0] + 30 + i * pitch
-            box(f'slat{i}', (x, top - 8, RACK_ZC), (58, 15, L - 2 * rail[0] - 10), BLACK, root, bevel=2)
-            box(f'slot{i}', (x, top, RACK_ZC), (9, 1.5, L - 2 * rail[0] - 30), TEXBLACK, root, bevel=0)
-    if mesh:                                             # horizontal mesh floor under the slats
-        mw, ml = W - 2 * rail[0], L - 2 * rail[0]
-        for i in range(int(mw // 40) + 1):
-            box(f'mfx{i}', (-mw / 2 + i * 40, top - 20, RACK_ZC), (3, 3, ml), BLACK, root, bevel=0)
-        for j in range(int(ml // 40) + 1):
-            box(f'mfz{j}', (0, top - 20, RACK_ZC - ml / 2 + j * 40), (mw, 3, 3), BLACK, root, bevel=0)
+        span = W - 2 * rw
+        pitch = (span - slat_w - 40) / max(1, slats - 1)
+        zin = L / 2 - rw + 6
+        for i in range(slats):
+            x = -span / 2 + 20 + slat_w / 2 + i * pitch
+            hsweep(f'slat{i}', [(x, top, zc - zin), (x, top, zc + zin)], slat_prof(slat_w, slat_h, flutes), BLACK, root, caps=False)
+    if backbone:                                           # Rhino: two cross members under the slats
+        for k in (-1, 1):
+            hsweep(f'backbone{k}', [(-inner, top - slat_h - 12, zc + k * L * 0.22), (inner, top - slat_h - 12, zc + k * L * 0.22)],
+                   rail_prof(40, 24), BLACK, root, caps=True)
+    if spine:                                              # URNIETA: a fore-aft spine down the middle
+        hsweep('spine', [(0, top - 2, z0 + rw), (0, top - 2, z1 - rw)], slat_prof(52, 24, 1), BLACK, root, caps=False)
+    for k in range(eyebolts):                              # tie-down eye bolts on the slats
+        for s in (-1, 1):
+            z = z0 + L * (0.2 + 0.6 * k / max(1, eyebolts - 1))
+            ex = s * (W / 2 - rw - 110)
+            sweep(f'eye{s}{k}', [tuple(p) for p in fillet([(ex - 12, top + 1, z), (ex - 12, top + 22, z), (ex + 12, top + 22, z), (ex + 12, top + 1, z)], 11, 4)],
+                  circle(3, 6), STEEL, root)
+    # gutter legs
     per = legs // 2
     for s in (-1, 1):
         for k in range(per):
             z = z0 + 170 + k * (L - 340) / max(1, per - 1)
-            yg = ROOF_Y_EDGE - 6
-            leg = [(s * (GUTTER_X + 18), yg - 25, z), (s * (GUTTER_X + 18), yg + 40, z), (s * (W / 2 - rail[0] / 2), deck, z)]
-            sweep(f'leg{s}{k}', [tuple(p) for p in fillet(leg, 30)], rounded_rect(64, 22, 5), BLACK, root)
-            box(f'pad{s}{k}', (s * (GUTTER_X + 5), yg + 3, z), (40, 8, 64), RUBBER, root, bevel=2)
+            z = min(max(z, ROOF_Z_REAR + 90), ROOF_Z_FRONT - 150)
+            gutter_leg(root, f'leg{s}{k}', s, z, xh, deck, leg_kind, leg_depth)
     if deflector:
-        box('deflector', (0, top - 50, z1 + 60), (W - 60, 80, 3), BLACK, root, bevel=1, rot=Matrix.Rotation(math.radians(-58), 3, 'X'))
-    if hoop:                                             # tube perimeter standing proud of the deck
-        hy = top + hoop
-        loop = [(-W / 2 + rail[0], hy, z0 + rail[0]), (-W / 2 + rail[0], hy, z1 - rail[0]),
-                (W / 2 - rail[0], hy, z1 - rail[0]), (W / 2 - rail[0], hy, z0 + rail[0]),
-                (-W / 2 + rail[0], hy, z0 + rail[0])]
-        tube('hoop', loop, 34, BLACK, root, bend=70)
-        for s2 in (-1, 1):
-            for k in range(3):
-                zz = z0 + 120 + k * (L - 240) / 2
-                box(f'stanchion{s2}{k}', (s2 * (W / 2 - rail[0]), top + hoop / 2, zz), (26, hoop, 26), BLACK, root, bevel=3)
+        deflector_curve(root, W, top, z1 - 4, defl_drop, holes=defl_holes)
+    if fairing:                                            # Yakima: short fairing under the front rail
+        arc = bezier2((top - rh + 4, z1 - 10), (top - rh - 10, z1 + 20), (top - rh - 34, z1 + 10), 6)
+        curved_strip('fairing', -xh + 30, xh - 30, arc, 3, BLACK, root)
+    if side_bars:                                          # JAOS side bars: two sections a side on posts
+        for s in (-1, 1):
+            for seg in (-1, 1):
+                za, zb = zc + seg * 40, zc + seg * (L / 2 - 90)
+                za, zb = min(za, zb), max(za, zb)
+                hsweep(f'sideBar{s}{seg}', [(s * xh, top + side_bars, za), (s * xh, top + side_bars, zb)],
+                       rounded_rect(26, 22, 6, 3), BLACK, root)
+                for zz in (za + 40, zb - 40):
+                    lib.cylinder(f'sidePost{s}{seg}{zz:.0f}', (s * xh, top + side_bars / 2, zz), (0, 1, 0), 20, side_bars, BLACK, root, n=12)
+                for zz in (za, zb):
+                    box(f'sideCap{s}{seg}{zz:.0f}', (s * xh, top + side_bars, zz), (30, 26, 12), TEXBLACK, root, bevel=4)
+    if tube_frame:                                         # URNIETA: low round-tube frame round the edge
+        tl = rect_loop(xh - 10, z0 + rw, z1 - rw, top + tube_frame, 110, 6)
+        hsweep('tubeFrame', tl, circle(16, 12), BLACK, root, closed=True, crisp=False)
+        for s in (-1, 1):
+            for k in range(4):
+                zz = z0 + 150 + k * (L - 300) / 3
+                lib.cylinder(f'tubePost{s}{k}', (s * (xh - 10), top + tube_frame / 2, zz), (0, 1, 0), 20, tube_frame, BLACK, root, n=10)
+    if badge:                                              # maker's badge plate on the front rail
+        box('badge', (0, top - rh / 2, z1 + 1.5), (140, rh * 0.5, 3), badge, root, bevel=0.5)
+        for k in (-1, 1):
+            bolt(f'badgeBolt{k}', (k * 60, top - rh / 2, z1 + 3.5), (0, 0, 1), root, dia=8, length=3)
     return root
 
 
-def awning_case(pid, side, L, W, H, mat, hard=True, hinge=False):
-    """Roll-out awning on the rack's side rail: soft PVC bag (rounded) or
-    aluminium hard case (crisp). `hinge` adds the 270-degree pivot housing at
-    the rear end (batwing types)."""
+# Per-product look, from the photo review (docs in the review JSON). Only
+# construction details live here -- overall sizes stay in the build() calls,
+# which carry the published figures.
+RACK_STYLE = {
+    # Rhino Pioneer: fore-aft slats on two Backbone cross members, legs are
+    # plates with three lightening holes. No mesh floor in any photo.
+    'pioneer': dict(R=40, slat_w=86, slat_h=20, flutes=2, leg_kind='plate3', backbone=True),
+    # JAOS: square frame under big moulded corner covers (39 mm over a 32 mm
+    # frame), ribbed tower clamps, short side bars in two sections a side.
+    'jaos': dict(rail_kind='tslot', R=18, castings=(46, 39), slat_w=50, slat_h=20, leg_depth=72),
+    # IPF EXR-01: flat (38.8 mm), small square corner caps, fat fluted slats,
+    # S-legs with a knob clamp, eye bolts. There is no raised hoop.
+    'ipf': dict(R=22, slat_w=80, slat_h=26, flutes=2, leg_kind='sleg', eyebolts=2),
+    # APIO: tall thin plate rails, four slats, angled front plate with holes.
+    'apio': dict(rail_kind='plate', R=16, slat_w=70, slat_h=22, flutes=0, defl_holes=4, defl_drop=50),
+    # SHOWA A-x: many fluted slats, big round corner castings, emblem plate.
+    'showa_foot': dict(R=70, castings=True, slat_w=70, slat_h=20, flutes=2),
+    # Taiwan generic: twin-channel slats, big moulded round corners, eye bolts.
+    'tw_generic': dict(R=110, castings=True, slat_w=90, slat_h=22, flutes=2, eyebolts=3),
+    # Yakima LockNLoad: fat rounded perimeter, aero crossbars, front fairing.
+    'yakima': dict(rail_kind='round', R=140, bars='aero', slat_w=70, slat_h=22, fairing=True),
+    'fr34': dict(slat_w=62, slat_h=18, flutes=1),
+    # URNIETA SALADO: 50 mm channels, centre spine, low tube frame, deep
+    # stamped deflector.
+    'urnieta_salado': dict(slat_w=50, slat_h=24, flutes=0, spine=True, tube_frame=36, defl_drop=100),
+    'urnieta_salado_half': dict(slat_w=50, slat_h=24, flutes=0, spine=True, tube_frame=36, defl_drop=100),
+}
+
+
+def rack_platform(pid, W, L, slat_dir='across', slats=None, rail=(50, 45), legs=6, deflector=True, top=None, **kw):
+    """Flat platform on gutter legs; the construction is rack_frame(), the
+    per-product details RACK_STYLE."""
+    style = dict(RACK_STYLE.get(pid, {}))
+    style.update(kw)
+    n = slats or (int((L - 60) // 110) if slat_dir == 'across' else int((W - 2 * rail[0]) // 75))
+    root = rack_frame(pid, W, L, top=top, rail=rail, slat_dir=slat_dir, slats=n, legs=legs, deflector=deflector, **style)
+    top = top or RACK_TOP
+    if pid == 'apio':                                      # slot holes along the plate rails
+        for s in (-1, 1):
+            for k in range(14):
+                z = RACK_ZC - L / 2 + 120 + k * (L - 240) / 13
+                box(f'railHole{s}{k}', (s * (W / 2 + 0.6), top - rail[1] / 2, z), (1.5, 12, 34), RUBBER, root, bevel=0)
+    if pid == 'showa_foot':
+        box('emblem', (0, top - rail[1] / 2, RACK_ZC + L / 2 + 1.5), (170, 22, 3), material('LabelWhite', 0xf0f0ec, rough=0.6), root, bevel=0.5)
+    return root
+
+
+def squircle(w, h, n=24, p=4.0):
+    """Soft box section: what a stuffed PVC bag looks like end-on."""
+    out = []
+    for i in range(n):
+        a = 2 * math.pi * (i + 0.5) / n
+        c, s_ = math.cos(a), math.sin(a)
+        out.append((math.copysign(abs(c) ** (2 / p), c) * w / 2, math.copysign(abs(s_) ** (2 / p), s_) * h / 2))
+    return out
+
+
+AWNING_LABEL = {'arb': ('LabelRed', 0xb3261e), 'yakima': ('LabelWhite', 0xf0f0ec), 'rhino': ('LabelWhite', 0xf0f0ec),
+                'darche': ('LabelWhite', 0xf0f0ec), 'allblack': ('LabelOrange', 0xd8641e), 'ikamper': ('LabelWhite', 0xf0f0ec)}
+
+
+def awning_case(pid, side, L, W, H, mat, hard=None, hinge=False):
+    """Roll-out awning on the rack's side rail. Soft types are a PVC bag:
+    squircle section pinched where the straps pull it in, welted seams top
+    and bottom, a zip along the lower outboard edge with its pull, webbing
+    straps with buckles, moulded end caps. Hard types (ARB alu, iKamper) are
+    a grooved extrusion with a lid line, end castings and latches. `hinge`
+    adds the 270/180 pivot at the REAR end: a cast housing over the bag's
+    end, the pivot on top of it bolted to the rack, and the folded arms'
+    knuckles showing out of its end."""
     root = group(f'awning_{pid}_{side}')
     s = -RIGHT if side == 'left' else RIGHT
-    rack_top = RACK_TOP
+    if hard is None:                                       # every PVC entry is a bag; the default used to
+        hard = mat is not PVC                              # be True, so all fourteen were drawn as hard cases
     # every case is centred on the roof, so it overhangs the same amount front
     # and rear -- never trailing a long tail off the back
     # hung OUTBOARD of the rack's side rail (it used to sit 30 mm inside it),
     # and never lower than just above the gutter, or a tall bag runs into
-    # the roof side and over the top of the door glass
-    x, y, zc = s * (ARB_W / 2 + W / 2 + 5), max(rack_top + 40 - H / 2, 1595 + H / 2), RACK_ZC
-    prof = rounded_rect(W, H, 8 if hard else min(W, H) * 0.4, 6)
-    sweep('bag', [(x, y, zc - L / 2 + 20), (x, y, zc + L / 2 - 20)], prof, mat, root)
-    for k in (-1, 1):
-        z = zc + k * (L / 2 - 10)
-        sweep(f'cap{k}', [(x, y, z - 18), (x, y, z + 18)], rounded_rect(W + 6, H + 6, 10 if hard else min(W, H) * 0.42, 6), BLACK, root)
-    if not hard:
-        for k in (-1, 1):
-            box(f'strap{k}', (x, y, zc + k * 600), (W + 4, H + 4, 40), WEBBING, root, bevel=10)
-        box('zip', (x + s * W / 2, y - 30, zc), (3, 8, L - 120), WEBBING, root, bevel=0)
+    # the roof side and over the top of the door glass. The 5 mm over the old
+    # 1595 floor is for the straps, which wrap the bag.
+    x, y, zc = s * (ARB_W / 2 + W / 2 + 5), max(RACK_TOP + 40 - H / 2, 1600 + H / 2), RACK_ZC
+    za, zb = zc - L / 2 + 30, zc + L / 2 - 30             # the bag between its end caps
+    yt = y + H / 2
+    lab = next((v for k, v in AWNING_LABEL.items() if pid.startswith(k)), None)
+    lab = material(*lab, rough=0.6) if lab else None
+    if hard:
+        # extrusion: chamfered box with two grooves down the outboard face,
+        # one along the top, and the lid split line at the top outboard edge
+        w2, h2 = W / 2, H / 2
+        prof = [(-w2 + 6, -h2), (w2 - 6, -h2), (w2, -h2 + 6), (w2, -h2 * 0.35), (w2 - 3, -h2 * 0.35 + 3), (w2, -h2 * 0.35 + 6),
+                (w2, h2 * 0.3), (w2 - 3, h2 * 0.3 + 3), (w2, h2 * 0.3 + 6), (w2, h2 - 10), (w2 - 5, h2 - 7), (w2 - 10, h2),
+                (w2 * 0.2 + 3, h2), (w2 * 0.2, h2 - 3), (w2 * 0.2 - 3, h2), (-w2 + 6, h2), (-w2, h2 - 6), (-w2, -h2 + 6)]
+        prof = [(u * s, v) for (u, v) in prof]
+        hsweep('bag', [(x, y, za), (x, y, zb)], prof, mat, root, caps=False)
+        for k, z in enumerate((za, zb)):                   # end castings
+            d = -1 if k == 0 else 1
+            hsweep(f'cap{k}', [(x, y, z - d * 6), (x, y, z + d * 30)], rounded_rect(W + 10, H + 10, 14, 4), TEXBLACK, root)
+            box(f'capFace{k}', (x, y, z + d * 31), (W - 20, H - 20, 3), BLACK, root, bevel=1)
+        for k in range(3):                                 # latches under the lid
+            z = zc + (k - 1) * L * 0.3
+            box(f'latch{k}', (x + s * (W / 2 + 2), y + H * 0.1, z), (5, 30, 44), STEEL, root, bevel=1.5)
+        lib.cylinder('lidHinge', (x - s * W * 0.1, yt + 1, zc), (0, 0, 1), 8, L - 120, TEXBLACK, root, n=8)
+        if lab:
+            box('label', (x + s * (W / 2 + 0.8), y - H * 0.1, zb - 220), (1.5, 18, 170), lab, root, bevel=0)
+    else:
+        sec = squircle(W, H)
+        straps = [zc + k * L * 0.3 for k in (-1, 1)] if L < 2300 else [zc + k * L * 0.33 for k in (-1, 0, 1)]
+        n = 36
+        path = [(x, y, za + (zb - za) * i / (n - 1)) for i in range(n)]
+
+        def pinch(i):
+            z = path[i][2]
+            return 1 - 0.07 * sum(math.exp(-((z - zs) / 70) ** 2) for zs in straps) - 0.03 * math.exp(-((z - za) / 40) ** 2) \
+                - 0.03 * math.exp(-((z - zb) / 40) ** 2)
+        hsweep('bag', path, sec, mat, root, scale=pinch, crisp=False)
+        # welted seams along the four long edges
+        for k, a in enumerate((40, 140, 220, 320)):
+            r = math.radians(a)
+            u = math.copysign(abs(math.cos(r)) ** 0.5, math.cos(r)) * (W / 2 + 1)
+            v = math.copysign(abs(math.sin(r)) ** 0.5, math.sin(r)) * (H / 2 + 1)
+            lib.cylinder(f'seam{k}', (x + s * u, y + v, zc), (0, 0, 1), 6, zb - za - 40, mat, root, n=6)
+        # zip down the lower outboard edge, with its pull near the front
+        r = math.radians(-22)
+        zu, zv = (abs(math.cos(r)) ** 0.5) * (W / 2 + 1.5), -(abs(math.sin(r)) ** 0.5) * (H / 2 + 1.5)
+        lib.cylinder('zip', (x + s * zu, y + zv, zc), (0, 0, 1), 8, zb - za - 80, TEXBLACK, root, n=6)
+        box('zipPull', (x + s * (zu + 4), y + zv - 10, zb - 90), (4, 26, 12), STEEL, root, bevel=1.5)
+        # webbing straps round the bag, buckle on the outboard face
+        for j, zs in enumerate(straps):
+            k = 0.93
+            ring = [(x + u * k * 1.02 + math.copysign(3, u), y + v * k * 1.02 + math.copysign(3, v), zs) for (u, v) in squircle(W, H, 20)]
+            ring = ring[15:] + ring[:15]                       # start underneath, where the seam hides
+            sweep(f'strap{j}', ring + [ring[0]], [(-19, -1.6), (19, -1.6), (19, 1.6), (-19, 1.6)], WEBBING, root, caps=False)
+            bx = x + s * (W / 2 * k + 7)
+            box(f'buckle{j}', (bx, y + H * 0.05, zs), (7, 34, 46), TEXBLACK, root, bevel=2)
+            box(f'buckleBar{j}', (bx + s * 3.5, y + H * 0.05 + 8, zs), (2, 5, 40), STEEL, root, bevel=0.5)
+        # moulded end caps: a skirt over the bag and a chamfered face
+        for k, z in enumerate((za, zb)):
+            d = -1 if k == 0 else 1
+            st = [(x, y, z - d * 20), (x, y, z + d * 6), (x, y, z + d * 26), (x, y, z + d * 34)]
+            ks = (1.0, 1.08, 1.08, 0.94)
+            hsweep(f'cap{k}', st, [(u * 1.0, v) for (u, v) in squircle(W, H, 20)], BLACK, root, scale=lambda i: ks[i])
+        if lab:
+            box('label', (x + s * (W / 2 * 0.99 + 1), y + H * 0.12, zb - 260), (1.5, min(24, H * 0.18), 190), lab, root, bevel=0)
+    # L-brackets: a plate bolted to the rack rail's outer face, a flat arm
+    # over the bag's top, a gusset between them
     for k in (-1, 1):
         z = zc + k * min(600, L * 0.3)
-        box(f'bracketH{k}', (s * (ARB_W / 2 + W / 2 - 10), y + H / 2 + 4, z), (W + 40, 8, 50), BLACK, root, bevel=2)
-        box(f'bracketV{k}', (s * (ARB_W / 2 - 4), (y + H / 2 + RACK_TOP - 45) / 2, z), (8, max(40, y + H / 2 - RACK_TOP + 60), 50), BLACK, root, bevel=2)
-    if hinge:                                            # 270 types: pivot plate at the rear end, flush with the bag
-        box('hinge', (x, y - 4, zc - L / 2 - 22), (W + 10, H + 8, 40), BLACK, root, bevel=6)
-        lib.cylinder('pivot', (x, y - H / 2 - 30, zc - L / 2 - 22), (0, 1, 0), 36, 50, BLACK, root)
+        xr = s * (ARB_W / 2 + 3)
+        yb = RACK_TOP - 36
+        box(f'bracketV{k}', (xr, (yb + yt + 8) / 2, z), (6, yt + 8 - yb, 50), BLACK, root, bevel=1.5)
+        box(f'bracketH{k}', (s * (ARB_W / 2 + W * 0.45), yt + 3, z), (W * 0.9, 6, 50), BLACK, root, bevel=1.5)
+        slab(f'gusset{k}', [(xr, yt), (xr + s * 40, yt), (xr, yt - 40)], z - 3, z + 3, BLACK, root)
+        for b in (-1, 1):
+            bolt(f'bracketBolt{k}{b}', (xr + s * 3.5, yb + 12, z + b * 14), (1, 0, 0), root, dia=12, length=5)
+            bolt(f'bagBolt{k}{b}', (s * (ARB_W / 2 + W * 0.55), yt + 6.5, z + b * 14), (0, 1, 0), root, dia=11, length=4)
+    if hinge:
+        zr = zc - L / 2 + 10                               # hinge at the rear end
+        hsg = box('hinge', (x, y + 5, zr + 20), (W + 24, H + 18, 80), TEXBLACK, root, bevel=14)
+        hsg.modifiers['bevel'].segments = 3
+        for k in range(4):                                 # folded arms' knuckles out of its end
+            yy = y - H / 2 + 30 + k * (H - 50) / 3
+            box(f'knuckle{k}', (x + s * W * 0.18, yy, zr - 26), (W * 0.42, min(26, H / 5), 24), BLACK, root, bevel=4)
+            bolt(f'knucklePin{k}', (x + s * (W * 0.18 + W * 0.21 + 2), yy, zr - 26), (1, 0, 0), root, dia=10, length=4)
+        py = y + 5 + (H + 18) / 2
+        lib.cylinder('pivot', (x - s * W * 0.1, py + 14, zr + 20), (0, 1, 0), 64, 28, BLACK, root, n=20)
+        bolt('pivotBolt', (x - s * W * 0.1, py + 30, zr + 20), (0, 1, 0), root, dia=24, length=6)
+        box('pivotArm', (s * (ARB_W / 2 + W * 0.2), py + 6, zr + 20), (W * 0.6 + 40, 8, 70), BLACK, root, bevel=2)
     return root
 
 
@@ -3403,7 +3749,9 @@ def rack_wood(size='half'):
         # (1607) ran 15 mm into the roof's crown (1622)
         sweep(f'bar{zz}', [(-660, deck - 14, zz), (660, deck - 14, zz)], rounded_rect(70, 26, 6), BLACK, root)
         for s in (-1, 1):
-            box(f'foot{s}{zz}', (s * (GUTTER_X + 10), ROOF_Y_EDGE + 26, zz), (60, 94, 52), BLACK, root, bevel=6)
+            # TERZO foot: pad, clamp and tower (was a plain box)
+            gutter_leg(root, f'foot{s}{zz}', s, zz, 636, deck - 27, 'tower', 52)
+            box(f'barCap{s}{zz}', (s * 662, deck - 14, zz), (8, 30, 74), TEXBLACK, root, bevel=3)
     xl, xr = xc - W / 2, xc + W / 2                          # the basket's own left and right
     # wire floor: rods along the car over cross rods
     n_rod = max(9, int(W / 48))
@@ -4347,16 +4695,18 @@ def build():
     pillar_pods(sides=(-RIGHT,), suffix='_left')
     # catalogue variants (dimensions from parts.js research; see notes there)
     # roof racks (research 2026-09-16: ARB/Yakima TW, Front Runner, Rhino, JAOS, IPF, APIO, SHOWA, TW generic)
-    rack_platform('yakima', 1370, 1520, slat_dir='across', slats=6, legs=4, deflector=False, round_bars=True)
-    rack_platform('fr34', 1345, 1156, slat_dir='across', slats=6, legs=4, deflector=True)
-    rack_platform('pioneer', 1339, 1453, slat_dir='along', slats=4, rail=(56, 52), legs=4, deflector=False, mesh=True)
-    rack_platform('jaos', 1250, 1400, slat_dir='across', slats=6, rail=(32, 32), legs=6, deflector=False, hoop=96)
-    rack_platform('ipf', 1250, 1400, slat_dir='across', slats=7, rail=(40, 39), legs=4, deflector=False, hoop=140)
-    rack_platform('apio', 1270, 1420, slat_dir='across', slats=4, rail=(28, 60), legs=6, deflector=True, mesh=True)
+    rack_platform('yakima', 1370, 1520, slat_dir='across', slats=6, rail=(60, 40), legs=4, deflector=False)
+    # same 110 mm slat pitch as the full-length Slimline II
+    rack_platform('fr34', 1345, 1156, slat_dir='across', slats=10, rail=(30, 50), legs=4, deflector=True)
+    rack_platform('pioneer', 1339, 1453, slat_dir='along', slats=5, rail=(56, 52), legs=4, deflector=False)
+    rack_platform('jaos', 1250, 1400, slat_dir='across', slats=6, rail=(32, 32), legs=6, deflector=False, side_bars=96)
+    # flat: IPF publish 38.8 mm for the rack body; no hoop in any photo
+    rack_platform('ipf', 1250, 1400, slat_dir='across', slats=7, rail=(40, 39), legs=6, deflector=False)
+    rack_platform('apio', 1270, 1420, slat_dir='across', slats=4, rail=(28, 60), legs=6, deflector=True)
     rack_platform('showa_foot', 1250, 1500, slat_dir='across', slats=12, rail=(40, 40), legs=6, deflector=False)
     rack_wood('half')
     rack_wood('full')
-    rack_platform('tw_generic', 1260, 1600, slat_dir='across', slats=7, legs=6, deflector=True, hoop=70)
+    rack_platform('tw_generic', 1260, 1600, slat_dir='across', slats=7, legs=6, deflector=True)
     # awnings (closed bag L x W x H; hard = aluminium case; hinge = 270/180 pivot at the rear end)
     for side in ('left', 'right'):
         awning_case('arb_touring_2', side, 2200, 130, 130, PVC)

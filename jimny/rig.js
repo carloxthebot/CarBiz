@@ -381,6 +381,15 @@ export function applyConfig(THREE, rig, cfg) {
   for (const m of U.stockRearLamps) m.visible = !cfg.hideRearLamps;
   for (const m of U.stockQuarter) m.visible = !cfg.hideQuarterGlass;
   for (const m of U.stockHeadlamps) m.visible = !cfg.hideHeadlamps;
+  // a tinted cover over the headlamp lenses (Beyond's yellow acrylic)
+  if (!U.lampCover) U.lampCover = new THREE.MeshStandardMaterial({ name: 'LampCover', color: 0xf3c21c, roughness: 0.08,
+    metalness: 0, transparent: true, opacity: 0.62, depthWrite: false });
+  if (cfg.lampTint != null) U.lampCover.color.setHex(cfg.lampTint);
+  for (const m of U.stockHeadlamps) {
+    m.userData.lensMat ??= m.material;
+    if (m.userData.lensMat?.name !== 'LampLens') continue;
+    m.material = cfg.lampTint != null ? U.lampCover : m.userData.lensMat;
+  }
   if (U.roofMat) {
     const twoTone = !!cfg.twoTone;
     U.roofMat.color.setHex(twoTone ? (cfg.roofColor ?? 0x1e2326) : (cfg.bodyColor ?? 0x6a6866));

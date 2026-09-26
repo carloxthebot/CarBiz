@@ -6,7 +6,7 @@ on. Everything described here is committed, pushed and live.
 
 Live: <https://carloxthebot.github.io/CarBiz/jimny/app.html>
 Catalogue: <https://carloxthebot.github.io/CarBiz/jimny/parts.html>
-Current build: **202609260650** · 247 catalogue entries · 10 styles
+Current build: **202609260852** · 247 catalogue entries · 11 styles
 
 ---
 
@@ -182,6 +182,13 @@ plates where the product puts them; Beyond front is now a round tube);
 grilles take their real finishes (docs/jb74-grille-finishes.json: body
 colour, gunmetal, KLC silver mesh) and four wrong shapes fixed. Shot tools
 reset to stock and wait out the intro camera before shooting.
+
+Later the same day: roof racks and awning bags redrawn in detail (review in
+the scratchpad; soft awnings had been drawn as hard cases by a default),
+Beyond's yellow headlamp covers (LAMP_COVERS, a tinted lens material on the
+stock headlamps), rack paint (RACK_PAINTS; painted BEFORE the part is added,
+because settleIn() restores the materials it saw on arrival), and the
+奶油硬件 style (Beyond CODE13).
 
 **The owner does not want regulation treated as a gate** — "改裝界會另外處理".
 A lift advisory was added and then removed on that instruction. Do not put

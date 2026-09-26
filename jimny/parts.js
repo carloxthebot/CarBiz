@@ -61,6 +61,26 @@ export const SPLIT_PAINTS = [
 ];
 export const SPLIT_Y = 1000;          // mm: the window sill line, sampled belt 995
 
+/** Covers over the stock round headlamps. Beyond's is a yellow acrylic
+ *  overlay stuck on with tape -- the French-yellow look of their cream demo
+ *  car (docs/jb74-beyond-styles.json). */
+export const LAMP_COVERS = [
+  { id: 'none', label: '不裝', price: 0 },
+  { id: 'beyond_yellow', url: 'https://shop.beyond-jpn.com/products/behlc', label: 'リベル 黃色大燈罩', price: 19800, cur: 'JPY', brand: 'Beyond Japan',
+    part: 'behlc', tint: 0xf3c21c,
+    note: '黃色壓克力貼片，附雙面膠直接貼在原廠大燈上，JB64／JB74／JC74 全等級通用。定價 ¥19,800 稅込（官網特價 ¥15,840）' },
+];
+
+/** Roof-rack paint. Every rack in the catalogue ships black or bare
+ *  aluminium; a light rack is a respray (Beyond's own ivory Liberte rack,
+ *  berr-iv at ¥99,000, is discontinued), so these carry no price. */
+export const RACK_PAINTS = [
+  { id: 'none', label: '原色（黑／鋁）' },
+  { id: 'ivory', label: '象牙白烤漆', hex: 0xe9e1cc },
+  { id: 'sand', label: '沙色烤漆', hex: 0xc7b28a },
+  { id: 'olive', label: '橄欖綠烤漆', hex: 0x5b6345 },
+];
+
 export const ROOF_BLACK = 0x16191c;   // ZJ3 — the only two-tone roof Suzuki offers
 
 // Suspension lifts, grouped by the inch class the trade uses. `lift` is the
@@ -1094,6 +1114,12 @@ export const STYLES = [
     desc: '白車配一整道橘紅棕漸層寬條紋，黑管桿、JA 水箱罩、黑鋼圈白字胎——向 90 年代 JA11 致敬。照 Beyond CODE26。',
     set: { color: 'ZVR', stripe: 'toy4', lift: 'klc30', wheel: 'dean_cross', rimColor: 0x1b1d1f, tyre: 't215r16',
       tread: 'toyo_rt', owl: false, frontBumper: 'beyond_liberte', rearBumper: 'beyond_rear', grille: 'klc_ja' } },
+
+  { id: 'cream_hw', label: '奶油硬件', sw: ['#444a3a', '#e9e1cc', '#f3c21c'],
+    desc: '軍綠車身，所有粗件——前後管桿、籃式車頂架、鋼圈——都是奶油白，大燈貼黃色罩。車頂有架子，但看起來是配色不是裝備。照 Beyond CODE13。',
+    set: { color: 'ZZC', wheel: 'mrk_retro', rimColor: 0xe9e1cc, tyre: 't215r16', tread: 'toyo_at3', owl: true,
+      frontBumper: 'klc_trad', rearBumper: 'beyond_rear_ivory', roofRack: 'basket', rackPaint: 'ivory',
+      lampCover: 'beyond_yellow', grille: 'hbar_suzuki' } },
 
   { id: 'camp', label: '露營', sw: ['#2f3a33', '#c0a878', '#1d2224'],
     desc: '雙色車頂配整套上下車的東西：車頂架、車邊帳、側踏與尾梯，ARMANDO 鋼製前保桿、Wild Goose 圓管後保桿、復古水箱罩，四條橘色拉花橫過門把。胎走安靜的全地形，長途不吵。',
